@@ -1,0 +1,84 @@
+include "Types.dpt"
+
+/* ================================================================== *
+ *                               GLOBALS                              *
+ * ================================================================== */
+
+ 
+
+/* ================================================================== *
+ *                               EVENTS                               *
+ * ================================================================== */
+
+// TODO: Do we want separate entry events for each type and a more complex harnes or a top level ingress?
+/*
+ * Event signifying application flow data packet to forward to peer Tango node.
+ * 
+ * PARAMETERS
+ * ----------
+ * src (int): the source IP address
+ * dest (int): the destination IP address
+ * src_port (int<<9>>): the source IP address
+ * dest_port (int<<9>>): the destination IP address
+ * protocol (int<<8>>): the protocol used by tango flow
+ * header (ip_header): the full header of packet, to forward once at other switch
+ *
+ * GENERATES
+ * ---------
+ * incoming_tango_traffic: flow packet wrapped with tango data sent to peer node
+ */
+entry event forward_flow (int src, int dest, int<<9>> src_port, int<<9>> dest_port, int<<8>> protocol, ip_header header);
+
+/*
+ * Incoming Tango data traffic from peer node.
+ * 
+ * PARAMETERS
+ * ----------
+ * path_id (int<<6>>): the physical path ID taken by the packet
+ * timestamp (int): the timestamp when the packet left peer
+ * metric_signature (int<<256>>): signature of the path_id and timestamp
+ * sequence_num (int<<20>>): the tango packet sequence number
+ * book_signature (int<<1>>): the one-bit signature in book corresponding to sequence number
+ * header (ip_header): the full header of packet, to forward once at other switch
+ *
+ * GENERATES
+ * ---------
+ * route_update: sometimes responds to peer that they should update route due to changed metrics
+ * complete_forward: forwards the packet on to its final destination
+ * FIXME: fix the number of bits
+ */
+event incoming_tango_traffic(int<<6>> path_id, int timestamp, int<<256>> metric_signature, int<<20>> sequence_num, int<<1> book_signature, ip_header forwarded_header);
+
+/*
+ * Peer says to update a given route mapping for a traffic class
+ * 
+ * PARAMETERS
+ * ----------
+ * update (int<<64>>): encrypted version of the update
+ */
+event route_update(int<<64>> update);
+
+/*
+ * Forward the flow using tango to its final destination.
+ * 
+ * PARAMETERS
+ * ----------
+ * header (ip_header): the full header of packet, to re-encapsulte
+ */
+exit event complete_forward(ip_header header);
+
+/* ================================================================== *
+ *                              HANDLERS                              *
+ * ================================================================== */
+
+handle forward_flow (int src, int dest, int<<9>> src_port, int<<9>> dest_port, int<<8>> protocol, ip_header header) {
+    // ...
+}
+
+handle incoming_tango_traffic(int<<6>> path_id, int timestamp, int<<256>> metric_signature, int<<20>> sequence_num, int<<1> book_signature, ip_header forwarded_header) {
+    // ...
+}
+
+handle route_update(int<<64>> update) {
+    // ...
+}
