@@ -1,0 +1,53 @@
+// Manages all precomputed metric signatrures
+module MetricSignatureManager : {
+    global type t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>>;
+    constr t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> create();
+
+   /*
+    * Gets a signature for a given timestamp and physical path ID
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>>): self
+    * timestamp (int): timestamp of packet send/receive
+    * path_id (int<<'path_id_sz'>>): the physcial path ID packet is/was sent on
+    * 
+    * RETURNS
+    * -------
+    * signature (int<<'signature_sz>>): signature of timestamp + path ID
+    */
+    fun int<<'signature_sz>> sign(t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz'>> path_id) [start <= self; end self];
+
+   /*
+    * Verifies a signature for a given timestamp and physical path ID
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>>): self
+    * timestamp (int): timestamp of packet send/receive
+    * path_id (int<<'path_id_sz'>>): the physcial path ID packet is/was sent on
+    * signature (int<<'signature_sz >> signature): signature to validate
+    * 
+    * RETURNS
+    * -------
+    * is_valid (bool): if signature is valid
+    */
+    fun bool verify(t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz'>> path_id, int<<'signature_sz >> signature) [start <= self; end self];
+}
+{
+    type t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> = {
+        int<<'signature_sz>>['num_path_ids]['num_timestamps] signatures; // TODO: Use Array.t? Use concatenated form? Also idk how indexing is going to work... best guess is index = timestamp - base (ms) where base is the first timestamp in the list?
+    }
+
+    constr t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> create() = {
+        /* TODO */
+    };
+
+    fun int<<'signature_sz>> sign(t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz'>> path_id) {
+        /* TODO */
+    }
+
+    fun bool verify(t<<'num_path_ids, 'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz'>> path_id, int<<'signature_sz >> signature) {
+        /* TODO */
+    }
+}

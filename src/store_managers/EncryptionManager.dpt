@@ -1,0 +1,53 @@
+// Encrypts and decrypts route updates using a one-time pad
+module EncryptionManager : {
+    global type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>;
+    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> create();
+
+   /*
+    * Encrypts a given route update with a one-time pad
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>): self
+    * seq_number (int<<'seq_num_sz>>): sequence number to index into pads
+    * plaintext (RouteUpdate<<'traffic_cls_sz, 'path_id_sz>>): update to encrypt
+    * 
+    * RETURNS
+    * -------
+    * ciphertext (int<<'ciphertext_sz>>): encrypted route update
+    */
+    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> plaintext) [start <= self; end self];
+
+   /*
+    * Decrypts the route update
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>): self
+    * seq_number (int<<'seq_num_sz'>>): sequence number signed
+    * ciphertext (int<<'ciphertext_sz'>>): signature to validate
+    * 
+    * RETURNS
+    * -------
+    * plaintext (RouteUpdate<<'traffic_cls_sz, 'path_id_sz>>): decrypted route update
+    */
+    fun RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) [start <= self; end self];
+
+}
+{
+    type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> = {
+        Array.t<<'ciphertext_sz>>['num_seq_nums] one_time_pads;
+    }
+
+    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> create() = {
+        /* TODO */
+    };
+
+    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> plaintext) {
+        /* TODO */
+    }
+
+    fun RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) {
+        /* TODO */
+    }
+}

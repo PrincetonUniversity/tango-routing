@@ -1,0 +1,28 @@
+// Manages all Tango UDP headers for all paths
+module InvalidPacketManager : {
+    global type t<<'num_path_ids>>;
+    constr t<<'num_path_ids>> create();
+
+   /*
+    * Get a header for a given packet.
+    * 
+    * PARAMETERS
+    * ----------
+    * self (<<'num_path_ids>>): self
+    * path_id (int<<'path_id_sz>>): path upon the invalid packet was found
+    */
+    fun IpHeader get_path_header(t<<'num_path_ids>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
+}
+{
+    type <<'num_path_ids>> = {
+        IpHeader['num_path_ids] headers; // TODO: or use Array.t<<?>> type>
+    }
+    
+    constr <<'num_path_ids>> create() = {
+        /* TODO */
+    };
+
+    fun IpHeader get_path_header(t<<'num_path_ids>> self, int<<'path_id_sz>> path_id) {
+        /* TODO */
+    }
+}

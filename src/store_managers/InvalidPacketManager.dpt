@@ -1,0 +1,28 @@
+// Manages all invalid packets for each incoming path
+module InvalidPacketManager : {
+    global type t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>;
+    constr t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> create();
+
+   /*
+    * Report an invlaid packet.
+    * 
+    * PARAMETERS
+    * ----------
+    * self (<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>): self
+    * path_id (int<<'path_id_sz>>): path upon the invalid packet was found
+    */
+    fun void found_invalid_packet(<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
+}
+{
+    type <<'num_path_ids, 'path_id_sz, 'invalid_track_num>> = {
+        Counter.t<<'invalid_track_num>>['num_path_ids] invalid_counts; // TODO: or use Array.t<<?>> type>
+    }
+    
+    constr <<'num_path_ids, 'path_id_sz, 'invalid_track_num>> create() = {
+        /* TODO */
+    };
+
+    fun void found_invalid_packet(<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> self, int<<'path_id_sz>> path_id) {
+        /* TODO */
+    }
+}

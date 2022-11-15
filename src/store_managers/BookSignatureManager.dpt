@@ -1,0 +1,52 @@
+// Manages all sequence number book signatures
+module BookSignatureManager : {
+    global type t<<'num_seq_nums, 'seq_num_sz>>;
+    constr t<<'num_seq_nums, 'seq_num_sz>> create();
+
+   /*
+    * Gets a signature for a given timestamp and physical path ID
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'num_seq_nums, 'seq_num_sz>>): self
+    * seq_number (int<<'seq_num_sz'>>): sequence number to sign
+    * 
+    * RETURNS
+    * -------
+    * signature (int<<1>>): signature of timestamp + path ID
+    */
+    fun int<<1>> sign(t<<'num_seq_nums, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number) [start <= self; end self];
+
+   /*
+    * Verifies a signature for a given timestamp and physical path ID
+    * 
+    * PARAMETERS
+    * ----------
+    * self (t<<'num_seq_nums, 'seq_num_sz>>): self
+    * seq_number (int<<'seq_num_sz'>>): sequence number signed
+    * signature (int<<1>>): signature to validate
+    * 
+    * RETURNS
+    * -------
+    * is_valid (bool): if signature is valid
+    */
+    fun bool verify(t<<'num_seq_nums, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, int<<1>> signature) [start <= self; end self];
+
+}
+{
+    type t<<'num_seq_nums, 'seq_num_sz>> = {
+        int<<1>>['num_seq_nums] signatures; // TODO: or use Array.t<<?>> type>
+    }
+
+    constr t<<'num_seq_nums, 'seq_num_sz>> create() = {
+        /* TODO */
+    };
+
+    fun int<<1>> sign(t<<'num_seq_nums, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number) {
+        /* TODO */
+    }
+
+    fun bool verify(t<<'num_seq_nums, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, int<<1>> signature) {
+        /* TODO */
+    }
+}

@@ -1,0 +1,45 @@
+/*
+ * The header decribing a flow using tango
+ */
+type IpHeader = {
+    /* TODO */
+}
+
+/*
+ * Route Update which is able to be en- and decrypted
+ *
+ * PROPERTIES
+ * ----------
+ * traffic_class (int<<'traffic_cls_sz>>): traffic class to update
+ * new_path_id (int<<'path_id_sz>>): physical path ID to update mapping to
+ */
+type RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> = {
+   int<<'traffic_cls_sz>> traffic_class,
+   int<<'path_id_sz>> new_path_id
+}
+
+/*
+ * Delay metrics for a given path
+ *
+ * PROPERTIES
+ * ----------
+ * delay_sum (int<<'delay_sum_sz>>): running sum of all delays
+ * delay_count (int<<'delay_count_sz>>): count of number of packets
+ */
+type DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> = {
+   int<<'delay_sum_sz>> delay_sum,
+   int<<'delay_count_sz>> delay_count
+}
+
+/*
+ * Loss metrics for a given path
+ *
+ * PROPERTIES
+ * ----------
+ * loss_count (int<<'loss_count_sz>>): 
+ * transmission_count (int<<'tsm_count_sz>>): count of number of packets
+ */
+type LogsMetrics<<'loss_count_sz, 'tsm_count_sz>> = {
+   int<<'loss_count_sz>> loss_count,
+   int<<'tsm_count_sz>> transmission_count
+}
