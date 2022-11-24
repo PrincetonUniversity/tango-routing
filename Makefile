@@ -9,10 +9,10 @@ setup:
 	@-[ ! -d "$(LUCID_SRC)" ] && git clone https://github.com/PrincetonUniversity/lucid/ ||:
 	@$(COMPILER) pull ||:
  
-interpret: setup $(SOURCES)
-	@echo "ERROR: interpret target is *unimplemented*"
+lint: setup $(SOURCES)
+	$(COMPILER) interpret ./src/Tango.dpt --symb build.symb
 
-compile: setup interpret
+compile: setup lint
 	@echo "ERROR: compile target is *unimplemented*"
 
 .PHONY: clean

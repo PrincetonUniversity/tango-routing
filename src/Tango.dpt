@@ -21,35 +21,35 @@ symbolic size seq_num_sz;
  *                               GLOBALS                              *
  * ================================================================== */
 
-// Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
+/*// Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global Counter.t<<20>> sequence_counter = Counter.create(0);
 
-// // Array keeping track of the 5-tuple to traffic class mappings
-// global Array.t<</* TODO */>> traffic_classes = Array.create(/* TODO */);
+// Array keeping track of the 5-tuple to traffic class mappings
+global Array.t<<>> traffic_classes = Array.create();
 
-// // Keep track of the traffic class to physical path ID mappings
-// global RouteManager.t<</* TODO */, /* TODO */, /* TODO */>> route_manager = RouteManager.create();
+// Keep track of the traffic class to physical path ID mappings
+global RouteManager.t<<,,>> route_manager = RouteManager.create();
 
-// // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-// global TangoHeaderManager.t<</*TODO*/>> header_manager = TangoHeaderManager.create()
+// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
+global TangoHeaderManager.t<<>> header_manager = TangoHeaderManager.create()
 
-// // Provide read access to precomputed timestamp + path ID signatures
-// global MetricSignatureManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */>> metric_signature_manager = MetricSignatureManager.create();
+// Provide read access to precomputed timestamp + path ID signatures
+global MetricSignatureManager.t<<,,,>> metric_signature_manager = MetricSignatureManager.create();
 
-// // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-// global BookSignatureManager.t<</* TODO */, /* TODO */>> book_signature_manager = BookSignatureManager.create()
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers
+global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create()
 
-// // Keep track of delay metrics of paths from peer
-// global DelayMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> delay_metrics_manager = DelayMetricsManager.create()
+// Keep track of delay metrics of paths from peer
+global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create()
 
-// // Keep track of loss metrics of paths from peer
-// global LossMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> loss_metrics_manager = LossMetricsManager.create()
+// Keep track of loss metrics of paths from peer
+global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create()
 
-// // Keep track of invlaid packets found
-// global InvalidPacketManager.t<</* TODO */, /* TODO */, /* TODO */>> invalid_pkt_manager = InvalidPacketManager.create()
+// Keep track of invlaid packets found
+global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create()
 
-// // Encrypt and decrypt path updates using one-time pads
-// global EncryptionManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> encryption_manager = EncryptionManager.create()
+// Encrypt and decrypt path updates using one-time pads
+global EncryptionManager.t<<,,,,>> encryption_manager = EncryptionManager.create()*/
 
 /* ================================================================== *
  *                               EVENTS                               *
@@ -112,13 +112,16 @@ exit event complete_forward (EthernetHeader_t ethernet_header, IPv4Header_t ip_h
  * ================================================================== */
 
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple) {
-    /* TODO */
+    printf("ERROR: hander `forward_flow` is *unimplemented*");
+    // TODO
 }
 
 handle incoming_tango_traffic (EthernetHeader_t tango_eth_header, IPv6Header_t tango_ip_header, TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header, EthernetHeader_t encaped_eth_header, IPv4Header_t encaped_ip_header) {
-    /* TODO */
+    printf("ERROR: hander `incoming_tango_traffic` is *unimplemented*");
+    // TODO
 }
 
 handle route_update (int<<64>> update) {
-    /* TODO */
+    printf("ERROR: hander `route_update` is *unimplemented*");
+    // TODO
 }
