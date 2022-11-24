@@ -3,7 +3,7 @@ include "store_managers/RouteManager.dpt"
 include "store_managers/TangoHeaderManager.dpt"
 include "store_managers/MetricSignatureManager.dpt"
 include "store_managers/BookSignatureManager.dpt"
-// include "store_managers/DelayMetricsManager.dpt"
+include "store_managers/DelayMetricsManager.dpt"
 // include "store_managers/LossMetricsManager.dpt"
 // include "store_managers/InvalidPacketManager.dpt"
 // include "store_managers/EncryptionManager.dpt"
@@ -17,6 +17,8 @@ symbolic size signature_sz;
 symbolic size seq_num_sz;
 symbolic size traffic_cls_sz;
 symbolic size num_timestamps;
+symbolic size delay_sum_sz;
+symbolic size delay_count_sz;
 // TODO
 
 /* ================================================================== *
@@ -42,10 +44,10 @@ global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metr
 global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatureManager.create(0); // FIXME: size
 
 // Keep track of delay metrics of paths from peer
-/*global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create();
+global DelayMetricsManager.t<<0, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager = DelayMetricsManager.create(); // FIXME: size
 
 // Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create();
+/*global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create();
 
 // Keep track of invlaid packets found
 global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create();

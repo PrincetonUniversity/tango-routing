@@ -1,3 +1,5 @@
+include "../Types.dpt"
+
 // Keep track of delay metrics
 module DelayMetricsManager : {
     global type t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>>;
@@ -16,7 +18,7 @@ module DelayMetricsManager : {
     * -------
     * metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
     */
-    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) [start <= self; end self];
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<'path_id_sz>> path_id) [start <= self; end self];
 
    /*
     * Gets the delay metrics for the path
@@ -30,26 +32,35 @@ module DelayMetricsManager : {
     * -------
     * metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
     */
-    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) [start <= self; end self];
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
 
 }
 {
     type t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> = {
-        Array.t<<'delay_sum_sz>> delay_sums; // TODO: Convert to 
+        Array.t<<'delay_sum_sz>> delay_sums;
         Counter.t<<'delay_count_sz>>['num_path_ids] delay_counts;
     }
 
     constr t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> create() = {
-        delay_sums = Array.create('num_path_ids) // FIXME: Cannot be parametric like this
-        delay_counts = [Counter.create(0) for x < 'num_path_ids]
-        /* TODO */
+        delay_sums = Array.create(size_to_int('num_path_ids));
+        delay_counts = [Counter.create(0) for x < 'num_path_ids];
     };
 
-    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) {
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<'path_id_sz>> path_id) {
+        printf("ERROR: `DelayMetricsManager.update_delay()` is *unimplemented*");
+        return {
+            delay_sum = 0;
+            delay_count = 0;
+        };
         /* TODO */
     }
 
-    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) {
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<'path_id_sz>> path_id) {
+        printf("ERROR: `DelayMetricsManager.get_metrics()` is *unimplemented*");
+        return {
+            delay_sum = 0;
+            delay_count = 0;
+        };
         /* TODO */
     }
 }
