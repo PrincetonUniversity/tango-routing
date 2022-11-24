@@ -4,7 +4,7 @@ include "store_managers/TangoHeaderManager.dpt"
 include "store_managers/MetricSignatureManager.dpt"
 include "store_managers/BookSignatureManager.dpt"
 include "store_managers/DelayMetricsManager.dpt"
-// include "store_managers/LossMetricsManager.dpt"
+include "store_managers/LossMetricsManager.dpt"
 // include "store_managers/InvalidPacketManager.dpt"
 // include "store_managers/EncryptionManager.dpt"
 
@@ -19,6 +19,8 @@ symbolic size traffic_cls_sz;
 symbolic size num_timestamps;
 symbolic size delay_sum_sz;
 symbolic size delay_count_sz;
+symbolic size loss_count_sz;
+symbolic size tns_cnt_sz;
 // TODO
 
 /* ================================================================== *
@@ -47,10 +49,10 @@ global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatu
 global DelayMetricsManager.t<<0, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager = DelayMetricsManager.create(); // FIXME: size
 
 // Keep track of loss metrics of paths from peer
-/*global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create();
+global LossMetricsManager.t<<0, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager = LossMetricsManager.create(); // FIXME: size
 
 // Keep track of invlaid packets found
-global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create();
+/*global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create();
 
 // Encrypt and decrypt path updates using one-time pads
 global EncryptionManager.t<<,,,,>> encryption_manager = EncryptionManager.create()*/
