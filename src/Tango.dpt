@@ -1,5 +1,5 @@
 include "Types.dpt"
-// include "store_managers/RouteManager.dpt"
+include "store_managers/RouteManager.dpt"
 // include "store_managers/TangoHeaderManager.dpt"
 // include "store_managers/MetricSignatureManager.dpt"
 // include "store_managers/BookSignatureManager.dpt"
@@ -15,22 +15,23 @@ include "Types.dpt"
 symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
+symbolic size traffic_cls_sz;
 // TODO
 
 /* ================================================================== *
  *                               GLOBALS                              *
  * ================================================================== */
 
-/*// Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
-global Counter.t<<20>> sequence_counter = Counter.create(0);
+// Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
+global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
 
 // Array keeping track of the 5-tuple to traffic class mappings
-global Array.t<<>> traffic_classes = Array.create();
+// global Array.t<<>> traffic_classes = Array.create();
 
 // Keep track of the traffic class to physical path ID mappings
-global RouteManager.t<<,,>> route_manager = RouteManager.create();
+global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager.create(0); // FIXME: size
 
-// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
+/*// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
 global TangoHeaderManager.t<<>> header_manager = TangoHeaderManager.create()
 
 // Provide read access to precomputed timestamp + path ID signatures

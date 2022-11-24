@@ -3,7 +3,7 @@ COMPILER=./lucid/lucid.sh
 
 SOURCES=$(shell find src -type f -name "*.dpt")
 
-all: setup interpret compile
+all: setup lint compile
 
 setup:
 	@-[ ! -d "$(LUCID_SRC)" ] && git clone https://github.com/PrincetonUniversity/lucid/ ||:
