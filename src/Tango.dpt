@@ -1,6 +1,6 @@
 include "Types.dpt"
 include "store_managers/RouteManager.dpt"
-// include "store_managers/TangoHeaderManager.dpt"
+include "store_managers/TangoHeaderManager.dpt"
 // include "store_managers/MetricSignatureManager.dpt"
 // include "store_managers/BookSignatureManager.dpt"
 // include "store_managers/DelayMetricsManager.dpt"
@@ -31,23 +31,23 @@ global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager.create(0); // FIXME: size
 
-/*// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-global TangoHeaderManager.t<<>> header_manager = TangoHeaderManager.create()
+// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
+global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.create(0); // FIXME: size
 
-// Provide read access to precomputed timestamp + path ID signatures
+/*// Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t<<,,,>> metric_signature_manager = MetricSignatureManager.create();
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create()
+global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create();
 
 // Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create()
+global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create();
 
 // Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create()
+global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create();
 
 // Keep track of invlaid packets found
-global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create()
+global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create();
 
 // Encrypt and decrypt path updates using one-time pads
 global EncryptionManager.t<<,,,,>> encryption_manager = EncryptionManager.create()*/
