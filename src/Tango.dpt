@@ -1,7 +1,7 @@
 include "Types.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/TangoHeaderManager.dpt"
-// include "store_managers/MetricSignatureManager.dpt"
+include "store_managers/MetricSignatureManager.dpt"
 // include "store_managers/BookSignatureManager.dpt"
 // include "store_managers/DelayMetricsManager.dpt"
 // include "store_managers/LossMetricsManager.dpt"
@@ -16,6 +16,7 @@ symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
 symbolic size traffic_cls_sz;
+symbolic size num_timestamps;
 // TODO
 
 /* ================================================================== *
@@ -34,11 +35,11 @@ global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager
 // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
 global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.create(0); // FIXME: size
 
-/*// Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<<,,,>> metric_signature_manager = MetricSignatureManager.create();
+// Provide read access to precomputed timestamp + path ID signatures
+global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager = MetricSignatureManager.create(0); // FIXME: size
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create();
+/*global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create();
 
 // Keep track of delay metrics of paths from peer
 global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create();
