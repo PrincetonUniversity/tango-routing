@@ -1,7 +1,7 @@
 // Manages all precomputed metric signatures
 module MetricSignatureManager : {
     global type t<<'num_timestamps, 'path_id_sz, 'signature_sz>>;
-    constr t<<'num_timestamps, 'path_id_sz, 'signature_sz>> create(int<<'path_id_sz>> num_path_ids);
+    constr t<<'num_timestamps, 'path_id_sz, 'signature_sz>> create (int<<'path_id_sz>> num_path_ids);
 
    /*
     * Gets a signature for a given timestamp and physical path ID
@@ -16,7 +16,10 @@ module MetricSignatureManager : {
     * -------
     * signature (int<<'signature_sz>>): signature of timestamp + path ID
     */
-    fun int<<'signature_sz>> sign(t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz>> path_id) [start <= self; end self];
+    fun int<<'signature_sz>> sign (
+        t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self,
+        int timestamp, int<<'path_id_sz>> path_id
+    ) [start <= self; end self];
 
    /*
     * Verifies a signature for a given timestamp and physical path ID
@@ -32,25 +35,39 @@ module MetricSignatureManager : {
     * -------
     * is_valid (bool): if signature is valid
     */
-    fun bool verify(t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz>> path_id, int<<'signature_sz >> signature) [start <= self; end self];
+    fun bool verify (
+        t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self,
+        int timestamp,
+        int<<'path_id_sz>> path_id,
+        int<<'signature_sz>> signature
+    ) [start <= self; end self];
 }
 {
     type t<<'num_timestamps, 'path_id_sz, 'signature_sz>> = {
         Array.t<<'signature_sz>>['num_timestamps] signatures;
     }
 
-    constr t<<'num_timestamps, 'path_id_sz, 'signature_sz>> create(int<<'path_id_sz>> num_path_ids) = {
+    constr t<<'num_timestamps, 'path_id_sz, 'signature_sz>> create (int<<'path_id_sz>> num_path_ids) = {
         signatures = [Array.create(num_path_ids) for i < 'num_timestamps];
         /* TODO */
     };
 
-    fun int<<'signature_sz>> sign(t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz>> path_id) {
+    fun int<<'signature_sz>> sign (
+        t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self,
+        int timestamp,
+        int<<'path_id_sz>> path_id
+    ) {
         printf("ERROR: `MetricSignatureManager.sign()` is *unimplemented*");
         return 0;
         /* TODO */
     }
 
-    fun bool verify(t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self, int timestamp, int<<'path_id_sz>> path_id, int<<'signature_sz >> signature) {
+    fun bool verify (
+        t<<'num_timestamps, 'path_id_sz, 'signature_sz>> self,
+        int timestamp,
+        int<<'path_id_sz>> path_id,
+        int<<'signature_sz >> signature
+    ) {
        printf("ERROR: `MetricSignatureManager.verify()` is *unimplemented*");
        return false;
         /* TODO */

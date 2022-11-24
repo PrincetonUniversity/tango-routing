@@ -3,7 +3,7 @@ include "../Types.dpt"
 // Keep track of delay metrics
 module LossMetricsManager : {
     global type t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>>;
-    constr t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> create();
+    constr t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> create ();
 
    /*
     * Updates the delay from the incoming Tango packets timestamp
@@ -18,7 +18,10 @@ module LossMetricsManager : {
     * -------
     * metrics (LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
     */
-    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) [start <= self; end self];
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss (
+        t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self,
+        int<<'seq_num_sz>> sequence_num
+    ) [start <= self; end self];
 
    /*
     * Gets the delay metrics for the path
@@ -32,7 +35,10 @@ module LossMetricsManager : {
     * -------
     * metrics (LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
     */
-    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics (
+        t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self,
+        int<<'path_id_sz>> path_id
+    ) [start <= self; end self];
 
 }
 {
@@ -42,14 +48,17 @@ module LossMetricsManager : {
         Array.t<<'seq_num_sz>> seen_sequence_nums;
     }
 
-    constr t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> create() = {
+    constr t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> create () = {
         loss_counts = [Counter.create(0) for x < 'num_path_ids];
         transmission_counts = [Counter.create(0) for x < 'num_path_ids];
         seen_sequence_nums = Array.create(size_to_int('num_path_ids));
         /* TODO */
     };
 
-    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) {
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss (
+        t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self,
+        int<<'seq_num_sz>> sequence_num
+    ) {
         printf("ERROR: `LossMetricsManager.update_loss()` is *unimplemented*");
         return {
             loss_count = 0;
@@ -58,7 +67,10 @@ module LossMetricsManager : {
         /* TODO */
     }
 
-    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'path_id_sz>> path_id) {
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics (
+        t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self,
+        int<<'path_id_sz>> path_id
+    ) {
        printf("ERROR: `LossMetricsManager.get_metrics()` is *unimplemented*");
         return {
             loss_count = 0;

@@ -8,9 +8,9 @@ include "store_managers/LossMetricsManager.dpt"
 include "store_managers/InvalidPacketManager.dpt"
 include "store_managers/EncryptionManager.dpt"
 
-/* ================================================================== *
- *                                SIZES                               *
- * ================================================================== */
+/* ================================================================================================================== *
+ *                                                      SIZES                                                         *
+ * ================================================================================================================== */
 
 // Parametric sizes
 symbolic size path_id_sz;
@@ -30,40 +30,48 @@ symbolic size num_traffic_cls;
 symbolic size num_path_ids;
 symbolic size num_seq_nums;
 
-/* ================================================================== *
- *                               GLOBALS                              *
- * ================================================================== */
+/* ================================================================================================================== *
+ *                                                     GLOBALS                                                        *
+ * ================================================================================================================== */
 
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
 
 // Keep track of the traffic class to physical path ID mappings
-global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager.create((int<<'traffic_cls_sz>>) size_to_int(num_traffic_cls));
+global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager =
+    RouteManager.create((int<<'traffic_cls_sz>>) size_to_int(num_traffic_cls));
 
 // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+global TangoHeaderManager.t<<path_id_sz>> header_manager =
+    TangoHeaderManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager = MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager =
+    MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+global BookSignatureManager.t<<seq_num_sz>> book_signature_manager =
+    BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<<num_path_ids, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager = DelayMetricsManager.create();
+global DelayMetricsManager.t<<num_path_ids, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager =
+    DelayMetricsManager.create();
 
 // Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<<num_path_ids, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager = LossMetricsManager.create();
+global LossMetricsManager.t<<num_path_ids, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager =
+    LossMetricsManager.create();
 
 // Keep track of invlaid packets found
-global InvalidPacketManager.t<<num_path_ids, path_id_sz, invalid_track_sz>> invalid_pkt_manager = InvalidPacketManager.create();
+global InvalidPacketManager.t<<num_path_ids, path_id_sz, invalid_track_sz>> invalid_pkt_manager =
+    InvalidPacketManager.create();
 
 // Encrypt and decrypt path updates using one-time pads
-global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> encryption_manager = EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> encryption_manager =
+    EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
-/* ================================================================== *
- *                               EVENTS                               *
- * ================================================================== */
+/* ================================================================================================================== *
+ *                                                     EVENTS                                                         *
+ * ================================================================================================================== */
 
 /*
  * Event signifying application flow data packet to forward to peer Tango node.
@@ -96,7 +104,13 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
  * route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
  */
-event incoming_tango_traffic (EthernetHeader_t tango_eth_header, IPv6Header_t tango_ip_header, TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header, EthernetHeader_t encaped_eth_header, IPv4Header_t encaped_ip_header);
+event incoming_tango_traffic (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
+    EthernetHeader_t encaped_eth_header,
+    IPv4Header_t encaped_ip_header
+);
 
 /*
  * Peer says to update a given route mapping for a traffic class
@@ -117,16 +131,22 @@ event route_update (int<<64>> update);
  */
 exit event complete_forward (EthernetHeader_t ethernet_header, IPv4Header_t ip_header);
 
-/* ================================================================== *
- *                              HANDLERS                              *
- * ================================================================== */
+/* ================================================================================================================== *
+ *                                                    HANDLERS                                                        *
+ * ================================================================================================================== */
 
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple) {
     printf("ERROR: hander `forward_flow` is *unimplemented*");
     // TODO
 }
 
-handle incoming_tango_traffic (EthernetHeader_t tango_eth_header, IPv6Header_t tango_ip_header, TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header, EthernetHeader_t encaped_eth_header, IPv4Header_t encaped_ip_header) {
+handle incoming_tango_traffic (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
+    EthernetHeader_t encaped_eth_header,
+    IPv4Header_t encaped_ip_header
+) {
     printf("ERROR: hander `incoming_tango_traffic` is *unimplemented*");
     // TODO
 }
