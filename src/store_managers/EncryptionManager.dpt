@@ -1,14 +1,16 @@
+include "../Types.dpt"
+
 // Encrypts and decrypts route updates using a one-time pad
 module EncryptionManager : {
-    global type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>;
-    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> create();
+    global type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>>;
+    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> create(int<<'seq_num_sz>> num_seq_nums);
 
    /*
     * Encrypts a given route update with a one-time pad
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>): self
+    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>>): self
     * seq_number (int<<'seq_num_sz>>): sequence number to index into pads
     * plaintext (RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>>): update to encrypt
     * 
@@ -16,14 +18,14 @@ module EncryptionManager : {
     * -------
     * ciphertext (int<<'ciphertext_sz>>): encrypted route update
     */
-    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> plaintext) [start <= self; end self];
+    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> plaintext) [start <= self; end self];
 
    /*
     * Decrypts the route update
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>>): self
+    * self (t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>>): self
     * seq_number (int<<'seq_num_sz'>>): sequence number signed
     * ciphertext (int<<'ciphertext_sz'>>): signature to validate
     * 
@@ -31,23 +33,31 @@ module EncryptionManager : {
     * -------
     * plaintext (RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>>): decrypted route update
     */
-    fun RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) [start <= self; end self];
+    fun RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) [start <= self; end self];
 
 }
 {
-    type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> = {
-        Array.t<<'ciphertext_sz>>['num_seq_nums] one_time_pads;
+    type t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> = {
+        Array.t<<'ciphertext_sz>> one_time_pads;
     }
 
-    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> create() = {
+    constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> create(int<<'seq_num_sz>> num_seq_nums) = {
+        one_time_pads = Array.create(num_seq_nums);
         /* TODO */
     };
 
-    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> plaintext) {
+    fun int<<'ciphertext_sz>> encrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> plaintext) {
+        printf("ERROR: `EncryptionManager.encrypt()` is *unimplemented*");
+        return 0;
         /* TODO */
     }
 
-    fun RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz, 'num_seq_nums>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) {
+    fun RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> decrypt(t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> seq_number, int<<'ciphertext_sz>> ciphertext) {
+        printf("ERROR: `EncryptionManager.decrypt()` is *unimplemented*");
+        return {
+            traffic_class = 0;
+            new_path_id = 0;
+        };
         /* TODO */
     }
 }
