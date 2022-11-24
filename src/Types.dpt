@@ -68,6 +68,8 @@ type IPv6Header_t = {
    int<<128>> dest_addr;
 }
 
+size ipv6_hdr_sz = 320;
+
 /*
  * A five-tuple describing a particular flow.
  *

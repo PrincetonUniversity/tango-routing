@@ -17,7 +17,7 @@ module TangoHeaderManager : {
 }
 {
     type t<<'path_id_sz>> = {
-        Array.t<<312>> headers;
+        Array.t<<ipv6_hdr_sz>> headers;
     }
     
     constr t<<'path_id_sz>> create(int<<'path_id_sz>> num_path_ids) = {

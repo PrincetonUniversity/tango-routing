@@ -2,7 +2,7 @@ include "Types.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/TangoHeaderManager.dpt"
 include "store_managers/MetricSignatureManager.dpt"
-// include "store_managers/BookSignatureManager.dpt"
+include "store_managers/BookSignatureManager.dpt"
 // include "store_managers/DelayMetricsManager.dpt"
 // include "store_managers/LossMetricsManager.dpt"
 // include "store_managers/InvalidPacketManager.dpt"
@@ -39,10 +39,10 @@ global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.cr
 global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager = MetricSignatureManager.create(0); // FIXME: size
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-/*global BookSignatureManager.t<<,>> book_signature_manager = BookSignatureManager.create();
+global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatureManager.create(0); // FIXME: size
 
 // Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create();
+/*global DelayMetricsManager.t<<,,,,>> delay_metrics_manager = DelayMetricsManager.create();
 
 // Keep track of loss metrics of paths from peer
 global LossMetricsManager.t<<,,,,>> loss_metrics_manager = LossMetricsManager.create();
