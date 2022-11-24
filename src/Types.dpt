@@ -1,21 +1,122 @@
 /*
- * The header decribing a flow using tango
+ * The ethernet header of a packet.
+ *
+ * PROPERTIES
+ * ----------
+ * dest_mac (int<<48>>): destination MAC address
+ * src_mac (int<<48>>): source MAC address
+ * ethertype (int<<16>>): ethernet type
  */
-type IpHeader = {
-    /* TODO */
+type EthernetHeader_t = {
+   int<<48>> dest_mac; 
+   int<<48>> src_mac; 
+   int<<16>> ethertype;
+}
+
+
+/*
+ * The ipv4 header describing a packet source and destination.
+ *
+ * PROPERTIES
+ * ----------
+ * version_ihl (int<<8>>): IP protocol version and length of the header
+ * type_of_svc (int<<8>>): expected service for packet delivery
+ * len (int<<16>>): length of entire packet
+ * id (int<<16>>): ID used for fragmented packet reconstruction
+ * flags_fragment_offset (int<<16>>): if fragmented and position of fragment
+ * ttl (int<<8>>): time to live
+ * protocol (int<<8>>): transmission protocol
+ * checksum (int<<16>>): checksum of header
+ * src_addr (int<<32>>): IPv4 address of sender
+ * dest_addr (int<<32>>): IPv4 address of receiver
+ */
+type IPv4Header_t = {
+   int<<8>> version_ihl;
+   int<<8>> type_of_svc;
+   int<<16>> len;
+   int<<16>> id;
+   int<<16>> flags_fragment_offset;
+   int<<8>> ttl;
+   int<<8>> protocol;
+   int<<16>> checksum;
+   int<<32>> src_addr;
+   int<<32>> dest_addr;
 }
 
 /*
- * Route Update which is able to be en- and decrypted
+ * The ipv6 header describing a packet source and destination.
+ *
+ * PROPERTIES
+ * ----------
+ * version (int<<4>>): receiver ip version
+ * traffic_class (int<<8>>): ip traffic class, not tango // TODO: Should we reconsider naming
+ * flow_label (int<<20>>): signal to maintain flow on same path
+ * payload_len (int<<16>>): size of payload in octets
+ * next_header (int<<8>>): next header type (protocol)
+ * hop_limit (int<<8>>): time to live
+ * src_addr (int<<128>>): IPv6 address of sender
+ * dest_addr (int<<128>>): IPv6 address of receiver
+ */
+type IPv6Header_t = {
+   int<<4>> version;
+   int<<8>> traffic_class; // TODO: Should we reconsider naming
+   int<<20>> flow_label;
+   int<<16>> payload_len;
+   int<<8>> next_header;
+   int<<8>> hop_limit;
+   int<<128>> src_addr;
+   int<<128>> dest_addr;
+}
+
+/*
+ * A five-tuple describing a particular flow.
+ *
+ * PROPERTIES
+ * ----------
+ * src_addr (int<<32>>): IPv4 address of sender
+ * dest_addr (int<<32>>): IPv4 address of receiver
+ * src_port (int<<16>>): originating port
+ * dest_port (int<<16>>): receiving port
+ * protocol (int<<8>>): protocol of connection
+ */
+type FiveTuple_t = {
+   int<<32>> src_addr;
+   int<<32>> dest_addr;
+   int<<16>> src_port;
+   int<<16>> dest_port;
+   int<<8>> protocol;
+}
+
+/*
+ * The ipv6 header describing a packet source and destination.
+ *
+ * PROPERTIES
+ * ----------
+ * path_id (int<<'path_id_sz>>): path id packet is to or should have take(n)
+ * timestamp (int): timestamp of when packet left peer
+ * signature (int<<'signature_sz>>): signature of the path ID and timestamp
+ * sequence_num (int<<'seq_num_sz>>): Tango-specific sequence number
+ * book_signature (int<<1>>): single-bit signature of the sequence number
+ */
+type TangoHeader_t<<'path_id_sz, 'signature_sz, 'seq_num_sz>> = {
+   int<<'path_id_sz>> path_id;
+   int timestamp;
+   int<<'signature_sz>> signature;
+   int<<'seq_num_sz>> sequence_num;
+   int<<1>> book_signature;
+}
+
+/*
+ * Route Update which is able to be en- and decrypted.
  *
  * PROPERTIES
  * ----------
  * traffic_class (int<<'traffic_cls_sz>>): traffic class to update
  * new_path_id (int<<'path_id_sz>>): physical path ID to update mapping to
  */
-type RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> = {
-   int<<'traffic_cls_sz>> traffic_class,
-   int<<'path_id_sz>> new_path_id
+type RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> = {
+   int<<'traffic_cls_sz>> traffic_class;
+   int<<'path_id_sz>> new_path_id;
 }
 
 /*
@@ -26,20 +127,20 @@ type RouteUpdate<<'traffic_cls_sz, 'path_id_sz>> = {
  * delay_sum (int<<'delay_sum_sz>>): running sum of all delays
  * delay_count (int<<'delay_count_sz>>): count of number of packets
  */
-type DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> = {
-   int<<'delay_sum_sz>> delay_sum,
-   int<<'delay_count_sz>> delay_count
+type DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> = {
+   int<<'delay_sum_sz>> delay_sum;
+   int<<'delay_count_sz>> delay_count;
 }
 
 /*
- * Loss metrics for a given path
+ * Loss metrics for a given path.
  *
  * PROPERTIES
  * ----------
  * loss_count (int<<'loss_count_sz>>): 
  * transmission_count (int<<'tsm_count_sz>>): count of number of packets
  */
-type LogsMetrics<<'loss_count_sz, 'tsm_count_sz>> = {
-   int<<'loss_count_sz>> loss_count,
-   int<<'tsm_count_sz>> transmission_count
+type LossMetrics_t<<'loss_count_sz, 'tsm_count_sz>> = {
+   int<<'loss_count_sz>> loss_count;
+   int<<'tsm_count_sz>> transmission_count;
 }

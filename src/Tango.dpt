@@ -1,10 +1,21 @@
 include "Types.dpt"
-include "store_managers/RouteManager.dpt"
-include "store_managers/MetricSignatureManager.dpt"
-include "store_managers/BookSignatureManager.dpt"
-include "store_managers/DelayMetricsManager.dpt"
-include "store_managers/InvalidPacketManager.dpt"
-include "store_managers/EncryptionManager.dpt"
+// include "store_managers/RouteManager.dpt"
+// include "store_managers/TangoHeaderManager.dpt"
+// include "store_managers/MetricSignatureManager.dpt"
+// include "store_managers/BookSignatureManager.dpt"
+// include "store_managers/DelayMetricsManager.dpt"
+// include "store_managers/LossMetricsManager.dpt"
+// include "store_managers/InvalidPacketManager.dpt"
+// include "store_managers/EncryptionManager.dpt"
+
+/* ================================================================== *
+ *                                SIZES                               *
+ * ================================================================== */
+
+symbolic size path_id_sz;
+symbolic size signature_sz;
+symbolic size seq_num_sz;
+// TODO
 
 /* ================================================================== *
  *                               GLOBALS                              *
@@ -13,89 +24,69 @@ include "store_managers/EncryptionManager.dpt"
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global Counter.t<<20>> sequence_counter = Counter.create(0);
 
-// Array keeping track of the 5-tuple to traffic class mappings
-global Array.t<</* TODO */>> traffic_classes = Array.create(/* TODO */);
+// // Array keeping track of the 5-tuple to traffic class mappings
+// global Array.t<</* TODO */>> traffic_classes = Array.create(/* TODO */);
 
-// Keep track of the traffic class to physical path ID mappings
-global RouteManager.t<</* TODO */, /* TODO */, /* TODO */>> route_manager = RouteManager.create();
+// // Keep track of the traffic class to physical path ID mappings
+// global RouteManager.t<</* TODO */, /* TODO */, /* TODO */>> route_manager = RouteManager.create();
 
-// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-/* FIXME: symbolic or global or how to specify */
+// // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
+// global TangoHeaderManager.t<</*TODO*/>> header_manager = TangoHeaderManager.create()
 
-// Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */>> metric_signature_manager = MetricSignatureManager.create();
+// // Provide read access to precomputed timestamp + path ID signatures
+// global MetricSignatureManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */>> metric_signature_manager = MetricSignatureManager.create();
 
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<</* TODO */, /* TODO */>> book_signature_manager = BookSignatureManager.create()
+// // Provide read access to precomputed 1-bit signatures derived from sequence numbers
+// global BookSignatureManager.t<</* TODO */, /* TODO */>> book_signature_manager = BookSignatureManager.create()
 
-// Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> delay_metrics_manager = DelayMetricsManager.create()
+// // Keep track of delay metrics of paths from peer
+// global DelayMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> delay_metrics_manager = DelayMetricsManager.create()
 
-// Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> loss_metrics_manager = LossMetricsManager.create()
+// // Keep track of loss metrics of paths from peer
+// global LossMetricsManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> loss_metrics_manager = LossMetricsManager.create()
 
-// Keep track of invlaid packets found
-global InvalidPacketManager.t<</* TODO */, /* TODO */, /* TODO */>> invalid_pkt_manager = InvalidPacketManager.create()
+// // Keep track of invlaid packets found
+// global InvalidPacketManager.t<</* TODO */, /* TODO */, /* TODO */>> invalid_pkt_manager = InvalidPacketManager.create()
 
-// Encrypt and decrypt path updates using one-time pads
-global EncryptionManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> encryption_manager = EncryptionManager.create()
+// // Encrypt and decrypt path updates using one-time pads
+// global EncryptionManager.t<</* TODO */, /* TODO */, /* TODO */, /* TODO */, /* TODO */>> encryption_manager = EncryptionManager.create()
 
 /* ================================================================== *
  *                               EVENTS                               *
  * ================================================================== */
 
-// TODO: Do we want separate entry events for each type and a more complex harness or a top level ingress?
 /*
  * Event signifying application flow data packet to forward to peer Tango node.
  * 
  * PARAMETERS
  * ----------
- * src (int): the source IP address
- * dest (int): the destination IP address
- * src_port (int<<9>>): the source IP address
- * dest_port (int<<9>>): the destination IP address
- * protocol (int<<8>>): the protocol used by tango flow
- * header (IpHeader): the full header of packet, to forward once at other switch
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * five_tuple (`FiveTuple_t`): five-tuple describing flow
  *
  * GENERATES
  * ---------
  * incoming_tango_traffic: flow packet wrapped with tango data sent to peer node
  */
-entry event forward_flow (
-    int src,
-    int dest,
-    int<<9>> src_port,
-    int<<9>> dest_port,
-    int<<8>> protocol,
-    IpHeader header
-);
+entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple);
 
 /*
  * Incoming Tango data traffic from peer node.
  * 
  * PARAMETERS
  * ----------
- * path_id (int<<6>>): the physical path ID taken by the packet
- * timestamp (int): the timestamp when the packet left peer
- * metric_signature (int<<256>>): signature of the path_id and timestamp
- * sequence_num (int<<20>>): the tango packet sequence number
- * book_signature (int<<1>>): the one-bit signature in book corresponding to sequence number
- * header (IpHeader): the full header of packet, to forward once at other switch
+ * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
+ * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_metrics_header (TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>>): tango metric data and signatures
+ * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
+ * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  *
  * GENERATES
  * ---------
  * route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
- * FIXME: fix the number of bits
  */
-event incoming_tango_traffic (
-    int<</* TODO */>> path_id,
-    int timestamp,
-    int<<256>> metric_signature,
-    int<<20>> sequence_num,
-    int<<1> book_signature,
-    IpHeader forwarded_header
-);
+event incoming_tango_traffic (EthernetHeader_t tango_eth_header, IPv6Header_t tango_ip_header, TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header, EthernetHeader_t encaped_eth_header, IPv4Header_t encaped_ip_header);
 
 /*
  * Peer says to update a given route mapping for a traffic class
@@ -111,33 +102,20 @@ event route_update (int<<64>> update);
  * 
  * PARAMETERS
  * ----------
- * header (IpHeader): the full header of packet, to re-encapsulte
+ * ethernet_header (EthernetHeader_t): ethernet header of original packet, to re-encapsulate
+ * ip_header (IPv4Header_t): the full ip header of packet, to re-encapsulte
  */
-exit event complete_forward (IpHeader header);
+exit event complete_forward (EthernetHeader_t ethernet_header, IPv4Header_t ip_header);
 
 /* ================================================================== *
  *                              HANDLERS                              *
  * ================================================================== */
 
-handle forward_flow (
-    int src,
-    int dest,
-    int<<9>> src_port,
-    int<<9>> dest_port,
-    int<<8>> protocol,
-    IpHeader header
-) {
+handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple) {
     /* TODO */
 }
 
-handle incoming_tango_traffic (
-    int<</* TODO */>> path_id,
-    int timestamp,
-    int<<256>> metric_signature,
-    int<<20>> sequence_num,
-    int<<1> book_signature,
-    IpHeader forwarded_header
-) {
+handle incoming_tango_traffic (EthernetHeader_t tango_eth_header, IPv6Header_t tango_ip_header, TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header, EthernetHeader_t encaped_eth_header, IPv4Header_t encaped_ip_header) {
     /* TODO */
 }
 

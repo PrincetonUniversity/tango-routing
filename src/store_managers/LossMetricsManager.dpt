@@ -14,9 +14,9 @@ module LossMetricsManager : {
     * 
     * RETURNS
     * -------
-    * metrics (LossMetrics<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
+    * metrics (LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
     */
-    fun LossMetrics<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) [start <= self; end self];
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) [start <= self; end self];
 
    /*
     * Gets the delay metrics for the path
@@ -28,9 +28,9 @@ module LossMetricsManager : {
     * 
     * RETURNS
     * -------
-    * metrics (LossMetrics<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
+    * metrics (LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>>): the calculated metrics
     */
-    fun LossMetrics<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<path_id_sz>> path_id) [start <= self; end self];
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<path_id_sz>> path_id) [start <= self; end self];
 
 }
 {
@@ -47,11 +47,11 @@ module LossMetricsManager : {
         /* TODO */
     };
 
-    fun LossMetrics<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) {
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> update_loss(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<'seq_num_sz>> sequence_num) {
         /* TODO */
     }
 
-    fun LossMetrics<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<path_id_sz>> path_id) {
+    fun LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'loss_count_sz, 'tns_cnt_sz, 'seq_num_sz>> self, int<<path_id_sz>> path_id) {
         /* TODO */
     }
 }

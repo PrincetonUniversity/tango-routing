@@ -1,14 +1,14 @@
 // Manages all traffic class to physical path ID mappings
 module RouteManager : {
-    global type t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>>;
-    constr t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> create();
+    global type t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>>;
+    constr t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>> create();
 
     /*
     * Updates map with a new traffic class to physical path ID mapping.
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>>): self
+    * self (t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>>): self
     * traffic_cls (int<<'traffic_cls_sz>>): traffic class to update mapping for
     * path_id (int<<'path_id_sz>>): physical path ID to update mapping to
     */
@@ -19,7 +19,7 @@ module RouteManager : {
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>>): self
+    * self (t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>>): self
     * traffic_cls (int<<'traffic_cls_sz>>): traffic class to get mapping for
     * 
     * RETURNS
@@ -29,19 +29,19 @@ module RouteManager : {
     fun int<<'path_id_sz>> get_path_id(t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> self, int<<'traffic_cls_sz>> traffic_cls) [start <= self; end self];
 }
 {
-    type t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> = {
+    type t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>> = {
         int<<'path_id_sz>>['num_traffic_cls] mappings; // TODO: may convert to Array.t
     }
 
-    constr t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> create() = {
+    constr t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>> create() = {
         /* TODO */
     };
 
-    fun void update_route(t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> self, int<<'traffic_cls_sz>> traffic_cls, int<<'path_id_sz>> path_id) {
+    fun void update_route(t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>> self, int<<'traffic_cls_sz>> traffic_cls, int<<'path_id_sz>> path_id) {
         /* TODO */
     }
 
-    fun int<<'path_id_sz>> get_path_id(t<<'traffic_cls_sz, 'num_traffic_cls', 'path_id_sz>> self, int<<'traffic_cls_sz>> traffic_cls) {
+    fun int<<'path_id_sz>> get_path_id(t<<'traffic_cls_sz, 'num_traffic_cls, 'path_id_sz>> self, int<<'traffic_cls_sz>> traffic_cls) {
         /* TODO */
     }
 }

@@ -14,9 +14,9 @@ module DelayMetricsManager : {
     * 
     * RETURNS
     * -------
-    * metrics (DelayMetrics<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
+    * metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
     */
-    fun DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) [start <= self; end self];
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) [start <= self; end self];
 
    /*
     * Gets the delay metrics for the path
@@ -28,9 +28,9 @@ module DelayMetricsManager : {
     * 
     * RETURNS
     * -------
-    * metrics (DelayMetrics<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
+    * metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): the calculated metrics
     */
-    fun DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) [start <= self; end self];
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) [start <= self; end self];
 
 }
 {
@@ -45,11 +45,11 @@ module DelayMetricsManager : {
         /* TODO */
     };
 
-    fun DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) {
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> update_delay(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int timestamp, int<<path_id_sz>> path_id) {
         /* TODO */
     }
 
-    fun DelayMetrics<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) {
+    fun DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> get_metrics(t<<'num_path_ids, 'path_id_sz, 'delay_sum_sz, 'delay_count_sz>> self, int<<path_id_sz>> path_id) {
         /* TODO */
     }
 }

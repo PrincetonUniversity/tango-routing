@@ -8,7 +8,7 @@ module InvalidPacketManager : {
     * 
     * PARAMETERS
     * ----------
-    * self (<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>): self
+    * self (t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>): self
     * path_id (int<<'path_id_sz>>): path upon the invalid packet was found
     */
     fun void found_invalid_packet(<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
