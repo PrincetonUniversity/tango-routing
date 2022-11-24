@@ -30,7 +30,7 @@ module RouteManager : {
 }
 {
     type t<<'traffic_cls_sz, 'path_id_sz>> = {
-        Array.t<<'path_id_sz>> mappings; // TODO: may convert to Array.t
+        Array.t<<'path_id_sz>> mappings;
     }
 
     constr t<<'traffic_cls_sz, 'path_id_sz>> create(int<<'traffic_cls_sz>> num_traffic_cls) = {

@@ -36,7 +36,7 @@ module MetricSignatureManager : {
 }
 {
     type t<<'num_timestamps, 'path_id_sz, 'signature_sz>> = {
-        Array.t<<'signature_sz>>['num_timestamps] signatures; // TODO: Use Array.t? Use concatenated form? Also idk how indexing is going to work... best guess is index = timestamp - base (ms) where base is the first timestamp in the list?
+        Array.t<<'signature_sz>>['num_timestamps] signatures;
     }
 
     constr t<<'num_timestamps, 'path_id_sz, 'signature_sz>> create(int<<'path_id_sz>> num_path_ids) = {

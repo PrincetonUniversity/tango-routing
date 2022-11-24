@@ -12,17 +12,23 @@ include "store_managers/EncryptionManager.dpt"
  *                                SIZES                               *
  * ================================================================== */
 
+// Parametric sizes
 symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
 symbolic size traffic_cls_sz;
-symbolic size num_timestamps;
 symbolic size delay_sum_sz;
 symbolic size delay_count_sz;
 symbolic size loss_count_sz;
 symbolic size tns_cnt_sz;
 symbolic size invalid_track_sz;
 symbolic size ciphertext_sz;
+
+// Lengths of arrays
+symbolic size num_timestamps;
+symbolic size num_traffic_cls;
+symbolic size num_path_ids;
+symbolic size num_seq_nums;
 
 /* ================================================================== *
  *                               GLOBALS                              *
@@ -32,28 +38,28 @@ symbolic size ciphertext_sz;
 global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
 
 // Keep track of the traffic class to physical path ID mappings
-global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager.create(0); // FIXME: size
+global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager = RouteManager.create((int<<'traffic_cls_sz>>) size_to_int(num_traffic_cls));
 
 // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.create(0); // FIXME: size
+global TangoHeaderManager.t<<path_id_sz>> header_manager = TangoHeaderManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager = MetricSignatureManager.create(0); // FIXME: size
+global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager = MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatureManager.create(0); // FIXME: size
+global BookSignatureManager.t<<seq_num_sz>> book_signature_manager = BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<<0, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager = DelayMetricsManager.create(); // FIXME: size
+global DelayMetricsManager.t<<num_path_ids, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager = DelayMetricsManager.create();
 
 // Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<<0, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager = LossMetricsManager.create(); // FIXME: size
+global LossMetricsManager.t<<num_path_ids, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager = LossMetricsManager.create();
 
 // Keep track of invlaid packets found
-global InvalidPacketManager.t<<0, path_id_sz, invalid_track_sz>> invalid_pkt_manager = InvalidPacketManager.create(); // FIXME: size
+global InvalidPacketManager.t<<num_path_ids, path_id_sz, invalid_track_sz>> invalid_pkt_manager = InvalidPacketManager.create();
 
 // Encrypt and decrypt path updates using one-time pads
-global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> encryption_manager = EncryptionManager.create(0); // FIXME: size
+global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> encryption_manager = EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
 /* ================================================================== *
  *                               EVENTS                               *
