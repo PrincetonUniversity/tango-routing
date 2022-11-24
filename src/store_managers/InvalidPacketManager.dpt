@@ -1,28 +1,29 @@
 // Manages all invalid packets for each incoming path
 module InvalidPacketManager : {
-    global type t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>;
-    constr t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> create();
+    global type t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>>;
+    constr t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>> create();
 
    /*
     * Report an invlaid packet.
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'num_path_ids, 'path_id_sz, 'invalid_track_num>>): self
+    * self (t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>>): self
     * path_id (int<<'path_id_sz>>): path upon the invalid packet was found
     */
-    fun void found_invalid_packet(<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
+    fun void found_invalid_packet(t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>> self, int<<'path_id_sz>> path_id) [start <= self; end self];
 }
 {
-    type <<'num_path_ids, 'path_id_sz, 'invalid_track_num>> = {
-        Counter.t<<'invalid_track_num>>['num_path_ids] invalid_counts; // TODO: or use Array.t<<?>> type>
+    type t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>> = {
+        Counter.t<<'invalid_track_sz>>['num_path_ids] invalid_counts;
     }
     
-    constr <<'num_path_ids, 'path_id_sz, 'invalid_track_num>> create() = {
-        /* TODO */
+    constr t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>> create() = {
+        invalid_counts = [Counter.create(0) for x < 'num_path_ids];
     };
 
-    fun void found_invalid_packet(<<'num_path_ids, 'path_id_sz, 'invalid_track_num>> self, int<<'path_id_sz>> path_id) {
+    fun void found_invalid_packet(t<<'num_path_ids, 'path_id_sz, 'invalid_track_sz>> self, int<<'path_id_sz>> path_id) {
+        printf("ERROR: `DelayMetricsManager.update_delay()` is *unimplemented*");
         /* TODO */
     }
 }

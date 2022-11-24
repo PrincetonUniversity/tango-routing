@@ -5,7 +5,7 @@ include "store_managers/MetricSignatureManager.dpt"
 include "store_managers/BookSignatureManager.dpt"
 include "store_managers/DelayMetricsManager.dpt"
 include "store_managers/LossMetricsManager.dpt"
-// include "store_managers/InvalidPacketManager.dpt"
+include "store_managers/InvalidPacketManager.dpt"
 // include "store_managers/EncryptionManager.dpt"
 
 /* ================================================================== *
@@ -21,6 +21,7 @@ symbolic size delay_sum_sz;
 symbolic size delay_count_sz;
 symbolic size loss_count_sz;
 symbolic size tns_cnt_sz;
+symbolic size invalid_track_sz;
 // TODO
 
 /* ================================================================== *
@@ -52,10 +53,10 @@ global DelayMetricsManager.t<<0, path_id_sz, delay_sum_sz, delay_count_sz>> dela
 global LossMetricsManager.t<<0, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager = LossMetricsManager.create(); // FIXME: size
 
 // Keep track of invlaid packets found
-/*global InvalidPacketManager.t<<,,>> invalid_pkt_manager = InvalidPacketManager.create();
+global InvalidPacketManager.t<<0, path_id_sz, invalid_track_sz>> invalid_pkt_manager = InvalidPacketManager.create(); // FIXME: size
 
 // Encrypt and decrypt path updates using one-time pads
-global EncryptionManager.t<<,,,,>> encryption_manager = EncryptionManager.create()*/
+/*global EncryptionManager.t<<,,,,>> encryption_manager = EncryptionManager.create()*/
 
 /* ================================================================== *
  *                               EVENTS                               *
