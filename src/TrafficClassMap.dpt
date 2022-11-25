@@ -2,6 +2,13 @@ include "Types.dpt"
 
 symbolic size path_id_sz;
 
+/*
+ * User-generated or defined fuzzy mappings between a flow 5-tuple and traffic class.
+ * 
+ * PARAMETERS
+ * ----------
+ * flow (FiveTuple_t): five-tuple describing a user flow
+ */
 fun int<<path_id_sz>> map_flow_to_traffic_class (FiveTuple_t flow) {
     match (flow#src_addr, flow#src_port, flow#dest_addr, flow#dest_port, flow#protocol) with
 	| _, _, _, _, _ -> {

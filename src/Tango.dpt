@@ -111,7 +111,7 @@ event incoming_tango_traffic (
     TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
-);
+) // TODO: Do we need constraints?
 
 /*
  * Peer says to update a given route mapping for a traffic class
