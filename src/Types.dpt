@@ -146,3 +146,20 @@ type LossMetrics_t<<'loss_count_sz, 'tsm_count_sz>> = {
    int<<'loss_count_sz>> loss_count;
    int<<'tsm_count_sz>> transmission_count;
 }
+
+/*
+ * Best metrics over all paths.
+ *
+ * PROPERTIES
+ * ----------
+ * best_delay_metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): metrics constituting updated best delay
+ * best_delay_id (int<<'path_id_sz>>): path id of best delay path
+ * best_loss_metrics (LossMetrics_t<<'loss_count_sz, 'tns_count_sz>>): loss constituting updated best delay
+ * best_loss_id (int<<'path_id_sz>>): path id of best loss path
+ */
+type BestMetrics_t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz, 'path_id_sz>> = {
+   DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> best_delay_metrics;
+   int<<'path_id_sz>> best_delay_id;
+   LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> best_loss_metrics;
+   int<<'path_id_sz>> best_loss_id;
+}
