@@ -27,23 +27,17 @@ module BestMetricsManager : {
 }
 {
     type t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> = {
-        LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> best_loss;
-        DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> best_delay;
-        int<<'path_id_sz>> best_loss_id;
-        int<<'path_id_sz>> best_delay_id;
+        Array.t<<delay_metric_sz>> best_loss;
+        Array.t<<loss_metric_sz>> best_delay;
+        Array.t<<'path_id_sz>> best_loss_id;
+        Array.t<<'path_id_sz>> best_delay_id;
     }
 
     constr t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> create () = {
-        best_loss = {
-            loss_count = -1;
-            transmission_count = -1;
-        };
-        best_delay = {
-            delay_sum = -1;
-            delay_count = -1;
-        };
-        best_loss_id = -1;
-        best_delay_id = -1;
+        best_loss = Array.create(1);
+        best_delay = Array.create(1);
+        best_loss_id = Array.create(1);
+        best_delay_id = Array.create(1);
         /* TODO */
     };
 

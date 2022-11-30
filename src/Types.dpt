@@ -163,3 +163,10 @@ type BestMetrics_t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,
    LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> best_loss_metrics;
    int<<'path_id_sz>> best_loss_id;
 }
+
+symbolic size delay_sum_sz;
+symbolic size delay_count_sz;
+symbolic size loss_count_sz;
+symbolic size tns_cnt_sz;
+size delay_metric_sz = delay_sum_sz + delay_count_sz;
+size loss_metric_sz = loss_count_sz + tns_cnt_sz;

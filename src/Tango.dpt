@@ -8,6 +8,7 @@ include "store_managers/DelayMetricsManager.dpt"
 include "store_managers/LossMetricsManager.dpt"
 include "store_managers/InvalidPacketManager.dpt"
 include "store_managers/EncryptionManager.dpt"
+include "store_managers/BestMetricsManager.dpt"
 
 /* ================================================================================================================== *
  *                                                      SIZES                                                         *
@@ -38,6 +39,18 @@ symbolic size num_seq_nums;
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
 
+// Decrypt path updates using one-time pads
+global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> incoming_encryption_manager =
+    EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+
+// Provide read access to precomputed timestamp + path ID signatures for validation
+global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> incoming_metric_signature_manager =
+    MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
+global BookSignatureManager.t<<seq_num_sz>> incoming_book_signature_manager =
+    BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager =
     RouteManager.create((int<<'traffic_cls_sz>>) size_to_int(num_traffic_cls));
@@ -47,11 +60,11 @@ global TangoHeaderManager.t<<path_id_sz>> header_manager =
     TangoHeaderManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> metric_signature_manager =
+global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> outgoing_metric_signature_manager =
     MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<seq_num_sz>> book_signature_manager =
+global BookSignatureManager.t<<seq_num_sz>> outgoing_book_signature_manager =
     BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Keep track of delay metrics of paths from peer
@@ -66,8 +79,12 @@ global LossMetricsManager.t<<num_path_ids, path_id_sz, loss_count_sz, tns_cnt_sz
 global InvalidPacketManager.t<<num_path_ids, path_id_sz, invalid_track_sz>> invalid_pkt_manager =
     InvalidPacketManager.create();
 
-// Encrypt and decrypt path updates using one-time pads
-global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> encryption_manager =
+// Keep track of the most performant paths
+global BestMetricsManager.t<<delay_sum_sz, delay_count_sz, loss_count_sz, tns_cnt_sz,  path_id_sz>> best_metrics_manager =
+    BestMetricsManager.create();
+
+// Encrypt path updates using one-time pads
+global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> outgoing_encryption_manager =
     EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
 
 /* ================================================================================================================== *
