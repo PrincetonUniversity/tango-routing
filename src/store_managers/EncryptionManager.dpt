@@ -48,7 +48,7 @@ module EncryptionManager : {
     }
 
     constr t<<'ciphertext_sz, 'traffic_cls_sz, 'path_id_sz, 'seq_num_sz>> create (int<<'seq_num_sz>> num_seq_nums) = {
-        one_time_pads = Array.create(num_seq_nums);
+        one_time_pads = Array.create(num_seq_nums); // FIXME: size
         /* TODO */
     };
 

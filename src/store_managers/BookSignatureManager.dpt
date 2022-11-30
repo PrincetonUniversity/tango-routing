@@ -1,23 +1,25 @@
 // Manages all sequence number book signatures
 module BookSignatureManager : {
-    global type t<<'seq_num_sz>>;
-    constr t<<'seq_num_sz>> create (int<<'seq_num_sz>> num_seq_nums);
+    global type t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>>;
+    constr t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> create (int<<'seq_num_sz>> num_seq_nums);
 
    /*
-    * Gets a signature for a given timestamp and physical path ID
+    * Gets a signature for a given sequence number and physical path ID
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'seq_num_sz>>): self
+    * self (t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>>): self
     * seq_number (int<<'seq_num_sz'>>): sequence number to sign
+    * path_id (int<<'path_id_sz>>): path ID of associated sequence number
     * 
     * RETURNS
     * -------
-    * signature (int<<1>>): signature of timestamp + path ID
+    * signature (int<<'book_sig_sz>>): signature of timestamp + path ID
     */
-    fun int<<1>> sign (
-        t<<'seq_num_sz>> self,
-        int<<'seq_num_sz>> seq_number
+    fun int<<'book_sig_sz>> sign (
+        t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> self,
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id
     ) [start <= self; end self];
 
    /*
@@ -25,33 +27,36 @@ module BookSignatureManager : {
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'seq_num_sz>>): self
+    * self (t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>>): self
     * seq_number (int<<'seq_num_sz'>>): sequence number signed
-    * signature (int<<1>>): signature to validate
+    * path_id (int<<'path_id_sz>>): path ID of associated sequence number
+    * signature (int<<'book_sig_sz>>): signature to validate
     * 
     * RETURNS
     * -------
     * is_valid (bool): if signature is valid
     */
     fun bool verify (
-        t<<'seq_num_sz>> self,
+        t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> self,
         int<<'seq_num_sz>> seq_number,
-        int<<1>> signature
+        int<<'path_id_sz>> path_id,
+        int<<'book_sig_sz>> signature
     ) [start <= self; end self];
 
 }
 {
-    type t<<'seq_num_sz>> = {
+    type t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> = {
         Array.t<<1>> onebit_signatures;
     }
 
-    constr t<<'seq_num_sz>> create (int<<'seq_num_sz>> num_seq_nums) = {
-        onebit_signatures = Array.create(num_seq_nums);
+    constr t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> create (int<<'seq_num_sz>> num_seq_nums) = {
+        onebit_signatures = Array.create(num_seq_nums); // FIXME: size
     };
 
-    fun int<<1>> sign (
-        t<<'seq_num_sz>> self,
-        int<<'seq_num_sz>> seq_number
+    fun int<<'book_sig_sz>> sign (
+        t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> self,
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id
     ) {
         printf("ERROR: `BookSignatureManager.sign()` is *unimplemented*");
         return 0;
@@ -59,9 +64,10 @@ module BookSignatureManager : {
     }
 
     fun bool verify (
-        t<<'seq_num_sz>> self,
+        t<<'num_path_ids, 'path_id_sz, 'seq_num_sz, 'book_sig_sz>> self,
         int<<'seq_num_sz>> seq_number,
-        int<<1>> signature
+        int<<'path_id_sz>> path_id,
+        int<<'book_sig_sz>> signature
     ) {
         printf("ERROR: `BookSignatureManager.verify()` is *unimplemented*");
         return false;

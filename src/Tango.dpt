@@ -1,5 +1,6 @@
 include "Types.dpt"
 include "TrafficClassMap.dpt"
+include "store_managers/SequenceNumberManager.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/TangoHeaderManager.dpt"
 include "store_managers/MetricSignatureManager.dpt"
@@ -25,6 +26,7 @@ symbolic size loss_count_sz;
 symbolic size tns_cnt_sz;
 symbolic size invalid_track_sz;
 symbolic size ciphertext_sz;
+symbolic size book_sig_sz;
 
 // Lengths of arrays
 symbolic size num_timestamps;
@@ -37,35 +39,36 @@ symbolic size num_seq_nums;
  * ================================================================================================================== */
 
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
-global Counter.t<<seq_num_sz>> sequence_counter = Counter.create(0);
+global SequenceNumberManager.t<<num_path_ids, path_id_sz, seq_num_sz>> sequence_counters =
+    SequenceNumberManager.create();
 
 // Decrypt path updates using one-time pads
 global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> incoming_encryption_manager =
-    EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+    EncryptionManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Provide read access to precomputed timestamp + path ID signatures for validation
 global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> incoming_metric_signature_manager =
-    MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+    MetricSignatureManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
-global BookSignatureManager.t<<seq_num_sz>> incoming_book_signature_manager =
-    BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+global BookSignatureManager.t<<num_path_ids, path_id_sz, seq_num_sz, book_sig_sz>> incoming_book_signature_manager =
+    BookSignatureManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager =
-    RouteManager.create((int<<'traffic_cls_sz>>) size_to_int(num_traffic_cls));
+    RouteManager.create((int<<traffic_cls_sz>>) size_to_int(num_traffic_cls));
 
 // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
 global TangoHeaderManager.t<<path_id_sz>> header_manager =
-    TangoHeaderManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+    TangoHeaderManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> outgoing_metric_signature_manager =
-    MetricSignatureManager.create((int<<'path_id_sz>>) size_to_int(num_path_ids));
+    MetricSignatureManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<seq_num_sz>> outgoing_book_signature_manager =
-    BookSignatureManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+global BookSignatureManager.t<<num_path_ids, path_id_sz, seq_num_sz, book_sig_sz>> outgoing_book_signature_manager =
+    BookSignatureManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
 
 // Keep track of delay metrics of paths from peer
 global DelayMetricsManager.t<<num_path_ids, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager =
