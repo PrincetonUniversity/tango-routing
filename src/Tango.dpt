@@ -19,76 +19,49 @@ include "store_managers/BestMetricsManager.dpt"
 symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
-symbolic size traffic_cls_sz;
-symbolic size delay_sum_sz;
-symbolic size delay_count_sz;
-symbolic size loss_count_sz;
-symbolic size tns_cnt_sz;
-symbolic size invalid_track_sz;
-symbolic size ciphertext_sz;
-symbolic size book_sig_sz;
-
-// Lengths of arrays
-symbolic size num_timestamps;
-symbolic size num_traffic_cls;
-symbolic size num_path_ids;
-symbolic size num_seq_nums;
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
  * ================================================================================================================== */
 
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
-global SequenceNumberManager.t<<num_path_ids, path_id_sz, seq_num_sz>> sequence_counters =
-    SequenceNumberManager.create();
+global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
 
 // Decrypt path updates using one-time pads
-global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> incoming_encryption_manager =
-    EncryptionManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
+global EncryptionManager.t incoming_encryption_manager = EncryptionManager.create();
 
 // Provide read access to precomputed timestamp + path ID signatures for validation
-global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> incoming_metric_signature_manager =
-    MetricSignatureManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
+global MetricSignatureManager.t incoming_metric_signature_manager = MetricSignatureManager.create();
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
-global BookSignatureManager.t<<num_path_ids, path_id_sz, seq_num_sz, book_sig_sz>> incoming_book_signature_manager =
-    BookSignatureManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
+global BookSignatureManager.t incoming_book_signature_manager = BookSignatureManager.create();
 
 // Keep track of the traffic class to physical path ID mappings
-global RouteManager.t<<traffic_cls_sz, path_id_sz>> route_manager =
-    RouteManager.create((int<<traffic_cls_sz>>) size_to_int(num_traffic_cls));
+global RouteManager.t route_manager = RouteManager.create();
 
 // Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-global TangoHeaderManager.t<<path_id_sz>> header_manager =
-    TangoHeaderManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
+global TangoHeaderManager.t header_manager = TangoHeaderManager.create();
 
 // Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t<<num_timestamps, path_id_sz, signature_sz>> outgoing_metric_signature_manager =
-    MetricSignatureManager.create((int<<path_id_sz>>) size_to_int(num_path_ids));
+global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t<<num_path_ids, path_id_sz, seq_num_sz, book_sig_sz>> outgoing_book_signature_manager =
-    BookSignatureManager.create((int<<seq_num_sz>>) size_to_int(num_seq_nums));
+global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
 
 // Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t<<num_path_ids, path_id_sz, delay_sum_sz, delay_count_sz>> delay_metrics_manager =
-    DelayMetricsManager.create();
+global DelayMetricsManager.t delay_metrics_manager = DelayMetricsManager.create();
 
 // Keep track of loss metrics of paths from peer
-global LossMetricsManager.t<<num_path_ids, path_id_sz, loss_count_sz, tns_cnt_sz, seq_num_sz>> loss_metrics_manager =
-    LossMetricsManager.create();
+global LossMetricsManager.t loss_metrics_manager = LossMetricsManager.create();
 
 // Keep track of invlaid packets found
-global InvalidPacketManager.t<<num_path_ids, path_id_sz, invalid_track_sz>> invalid_pkt_manager =
-    InvalidPacketManager.create();
+global InvalidPacketManager.t invalid_pkt_manager = InvalidPacketManager.create();
 
 // Keep track of the most performant paths
-global BestMetricsManager.t<<delay_sum_sz, delay_count_sz, loss_count_sz, tns_cnt_sz,  path_id_sz>> best_metrics_manager =
-    BestMetricsManager.create();
+global BestMetricsManager.t best_metrics_manager = BestMetricsManager.create();
 
 // Encrypt path updates using one-time pads
-global EncryptionManager.t<<ciphertext_sz, traffic_cls_sz, path_id_sz, seq_num_sz>> outgoing_encryption_manager =
-    EncryptionManager.create((int<<'seq_num_sz>>) size_to_int(num_seq_nums));
+global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.create();
 
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *

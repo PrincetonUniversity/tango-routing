@@ -1,39 +1,45 @@
 include "../Types.dpt"
 
+symbolic size path_id_sz;
+symbolic size delay_sum_sz;
+symbolic size delay_count_sz;
+symbolic size loss_count_sz;
+symbolic size tns_cnt_sz;
+
 // Keep track of most performant path
 module BestMetricsManager : {
-    global type t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>>;
-    constr t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> create ();
+    global type t;
+    constr t create ();
 
    /*
     * Updates the delay from the incoming Tango packets timestamp
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>>): self
-    * path_id (int<<'path_id_sz>>): contending path id
-    * loss_metrics (LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>>): loss metrics found ion that path
-    * delay_metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): delay metrics found on that path
+    * self (t): self
+    * path_id (int<<path_id_sz>>): contending path id
+    * loss_metrics (LossMetrics_t<<loss_count_sz, tns_cnt_sz>>): loss metrics found ion that path
+    * delay_metrics (DelayMetrics_t<<delay_sum_sz, delay_count_sz>>): delay metrics found on that path
     * 
     * RETURNS
     * -------
     */
-    fun BestMetrics_t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz, 'path_id_sz>> update (
-        t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> self,
-        int<<'path_id_sz>> path_id,
-        LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> loss_metrics,
-        DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> delay_metrics
+    fun BestMetrics_t<<delay_sum_sz, delay_count_sz, loss_count_sz, tns_cnt_sz, path_id_sz>> update (
+        t self,
+        int<<path_id_sz>> path_id,
+        LossMetrics_t<<loss_count_sz, tns_cnt_sz>> loss_metrics,
+        DelayMetrics_t<<delay_sum_sz, delay_count_sz>> delay_metrics
     ) [start <= self; end self];
 }
 {
-    type t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> = {
+    type t = {
         Array.t<<delay_metric_sz>> best_loss;
         Array.t<<loss_metric_sz>> best_delay;
-        Array.t<<'path_id_sz>> best_loss_id;
-        Array.t<<'path_id_sz>> best_delay_id;
+        Array.t<<path_id_sz>> best_loss_id;
+        Array.t<<path_id_sz>> best_delay_id;
     }
 
-    constr t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> create () = {
+    constr t create () = {
         best_loss = Array.create(1);
         best_delay = Array.create(1);
         best_loss_id = Array.create(1);
@@ -41,11 +47,11 @@ module BestMetricsManager : {
         /* TODO */
     };
 
-    fun BestMetrics_t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz, 'path_id_sz>> update (
-        t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz,  'path_id_sz>> self,
-        int<<'path_id_sz>> path_id,
-        LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> loss_metrics,
-        DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> delay_metrics
+    fun BestMetrics_t<<delay_sum_sz, delay_count_sz, loss_count_sz, tns_cnt_sz, path_id_sz>> update (
+        t self,
+        int<<path_id_sz>> path_id,
+        LossMetrics_t<<loss_count_sz, tns_cnt_sz>> loss_metrics,
+        DelayMetrics_t<<delay_sum_sz, delay_count_sz>> delay_metrics
     ) {
         printf("ERROR: `BestMetricsManager.update()` is *unimplemented*");
         return {

@@ -1,36 +1,38 @@
 include "../Types.dpt"
 
+symbolic size num_path_ids;
+
 // Manages all Tango UDP headers for all paths
 module TangoHeaderManager : {
-    global type t<<'path_id_sz>>;
-    constr t<<'path_id_sz>> create (int<<'path_id_sz>> num_path_ids);
+    global type t;
+    constr t create ();
 
    /*
     * Get a header for a given packet.
     * 
     * PARAMETERS
     * ----------
-    * self (t<<'num_path_ids>>): self
-    * path_id (int<<'path_id_sz>>): path upon the invalid packet was found
+    * self (t): self
+    * path_id (int): path upon the invalid packet was found
     */
     fun IPv6Header_t get_path_header (
-        t<<'path_id_sz>> self,
-        int<<'path_id_sz>> path_id
+        t self,
+        int path_id
     ) [start <= self; end self];
 }
 {
-    type t<<'path_id_sz>> = {
+    type t = {
         Array.t<<ipv6_hdr_sz>> headers;
     }
     
-    constr t<<'path_id_sz>> create (int<<'path_id_sz>> num_path_ids) = {
-        headers = Array.create(num_path_ids);
+    constr t create () = {
+        headers = Array.create(size_to_int(num_path_ids));
         /* TODO */
     };
 
     fun IPv6Header_t get_path_header (
-        t<<'path_id_sz>> self,
-        int<<'path_id_sz>> path_id
+        t self,
+        int path_id
     ) {
         printf("ERROR: `TangoHeaderManager.get_path_header()` is *unimplemented*");
         return {
