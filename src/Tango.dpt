@@ -20,6 +20,8 @@ symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
 
+symbolic int out_peer_port;
+
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
  * ================================================================================================================== */
@@ -98,7 +100,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
  * route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
  */
-event incoming_tango_traffic (
+event incoming_tango_traffic ( // TODO: Compiler gave warning about unconditional and not 'exit'
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
@@ -132,6 +134,41 @@ exit event complete_forward (EthernetHeader_t ethernet_header, IPv4Header_t ip_h
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple) {
     printf("ERROR: hander `forward_flow` is *unimplemented*");
     // TODO
+
+    EthernetHeader_t tango_eth_header = {
+        dest_mac = 0;
+        src_mac = 0;
+        ethertype = 0;
+    };
+
+    IPv6Header_t tango_path_hdr = {
+        version = 0;
+        traffic_class = 0;
+        flow_label = 0;
+        payload_len = 0;
+        next_header = 0;
+        hop_limit = 0;
+        src_addr = 0;
+        dest_addr = 0;
+    };
+
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_hdr = {
+        path_id = 0;
+        timestamp = 0;
+        signature = 0;
+        sequence_num = 0;
+        book_signature = 0;
+    };
+
+    auto fwd = incoming_tango_traffic (
+        tango_eth_header,
+        tango_path_hdr,
+        tango_metrics_hdr,
+        eth_header,
+        ip_header
+    );
+
+    generate_port (out_peer_port, fwd);
 }
 
 handle incoming_tango_traffic (
@@ -143,6 +180,12 @@ handle incoming_tango_traffic (
 ) {
     printf("ERROR: hander `incoming_tango_traffic` is *unimplemented*");
     // TODO
+
+    auto tunneled = complete_forward (encaped_eth_header, encaped_ip_header);
+    generate_port (out_peer_port, tunneled);
+
+    auto update = route_update (12312);
+    generate_port (out_peer_port, update);
 }
 
 handle route_update (int<<64>> update) {
