@@ -4,8 +4,8 @@ symbolic size num_path_ids;
 
 // Manages all Tango UDP headers for all paths
 module TangoHeaderManager : {
-    global type t;
-    constr t create ();
+    global type t<<'num_path_ids>>;
+    constr t<<'num_path_ids>> create ();
 
    /*
     * Get a header for a given packet.
@@ -16,7 +16,7 @@ module TangoHeaderManager : {
     * path_id (int): path upon the invalid packet was found
     */
     fun IPv6Header_t get_path_header (
-        t self,
+        t<<'num_path_ids>> self,
         int path_id
     ) [start <= self; end self];
 }
@@ -26,7 +26,7 @@ module TangoHeaderManager : {
     }
     
     constr t create () = {
-        headers = Array.create(size_to_int(num_path_ids));
+        headers = Array.create(size_to_int('num_path_ids));
         /* TODO */
     };
 

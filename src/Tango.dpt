@@ -19,6 +19,7 @@ include "store_managers/BestMetricsManager.dpt"
 symbolic size path_id_sz;
 symbolic size signature_sz;
 symbolic size seq_num_sz;
+symbolic size ciphertext_sz;
 
 symbolic int out_peer_port;
 
@@ -103,7 +104,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
 event incoming_tango_traffic ( // TODO: Compiler gave warning about unconditional and not 'exit'
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_header,
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
 ); // TODO: Do we need constraints?
@@ -152,7 +153,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         dest_addr = 0;
     };
 
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_hdr = {
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_hdr = {
         path_id = 0;
         timestamp = 0;
         signature = 0;
@@ -174,12 +175,23 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
 handle incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>> tango_metrics_header,
+    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_header,
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
 ) {
     printf("ERROR: hander `incoming_tango_traffic` is *unimplemented*");
     // TODO
+
+    // 1. Validate signatures
+    bool is_valid_seq_num = BookSignatureManager.verify(
+        incoming_book_signature_manager,
+        tango_metrics_header#sequence_num,
+        tango_metrics_header#path_id,
+        tango_metrics_header#book_signature
+    );
+
+    // 2. Update Metrics
+    int time_now = Sys.time(); // NOTE: in nanoseconds
 
     auto tunneled = complete_forward (encaped_eth_header, encaped_ip_header);
     generate_port (out_peer_port, tunneled);
@@ -191,4 +203,5 @@ handle incoming_tango_traffic (
 handle route_update (int<<64>> update) {
     printf("ERROR: hander `route_update` is *unimplemented*");
     // TODO
+
 }

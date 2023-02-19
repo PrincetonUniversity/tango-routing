@@ -1,11 +1,7 @@
-symbolic size num_traffic_cls;
-symbolic size path_id_sz;
-symbolic size traffic_cls_sz;
-
 // Manages all traffic class to physical path ID mappings
 module RouteManager : {
-    global type t;
-    constr t create ();
+    global type t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>>;
+    constr t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> create ();
 
     /*
     * Updates map with a new traffic class to physical path ID mapping.
@@ -17,9 +13,9 @@ module RouteManager : {
     * path_id (int<<path_id_sz>>): physical path ID to update mapping to
     */
     fun void update_route (
-        t self,
-        int<<traffic_cls_sz>> traffic_cls,
-        int<<path_id_sz>> path_id
+        t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> self,
+        int<<'traffic_cls_sz>> traffic_cls,
+        int<<'path_id_sz>> path_id
     ) [start <= self; end self];
     
     /*
@@ -34,33 +30,33 @@ module RouteManager : {
     * -------
     * path_id (int<<path_id_sz>>): mapped physical path ID
     */
-    fun int<<path_id_sz>> get_path_id (
-        t self,
-        int<<traffic_cls_sz>> traffic_cls
+    fun int<<'path_id_sz>> get_path_id (
+        t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> self,
+        int<<'traffic_cls_sz>> traffic_cls
     ) [start <= self; end self];
 }
 {
-    type t = {
-        Array.t<<path_id_sz>> mappings;
+    type t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> = {
+        Array.t<<'path_id_sz>> mappings;
     }
 
-    constr t create () = {
-        mappings = Array.create(size_to_int(num_traffic_cls));
+    constr t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> create () = {
+        mappings = Array.create(size_to_int('num_traffic_cls));
         /* TODO */
     };
 
     fun void update_route (
-        t self,
-        int<<traffic_cls_sz>> traffic_cls,
-        int<<path_id_sz>> path_id
+        t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> self,
+        int<<'traffic_cls_sz>> traffic_cls,
+        int<<'path_id_sz>> path_id
     ) {
         printf("ERROR: `RouteManager.update_route()` is *unimplemented*");
         /* TODO */
     }
 
-    fun int<<path_id_sz>> get_path_id (
-        t self,
-        int<<traffic_cls_sz>> traffic_cls
+    fun int<<'path_id_sz>> get_path_id (
+        t<<'num_traffic_cls, 'path_id_sz, 'traffic_cls_sz>> self,
+        int<<'traffic_cls_sz>> traffic_cls
     ) {
         printf("ERROR: `RouteManager.get_path_id()` is *unimplemented*");
         return 0;

@@ -1,11 +1,7 @@
-symbolic size path_id_sz;
-symbolic size invalid_track_sz;
-symbolic size num_path_ids;
-
 // Manages all invalid packets for each incoming path
 module InvalidPacketManager : {
-    global type t;
-    constr t create ();
+    global type t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>>;
+    constr t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>> create ();
 
    /*
     * Report an invlaid packet.
@@ -16,22 +12,22 @@ module InvalidPacketManager : {
     * path_id (int<<path_id_sz>>): path upon the invalid packet was found
     */
     fun void found_invalid_packet (
-        t self,
-        int<<path_id_sz>> path_id
+        t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>> self,
+        int<<'path_id_sz>> path_id
     ) [start <= self; end self];
 }
 {
-    type t = {
-        Counter.t<<invalid_track_sz>>[num_path_ids] invalid_counts;
+    type t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>> = {
+        Counter.t<<'invalid_track_sz>>['num_path_ids] invalid_counts;
     }
     
-    constr t create () = {
-        invalid_counts = [Counter.create(0) for x < num_path_ids];
+    constr t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>> create () = {
+        invalid_counts = [Counter.create(0) for x < 'num_path_ids];
     };
 
     fun void found_invalid_packet (
-        t self,
-        int<<path_id_sz>> path_id
+        t<<'path_id_sz, 'invalid_track_sz, 'num_path_ids>> self,
+        int<<'path_id_sz>> path_id
     ) {
         printf("ERROR: `InvalidPacketManager.found_invalid_packet()` is *unimplemented*");
         /* TODO */

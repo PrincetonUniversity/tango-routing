@@ -1,12 +1,7 @@
-symbolic size path_id_sz;
-symbolic size seq_num_sz;
-symbolic size book_sig_sz;
-symbolic size num_seq_nums;
-
 // Manages all sequence number book signatures
 module BookSignatureManager : {
-    global type t;
-    constr t create ();
+    global type t<<'book_sig_sz, 'seq_num_sz, 'path_id_sz>>;
+    constr t<<'book_sig_sz, 'seq_num_sz, 'path_id_sz>> create ();
 
    /*
     * Gets a signature for a given sequence number and physical path ID
@@ -21,10 +16,10 @@ module BookSignatureManager : {
     * -------
     * signature (int<<book_sig_sz>>): signature of timestamp + path ID
     */
-    fun int<<book_sig_sz>> sign (
-        t self,
-        int<<seq_num_sz>> seq_number,
-        int<<path_id_sz>> path_id
+    fun int<<'book_sig_sz>> sign (
+        t<<'book_sig_sz, 'seq_num_sz, 'path_id_sz>> self,
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id
     ) [start <= self; end self];
 
    /*
@@ -43,9 +38,9 @@ module BookSignatureManager : {
     */
     fun bool verify (
         t self,
-        int<<seq_num_sz>> seq_number,
-        int<<path_id_sz>> path_id,
-        int<<book_sig_sz>> signature
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id,
+        int<<'book_sig_sz>> signature
     ) [start <= self; end self];
 
 }
@@ -58,10 +53,10 @@ module BookSignatureManager : {
         onebit_signatures = Array.create(size_to_int(num_seq_nums)); // FIXME: size
     };
 
-    fun int<<book_sig_sz>> sign (
+    fun int<<'book_sig_sz>> sign (
         t self,
-        int<<seq_num_sz>> seq_number,
-        int<<path_id_sz>> path_id
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id
     ) {
         printf("ERROR: `BookSignatureManager.sign()` is *unimplemented*");
         return 0;
@@ -70,9 +65,9 @@ module BookSignatureManager : {
 
     fun bool verify (
         t self,
-        int<<seq_num_sz>> seq_number,
-        int<<path_id_sz>> path_id,
-        int<<book_sig_sz>> signature
+        int<<'seq_num_sz>> seq_number,
+        int<<'path_id_sz>> path_id,
+        int<<'book_sig_sz>> signature
     ) {
         printf("ERROR: `BookSignatureManager.verify()` is *unimplemented*");
         return false;

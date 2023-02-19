@@ -98,14 +98,14 @@ type FiveTuple_t = {
  * timestamp (int): timestamp of when packet left peer
  * signature (int<<'signature_sz>>): signature of the path ID and timestamp
  * sequence_num (int<<'seq_num_sz>>): Tango-specific sequence number
- * book_signature (int<<1>>): single-bit signature of the sequence number
+ * book_signature (int<<'book_sig_sz>>): signature of the sequence number
  */
-type TangoHeader_t<<'path_id_sz, 'signature_sz, 'seq_num_sz>> = {
+type TangoHeader_t<<'path_id_sz, 'signature_sz, 'seq_num_sz, 'book_sig_sz>> = {
    int<<'path_id_sz>> path_id;
    int timestamp;
    int<<'signature_sz>> signature;
    int<<'seq_num_sz>> sequence_num;
-   int<<1>> book_signature;
+   int<<'book_sig_sz>> book_signature;
 }
 
 /*
