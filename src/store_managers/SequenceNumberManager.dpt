@@ -4,7 +4,8 @@ module SequenceNumberManager : {
     constr t create ();
 
    /*
-    * Increments and returns the sequence number of a given path.
+    * Increments and returns the current, non-incremented sequence
+    * number of a given path.
     * 
     * PARAMETERS
     * ----------
@@ -13,7 +14,7 @@ module SequenceNumberManager : {
     * 
     * RETURNS
     * -------
-    * sequence number (int<<24>>): the current sequence number
+    * sequence_number (int<<24>>): the current, non-incremented sequence number
     */
     fun int<<24>> increment (
         t self,

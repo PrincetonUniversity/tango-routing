@@ -15,7 +15,7 @@ module TangoHeaderManager : {
     */
     fun IPv6Header_t get_path_header (
         t self,
-        int path_id
+        int<<3>> path_id
     ) [start <= self; end self];
 }
 {
@@ -30,7 +30,7 @@ module TangoHeaderManager : {
 
     fun IPv6Header_t get_path_header (
         t self,
-        int path_id
+        int<<3>> path_id
     ) {
         printf("ERROR: `TangoHeaderManager.get_path_header()` is *unimplemented*");
         return {
