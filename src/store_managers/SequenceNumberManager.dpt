@@ -1,7 +1,7 @@
 // Keep track of delay metrics
 module SequenceNumberManager : {
-    global type t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>>;
-    constr t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>> create ();
+    global type t;
+    constr t create ();
 
    /*
     * Increments and returns the sequence number of a given path.
@@ -9,30 +9,30 @@ module SequenceNumberManager : {
     * PARAMETERS
     * ----------
     * self (t): self
-    * path_id (int<<path_id_sz>>): the path on which the packet is tunneled
+    * path_id (int<<3>>): the path on which the packet is tunneled
     * 
     * RETURNS
     * -------
-    * sequence number (int<<seq_num_sz>>): the current sequence number
+    * sequence number (int<<24>>): the current sequence number
     */
-    fun int<<'seq_num_sz>> increment (
-        t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>> self,
-        int<<'path_id_sz>> path_id
+    fun int<<24>> increment (
+        t self,
+        int<<3>> path_id
     ) [start <= self; end self];
 }
 {
-    type t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>> = {
-        Counter.t<<seq_num_sz>>[num_path_ids] seq_nums;
+    type t = {
+        Counter.t<<24>>[8] seq_nums;
     }
 
-    constr t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>> create () = {
-        seq_nums = [Counter.create(0) for x < 'num_path_ids];
+    constr t create () = {
+        seq_nums = [Counter.create(0) for x < 8];
         /* TODO */
     };
 
-    fun int<<'seq_num_sz>> increment (
-        t<<'seq_num_sz, 'path_id_sz, 'num_path_ids>> self,
-        int<<'path_id_sz>> path_id
+    fun int<<24>> increment (
+        t self,
+        int<<3>> path_id
     ) {
         printf("ERROR: `SequenceNumberManager.increment()` is *unimplemented*");
         return 0;

@@ -49,7 +49,7 @@ type IPv4Header_t = {
  * PROPERTIES
  * ----------
  * version (int<<4>>): receiver ip version
- * traffic_class (int<<8>>): ip traffic class, not tango // TODO: Should we reconsider naming
+ * traffic_class (int<<8>>): ip traffic class, not tango 
  * flow_label (int<<20>>): signal to maintain flow on same path
  * payload_len (int<<16>>): size of payload in octets
  * next_header (int<<8>>): next header type (protocol)
@@ -94,18 +94,18 @@ type FiveTuple_t = {
  *
  * PROPERTIES
  * ----------
- * path_id (int<<'path_id_sz>>): path id packet is to or should have take(n)
+ * path_id (int<<3>>): path id packet is to or should have take(n)
  * timestamp (int): timestamp of when packet left peer
- * signature (int<<'signature_sz>>): signature of the path ID and timestamp
- * sequence_num (int<<'seq_num_sz>>): Tango-specific sequence number
- * book_signature (int<<'book_sig_sz>>): signature of the sequence number
+ * signature (int<<256>>): signature of the path ID and timestamp
+ * sequence_num (int): Tango-specific sequence number
+ * book_signature (int<<1>>): signature of the sequence number
  */
-type TangoHeader_t<<'path_id_sz, 'signature_sz, 'seq_num_sz, 'book_sig_sz>> = {
-   int<<'path_id_sz>> path_id;
+type TangoHeader_t = {
+   int<<3>> path_id;
    int timestamp;
-   int<<'signature_sz>> signature;
-   int<<'seq_num_sz>> sequence_num;
-   int<<'book_sig_sz>> book_signature;
+   int<<256>> signature;
+   int<<24>> sequence_num;
+   int<<1>> book_signature;
 }
 
 /*
@@ -113,12 +113,12 @@ type TangoHeader_t<<'path_id_sz, 'signature_sz, 'seq_num_sz, 'book_sig_sz>> = {
  *
  * PROPERTIES
  * ----------
- * traffic_class (int<<'traffic_cls_sz>>): traffic class to update
- * new_path_id (int<<'path_id_sz>>): physical path ID to update mapping to
+ * traffic_class (int<<4>>): traffic class to update
+ * new_path_id (int<<3>>): physical path ID to update mapping to
  */
-type RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> = {
-   int<<'traffic_cls_sz>> traffic_class;
-   int<<'path_id_sz>> new_path_id;
+type RouteUpdate_t = {
+   int<<4>> traffic_class;
+   int<<3>> new_path_id;
 }
 
 /*
@@ -126,12 +126,12 @@ type RouteUpdate_t<<'traffic_cls_sz, 'path_id_sz>> = {
  *
  * PROPERTIES
  * ----------
- * delay_sum (int<<'delay_sum_sz>>): running sum of all delays
- * delay_count (int<<'delay_count_sz>>): count of number of packets
+ * delay_sum (int): running sum of all delays
+ * delay_count (int): count of number of packets
  */
-type DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> = {
-   int<<'delay_sum_sz>> delay_sum;
-   int<<'delay_count_sz>> delay_count;
+type DelayMetrics_t = {
+   int delay_sum;
+   int delay_count;
 }
 
 /*
@@ -139,12 +139,12 @@ type DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> = {
  *
  * PROPERTIES
  * ----------
- * loss_count (int<<'loss_count_sz>>): 
- * transmission_count (int<<'tsm_count_sz>>): count of number of packets
+ * loss_count (int): running sum of loss seen on a given path
+ * transmission_count (int): count of number of packets
  */
-type LossMetrics_t<<'loss_count_sz, 'tsm_count_sz>> = {
-   int<<'loss_count_sz>> loss_count;
-   int<<'tsm_count_sz>> transmission_count;
+type LossMetrics_t = {
+   int loss_count;
+   int transmission_count;
 }
 
 /*
@@ -152,21 +152,14 @@ type LossMetrics_t<<'loss_count_sz, 'tsm_count_sz>> = {
  *
  * PROPERTIES
  * ----------
- * best_delay_metrics (DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>>): metrics constituting updated best delay
- * best_delay_id (int<<'path_id_sz>>): path id of best delay path
- * best_loss_metrics (LossMetrics_t<<'loss_count_sz, 'tns_count_sz>>): loss constituting updated best delay
- * best_loss_id (int<<'path_id_sz>>): path id of best loss path
+ * best_delay_metrics (DelayMetrics_t): metrics constituting updated best delay
+ * best_delay_id (int<<3>>): path id of best delay path
+ * best_loss_metrics (LossMetrics_t): loss constituting updated best delay
+ * best_loss_id (int<<3>>): path id of best loss path
  */
-type BestMetrics_t<<'delay_sum_sz, 'delay_count_sz, 'loss_count_sz, 'tns_cnt_sz, 'path_id_sz>> = {
-   DelayMetrics_t<<'delay_sum_sz, 'delay_count_sz>> best_delay_metrics;
-   int<<'path_id_sz>> best_delay_id;
-   LossMetrics_t<<'loss_count_sz, 'tns_cnt_sz>> best_loss_metrics;
-   int<<'path_id_sz>> best_loss_id;
+type BestMetrics_t = {
+   DelayMetrics_t best_delay_metrics;
+   int best_delay_id;
+   LossMetrics_t best_loss_metrics;
+   int best_loss_id;
 }
-
-symbolic size delay_sum_sz;
-symbolic size delay_count_sz;
-symbolic size loss_count_sz;
-symbolic size tns_cnt_sz;
-size delay_metric_sz = delay_sum_sz + delay_count_sz;
-size loss_metric_sz = loss_count_sz + tns_cnt_sz;

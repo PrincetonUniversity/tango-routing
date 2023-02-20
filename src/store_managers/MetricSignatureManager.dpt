@@ -1,7 +1,7 @@
 // Manages all precomputed metric signatures
 module MetricSignatureManager : {
-    global type t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>>;
-    constr t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> create ();
+    global type t;
+    constr t create ();
 
    /*
     * Gets a signature for a given timestamp and physical path ID
@@ -10,16 +10,16 @@ module MetricSignatureManager : {
     * ----------
     * self (t): self
     * timestamp (int): timestamp of packet send/receive
-    * path_id (int<<path_id_sz>>): the physcial path ID packet is/was sent on
+    * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * 
     * RETURNS
     * -------
-    * signature (int<<signature_sz>>): signature of timestamp + path ID
+    * signature (int<<256>>): signature of timestamp + path ID
     */
-    fun int<<'signature_sz>> sign (
-        t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> self,
+    fun int<<256>> sign (
+        t self,
         int timestamp,
-        int<<'path_id_sz>> path_id
+        int<<3>> path_id
     ) [start <= self; end self];
 
    /*
@@ -29,34 +29,34 @@ module MetricSignatureManager : {
     * ----------
     * self (t): self
     * timestamp (int): timestamp of packet send/receive
-    * path_id (int<<path_id_sz>>): the physcial path ID packet is/was sent on
-    * signature (int<<signature_sz >> signature): signature to validate
+    * path_id (int<<3>>): the physcial path ID packet is/was sent on
+    * signature (int<<256 >> signature): signature to validate
     * 
     * RETURNS
     * -------
     * is_valid (bool): if signature is valid
     */
     fun bool verify (
-        t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> self,
+        t self,
         int timestamp,
-        int<<'path_id_sz>> path_id,
-        int<<'signature_sz>> signature
+        int<<3>> path_id,
+        int<<256>> signature
     ) [start <= self; end self];
 }
 {
-    type t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> = {
-        Array.t<<'signature_sz>>['num_timestamps] signatures;
+    type t = {
+        Array.t<<256>>[8] signatures;
     }
 
-    constr t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> create () = {
-        signatures = [Array.create(size_to_int('num_path_ids)) for i < 'num_timestamps];
+    constr t create () = {
+        signatures = [Array.create(10) for i < 8]; // 10ms control loop
         /* TODO */
     };
 
-    fun int<<'signature_sz>> sign (
-        t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> self,
+    fun int<<256>> sign (
+        t self,
         int timestamp,
-        int<<'path_id_sz>> path_id
+        int<<3>> path_id
     ) {
         printf("ERROR: `MetricSignatureManager.sign()` is *unimplemented*");
         return 0;
@@ -64,10 +64,10 @@ module MetricSignatureManager : {
     }
 
     fun bool verify (
-        t<<'path_id_sz, 'signature_sz, 'num_timestamps, 'num_path_ids>> self,
+        t self,
         int timestamp,
-        int<<'path_id_sz>> path_id,
-        int<<'signature_sz >> signature
+        int<<3>> path_id,
+        int<<256 >> signature
     ) {
        printf("ERROR: `MetricSignatureManager.verify()` is *unimplemented*");
        return false;

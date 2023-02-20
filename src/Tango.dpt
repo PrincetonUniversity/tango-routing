@@ -12,14 +12,8 @@ include "store_managers/EncryptionManager.dpt"
 include "store_managers/BestMetricsManager.dpt"
 
 /* ================================================================================================================== *
- *                                                      SIZES                                                         *
+ *                                                     EXTERNS                                                        *
  * ================================================================================================================== */
-
-// Parametric sizes
-symbolic size path_id_sz;
-symbolic size signature_sz;
-symbolic size seq_num_sz;
-symbolic size ciphertext_sz;
 
 symbolic int out_peer_port;
 
@@ -92,7 +86,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
  * ----------
  * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
- * tango_metrics_header (TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz>>): tango metric data and signatures
+ * tango_metrics_header (TangoHeader_t): tango metric data and signatures
  * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  *
@@ -104,7 +98,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
 event incoming_tango_traffic ( // TODO: Compiler gave warning about unconditional and not 'exit'
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_header,
+    TangoHeader_t tango_metrics_header,
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
 ); // TODO: Do we need constraints?
@@ -153,7 +147,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         dest_addr = 0;
     };
 
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_hdr = {
+    TangoHeader_t tango_metrics_hdr = {
         path_id = 0;
         timestamp = 0;
         signature = 0;
@@ -175,7 +169,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
 handle incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
-    TangoHeader_t<<path_id_sz, signature_sz, seq_num_sz, book_sig_sz>> tango_metrics_header,
+    TangoHeader_t tango_metrics_header,
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
 ) {
