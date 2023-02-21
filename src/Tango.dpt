@@ -1,8 +1,9 @@
 include "Types.dpt"
-include "TrafficClassMap.dpt"
+include "static_maps/TrafficClassConstraintMap.dpt"
+include "static_maps/TrafficClassMap.dpt"
+include "static_maps/TunnelHeaderMap.dpt"
 include "store_managers/SequenceNumberManager.dpt"
 include "store_managers/RouteManager.dpt"
-include "store_managers/TangoHeaderManager.dpt"
 include "store_managers/MetricSignatureManager.dpt"
 include "store_managers/BookSignatureManager.dpt"
 include "store_managers/DelayMetricsManager.dpt"
@@ -38,9 +39,6 @@ global EncryptionManager.t incoming_encryption_manager = EncryptionManager.creat
 
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t route_manager = RouteManager.create();
-
-// Static mapping of physical path IDs to Tango UDP Headers (Read-Only)
-global TangoHeaderManager.t header_manager = TangoHeaderManager.create();
 
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
@@ -87,7 +85,7 @@ global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.creat
  *
  * GENERATES
  * ---------
- * incoming_tango_traffic: flow packet wrapped with tango data sent to peer node
+ * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
  */
 entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple);
 
@@ -102,7 +100,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
  * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  */
-exit event peer_forwarded_traffic (
+exit event forward_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
@@ -123,7 +121,7 @@ exit event peer_forwarded_traffic (
  *
  * GENERATES
  * ---------
- * route_update: sometimes responds to peer that they should update route due to changed metrics
+ * request_route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
  */
 entry event incoming_tango_traffic ( 
@@ -141,7 +139,7 @@ entry event incoming_tango_traffic (
  * ----------
  * update (int<<64>>): encrypted version of the update
  */
-entry event route_update (int<<64>> update);
+entry event incoming_route_update (int<<64>> update);
 
 /*
  * Tell peer to update a given route mapping for a traffic class.
@@ -176,7 +174,8 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
     int<<3>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
 
     // -- Get physical path header to tunnel with.
-    IPv6Header_t physcial_path_hdr = TangoHeaderManager.get_path_header(header_manager, path_id);
+    IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
+
 
 
     /* 2. Increment and sign sequence number. */
@@ -204,9 +203,9 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         book_signature = book_signature;
     };
      
-    event forward_tango_pkt = incoming_tango_traffic (
+    event forward_tango_pkt = forward_tango_traffic (
         TANGO_ETH_HDR,
-        physcial_path_hdr,
+        tango_tunnel_hdr,
         tango_metrics_hdr,
         eth_header,
         ip_header
@@ -275,8 +274,8 @@ handle incoming_tango_traffic (
 
         /* 3. Reroute if necessary. */
         // -- Do the metrics meet the hard routing constraints
-        bool is_within_constraints = metrics_meet_constraints(
-            tango_metrics_header#path_id,
+        bool is_within_constraints = verify_metrics_within_constraints(
+            0, // FIXME: NEED TRAFFIC CLASS
             loss_metrics,
             delay_metrics
         );
@@ -291,14 +290,14 @@ handle incoming_tango_traffic (
                 new_path_id
             );
 
-            event update = route_update (enc_update);
+            event update = request_route_update (enc_update);
             generate_port (out_peer_port, update);
         }
 
     }
 }
 
-handle route_update (int<<64>> update) {
+handle incoming_route_update (int<<64>> update) {
 
     /* 1. Decrypt and verify update. */
     // -- Decrypt

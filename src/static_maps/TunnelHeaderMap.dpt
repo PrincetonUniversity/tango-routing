@@ -1,0 +1,33 @@
+include "../Types.dpt"
+
+const IPv6Header_t DUMMY_HDR = {
+    version = 0;
+    traffic_class = 0;
+    flow_label = 0;
+    payload_len = 0;
+    next_header = 0;
+    hop_limit = 0;
+    src_addr = 0;
+    dest_addr = 0;
+};
+
+/*
+ * Get a Tango header for a given packet to tunnel over a particular
+ * physical path.
+ * 
+ * PARAMETERS
+ * ----------
+ * self (t): self
+ * path_id (int<<3>>): path upon the invalid packet was found
+ * 
+ * RETURNS
+ * -------
+ * tunnel_header (IPv6Header_t): tunnel header corresponding to phyisical path
+ */
+fun IPv6Header_t map_path_to_tunnel_header (int<<3>> path_id) {
+    match (path_id) with
+	| _ -> {
+        printf("ERROR: tunnel header map has not been configured!");
+        return DUMMY_HDR;
+    }
+}

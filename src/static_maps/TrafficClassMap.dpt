@@ -1,7 +1,7 @@
-include "Types.dpt"
+include "../Types.dpt"
 
 /*
- * User-generated or defined fuzzy mappings between a flow 5-tuple and traffic class.
+ * User-generated fuzzy mappings between a flow 5-tuple and traffic class.
  * 
  * PARAMETERS
  * ----------
@@ -20,7 +20,7 @@ fun int<<4>> map_flow_to_traffic_class (FiveTuple_t flow) {
         flow#protocol
     ) with
 	| _, _, _, _, _ -> {
-        printf("ERROR: map has not been configured!");
+        printf("ERROR: traffic class map has not been configured!");
         return 0;
     }
 }

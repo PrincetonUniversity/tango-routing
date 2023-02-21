@@ -1,0 +1,30 @@
+include "../Types.dpt"
+
+const bool OPTIMIZE_DELAY = false;
+const bool OPTIMIZE_LOSS = true;
+
+/*
+ * User-generated constraints for every traffic class.
+ * 
+ * PARAMETERS
+ * ----------
+ * traffic_class (int<<4>>): traffic class which constrains optimal metrics
+ * loss_metrics (LossMetrics_t): loss metrics along this class
+ * delay_metrics (DelayMetrics_t): delay metrics along this class
+ * 
+ * RETURNS
+ * -------
+ * is_within_constraints (bool): metrics satisfy constraints for this class
+ */
+fun bool verify_metrics_within_constraints (
+    int<<4>> traffic_class,
+    LossMetrics_t loss_metrics,
+    DelayMetrics_t delay_metrics
+) {
+    match (traffic_class) with
+	| _ -> {
+        printf("ERROR: traffic class map has not been configured!");
+        return false;
+    }
+}
+

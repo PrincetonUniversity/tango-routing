@@ -164,13 +164,3 @@ type BestMetrics_t = {
    LossMetrics_t best_loss_metrics;
    int best_loss_id;
 }
-
-// FIXME: MOVE
-fun bool metrics_meet_constraints(
-   int<<3>> path_id,
-   LossMetrics_t loss_metrics,
-   DelayMetrics_t delay_metrics
-) {
-   printf("ERROR: `metrics_meet_constraints` is unimplemented!");
-   return true;
-}
