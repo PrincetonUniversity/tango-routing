@@ -1,41 +1,47 @@
 include "../Types.dpt"
 
-// Encrypts and decrypts route updates using a one-time pad
+/**
+ * # Description
+ * Encrypt and decrypt route updates using a one-time pad
+ * 
+ * # Methods
+ * create() -> EncryptionManager.t
+ * encrypt(EncryptionManager.t, int<<4>>, int<<3>>) -> int<<64>>
+ * decrypt(EncryptionManager.t, int<<64>>) -> RouteUpdate_t
+ **/
 module EncryptionManager : {
     global type t;
     constr t create ();
 
-   /*
-    * Encrypts a given route update with a one-time pad
+   /**
+    * # Description
+    * Encrypt a given route update with a one-time pad
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * traffic_cls (int<<4>>): traffic class to map
     * path_id (int<<3>>): path to map traffic class to
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * ciphertext (int<<64>>): encrypted route update
-    */
+    **/
     fun int<<64>> encrypt (
         t self,
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) [start <= self; end self];
 
-   /*
-    * Decrypts the route update
+   /**
+    * # Description
+    * Decrypt the route update.
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * ciphertext (int<<64>>): signature to validate
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * plaintext (RouteUpdate_t): decrypted route update
-    */
+    **/
     fun RouteUpdate_t decrypt (
         t self,
         int<<64>> ciphertext

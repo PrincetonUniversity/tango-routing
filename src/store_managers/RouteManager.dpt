@@ -1,35 +1,42 @@
-// Manages all traffic class to physical path ID mappings
+/**
+ * # Description
+ * Manage all traffic class to physical path ID mappings
+ * 
+ * # Methods
+ * create() -> RouteManager.t
+ * update_route(RouteManager.t, int<<4>>, int<<3>>) -> void
+ * get_path_id(RouteManager.t, int<<4>>) -> int<<3>>
+ **/
 module RouteManager : {
     global type t;
     constr t create ();
 
-    /*
+    /**
+    * # Description
     * Updates map with a new traffic class to physical path ID mapping.
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * traffic_cls (int<<4>>): traffic class to update mapping for
     * path_id (int<<3>>): physical path ID to update mapping to
-    */
+    **/
     fun void update_route (
         t self,
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) [start <= self; end self];
     
-    /*
+    /**
+    * # Description
     * Gets a physical path ID mapping for a specific traffic class.
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * traffic_cls (int<<4>>): traffic class to get mapping for
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * path_id (int<<3>>): mapped physical path ID
-    */
+    **/
     fun int<<3>> get_path_id (
         t self,
         int<<4>> traffic_cls

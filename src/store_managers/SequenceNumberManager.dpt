@@ -1,21 +1,27 @@
-// Keep track of delay metrics
+/**
+ * # Description
+ * Keep track of all relavent delay metrics
+ * 
+ * # Methods
+ * create() -> SequenceNumberManager.t
+ * increment(SequenceNumberManager.t, int<<3>>) -> int<<24>>
+ **/
 module SequenceNumberManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Increments and returns the current, non-incremented sequence
     * number of a given path.
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * path_id (int<<3>>): the path on which the packet is tunneled
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * sequence_number (int<<24>>): the current, non-incremented sequence number
-    */
+    **/
     fun int<<24>> increment (
         t self,
         int<<3>> path_id

@@ -1,41 +1,47 @@
-// Manages all sequence number book signatures
+/**
+ * # Description
+ * Manage all sequence number book signatures
+ * 
+ * # Methods
+ * create() -> BookSignatureManager.t
+ * sign(BookSignatureManager.t, int<<24>>, int<<3>>) -> int<<1>>
+ * verify(BookSignatureManager.t, int<<24>>, int<<3>>, int<<1>>) -> bool
+ **/
 module BookSignatureManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Gets a signature for a given sequence number and physical path ID
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * seq_number (int<<24>>): sequence number to sign
     * path_id (int<<3>>): path ID of associated sequence number
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * signature (int<<1>>): signature of timestamp + path ID
-    */
+    **/
     fun int<<1>> sign (
         t self,
         int<<24>> seq_number,
         int<<3>> path_id
     ) [start <= self; end self];
 
-   /*
+   /**
+    * # Description
     * Verifies a signature for a given timestamp and physical path ID
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * seq_number (int<<24>>): sequence number signed
     * path_id (int<<3>>): path ID of associated sequence number
     * signature (int<<1>>): signature to validate
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * is_valid (bool): if signature is valid
-    */
+    **/
     fun bool verify (
         t self,
         int<<24>> seq_number,

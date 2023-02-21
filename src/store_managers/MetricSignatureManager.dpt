@@ -1,41 +1,47 @@
-// Manages all precomputed metric signatures
+/**
+ * # Description
+ * Manage all precomputed metric signatures
+ * 
+ * # Methods
+ * create() -> MetricSignatureManager.t
+ * sign(MetricSignatureManager.t, int, int<<3>>) -> int<<256>>
+ * verify(MetricSignatureManager.t, int, int<<3>>, int<<256>>) -> bool
+ **/
 module MetricSignatureManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Gets a signature for a given timestamp and physical path ID
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * timestamp (int): timestamp of packet send/receive
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * signature (int<<256>>): signature of timestamp + path ID
-    */
+    **/
     fun int<<256>> sign (
         t self,
         int timestamp,
         int<<3>> path_id
     ) [start <= self; end self];
 
-   /*
+   /**
+    * # Description
     * Verifies a signature for a given timestamp and physical path ID
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * timestamp (int): timestamp of packet send/receive
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * signature (int<<256 >> signature): signature to validate
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * is_valid (bool): if signature is valid
-    */
+    **/
     fun bool verify (
         t self,
         int timestamp,

@@ -75,32 +75,31 @@ global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.creat
  *                                                     EVENTS                                                         *
  * ================================================================================================================== */
 
-/*
+/**
+ * # Description
  * Event signifying application flow data packet to forward to peer Tango node.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * eth_header (`EthernetHeader_t`): ethernet frame header
  * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
  * five_tuple (`FiveTuple_t`): five-tuple describing flow
  *
- * GENERATES
- * ---------
+ * # Generates
  * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
- */
+ **/
 entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple);
 
-/*
+/**
+ * # Description
  * Tunneled Tango data traffic headed to peer node.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
  * tango_metrics_header (TangoHeader_t): tango metric data and signatures
  * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
- */
+ **/
 exit event forward_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
@@ -109,22 +108,21 @@ exit event forward_tango_traffic (
     IPv4Header_t encaped_ip_header
 );
 
-/*
+/**
+ * # Description
  * Incoming Tango data traffic from peer node.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
  * tango_metrics_header (TangoHeader_t): tango metric data and signatures
  * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  *
- * GENERATES
- * ---------
+ * # Generates
  * request_route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
- */
+ **/
 entry event incoming_tango_traffic ( 
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
@@ -133,32 +131,32 @@ entry event incoming_tango_traffic (
     IPv4Header_t encaped_ip_header
 ); // TODO: Do we need constraints?
 
-/*
+/**
+ * # Description
  * Peer says to update a given route mapping for a traffic class.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * update (int<<64>>): encrypted version of the update
- */
+ **/
 entry event incoming_route_update (int<<64>> update);
 
-/*
+/**
+ * # Description
  * Tell peer to update a given route mapping for a traffic class.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * update (int<<64>>): encrypted version of the update
- */
+ **/
 exit event request_route_update (int<<64>> update);
 
-/*
+/**
+ * # Description
  * Forward the flow using tango to its final destination.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * ethernet_header (EthernetHeader_t): ethernet header of original packet, to re-encapsulate
  * ip_header (IPv4Header_t): the full ip header of packet, to re-encapsulte
- */
+ **/
 exit event complete_forward (EthernetHeader_t ethernet_header, IPv4Header_t ip_header);
 
 /* ================================================================================================================== *

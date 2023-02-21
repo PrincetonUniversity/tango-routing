@@ -1,16 +1,23 @@
-// Manages all invalid packets for each incoming path
+/**
+ * # Description
+ * Manage all invalid packets for each incoming path
+ * 
+ * # Methods
+ * create() -> InvalidPacketManager.t
+ * found_invalid_packet(InvalidPacketManager.t, int<<3>>) -> void
+ **/
 module InvalidPacketManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Report an invlaid packet.
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * path_id (int<<3>>): path upon the invalid packet was found
-    */
+    **/
     fun void found_invalid_packet (
         t self,
         int<<3>> path_id

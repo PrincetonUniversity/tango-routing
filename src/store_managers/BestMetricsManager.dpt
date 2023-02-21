@@ -1,24 +1,30 @@
 include "../Types.dpt"
 
-// Keep track of most performant path
+/**
+ * # Description
+ * Keep track of most performant path
+ * 
+ * # Methods
+ * create() -> BestMetricsManager.t
+ * update(BestMetricsManager.t, int<<3>>, LossMetrics_t, DelayMetrics_t) -> BestMetrics_t
+ **/
 module BestMetricsManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Updates the delay from the incoming Tango packets timestamp
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * path_id (int<<3>>): contending path id
     * loss_metrics (LossMetrics_t): loss metrics found ion that path
     * delay_metrics (DelayMetrics_t): delay metrics found on that path
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * best_metrics (BestMetrics_t): the most performant path metrics
-    */
+    **/
     fun BestMetrics_t update (
         t self,
         int<<3>> path_id,

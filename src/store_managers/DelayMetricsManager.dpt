@@ -1,41 +1,47 @@
 include "../Types.dpt"
 
-// Keep track of delay metrics
+/**
+ * # Description
+ * Keep track of delay metrics
+ * 
+ * # Methods
+ * create() -> DelayMetricsManager.t
+ * update_delay(DelayMetricsManager.t, int, int<<3>>) -> DelayMetrics_t
+ * get_metrics(DelayMetricsManager.t, int, int<<3>>) -> DelayMetrics_t
+ **/
 module DelayMetricsManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Updates the delay from the incoming Tango packets timestamp
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * timestamp (int): sequence number to index into pads
     * path_id (int<<3>>): the path on which the packet came
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * metrics (DelayMetrics_t): the calculated metrics
-    */
+    **/
     fun DelayMetrics_t update_delay (
         t self,
         int timestamp,
         int<<3>> path_id
     ) [start <= self; end self];
 
-   /*
+   /**
+    * # Description
     * Gets the delay metrics for the path
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * path_id (int<<3>>): the path of interest
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * metrics (DelayMetrics_t): the calculated metrics
-    */
+    **/
     fun DelayMetrics_t get_metrics (
         t self,
         int<<3>> path_id

@@ -3,17 +3,16 @@ include "../Types.dpt"
 const bool OPTIMIZE_DELAY = false;
 const bool OPTIMIZE_LOSS = true;
 
-/*
+/**
+ * # Description
  * Opmization policies for every traffic class.
  * 
- * PARAMETERS
- * ----------
+ * # Parameters
  * traffic_class (int<<4>>): traffic class whose policy is of interest
  * 
- * RETURNS
- * -------
+ * # Returns
  * policy (bool): optimization policy for the given traffic class
- */
+ **/
 fun bool map_traffic_class_to_policy (int<<4>> traffic_class) {
     match (traffic_class) with
 	| _ -> {

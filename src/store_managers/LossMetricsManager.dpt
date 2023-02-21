@@ -1,41 +1,47 @@
 include "../Types.dpt"
 
-// Keep track of delay metrics
+/**
+ * # Description
+ * Keep track of loss metrics
+ * 
+ * # Methods
+ * create() -> LossMetricsManager.t
+ * update_loss(LossMetricsManager.t, int<<24>>, int<<3>>) -> LossMetrics_t
+ * get_metrics(LossMetricsManager.t, int, int<<3>>) -> LossMetrics_t
+ **/
 module LossMetricsManager : {
     global type t;
     constr t create ();
 
-   /*
+   /**
+    * # Description
     * Updates the delay from the incoming Tango packets timestamp
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * sequence_num (int<<24>>): sequence number of packet
     * path_id (int<<3>>): the path on which the packet came
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * metrics (LossMetrics_t): the calculated metrics
-    */
+    **/
     fun LossMetrics_t update_loss (
         t self,
         int<<24>> sequence_num,
         int<<3>> path_id
     ) [start <= self; end self];
 
-   /*
+   /**
+    * # Description
     * Gets the delay metrics for the path
     * 
-    * PARAMETERS
-    * ----------
+    * # Parameters
     * self (t): self
     * path_id (int<<3>>): the path of interest
     * 
-    * RETURNS
-    * -------
+    * # Returns
     * metrics (LossMetrics_t): the calculated metrics
-    */
+    **/
     fun LossMetrics_t get_metrics (
         t self,
         int<<3>> path_id
