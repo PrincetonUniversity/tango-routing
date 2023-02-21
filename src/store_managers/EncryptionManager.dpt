@@ -11,8 +11,8 @@ module EncryptionManager : {
     * PARAMETERS
     * ----------
     * self (t): self
-    * seq_number (int<<24>>): sequence number to index into pads
-    * plaintext (RouteUpdate_t): update to encrypt
+    * traffic_cls (int<<4>>): traffic class to map
+    * path_id (int<<3>>): path to map traffic class to
     * 
     * RETURNS
     * -------
@@ -20,7 +20,8 @@ module EncryptionManager : {
     */
     fun int<<64>> encrypt (
         t self,
-        int<<24>> seq_number, RouteUpdate_t plaintext
+        int<<4>> traffic_cls,
+        int<<3>> path_id
     ) [start <= self; end self];
 
    /*
@@ -29,7 +30,6 @@ module EncryptionManager : {
     * PARAMETERS
     * ----------
     * self (t): self
-    * seq_number (int<<24>>): sequence number signed
     * ciphertext (int<<64>>): signature to validate
     * 
     * RETURNS
@@ -38,24 +38,25 @@ module EncryptionManager : {
     */
     fun RouteUpdate_t decrypt (
         t self,
-        int<<24>> seq_number,
         int<<64>> ciphertext
     ) [start <= self; end self];
 }
 {
     type t = {
         Array.t<<64>> one_time_pads;
+        Counter.t<<4>> seq_number;
     }
 
     constr t create () = {
         one_time_pads = Array.create(16);
+        seq_number = Counter.create(0);
         /* TODO */
     };
 
     fun int<<64>> encrypt (
         t self,
-        int<<24>> seq_number,
-        RouteUpdate_t plaintext
+        int<<4>> traffic_cls,
+        int<<3>> path_id
     ) {
         printf("ERROR: `EncryptionManager.encrypt()` is *unimplemented*");
         return 0;
@@ -64,11 +65,11 @@ module EncryptionManager : {
 
     fun RouteUpdate_t decrypt (
         t self,
-        int<<24>> seq_number,
         int<<64>> ciphertext
     ) {
         printf("ERROR: `EncryptionManager.decrypt()` is *unimplemented*");
         return {
+            is_valid = true;
             traffic_class = 0;
             new_path_id = 0;
         };

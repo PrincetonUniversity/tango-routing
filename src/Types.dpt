@@ -117,6 +117,7 @@ type TangoHeader_t = {
  * new_path_id (int<<3>>): physical path ID to update mapping to
  */
 type RouteUpdate_t = {
+   bool is_valid;
    int<<4>> traffic_class;
    int<<3>> new_path_id;
 }
@@ -162,4 +163,14 @@ type BestMetrics_t = {
    int best_delay_id;
    LossMetrics_t best_loss_metrics;
    int best_loss_id;
+}
+
+// FIXME: MOVE
+fun bool metrics_meet_constraints(
+   int<<3>> path_id,
+   LossMetrics_t loss_metrics,
+   DelayMetrics_t delay_metrics
+) {
+   printf("ERROR: `metrics_meet_constraints` is unimplemented!");
+   return true;
 }

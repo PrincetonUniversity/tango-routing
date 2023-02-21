@@ -20,7 +20,8 @@ module LossMetricsManager : {
     */
     fun LossMetrics_t update_loss (
         t self,
-        int<<24>> sequence_num
+        int<<24>> sequence_num,
+        int<<3>> path_id
     ) [start <= self; end self];
 
    /*
@@ -57,7 +58,8 @@ module LossMetricsManager : {
 
     fun LossMetrics_t update_loss (
         t self,
-        int<<24>> sequence_num
+        int<<24>> sequence_num,
+        int<<3>> path_id
     ) {
         printf("ERROR: `LossMetricsManager.update_loss()` is *unimplemented*");
         return {

@@ -16,6 +16,7 @@ include "store_managers/BestMetricsManager.dpt"
  * ================================================================================================================== */
 
 symbolic int out_peer_port;
+symbolic int out_port;
 
 /* ================================================================================================================== *
  *                                                   CONSTANTS                                                        *
@@ -32,6 +33,9 @@ const EthernetHeader_t TANGO_ETH_HDR = {
  *                                                     GLOBALS                                                        *
  * ================================================================================================================== */
 
+// Decrypt path updates using one-time pads
+global EncryptionManager.t incoming_encryption_manager = EncryptionManager.create();
+
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t route_manager = RouteManager.create();
 
@@ -41,14 +45,11 @@ global TangoHeaderManager.t header_manager = TangoHeaderManager.create();
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
 
-// Decrypt path updates using one-time pads
-global EncryptionManager.t incoming_encryption_manager = EncryptionManager.create();
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
+global BookSignatureManager.t incoming_book_signature_manager = BookSignatureManager.create();
 
 // Provide read access to precomputed timestamp + path ID signatures for validation
 global MetricSignatureManager.t incoming_metric_signature_manager = MetricSignatureManager.create();
-
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
-global BookSignatureManager.t incoming_book_signature_manager = BookSignatureManager.create();
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
 global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
@@ -56,11 +57,11 @@ global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureMan
 // Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
 
-// Keep track of delay metrics of paths from peer
-global DelayMetricsManager.t delay_metrics_manager = DelayMetricsManager.create();
-
 // Keep track of loss metrics of paths from peer
 global LossMetricsManager.t loss_metrics_manager = LossMetricsManager.create();
+
+// Keep track of delay metrics of paths from peer
+global DelayMetricsManager.t delay_metrics_manager = DelayMetricsManager.create();
 
 // Keep track of invlaid packets found
 global InvalidPacketManager.t invalid_pkt_manager = InvalidPacketManager.create();
@@ -193,10 +194,9 @@ handle incoming_tango_traffic (
     EthernetHeader_t encaped_eth_header,
     IPv4Header_t encaped_ip_header
 ) {
-    printf("ERROR: hander `incoming_tango_traffic` is *unimplemented*");
-    // TODO
-
-    // 1. Validate signatures
+    
+    /* 1. Validate signatures. */
+    // -- Verify
     bool is_valid_seq_num = BookSignatureManager.verify(
         incoming_book_signature_manager,
         tango_metrics_header#sequence_num,
@@ -204,18 +204,83 @@ handle incoming_tango_traffic (
         tango_metrics_header#book_signature
     );
 
-    // 2. Update Metrics
-    int time_now = Sys.time(); // NOTE: in nanoseconds
+    bool is_valid_metrics = MetricSignatureManager.verify(
+        incoming_metric_signature_manager,
+        tango_metrics_header#timestamp,
+        tango_metrics_header#path_id,
+        tango_metrics_header#signature
+    );
 
-    auto tunneled = complete_forward (encaped_eth_header, encaped_ip_header);
-    generate_port (out_peer_port, tunneled);
+    // TODO: Verify `path_id` matches expected header metadata
 
-    auto update = route_update (12312);
-    generate_port (out_peer_port, update);
+    // -- Record and bail if invalid
+    if (!(is_valid_seq_num && is_valid_metrics)) {
+        InvalidPacketManager.found_invalid_packet(invalid_pkt_manager, tango_metrics_header#path_id);
+    } else {
+
+        /* 2. Update Metrics. */
+        // -- Update Loss
+        LossMetrics_t loss_metrics = LossMetricsManager.update_loss(
+            loss_metrics_manager,
+            tango_metrics_header#sequence_num,
+            tango_metrics_header#path_id
+        );
+
+        // -- Update delay
+        DelayMetrics_t delay_metrics = DelayMetricsManager.update_delay(
+            delay_metrics_manager,
+            tango_metrics_header#timestamp,
+            tango_metrics_header#path_id
+        );
+
+        // -- Update best metrics
+        BestMetrics_t best_metrics = BestMetricsManager.update(
+            best_metrics_manager,
+            tango_metrics_header#path_id,
+            loss_metrics,
+            delay_metrics
+        );
+
+        event tunneled = complete_forward (encaped_eth_header, encaped_ip_header);
+        generate_port (out_port, tunneled);
+
+
+        /* 3. Reroute if necessary. */
+        // -- Do the metrics meet the hard routing constraints
+        bool is_within_constraints = metrics_meet_constraints(
+            tango_metrics_header#path_id,
+            loss_metrics,
+            delay_metrics
+        );
+
+        // -- Trigger reroute if hard constraints are broken
+        if (!is_within_constraints) {
+            // TODO: Better design...
+            int<<3>> new_path_id = 0;
+            int<<64>> enc_update = EncryptionManager.encrypt(
+                outgoing_encryption_manager,
+                0, // FIXME: HOW TO DETERMINE?
+                new_path_id
+            );
+
+            event update = route_update (enc_update);
+            generate_port (out_peer_port, update);
+        }
+
+    }
 }
 
 handle route_update (int<<64>> update) {
-    printf("ERROR: hander `route_update` is *unimplemented*");
-    // TODO
 
+    /* 1. Decrypt and verify update. */
+    // -- Decrypt
+    RouteUpdate_t dec_update = EncryptionManager.decrypt(incoming_encryption_manager, update);
+
+    // -- Verify
+    if (dec_update#is_valid) {
+
+        /* 2. Update route mapping. */
+        RouteManager.update_route(route_manager, dec_update#traffic_class, dec_update#new_path_id);
+
+    }
 }
