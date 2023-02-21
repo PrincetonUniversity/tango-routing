@@ -92,6 +92,25 @@ global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.creat
 entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple);
 
 /*
+ * Tunneled Tango data traffic headed to peer node.
+ * 
+ * PARAMETERS
+ * ----------
+ * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
+ * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_metrics_header (TangoHeader_t): tango metric data and signatures
+ * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
+ * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
+ */
+exit event peer_forwarded_traffic (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    TangoHeader_t tango_metrics_header,
+    EthernetHeader_t encaped_eth_header,
+    IPv4Header_t encaped_ip_header
+);
+
+/*
  * Incoming Tango data traffic from peer node.
  * 
  * PARAMETERS
@@ -107,7 +126,7 @@ entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, F
  * route_update: sometimes responds to peer that they should update route due to changed metrics
  * complete_forward: forwards the packet on to its final destination
  */
-event incoming_tango_traffic ( // TODO: Compiler gave warning about unconditional and not 'exit'
+entry event incoming_tango_traffic ( 
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
@@ -116,13 +135,22 @@ event incoming_tango_traffic ( // TODO: Compiler gave warning about unconditiona
 ); // TODO: Do we need constraints?
 
 /*
- * Peer says to update a given route mapping for a traffic class
+ * Peer says to update a given route mapping for a traffic class.
  * 
  * PARAMETERS
  * ----------
  * update (int<<64>>): encrypted version of the update
  */
-event route_update (int<<64>> update);
+entry event route_update (int<<64>> update);
+
+/*
+ * Tell peer to update a given route mapping for a traffic class.
+ * 
+ * PARAMETERS
+ * ----------
+ * update (int<<64>>): encrypted version of the update
+ */
+exit event request_route_update (int<<64>> update);
 
 /*
  * Forward the flow using tango to its final destination.
