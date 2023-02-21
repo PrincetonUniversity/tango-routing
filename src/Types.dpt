@@ -160,7 +160,7 @@ type LossMetrics_t = {
  */
 type BestMetrics_t = {
    DelayMetrics_t best_delay_metrics;
-   int best_delay_id;
+   int<<3>> best_delay_id;
    LossMetrics_t best_loss_metrics;
-   int best_loss_id;
+   int<<3>> best_loss_id;
 }

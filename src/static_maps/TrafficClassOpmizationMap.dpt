@@ -1,0 +1,24 @@
+include "../Types.dpt"
+
+const bool OPTIMIZE_DELAY = false;
+const bool OPTIMIZE_LOSS = true;
+
+/*
+ * Opmization policies for every traffic class.
+ * 
+ * PARAMETERS
+ * ----------
+ * traffic_class (int<<4>>): traffic class whose policy is of interest
+ * 
+ * RETURNS
+ * -------
+ * policy (bool): optimization policy for the given traffic class
+ */
+fun bool map_traffic_class_to_policy (int<<4>> traffic_class) {
+    match (traffic_class) with
+	| _ -> {
+        printf("ERROR: optimization policy map has not been configured!");
+        return OPTIMIZE_DELAY;
+    }
+}
+

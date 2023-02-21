@@ -1,6 +1,7 @@
 include "Types.dpt"
 include "static_maps/TrafficClassConstraintMap.dpt"
 include "static_maps/TrafficClassMap.dpt"
+include "static_maps/TrafficClassOpmizationMap.dpt"
 include "static_maps/TunnelHeaderMap.dpt"
 include "store_managers/SequenceNumberManager.dpt"
 include "store_managers/RouteManager.dpt"
@@ -282,8 +283,19 @@ handle incoming_tango_traffic (
 
         // -- Trigger reroute if hard constraints are broken
         if (!is_within_constraints) {
-            // TODO: Better design...
+
+            // -- Get optimization policy of traffic class
+            bool policy = map_traffic_class_to_policy(0); // FIXME: TRAFFIC CLASS
+
+            // -- Get new path id to route traffic class to
             int<<3>> new_path_id = 0;
+            if (policy == OPTIMIZE_DELAY) {
+                new_path_id = best_metrics#best_delay_id;
+            } else {
+                new_path_id = best_metrics#best_loss_id;
+            }
+
+            // -- Encrypt reroute request
             int<<64>> enc_update = EncryptionManager.encrypt(
                 outgoing_encryption_manager,
                 0, // FIXME: HOW TO DETERMINE?
