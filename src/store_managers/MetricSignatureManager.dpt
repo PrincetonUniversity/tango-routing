@@ -17,7 +17,7 @@ module MetricSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * timestamp (int): timestamp of packet send/receive
+    * timestamp (int<<12>>): timestamp of packet send/receive
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * 
     * # Returns
@@ -25,7 +25,7 @@ module MetricSignatureManager : {
     **/
     fun int<<256>> sign (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id
     ) [start <= self; end self];
 
@@ -35,7 +35,7 @@ module MetricSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * timestamp (int): timestamp of packet send/receive
+    * timestamp (int<<12>>): timestamp of packet send/receive
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * signature (int<<256 >> signature): signature to validate
     * 
@@ -44,7 +44,7 @@ module MetricSignatureManager : {
     **/
     fun bool verify (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id,
         int<<256>> signature
     ) [start <= self; end self];
@@ -61,7 +61,7 @@ module MetricSignatureManager : {
 
     fun int<<256>> sign (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id
     ) {
         printf("ERROR: `MetricSignatureManager.sign()` is *unimplemented*");
@@ -71,7 +71,7 @@ module MetricSignatureManager : {
 
     fun bool verify (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id,
         int<<256 >> signature
     ) {

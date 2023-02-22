@@ -95,14 +95,14 @@ type FiveTuple_t = {
  *
  * # Properties
  * path_id (int<<3>>): path id packet is to or should have take(n)
- * timestamp (int): timestamp of when packet left peer
+ * timestamp (int<<12>>): timestamp of when packet left peer
  * signature (int<<256>>): signature of the path ID and timestamp
  * sequence_num (int): Tango-specific sequence number
  * book_signature (int<<1>>): signature of the sequence number
  **/
 type TangoHeader_t = {
    int<<3>>   path_id;
-   int        timestamp;
+   int<<12>>  timestamp;
    int<<256>> signature;
    int<<24>>  sequence_num;
    int<<1>>   book_signature;

@@ -19,7 +19,7 @@ module DelayMetricsManager : {
     * 
     * # Parameters
     * self (t): self
-    * timestamp (int): sequence number to index into pads
+    * timestamp (int<<12>>): sequence number to index into pads
     * path_id (int<<3>>): the path on which the packet came
     * 
     * # Returns
@@ -27,7 +27,7 @@ module DelayMetricsManager : {
     **/
     fun DelayMetrics_t update_delay (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id
     ) [start <= self; end self];
 
@@ -61,7 +61,7 @@ module DelayMetricsManager : {
 
     fun DelayMetrics_t update_delay (
         t self,
-        int timestamp,
+        int<<12>> timestamp,
         int<<3>> path_id
     ) {
         printf("ERROR: `DelayMetricsManager.update_delay()` is *unimplemented*");
