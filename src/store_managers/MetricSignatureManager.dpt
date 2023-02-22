@@ -51,12 +51,26 @@ module MetricSignatureManager : {
 }
 {
     type t = {
-        Array.t<<256>>[8] signatures;
+        Array.t<<256>> signatures0;
+        Array.t<<256>> signatures1;
+        Array.t<<256>> signatures2;
+        Array.t<<256>> signatures3;
+        Array.t<<256>> signatures4;
+        Array.t<<256>> signatures5;
+        Array.t<<256>> signatures6;
+        Array.t<<256>> signatures7;
     }
 
     constr t create () = {
-        signatures = [Array.create(10) for i < 8]; // 10ms control loop
-        /* TODO */
+        // ASSUMPTION:16ms control loop
+        signatures0 = Array.create(16);
+        signatures1 = Array.create(16);
+        signatures2 = Array.create(16);
+        signatures3 = Array.create(16);
+        signatures4 = Array.create(16);
+        signatures5 = Array.create(16);
+        signatures6 = Array.create(16);
+        signatures7 = Array.create(16);
     };
 
     fun int<<256>> sign (
@@ -64,19 +78,49 @@ module MetricSignatureManager : {
         int<<12>> timestamp,
         int<<3>> path_id
     ) {
-        printf("ERROR: `MetricSignatureManager.sign()` is *unimplemented*");
-        return 0;
-        /* TODO */
+        match path_id with
+        | 0 -> { return Array.get(self#signatures0, timestamp[3:0]); }
+        | 1 -> { return Array.get(self#signatures1, timestamp[3:0]); }
+        | 2 -> { return Array.get(self#signatures2, timestamp[3:0]); }
+        | 3 -> { return Array.get(self#signatures3, timestamp[3:0]); }
+        | 4 -> { return Array.get(self#signatures4, timestamp[3:0]); }
+        | 5 -> { return Array.get(self#signatures5, timestamp[3:0]); }
+        | 6 -> { return Array.get(self#signatures6, timestamp[3:0]); }
+        | 7 -> { return Array.get(self#signatures7, timestamp[3:0]); }
     }
 
     fun bool verify (
         t self,
         int<<12>> timestamp,
         int<<3>> path_id,
-        int<<256 >> signature
+        int<<256>> signature
     ) {
-       printf("ERROR: `MetricSignatureManager.verify()` is *unimplemented*");
-       return false;
-        /* TODO */
+       match path_id with
+        | 0 -> {
+            return Array.get(self#signatures0, timestamp[3:0]) == signature;
+        }
+        | 1 -> {
+            return Array.get(self#signatures1, timestamp[3:0]) == signature;
+        }
+        | 2 -> {
+            return Array.get(self#signatures2, timestamp[3:0]) == signature;
+        }
+        | 3 -> {
+            return Array.get(self#signatures3, timestamp[3:0]) == signature;
+        }
+        | 4 -> {
+            return Array.get(self#signatures4, timestamp[3:0]) == signature;
+        }
+        | 5 -> {
+            return Array.get(self#signatures5, timestamp[3:0]) == signature;
+        }
+        | 6 -> {
+            return Array.get(self#signatures6, timestamp[3:0]) == signature;
+        }
+        | 7 -> {
+            return Array.get(self#signatures7, timestamp[3:0]) == signature;
+        }
     }
 }
+
+// FIXME: Woof... this is wildly out of sync
