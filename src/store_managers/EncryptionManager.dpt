@@ -1,5 +1,17 @@
 include "../Types.dpt"
 
+const RouteUpdate_t INVALID_UPDATE = {
+    is_valid = false;
+    traffic_class = 0;
+    new_path_id = 0;
+};
+
+const RouteUpdate_t VALID_UPDATE = {
+    is_valid = true;
+    traffic_class = 0;
+    new_path_id = 0;
+};
+
 /**
  * # Description
  * Encrypt and decrypt route updates using a one-time pad
@@ -49,14 +61,17 @@ module EncryptionManager : {
 }
 {
     type t = {
-        Array.t<<64>> one_time_pads;
+        Array.t<<29>> path_encodings;
+        Array.t<<28>> traffic_cls_encodings;
         Counter.t<<4>> seq_number;
+        Array.t<<64>> one_time_pads;
     }
 
     constr t create () = {
-        one_time_pads = Array.create(16);
+        path_encodings = Array.create(8);
+        traffic_cls_encodings = Array.create(16);
         seq_number = Counter.create(0);
-        /* TODO */
+        one_time_pads = Array.create(16);
     };
 
     fun int<<64>> encrypt (
@@ -64,21 +79,35 @@ module EncryptionManager : {
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) {
-        printf("ERROR: `EncryptionManager.encrypt()` is *unimplemented*");
-        return 0;
-        /* TODO */
+        int encoded_path = path_id ^ Array.get(self#path_encodings, path_id);
+        int encoded_cls = traffic_cls ^ Array.get(self#traffic_cls_encodings, traffic_cls);
+        int<<4>> curr_seq_num = Counter.add(self#seq_number, 1);
+        int<<64>> pad = Array.get(self#one_time_pads, curr_seq_num);
+
+        return (encoded_path ^ encoded_cls) ^^ pad;
     }
 
     fun RouteUpdate_t decrypt (
         t self,
         int<<64>> ciphertext
     ) {
-        printf("ERROR: `EncryptionManager.decrypt()` is *unimplemented*");
-        return {
-            is_valid = true;
-            traffic_class = 0;
-            new_path_id = 0;
-        };
-        /* TODO */
+        int seq_num = 0; //FIXME
+        int<<64>> pad = Array.get(self#one_time_pads, seq_num);
+
+        int<<64>> plaintext = ciphertext ^^ pad;
+        int<<3>> new_path_id = plaintext[63:61];
+        int<<29>> path_padding = plaintext[60:32];
+        int<<4>> traffic_class = plaintext[31:28];
+        int<<28>> class_padding = plaintext[27:0];
+
+        // FIXME: Check if encoding is valid
+        // if (
+        //     (path_padding != Array.get(self#path_encodings, new_path_id))
+        //     || (class_padding != Array.get(self#traffic_cls_encodings, traffic_class))
+        //    ) {
+        //     return INVALID_UPDATE;
+        // }
+
+        return { VALID_UPDATE with traffic_class = traffic_class; new_path_id = new_path_id };
     }
 }

@@ -50,16 +50,27 @@ module LossMetricsManager : {
 }
 {
     type t = {
-        Counter.t<<32>>[8] loss_counts;
-        Counter.t<<32>>[8] transmission_counts;
+        Counter.t<<32>> loss_counts0;
+        Counter.t<<32>> loss_counts1;
+        Counter.t<<32>> loss_counts2;
+        Counter.t<<32>> loss_counts3;
+        Counter.t<<32>> loss_counts4;
+        Counter.t<<32>> loss_counts5;
+        Counter.t<<32>> loss_counts6;
+        Counter.t<<32>> loss_counts7;
         Array.t<<24>> seen_sequence_nums;
     }
 
     constr t create () = {
-        loss_counts = [Counter.create(0) for x < 8];
-        transmission_counts = [Counter.create(0) for x < 8];
+        loss_counts0 = Counter.create(0);
+        loss_counts1 = Counter.create(0);
+        loss_counts2 = Counter.create(0);
+        loss_counts3 = Counter.create(0);
+        loss_counts4 = Counter.create(0);
+        loss_counts5 = Counter.create(0);
+        loss_counts6 = Counter.create(0);
+        loss_counts7 = Counter.create(0);
         seen_sequence_nums = Array.create(8);
-        /* TODO */
     };
 
     fun LossMetrics_t update_loss (
@@ -79,11 +90,24 @@ module LossMetricsManager : {
         t self,
         int<<3>> path_id
     ) {
-       printf("ERROR: `LossMetricsManager.get_metrics()` is *unimplemented*");
+       // Get known loss count
+       int loss_count = 0;
+       match path_id with
+        | 0 -> { loss_count = Counter.add(self#loss_counts0, 0); }
+        | 1 -> { loss_count = Counter.add(self#loss_counts1, 0); }
+        | 2 -> { loss_count = Counter.add(self#loss_counts2, 0); }
+        | 3 -> { loss_count = Counter.add(self#loss_counts3, 0); }
+        | 4 -> { loss_count = Counter.add(self#loss_counts4, 0); }
+        | 5 -> { loss_count = Counter.add(self#loss_counts5, 0); }
+        | 6 -> { loss_count = Counter.add(self#loss_counts6, 0); }
+        | 7 -> { loss_count = Counter.add(self#loss_counts7, 0); }
+
+        // Get known transmission count
+       int<<24>> transmission_count = Array.get(self#seen_sequence_nums, path_id);
+
         return {
-            loss_count = 0;
-            transmission_count = 0;
+            loss_count = (int<<32>>) loss_count;
+            transmission_count = (int<<32>>) transmission_count;
         };
-        /* TODO */
     }
 }
