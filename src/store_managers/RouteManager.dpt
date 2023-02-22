@@ -49,7 +49,6 @@ module RouteManager : {
 
     constr t create () = {
         mappings = Array.create(16);
-        /* TODO */
     };
 
     fun void update_route (
@@ -57,16 +56,13 @@ module RouteManager : {
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) {
-        printf("ERROR: `RouteManager.update_route()` is *unimplemented*");
-        /* TODO */
+        Array.set(self#mappings, traffic_cls, path_id);
     }
 
     fun int<<3>> get_path_id (
         t self,
         int<<4>> traffic_cls
     ) {
-        printf("ERROR: `RouteManager.get_path_id()` is *unimplemented*");
-        return 0;
-        /* TODO */
+        return Array.get(self#mappings, traffic_cls);
     }
 }
