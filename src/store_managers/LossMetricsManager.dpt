@@ -104,6 +104,7 @@ module LossMetricsManager : {
         int<<24>> sequence_num,
         int<<3>> path_id
     ) {
+        // Calculate loss and updated last seen sequence number
         int<<32>> loss = (int<<32>>) Array.update(
             self#seen_sequence_nums,
             path_id,
@@ -113,6 +114,7 @@ module LossMetricsManager : {
             sequence_num
         );
 
+        // Update loss counters
         match path_id with
         | 0 -> { Counter.add(self#loss_counts0, loss); }
         | 1 -> { Counter.add(self#loss_counts1, loss); }
