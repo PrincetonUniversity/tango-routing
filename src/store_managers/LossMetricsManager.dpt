@@ -50,6 +50,7 @@ module LossMetricsManager : {
 }
 {
     type t = {
+        Array.t<<24>> seen_sequence_nums;
         Counter.t<<32>> loss_counts0;
         Counter.t<<32>> loss_counts1;
         Counter.t<<32>> loss_counts2;
@@ -58,10 +59,10 @@ module LossMetricsManager : {
         Counter.t<<32>> loss_counts5;
         Counter.t<<32>> loss_counts6;
         Counter.t<<32>> loss_counts7;
-        Array.t<<24>> seen_sequence_nums;
     }
 
     constr t create () = {
+        seen_sequence_nums = Array.create(8);
         loss_counts0 = Counter.create(0);
         loss_counts1 = Counter.create(0);
         loss_counts2 = Counter.create(0);
@@ -70,40 +71,82 @@ module LossMetricsManager : {
         loss_counts5 = Counter.create(0);
         loss_counts6 = Counter.create(0);
         loss_counts7 = Counter.create(0);
-        seen_sequence_nums = Array.create(8);
     };
+
+    /**
+     * # Description
+     * Get the loss corresponding to the difference in expected
+     * sequence numebrs.
+     **/
+    memop get_loss (int<<'sz>> curr_seq_num, int<<'sz>> new_seq_num) { 
+        if (curr_seq_num < new_seq_num) { // FIXME: No wrap arounds
+            return new_seq_num - curr_seq_num;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * # Description
+     * Update the stored sequence number to the most recently seen one
+     * iff it is known to be out-of-order.
+     **/
+    memop set_new (int<<'sz>> curr_seq_num, int<<'sz>> new_seq_num) { 
+        if (curr_seq_num < new_seq_num) { // FIXME: No wrap arounds
+            return new_seq_num;
+        } else {
+            return curr_seq_num;
+        }
+    }
 
     fun LossMetrics_t update_loss (
         t self,
         int<<24>> sequence_num,
         int<<3>> path_id
     ) {
-        printf("ERROR: `LossMetricsManager.update_loss()` is *unimplemented*");
+        int<<32>> loss = (int<<32>>) Array.update(
+            self#seen_sequence_nums,
+            path_id,
+            get_loss,
+            sequence_num,
+            set_new,
+            sequence_num
+        );
+
+        match path_id with
+        | 0 -> { Counter.add(self#loss_counts0, loss); }
+        | 1 -> { Counter.add(self#loss_counts1, loss); }
+        | 2 -> { Counter.add(self#loss_counts2, loss); }
+        | 3 -> { Counter.add(self#loss_counts3, loss); }
+        | 4 -> { Counter.add(self#loss_counts4, loss); }
+        | 5 -> { Counter.add(self#loss_counts5, loss); }
+        | 6 -> { Counter.add(self#loss_counts6, loss); }
+        | 7 -> { Counter.add(self#loss_counts7, loss); }
+
         return {
-            loss_count = 0;
-            transmission_count = 0;
+            loss_count = loss;
+            transmission_count = ((int<<32>>) sequence_num) - loss; // FIXME: Wrap around not handled
         };
-        /* TODO */
     }
 
     fun LossMetrics_t get_metrics (
         t self,
         int<<3>> path_id
     ) {
-       // Get known loss count
-       int loss_count = 0;
-       match path_id with
-        | 0 -> { loss_count = Counter.add(self#loss_counts0, 0); }
-        | 1 -> { loss_count = Counter.add(self#loss_counts1, 0); }
-        | 2 -> { loss_count = Counter.add(self#loss_counts2, 0); }
-        | 3 -> { loss_count = Counter.add(self#loss_counts3, 0); }
-        | 4 -> { loss_count = Counter.add(self#loss_counts4, 0); }
-        | 5 -> { loss_count = Counter.add(self#loss_counts5, 0); }
-        | 6 -> { loss_count = Counter.add(self#loss_counts6, 0); }
-        | 7 -> { loss_count = Counter.add(self#loss_counts7, 0); }
-
         // Get known transmission count
-       int<<24>> transmission_count = Array.get(self#seen_sequence_nums, path_id);
+        int<<24>> transmission_count = Array.get(self#seen_sequence_nums, path_id);
+
+        // Get known loss count
+        int loss_count = 0;
+        match path_id with
+            | 0 -> { loss_count = Counter.add(self#loss_counts0, 0); }
+            | 1 -> { loss_count = Counter.add(self#loss_counts1, 0); }
+            | 2 -> { loss_count = Counter.add(self#loss_counts2, 0); }
+            | 3 -> { loss_count = Counter.add(self#loss_counts3, 0); }
+            | 4 -> { loss_count = Counter.add(self#loss_counts4, 0); }
+            | 5 -> { loss_count = Counter.add(self#loss_counts5, 0); }
+            | 6 -> { loss_count = Counter.add(self#loss_counts6, 0); }
+            | 7 -> { loss_count = Counter.add(self#loss_counts7, 0); }
 
         return {
             loss_count = (int<<32>>) loss_count;
