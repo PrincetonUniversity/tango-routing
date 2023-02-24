@@ -52,11 +52,25 @@ module BookSignatureManager : {
 }
 {
     type t = {
-        Array.t<<1>> onebit_signatures;
+        Array.t<<1>> onebit_signatures0;
+        Array.t<<1>> onebit_signatures1;
+        Array.t<<1>> onebit_signatures2;
+        Array.t<<1>> onebit_signatures3;
+        Array.t<<1>> onebit_signatures4;
+        Array.t<<1>> onebit_signatures5;
+        Array.t<<1>> onebit_signatures6;
+        Array.t<<1>> onebit_signatures7;
     }
 
     constr t create () = {
-        onebit_signatures = Array.create(16777216); // 2^24
+        onebit_signatures0 = Array.create(16777216); // 2^24
+        onebit_signatures1 = Array.create(16777216);
+        onebit_signatures2 = Array.create(16777216);
+        onebit_signatures3 = Array.create(16777216);
+        onebit_signatures4 = Array.create(16777216);
+        onebit_signatures5 = Array.create(16777216);
+        onebit_signatures6 = Array.create(16777216);
+        onebit_signatures7 = Array.create(16777216);
     };
 
     fun int<<1>> sign (
@@ -64,9 +78,15 @@ module BookSignatureManager : {
         int<<24>> seq_number,
         int<<3>> path_id
     ) {
-        printf("ERROR: `BookSignatureManager.sign()` is *unimplemented*");
-        return 0;
-        /* TODO */
+        match path_id with
+        | 0 -> { return Array.get(self#onebit_signatures0, seq_number); }
+        | 1 -> { return Array.get(self#onebit_signatures1, seq_number); }
+        | 2 -> { return Array.get(self#onebit_signatures2, seq_number); }
+        | 3 -> { return Array.get(self#onebit_signatures3, seq_number); }
+        | 4 -> { return Array.get(self#onebit_signatures4, seq_number); }
+        | 5 -> { return Array.get(self#onebit_signatures5, seq_number); }
+        | 6 -> { return Array.get(self#onebit_signatures6, seq_number); }
+        | 7 -> { return Array.get(self#onebit_signatures7, seq_number); }
     }
 
     fun bool verify (
@@ -75,8 +95,14 @@ module BookSignatureManager : {
         int<<3>> path_id,
         int<<1>> signature
     ) {
-        printf("ERROR: `BookSignatureManager.verify()` is *unimplemented*");
-        return false;
-        /* TODO */
+        match path_id with
+        | 0 -> { return Array.get(self#onebit_signatures0, seq_number) == signature; }
+        | 1 -> { return Array.get(self#onebit_signatures1, seq_number) == signature; }
+        | 2 -> { return Array.get(self#onebit_signatures2, seq_number) == signature; }
+        | 3 -> { return Array.get(self#onebit_signatures3, seq_number) == signature; }
+        | 4 -> { return Array.get(self#onebit_signatures4, seq_number) == signature; }
+        | 5 -> { return Array.get(self#onebit_signatures5, seq_number) == signature; }
+        | 6 -> { return Array.get(self#onebit_signatures6, seq_number) == signature; }
+        | 7 -> { return Array.get(self#onebit_signatures7, seq_number) == signature; }
     }
 }
