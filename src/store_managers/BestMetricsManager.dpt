@@ -36,17 +36,29 @@ module BestMetricsManager : {
     type t = {
         Array.t<<64>> best_loss;
         Array.t<<64>> best_delay;
-        Array.t<<3>> best_loss_id;
-        Array.t<<3>> best_delay_id;
+        Array.t<<3>> best_loss_path_id;
+        Array.t<<3>> best_delay_path_id;
     }
 
     constr t create () = {
         best_loss = Array.create(1);
         best_delay = Array.create(1);
-        best_loss_id = Array.create(1);
-        best_delay_id = Array.create(1);
-        /* TODO */
+        best_loss_path_id = Array.create(1);
+        best_delay_path_id = Array.create(1);
     };
+
+    /**
+    * # Description
+    * Update the metric stored to the new value if it is lesser, and
+    * therefore better.
+    **/
+    memop choose_lower (int<<'sz>> curr_metric, int<<'sz>> new_metric) { 
+        if (curr_metric < new_metric) {
+            return curr_metric;
+        } else {
+            return new_metric;
+        }
+    }
 
     fun BestMetrics_t update (
         t self,
@@ -54,19 +66,58 @@ module BestMetricsManager : {
         LossMetrics_t loss_metrics,
         DelayMetrics_t delay_metrics
     ) {
-        printf("ERROR: `BestMetricsManager.update()` is *unimplemented*");
+        // Update best metrics
+        int<<64>> best_loss = Array.getm(
+            self#best_loss,
+            0,
+            choose_lower,
+            loss_metrics#loss_count ^ loss_metrics#transmission_count
+        );
+
+        int<<64>> best_delay = Array.getm(
+            self#best_delay,
+            0,
+            choose_lower,
+            delay_metrics#delay_sum ^ delay_metrics#delay_count
+        );
+
+
+        // Test if we got a new best delay or loss path
+        int<<3>> winning_loss_id = 0;
+        if (
+            (loss_metrics#loss_count == best_loss[63:32])
+            && (loss_metrics#transmission_count == best_loss[31:0])
+        ) {
+            winning_loss_id = path_id;
+            Array.set(self#best_loss_path_id, 0, winning_loss_id);
+        } else {
+            winning_loss_id = Array.get(self#best_loss_path_id, 0);
+        }
+
+        int<<3>> winning_delay_id = 0;
+        if (
+            (delay_metrics#delay_sum == best_delay[63:32])
+            && (delay_metrics#delay_count == best_delay[31:0])
+        ) {
+            winning_delay_id = path_id;
+            Array.set(self#best_delay_path_id, 0, winning_delay_id);
+        } else {
+            winning_delay_id = Array.get(self#best_delay_path_id, 0);
+        }
+
+
+        // Construct best metrics
         return {
             best_delay_metrics = {
-                delay_sum = 0;
-                delay_count = 0;
+                delay_sum = best_delay[63:32];
+                delay_count = best_delay[31:0];
             };
-            best_delay_id = 0;
+            best_delay_id = winning_delay_id;
             best_loss_metrics = {
-                loss_count = 0;
-                transmission_count = 0;
+                loss_count = best_loss[63:32];
+                transmission_count = best_loss[31:0];
             };
-            best_loss_id = 0;
+            best_loss_id = winning_loss_id;
         };
-        /* TODO */
     }
 }
