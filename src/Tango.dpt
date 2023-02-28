@@ -88,7 +88,11 @@ global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.creat
  * # Generates
  * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
  **/
-entry event forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple);
+entry event forward_flow (
+    EthernetHeader_t eth_header,
+    IPv4Header_t ip_header,
+    FiveTuple_t five_tuple
+);
 
 /**
  * # Description
@@ -121,7 +125,7 @@ exit event forward_tango_traffic (
  * encaped_five_tuple (FiveTuple_t): five-tuple of tunneled packet
  *
  * # Generates
- * request_route_update: sometimes responds to peer that they should update route due to changed metrics
+ * request_route_update: sometimes responds to peer with route mapping update
  * complete_forward: forwards the packet on to its final destination
  **/
 entry event incoming_tango_traffic ( 
@@ -179,14 +183,12 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
     IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
 
 
-
     /* 2. Increment and sign sequence number. */
     // -- Get updated sequence number
     int<<24>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
 
     // -- Get signature corresponding to sequence number
     int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, path_id);
-
 
     /* 3. Record and sign path-specific timestamp. */
     // -- Get current time in milliseconds
@@ -211,6 +213,14 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         tango_metrics_hdr,
         eth_header,
         ip_header
+    );
+
+    printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
+        path_id,
+        timestamp,
+        ts_signature,
+        seq_number,
+        book_signature
     );
 
     generate_port (out_peer_port, forward_tango_pkt);
@@ -244,6 +254,13 @@ handle incoming_tango_traffic (
 
     // -- Record and bail if invalid
     if (!(is_valid_seq_num && is_valid_metrics)) {
+        printf("Invalid incoming packet found: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
+            tango_metrics_header#path_id,
+            tango_metrics_header#timestamp,
+            tango_metrics_header#signature,
+            tango_metrics_header#sequence_num,
+            tango_metrics_header#book_signature
+        );
         InvalidPacketManager.found_invalid_packet(invalid_pkt_manager, tango_metrics_header#path_id);
     } else {
 
@@ -268,6 +285,16 @@ handle incoming_tango_traffic (
             tango_metrics_header#path_id,
             loss_metrics,
             delay_metrics
+        );
+
+        printf("Metrics for path %d updated: { { loss_sum: %d, loss_cnt: %d }, { delay_sum: %d, delay_cnt: %d }, { best_loss_id: %d, best_delay_id: %d } }",
+            tango_metrics_header#path_id,
+            loss_metrics#loss_count,
+            loss_metrics#transmission_count,
+            delay_metrics#delay_sum,
+            delay_metrics#delay_count,
+            best_metrics#best_loss_id,
+            best_metrics#best_delay_id
         );
 
         event tunneled = complete_forward (tango_eth_header, encaped_ip_header);
@@ -296,6 +323,12 @@ handle incoming_tango_traffic (
             } else {
                 new_path_id = best_metrics#best_loss_id;
             }
+
+            printf("Triggering Reroute: { traffic_cls: %d, old_path_id: %d, new_path_id: %d }",
+                traffic_class,
+                tango_metrics_header#path_id,
+                new_path_id
+            );
 
             // -- Encrypt reroute request
             TaggedCiphertext_t enc_update = EncryptionManager.encrypt(
