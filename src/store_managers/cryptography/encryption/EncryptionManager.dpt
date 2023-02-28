@@ -1,0 +1,92 @@
+include "../../../Types.dpt"
+include "Encoder.dpt"
+include "Encyptor.dpt"
+include "Decryptor.dpt"
+
+/**
+ * # Description
+ * Encrypt and decrypt route updates using a one-time pad
+ * 
+ * # Methods
+ * create() -> EncryptionManager.t
+ * encrypt(EncryptionManager.t, int<<4>>, int<<3>>) -> int<<64>>
+ * decrypt(EncryptionManager.t, TaggedCiphertext_t) -> RouteUpdate_t
+ **/
+module EncryptionManager : {
+    global type t;
+    constr t create ();
+
+   /**
+    * # Description
+    * Encrypt a given route update with a one-time pad
+    * 
+    * # Parameters
+    * self (t): self
+    * traffic_cls (int<<4>>): traffic class to map
+    * path_id (int<<3>>): path to map traffic class to
+    * 
+    * # Returns
+    * ciphertext (TaggedCiphertext_t): encrypted route update
+    **/
+    fun TaggedCiphertext_t encrypt (
+        t self,
+        int<<4>> traffic_cls,
+        int<<3>> path_id
+    ) [start <= self; end self];
+
+   /**
+    * # Description
+    * Decrypt the route update.
+    * 
+    * # Parameters
+    * self (t): self
+    * seq_number (int<<4>>): one-way sequence number of update
+    * ciphertext (int<<64>>): signature to validate
+    * 
+    * # Returns
+    * plaintext (RouteUpdate_t): decrypted route update
+    **/
+    fun RouteUpdate_t decrypt (
+        t self,
+        int<<4>> seq_number,
+        int<<64>> ciphertext
+    ) [start <= self; end self];
+}
+{
+    type t = {
+        Decryptor.t decryptor;
+        Encoder.t encoder;
+        Encryptor.t encryptor;
+    }
+
+    constr t create () = {
+        decryptor = Decryptor.create();
+        encoder = Encoder.create();
+        encryptor = Encryptor.create();
+    };
+
+    fun TaggedCiphertext_t encrypt (
+        t self,
+        int<<4>> traffic_cls,
+        int<<3>> path_id
+    ) {
+        int<<64>> encoded_update =
+            Encoder.encode(self#encoder, path_id, traffic_cls);
+
+        TaggedCiphertext_t ciphertext =
+            Encryptor.encrypt(self#encryptor, encoded_update);
+        
+        return ciphertext;
+    }
+
+    fun RouteUpdate_t decrypt (
+        t self,
+        int<<4>> seq_number,
+        int<<64>> ciphertext
+    ) {
+        int<<64>> plaintext =
+            Decryptor.decrypt(self#decryptor, seq_number, ciphertext);
+
+        return Encoder.decode(self#encoder, plaintext);
+    }
+}

@@ -124,6 +124,19 @@ type RouteUpdate_t = {
 
 /**
  * # Description
+ * Encrypted version of route update tagged with sequence number.
+ *
+ * # Properties
+ * seq_num_tag (int<<4>>): sequence number corresponding to update
+ * ciphertext (int<<64>>): encrypted route mapping update
+ **/
+type TaggedCiphertext_t = {
+   int<<4>> seq_num_tag;
+   int<<64>> ciphertext;
+}
+
+/**
+ * # Description
  * Delay metrics for a given path
  *
  * # Properties

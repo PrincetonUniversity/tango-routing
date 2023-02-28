@@ -1,0 +1,51 @@
+include "../../../Types.dpt"
+
+/**
+ * # Description
+ * Encrypt and decrypt route updates using a one-time pad
+ * 
+ * # Methods
+ * create() -> Decryptor.t
+ * decrypt(Decryptor.t, int<<64>>) -> int<<64>>
+ **/
+module Decryptor : {
+    global type t;
+    constr t create ();
+
+   /**
+    * # Description
+    * Decrypt the route update.
+    * 
+    * # Parameters
+    * self (t): self
+    * seq_number (int<<4>>): sequence number of update
+    * ciphertext (int<<64>>): signature to validate
+    * 
+    * # Returns
+    * plaintext (int<<64>>): decrypted route update
+    **/
+    fun int<<64>> decrypt (
+        t self,
+        int<<4>> seq_number,
+        int<<64>> ciphertext
+    ) [start <= self; end self];
+}
+{
+    type t = {
+        Array.t<<64>> corresponding_otps;
+    }
+
+    constr t create () = {
+        corresponding_otps = Array.create(16);
+    };
+
+    fun int<<64>> decrypt (
+        t self,
+        int<<4>> seq_number,
+        int<<64>> ciphertext
+    ) {
+        int<<64>> pad = Array.get(self#corresponding_otps, seq_number);
+
+        return ciphertext ^^ pad;
+    }
+}

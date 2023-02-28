@@ -1,18 +1,18 @@
-include "Types.dpt"
 include "Time.dpt"
+include "Types.dpt"
 include "static_maps/TrafficClassConstraintMap.dpt"
 include "static_maps/TrafficClassMap.dpt"
 include "static_maps/TrafficClassOpmizationMap.dpt"
 include "static_maps/TunnelHeaderMap.dpt"
-include "store_managers/SequenceNumberManager.dpt"
-include "store_managers/RouteManager.dpt"
-include "store_managers/MetricSignatureManager.dpt"
-include "store_managers/BookSignatureManager.dpt"
-include "store_managers/DelayMetricsManager.dpt"
-include "store_managers/LossMetricsManager.dpt"
 include "store_managers/InvalidPacketManager.dpt"
-include "store_managers/EncryptionManager.dpt"
-include "store_managers/BestMetricsManager.dpt"
+include "store_managers/RouteManager.dpt"
+include "store_managers/SequenceNumberManager.dpt"
+include "store_managers/cryptography/encryption/EncryptionManager.dpt"
+include "store_managers/cryptography/signatures/BookSignatureManager.dpt"
+include "store_managers/cryptography/signatures/MetricSignatureManager.dpt"
+include "store_managers/metrics/BestMetricsManager.dpt"
+include "store_managers/metrics/DelayMetricsManager.dpt"
+include "store_managers/metrics/LossMetricsManager.dpt"
 
 /* ================================================================================================================== *
  *                                                     EXTERNS                                                        *
@@ -137,18 +137,20 @@ entry event incoming_tango_traffic (
  * Peer says to update a given route mapping for a traffic class.
  * 
  * # Parameters
+ * sequence_num (int<<4>>): sequence number corresponding to update
  * update (int<<64>>): encrypted version of the update
  **/
-entry event incoming_route_update (int<<64>> update);
+entry event incoming_route_update (int<<4>> sequence_num, int<<64>> update);
 
 /**
  * # Description
  * Tell peer to update a given route mapping for a traffic class.
  * 
  * # Parameters
+ * sequence_num (int<<4>>): sequence number corresponding to update
  * update (int<<64>>): encrypted version of the update
  **/
-exit event request_route_update (int<<64>> update);
+exit event request_route_update (int<<4>> sequence_num, int<<64>> update);
 
 /**
  * # Description
@@ -296,24 +298,28 @@ handle incoming_tango_traffic (
             }
 
             // -- Encrypt reroute request
-            int<<64>> enc_update = EncryptionManager.encrypt(
+            TaggedCiphertext_t enc_update = EncryptionManager.encrypt(
                 outgoing_encryption_manager,
                 traffic_class,
                 new_path_id
             );
 
-            event update = request_route_update (enc_update);
+            event update = request_route_update (
+                enc_update#seq_num_tag,
+                enc_update#ciphertext
+            );
             generate_port (out_peer_port, update); // FIXME: Need to multicast
         }
 
     }
 }
 
-handle incoming_route_update (int<<64>> update) {
+handle incoming_route_update (int<<4>> sequence_num, int<<64>> update) {
 
     /* 1. Decrypt and verify update. */
     // -- Decrypt
-    RouteUpdate_t dec_update = EncryptionManager.decrypt(incoming_encryption_manager, update);
+    RouteUpdate_t dec_update =
+        EncryptionManager.decrypt(incoming_encryption_manager, sequence_num, update);
 
     // -- Verify
     if (dec_update#is_valid) {

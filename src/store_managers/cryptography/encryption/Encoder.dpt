@@ -1,0 +1,93 @@
+include "../../../Types.dpt"
+
+/**
+ * # Description
+ * Manage all verifyable route encodings
+ * 
+ * # Methods
+ * encode() -> Encoder.t
+ * decode(Encoder.t, int<<3>>, int<<4>>) -> int<<64>>
+ * verify(Encoder.t, int<<63>>) -> RouteUpdate_t
+ **/
+module Encoder : {
+    global type t;
+    constr t create ();
+
+   /**
+    * # Description
+    * Encode a route update (physical path & traffic class) with
+    * a verifyable padding scheme.
+    * 
+    * # Parameters
+    * self (t): self
+    * path_id (int<<3>>): path ID of associated sequence number
+    * traffic_class (int<<4>>): traffic class of associated sequence number
+    * 
+    * # Returns
+    * encoding (int<<64>>): verifiable, encoded route update
+    **/
+    fun int<<64>> encode (
+        t self,
+        int<<3>> path_id,
+        int<<4>> traffic_class
+    ) [start <= self; end self];
+
+   /**
+    * # Description
+    * Decodes and verifies route update.
+    * 
+    * # Parameters
+    * self (t): self
+    * encoded_update (int<<64>>): route to decode and verify
+    * 
+    * # Returns
+    * update (RouteUpdate_t): verified route mapping update
+    **/
+    fun RouteUpdate_t decode (
+        t self,
+        int<<64>> encoded_update
+    ) [start <= self; end self];
+
+}
+{
+    type t = {
+        Array.t<<29>> path_encodings;
+        Array.t<<28>> traffic_class_encodings;
+    }
+
+    constr t create () = {
+        path_encodings = Array.create(8);
+        traffic_class_encodings = Array.create(16);
+    };
+
+    fun int<<64>> encode (
+        t self,
+        int<<3>> path_id,
+        int<<4>> traffic_class
+    ) {
+        // Get path encoding
+        int<<32>> encoded_path = path_id ^ Array.get(self#path_encodings, path_id);
+
+        // Get traffic class encoding
+        int<<32>> encoded_traffic_class =
+            traffic_class ^ Array.get(self#traffic_class_encodings, traffic_class);
+
+        return encoded_path ^ encoded_traffic_class;
+    }
+
+    fun RouteUpdate_t decode (t self, int<<64>> encoded_update) {
+        // Validate self-referencial encoding
+        bool is_valid_path =
+            Array.get(self#path_encodings, encoded_update[63:61]) == encoded_update[60:32];
+
+        // Get traffic class encoding
+        bool is_valid_class =
+            Array.get(self#traffic_class_encodings, encoded_update[31:28]) == encoded_update[27:0];
+
+        return {
+            is_valid = is_valid_path && is_valid_class;
+            traffic_class = encoded_update[31:28];
+            new_path_id = encoded_update[63:61];
+        };
+    }
+}
