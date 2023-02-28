@@ -25,18 +25,41 @@ module InvalidPacketManager : {
 }
 {
     type t = {
-        Counter.t<<24>>[8] invalid_counts;
+        Counter.t<<32>> invalid_counts0;
+        Counter.t<<32>> invalid_counts1;
+        Counter.t<<32>> invalid_counts2;
+        Counter.t<<32>> invalid_counts3;
+        Counter.t<<32>> invalid_counts4;
+        Counter.t<<32>> invalid_counts5;
+        Counter.t<<32>> invalid_counts6;
+        Counter.t<<32>> invalid_counts7;
     }
     
     constr t create () = {
-        invalid_counts = [Counter.create(0) for x < 8];
+        invalid_counts0 = Counter.create(0);
+        invalid_counts1 = Counter.create(0);
+        invalid_counts2 = Counter.create(0);
+        invalid_counts3 = Counter.create(0);
+        invalid_counts4 = Counter.create(0);
+        invalid_counts5 = Counter.create(0);
+        invalid_counts6 = Counter.create(0);
+        invalid_counts7 = Counter.create(0);
     };
 
     fun void found_invalid_packet (
         t self,
         int<<3>> path_id
     ) {
-        printf("ERROR: `InvalidPacketManager.found_invalid_packet()` is *unimplemented*");
-        /* TODO */
+        printf("Found invalid packet on path: %d", path_id);
+
+        match path_id with
+        | 0 -> { Counter.add(self#invalid_counts0, 1); }
+        | 1 -> { Counter.add(self#invalid_counts1, 1); }
+        | 2 -> { Counter.add(self#invalid_counts2, 1); }
+        | 3 -> { Counter.add(self#invalid_counts3, 1); }
+        | 4 -> { Counter.add(self#invalid_counts4, 1); }
+        | 5 -> { Counter.add(self#invalid_counts5, 1); }
+        | 6 -> { Counter.add(self#invalid_counts6, 1); }
+        | 7 -> { Counter.add(self#invalid_counts7, 1); }
     }
 }
