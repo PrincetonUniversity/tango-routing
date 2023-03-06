@@ -1,3 +1,6 @@
+"""Command-line tool enabling simple interactions with Tango."""
+from pathlib import Path
+from typing import Optional
 import click
 
 from edu.princeton.tango.config_parser import ConfigParser, DefaultConfigParser
@@ -6,6 +9,12 @@ from edu.princeton.tango.config_parser import ConfigParser, DefaultConfigParser
 @click.group()
 def cli():
     """Tango base command"""
+
+
+def get_out_path(file: str, prefix: Optional[str] = None) -> Path:
+    """Get output path for a given gerneated file."""
+
+    return Path(prefix) / Path(file) if prefix else Path(file)
 
 
 @cli.command()
@@ -22,7 +31,16 @@ def cli():
     help="Restore placeholder files.",
     required=False,
 )
-def config(file: str, default: bool):
+@click.option(
+    "--prefix",
+    type=click.Path(),
+    default=".",
+    help="Directory prefix for output files.",
+    required=False,
+)
+def config(
+    file: str, default: Optional[bool] = None, prefix: Optional[str] = None
+):
     """Configure Tango given a YAML file."""
 
     if default:
@@ -30,12 +48,20 @@ def config(file: str, default: bool):
     else:
         configs = ConfigParser(file)
 
-    with open("headers.dpt", "w+", encoding="utf-8") as file:
-        file.write(str(configs.header_mapper))
-    with open("mappings.dpt", "w+", encoding="utf-8") as file:
-        file.write(str(configs.class_mapper))
-    with open("policies.dpt", "w+", encoding="utf-8") as file:
-        file.write(str(configs.policy_mapper))
+    if prefix:
+        Path(prefix).mkdir(exist_ok=True, parents=True)
+
+    get_out_path("TunnelHeaderMap.dpt", prefix).write_text(
+        str(configs.header_mapper), encoding="utf-8"
+    )
+
+    get_out_path("TrafficClassMap.dpt", prefix).write_text(
+        str(configs.class_mapper), encoding="utf-8"
+    )
+
+    get_out_path("TrafficClassOpmizationMap.dpt", prefix).write_text(
+        str(configs.policy_mapper), encoding="utf-8"
+    )
 
 
 if __name__ == "__main__":
