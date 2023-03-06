@@ -25,12 +25,12 @@ symbolic int out_port;
  *                                                   CONSTANTS                                                        *
  * ================================================================================================================== */
 
-// Ethernet header for all outgoing Tango traffic
-const EthernetHeader_t TANGO_ETH_HDR = {
-    dest_mac = 0;
-    src_mac = 0;
-    ethertype = 0;
-};
+// // Ethernet header for all outgoing Tango traffic
+// const EthernetHeader_t TANGO_ETH_HDR = {
+//     dest_mac = 0;
+//     src_mac = 0;
+//     ethertype = 0;
+// };
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
@@ -94,24 +94,24 @@ entry event forward_flow (
     FiveTuple_t five_tuple
 );
 
-/**
- * # Description
- * Tunneled Tango data traffic headed to peer node.
- * 
- * # Parameters
- * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
- * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
- * tango_metrics_header (TangoHeader_t): tango metric data and signatures
- * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
- * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
- **/
-exit event forward_tango_traffic (
-    EthernetHeader_t tango_eth_header,
-    IPv6Header_t tango_ip_header,
-    TangoHeader_t tango_metrics_header,
-    EthernetHeader_t encaped_eth_header,
-    IPv4Header_t encaped_ip_header
-);
+// /**
+//  * # Description
+//  * Tunneled Tango data traffic headed to peer node.
+//  * 
+//  * # Parameters
+//  * tango_eth_header (EthernetHeader_t): tango tunnel ethernet frame header
+//  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+//  * tango_metrics_header (TangoHeader_t): tango metric data and signatures
+//  * encaped_eth_header (EthernetHeader_t): flow ethernet header tunneled through path
+//  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
+//  **/
+// exit event forward_tango_traffic (
+//     EthernetHeader_t tango_eth_header,
+//     IPv6Header_t tango_ip_header,
+//     TangoHeader_t tango_metrics_header,
+//     EthernetHeader_t encaped_eth_header,
+//     IPv4Header_t encaped_ip_header
+// );
 
 /**
  * # Description
@@ -128,7 +128,7 @@ exit event forward_tango_traffic (
  * request_route_update: sometimes responds to peer with route mapping update
  * complete_forward: forwards the packet on to its final destination
  **/
-entry event incoming_tango_traffic ( 
+event incoming_tango_traffic ( 
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
@@ -136,15 +136,15 @@ entry event incoming_tango_traffic (
     FiveTuple_t encaped_five_tuple
 );
 
-/**
- * # Description
- * Peer says to update a given route mapping for a traffic class.
- * 
- * # Parameters
- * sequence_num (int<<4>>): sequence number corresponding to update
- * update (int<<64>>): encrypted version of the update
- **/
-entry event incoming_route_update (int<<4>> sequence_num, int<<64>> update);
+// /**
+//  * # Description
+//  * Peer says to update a given route mapping for a traffic class.
+//  * 
+//  * # Parameters
+//  * sequence_num (int<<4>>): sequence number corresponding to update
+//  * update (int<<64>>): encrypted version of the update
+//  **/
+// entry event incoming_route_update (int<<4>> sequence_num, int<<64>> update);
 
 /**
  * # Description
@@ -154,7 +154,7 @@ entry event incoming_route_update (int<<4>> sequence_num, int<<64>> update);
  * sequence_num (int<<4>>): sequence number corresponding to update
  * update (int<<64>>): encrypted version of the update
  **/
-exit event request_route_update (int<<4>> sequence_num, int<<64>> update);
+event route_update (int<<4>> sequence_num, int<<64>> update);
 
 /**
  * # Description
@@ -207,12 +207,12 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         book_signature = book_signature;
     };
      
-    event forward_tango_pkt = forward_tango_traffic (
-        TANGO_ETH_HDR,
+    event forward_tango_pkt = incoming_tango_traffic (
+        eth_header,
         tango_tunnel_hdr,
         tango_metrics_hdr,
-        eth_header,
-        ip_header
+        ip_header,
+        five_tuple
     );
 
     printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
@@ -223,7 +223,9 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         book_signature
     );
 
+    printf("Tunneling packet out port %d", out_peer_port);
     generate_port (out_peer_port, forward_tango_pkt);
+    printf("Tunneled packet.");
 }
 
 handle incoming_tango_traffic (
@@ -233,7 +235,7 @@ handle incoming_tango_traffic (
     IPv4Header_t encaped_ip_header,
     FiveTuple_t encaped_five_tuple
 ) {
-    
+    printf("hello");
     /* 1. Validate signatures. */
     // -- Verify
     bool is_valid_seq_num = BookSignatureManager.verify(
@@ -337,7 +339,7 @@ handle incoming_tango_traffic (
                 new_path_id
             );
 
-            event update = request_route_update (
+            event update = route_update (
                 enc_update#seq_num_tag,
                 enc_update#ciphertext
             );
@@ -347,7 +349,7 @@ handle incoming_tango_traffic (
     }
 }
 
-handle incoming_route_update (int<<4>> sequence_num, int<<64>> update) {
+handle route_update (int<<4>> sequence_num, int<<64>> update) {
 
     /* 1. Decrypt and verify update. */
     // -- Decrypt
