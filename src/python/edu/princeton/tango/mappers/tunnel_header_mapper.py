@@ -112,14 +112,7 @@ class TunnelHeader:
             )
 
 
-class DefaultTunnelHeaderMapper:
-    """Default placeholder tunnel headers."""
-
-    def __str__(self) -> str:
-        return _DEFAULT_HEADER_MAP
-
-
-class TunnelHeaderMapper(DefaultTunnelHeaderMapper):
+class TunnelHeaderMapper:
     """Maps all path ids to given tunnel headers."""
 
     def __init__(self, headers: List[TunnelHeader]) -> None:
@@ -140,3 +133,10 @@ class TunnelHeaderMapper(DefaultTunnelHeaderMapper):
 
     def __str__(self) -> str:
         return _HEADER_MAP_TEMPLATE.format(str(self._headers))
+
+
+class DefaultTunnelHeaderMapper:
+    """Default placeholder tunnel headers."""
+
+    def __str__(self) -> str:
+        return _DEFAULT_HEADER_MAP

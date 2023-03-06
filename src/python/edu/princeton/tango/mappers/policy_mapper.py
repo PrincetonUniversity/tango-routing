@@ -83,14 +83,7 @@ class Policy:
             )
 
 
-class DefaultPolicyMapper:
-    """Default placeholder policy mappings."""
-
-    def __str__(self) -> str:
-        return _DEFAULT_OPTIMIZATION_MAP
-
-
-class PolicyMapper(DefaultPolicyMapper):
+class PolicyMapper:
     """Maps all traffic classes to policies"""
 
     def __init__(self, policies: List[Policy]) -> None:
@@ -118,3 +111,10 @@ class PolicyMapper(DefaultPolicyMapper):
 
     def __str__(self) -> str:
         return _OPTIMIZATION_MAP_TEMPLATE.format(str(self._policies))
+
+
+class DefaultPolicyMapper:
+    """Default placeholder policy mappings."""
+
+    def __str__(self) -> str:
+        return _DEFAULT_OPTIMIZATION_MAP

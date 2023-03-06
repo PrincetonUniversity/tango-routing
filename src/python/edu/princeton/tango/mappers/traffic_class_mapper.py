@@ -141,14 +141,7 @@ class FuzzyClassMapping:
             )
 
 
-class DefaultTrafficClassMapper:
-    """Default placeholder trafffic class mappings."""
-
-    def __str__(self) -> str:
-        return _DEFAULT_CLASS_MAP
-
-
-class TrafficClassMapper(DefaultTrafficClassMapper):
+class TrafficClassMapper:
     """Fuzzy maps all flows to a given traffic class."""
 
     def __init__(self, fuzzy_maps: List[FuzzyClassMapping]) -> None:
@@ -168,3 +161,10 @@ class TrafficClassMapper(DefaultTrafficClassMapper):
 
     def __str__(self) -> str:
         return _CLASS_MAP_TEMPLATE.format(str(self._mappings))
+
+
+class DefaultTrafficClassMapper:
+    """Default placeholder trafffic class mappings."""
+
+    def __str__(self) -> str:
+        return _DEFAULT_CLASS_MAP
