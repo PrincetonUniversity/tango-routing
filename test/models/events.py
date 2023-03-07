@@ -2,15 +2,9 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
-from .error import ModelError
+import error
 
-from .types import (
-    EthernetHeader,
-    IPv4Header,
-    FiveTuple,
-    IPv6Header,
-    TangoHeader,
-)
+import tango_types
 
 
 class TangoEvent(ABC):
@@ -26,9 +20,9 @@ class TangoEvent(ABC):
 class ForwardFlow(TangoEvent):
     """Forward Flow event type."""
 
-    eth_header: EthernetHeader
-    ip_header: IPv4Header
-    five_tuple: FiveTuple
+    eth_header: tango_types.EthernetHeader
+    ip_header: tango_types.IPv4Header
+    five_tuple: tango_types.FiveTuple
 
     @property
     def name(self) -> str:
@@ -48,11 +42,11 @@ class ForwardFlow(TangoEvent):
 class IncomingTangoTraffic(TangoEvent):
     """Incoming traffic from a Tango peer."""
 
-    tango_eth_header: EthernetHeader
-    tango_ip_header: IPv6Header
-    tango_metrics_header: TangoHeader
-    encaped_ip_header: IPv4Header
-    encaped_five_tuple: FiveTuple
+    tango_eth_header: tango_types.EthernetHeader
+    tango_ip_header: tango_types.IPv6Header
+    tango_metrics_header: tango_types.TangoHeader
+    encaped_ip_header: tango_types.IPv4Header
+    encaped_five_tuple: tango_types.FiveTuple
 
     @property
     def name(self) -> str:
@@ -79,9 +73,9 @@ class RouteUpdate(TangoEvent):
 
     def __post_init__(self):
         if self.sequence_num >= 2**4:
-            raise ModelError("Too large of path_id")
+            raise error.ModelError("Too large of path_id")
         if self.update >= 2**64:
-            raise ModelError("Too large of timestamp")
+            raise error.ModelError("Too large of timestamp")
 
     @property
     def name(self) -> str:

@@ -1,7 +1,7 @@
 """Models of Tango record types."""
 from dataclasses import dataclass
 
-from .error import ModelError
+import error
 
 
 @dataclass
@@ -14,11 +14,11 @@ class EthernetHeader:
 
     def __post_init__(self):
         if self.dest_mac >= 2**48:
-            raise ModelError("Too large of dest mac")
+            raise error.ModelError("Too large of dest mac")
         if self.src_mac >= 2**48:
-            raise ModelError("Too large of src mac")
+            raise error.ModelError("Too large of src mac")
         if self.ethertype >= 2**16:
-            raise ModelError("Too large of ethertype")
+            raise error.ModelError("Too large of ethertype")
 
     def __iter__(self):
         return iter(
@@ -47,25 +47,25 @@ class IPv4Header:
 
     def __post_init__(self):
         if self.version_ihl >= 2**8:
-            raise ModelError("Too large of version")
+            raise error.ModelError("Too large of version")
         if self.type_of_svc >= 2**8:
-            raise ModelError("Too large of service type")
+            raise error.ModelError("Too large of service type")
         if self.len >= 2**16:
-            raise ModelError("Too large of length")
+            raise error.ModelError("Too large of length")
         if self.id >= 2**16:
-            raise ModelError("Too large of id")
+            raise error.ModelError("Too large of id")
         if self.flags_fragment_offset >= 2**16:
-            raise ModelError("Too large of fragment offset")
+            raise error.ModelError("Too large of fragment offset")
         if self.ttl >= 2**8:
-            raise ModelError("Too large of ttl")
+            raise error.ModelError("Too large of ttl")
         if self.protocol >= 2**8:
-            raise ModelError("Too large of protocol")
+            raise error.ModelError("Too large of protocol")
         if self.checksum >= 2**16:
-            raise ModelError("Too large of checksum")
+            raise error.ModelError("Too large of checksum")
         if self.src_addr >= 2**32:
-            raise ModelError("Too large of source address")
+            raise error.ModelError("Too large of source address")
         if self.dest_addr >= 2**32:
-            raise ModelError("Too large of destination address")
+            raise error.ModelError("Too large of destination address")
 
     def __iter__(self):
         return iter(
@@ -96,15 +96,15 @@ class FiveTuple:
 
     def __post_init__(self):
         if self.src_addr >= 2**32:
-            raise ModelError("Too large of source address")
+            raise error.ModelError("Too large of source address")
         if self.dest_addr >= 2**32:
-            raise ModelError("Too large of destination address")
+            raise error.ModelError("Too large of destination address")
         if self.src_port >= 2**16:
-            raise ModelError("Too large of source port")
+            raise error.ModelError("Too large of source port")
         if self.dest_port >= 2**16:
-            raise ModelError("Too large of destination port")
+            raise error.ModelError("Too large of destination port")
         if self.protocol >= 2**8:
-            raise ModelError("Too large of protocol")
+            raise error.ModelError("Too large of protocol")
 
     def __iter__(self):
         return iter(
@@ -133,21 +133,21 @@ class IPv6Header:
 
     def __post_init__(self):
         if self.version >= 2**4:
-            raise ModelError("Too large of version")
+            raise error.ModelError("Too large of version")
         if self.traffic_class >= 2**8:
-            raise ModelError("Too large of traffic_class")
+            raise error.ModelError("Too large of traffic_class")
         if self.flow_label >= 2**20:
-            raise ModelError("Too large of flow_label")
+            raise error.ModelError("Too large of flow_label")
         if self.payload_len >= 2**16:
-            raise ModelError("Too large of payload_len")
+            raise error.ModelError("Too large of payload_len")
         if self.next_header >= 2**8:
-            raise ModelError("Too large of next_header")
+            raise error.ModelError("Too large of next_header")
         if self.hop_limit >= 2**8:
-            raise ModelError("Too large of hop_limit")
+            raise error.ModelError("Too large of hop_limit")
         if self.src_addr >= 2**128:
-            raise ModelError("Too large of src_addr")
+            raise error.ModelError("Too large of src_addr")
         if self.dest_addr >= 2**128:
-            raise ModelError("Too large of dest_addr")
+            raise error.ModelError("Too large of dest_addr")
 
     def __iter__(self):
         return iter(
@@ -176,15 +176,15 @@ class TangoHeader:
 
     def __post_init__(self):
         if self.path_id >= 2**3:
-            raise ModelError("Too large of path_id")
+            raise error.ModelError("Too large of path_id")
         if self.timestamp >= 2**12:
-            raise ModelError("Too large of timestamp")
+            raise error.ModelError("Too large of timestamp")
         if self.signature >= 2**32:
-            raise ModelError("Too large of signature")
+            raise error.ModelError("Too large of signature")
         if self.sequence_num >= 2**24:
-            raise ModelError("Too large of sequence_num")
+            raise error.ModelError("Too large of sequence_num")
         if self.book_signature >= 2**1:
-            raise ModelError("Too large of book_signature")
+            raise error.ModelError("Too large of book_signature")
 
     def __iter__(self):
         return iter(

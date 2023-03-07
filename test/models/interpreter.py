@@ -1,7 +1,11 @@
 """Interpreter configuration models."""
+import json
+from tempfile import TemporaryDirectory
 from typing import Dict, List, Optional
 from dataclasses import dataclass
-from .events import TangoEvent
+from pathlib import Path
+import events
+import error
 
 
 @dataclass
@@ -19,16 +23,14 @@ class EventLocation:
 class EventLink:
     """Tie router id and port together as a location."""
 
-    router_send_id: int
-    send_port: int
-    router_rcv_id: int
-    rcv_port: int
+    sender: EventLocation
+    recevier: EventLocation
 
     def as_dict(self) -> Dict[str, str]:
         """Convert to a dictionary."""
 
-        send = f"{self.router_send_id}:{self.send_port}"
-        rcv = f"{self.router_rcv_id}:{self.rcv_port}"
+        send = f"{self.sender.router_id}:{self.sender.port}"
+        rcv = f"{self.recevier.router_id}:{self.recevier.port}"
         return {send: rcv}
 
 
@@ -37,7 +39,7 @@ class TestEvent:
 
     def __init__(
         self,
-        event: TangoEvent,
+        event: events.TangoEvent,
         timestamp: Optional[int] = None,
         locations: Optional[List[EventLocation]] = None,
     ) -> None:
@@ -68,18 +70,18 @@ class TestCase:
     def __init__(
         self,
         max_time: int,
-        events: List[TestEvent],
+        event_list: List[TestEvent],
         switches: Optional[int] = None,
-        links: Optional[List[EventLink]] = None,
+        link_list: Optional[List[EventLink]] = None,
         default_input_gap: Optional[int] = None,
         generate_delay: Optional[int] = None,
         random_delay_range: Optional[int] = None,
         random_seed: Optional[int] = None,
     ) -> None:
         self._max_time = max_time
-        self._events = events
+        self._events = event_list
         self._switches = switches
-        self._links = links
+        self._links = link_list
         self._default_input_gap = default_input_gap
         self._generate_delay = generate_delay
         self._random_delay_range = random_delay_range
@@ -90,16 +92,16 @@ class TestCase:
 
         config = {}
         config["max time"] = self._max_time
-        config["events"] = list(map(lambda e: e.as_dict(), self._events))
+        config["events"] = list(map(list, self._events))
 
         if self._switches:
             config["switches"] = self._switches
 
         if self._links:
-            links = {}
+            all_links = {}
             for link in self._links:
-                links.update(link.as_dict())
-            config["links"] = links
+                all_links.update(link.as_dict())
+            config["links"] = all_links
 
         if self._default_input_gap:
             config["default input gap"] = self._default_input_gap
@@ -114,6 +116,12 @@ class TestCase:
             config["random seed"] = self._random_seed
 
         return config
+
+    @property
+    def json(self) -> str:
+        """Get test case in json string form."""
+
+        return json.dumps(self.as_dict())
 
 
 class ExpectedResult:
@@ -133,8 +141,26 @@ class TestRunner:
 
     def __init__(self, given: TestCase) -> None:
         self._given = given
+        self._tmp_dir = None
+
+    def __enter__(self) -> "TestRunner":
+        self._tmp_dir = TemporaryDirectory(prefix="tango")
+        return self
+
+    def __exit__(self, _, __, ____) -> None:
+        self._tmp_dir.cleanup()
+
+    def _create_test_file(self) -> None:
+        """Make the json test file."""
+
+        if not self._tmp_dir:
+            raise error.UsageError("Must be called within context manager!")
+
+        config_file = Path(self._tmp_dir.name) / Path("test.yaml")
+        config_file.write_text(self._given.json)
+        print(config_file.read_text())
 
     def run(self) -> TestResult:
         """Execute the interpreter."""
 
-        # TODO: IMPLEMENT
+        self._create_test_file()
