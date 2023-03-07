@@ -1,4 +1,5 @@
 """Map traffic classes to pre-defined optimization strategies."""
+from abc import ABC
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Final, List, LiteralString
@@ -83,7 +84,11 @@ class Policy:
             )
 
 
-class PolicyMapper:
+class PolicyMapper(ABC):
+    """Maps all traffic classes to policies"""
+
+
+class ConfiguredPolicyMapper(PolicyMapper):
     """Maps all traffic classes to policies"""
 
     def __init__(self, policies: List[Policy]) -> None:
@@ -113,7 +118,7 @@ class PolicyMapper:
         return _OPTIMIZATION_MAP_TEMPLATE.format(str(self._policies))
 
 
-class DefaultPolicyMapper:
+class DefaultPolicyMapper(PolicyMapper):
     """Default placeholder policy mappings."""
 
     def __str__(self) -> str:

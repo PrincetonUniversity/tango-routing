@@ -1,9 +1,12 @@
 """Command-line tool enabling simple interactions with Tango."""
 from pathlib import Path
 from typing import Optional
-import click
 
-from edu.princeton.tango.config_parser import ConfigParser, DefaultConfigParser
+import click
+from edu.princeton.tango.config_parser import (
+    DefaultConfigParser,
+    YAMLConfigParser,
+)
 
 
 @click.group()
@@ -46,7 +49,7 @@ def config(
     if default:
         configs = DefaultConfigParser()
     else:
-        configs = ConfigParser(file)
+        configs = YAMLConfigParser(file)
 
     if prefix:
         Path(prefix).mkdir(exist_ok=True, parents=True)

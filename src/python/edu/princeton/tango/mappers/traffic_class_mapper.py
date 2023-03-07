@@ -1,4 +1,5 @@
 """Map path-ids to IPv6 Tunnel headers."""
+from abc import ABC
 from dataclasses import dataclass
 from ipaddress import IPv4Address
 from typing import Final, List, LiteralString, Optional
@@ -141,7 +142,11 @@ class FuzzyClassMapping:
             )
 
 
-class TrafficClassMapper:
+class TrafficClassMapper(ABC):
+    """Fuzzy maps all flows to a given traffic class."""
+
+
+class ConfiguredTrafficClassMapper(TrafficClassMapper):
     """Fuzzy maps all flows to a given traffic class."""
 
     def __init__(self, fuzzy_maps: List[FuzzyClassMapping]) -> None:
@@ -163,7 +168,7 @@ class TrafficClassMapper:
         return _CLASS_MAP_TEMPLATE.format(str(self._mappings))
 
 
-class DefaultTrafficClassMapper:
+class DefaultTrafficClassMapper(TrafficClassMapper):
     """Default placeholder trafffic class mappings."""
 
     def __str__(self) -> str:

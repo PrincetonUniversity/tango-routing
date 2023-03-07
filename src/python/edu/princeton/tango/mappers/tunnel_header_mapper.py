@@ -1,4 +1,5 @@
 """Map path-ids to IPv6 Tunnel headers."""
+from abc import ABC
 from dataclasses import dataclass
 from ipaddress import IPv6Address
 from typing import Final, List, LiteralString
@@ -76,6 +77,37 @@ class IPv6Header:
     src_addr: IPv6Address
     dest_addr: IPv6Address
 
+    def __post_init__(self):
+        if self.version >= 2**4:
+            raise InvalidParameterError(
+                f"`version` ({self.version}) is more than 4-bit!"
+            )
+
+        if self.traffic_class >= 2**8:
+            raise InvalidParameterError(
+                f"`traffic_class` ({self.traffic_class}) is more than 8-bit!"
+            )
+
+        if self.flow_label >= 2**20:
+            raise InvalidParameterError(
+                f"`flow_label` ({self.flow_label}) is more than 20-bit!"
+            )
+
+        if self.payload_len >= 2**16:
+            raise InvalidParameterError(
+                f"`payload_len` ({self.payload_len}) is more than 16-bit!"
+            )
+
+        if self.next_header >= 2**8:
+            raise InvalidParameterError(
+                f"`next_header` ({self.next_header}) is more than 8-bit!"
+            )
+
+        if self.hop_limit >= 2**8:
+            raise InvalidParameterError(
+                f"`hop_limit` ({self.hop_limit}) is more than 8-bit!"
+            )
+
     def __str__(self) -> str:
         return " ".join(
             (
@@ -112,7 +144,11 @@ class TunnelHeader:
             )
 
 
-class TunnelHeaderMapper:
+class HeaderMapper(ABC):
+    """Maps all path ids to given tunnel headers."""
+
+
+class ConfiguredHeaderMapper(HeaderMapper):
     """Maps all path ids to given tunnel headers."""
 
     def __init__(self, headers: List[TunnelHeader]) -> None:
@@ -135,7 +171,7 @@ class TunnelHeaderMapper:
         return _HEADER_MAP_TEMPLATE.format(str(self._headers))
 
 
-class DefaultTunnelHeaderMapper:
+class DefaultHeaderMapper(HeaderMapper):
     """Default placeholder tunnel headers."""
 
     def __str__(self) -> str:
