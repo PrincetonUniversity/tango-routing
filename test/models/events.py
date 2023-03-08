@@ -1,9 +1,8 @@
 """Models of events for Tango."""
-from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 import error
-
 import tango_types
 
 

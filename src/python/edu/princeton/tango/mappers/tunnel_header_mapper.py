@@ -1,10 +1,10 @@
 """Map path-ids to IPv6 Tunnel headers."""
-from abc import ABC
 from dataclasses import dataclass
 from ipaddress import IPv6Address
 from typing import Final, List, LiteralString
 
 from edu.princeton.tango.errors import InvalidParameterError
+from edu.princeton.tango.mappers.mapper import Mapper
 from edu.princeton.tango.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_HEADER_MAP: LiteralString = """include "../Types.dpt"
@@ -144,8 +144,14 @@ class TunnelHeader:
             )
 
 
-class HeaderMapper(ABC):
+class HeaderMapper(Mapper):
     """Maps all path ids to given tunnel headers."""
+
+    @property
+    def name(self) -> str:
+        """Get filename to generate output to."""
+
+        return "TunnelHeaderMap.dpt"
 
 
 class ConfiguredHeaderMapper(HeaderMapper):

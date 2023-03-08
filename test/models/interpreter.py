@@ -1,11 +1,38 @@
 """Interpreter configuration models."""
+from ipaddress import IPv6Address
 import json
-from tempfile import TemporaryDirectory
-from typing import Dict, List, Optional
 from dataclasses import dataclass
 from pathlib import Path
-import events
-import error
+from shutil import copytree, rmtree
+from tempfile import mkdtemp
+from typing import Dict, List, Optional, Self
+
+# from subprocess import run as run_cmd, PIPE as PROC_PIPE
+import docker
+
+from edu.princeton.tango.mappers import (
+    HeaderMapper,
+    PolicyMapper,
+    TrafficClassMapper,
+)
+from edu.princeton.tango.mappers.mapper import Mapper
+from edu.princeton.tango.mappers.policy_mapper import (
+    ConfiguredPolicyMapper,
+    OptimizationStrategy,
+    Policy,
+)
+from edu.princeton.tango.mappers.traffic_class_mapper import (
+    ConfiguredTrafficClassMapper,
+    FuzzyClassMapping,
+    FuzzyFiveTuple,
+)
+from edu.princeton.tango.mappers.tunnel_header_mapper import (
+    ConfiguredHeaderMapper,
+    IPv6Header,
+    TunnelHeader,
+)
+from error import UsageError, TestCompileError
+from events import TangoEvent
 
 
 @dataclass
@@ -39,7 +66,7 @@ class TestEvent:
 
     def __init__(
         self,
-        event: events.TangoEvent,
+        event: TangoEvent,
         timestamp: Optional[int] = None,
         locations: Optional[List[EventLocation]] = None,
     ) -> None:
@@ -133,34 +160,171 @@ class ExpectedResult:
 class TestResult:
     """Result of an interpreter run."""
 
-    # TODO: IMPLEMENT
+    def __init__(self, result: str) -> None:
+        self._res = result
+
+    def __str__(self) -> str:
+        return self._res
 
 
 class TestRunner:
     """Run a Lucid interpreter test."""
 
-    def __init__(self, given: TestCase) -> None:
+    def __init__(
+        self,
+        given: TestCase,
+        policy_mapper: Optional[PolicyMapper] = None,
+        class_mapper: Optional[TrafficClassMapper] = None,
+        header_mapper: Optional[HeaderMapper] = None,
+    ) -> None:
         self._given = given
+        self._policy_mapper = policy_mapper
+        self._class_mapper = class_mapper
+        self._header_mapper = header_mapper
         self._tmp_dir = None
+        self._root_dir = Path(__file__).parent.parent.parent.absolute()
 
-    def __enter__(self) -> "TestRunner":
-        self._tmp_dir = TemporaryDirectory(prefix="tango")
+    def __enter__(self) -> Self:
+        return self.create()
+
+    def create(self) -> Self:
+        """Create a testing session."""
+
+        self._tmp_dir = mkdtemp(prefix="tango-test-")
+        print(self._tmp_dir)
+        src = self._root_dir / Path("src/dpt/tango")
+        copytree(str(src), str(self._tmp_dir), dirs_exist_ok=True)
         return self
 
     def __exit__(self, _, __, ____) -> None:
-        self._tmp_dir.cleanup()
+        self.close()
+
+    def close(self) -> None:
+        """Close a testing session and clean up."""
+
+        rmtree(self._tmp_dir)
 
     def _create_test_file(self) -> None:
         """Make the json test file."""
 
         if not self._tmp_dir:
-            raise error.UsageError("Must be called within context manager!")
+            raise UsageError("Must be called within context manager!")
 
-        config_file = Path(self._tmp_dir.name) / Path("test.yaml")
-        config_file.write_text(self._given.json)
-        print(config_file.read_text())
+        config_file = Path(self._tmp_dir) / Path("test.json")
+        config_file.write_text(self._given.json, encoding="utf-8")
+
+    def _write_out_mapper(self, mapper: Optional[Mapper] = None):
+        """Write out mappings to test configuration."""
+
+        if mapper:
+            path = (
+                Path(self._tmp_dir) / Path("static_maps") / Path(mapper.name)
+            )
+            path.write_text(str(mapper))
+
+    def _run_test(self) -> str:
+        """Run the test configuration."""
+
+        # cmd = [
+        #     "docker",
+        #     "run",
+        #     "-it",
+        #     "--rm",
+        #     "-v",
+        #     f"{self._tmp_dir}:/workspace",
+        #     "jsonch/lucid:lucid",
+        #     'sh -c cd /workspace && /app/dpt Tango.dpt"',
+        # ]
+        # proc = run_cmd(cmd, stdout=PROC_PIPE, check=False)
+        # out = proc.stdout.decode("utf-8")
+
+        # if proc.returncode != 0:
+        #     raise TestCompileError(out)
+
+        client = docker.from_env()
+        try:
+            return client.containers.run(
+                image="jsonch/lucid:lucid",
+                auto_remove=True,
+                volumes=[f"{self._tmp_dir}:/workspace"],
+                command='sh -c "cd /workspace && /app/dpt Tango.dpt"',
+            ).decode("utf-8")
+        except Exception as err:
+            raise TestCompileError(err) from err
 
     def run(self) -> TestResult:
         """Execute the interpreter."""
 
         self._create_test_file()
+        self._write_out_mapper(self._policy_mapper)
+        self._write_out_mapper(self._class_mapper)
+        self._write_out_mapper(self._header_mapper)
+        return TestResult(self._run_test())
+
+
+if __name__ == "__main__":
+    from events import ForwardFlow
+    from tango_types import EthernetHeader, FiveTuple, IPv4Header
+
+    events = [
+        ForwardFlow(
+            EthernetHeader(0, 1, 2),
+            IPv4Header(3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+            FiveTuple(13, 14, 15, 16, 17),
+        ),
+        ForwardFlow(
+            EthernetHeader(10, 11, 12),
+            IPv4Header(13, 14, 15, 16, 17, 18, 19, 110, 111, 112),
+            FiveTuple(113, 114, 115, 116, 117),
+        ),
+    ]
+
+    links = [EventLink(EventLocation(0, 1), EventLocation(1, 0))]
+
+    # given_case = TestCase(99999, events, switches=2, link_list=links)
+    given_case = TestCase(99999, [])
+
+    policy_mapper_case = ConfiguredPolicyMapper(
+        [
+            Policy(0, OptimizationStrategy.OPTIMIZE_DELAY),
+            Policy(1, OptimizationStrategy.OPTIMIZE_LOSS),
+        ]
+    )
+
+    class_mapper_case = ConfiguredTrafficClassMapper(
+        [
+            FuzzyClassMapping(FuzzyFiveTuple(src_port=1, dest_port=1), 1),
+            FuzzyClassMapping(FuzzyFiveTuple(src_port=2, dest_port=2), 2),
+        ]
+    )
+
+    header_mapper_case = ConfiguredHeaderMapper(
+        [
+            TunnelHeader(
+                0,
+                IPv6Header(
+                    0, 0, 0, 0, 0, 0, IPv6Address(11111), IPv6Address(22222)
+                ),
+            ),
+            TunnelHeader(
+                1,
+                IPv6Header(
+                    0, 0, 0, 0, 0, 0, IPv6Address(33333), IPv6Address(44444)
+                ),
+            ),
+        ]
+    )
+
+    with TestRunner(
+        given_case,
+        # policy_mapper=policy_mapper_case,
+        # class_mapper=class_mapper_case,
+        # header_mapper=header_mapper_case,
+    ) as runner:
+        print(runner.run())
+    # TestRunner(
+    #     given_case,
+    #     # policy_mapper=policy_mapper_case,
+    #     # class_mapper=class_mapper_case,
+    #     # header_mapper=header_mapper_case,
+    # ).create().run()

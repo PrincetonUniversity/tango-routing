@@ -1,10 +1,10 @@
 """Map traffic classes to pre-defined optimization strategies."""
-from abc import ABC
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Final, List, LiteralString
 
 from edu.princeton.tango.errors import InvalidParameterError
+from edu.princeton.tango.mappers.mapper import Mapper
 from edu.princeton.tango.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_OPTIMIZATION_MAP: LiteralString = """include "../Types.dpt"
@@ -84,8 +84,14 @@ class Policy:
             )
 
 
-class PolicyMapper(ABC):
+class PolicyMapper(Mapper):
     """Maps all traffic classes to policies"""
+
+    @property
+    def name(self) -> str:
+        """Get filename to generate output to."""
+
+        return "TrafficClassOpmizationMap.dpt"
 
 
 class ConfiguredPolicyMapper(PolicyMapper):

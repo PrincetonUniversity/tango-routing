@@ -1,10 +1,10 @@
 """Map path-ids to IPv6 Tunnel headers."""
-from abc import ABC
 from dataclasses import dataclass
 from ipaddress import IPv4Address
 from typing import Final, List, LiteralString, Optional
 
 from edu.princeton.tango.errors import InvalidParameterError
+from edu.princeton.tango.mappers.mapper import Mapper
 from edu.princeton.tango.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_CLASS_MAP: LiteralString = """include "../Types.dpt"
@@ -142,8 +142,14 @@ class FuzzyClassMapping:
             )
 
 
-class TrafficClassMapper(ABC):
+class TrafficClassMapper(Mapper):
     """Fuzzy maps all flows to a given traffic class."""
+
+    @property
+    def name(self) -> str:
+        """Get filename to generate output to."""
+
+        return "TrafficClassMap.dpt"
 
 
 class ConfiguredTrafficClassMapper(TrafficClassMapper):
