@@ -14,8 +14,8 @@ include "../Types.dpt"
  **/
 fun bool verify_metrics_within_constraints (
     int<<4>> traffic_class,
-    LossMetrics_t loss_metrics,
-    DelayMetrics_t delay_metrics
+    int<<32>> loss_metrics,
+    int<<32>> delay_metrics
 ) {
     match (traffic_class) with
 	| _ -> {

@@ -4,8 +4,8 @@
  * 
  * # Methods
  * create() -> MetricSignatureManager.t
- * sign(MetricSignatureManager.t, int, int<<3>>) -> int<<256>>
- * verify(MetricSignatureManager.t, int, int<<3>>, int<<256>>) -> bool
+ * sign(MetricSignatureManager.t, int, int<<3>>) -> int<<32>>
+ * verify(MetricSignatureManager.t, int, int<<3>>, int<<32>>) -> bool
  **/
 module MetricSignatureManager : {
     global type t;
@@ -21,9 +21,9 @@ module MetricSignatureManager : {
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
     * 
     * # Returns
-    * signature (int<<256>>): signature of timestamp + path ID
+    * signature (int<<32>>): signature of timestamp + path ID
     **/
-    fun int<<256>> sign (
+    fun int<<32>> sign (
         t self,
         int<<12>> timestamp,
         int<<3>> path_id
@@ -37,7 +37,7 @@ module MetricSignatureManager : {
     * self (t): self
     * timestamp (int<<12>>): timestamp of packet send/receive
     * path_id (int<<3>>): the physcial path ID packet is/was sent on
-    * signature (int<<256 >> signature): signature to validate
+    * signature (int<<32>> signature): signature to validate
     * 
     * # Returns
     * is_valid (bool): if signature is valid
@@ -46,19 +46,19 @@ module MetricSignatureManager : {
         t self,
         int<<12>> timestamp,
         int<<3>> path_id,
-        int<<256>> signature
+        int<<32>> signature
     ) [start <= self; end self];
 }
 {
     type t = {
-        Array.t<<256>> signatures0;
-        Array.t<<256>> signatures1;
-        Array.t<<256>> signatures2;
-        Array.t<<256>> signatures3;
-        Array.t<<256>> signatures4;
-        Array.t<<256>> signatures5;
-        Array.t<<256>> signatures6;
-        Array.t<<256>> signatures7;
+        Array.t<<32>> signatures0;
+        Array.t<<32>> signatures1;
+        Array.t<<32>> signatures2;
+        Array.t<<32>> signatures3;
+        Array.t<<32>> signatures4;
+        Array.t<<32>> signatures5;
+        Array.t<<32>> signatures6;
+        Array.t<<32>> signatures7;
     }
 
     constr t create () = {
@@ -73,7 +73,7 @@ module MetricSignatureManager : {
         signatures7 = Array.create(16);
     };
 
-    fun int<<256>> sign (
+    fun int<<32>> sign (
         t self,
         int<<12>> timestamp,
         int<<3>> path_id
@@ -93,7 +93,7 @@ module MetricSignatureManager : {
         t self,
         int<<12>> timestamp,
         int<<3>> path_id,
-        int<<256>> signature
+        int<<32>> signature
     ) {
        match path_id with
         | 0 -> {

@@ -6,7 +6,7 @@ include "../../Types.dpt"
  * 
  * # Methods
  * create() -> BestMetricsManager.t
- * update(BestMetricsManager.t, int<<3>>, LossMetrics_t, DelayMetrics_t) -> BestMetrics_t
+ * update(BestMetricsManager.t, int<<3>>, int<<32>>, int<<32>>) -> BestMetrics_t
  **/
 module BestMetricsManager : {
     global type t;
@@ -19,8 +19,8 @@ module BestMetricsManager : {
     * # Parameters
     * self (t): self
     * path_id (int<<3>>): contending path id
-    * loss_metrics (LossMetrics_t): loss metrics found ion that path
-    * delay_metrics (DelayMetrics_t): delay metrics found on that path
+    * loss_metrics (int<<32>>): loss metrics found ion that path
+    * delay_metrics (int<<32>>): delay metrics found on that path
     * 
     * # Returns
     * best_metrics (BestMetrics_t): the most performant path metrics
@@ -28,23 +28,19 @@ module BestMetricsManager : {
     fun BestMetrics_t update (
         t self,
         int<<3>> path_id,
-        LossMetrics_t loss_metrics,
-        DelayMetrics_t delay_metrics
+        int<<32>> loss_metrics,
+        int<<32>> delay_metrics
     ) [start <= self; end self];
 }
 {
     type t = {
-        Array.t<<64>> best_loss;
-        Array.t<<64>> best_delay;
-        Array.t<<3>> best_loss_path_id;
-        Array.t<<3>> best_delay_path_id;
+        PairArray.t<<32>> best_loss;
+        PairArray.t<<32>> best_delay;
     }
 
     constr t create () = {
-        best_loss = Array.create(1);
-        best_delay = Array.create(1);
-        best_loss_path_id = Array.create(1);
-        best_delay_path_id = Array.create(1);
+        best_loss = PairArray.create(1);
+        best_delay = PairArray.create(1);
     };
 
     /**
@@ -52,71 +48,53 @@ module BestMetricsManager : {
     * Update the metric stored to the new value if it is lesser, and
     * therefore better.
     **/
-    memop choose_lower (int<<'sz>> curr_metric, int<<'sz>> new_metric) { 
-        if (curr_metric < new_metric) {
-            return curr_metric;
-        } else {
-            return new_metric;
+    memop choose_lower (
+        int<<'sz>> curr_metric,
+        int<<'sz>> curr_winner,
+        int<<'sz>> new_metric,
+        int<<'sz>> new_path_id
+    ) {
+        bool new_winner = curr_metric < new_metric;
+
+        if (new_winner) {
+            cell1 = new_metric;
         }
+
+        if (new_winner) {
+            cell2 = new_path_id;
+        }
+
+        if (true) { return cell2; }
     }
 
     fun BestMetrics_t update (
         t self,
         int<<3>> path_id,
-        LossMetrics_t loss_metrics,
-        DelayMetrics_t delay_metrics
+        int<<32>> loss_metrics,
+        int<<32>> delay_metrics
     ) {
         // Update best metrics
-        int<<64>> best_loss = Array.getm(
+        int<<3>> winning_loss_id = (int<<3>>) PairArray.update(
             self#best_loss,
             0,
             choose_lower,
-            loss_metrics#loss_count ^ loss_metrics#transmission_count
+            loss_metrics,
+            (int<<32>>) path_id,
+            0
         );
 
-        int<<64>> best_delay = Array.getm(
+        int<<3>> winning_delay_id = (int<<3>>) PairArray.update(
             self#best_delay,
             0,
             choose_lower,
-            delay_metrics#delay_sum ^ delay_metrics#delay_count
+            delay_metrics,
+            (int<<32>>) path_id,
+            0
         );
-
-
-        // Test if we got a new best delay or loss path
-        int<<3>> winning_loss_id = 0;
-        if (
-            (loss_metrics#loss_count == best_loss[63:32])
-            && (loss_metrics#transmission_count == best_loss[31:0])
-        ) {
-            winning_loss_id = path_id;
-            Array.set(self#best_loss_path_id, 0, winning_loss_id);
-        } else {
-            winning_loss_id = Array.get(self#best_loss_path_id, 0);
-        }
-
-        int<<3>> winning_delay_id = 0;
-        if (
-            (delay_metrics#delay_sum == best_delay[63:32])
-            && (delay_metrics#delay_count == best_delay[31:0])
-        ) {
-            winning_delay_id = path_id;
-            Array.set(self#best_delay_path_id, 0, winning_delay_id);
-        } else {
-            winning_delay_id = Array.get(self#best_delay_path_id, 0);
-        }
-
 
         // Construct best metrics
         return {
-            best_delay_metrics = {
-                delay_sum = best_delay[63:32];
-                delay_count = best_delay[31:0];
-            };
             best_delay_id = winning_delay_id;
-            best_loss_metrics = {
-                loss_count = best_loss[63:32];
-                transmission_count = best_loss[31:0];
-            };
             best_loss_id = winning_loss_id;
         };
     }

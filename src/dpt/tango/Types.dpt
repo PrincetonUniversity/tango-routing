@@ -96,14 +96,14 @@ type FiveTuple_t = {
  * # Properties
  * path_id (int<<3>>): path id packet is to or should have take(n)
  * timestamp (int<<12>>): timestamp of when packet left peer
- * signature (int<<256>>): signature of the path ID and timestamp
+ * signature (int<<32>>): signature of the path ID and timestamp
  * sequence_num (int): Tango-specific sequence number
  * book_signature (int<<1>>): signature of the sequence number
  **/
 type TangoHeader_t = {
    int<<3>>   path_id;
    int<<12>>  timestamp;
-   int<<256>> signature;
+   int<<32>> signature;
    int<<24>>  sequence_num;
    int<<1>>   book_signature;
 }
@@ -137,43 +137,13 @@ type TaggedCiphertext_t = {
 
 /**
  * # Description
- * Delay metrics for a given path
- *
- * # Properties
- * delay_sum (int): running sum of all delays
- * delay_count (int): count of number of packets
- **/
-type DelayMetrics_t = {
-   int delay_sum;
-   int delay_count;
-}
-
-/**
- * # Description
- * Loss metrics for a given path.
- *
- * # Properties
- * loss_count (int): running sum of loss seen on a given path
- * transmission_count (int): count of number of packets
- **/
-type LossMetrics_t = {
-   int loss_count;
-   int transmission_count;
-}
-
-/**
- * # Description
  * Best metrics over all paths.
  *
  * # Properties
- * best_delay_metrics (DelayMetrics_t): metrics constituting updated best delay
  * best_delay_id (int<<3>>): path id of best delay path
- * best_loss_metrics (LossMetrics_t): loss constituting updated best delay
  * best_loss_id (int<<3>>): path id of best loss path
  **/
 type BestMetrics_t = {
-   DelayMetrics_t best_delay_metrics;
-   int<<3>>       best_delay_id;
-   LossMetrics_t  best_loss_metrics;
-   int<<3>>       best_loss_id;
+   int<<3>> best_delay_id;
+   int<<3>> best_loss_id;
 }
