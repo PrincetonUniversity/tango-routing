@@ -15,7 +15,7 @@ const bool OPTIMIZE_LOSS = true;
  **/
 fun bool map_traffic_class_to_policy (int<<4>> traffic_class) {
     match (traffic_class) with
-	| _ -> {
+    | _ -> {
         printf("ERROR: optimization policy map has not been configured!");
         return OPTIMIZE_DELAY;
     }

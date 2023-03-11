@@ -1,10 +1,9 @@
 """Map traffic classes to pre-defined optimization strategies."""
 from dataclasses import dataclass
-from enum import Enum, auto
 from typing import Final, LiteralString, Self
 
 from edu.princeton.tango.errors import InvalidParameterError
-from edu.princeton.tango.mappers.mapper import Mapper
+from edu.princeton.tango.mappers.mapper import Mapper, OptimizationStrategy
 from edu.princeton.tango.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_OPTIMIZATION_MAP: LiteralString = """include "../Types.dpt"
@@ -55,17 +54,6 @@ fun bool map_traffic_class_to_policy (int<<4>> traffic_class) {{
 """
 
 
-class OptimizationStrategy(Enum):
-    """A policy indicating which optimziation strategy to use."""
-
-    OPTIMIZE_DELAY = auto()
-    OPTIMIZE_LOSS = auto()
-
-    def __str__(self: Self) -> str:
-        """Get the optimization strategy."""
-        return f"{self.name}"
-
-
 @dataclass
 class Policy:
     """Map a particular traffic class to a policy type."""
@@ -112,9 +100,13 @@ class ConfiguredPolicyMapper(PolicyMapper):
 
         policies.sort(key=lambda policy: policy.traffic_class)
 
-        resolved_policies = [MatchCase(
-                    [str(policy.traffic_class)], str(policy.policy),
-                ) for policy in policies]
+        resolved_policies = [
+            MatchCase(
+                [str(policy.traffic_class)],
+                str(policy.policy),
+            )
+            for policy in policies
+        ]
         self._policies: Final[MatchBody] = MatchBody(resolved_policies)
 
     def __str__(self: Self) -> str:

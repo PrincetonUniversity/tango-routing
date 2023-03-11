@@ -25,7 +25,7 @@ const IPv6Header_t DUMMY_HDR = {
  **/
 fun IPv6Header_t map_path_to_tunnel_header (int<<3>> path_id) {
     match (path_id) with
-	| _ -> {
+    | _ -> {
         printf("ERROR: tunnel header map has not been configured!");
         return DUMMY_HDR;
     }

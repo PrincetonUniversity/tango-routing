@@ -40,7 +40,9 @@ def get_out_path(file: str, prefix: str | None = None) -> Path:
     required=False,
 )
 def config(
-    file: str, default: bool | None = None, prefix: str | None = None,
+    file: str,
+    default: bool | None = None,
+    prefix: str | None = None,
 ) -> None:
     """Configure Tango given a YAML file."""
     configs = DefaultConfigParser() if default else YAMLConfigParser(file)
@@ -49,15 +51,23 @@ def config(
         Path(prefix).mkdir(exist_ok=True, parents=True)
 
     get_out_path("TunnelHeaderMap.dpt", prefix).write_text(
-        str(configs.header_mapper), encoding="utf-8",
+        str(configs.header_mapper),
+        encoding="utf-8",
     )
 
     get_out_path("TrafficClassMap.dpt", prefix).write_text(
-        str(configs.class_mapper), encoding="utf-8",
+        str(configs.class_mapper),
+        encoding="utf-8",
     )
 
     get_out_path("TrafficClassOpmizationMap.dpt", prefix).write_text(
-        str(configs.policy_mapper), encoding="utf-8",
+        str(configs.policy_mapper),
+        encoding="utf-8",
+    )
+
+    get_out_path("TrafficClassConstraintMap.dpt", prefix).write_text(
+        str(configs.constraint_mapper),
+        encoding="utf-8",
     )
 
 

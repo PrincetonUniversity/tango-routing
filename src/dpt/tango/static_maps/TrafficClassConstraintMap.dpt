@@ -18,9 +18,8 @@ fun bool verify_metrics_within_constraints (
     int<<32>> delay_metrics
 ) {
     match (traffic_class) with
-	| _ -> {
+    | _ -> {
         printf("ERROR: traffic class map has not been configured!");
-        return false;
+        return true;
     }
 }
-

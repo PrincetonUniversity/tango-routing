@@ -5,6 +5,12 @@ from pathlib import Path
 from typing import Self
 
 import yaml
+from edu.princeton.tango.mappers.constraints_mapper import (
+    ConfiguredConstraintMapper,
+    Constraint,
+    ConstraintMapping,
+    DefaultConstraintMapper,
+)
 from edu.princeton.tango.mappers.policy_mapper import (
     ConfiguredPolicyMapper,
     DefaultPolicyMapper,
@@ -44,6 +50,11 @@ class ConfigParser(ABC):
     def policy_mapper(self: Self) -> ConfiguredPolicyMapper:
         """Map of optimization policies for given traffic classes."""
 
+    @property
+    @abstractmethod
+    def constraint_mapper(self: Self) -> ConfiguredPolicyMapper:
+        """Map of optimization constraints for given traffic classes."""
+
 
 class YAMLConfigParser(ConfigParser):
     """Parse a given tango YAML config."""
@@ -54,6 +65,7 @@ class YAMLConfigParser(ConfigParser):
             self._header_mapper,
             self._class_mapper,
             self._policy_mapper,
+            self._constraint_mapper,
         ) = self._parse_config(filename)
 
     @property
@@ -71,51 +83,61 @@ class YAMLConfigParser(ConfigParser):
         """Map of optimization policies for given traffic classes."""
         return self._policy_mapper
 
+    @property
+    def constraint_mapper(self: Self) -> ConfiguredPolicyMapper:
+        """Map of optimization constraints for given traffic classes."""
+        return self._constraint_mapper
+
     def _parse_traffic_class_map(
-        self: Self, tc_map: list[dict[int, list[dict[str, str | int]]]],
+        self: Self,
+        tc_map: dict[int, list[dict[str, str | int]]],
     ) -> ConfiguredTrafficClassMapper:
         """Parse traffic class map into python objects."""
         mappings: list[FuzzyClassMapping] = []
-        for mapping in tc_map:
-            for traffic_class, matcher_mappings in mapping.items():
-                for matcher in matcher_mappings:
-                    src_addr = (
-                        FuzzyIPv4Address(matcher.get("src_addr"))
-                        if matcher.get("src_addr")
-                        else None
-                    )
-                    dest_addr = (
-                        FuzzyIPv4Address(matcher.get("dest_addr"))
-                        if matcher.get("dest_addr")
-                        else None
-                    )
-                    five_tuple = FuzzyFiveTuple(
-                        src_addr,
-                        matcher.get("src_port"),
-                        dest_addr,
-                        matcher.get("dest_port"),
-                        matcher.get("protocol"),
-                    )
-                    mappings.append(
-                        FuzzyClassMapping(five_tuple, traffic_class),
-                    )
+        for traffic_class, matcher_mappings in tc_map.items():
+            for matcher in matcher_mappings:
+                src_addr = (
+                    FuzzyIPv4Address(matcher.get("src_addr"))
+                    if matcher.get("src_addr")
+                    else None
+                )
+                dest_addr = (
+                    FuzzyIPv4Address(matcher.get("dest_addr"))
+                    if matcher.get("dest_addr")
+                    else None
+                )
+                five_tuple = FuzzyFiveTuple(
+                    src_addr,
+                    matcher.get("src_port"),
+                    dest_addr,
+                    matcher.get("dest_port"),
+                    matcher.get("protocol"),
+                )
+                mappings.append(
+                    FuzzyClassMapping(five_tuple, traffic_class),
+                )
 
         return ConfiguredTrafficClassMapper(mappings)
 
     def _parse_class_policies(
-        self: Self, policy_map: dict[int, str],
+        self: Self,
+        policy_map: dict[int, dict[str, str]],
     ) -> ConfiguredPolicyMapper:
         """Parse class constraints into Python objects."""
         policies: list[Policy] = []
         for traffic_class, policy in policy_map.items():
             policies.append(
-                Policy(traffic_class, OptimizationStrategy[policy]),
+                Policy(
+                    traffic_class,
+                    OptimizationStrategy[policy["policy"]],
+                ),
             )
 
         return ConfiguredPolicyMapper(policies)
 
     def _parse_header_map(
-        self: Self, header_map: dict[int, dict[str, int]],
+        self: Self,
+        header_map: dict[int, dict[str, int]],
     ) -> ConfiguredHeaderMapper:
         """Parse all path id to tunnel header mappings."""
         headers: list[TunnelHeader] = []
@@ -134,6 +156,25 @@ class YAMLConfigParser(ConfigParser):
 
         return ConfiguredHeaderMapper(headers)
 
+    def _parse_constraint_map(
+        self: Self,
+        constraint_map: dict[int, dict[str, str]],
+    ) -> ConfiguredConstraintMapper:
+        """Parse all constraints into mappings."""
+        constraint_mappings: list[ConstraintMapping] = []
+        for traffic_class, constraint in constraint_map.items():
+            constraint_mappings.append(
+                ConstraintMapping(
+                    traffic_class,
+                    Constraint(
+                        constraint["constraint"],
+                        OptimizationStrategy[constraint["policy"]],
+                    ),
+                ),
+            )
+
+        return ConfiguredConstraintMapper(constraint_mappings)
+
     def _parse_config(
         self: Self,
         config_file: str,
@@ -141,10 +182,11 @@ class YAMLConfigParser(ConfigParser):
         ConfiguredHeaderMapper,
         ConfiguredTrafficClassMapper,
         ConfiguredPolicyMapper,
+        ConfiguredConstraintMapper,
     ]:
         """Parse a YAML file containing the Tango configuration."""
         with Path(config_file).open(encoding="utf-8") as file:
-            config = yaml.safe_load(file, Loader=yaml.Loader)
+            config = yaml.safe_load(file)
 
             tunnel_headers = self._parse_header_map(config["tunnel_headers"])
             traffic_class_mappings = self._parse_traffic_class_map(
@@ -153,11 +195,15 @@ class YAMLConfigParser(ConfigParser):
             traffic_class_policies = self._parse_class_policies(
                 config["traffic_class_policies"],
             )
+            constraint_mappings = self._parse_constraint_map(
+                config["traffic_class_policies"],
+            )
 
             return (
                 tunnel_headers,
                 traffic_class_mappings,
                 traffic_class_policies,
+                constraint_mappings,
             )
 
 
@@ -178,3 +224,8 @@ class DefaultConfigParser(ConfigParser):
     def policy_mapper(self: Self) -> DefaultPolicyMapper:
         """Map of optimization policies for given traffic classes."""
         return DefaultPolicyMapper()
+
+    @property
+    def constraint_mapper(self: Self) -> DefaultConstraintMapper:
+        """Map of optimization constraints for given traffic classes."""
+        return DefaultConstraintMapper()
