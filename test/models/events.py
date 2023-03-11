@@ -1,9 +1,13 @@
 """Models of events for Tango."""
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import TYPE_CHECKING, Self
 
 import error
 import tango_types
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class TangoEvent(ABC):
@@ -11,7 +15,7 @@ class TangoEvent(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get the name of the event."""
 
 
@@ -24,16 +28,16 @@ class ForwardFlow(TangoEvent):
     five_tuple: tango_types.FiveTuple
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get the name of the event."""
-
         return "forward_flow"
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterator over all fields."""
         return iter(
             list(self.eth_header)
             + list(self.ip_header)
-            + list(self.five_tuple)
+            + list(self.five_tuple),
         )
 
 
@@ -48,18 +52,18 @@ class IncomingTangoTraffic(TangoEvent):
     encaped_five_tuple: tango_types.FiveTuple
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get the name of the event."""
-
         return "incoming_tango_traffic"
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterator over all fields."""
         return iter(
             list(self.tango_eth_header)
             + list(self.tango_ip_header)
             + list(self.tango_metrics_header)
             + list(self.encaped_ip_header)
-            + list(self.encaped_five_tuple)
+            + list(self.encaped_five_tuple),
         )
 
 
@@ -70,22 +74,23 @@ class RouteUpdate(TangoEvent):
     sequence_num: int
     update: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Sanitize inputs."""
         if self.sequence_num >= 2**4:
             raise error.ModelError("Too large of path_id")
         if self.update >= 2**64:
             raise error.ModelError("Too large of timestamp")
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get the name of the event."""
-
         return "route_update"
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterator over all fields."""
         return iter(
             [
                 self.sequence_num,
                 self.update,
-            ]
+            ],
         )

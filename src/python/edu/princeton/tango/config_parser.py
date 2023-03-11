@@ -1,7 +1,8 @@
 """Parse Tango configuration."""
 from abc import ABC, abstractmethod
 from ipaddress import IPv6Address
-from typing import Dict, List, Tuple, Union
+from pathlib import Path
+from typing import Self
 
 import yaml
 from edu.princeton.tango.mappers.policy_mapper import (
@@ -30,24 +31,25 @@ class ConfigParser(ABC):
 
     @property
     @abstractmethod
-    def header_mapper(self) -> ConfiguredHeaderMapper:
+    def header_mapper(self: Self) -> ConfiguredHeaderMapper:
         """Map of tunnel headers for path ids."""
 
     @property
     @abstractmethod
-    def class_mapper(self) -> ConfiguredTrafficClassMapper:
+    def class_mapper(self: Self) -> ConfiguredTrafficClassMapper:
         """Fuzzy matching floes to traffic classes."""
 
     @property
     @abstractmethod
-    def policy_mapper(self) -> ConfiguredPolicyMapper:
+    def policy_mapper(self: Self) -> ConfiguredPolicyMapper:
         """Map of optimization policies for given traffic classes."""
 
 
 class YAMLConfigParser(ConfigParser):
     """Parse a given tango YAML config."""
 
-    def __init__(self, filename: str) -> None:
+    def __init__(self: Self, filename: str) -> None:
+        """Create YAML config parser."""
         (
             self._header_mapper,
             self._class_mapper,
@@ -55,29 +57,25 @@ class YAMLConfigParser(ConfigParser):
         ) = self._parse_config(filename)
 
     @property
-    def header_mapper(self) -> ConfiguredHeaderMapper:
+    def header_mapper(self: Self) -> ConfiguredHeaderMapper:
         """Map of tunnel headers for path ids."""
-
         return self._header_mapper
 
     @property
-    def class_mapper(self) -> ConfiguredTrafficClassMapper:
+    def class_mapper(self: Self) -> ConfiguredTrafficClassMapper:
         """Fuzzy matching floes to traffic classes."""
-
         return self._class_mapper
 
     @property
-    def policy_mapper(self) -> ConfiguredPolicyMapper:
+    def policy_mapper(self: Self) -> ConfiguredPolicyMapper:
         """Map of optimization policies for given traffic classes."""
-
         return self._policy_mapper
 
     def _parse_traffic_class_map(
-        self, tc_map: List[Dict[int, List[Dict[str, Union[str, int]]]]]
+        self: Self, tc_map: list[dict[int, list[dict[str, str | int]]]],
     ) -> ConfiguredTrafficClassMapper:
         """Parse traffic class map into python objects."""
-
-        mappings: List[FuzzyClassMapping] = []
+        mappings: list[FuzzyClassMapping] = []
         for mapping in tc_map:
             for traffic_class, matcher_mappings in mapping.items():
                 for matcher in matcher_mappings:
@@ -99,30 +97,28 @@ class YAMLConfigParser(ConfigParser):
                         matcher.get("protocol"),
                     )
                     mappings.append(
-                        FuzzyClassMapping(five_tuple, traffic_class)
+                        FuzzyClassMapping(five_tuple, traffic_class),
                     )
 
         return ConfiguredTrafficClassMapper(mappings)
 
     def _parse_class_policies(
-        self, policy_map: Dict[int, str]
+        self: Self, policy_map: dict[int, str],
     ) -> ConfiguredPolicyMapper:
         """Parse class constraints into Python objects."""
-
-        policies: List[Policy] = []
+        policies: list[Policy] = []
         for traffic_class, policy in policy_map.items():
             policies.append(
-                Policy(traffic_class, OptimizationStrategy[policy])
+                Policy(traffic_class, OptimizationStrategy[policy]),
             )
 
         return ConfiguredPolicyMapper(policies)
 
     def _parse_header_map(
-        self, header_map: Dict[int, Dict[str, int]]
+        self: Self, header_map: dict[int, dict[str, int]],
     ) -> ConfiguredHeaderMapper:
         """Parse all path id to tunnel header mappings."""
-
-        headers: List[TunnelHeader] = []
+        headers: list[TunnelHeader] = []
         for path_id, header_fields in header_map.items():
             header = IPv6Header(
                 version=int(header_fields["version"]),
@@ -139,24 +135,23 @@ class YAMLConfigParser(ConfigParser):
         return ConfiguredHeaderMapper(headers)
 
     def _parse_config(
-        self,
+        self: Self,
         config_file: str,
-    ) -> Tuple[
+    ) -> tuple[
         ConfiguredHeaderMapper,
         ConfiguredTrafficClassMapper,
         ConfiguredPolicyMapper,
     ]:
         """Parse a YAML file containing the Tango configuration."""
-
-        with open(config_file, "r", encoding="utf-8") as file:
-            config = yaml.load(file, Loader=yaml.Loader)
+        with Path(config_file).open(encoding="utf-8") as file:
+            config = yaml.safe_load(file, Loader=yaml.Loader)
 
             tunnel_headers = self._parse_header_map(config["tunnel_headers"])
             traffic_class_mappings = self._parse_traffic_class_map(
-                config["traffic_class_mappings"]
+                config["traffic_class_mappings"],
             )
             traffic_class_policies = self._parse_class_policies(
-                config["traffic_class_policies"]
+                config["traffic_class_policies"],
             )
 
             return (
@@ -170,19 +165,16 @@ class DefaultConfigParser(ConfigParser):
     """Restore a default placeholder configuration."""
 
     @property
-    def header_mapper(self) -> DefaultHeaderMapper:
+    def header_mapper(self: Self) -> DefaultHeaderMapper:
         """Map of tunnel headers for path ids."""
-
         return DefaultHeaderMapper()
 
     @property
-    def class_mapper(self) -> DefaultTrafficClassMapper:
+    def class_mapper(self: Self) -> DefaultTrafficClassMapper:
         """Fuzzy matching floes to traffic classes."""
-
         return DefaultTrafficClassMapper()
 
     @property
-    def policy_mapper(self) -> DefaultPolicyMapper:
+    def policy_mapper(self: Self) -> DefaultPolicyMapper:
         """Map of optimization policies for given traffic classes."""
-
         return DefaultPolicyMapper()

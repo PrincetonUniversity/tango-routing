@@ -1,7 +1,11 @@
 """Models of Tango record types."""
 from dataclasses import dataclass
+from typing import TYPE_CHECKING, Self
 
 import error
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 @dataclass
@@ -12,7 +16,8 @@ class EthernetHeader:
     src_mac: int
     ethertype: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
         if self.dest_mac >= 2**48:
             raise error.ModelError("Too large of dest mac")
         if self.src_mac >= 2**48:
@@ -20,13 +25,14 @@ class EthernetHeader:
         if self.ethertype >= 2**16:
             raise error.ModelError("Too large of ethertype")
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterable of values."""
         return iter(
             [
                 self.dest_mac,
                 self.src_mac,
                 self.ethertype,
-            ]
+            ],
         )
 
 
@@ -36,8 +42,8 @@ class IPv4Header:
 
     version_ihl: int
     type_of_svc: int
-    len: int
-    id: int
+    len_: int
+    id_: int
     flags_fragment_offset: int
     ttl: int
     protocol: int
@@ -45,14 +51,15 @@ class IPv4Header:
     src_addr: int
     dest_addr: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
         if self.version_ihl >= 2**8:
             raise error.ModelError("Too large of version")
         if self.type_of_svc >= 2**8:
             raise error.ModelError("Too large of service type")
-        if self.len >= 2**16:
+        if self.len_ >= 2**16:
             raise error.ModelError("Too large of length")
-        if self.id >= 2**16:
+        if self.id_ >= 2**16:
             raise error.ModelError("Too large of id")
         if self.flags_fragment_offset >= 2**16:
             raise error.ModelError("Too large of fragment offset")
@@ -67,20 +74,21 @@ class IPv4Header:
         if self.dest_addr >= 2**32:
             raise error.ModelError("Too large of destination address")
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterable of values."""
         return iter(
             [
                 self.version_ihl,
                 self.type_of_svc,
-                self.len,
-                self.id,
+                self.len_,
+                self.id_,
                 self.flags_fragment_offset,
                 self.ttl,
                 self.protocol,
                 self.checksum,
                 self.src_addr,
                 self.dest_addr,
-            ]
+            ],
         )
 
 
@@ -94,7 +102,8 @@ class FiveTuple:
     dest_port: int
     protocol: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
         if self.src_addr >= 2**32:
             raise error.ModelError("Too large of source address")
         if self.dest_addr >= 2**32:
@@ -106,7 +115,8 @@ class FiveTuple:
         if self.protocol >= 2**8:
             raise error.ModelError("Too large of protocol")
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterable of values."""
         return iter(
             [
                 self.src_addr,
@@ -114,7 +124,7 @@ class FiveTuple:
                 self.src_port,
                 self.dest_port,
                 self.protocol,
-            ]
+            ],
         )
 
 
@@ -131,7 +141,8 @@ class IPv6Header:
     src_addr: int
     dest_addr: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
         if self.version >= 2**4:
             raise error.ModelError("Too large of version")
         if self.traffic_class >= 2**8:
@@ -149,7 +160,8 @@ class IPv6Header:
         if self.dest_addr >= 2**128:
             raise error.ModelError("Too large of dest_addr")
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterable of values."""
         return iter(
             [
                 self.version,
@@ -160,7 +172,7 @@ class IPv6Header:
                 self.hop_limit,
                 self.src_addr,
                 self.dest_addr,
-            ]
+            ],
         )
 
 
@@ -174,7 +186,8 @@ class TangoHeader:
     sequence_num: int
     book_signature: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
         if self.path_id >= 2**3:
             raise error.ModelError("Too large of path_id")
         if self.timestamp >= 2**12:
@@ -186,7 +199,8 @@ class TangoHeader:
         if self.book_signature >= 2**1:
             raise error.ModelError("Too large of book_signature")
 
-    def __iter__(self):
+    def __iter__(self: Self) -> Iterable[int]:
+        """Get iterable of values."""
         return iter(
             [
                 self.path_id,
@@ -194,5 +208,5 @@ class TangoHeader:
                 self.signature,
                 self.sequence_num,
                 self.book_signature,
-            ]
+            ],
         )

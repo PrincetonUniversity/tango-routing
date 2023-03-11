@@ -1,17 +1,17 @@
 """Errors for test models."""
 
 
-class TangoTestingBaseException(Exception):
+class TangoTestingBaseError(Exception):
     """Base exception for all Tango testing."""
 
 
-class ModelError(TangoTestingBaseException):
+class ModelError(TangoTestingBaseError):
     """Error in model definition."""
 
 
-class UsageError(TangoTestingBaseException):
+class UsageError(TangoTestingBaseError):
     """Error in user usage of test framework."""
 
 
-class TestCompileError(TangoTestingBaseException):
+class TestCompileError(TangoTestingBaseError):
     """Test compilation of lucid code failed."""

@@ -1,9 +1,9 @@
 """All errors pertaining to Tango classes."""
 
 
-class TangoBaseException(Exception):
+class TangoBaseError(Exception):
     """Base exception for all Tango errors."""
 
 
-class InvalidParameterError(TangoBaseException):
+class InvalidParameterError(TangoBaseError):
     """A paramter is does not pass validation."""

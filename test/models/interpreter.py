@@ -1,21 +1,13 @@
 """Interpreter configuration models."""
-from ipaddress import IPv6Address
 import json
 from dataclasses import dataclass
+from ipaddress import IPv6Address
 from pathlib import Path
 from shutil import copytree, rmtree
 from tempfile import mkdtemp
-from typing import Dict, List, Optional, Self
+from typing import TYPE_CHECKING, Self
 
-# from subprocess import run as run_cmd, PIPE as PROC_PIPE
 import docker
-
-from edu.princeton.tango.mappers import (
-    HeaderMapper,
-    PolicyMapper,
-    TrafficClassMapper,
-)
-from edu.princeton.tango.mappers.mapper import Mapper
 from edu.princeton.tango.mappers.policy_mapper import (
     ConfiguredPolicyMapper,
     OptimizationStrategy,
@@ -31,8 +23,16 @@ from edu.princeton.tango.mappers.tunnel_header_mapper import (
     IPv6Header,
     TunnelHeader,
 )
-from error import UsageError, TestCompileError
+from error import TestCompileError, UsageError
 from events import TangoEvent
+
+if TYPE_CHECKING:
+    from edu.princeton.tango.mappers import (
+        HeaderMapper,
+        PolicyMapper,
+        TrafficClassMapper,
+    )
+    from edu.princeton.tango.mappers.mapper import Mapper
 
 
 @dataclass
@@ -42,7 +42,8 @@ class EventLocation:
     router_id: int
     port: int
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Convert to expected formatted string."""
         return f"{self.router_id}:{self.port}"
 
 
@@ -53,9 +54,8 @@ class EventLink:
     sender: EventLocation
     recevier: EventLocation
 
-    def as_dict(self) -> Dict[str, str]:
+    def as_dict(self: Self) -> dict[str, str]:
         """Convert to a dictionary."""
-
         send = f"{self.sender.router_id}:{self.sender.port}"
         rcv = f"{self.recevier.router_id}:{self.recevier.port}"
         return {send: rcv}
@@ -65,18 +65,18 @@ class TestEvent:
     """Interpreter event to be injected into test system."""
 
     def __init__(
-        self,
+        self: Self,
         event: TangoEvent,
-        timestamp: Optional[int] = None,
-        locations: Optional[List[EventLocation]] = None,
+        timestamp: int | None = None,
+        locations: list[EventLocation] | None = None,
     ) -> None:
+        """Create a test event."""
         self._event = event
         self._timestamp = timestamp
         self._locations = locations
 
-    def as_dict(self) -> Dict[str, str]:
+    def as_dict(self: Self) -> dict[str, str]:
         """Convert to a dictionary."""
-
         event = {}
         event["name"] = self._event.name
         event["args"] = list(self._event)
@@ -95,16 +95,17 @@ class TestCase:
     """A configuration for a Lucid interpreter test."""
 
     def __init__(
-        self,
+        self: Self,
         max_time: int,
-        event_list: List[TestEvent],
-        switches: Optional[int] = None,
-        link_list: Optional[List[EventLink]] = None,
-        default_input_gap: Optional[int] = None,
-        generate_delay: Optional[int] = None,
-        random_delay_range: Optional[int] = None,
-        random_seed: Optional[int] = None,
+        event_list: list[TestEvent],
+        switches: int | None = None,
+        link_list: list[EventLink] | None = None,
+        default_input_gap: int | None = None,
+        generate_delay: int | None = None,
+        random_delay_range: int | None = None,
+        random_seed: int | None = None,
     ) -> None:
+        """Create a test case."""
         self._max_time = max_time
         self._events = event_list
         self._switches = switches
@@ -114,9 +115,8 @@ class TestCase:
         self._random_delay_range = random_delay_range
         self._random_seed = random_seed
 
-    def as_dict(self) -> Dict[str, str]:
+    def as_dict(self: Self) -> dict[str, str]:
         """Convert to a dictionary."""
-
         config = {}
         config["max time"] = self._max_time
         config["events"] = list(map(list, self._events))
@@ -145,9 +145,8 @@ class TestCase:
         return config
 
     @property
-    def json(self) -> str:
+    def json(self: Self) -> str:
         """Get test case in json string form."""
-
         return json.dumps(self.as_dict())
 
 
@@ -160,10 +159,12 @@ class ExpectedResult:
 class TestResult:
     """Result of an interpreter run."""
 
-    def __init__(self, result: str) -> None:
+    def __init__(self: Self, result: str) -> None:
+        """Create a Test Result."""
         self._res = result
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Give back the raw string form of the interpreter output."""
         return self._res
 
 
@@ -171,12 +172,13 @@ class TestRunner:
     """Run a Lucid interpreter test."""
 
     def __init__(
-        self,
+        self: Self,
         given: TestCase,
-        policy_mapper: Optional[PolicyMapper] = None,
-        class_mapper: Optional[TrafficClassMapper] = None,
-        header_mapper: Optional[HeaderMapper] = None,
+        policy_mapper: PolicyMapper | None = None,
+        class_mapper: TrafficClassMapper | None = None,
+        header_mapper: HeaderMapper | None = None,
     ) -> None:
+        """Create test runner."""
         self._given = given
         self._policy_mapper = policy_mapper
         self._class_mapper = class_mapper
@@ -184,63 +186,44 @@ class TestRunner:
         self._tmp_dir = None
         self._root_dir = Path(__file__).parent.parent.parent.absolute()
 
-    def __enter__(self) -> Self:
+    def __enter__(self: Self) -> Self:
+        """Enter into testing session within temp directory."""
         return self.create()
 
-    def create(self) -> Self:
+    def create(self: Self) -> Self:
         """Create a testing session."""
-
         self._tmp_dir = mkdtemp(prefix="tango-test-")
         print(self._tmp_dir)
         src = self._root_dir / Path("src/dpt/tango")
         copytree(str(src), str(self._tmp_dir), dirs_exist_ok=True)
         return self
 
-    def __exit__(self, _, __, ____) -> None:
+    def __exit__(self: Self, _: None, __: None, ____: None) -> None:
+        """Destroy the testing session."""
         self.close()
 
-    def close(self) -> None:
+    def close(self: Self) -> None:
         """Close a testing session and clean up."""
-
         rmtree(self._tmp_dir)
 
-    def _create_test_file(self) -> None:
+    def _create_test_file(self: Self) -> None:
         """Make the json test file."""
-
         if not self._tmp_dir:
             raise UsageError("Must be called within context manager!")
 
         config_file = Path(self._tmp_dir) / Path("test.json")
         config_file.write_text(self._given.json, encoding="utf-8")
 
-    def _write_out_mapper(self, mapper: Optional[Mapper] = None):
+    def _write_out_mapper(self, mapper: Mapper | None = None) -> None:
         """Write out mappings to test configuration."""
-
         if mapper:
             path = (
                 Path(self._tmp_dir) / Path("static_maps") / Path(mapper.name)
             )
             path.write_text(str(mapper))
 
-    def _run_test(self) -> str:
+    def _run_test(self: Self) -> str:
         """Run the test configuration."""
-
-        # cmd = [
-        #     "docker",
-        #     "run",
-        #     "-it",
-        #     "--rm",
-        #     "-v",
-        #     f"{self._tmp_dir}:/workspace",
-        #     "jsonch/lucid:lucid",
-        #     'sh -c cd /workspace && /app/dpt Tango.dpt"',
-        # ]
-        # proc = run_cmd(cmd, stdout=PROC_PIPE, check=False)
-        # out = proc.stdout.decode("utf-8")
-
-        # if proc.returncode != 0:
-        #     raise TestCompileError(out)
-
         client = docker.from_env()
         try:
             return client.containers.run(
@@ -252,9 +235,8 @@ class TestRunner:
         except Exception as err:
             raise TestCompileError(err) from err
 
-    def run(self) -> TestResult:
+    def run(self: Self) -> TestResult:
         """Execute the interpreter."""
-
         self._create_test_file()
         self._write_out_mapper(self._policy_mapper)
         self._write_out_mapper(self._class_mapper)
@@ -288,14 +270,14 @@ if __name__ == "__main__":
         [
             Policy(0, OptimizationStrategy.OPTIMIZE_DELAY),
             Policy(1, OptimizationStrategy.OPTIMIZE_LOSS),
-        ]
+        ],
     )
 
     class_mapper_case = ConfiguredTrafficClassMapper(
         [
             FuzzyClassMapping(FuzzyFiveTuple(src_port=1, dest_port=1), 1),
             FuzzyClassMapping(FuzzyFiveTuple(src_port=2, dest_port=2), 2),
-        ]
+        ],
     )
 
     header_mapper_case = ConfiguredHeaderMapper(
@@ -303,16 +285,30 @@ if __name__ == "__main__":
             TunnelHeader(
                 0,
                 IPv6Header(
-                    0, 0, 0, 0, 0, 0, IPv6Address(11111), IPv6Address(22222)
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    IPv6Address(11111),
+                    IPv6Address(22222),
                 ),
             ),
             TunnelHeader(
                 1,
                 IPv6Header(
-                    0, 0, 0, 0, 0, 0, IPv6Address(33333), IPv6Address(44444)
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    IPv6Address(33333),
+                    IPv6Address(44444),
                 ),
             ),
-        ]
+        ],
     )
 
     with TestRunner(

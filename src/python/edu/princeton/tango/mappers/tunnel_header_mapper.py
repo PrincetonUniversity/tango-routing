@@ -1,7 +1,7 @@
 """Map path-ids to IPv6 Tunnel headers."""
 from dataclasses import dataclass
 from ipaddress import IPv6Address
-from typing import Final, List, LiteralString
+from typing import Final, LiteralString, Self
 
 from edu.princeton.tango.errors import InvalidParameterError
 from edu.princeton.tango.mappers.mapper import Mapper
@@ -77,38 +77,40 @@ class IPv6Header:
     src_addr: IPv6Address
     dest_addr: IPv6Address
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Sanitize inputs."""
         if self.version >= 2**4:
             raise InvalidParameterError(
-                f"`version` ({self.version}) is more than 4-bit!"
+                f"`version` ({self.version}) is more than 4-bit!",
             )
 
         if self.traffic_class >= 2**8:
             raise InvalidParameterError(
-                f"`traffic_class` ({self.traffic_class}) is more than 8-bit!"
+                f"`traffic_class` ({self.traffic_class}) is more than 8-bit!",
             )
 
         if self.flow_label >= 2**20:
             raise InvalidParameterError(
-                f"`flow_label` ({self.flow_label}) is more than 20-bit!"
+                f"`flow_label` ({self.flow_label}) is more than 20-bit!",
             )
 
         if self.payload_len >= 2**16:
             raise InvalidParameterError(
-                f"`payload_len` ({self.payload_len}) is more than 16-bit!"
+                f"`payload_len` ({self.payload_len}) is more than 16-bit!",
             )
 
         if self.next_header >= 2**8:
             raise InvalidParameterError(
-                f"`next_header` ({self.next_header}) is more than 8-bit!"
+                f"`next_header` ({self.next_header}) is more than 8-bit!",
             )
 
         if self.hop_limit >= 2**8:
             raise InvalidParameterError(
-                f"`hop_limit` ({self.hop_limit}) is more than 8-bit!"
+                f"`hop_limit` ({self.hop_limit}) is more than 8-bit!",
             )
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid representation for header."""
         return " ".join(
             (
                 "{",
@@ -121,7 +123,7 @@ class IPv6Header:
                 f"src_addr = {int(self.src_addr)};",
                 f"dest_addr = {int(self.dest_addr)};",
                 "}",
-            )
+            ),
         )
 
 
@@ -132,15 +134,16 @@ class TunnelHeader:
     path_id: int
     header: IPv6Header
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Sanitize inputs."""
         if self.path_id >= 8:
             raise InvalidParameterError(
                 "".join(
                     (
                         "There is a maximum of 8 paths,",
                         f"zero-indexed: got {self.path_id}",
-                    )
-                )
+                    ),
+                ),
             )
 
 
@@ -148,37 +151,36 @@ class HeaderMapper(Mapper):
     """Maps all path ids to given tunnel headers."""
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get filename to generate output to."""
-
         return "TunnelHeaderMap.dpt"
 
 
 class ConfiguredHeaderMapper(HeaderMapper):
     """Maps all path ids to given tunnel headers."""
 
-    def __init__(self, headers: List[TunnelHeader]) -> None:
+    def __init__(self: Self, headers: list[TunnelHeader]) -> None:
+        """Create a configured header map."""
         if len(headers) >= 8:
             raise InvalidParameterError(
-                f"There is a maximum of 8 traffic classes: got {len(headers)}"
+                f"There is a maximum of 8 traffic classes: got {len(headers)}",
             )
 
         headers.sort(key=lambda hdr: hdr.path_id)
 
-        resolved_headers = list(
-            map(
-                lambda hdr: MatchCase([str(hdr.path_id)], str(hdr.header)),
-                headers,
-            )
-        )
+        resolved_headers = [
+            MatchCase([str(hdr.path_id)], str(hdr.header)) for hdr in headers
+        ]
         self._headers: Final[MatchBody] = MatchBody(resolved_headers)
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid file of header map."""
         return _HEADER_MAP_TEMPLATE.format(str(self._headers))
 
 
 class DefaultHeaderMapper(HeaderMapper):
     """Default placeholder tunnel headers."""
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid file of header map."""
         return _DEFAULT_HEADER_MAP

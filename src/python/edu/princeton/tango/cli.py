@@ -1,6 +1,5 @@
 """Command-line tool enabling simple interactions with Tango."""
 from pathlib import Path
-from typing import Optional
 
 import click
 from edu.princeton.tango.config_parser import (
@@ -10,13 +9,12 @@ from edu.princeton.tango.config_parser import (
 
 
 @click.group()
-def cli():
-    """Tango base command"""
+def cli() -> None:
+    """Tango base command."""
 
 
-def get_out_path(file: str, prefix: Optional[str] = None) -> Path:
+def get_out_path(file: str, prefix: str | None = None) -> Path:
     """Get output path for a given gerneated file."""
-
     return Path(prefix) / Path(file) if prefix else Path(file)
 
 
@@ -42,28 +40,24 @@ def get_out_path(file: str, prefix: Optional[str] = None) -> Path:
     required=False,
 )
 def config(
-    file: str, default: Optional[bool] = None, prefix: Optional[str] = None
-):
+    file: str, default: bool | None = None, prefix: str | None = None,
+) -> None:
     """Configure Tango given a YAML file."""
-
-    if default:
-        configs = DefaultConfigParser()
-    else:
-        configs = YAMLConfigParser(file)
+    configs = DefaultConfigParser() if default else YAMLConfigParser(file)
 
     if prefix:
         Path(prefix).mkdir(exist_ok=True, parents=True)
 
     get_out_path("TunnelHeaderMap.dpt", prefix).write_text(
-        str(configs.header_mapper), encoding="utf-8"
+        str(configs.header_mapper), encoding="utf-8",
     )
 
     get_out_path("TrafficClassMap.dpt", prefix).write_text(
-        str(configs.class_mapper), encoding="utf-8"
+        str(configs.class_mapper), encoding="utf-8",
     )
 
     get_out_path("TrafficClassOpmizationMap.dpt", prefix).write_text(
-        str(configs.policy_mapper), encoding="utf-8"
+        str(configs.policy_mapper), encoding="utf-8",
     )
 
 

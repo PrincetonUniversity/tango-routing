@@ -59,3 +59,9 @@ exclude = """
 profile = "black"
 combine_as_imports = true
 line_length = 79
+
+[tool.ruff]
+select = ["ALL"]
+ignore = ["PLR0913", "TRY003", "EM101", "BLE001", "C901", "PLR2004", "EM102"]
+line-length = 79
+

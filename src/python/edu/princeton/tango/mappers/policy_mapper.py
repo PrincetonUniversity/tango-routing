@@ -1,7 +1,7 @@
 """Map traffic classes to pre-defined optimization strategies."""
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Final, List, LiteralString
+from typing import Final, LiteralString, Self
 
 from edu.princeton.tango.errors import InvalidParameterError
 from edu.princeton.tango.mappers.mapper import Mapper
@@ -61,7 +61,8 @@ class OptimizationStrategy(Enum):
     OPTIMIZE_DELAY = auto()
     OPTIMIZE_LOSS = auto()
 
-    def __str__(self):
+    def __str__(self: Self) -> str:
+        """Get the optimization strategy."""
         return f"{self.name}"
 
 
@@ -72,60 +73,58 @@ class Policy:
     traffic_class: int
     policy: OptimizationStrategy
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Sanitize inputs."""
         if self.traffic_class >= 15:
             raise InvalidParameterError(
                 "".join(
                     (
                         "There is a maximum of 15 traffic classes,",
                         f" zero-indexed: got {self.traffic_class}",
-                    )
-                )
+                    ),
+                ),
             )
 
 
 class PolicyMapper(Mapper):
-    """Maps all traffic classes to policies"""
+    """Maps all traffic classes to policies."""
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get filename to generate output to."""
-
         return "TrafficClassOpmizationMap.dpt"
 
 
 class ConfiguredPolicyMapper(PolicyMapper):
-    """Maps all traffic classes to policies"""
+    """Maps all traffic classes to policies."""
 
-    def __init__(self, policies: List[Policy]) -> None:
+    def __init__(self: Self, policies: list[Policy]) -> None:
+        """Create configured policy map."""
         if len(policies) >= 15:
             raise InvalidParameterError(
                 "".join(
                     (
                         "There is a maximum of 15 traffic classes:",
                         f" got {len(policies)}",
-                    )
-                )
+                    ),
+                ),
             )
 
         policies.sort(key=lambda policy: policy.traffic_class)
 
-        resolved_policies = list(
-            map(
-                lambda policy: MatchCase(
-                    [str(policy.traffic_class)], str(policy.policy)
-                ),
-                policies,
-            )
-        )
+        resolved_policies = [MatchCase(
+                    [str(policy.traffic_class)], str(policy.policy),
+                ) for policy in policies]
         self._policies: Final[MatchBody] = MatchBody(resolved_policies)
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid policy map file."""
         return _OPTIMIZATION_MAP_TEMPLATE.format(str(self._policies))
 
 
 class DefaultPolicyMapper(PolicyMapper):
     """Default placeholder policy mappings."""
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid policy map file."""
         return _DEFAULT_OPTIMIZATION_MAP

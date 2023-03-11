@@ -10,7 +10,7 @@ setup:
 	@$(COMPILER) pull ||:
  
 lint: setup $(SOURCES)
-	@docker run -it --rm -v `pwd`:/workspace jsonch/lucid:lucid sh -c "cd /workspace && /app/dpt src/dpt/tango/Tango.dpt --symb build.symb"
+	@docker run -it --rm -v `pwd`:/workspace jsonch/lucid:lucid sh -c "cd /workspace && /app/dpt src/dpt/tango/Tango.dpt"
 
 compile: setup lint
 	@echo "ERROR: compile target is *unimplemented*"

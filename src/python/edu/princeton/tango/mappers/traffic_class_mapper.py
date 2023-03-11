@@ -1,7 +1,7 @@
 """Map path-ids to IPv6 Tunnel headers."""
 from dataclasses import dataclass
 from ipaddress import IPv4Address
-from typing import Final, List, LiteralString, Optional
+from typing import Final, LiteralString, Self
 
 from edu.princeton.tango.errors import InvalidParameterError
 from edu.princeton.tango.mappers.mapper import Mapper
@@ -62,9 +62,10 @@ fun int<<4>> map_flow_to_traffic_class (FiveTuple_t flow) {{
 
 
 class FuzzyIPv4Address:
-    """Fuzzy-matched IPv4 address with or without prefix"""
+    """Fuzzy-matched IPv4 address with or without prefix."""
 
-    def __init__(self, addr: str) -> None:
+    def __init__(self: Self, addr: str) -> None:
+        """Create fuzzy-matched IPv4 address."""
         split_addr = addr.split("/")
         if len(split_addr) == 1:
             self._addr = IPv4Address(split_addr[0])
@@ -74,10 +75,11 @@ class FuzzyIPv4Address:
             self._prefix = int(split_addr[1])
         else:
             raise InvalidParameterError(
-                "Improperly formatted IPv4 Address with prefix!"
+                "Improperly formatted IPv4 Address with prefix!",
             )
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get fuzzy-matched IPv4 address."""
         ipv4_bitstring = f"{int(self._addr):032b}"
         if self._prefix > 0:
             ipv4_list = list(ipv4_bitstring)
@@ -93,20 +95,22 @@ class FuzzyFiveTuple:
     """Fuzzy-matched five-tuple of a particular flow."""
 
     def __init__(
-        self,
-        src_addr: Optional[FuzzyIPv4Address] = None,
-        src_port: Optional[int] = None,
-        dest_addr: Optional[FuzzyIPv4Address] = None,
-        dest_port: Optional[int] = None,
-        protocol: Optional[int] = None,
+        self: Self,
+        src_addr: FuzzyIPv4Address | None = None,
+        src_port: int | None = None,
+        dest_addr: FuzzyIPv4Address | None = None,
+        dest_port: int | None = None,
+        protocol: int | None = None,
     ) -> None:
+        """Create a fizzy-matched five-tuple."""
         self._src_addr = src_addr
         self._src_port = src_port
         self._dest_addr = dest_addr
         self._dest_port = dest_port
         self._protocol = protocol
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get five tuple matcher."""
         src_addr_matcher = self._src_addr or "_"
         src_port_matcher = self._src_port or "_"
         dest_addr_matcher = self._dest_addr or "_"
@@ -119,7 +123,7 @@ class FuzzyFiveTuple:
                 f"{dest_addr_matcher}",
                 f"{dest_port_matcher}",
                 f"{protocol_matcher}",
-            )
+            ),
         )
 
 
@@ -130,15 +134,16 @@ class FuzzyClassMapping:
     five_tuple: FuzzyFiveTuple
     traffic_class: int
 
-    def __post_init__(self):
+    def __post_init__(self: Self) -> None:
+        """Sanitize inputs."""
         if self.traffic_class >= 15:
             raise InvalidParameterError(
                 "".join(
                     (
                         "There is a maximum of 15 traffic classes,",
                         f"zero-indexed: got {self.traffic_class}",
-                    )
-                )
+                    ),
+                ),
             )
 
 
@@ -146,36 +151,37 @@ class TrafficClassMapper(Mapper):
     """Fuzzy maps all flows to a given traffic class."""
 
     @property
-    def name(self) -> str:
+    def name(self: Self) -> str:
         """Get filename to generate output to."""
-
         return "TrafficClassMap.dpt"
 
 
 class ConfiguredTrafficClassMapper(TrafficClassMapper):
     """Fuzzy maps all flows to a given traffic class."""
 
-    def __init__(self, fuzzy_maps: List[FuzzyClassMapping]) -> None:
-        resolved_mappings = list(
-            map(
-                lambda map: MatchCase(
-                    [str(map.five_tuple)], str(map.traffic_class)
-                ),
-                fuzzy_maps,
+    def __init__(self: Self, fuzzy_maps: list[FuzzyClassMapping]) -> None:
+        """Create configured traffic class map."""
+        resolved_mappings = [
+            MatchCase(
+                [str(map_.five_tuple)],
+                str(map_.traffic_class),
             )
-        )
+            for map_ in fuzzy_maps
+        ]
 
         # Append catch-all for non-Tango traffic
         resolved_mappings.append(MatchCase(["_, _, _, _, _"], "15"))
 
         self._mappings: Final[MatchBody] = MatchBody(resolved_mappings)
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid traffic class map file."""
         return _CLASS_MAP_TEMPLATE.format(str(self._mappings))
 
 
 class DefaultTrafficClassMapper(TrafficClassMapper):
     """Default placeholder trafffic class mappings."""
 
-    def __str__(self) -> str:
+    def __str__(self: Self) -> str:
+        """Get lucid traffic class map file."""
         return _DEFAULT_CLASS_MAP
