@@ -3,10 +3,10 @@ include "../Types.dpt"
 /**
  * # Description
  * User-generated fuzzy mappings between a flow 5-tuple and traffic class.
- * 
+ *
  * # Parameters
  * flow (FiveTuple_t): five-tuple describing a user flow
- * 
+ *
  * # Returns
  * traffic_class (int<<4>>): the traffic class associated with this five-tuple
  **/
@@ -23,3 +23,4 @@ fun int<<4>> map_flow_to_traffic_class (FiveTuple_t flow) {
         return 0;
     }
 }
+

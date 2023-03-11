@@ -3,12 +3,12 @@ include "../Types.dpt"
 /**
  * # Description
  * User-generated constraints for every traffic class.
- * 
+ *
  * # Parameters
  * traffic_class (int<<4>>): traffic class which constrains optimal metrics
  * loss_metrics (LossMetrics_t): loss metrics along this class
  * delay_metrics (DelayMetrics_t): delay metrics along this class
- * 
+ *
  * # Returns
  * is_within_constraints (bool): metrics satisfy constraints for this class
  **/
@@ -23,3 +23,4 @@ fun bool verify_metrics_within_constraints (
         return true;
     }
 }
+
