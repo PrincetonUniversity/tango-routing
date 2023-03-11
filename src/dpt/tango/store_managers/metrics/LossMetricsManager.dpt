@@ -41,8 +41,8 @@ module LossMetricsManager : {
         Counter.t<<6>> loss_counts5;
         Counter.t<<6>> loss_counts6;
         Counter.t<<6>> loss_counts7;
-        PairArray.t<<24>> loss_tracker;
-        Array.t<<32>> loss_avgs;
+        Array.t<<24>> seq_num_tracker;
+        PairArray.t<<32>> loss_tracker;
     }
 
     constr t create () = {
@@ -54,35 +54,57 @@ module LossMetricsManager : {
         loss_counts5 = Counter.create(0);
         loss_counts6 = Counter.create(0);
         loss_counts7 = Counter.create(0);
+        seq_num_tracker = Array.create(8);
         loss_tracker = PairArray.create(8);
-        loss_avgs = Array.create(8);
     };
 
     /**
      * # Description
-     * Update the loss corresponding to the difference in expected
-     * sequence numebrs.
+     * Update the loss and the avg loss value.
      **/
-    memop update_loss (
-        int<<'sz>> curr_seq_num,
-        int<<'sz>> curr_loss,
-        int<<'sz>> new_seq_num,
+    memop update_loss_avg (
+        int<<'sz>> curr_loss_sum,
+        int<<'sz>> curr_loss_avg,
+        int<<'sz>> new_loss,
         int<<'sz>> avg_counter
     ) {
         bool should_reset = avg_counter > 62;
-        bool has_possible_loss = curr_seq_num < new_seq_num;
-
-        if (true) { cell1 = new_seq_num; }
 
         if (should_reset) {
-            cell2 = 0;
+            cell1 = 0;
         } else {
-            if (has_possible_loss) {
-                cell2 = curr_loss + 1; // FIXME
-            }
+            if (true) { cell1 = curr_loss_sum + new_loss; }
         }
 
+        if (should_reset) {
+            cell2 = curr_loss_sum;
+        }
+        
         if (true) { return cell2; }
+    }
+
+    /**
+     * # Description
+     * Store the larger sequence number. 
+     **/
+    memop store_larger (int<<'sz>> curr_seq_num, int<<'sz>> new_seq_num) {
+        if (curr_seq_num < new_seq_num) {
+            return new_seq_num;
+        } else {
+            return curr_seq_num;
+        }
+    }
+
+    /**
+     * # Description
+     * Get the loss between this and the previously seen sequence number. 
+     **/
+    memop calc_loss (int<<'sz>> curr_seq_num, int<<'sz>> new_seq_num) {
+        if (curr_seq_num + 1 < new_seq_num) {
+            return new_seq_num - curr_seq_num;
+        } else {
+            return 0;
+        }
     }
 
     fun int<<32>> update_loss (
@@ -91,34 +113,37 @@ module LossMetricsManager : {
         int<<3>> path_id
     ) {
         // Update loss counters
-        int<<24>> curr_cnt = 0;
+        int<<32>> curr_cnt = 0;
         match path_id with
-        | 0 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts0, 1) + 1; }
-        | 1 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts1, 1) + 1; }
-        | 2 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts2, 1) + 1; }
-        | 3 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts3, 1) + 1; }
-        | 4 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts4, 1) + 1; }
-        | 5 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts5, 1) + 1; }
-        | 6 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts6, 1) + 1; }
-        | 7 -> { curr_cnt = (int<<24>>) Counter.add(self#loss_counts7, 1) + 1; }
+        | 0 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts0, 1) + 1; }
+        | 1 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts1, 1) + 1; }
+        | 2 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts2, 1) + 1; }
+        | 3 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts3, 1) + 1; }
+        | 4 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts4, 1) + 1; }
+        | 5 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts5, 1) + 1; }
+        | 6 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts6, 1) + 1; }
+        | 7 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts7, 1) + 1; }
 
         // Calculate loss and updated last seen sequence number
-        int<<32>> loss = (int<<32>>) PairArray.update(
+        int<<32>> loss_found = (int<<32>>) Array.update(
+            self#seq_num_tracker,
+            path_id,
+            calc_loss,
+            sequence_num,
+            store_larger,
+            sequence_num
+        );
+
+        // Update and return average loss
+        int<<32>> avg_loss = PairArray.update(
             self#loss_tracker,
             path_id,
-            update_loss,
-            sequence_num,
+            update_loss_avg,
+            loss_found,
             curr_cnt,
             0
         );
 
-        // Update average loss
-        if (curr_cnt >= 63) {
-            Array.set(self#loss_avgs, path_id, loss);
-            return (int<<32>>) loss[31:6];
-        } else {
-            int<<32>> avg = Array.get(self#loss_avgs, path_id);
-            return (int<<32>>) avg[31:6];
-        }
+        return avg_loss;
     }
 }
