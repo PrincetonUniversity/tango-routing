@@ -1,38 +1,20 @@
 """Interpreter configuration models."""
 import json
 from dataclasses import dataclass
-from ipaddress import IPv6Address
 from pathlib import Path
 from shutil import copytree, rmtree
 from tempfile import mkdtemp
-from typing import TYPE_CHECKING, Self
+from typing import Self
 
 import docker
-from edu.princeton.tango.mappers.policy_mapper import (
-    ConfiguredPolicyMapper,
-    OptimizationStrategy,
-    Policy,
+from edu.princeton.tango.mappers import (
+    HeaderMapper,
+    PolicyMapper,
+    TrafficClassMapper,
 )
-from edu.princeton.tango.mappers.traffic_class_mapper import (
-    ConfiguredTrafficClassMapper,
-    FuzzyClassMapping,
-    FuzzyFiveTuple,
-)
-from edu.princeton.tango.mappers.tunnel_header_mapper import (
-    ConfiguredHeaderMapper,
-    IPv6Header,
-    TunnelHeader,
-)
-from error import TestCompileError, UsageError
+from edu.princeton.tango.mappers.mapper import Mapper
+from error import TestExpetedPacketGenError, UsageError
 from events import TangoEvent
-
-if TYPE_CHECKING:
-    from edu.princeton.tango.mappers import (
-        HeaderMapper,
-        PolicyMapper,
-        TrafficClassMapper,
-    )
-    from edu.princeton.tango.mappers.mapper import Mapper
 
 
 @dataclass
@@ -119,7 +101,7 @@ class TestCase:
         """Convert to a dictionary."""
         config = {}
         config["max time"] = self._max_time
-        config["events"] = list(map(list, self._events))
+        config["events"] = list(map(lambda e: e.as_dict(), self._events))
 
         if self._switches:
             config["switches"] = self._switches
@@ -214,7 +196,7 @@ class TestRunner:
         config_file = Path(self._tmp_dir) / Path("test.json")
         config_file.write_text(self._given.json, encoding="utf-8")
 
-    def _write_out_mapper(self, mapper: Mapper | None = None) -> None:
+    def _write_out_mapper(self: Self, mapper: Mapper | None = None) -> None:
         """Write out mappings to test configuration."""
         if mapper:
             path = (
@@ -230,10 +212,15 @@ class TestRunner:
                 image="jsonch/lucid:lucid",
                 auto_remove=True,
                 volumes=[f"{self._tmp_dir}:/workspace"],
-                command='sh -c "cd /workspace && /app/dpt Tango.dpt"',
+                command="".join(
+                    (
+                        'sh -c "cd /workspace &&',
+                        '/app/dpt Tango.dpt --spec test.json"',
+                    ),
+                ),
             ).decode("utf-8")
         except Exception as err:
-            raise TestCompileError(err) from err
+            raise TestExpetedPacketGenError(err) from err
 
     def run(self: Self) -> TestResult:
         """Execute the interpreter."""
@@ -248,79 +235,35 @@ if __name__ == "__main__":
     from events import ForwardFlow
     from tango_types import EthernetHeader, FiveTuple, IPv4Header
 
+    switch1 = EventLocation(0, 1)
+    switch2 = EventLocation(1, 0)
+
     events = [
-        ForwardFlow(
-            EthernetHeader(0, 1, 2),
-            IPv4Header(3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-            FiveTuple(13, 14, 15, 16, 17),
+        TestEvent(
+            ForwardFlow(
+                EthernetHeader(0, 1, 2),
+                IPv4Header(3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                FiveTuple(13, 14, 15, 16, 17),
+            ),
+            timestamp=1,
+            locations=[switch1],
         ),
-        ForwardFlow(
-            EthernetHeader(10, 11, 12),
-            IPv4Header(13, 14, 15, 16, 17, 18, 19, 110, 111, 112),
-            FiveTuple(113, 114, 115, 116, 117),
+        TestEvent(
+            ForwardFlow(
+                EthernetHeader(10, 11, 12),
+                IPv4Header(13, 14, 15, 16, 17, 18, 19, 110, 111, 112),
+                FiveTuple(113, 114, 115, 116, 117),
+            ),
+            timestamp=2,
+            locations=[switch1],
         ),
     ]
 
-    links = [EventLink(EventLocation(0, 1), EventLocation(1, 0))]
+    links = [EventLink(switch1, switch2)]
 
-    # given_case = TestCase(99999, events, switches=2, link_list=links)
-    given_case = TestCase(99999, [])
+    given_case = TestCase(99999, events, switches=2, link_list=links)
 
-    policy_mapper_case = ConfiguredPolicyMapper(
-        [
-            Policy(0, OptimizationStrategy.OPTIMIZE_DELAY),
-            Policy(1, OptimizationStrategy.OPTIMIZE_LOSS),
-        ],
-    )
+    # with TestRunner(given_case) as runner:
+    #     print(runner.run())
 
-    class_mapper_case = ConfiguredTrafficClassMapper(
-        [
-            FuzzyClassMapping(FuzzyFiveTuple(src_port=1, dest_port=1), 1),
-            FuzzyClassMapping(FuzzyFiveTuple(src_port=2, dest_port=2), 2),
-        ],
-    )
-
-    header_mapper_case = ConfiguredHeaderMapper(
-        [
-            TunnelHeader(
-                0,
-                IPv6Header(
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    IPv6Address(11111),
-                    IPv6Address(22222),
-                ),
-            ),
-            TunnelHeader(
-                1,
-                IPv6Header(
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    IPv6Address(33333),
-                    IPv6Address(44444),
-                ),
-            ),
-        ],
-    )
-
-    with TestRunner(
-        given_case,
-        # policy_mapper=policy_mapper_case,
-        # class_mapper=class_mapper_case,
-        # header_mapper=header_mapper_case,
-    ) as runner:
-        print(runner.run())
-    # TestRunner(
-    #     given_case,
-    #     # policy_mapper=policy_mapper_case,
-    #     # class_mapper=class_mapper_case,
-    #     # header_mapper=header_mapper_case,
-    # ).create().run()
+    TestRunner(given_case).create().run()

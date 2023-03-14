@@ -1,13 +1,11 @@
 """Models of events for Tango."""
 from abc import ABC, abstractmethod
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Self
+from typing import Self
 
 import error
 import tango_types
-
-if TYPE_CHECKING:
-    from collections.abc import Iterable
 
 
 class TangoEvent(ABC):

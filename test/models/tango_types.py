@@ -1,11 +1,9 @@
 """Models of Tango record types."""
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Self
+from typing import Self
 
 import error
-
-if TYPE_CHECKING:
-    from collections.abc import Iterable
 
 
 @dataclass
