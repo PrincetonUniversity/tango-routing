@@ -49,6 +49,22 @@ module BookSignatureManager : {
         int<<1>> signature
     ) [start <= self; end self];
 
+   /**
+    * # Description
+    * Stub for controller to set sequence number signature.
+    * 
+    * # Parameters
+    * self (t): self
+    * seq_number (int<<24>>): sequence number signed
+    * path_id (int<<3>>): path ID of associated sequence number
+    * signature (int<<1>>): signature to validate
+    **/
+    fun void control_set (
+        t self,
+        int<<24>> seq_number,
+        int<<3>> path_id,
+        int<<1>> signature
+    ) [start <= self; end self];
 }
 {
     type t = {
@@ -104,5 +120,22 @@ module BookSignatureManager : {
         | 5 -> { return Array.get(self#onebit_signatures5, seq_number) == signature; }
         | 6 -> { return Array.get(self#onebit_signatures6, seq_number) == signature; }
         | 7 -> { return Array.get(self#onebit_signatures7, seq_number) == signature; }
+    }
+
+    fun void control_set (
+        t self,
+        int<<24>> seq_number,
+        int<<3>> path_id,
+        int<<1>> signature
+    ) {
+        match path_id with
+        | 0 -> { Array.set(self#onebit_signatures0, seq_number, signature); }
+        | 1 -> { Array.set(self#onebit_signatures1, seq_number, signature); }
+        | 2 -> { Array.set(self#onebit_signatures2, seq_number, signature); }
+        | 3 -> { Array.set(self#onebit_signatures3, seq_number, signature); }
+        | 4 -> { Array.set(self#onebit_signatures4, seq_number, signature); }
+        | 5 -> { Array.set(self#onebit_signatures5, seq_number, signature); }
+        | 6 -> { Array.set(self#onebit_signatures6, seq_number, signature); }
+        | 7 -> { Array.set(self#onebit_signatures7, seq_number, signature); }
     }
 }

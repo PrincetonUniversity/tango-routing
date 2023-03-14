@@ -48,6 +48,35 @@ module Encoder : {
         int<<64>> encoded_update
     ) [start <= self; end self];
 
+   /**
+    * # Description
+    * Stub for controller to set encoding.
+    * 
+    * # Parameters
+    * self (t): self
+    * traffic_class (int<<4>>): traffic class for associated encoding
+    * enc (int<<28>>): encoding for traffic class
+    **/
+    fun void control_set_traffic_enc (
+        t self,
+        int<<4>> traffic_class,
+        int<<28>> enc
+    ) [start <= self; end self];
+
+   /**
+    * # Description
+    * Stub for controller to set encoding.
+    * 
+    * # Parameters
+    * self (t): self
+    * path_id (int<<4>>): path id for associated encoding
+    * enc (int<<28>>): encoding for path
+    **/
+    fun void control_set_path_enc (
+        t self,
+        int<<3>> path_id,
+        int<<29>> enc
+    ) [start <= self; end self];
 }
 {
     type t = {
@@ -89,5 +118,21 @@ module Encoder : {
             traffic_class = encoded_update[31:28];
             new_path_id = encoded_update[63:61];
         };
+    }
+
+    fun void control_set_traffic_enc (
+        t self,
+        int<<4>> traffic_class,
+        int<<28>> enc
+    ) {
+        Array.set(self#traffic_class_encodings, traffic_class, enc);
+    }
+
+    fun void control_set_path_enc (
+        t self,
+        int<<3>> path_id,
+        int<<29>> enc
+    ) {
+        Array.set(self#path_encodings, path_id, enc);
     }
 }
