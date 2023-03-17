@@ -1,20 +1,24 @@
 """Interpreter configuration models."""
+from abc import ABC, abstractmethod
 import json
 from dataclasses import dataclass
 from pathlib import Path
+import re
 from shutil import copytree, rmtree
 from tempfile import mkdtemp
 from typing import Self
 
-import docker
+# import docker
+
 from edu.princeton.tango.mappers import (
     HeaderMapper,
     PolicyMapper,
     TrafficClassMapper,
 )
 from edu.princeton.tango.mappers.mapper import Mapper
-from error import TestExpetedPacketGenError, UsageError
+from error import DptError, UsageError
 from events import InterpreterEvent
+from subprocess import run as run_cmd
 
 
 @dataclass
@@ -130,12 +134,6 @@ class TestCase:
         return json.dumps(self.as_dict())
 
 
-class ExpectedResult:
-    """Expected result of an interpreter test."""
-
-    # TODO: IMPLEMENT
-
-
 class TestResult:
     """Result of an interpreter run."""
 
@@ -146,6 +144,46 @@ class TestResult:
     def __str__(self: Self) -> str:
         """Give back the raw string form of the interpreter output."""
         return self._res
+
+
+class ExpectedResult(ABC):
+    """Expected result of an interpreter test."""
+
+    @abstractmethod
+    def check(self: Self, result: TestResult) -> None:
+        """Check result for a property."""
+
+
+class ExpectContains(ExpectedResult):
+    """Assert that result has a particular substring within."""
+
+    def __init__(self: Self, expect: str) -> None:
+        """Create an expectation object."""
+        self._expect = expect
+
+    def check(self: Self, result: TestResult) -> None:
+        """Check result for a property."""
+        assert self._expect in str(
+            result
+        ), f"Could not find '{self._expect}' in:\n\n{result}"
+
+
+class ExpectationRunner:
+    """Manages all epectations for a given test result."""
+
+    def __init__(self: Self, result: TestResult) -> None:
+        self._result = result
+        self._expectations: list[ExpectedResult] = []
+
+    def expect(self: Self, expectation: ExpectedResult) -> Self:
+        """Add an expectation to manage."""
+        self._expectations.append(expectation)
+        return self
+
+    def finish(self: Self) -> None:
+        """Manage and assert all the expectations."""
+        for ea in self._expectations:
+            ea.check()
 
 
 class TestRunner:
@@ -204,21 +242,33 @@ class TestRunner:
 
     def _run_test(self: Self) -> str:
         """Run the test configuration."""
-        client = docker.from_env()
-        try:
-            return client.containers.run(
-                image="jsonch/lucid:lucid",
-                auto_remove=True,
-                volumes=[f"{self._tmp_dir}:/workspace"],
-                command="".join(
-                    (
-                        'sh -c "cd /workspace &&',
-                        '/app/dpt Tango.dpt --spec test.json"',
-                    ),
-                ),
-            ).decode("utf-8")
-        except Exception as err:
-            raise TestExpetedPacketGenError(err) from err
+        # client = docker.from_env()
+        # try:
+        #     return client.containers.run(
+        #         image="jsonch/lucid:lucid",
+        #         auto_remove=True,
+        #         volumes=[f"{self._tmp_dir}:/workspace"],
+        #         command="".join(
+        #             (
+        #                 'sh -c "cd /workspace &&',
+        #                 '/app/dpt Tango.dpt --spec test.json"',
+        #             ),
+        #         ),
+        #     ).decode("utf-8")
+        # except Exception as err:
+        #     raise TestExpetedPacketGenError(err) from err
+        tango_src = Path(self._tmp_dir) / Path("Tango.dpt")
+        test_config = Path(self._tmp_dir) / Path("test.json")
+        cmd = ["dpt", str(tango_src), "--spec", str(test_config)]
+
+        result = run_cmd(cmd, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            raise DptError(
+                f"Lucid compiler erred with following:\n\n{result.stderr}"
+            )
+
+        return result.stdout
 
     def run(self: Self) -> TestResult:
         """Execute the interpreter."""
@@ -230,7 +280,7 @@ class TestRunner:
 
 
 if __name__ == "__main__":
-    from events import ForwardFlow, ArraySet, ArrayGet, ArrayGetRange
+    from events import ForwardFlow
     from tango_types import EthernetHeader, FiveTuple, IPv4Header
 
     switch1 = EventLocation(0, 1)
@@ -259,9 +309,12 @@ if __name__ == "__main__":
 
     links = [EventLink(switch1, switch2)]
 
-    given_case = TestCase(99999, events, switches=2, link_list=links)
+    given_case = TestCase(20000, events, switches=2, link_list=links)
+    from pprint import PrettyPrinter
 
-    # with TestRunner(given_case) as runner:
-    #     print(runner.run())
+    PrettyPrinter().pprint(json.loads(given_case.json))
 
-    TestRunner(given_case).create().run()
+    with TestRunner(given_case) as runner:
+        print(runner.run())
+
+    # TestRunner(given_case).create().run()

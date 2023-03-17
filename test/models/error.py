@@ -13,5 +13,5 @@ class UsageError(TangoTestingBaseError):
     """Error in user usage of test framework."""
 
 
-class TestExpetedPacketGenError(TangoTestingBaseError):
-    """Test explected packet generation of lucid code failed."""
+class DptError(TangoTestingBaseError):
+    """Error passed up from lucid compiler."""
