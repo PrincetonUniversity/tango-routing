@@ -32,11 +32,13 @@ module Decryptor : {
 }
 {
     type t = {
-        Array.t<<64>> corresponding_otps;
+        Array.t<<32>> corresponding_otps0;
+        Array.t<<32>> corresponding_otps1;
     }
 
     constr t create () = {
-        corresponding_otps = Array.create(16);
+        corresponding_otps0 = Array.create(16);
+        corresponding_otps1 = Array.create(16);
     };
 
     fun int<<64>> decrypt (
@@ -44,8 +46,9 @@ module Decryptor : {
         int<<4>> seq_number,
         int<<64>> ciphertext
     ) {
-        int<<64>> pad = Array.get(self#corresponding_otps, seq_number);
+        int<<32>> pad0 = Array.get(self#corresponding_otps0, seq_number);
+        int<<32>> pad1 = Array.get(self#corresponding_otps1, seq_number);
 
-        return ciphertext ^^ pad;
+        return ciphertext ^^ (pad1 ^ pad0);
     }
 }
