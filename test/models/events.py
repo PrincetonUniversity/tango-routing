@@ -1,6 +1,7 @@
 """Models of events for Tango."""
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from enum import Enum
 from typing import Self
 
 import error
@@ -112,11 +113,57 @@ class RouteUpdate(TangoEvent):
         }
 
 
+class ArrayName(Enum):
+    """Names of all arrays in Tango switch."""
+
+    INCOMING_DECRYPT_PADS_LOWER32 = "incoming_encryption_manager_0_0"
+    INCOMING_DECRYPT_PADS_UPPER32 = "incoming_encryption_manager_0_1"
+    INCOMING_ENCRYPT_PADS_LOWER32 = "incoming_encryption_manager_1_1"
+    INCOMING_ENCRYPT_PADS_UPPER32 = "incoming_encryption_manager_1_2"
+    ROUTE_MAPPINGS = "route_manager_0"
+    INCOMING_BOOK_SIG_0 = "incoming_book_signature_manager_0"
+    INCOMING_BOOK_SIG_1 = "incoming_book_signature_manager_1"
+    INCOMING_BOOK_SIG_2 = "incoming_book_signature_manager_2"
+    INCOMING_BOOK_SIG_3 = "incoming_book_signature_manager_3"
+    INCOMING_BOOK_SIG_4 = "incoming_book_signature_manager_4"
+    INCOMING_BOOK_SIG_5 = "incoming_book_signature_manager_5"
+    INCOMING_BOOK_SIG_6 = "incoming_book_signature_manager_6"
+    INCOMING_BOOK_SIG_7 = "incoming_book_signature_manager_7"
+    INCOMING_METRIC_SIG_0 = "incoming_metric_signature_manager_0"
+    INCOMING_METRIC_SIG_1 = "incoming_metric_signature_manager_1"
+    INCOMING_METRIC_SIG_2 = "incoming_metric_signature_manager_2"
+    INCOMING_METRIC_SIG_3 = "incoming_metric_signature_manager_3"
+    INCOMING_METRIC_SIG_4 = "incoming_metric_signature_manager_4"
+    INCOMING_METRIC_SIG_5 = "incoming_metric_signature_manager_5"
+    INCOMING_METRIC_SIG_6 = "incoming_metric_signature_manager_6"
+    INCOMING_METRIC_SIG_7 = "incoming_metric_signature_manager_7"
+    OUTGOING_BOOK_SIG_0 = "outgoing_book_signature_manager_0"
+    OUTGOING_BOOK_SIG_1 = "outgoing_book_signature_manager_1"
+    OUTGOING_BOOK_SIG_2 = "outgoing_book_signature_manager_2"
+    OUTGOING_BOOK_SIG_3 = "outgoing_book_signature_manager_3"
+    OUTGOING_BOOK_SIG_4 = "outgoing_book_signature_manager_4"
+    OUTGOING_BOOK_SIG_5 = "outgoing_book_signature_manager_5"
+    OUTGOING_BOOK_SIG_6 = "outgoing_book_signature_manager_6"
+    OUTGOING_BOOK_SIG_7 = "outgoing_book_signature_manager_7"
+    OUTGOING_METRIC_SIG_0 = "outgoing_metric_signature_manager_0"
+    OUTGOING_METRIC_SIG_1 = "outgoing_metric_signature_manager_1"
+    OUTGOING_METRIC_SIG_2 = "outgoing_metric_signature_manager_2"
+    OUTGOING_METRIC_SIG_3 = "outgoing_metric_signature_manager_3"
+    OUTGOING_METRIC_SIG_4 = "outgoing_metric_signature_manager_4"
+    OUTGOING_METRIC_SIG_5 = "outgoing_metric_signature_manager_5"
+    OUTGOING_METRIC_SIG_6 = "outgoing_metric_signature_manager_6"
+    OUTGOING_METRIC_SIG_7 = "outgoing_metric_signature_manager_7"
+    OUTGOING_DECRYPT_PADS_LOWER32 = "outgoing_encryption_manager_0_0"
+    OUTGOING_DECRYPT_PADS_UPPER32 = "outgoing_encryption_manager_0_1"
+    OUTGOING_ENCRYPT_PADS_LOWER32 = "outgoing_encryption_manager_1_1"
+    OUTGOING_ENCRYPT_PADS_UPPER32 = "outgoing_encryption_manager_1_2"
+
+
 @dataclass
 class ArraySet(ControlEvent):
     """Set an index of an array to a value."""
 
-    array: str
+    array: ArrayName
     index: int
     value: int
 
@@ -131,7 +178,7 @@ class ArraySet(ControlEvent):
             "type": "command",
             "name": self.name,
             "args": {
-                "array": self.array,
+                "array": self.array.value,
                 "index": self.index,
                 "value": [self.value],
             },
@@ -142,7 +189,7 @@ class ArraySet(ControlEvent):
 class ArrayGet(ControlEvent):
     """Get an index of an array to a value."""
 
-    array: str
+    array: ArrayName
     index: int
 
     @property
@@ -156,7 +203,7 @@ class ArrayGet(ControlEvent):
             "type": "command",
             "name": self.name,
             "args": {
-                "array": self.array,
+                "array": self.array.value,
                 "index": self.index,
             },
         }
@@ -166,7 +213,7 @@ class ArrayGet(ControlEvent):
 class ArraySetRange(ControlEvent):
     """Set a range of indexes of an array to a value."""
 
-    array: str
+    array: ArrayName
     start: int
     end: int
     values: list[int]
@@ -182,7 +229,7 @@ class ArraySetRange(ControlEvent):
             "type": "command",
             "name": self.name,
             "args": {
-                "array": self.array,
+                "array": self.array.value,
                 "start": self.start,
                 "end": self.end,
                 "value": self.values,
@@ -194,7 +241,7 @@ class ArraySetRange(ControlEvent):
 class ArrayGetRange(ControlEvent):
     """Get a range of indexes of an array to a value."""
 
-    array: str
+    array: ArrayName
     start: int
     end: int
 
@@ -209,7 +256,7 @@ class ArrayGetRange(ControlEvent):
             "type": "command",
             "name": self.name,
             "args": {
-                "array": self.array,
+                "array": self.array.value,
                 "start": self.start,
                 "end": self.end,
             },
