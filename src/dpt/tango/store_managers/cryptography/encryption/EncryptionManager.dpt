@@ -51,66 +51,6 @@ module EncryptionManager : {
         int<<4>> seq_number,
         int<<64>> ciphertext
     ) [start <= self; end self];
-
-    /**
-    * # Description
-    * Set the one-time pad associated with a sequence number.
-    * 
-    * # Parameters
-    * self (t): self
-    * sequence_num (int<<24>>): route update sequence number
-    * otp (int<<64>>): one-time pad to encrypt with
-    **/
-    fun void control_set_encrypt (
-        t self,
-        int<<4>> sequence_num,
-        int<<64>> otp
-    ) [start <= self; end self];
-
-    /**
-    * # Description
-    * Set the one-time pad associated with a sequence number.
-    * 
-    * # Parameters
-    * self (t): self
-    * sequence_num (int<<24>>): route update sequence number
-    * otp (int<<64>>): one-time pad to encrypt with
-    **/
-    fun void control_set_decrypt (
-        t self,
-        int<<4>> sequence_num,
-        int<<64>> otp
-    ) [start <= self; end self];
-
-    /**
-    * # Description
-    * Stub for controller to set encoding.
-    * 
-    * # Parameters
-    * self (t): self
-    * traffic_class (int<<4>>): traffic class for associated encoding
-    * enc (int<<28>>): encoding for traffic class
-    **/
-    fun void control_set_traffic_enc (
-        t self,
-        int<<4>> traffic_class,
-        int<<28>> enc
-    ) [start <= self; end self];
-
-   /**
-    * # Description
-    * Stub for controller to set encoding.
-    * 
-    * # Parameters
-    * self (t): self
-    * path_id (int<<4>>): path id for associated encoding
-    * enc (int<<28>>): encoding for path
-    **/
-    fun void control_set_path_enc (
-        t self,
-        int<<3>> path_id,
-        int<<29>> enc
-    ) [start <= self; end self];
 }
 {
     type t = {
@@ -148,37 +88,5 @@ module EncryptionManager : {
             Decryptor.decrypt(self#decryptor, seq_number, ciphertext);
 
         return Encoder.decode(self#encoder, plaintext);
-    }
-
-    fun void control_set_encrypt (
-        t self,
-        int<<4>> sequence_num,
-        int<<64>> otp
-    ) {
-        Encryptor.control_set(self#encryptor, sequence_num, otp);
-    }
-
-    fun void control_set_decrypt (
-        t self,
-        int<<4>> sequence_num,
-        int<<64>> otp
-    ) {
-        Decryptor.control_set(self#decryptor, sequence_num, otp);
-    }
-
-    fun void control_set_traffic_enc (
-        t self,
-        int<<4>> traffic_class,
-        int<<28>> enc
-    ) {
-        Encoder.control_set_traffic_enc(self#encoder, traffic_class, enc);
-    }
-
-    fun void control_set_path_enc (
-        t self,
-        int<<3>> path_id,
-        int<<29>> enc
-    ) {
-        Encoder.control_set_path_enc(self#encoder, path_id, enc);
     }
 }

@@ -1,6 +1,5 @@
 """Models of events for Tango."""
 from abc import ABC, abstractmethod
-from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Self
 
@@ -8,13 +7,29 @@ import error
 import tango_types
 
 
-class TangoEvent(ABC):
-    """A Tango event which can be tested."""
+class InterpreterEvent(ABC):
+    """Event for the Lucid interpreter."""
 
     @property
     @abstractmethod
     def name(self: Self) -> str:
         """Get the name of the event."""
+
+    @abstractmethod
+    def as_dict(
+        self: Self,
+    ) -> dict[
+        str, int | str | list[int | str] | dict[int | str | list[int | str]]
+    ]:
+        """Get dictionary representation of an interpreter event."""
+
+
+class TangoEvent(InterpreterEvent):
+    """A Tango event which can be tested."""
+
+
+class ControlEvent(InterpreterEvent):
+    """Command that the control plane can interact with registers."""
 
 
 @dataclass
@@ -30,13 +45,14 @@ class ForwardFlow(TangoEvent):
         """Get the name of the event."""
         return "forward_flow"
 
-    def __iter__(self: Self) -> Iterable[int]:
-        """Get iterator over all fields."""
-        return iter(
-            list(self.eth_header)
+    def as_dict(self: Self) -> dict[str, str | list[int]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "name": self.name,
+            "args": list(self.eth_header)
             + list(self.ip_header)
             + list(self.five_tuple),
-        )
+        }
 
 
 @dataclass
@@ -54,15 +70,16 @@ class IncomingTangoTraffic(TangoEvent):
         """Get the name of the event."""
         return "incoming_tango_traffic"
 
-    def __iter__(self: Self) -> Iterable[int]:
-        """Get iterator over all fields."""
-        return iter(
-            list(self.tango_eth_header)
+    def as_dict(self: Self) -> dict[str, str | list[int]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "name": self.name,
+            "args": list(self.tango_eth_header)
             + list(self.tango_ip_header)
             + list(self.tango_metrics_header)
             + list(self.encaped_ip_header)
             + list(self.encaped_five_tuple),
-        )
+        }
 
 
 @dataclass
@@ -74,21 +91,126 @@ class RouteUpdate(TangoEvent):
 
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
-        if self.sequence_num >= 2**4:
-            raise error.ModelError("Too large of path_id")
+        if self.sequence_num >= 2**24:
+            raise error.ModelError("Too large of sequence number")
         if self.update >= 2**64:
-            raise error.ModelError("Too large of timestamp")
+            raise error.ModelError("Too large of update")
 
     @property
     def name(self: Self) -> str:
         """Get the name of the event."""
         return "route_update"
 
-    def __iter__(self: Self) -> Iterable[int]:
-        """Get iterator over all fields."""
-        return iter(
-            [
+    def as_dict(self: Self) -> dict[str, str | list[int]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "name": self.name,
+            "args": [
                 self.sequence_num,
                 self.update,
             ],
-        )
+        }
+
+
+@dataclass
+class ArraySet(ControlEvent):
+    """Set an index of an array to a value."""
+
+    array: str
+    index: int
+    value: int
+
+    @property
+    def name(self: Self) -> str:
+        """Get the name of the event."""
+        return "Array.set"
+
+    def as_dict(self: Self) -> dict[str, str | dict[str, int | list[int]]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "type": "command",
+            "name": self.name,
+            "args": {
+                "array": self.array,
+                "index": self.index,
+                "value": [self.value],
+            },
+        }
+
+
+@dataclass
+class ArrayGet(ControlEvent):
+    """Get an index of an array to a value."""
+
+    array: str
+    index: int
+
+    @property
+    def name(self: Self) -> str:
+        """Get the name of the event."""
+        return "Array.get"
+
+    def as_dict(self: Self) -> dict[str, str | dict[str, int]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "type": "command",
+            "name": self.name,
+            "args": {
+                "array": self.array,
+                "index": self.index,
+            },
+        }
+
+
+@dataclass
+class ArraySetRange(ControlEvent):
+    """Set a range of indexes of an array to a value."""
+
+    array: str
+    start: int
+    end: int
+    values: list[int]
+
+    @property
+    def name(self: Self) -> str:
+        """Get the name of the event."""
+        return "Array.setrange"
+
+    def as_dict(self: Self) -> dict[str, str | dict[str, int | list[int]]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "type": "command",
+            "name": self.name,
+            "args": {
+                "array": self.array,
+                "start": self.start,
+                "end": self.end,
+                "value": self.values,
+            },
+        }
+
+
+@dataclass
+class ArrayGetRange(ControlEvent):
+    """Get a range of indexes of an array to a value."""
+
+    array: str
+    start: int
+    end: int
+
+    @property
+    def name(self: Self) -> str:
+        """Get the name of the event."""
+        return "Array.getrange"
+
+    def as_dict(self: Self) -> dict[str, str | dict[str, int]]:
+        """Get dictionary representation of an interpreter event."""
+        return {
+            "type": "command",
+            "name": self.name,
+            "args": {
+                "array": self.array,
+                "start": self.start,
+                "end": self.end,
+            },
+        }

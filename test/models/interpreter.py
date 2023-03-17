@@ -14,7 +14,7 @@ from edu.princeton.tango.mappers import (
 )
 from edu.princeton.tango.mappers.mapper import Mapper
 from error import TestExpetedPacketGenError, UsageError
-from events import TangoEvent
+from events import InterpreterEvent
 
 
 @dataclass
@@ -48,7 +48,7 @@ class TestEvent:
 
     def __init__(
         self: Self,
-        event: TangoEvent,
+        event: InterpreterEvent,
         timestamp: int | None = None,
         locations: list[EventLocation] | None = None,
     ) -> None:
@@ -59,9 +59,7 @@ class TestEvent:
 
     def as_dict(self: Self) -> dict[str, str]:
         """Convert to a dictionary."""
-        event = {}
-        event["name"] = self._event.name
-        event["args"] = list(self._event)
+        event = self._event.as_dict()
 
         if self._timestamp:
             event["timestamp"] = self._timestamp
@@ -232,7 +230,7 @@ class TestRunner:
 
 
 if __name__ == "__main__":
-    from events import ForwardFlow
+    from events import ForwardFlow, ArraySet, ArrayGet, ArrayGetRange
     from tango_types import EthernetHeader, FiveTuple, IPv4Header
 
     switch1 = EventLocation(0, 1)

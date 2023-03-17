@@ -48,23 +48,6 @@ module MetricSignatureManager : {
         int<<3>> path_id,
         int<<32>> signature
     ) [start <= self; end self];
-
-   /**
-    * # Description
-    * Let the control plane update a signature.
-    * 
-    * # Parameters
-    * self (t): self
-    * path_id (int<<3>>): the physcial path ID packet is/was sent on
-    * timestamp (int<<12>>): timestamp of packet send/receive
-    * signature (int<<32>> signature): signature to validate
-    **/
-    fun void control_set (
-        t self,
-        int<<3>> path_id,
-        int<<12>> timestamp,
-        int<<32>> signature
-    ) [start <= self; end self];
 }
 {
     type t = {
@@ -137,23 +120,6 @@ module MetricSignatureManager : {
         | 7 -> {
             return Array.get(self#signatures7, timestamp[3:0]) == signature;
         }
-    }
-
-    fun void control_set (
-        t self,
-        int<<3>> path_id,
-        int<<12>> timestamp,
-        int<<32>> signature
-    ) {
-        match path_id with
-        | 0 -> { Array.set(self#signatures0, timestamp, signature); }
-        | 1 -> { Array.set(self#signatures1, timestamp, signature); }
-        | 2 -> { Array.set(self#signatures2, timestamp, signature); }
-        | 3 -> { Array.set(self#signatures3, timestamp, signature); }
-        | 4 -> { Array.set(self#signatures4, timestamp, signature); }
-        | 5 -> { Array.set(self#signatures5, timestamp, signature); }
-        | 6 -> { Array.set(self#signatures6, timestamp, signature); }
-        | 7 -> { Array.set(self#signatures7, timestamp, signature); }
     }
 }
 
