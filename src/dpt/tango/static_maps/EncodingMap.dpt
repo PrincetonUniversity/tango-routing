@@ -1,0 +1,102 @@
+include "../Types.dpt"
+
+/**
+* # Description
+* Get verifiable padding for a given traffic class.
+* 
+* # Parameters
+* path_id (int<<3>>): path ID of associated sequence number
+* 
+* # Returns
+* padding (int<<29>>): verifiable padding for a given path identifier.
+**/
+fun int<<29>> get_path_id_padding (int<<3>> path_id) {
+    match (path_id) with
+    | 0 -> { return (int<<29>>) 0x0000; }
+    | 1 -> { return (int<<29>>) 0x0000; }
+    | 2 -> { return (int<<29>>) 0x0000; }
+    | 3 -> { return (int<<29>>) 0x0000; }
+    | 4 -> { return (int<<29>>) 0x0000; }
+    | 5 -> { return (int<<29>>) 0x0000; }
+    | 6 -> { return (int<<29>>) 0x0000; }
+    | 7 -> { return (int<<29>>) 0x0000; }
+} // FIXME: MAKE ACTUAL SPARSE PADS
+
+/**
+* # Description
+* Get verifiable padding for a given traffic class.
+* 
+* # Parameters
+* traffic_class (int<<4>>): traffic class of associated sequence number
+* 
+* # Returns
+* padding (int<<28>>): verifiable padding for a given traffic class.
+**/
+fun int<<28>> get_traffic_cls_padding (int<<4>> traffic_class) {
+    match (traffic_class) with
+    | 0 -> { return (int<<28>>) 0x0000; }
+    | 1 -> { return (int<<28>>) 0x0000; }
+    | 2 -> { return (int<<28>>) 0x0000; }
+    | 3 -> { return (int<<28>>) 0x0000; }
+    | 4 -> { return (int<<28>>) 0x0000; }
+    | 5 -> { return (int<<28>>) 0x0000; }
+    | 6 -> { return (int<<28>>) 0x0000; }
+    | 7 -> { return (int<<28>>) 0x0000; }
+    | 8 -> { return (int<<28>>) 0x0000; }
+    | 9 -> { return (int<<28>>) 0x0000; }
+    | 10 -> { return (int<<28>>) 0x0000; }
+    | 11 -> { return (int<<28>>) 0x0000; }
+    | 12 -> { return (int<<28>>) 0x0000; }
+    | 13 -> { return (int<<28>>) 0x0000; }
+    | 14 -> { return (int<<28>>) 0x0000; }
+    | 15 -> { return (int<<28>>) 0x0000; }
+} // FIXME: MAKE ACTUAL SPARSE PADS
+
+/**
+* # Description
+* Encode a route update (physical path & traffic class) with
+* a verifyable padding scheme.
+* 
+* # Parameters
+* path_id (int<<3>>): path ID of associated sequence number
+* traffic_class (int<<4>>): traffic class of associated sequence number
+* 
+* # Returns
+* encoding (int<<64>>): verifiable, encoded route update
+**/
+fun int<<64>> encode_update (int<<3>> path_id, int<<4>> traffic_class) {
+    // Get path encoding
+    int<<32>> encoded_path = path_id ^ get_path_id_padding(path_id);
+
+    // Get traffic class encoding
+    int<<32>> encoded_traffic_class =
+        traffic_class ^ get_traffic_cls_padding(traffic_class);
+
+    return encoded_path ^ encoded_traffic_class;
+}
+
+/**
+* # Description
+* Decodes and verifies route update.
+* 
+* # Parameters
+* encoded_update (int<<64>>): route to decode and verify
+* 
+* # Returns
+* update (RouteUpdate_t): verified route mapping update
+**/
+fun RouteUpdate_t decode_update (int<<64>> encoded_update) {
+        // Validate self-referencial encoding
+        bool is_valid_path =
+            get_path_id_padding(encoded_update[63:61]) == encoded_update[60:32];
+
+        // Get traffic class encoding
+        bool is_valid_class =
+            get_traffic_cls_padding(encoded_update[31:28]) == encoded_update[27:0];
+
+        return {
+            is_valid = is_valid_path && is_valid_class;
+            traffic_class = encoded_update[31:28];
+            new_path_id = encoded_update[63:61];
+        };
+}

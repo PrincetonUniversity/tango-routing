@@ -1,5 +1,5 @@
 include "../../../Types.dpt"
-include "Encoder.dpt"
+include "../../../static_maps/EncodingMap.dpt"
 include "Encyptor.dpt"
 include "Decryptor.dpt"
 
@@ -55,13 +55,11 @@ module EncryptionManager : {
 {
     type t = {
         Decryptor.t decryptor;
-        Encoder.t encoder;
         Encryptor.t encryptor;
     }
 
     constr t create () = {
         decryptor = Decryptor.create();
-        encoder = Encoder.create();
         encryptor = Encryptor.create();
     };
 
@@ -70,8 +68,7 @@ module EncryptionManager : {
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) {
-        int<<64>> encoded_update =
-            Encoder.encode(self#encoder, path_id, traffic_cls);
+        int<<64>> encoded_update = encode_update(path_id, traffic_cls);
 
         TaggedCiphertext_t ciphertext =
             Encryptor.encrypt(self#encryptor, encoded_update);
@@ -87,6 +84,6 @@ module EncryptionManager : {
         int<<64>> plaintext =
             Decryptor.decrypt(self#decryptor, seq_number, ciphertext);
 
-        return Encoder.decode(self#encoder, plaintext);
+        return decode_update(plaintext);
     }
 }
