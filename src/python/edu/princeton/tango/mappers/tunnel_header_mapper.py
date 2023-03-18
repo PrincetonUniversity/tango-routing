@@ -168,9 +168,7 @@ class ConfiguredHeaderMapper(HeaderMapper):
 
         headers.sort(key=lambda hdr: hdr.path_id)
 
-        resolved_headers = [
-            MatchCase([str(hdr.path_id)], str(hdr.header)) for hdr in headers
-        ]
+        resolved_headers = [MatchCase([str(hdr.path_id)], str(hdr.header)) for hdr in headers]
         self._headers: Final[MatchBody] = MatchBody(resolved_headers)
 
     def __str__(self: Self) -> str:

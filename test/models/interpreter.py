@@ -1,23 +1,17 @@
 """Interpreter configuration models."""
-from abc import ABC, abstractmethod
 import json
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 from shutil import copytree, rmtree
+from subprocess import run as run_cmd
 from tempfile import mkdtemp
 from typing import Self
 
-# import docker
-
-from edu.princeton.tango.mappers import (
-    HeaderMapper,
-    PolicyMapper,
-    TrafficClassMapper,
-)
+from edu.princeton.tango.mappers import HeaderMapper, PolicyMapper, TrafficClassMapper
 from edu.princeton.tango.mappers.mapper import Mapper
-from error import DptError, UsageError
-from events import InterpreterEvent
-from subprocess import run as run_cmd
+from models.error import DptError, UsageError
+from models.events import InterpreterEvent
 
 
 @dataclass
@@ -162,9 +156,7 @@ class ExpectContains(ExpectedResult):
 
     def check(self: Self, result: TestResult) -> None:
         """Check result for a property."""
-        assert self._expect in str(
-            result
-        ), f"Could not find '{self._expect}' in:\n\n{result}"
+        assert self._expect in str(result), f"Could not find '{self._expect}' in:\n\n{result}"
 
 
 class ExpectationRunner:
@@ -181,8 +173,8 @@ class ExpectationRunner:
 
     def finish(self: Self) -> None:
         """Manage and assert all the expectations."""
-        for ea in self._expectations:
-            ea.check()
+        for each in self._expectations:
+            each.check(self._result)
 
 
 class TestRunner:
@@ -234,38 +226,19 @@ class TestRunner:
     def _write_out_mapper(self: Self, mapper: Mapper | None = None) -> None:
         """Write out mappings to test configuration."""
         if mapper:
-            path = (
-                Path(self._tmp_dir) / Path("static_maps") / Path(mapper.name)
-            )
+            path = Path(self._tmp_dir) / Path("static_maps") / Path(mapper.name)
             path.write_text(str(mapper))
 
     def _run_test(self: Self) -> str:
         """Run the test configuration."""
-        # client = docker.from_env()
-        # try:
-        #     return client.containers.run(
-        #         image="jsonch/lucid:lucid",
-        #         auto_remove=True,
-        #         volumes=[f"{self._tmp_dir}:/workspace"],
-        #         command="".join(
-        #             (
-        #                 'sh -c "cd /workspace &&',
-        #                 '/app/dpt Tango.dpt --spec test.json"',
-        #             ),
-        #         ),
-        #     ).decode("utf-8")
-        # except Exception as err:
-        #     raise TestExpetedPacketGenError(err) from err
         tango_src = Path(self._tmp_dir) / Path("Tango.dpt")
         test_config = Path(self._tmp_dir) / Path("test.json")
         cmd = ["dpt", str(tango_src), "--spec", str(test_config)]
 
-        result = run_cmd(cmd, capture_output=True, text=True)
+        result = run_cmd(cmd, capture_output=True, text=True, check=False)
 
         if result.returncode != 0:
-            raise DptError(
-                f"Lucid compiler erred with following:\n\n{result.stderr}"
-            )
+            raise DptError(f"Lucid compiler erred with following:\n\n{result.stderr}")
 
         return result.stdout
 

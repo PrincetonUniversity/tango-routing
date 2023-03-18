@@ -2,10 +2,7 @@
 from pathlib import Path
 
 import click
-from edu.princeton.tango.config_parser import (
-    DefaultConfigParser,
-    YAMLConfigParser,
-)
+from edu.princeton.tango.config_parser import DefaultConfigParser, YAMLConfigParser
 
 
 @click.group()

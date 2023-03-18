@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Self
 
-import error
-import tango_types
+from models.error import ModelError
+from models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
 
 
 class InterpreterEvent(ABC):
@@ -19,9 +19,7 @@ class InterpreterEvent(ABC):
     @abstractmethod
     def as_dict(
         self: Self,
-    ) -> dict[
-        str, int | str | list[int | str] | dict[int | str | list[int | str]]
-    ]:
+    ) -> dict[str, int | str | list[int | str] | dict[int | str | list[int | str]]]:
         """Get dictionary representation of an interpreter event."""
 
 
@@ -37,9 +35,9 @@ class ControlEvent(InterpreterEvent):
 class ForwardFlow(TangoEvent):
     """Forward Flow event type."""
 
-    eth_header: tango_types.EthernetHeader
-    ip_header: tango_types.IPv4Header
-    five_tuple: tango_types.FiveTuple
+    eth_header: EthernetHeader
+    ip_header: IPv4Header
+    five_tuple: FiveTuple
 
     @property
     def name(self: Self) -> str:
@@ -50,9 +48,7 @@ class ForwardFlow(TangoEvent):
         """Get dictionary representation of an interpreter event."""
         return {
             "name": self.name,
-            "args": list(self.eth_header)
-            + list(self.ip_header)
-            + list(self.five_tuple),
+            "args": list(self.eth_header) + list(self.ip_header) + list(self.five_tuple),
         }
 
 
@@ -60,11 +56,11 @@ class ForwardFlow(TangoEvent):
 class IncomingTangoTraffic(TangoEvent):
     """Incoming traffic from a Tango peer."""
 
-    tango_eth_header: tango_types.EthernetHeader
-    tango_ip_header: tango_types.IPv6Header
-    tango_metrics_header: tango_types.TangoHeader
-    encaped_ip_header: tango_types.IPv4Header
-    encaped_five_tuple: tango_types.FiveTuple
+    tango_eth_header: EthernetHeader
+    tango_ip_header: IPv6Header
+    tango_metrics_header: TangoHeader
+    encaped_ip_header: IPv4Header
+    encaped_five_tuple: FiveTuple
 
     @property
     def name(self: Self) -> str:
@@ -93,9 +89,9 @@ class RouteUpdate(TangoEvent):
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
         if self.sequence_num >= 2**24:
-            raise error.ModelError("Too large of sequence number")
+            raise ModelError("Too large of sequence number")
         if self.update >= 2**64:
-            raise error.ModelError("Too large of update")
+            raise ModelError("Too large of update")
 
     @property
     def name(self: Self) -> str:
@@ -145,14 +141,14 @@ class ArrayName(Enum):
     OUTGOING_BOOK_SIG_5 = "outgoing_book_signature_manager_5"
     OUTGOING_BOOK_SIG_6 = "outgoing_book_signature_manager_6"
     OUTGOING_BOOK_SIG_7 = "outgoing_book_signature_manager_7"
-    OUTGOING_METRIC_SIG_0 = "outgoing_metric_signature_manager_0"
-    OUTGOING_METRIC_SIG_1 = "outgoing_metric_signature_manager_1"
-    OUTGOING_METRIC_SIG_2 = "outgoing_metric_signature_manager_2"
-    OUTGOING_METRIC_SIG_3 = "outgoing_metric_signature_manager_3"
-    OUTGOING_METRIC_SIG_4 = "outgoing_metric_signature_manager_4"
-    OUTGOING_METRIC_SIG_5 = "outgoing_metric_signature_manager_5"
-    OUTGOING_METRIC_SIG_6 = "outgoing_metric_signature_manager_6"
-    OUTGOING_METRIC_SIG_7 = "outgoing_metric_signature_manager_7"
+    OUTGOING_METRIC_SIG_0 = "outgoing_metric_signature_manager.signatures0"
+    OUTGOING_METRIC_SIG_1 = "outgoing_metric_signature_manager.signatures1"
+    OUTGOING_METRIC_SIG_2 = "outgoing_metric_signature_manager.signatures2"
+    OUTGOING_METRIC_SIG_3 = "outgoing_metric_signature_manager.signatures3"
+    OUTGOING_METRIC_SIG_4 = "outgoing_metric_signature_manager.signatures4"
+    OUTGOING_METRIC_SIG_5 = "outgoing_metric_signature_manager.signatures5"
+    OUTGOING_METRIC_SIG_6 = "outgoing_metric_signature_manager.signatures6"
+    OUTGOING_METRIC_SIG_7 = "outgoing_metric_signature_manager.signatures7"
     OUTGOING_DECRYPT_PADS_LOWER32 = "outgoing_encryption_manager_0_0"
     OUTGOING_DECRYPT_PADS_UPPER32 = "outgoing_encryption_manager_0_1"
     OUTGOING_ENCRYPT_PADS_LOWER32 = "outgoing_encryption_manager_1_1"

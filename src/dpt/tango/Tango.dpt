@@ -179,9 +179,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         book_signature
     );
 
-    printf("Tunneling packet out port %d", out_peer_port);
     generate_port (out_peer_port, forward_tango_pkt);
-    printf("Tunneled packet.");
 }
 
 handle incoming_tango_traffic (
@@ -196,12 +194,9 @@ handle incoming_tango_traffic (
     // -- Skip if not tango traffic
     int<<4>> traffic_class = map_flow_to_traffic_class(encaped_five_tuple);
     if (traffic_class == 15) {
-        printf("hello");
         event tunneled = forward_flow (tango_eth_header, encaped_ip_header, encaped_five_tuple);
         generate_port (out_port, tunneled);
-        printf("hello-2");
     } else {
-        printf("wtf");
     // -- Verify
     bool is_valid_seq_num = BookSignatureManager.verify(
         incoming_book_signature_manager,
@@ -309,7 +304,6 @@ handle incoming_tango_traffic (
         }
 
     }}
-    printf("exiting");
 }
 
 handle route_update (int<<4>> sequence_num, int<<64>> update) {

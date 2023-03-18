@@ -97,14 +97,10 @@ class YAMLConfigParser(ConfigParser):
         for traffic_class, matcher_mappings in tc_map.items():
             for matcher in matcher_mappings:
                 src_addr = (
-                    FuzzyIPv4Address(matcher.get("src_addr"))
-                    if matcher.get("src_addr")
-                    else None
+                    FuzzyIPv4Address(matcher.get("src_addr")) if matcher.get("src_addr") else None
                 )
                 dest_addr = (
-                    FuzzyIPv4Address(matcher.get("dest_addr"))
-                    if matcher.get("dest_addr")
-                    else None
+                    FuzzyIPv4Address(matcher.get("dest_addr")) if matcher.get("dest_addr") else None
                 )
                 five_tuple = FuzzyFiveTuple(
                     src_addr,
