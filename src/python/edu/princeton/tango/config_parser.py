@@ -8,6 +8,7 @@ import yaml
 from edu.princeton.tango.mappers.constraints_mapper import (
     ConfiguredConstraintMapper,
     Constraint,
+    ConstraintMapper,
     ConstraintMapping,
     DefaultConstraintMapper,
 )
@@ -16,6 +17,7 @@ from edu.princeton.tango.mappers.policy_mapper import (
     DefaultPolicyMapper,
     OptimizationStrategy,
     Policy,
+    PolicyMapper,
 )
 from edu.princeton.tango.mappers.traffic_class_mapper import (
     ConfiguredTrafficClassMapper,
@@ -23,10 +25,12 @@ from edu.princeton.tango.mappers.traffic_class_mapper import (
     FuzzyClassMapping,
     FuzzyFiveTuple,
     FuzzyIPv4Address,
+    TrafficClassMapper,
 )
 from edu.princeton.tango.mappers.tunnel_header_mapper import (
     ConfiguredHeaderMapper,
     DefaultHeaderMapper,
+    HeaderMapper,
     IPv6Header,
     TunnelHeader,
 )
@@ -37,22 +41,22 @@ class ConfigParser(ABC):
 
     @property
     @abstractmethod
-    def header_mapper(self: Self) -> ConfiguredHeaderMapper:
+    def header_mapper(self: Self) -> HeaderMapper:
         """Map of tunnel headers for path ids."""
 
     @property
     @abstractmethod
-    def class_mapper(self: Self) -> ConfiguredTrafficClassMapper:
+    def class_mapper(self: Self) -> TrafficClassMapper:
         """Fuzzy matching floes to traffic classes."""
 
     @property
     @abstractmethod
-    def policy_mapper(self: Self) -> ConfiguredPolicyMapper:
+    def policy_mapper(self: Self) -> PolicyMapper:
         """Map of optimization policies for given traffic classes."""
 
     @property
     @abstractmethod
-    def constraint_mapper(self: Self) -> ConfiguredPolicyMapper:
+    def constraint_mapper(self: Self) -> ConstraintMapper:
         """Map of optimization constraints for given traffic classes."""
 
 
@@ -84,7 +88,7 @@ class YAMLConfigParser(ConfigParser):
         return self._policy_mapper
 
     @property
-    def constraint_mapper(self: Self) -> ConfiguredPolicyMapper:
+    def constraint_mapper(self: Self) -> ConfiguredConstraintMapper:
         """Map of optimization constraints for given traffic classes."""
         return self._constraint_mapper
 

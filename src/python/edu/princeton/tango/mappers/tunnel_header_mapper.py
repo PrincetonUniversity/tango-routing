@@ -161,7 +161,7 @@ class ConfiguredHeaderMapper(HeaderMapper):
 
     def __init__(self: Self, headers: list[TunnelHeader]) -> None:
         """Create a configured header map."""
-        if len(headers) >= 8:
+        if len(headers) > 8:
             raise InvalidParameterError(
                 f"There is a maximum of 8 traffic classes: got {len(headers)}",
             )

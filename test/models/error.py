@@ -4,6 +4,8 @@
 class TangoTestingBaseError(Exception):
     """Base exception for all Tango testing."""
 
+    __test__ = False
+
 
 class ModelError(TangoTestingBaseError):
     """Error in model definition."""

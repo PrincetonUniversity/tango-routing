@@ -1,9 +1,8 @@
 """Models of Tango record types."""
 from collections.abc import Iterable
 from dataclasses import dataclass
+from test.models.error import ModelError
 from typing import Self
-
-from models.error import ModelError
 
 
 @dataclass
@@ -188,7 +187,7 @@ class TangoHeader:
         """Do sanitization."""
         if self.path_id >= 2**3:
             raise ModelError("Too large of path_id")
-        if self.timestamp >= 2**12:
+        if self.timestamp >= 2**32:
             raise ModelError("Too large of timestamp")
         if self.signature >= 2**32:
             raise ModelError("Too large of signature")

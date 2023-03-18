@@ -6,12 +6,12 @@ from pathlib import Path
 from shutil import copytree, rmtree
 from subprocess import run as run_cmd
 from tempfile import mkdtemp
+from test.models.error import DptError, UsageError
+from test.models.events import InterpreterEvent, TangoEvent
 from typing import Self
 
 from edu.princeton.tango.mappers import HeaderMapper, PolicyMapper, TrafficClassMapper
 from edu.princeton.tango.mappers.mapper import Mapper
-from models.error import DptError, UsageError
-from models.events import InterpreterEvent
 
 
 @dataclass
@@ -24,6 +24,10 @@ class EventLocation:
     def __str__(self: Self) -> str:
         """Convert to expected formatted string."""
         return f"{self.router_id}:{self.port}"
+
+    def __int__(self: Self) -> int:
+        """Get integer definition of event location (router id)."""
+        return self.router_id
 
 
 @dataclass
@@ -42,6 +46,8 @@ class EventLink:
 
 class TestEvent:
     """Interpreter event to be injected into test system."""
+    
+    __test__ = False
 
     def __init__(
         self: Self,
@@ -62,7 +68,10 @@ class TestEvent:
             event["timestamp"] = self._timestamp
 
         if self._locations:
-            event["locations"] = list(map(str, self._locations))
+            if isinstance(self._event, TangoEvent):
+                event["locations"] = list(map(str, self._locations))
+            else:
+                event["locations"] = list(map(int, self._locations))
 
         return event
 
@@ -70,6 +79,8 @@ class TestEvent:
 @dataclass
 class TestCase:
     """A configuration for a Lucid interpreter test."""
+
+    __test__ = False
 
     def __init__(
         self: Self,
@@ -96,7 +107,7 @@ class TestCase:
         """Convert to a dictionary."""
         config = {}
         config["max time"] = self._max_time
-        config["events"] = list(map(lambda e: e.as_dict(), self._events))
+        config["events"] = [e.as_dict() for e in self._events]
 
         if self._switches:
             config["switches"] = self._switches
@@ -129,6 +140,8 @@ class TestCase:
 
 class TestResult:
     """Result of an interpreter run."""
+    
+    __test__ = False
 
     def __init__(self: Self, result: str) -> None:
         """Create a Test Result."""
@@ -138,9 +151,15 @@ class TestResult:
         """Give back the raw string form of the interpreter output."""
         return self._res
 
+    def expect(self: Self) -> "ExpectationRunner":
+        """Get prepopulated expectation runner."""
+        return ExpectationRunner(self)
+
 
 class ExpectedResult(ABC):
     """Expected result of an interpreter test."""
+    
+    __test__ = False
 
     @abstractmethod
     def check(self: Self, result: TestResult) -> None:
@@ -161,12 +180,15 @@ class ExpectContains(ExpectedResult):
 
 class ExpectationRunner:
     """Manages all epectations for a given test result."""
+    
+    __test__ = False
 
     def __init__(self: Self, result: TestResult) -> None:
+        """Make expectation runner."""
         self._result = result
         self._expectations: list[ExpectedResult] = []
 
-    def expect(self: Self, expectation: ExpectedResult) -> Self:
+    def then(self: Self, expectation: ExpectedResult) -> Self:
         """Add an expectation to manage."""
         self._expectations.append(expectation)
         return self
@@ -179,6 +201,8 @@ class ExpectationRunner:
 
 class TestRunner:
     """Run a Lucid interpreter test."""
+    
+    __test__ = False
 
     def __init__(
         self: Self,
@@ -252,7 +276,7 @@ class TestRunner:
 
 
 if __name__ == "__main__":
-    from events import ForwardFlow
+    from events import ArrayGet, ArrayName, ArraySet, ForwardFlow
     from tango_types import EthernetHeader, FiveTuple, IPv4Header
 
     switch1 = EventLocation(0, 1)
@@ -281,12 +305,36 @@ if __name__ == "__main__":
 
     links = [EventLink(switch1, switch2)]
 
-    given_case = TestCase(20000, events, switches=2, link_list=links)
+    given_case = TestCase(
+        20000,
+        [
+            TestEvent(
+                ArraySet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0, 5055),
+                timestamp=1,
+                locations=[switch1],
+            ),
+            TestEvent(
+                ArraySet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0, 5056),
+                timestamp=1,
+                locations=[switch2],
+            ),
+            TestEvent(
+                ArrayGet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0),
+                timestamp=2,
+                locations=[switch1],
+            ),
+            TestEvent(
+                ArrayGet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0),
+                timestamp=2,
+                locations=[switch2],
+            ),
+        ],
+        switches=2,
+        link_list=links,
+    )
     from pprint import PrettyPrinter
 
     PrettyPrinter().pprint(json.loads(given_case.json))
 
     with TestRunner(given_case) as runner:
         print(runner.run())
-
-    # TestRunner(given_case).create().run()

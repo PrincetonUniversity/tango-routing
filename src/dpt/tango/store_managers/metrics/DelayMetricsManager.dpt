@@ -103,7 +103,9 @@ module DelayMetricsManager : {
         | 7 -> { delay_count = (int<<32>>) Counter.add(self#delay_count7, 1) + 1; }
 
         // Update and get delay
-        int ts_diff = (int<<32>>) (get_time_now_ms() - timestamp);
+        int<<12>> curr_time = get_time_now_ms();
+        int ts_diff = (int<<32>>) (curr_time - timestamp);
+        printf("Found ts diff: %d - %d = %d", curr_time, timestamp, ts_diff);
         int<<32>> delay_avg = PairArray.update(
             self#delay_sums,
             path_id,

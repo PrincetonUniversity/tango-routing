@@ -2,14 +2,15 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
+from test.models.error import ModelError
+from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
 from typing import Self
-
-from models.error import ModelError
-from models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
 
 
 class InterpreterEvent(ABC):
     """Event for the Lucid interpreter."""
+
+    __test__ = False
 
     @property
     @abstractmethod
@@ -112,35 +113,35 @@ class RouteUpdate(TangoEvent):
 class ArrayName(Enum):
     """Names of all arrays in Tango switch."""
 
-    INCOMING_DECRYPT_PADS_LOWER32 = "incoming_encryption_manager_0_0"
-    INCOMING_DECRYPT_PADS_UPPER32 = "incoming_encryption_manager_0_1"
-    INCOMING_ENCRYPT_PADS_LOWER32 = "incoming_encryption_manager_1_1"
-    INCOMING_ENCRYPT_PADS_UPPER32 = "incoming_encryption_manager_1_2"
-    ROUTE_MAPPINGS = "route_manager_0"
-    INCOMING_BOOK_SIG_0 = "incoming_book_signature_manager_0"
-    INCOMING_BOOK_SIG_1 = "incoming_book_signature_manager_1"
-    INCOMING_BOOK_SIG_2 = "incoming_book_signature_manager_2"
-    INCOMING_BOOK_SIG_3 = "incoming_book_signature_manager_3"
-    INCOMING_BOOK_SIG_4 = "incoming_book_signature_manager_4"
-    INCOMING_BOOK_SIG_5 = "incoming_book_signature_manager_5"
-    INCOMING_BOOK_SIG_6 = "incoming_book_signature_manager_6"
-    INCOMING_BOOK_SIG_7 = "incoming_book_signature_manager_7"
-    INCOMING_METRIC_SIG_0 = "incoming_metric_signature_manager_0"
-    INCOMING_METRIC_SIG_1 = "incoming_metric_signature_manager_1"
-    INCOMING_METRIC_SIG_2 = "incoming_metric_signature_manager_2"
-    INCOMING_METRIC_SIG_3 = "incoming_metric_signature_manager_3"
-    INCOMING_METRIC_SIG_4 = "incoming_metric_signature_manager_4"
-    INCOMING_METRIC_SIG_5 = "incoming_metric_signature_manager_5"
-    INCOMING_METRIC_SIG_6 = "incoming_metric_signature_manager_6"
-    INCOMING_METRIC_SIG_7 = "incoming_metric_signature_manager_7"
-    OUTGOING_BOOK_SIG_0 = "outgoing_book_signature_manager_0"
-    OUTGOING_BOOK_SIG_1 = "outgoing_book_signature_manager_1"
-    OUTGOING_BOOK_SIG_2 = "outgoing_book_signature_manager_2"
-    OUTGOING_BOOK_SIG_3 = "outgoing_book_signature_manager_3"
-    OUTGOING_BOOK_SIG_4 = "outgoing_book_signature_manager_4"
-    OUTGOING_BOOK_SIG_5 = "outgoing_book_signature_manager_5"
-    OUTGOING_BOOK_SIG_6 = "outgoing_book_signature_manager_6"
-    OUTGOING_BOOK_SIG_7 = "outgoing_book_signature_manager_7"
+    INCOMING_DECRYPT_PADS_LOWER32 = "incoming_encryption_manager.decryptor.corresponding_otps0"
+    INCOMING_DECRYPT_PADS_UPPER32 = "incoming_encryption_manager.decryptor.corresponding_otps1"
+    INCOMING_ENCRYPT_PADS_LOWER32 = "incoming_encryption_manager.encryptor.one_time_pads0"
+    INCOMING_ENCRYPT_PADS_UPPER32 = "incoming_encryption_manager.encryptor.one_time_pads1"
+    ROUTE_MAPPINGS = "route_manager.mappings"
+    INCOMING_BOOK_SIG_0 = "incoming_book_signature_manager.onebit_signatures0"
+    INCOMING_BOOK_SIG_1 = "incoming_book_signature_manager.onebit_signatures1"
+    INCOMING_BOOK_SIG_2 = "incoming_book_signature_manager.onebit_signatures2"
+    INCOMING_BOOK_SIG_3 = "incoming_book_signature_manager.onebit_signatures3"
+    INCOMING_BOOK_SIG_4 = "incoming_book_signature_manager.onebit_signatures4"
+    INCOMING_BOOK_SIG_5 = "incoming_book_signature_manager.onebit_signatures5"
+    INCOMING_BOOK_SIG_6 = "incoming_book_signature_manager.onebit_signatures6"
+    INCOMING_BOOK_SIG_7 = "incoming_book_signature_manager.onebit_signatures7"
+    INCOMING_METRIC_SIG_0 = "incoming_metric_signature_manager.signatures0"
+    INCOMING_METRIC_SIG_1 = "incoming_metric_signature_manager.signatures1"
+    INCOMING_METRIC_SIG_2 = "incoming_metric_signature_manager.signatures2"
+    INCOMING_METRIC_SIG_3 = "incoming_metric_signature_manager.signatures3"
+    INCOMING_METRIC_SIG_4 = "incoming_metric_signature_manager.signatures4"
+    INCOMING_METRIC_SIG_5 = "incoming_metric_signature_manager.signatures5"
+    INCOMING_METRIC_SIG_6 = "incoming_metric_signature_manager.signatures6"
+    INCOMING_METRIC_SIG_7 = "incoming_metric_signature_manager.signatures7"
+    OUTGOING_BOOK_SIG_0 = "outgoing_book_signature_manager.onebit_signatures0"
+    OUTGOING_BOOK_SIG_1 = "outgoing_book_signature_manager.onebit_signatures1"
+    OUTGOING_BOOK_SIG_2 = "outgoing_book_signature_manager.onebit_signatures2"
+    OUTGOING_BOOK_SIG_3 = "outgoing_book_signature_manager.onebit_signatures3"
+    OUTGOING_BOOK_SIG_4 = "outgoing_book_signature_manager.onebit_signatures4"
+    OUTGOING_BOOK_SIG_5 = "outgoing_book_signature_manager.onebit_signatures5"
+    OUTGOING_BOOK_SIG_6 = "outgoing_book_signature_manager.onebit_signatures6"
+    OUTGOING_BOOK_SIG_7 = "outgoing_book_signature_manager.onebit_signatures7"
     OUTGOING_METRIC_SIG_0 = "outgoing_metric_signature_manager.signatures0"
     OUTGOING_METRIC_SIG_1 = "outgoing_metric_signature_manager.signatures1"
     OUTGOING_METRIC_SIG_2 = "outgoing_metric_signature_manager.signatures2"
@@ -149,10 +150,10 @@ class ArrayName(Enum):
     OUTGOING_METRIC_SIG_5 = "outgoing_metric_signature_manager.signatures5"
     OUTGOING_METRIC_SIG_6 = "outgoing_metric_signature_manager.signatures6"
     OUTGOING_METRIC_SIG_7 = "outgoing_metric_signature_manager.signatures7"
-    OUTGOING_DECRYPT_PADS_LOWER32 = "outgoing_encryption_manager_0_0"
-    OUTGOING_DECRYPT_PADS_UPPER32 = "outgoing_encryption_manager_0_1"
-    OUTGOING_ENCRYPT_PADS_LOWER32 = "outgoing_encryption_manager_1_1"
-    OUTGOING_ENCRYPT_PADS_UPPER32 = "outgoing_encryption_manager_1_2"
+    OUTGOING_DECRYPT_PADS_LOWER32 = "outgoing_encryption_manager.decryptor.corresponding_otps0"
+    OUTGOING_DECRYPT_PADS_UPPER32 = "outgoing_encryption_manager.decryptor.corresponding_otps1"
+    OUTGOING_ENCRYPT_PADS_LOWER32 = "outgoing_encryption_manager.encryptor.one_time_pads0"
+    OUTGOING_ENCRYPT_PADS_UPPER32 = "outgoing_encryption_manager.encryptor.one_time_pads1"
 
 
 @dataclass
