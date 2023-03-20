@@ -154,6 +154,14 @@ class ArrayName(Enum):
     OUTGOING_DECRYPT_PADS_UPPER32 = "outgoing_encryption_manager.decryptor.corresponding_otps1"
     OUTGOING_ENCRYPT_PADS_LOWER32 = "outgoing_encryption_manager.encryptor.one_time_pads0"
     OUTGOING_ENCRYPT_PADS_UPPER32 = "outgoing_encryption_manager.encryptor.one_time_pads1"
+    INVALID_PKT_0 = "invalid_pkt_manager.invalid_counts0"
+    INVALID_PKT_1 = "invalid_pkt_manager.invalid_counts1"
+    INVALID_PKT_2 = "invalid_pkt_manager.invalid_counts2"
+    INVALID_PKT_3 = "invalid_pkt_manager.invalid_counts3"
+    INVALID_PKT_4 = "invalid_pkt_manager.invalid_counts4"
+    INVALID_PKT_5 = "invalid_pkt_manager.invalid_counts5"
+    INVALID_PKT_6 = "invalid_pkt_manager.invalid_counts6"
+    INVALID_PKT_7 = "invalid_pkt_manager.invalid_counts7"
 
 
 @dataclass

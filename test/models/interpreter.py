@@ -46,7 +46,7 @@ class EventLink:
 
 class TestEvent:
     """Interpreter event to be injected into test system."""
-    
+
     __test__ = False
 
     def __init__(
@@ -140,7 +140,7 @@ class TestCase:
 
 class TestResult:
     """Result of an interpreter run."""
-    
+
     __test__ = False
 
     def __init__(self: Self, result: str) -> None:
@@ -158,7 +158,7 @@ class TestResult:
 
 class ExpectedResult(ABC):
     """Expected result of an interpreter test."""
-    
+
     __test__ = False
 
     @abstractmethod
@@ -180,7 +180,7 @@ class ExpectContains(ExpectedResult):
 
 class ExpectationRunner:
     """Manages all epectations for a given test result."""
-    
+
     __test__ = False
 
     def __init__(self: Self, result: TestResult) -> None:
@@ -201,7 +201,7 @@ class ExpectationRunner:
 
 class TestRunner:
     """Run a Lucid interpreter test."""
-    
+
     __test__ = False
 
     def __init__(

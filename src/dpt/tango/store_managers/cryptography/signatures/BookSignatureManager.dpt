@@ -95,13 +95,29 @@ module BookSignatureManager : {
         int<<1>> signature
     ) {
         match path_id with
-        | 0 -> { return Array.get(self#onebit_signatures0, seq_number) == signature; }
-        | 1 -> { return Array.get(self#onebit_signatures1, seq_number) == signature; }
-        | 2 -> { return Array.get(self#onebit_signatures2, seq_number) == signature; }
-        | 3 -> { return Array.get(self#onebit_signatures3, seq_number) == signature; }
-        | 4 -> { return Array.get(self#onebit_signatures4, seq_number) == signature; }
-        | 5 -> { return Array.get(self#onebit_signatures5, seq_number) == signature; }
-        | 6 -> { return Array.get(self#onebit_signatures6, seq_number) == signature; }
-        | 7 -> { return Array.get(self#onebit_signatures7, seq_number) == signature; }
+        | 0 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number)) == ((int<<32>>) signature);
+        }
+        | 1 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number)) == ((int<<32>>) signature);
+        }
+        | 2 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number)) == ((int<<32>>) signature);
+        }
+        | 3 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number)) == ((int<<32>>) signature);
+        }
+        | 4 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number)) == ((int<<32>>) signature);
+        }
+        | 5 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number)) == ((int<<32>>) signature);
+        }
+        | 6 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number)) == ((int<<32>>) signature);
+        }
+        | 7 -> {
+            return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number)) == ((int<<32>>) signature);
+        }
     }
 }

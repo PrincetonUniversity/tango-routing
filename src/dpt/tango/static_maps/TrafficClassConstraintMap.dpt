@@ -19,7 +19,7 @@ fun bool verify_metrics_within_constraints (
 ) {
     match (traffic_class) with
     | _ -> {
-        printf("ERROR: traffic class map has not been configured!");
+        printf("ERROR: constraint map has not been configured!");
         return true;
     }
 }

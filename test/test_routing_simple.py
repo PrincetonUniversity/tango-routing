@@ -2,7 +2,13 @@
 
 
 from test.models.events import ArrayName, ArraySet, ForwardFlow
-from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
+from test.models.interpreter import (
+    ExpectationRunner,
+    ExpectContains,
+    TestCase,
+    TestEvent,
+    TestRunner,
+)
 from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header
 
 from edu.princeton.tango.mappers.traffic_class_mapper import (
@@ -52,7 +58,7 @@ def test_simple_route() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        when.run().expect().then(
+        ExpectationRunner(when.run()).then(
             ExpectContains(
                 "".join(
                     (

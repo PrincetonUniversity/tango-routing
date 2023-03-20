@@ -211,12 +211,15 @@ handle incoming_tango_traffic (
         tango_metrics_header#path_id,
         tango_metrics_header#signature
     );
+    printf("Found timestamp: %d", tango_metrics_header#timestamp);
 
     // TODO: Verify `path_id` matches expected header metadata
 
     // -- Record and bail if invalid
     if (!(is_valid_seq_num && is_valid_metrics)) {
-        printf("Invalid incoming packet found: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
+        printf("Invalid incoming packet found: { reason: { seq_num: %b, ts: %b } path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
+            is_valid_seq_num,
+            is_valid_metrics,
             tango_metrics_header#path_id,
             tango_metrics_header#timestamp,
             tango_metrics_header#signature,
