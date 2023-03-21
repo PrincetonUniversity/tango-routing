@@ -20,6 +20,8 @@ const IPv6Header_t DUMMY_HDR = {
     dest_addr = 0;
 };
 
+size NUM_VALID_PATHS = 1;
+
 /**
  * # Description
  * Get a Tango header for a given packet to tunnel over a particular
@@ -44,6 +46,8 @@ fun IPv6Header_t map_path_to_tunnel_header (int<<3>> path_id) {
 
 _HEADER_MAP_TEMPLATE: LiteralString = """include "../Types.dpt"
 
+size NUM_VALID_PATHS = {0};
+
 /**
  * # Description
  * Get a Tango header for a given packet to tunnel over a particular
@@ -58,7 +62,7 @@ _HEADER_MAP_TEMPLATE: LiteralString = """include "../Types.dpt"
  **/
 fun IPv6Header_t map_path_to_tunnel_header (int<<3>> path_id) {{
     match (path_id) with
-{0}
+{1}
 }}
 
 """
@@ -166,6 +170,8 @@ class ConfiguredHeaderMapper(HeaderMapper):
                 f"There is a maximum of 8 traffic classes: got {len(headers)}",
             )
 
+        self._num_paths = len(headers)
+
         headers.sort(key=lambda hdr: hdr.path_id)
 
         resolved_headers = [MatchCase([str(hdr.path_id)], str(hdr.header)) for hdr in headers]
@@ -173,7 +179,7 @@ class ConfiguredHeaderMapper(HeaderMapper):
 
     def __str__(self: Self) -> str:
         """Get lucid file of header map."""
-        return _HEADER_MAP_TEMPLATE.format(str(self._headers))
+        return _HEADER_MAP_TEMPLATE.format(self._num_paths, str(self._headers))
 
 
 class DefaultHeaderMapper(HeaderMapper):

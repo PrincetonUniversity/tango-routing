@@ -111,10 +111,17 @@ event incoming_tango_traffic (
  * Tell peer to update a given route mapping for a traffic class.
  * 
  * # Parameters
+ * eth_header (EthernetHeader_t): ethernet header to go back to peer
+ * ip_header (IPv6Header_t): ip header corresponding to a given path
  * sequence_num (int<<4>>): sequence number corresponding to update
  * update (int<<64>>): encrypted version of the update
  **/
-event route_update (int<<4>> sequence_num, int<<64>> update);
+event route_update (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    int<<4>> sequence_num,
+    int<<64>> update
+);
 
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
@@ -299,17 +306,31 @@ handle incoming_tango_traffic (
                 new_path_id
             );
 
-            event update = route_update (
-                enc_update#seq_num_tag,
-                enc_update#ciphertext
-            );
-            generate_port (out_peer_port, update); // FIXME: Need to multicast
+            // -- multicast reroute request
+            for (request_path < NUM_VALID_PATHS) {
+                IPv6Header_t path_hdr =
+                    map_path_to_tunnel_header((int<<3>>) size_to_int(request_path));
+
+                event update = route_update (
+                    tango_eth_header,
+                    path_hdr,
+                    enc_update#seq_num_tag,
+                    enc_update#ciphertext
+                );
+
+                generate_port (out_peer_port, update);
+            }
         }
 
     }}
 }
 
-handle route_update (int<<4>> sequence_num, int<<64>> update) {
+handle route_update (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    int<<4>> sequence_num,
+    int<<64>> update
+) {
 
     /* 1. Decrypt and verify update. */
     // -- Decrypt
