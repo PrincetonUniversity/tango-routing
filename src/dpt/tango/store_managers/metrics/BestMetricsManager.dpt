@@ -54,16 +54,13 @@ module BestMetricsManager : {
      **/
     memop choose_lower (
         int<<'sz>> curr_metric,
-        int<<'sz>> new_metric,
-        int<<'sz>> path_id
+        int<<'sz>> new_metric
     ) { 
-        bool new_winner_exists = curr_metric > new_metric;
-
-        if (new_winner_exists) {
-            cell1 = new_metric;
+        if (new_metric < curr_metric) {
+            return new_metric;
+        } else {
+            return curr_metric;
         }
-
-        if (new_winner_exists) { return path_id; }
     }
 
     fun BestMetrics_t update (
@@ -73,26 +70,28 @@ module BestMetricsManager : {
         int<<32>> delay_metrics
     ) {
         // Update best metrics
-        int<<32>> loss_result = Array.update_complex(
+        int<<32>> loss_result = Array.update(
             self#best_loss_val,
             0,
             choose_lower,
             loss_metrics,
-            (int<<32>>) path_id,
-            0xFFFF
+            choose_lower,
+            loss_metrics
         );
 
-        int<<32>> delay_result = Array.update_complex(
+        printf("path: %d, loss: %d, delay: %d", path_id, loss_metrics, delay_metrics);
+
+        int<<32>> delay_result = Array.update(
             self#best_delay_val,
             0,
             choose_lower,
             delay_metrics,
-            (int<<32>>) path_id,
-            0xFFFF
+            choose_lower,
+            delay_metrics
         );
 
         // Update best path ids
-        bool isnt_loss_winner = loss_result == 0xFFFF;
+        bool isnt_loss_winner = loss_result != loss_metrics;
         int<<3>> winning_loss_id = 0;
         if (isnt_loss_winner) {
             winning_loss_id = Array.get(self#best_loss_path, 0);
@@ -101,7 +100,7 @@ module BestMetricsManager : {
             Array.set(self#best_loss_path, 0, path_id);
         }
 
-        bool isnt_delay_winner = delay_result == 0xFFFF;
+        bool isnt_delay_winner = delay_result != delay_metrics;
         int<<3>> winning_delay_id = 0;
         if (isnt_delay_winner) {
             winning_delay_id = Array.get(self#best_delay_path, 0);
@@ -109,6 +108,8 @@ module BestMetricsManager : {
             winning_delay_id = path_id;
             Array.set(self#best_delay_path, 0, path_id);
         }
+
+        printf("path: %d, delay_res: %d, loss_res: %d, delay_win: %d, loss_win: %d", path_id, delay_result, loss_result, winning_delay_id, winning_loss_id);
 
         // Construct best metrics
         return {

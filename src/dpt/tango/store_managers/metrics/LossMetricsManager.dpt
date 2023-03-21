@@ -180,6 +180,6 @@ module LossMetricsManager : {
 
         printf("loss: %d, loss-sum: %d, loss-avg: %d", loss_found, curr_loss_sum, avg_loss);
 
-        return (int<<32>>) avg_loss[31:6]; // 'divide' by 64
+        return (int<<32>>) avg_loss[31:6]; // Divide by '64'
     }
 }

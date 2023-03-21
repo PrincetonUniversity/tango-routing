@@ -162,6 +162,12 @@ class ArrayName(Enum):
     INVALID_PKT_5 = "invalid_pkt_manager.invalid_counts5"
     INVALID_PKT_6 = "invalid_pkt_manager.invalid_counts6"
     INVALID_PKT_7 = "invalid_pkt_manager.invalid_counts7"
+    BEST_DELAY_VAL = "best_metrics_manager.best_delay_val"
+    BEST_LOSS_VAL = "best_metrics_manager.best_loss_val"
+    BEST_DELAY_PATH = "best_metrics_manager.best_delay_path"
+    BEST_LOSS_PATH = "best_metrics_manager.best_loss_path"
+    LOSS_AVGS = "loss_metrics_manager.loss_avgs"
+    DELAY_AVGS = "delay_metrics_manager.delay_avgs"
 
 
 @dataclass
