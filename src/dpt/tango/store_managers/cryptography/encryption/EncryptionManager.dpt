@@ -69,6 +69,7 @@ module EncryptionManager : {
         int<<3>> path_id
     ) {
         int<<64>> encoded_update = encode_update(path_id, traffic_cls);
+        printf("encoed update: %d", encoded_update);
 
         TaggedCiphertext_t ciphertext =
             Encryptor.encrypt(self#encryptor, encoded_update);

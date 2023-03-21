@@ -72,6 +72,10 @@ fun int<<64>> encode_update (int<<3>> path_id, int<<4>> traffic_class) {
     int<<32>> encoded_traffic_class =
         traffic_class ^ get_traffic_cls_padding(traffic_class);
 
+    printf("Update: [path: %d --> cls: %d], encoding: [path: %d --> cls: %d]", path_id, traffic_class, encoded_path, encoded_traffic_class);
+    int<<64>> encoded_update = encoded_path ^ encoded_traffic_class;
+    printf("extracted: [path: %d --> cls: %d]", encoded_update[63:61], encoded_update[31:28]);
+
     return encoded_path ^ encoded_traffic_class;
 }
 

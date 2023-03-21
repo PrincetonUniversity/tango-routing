@@ -84,14 +84,19 @@ class IncomingTangoTraffic(TangoEvent):
 class RouteUpdate(TangoEvent):
     """Trigger a route update on a peer."""
 
+    eth_header: EthernetHeader
+    ip_header: IPv6Header
     sequence_num: int
-    update: int
+    update_lo: int
+    update_hi: int
 
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
         if self.sequence_num >= 2**24:
             raise ModelError("Too large of sequence number")
-        if self.update >= 2**64:
+        if self.update_lo >= 2**32:
+            raise ModelError("Too large of update")
+        if self.update_hi >= 2**32:
             raise ModelError("Too large of update")
 
     @property
@@ -104,8 +109,11 @@ class RouteUpdate(TangoEvent):
         return {
             "name": self.name,
             "args": [
+                *list(self.eth_header),
+                *list(self.ip_header),
                 self.sequence_num,
-                self.update,
+                self.update_lo,
+                self.update_hi,
             ],
         }
 

@@ -120,7 +120,8 @@ event route_update (
     EthernetHeader_t eth_header,
     IPv6Header_t ip_header,
     int<<4>> sequence_num,
-    int<<64>> update
+    int<<32>> update_lo,
+    int<<32>> update_hi
 );
 
 /* ================================================================================================================== *
@@ -279,19 +280,22 @@ handle incoming_tango_traffic (
             delay_metrics
         );
 
+        // -- Get optimization policy of traffic class
+        bool policy = map_traffic_class_to_policy(traffic_class);
+
+        // -- Prep new path id to route traffic class to
+        int<<3>> new_path_id = 0;
+        if (policy == OPTIMIZE_DELAY) {
+            new_path_id = best_metrics#best_delay_id;
+        } else {
+            new_path_id = best_metrics#best_loss_id;
+        }
+
         // -- Trigger reroute if hard constraints are broken
-        if (!is_within_constraints) {
-
-            // -- Get optimization policy of traffic class
-            bool policy = map_traffic_class_to_policy(traffic_class);
-
-            // -- Get new path id to route traffic class to
-            int<<3>> new_path_id = 0;
-            if (policy == OPTIMIZE_DELAY) {
-                new_path_id = best_metrics#best_delay_id;
-            } else {
-                new_path_id = best_metrics#best_loss_id;
-            }
+        if (
+            (!is_within_constraints)
+            && (tango_metrics_header#path_id != new_path_id)
+        ) {
 
             printf("Triggering Reroute: { traffic_cls: %d, old_path_id: %d, new_path_id: %d }",
                 traffic_class,
@@ -315,7 +319,8 @@ handle incoming_tango_traffic (
                     tango_eth_header,
                     path_hdr,
                     enc_update#seq_num_tag,
-                    enc_update#ciphertext
+                    enc_update#ciphertext[31:0],
+                    enc_update#ciphertext[63:32]
                 );
 
                 generate_port (out_peer_port, update);
@@ -329,13 +334,14 @@ handle route_update (
     EthernetHeader_t eth_header,
     IPv6Header_t ip_header,
     int<<4>> sequence_num,
-    int<<64>> update
+    int<<32>> update_lo,
+    int<<32>> update_hi
 ) {
 
     /* 1. Decrypt and verify update. */
     // -- Decrypt
     RouteUpdate_t dec_update =
-        EncryptionManager.decrypt(incoming_encryption_manager, sequence_num, update);
+        EncryptionManager.decrypt(incoming_encryption_manager, sequence_num, update_hi ^ update_lo);
 
     // -- Verify
     if (dec_update#is_valid) {

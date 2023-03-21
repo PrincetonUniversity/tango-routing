@@ -6,6 +6,8 @@ from pathlib import Path
 from shutil import copytree, rmtree
 from subprocess import run as run_cmd
 from tempfile import mkdtemp
+
+from edu.princeton.tango.mappers.constraints_mapper import ConstraintMapper
 from test.models.error import DptError, UsageError
 from test.models.events import InterpreterEvent, TangoEvent
 from typing import Self
@@ -210,12 +212,14 @@ class TestRunner:
         policy_mapper: PolicyMapper | None = None,
         class_mapper: TrafficClassMapper | None = None,
         header_mapper: HeaderMapper | None = None,
+        constraint_mapper: ConstraintMapper | None = None,
     ) -> None:
         """Create test runner."""
         self._given = given
         self._policy_mapper = policy_mapper
         self._class_mapper = class_mapper
         self._header_mapper = header_mapper
+        self._constraint_mapper = constraint_mapper
         self._tmp_dir = None
         self._root_dir = Path(__file__).parent.parent.parent.absolute()
 
@@ -271,4 +275,5 @@ class TestRunner:
         self._write_out_mapper(self._policy_mapper)
         self._write_out_mapper(self._class_mapper)
         self._write_out_mapper(self._header_mapper)
+        self._write_out_mapper(self._constraint_mapper)
         return TestResult(self._run_test())
