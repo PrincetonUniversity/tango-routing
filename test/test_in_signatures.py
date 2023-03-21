@@ -1,11 +1,6 @@
 """Test simple metric signature checks."""
 
-from test.models.events import (
-    ArrayName,
-    ArraySet,
-    ArraySetRange,
-    IncomingTangoTraffic,
-)
+from test.models.events import ArrayName, ArraySet, ArraySetRange, IncomingTangoTraffic
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
 from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
 

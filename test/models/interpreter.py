@@ -226,7 +226,6 @@ class TestRunner:
     def create(self: Self) -> Self:
         """Create a testing session."""
         self._tmp_dir = mkdtemp(prefix="tango-test-")
-        print(self._tmp_dir)
         src = self._root_dir / Path("src/dpt/tango")
         copytree(str(src), str(self._tmp_dir), dirs_exist_ok=True)
         return self
@@ -273,68 +272,3 @@ class TestRunner:
         self._write_out_mapper(self._class_mapper)
         self._write_out_mapper(self._header_mapper)
         return TestResult(self._run_test())
-
-
-if __name__ == "__main__":
-    from events import ArrayGet, ArrayName, ArraySet, ForwardFlow
-    from tango_types import EthernetHeader, FiveTuple, IPv4Header
-
-    switch1 = EventLocation(0, 1)
-    switch2 = EventLocation(1, 0)
-
-    events = [
-        TestEvent(
-            ForwardFlow(
-                EthernetHeader(0, 1, 2),
-                IPv4Header(3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-                FiveTuple(13, 14, 15, 16, 17),
-            ),
-            timestamp=1,
-            locations=[switch1],
-        ),
-        TestEvent(
-            ForwardFlow(
-                EthernetHeader(10, 11, 12),
-                IPv4Header(13, 14, 15, 16, 17, 18, 19, 110, 111, 112),
-                FiveTuple(113, 114, 115, 116, 117),
-            ),
-            timestamp=2,
-            locations=[switch1],
-        ),
-    ]
-
-    links = [EventLink(switch1, switch2)]
-
-    given_case = TestCase(
-        20000,
-        [
-            TestEvent(
-                ArraySet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0, 5055),
-                timestamp=1,
-                locations=[switch1],
-            ),
-            TestEvent(
-                ArraySet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0, 5056),
-                timestamp=1,
-                locations=[switch2],
-            ),
-            TestEvent(
-                ArrayGet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0),
-                timestamp=2,
-                locations=[switch1],
-            ),
-            TestEvent(
-                ArrayGet(ArrayName.INCOMING_DECRYPT_PADS_LOWER32, 0),
-                timestamp=2,
-                locations=[switch2],
-            ),
-        ],
-        switches=2,
-        link_list=links,
-    )
-    from pprint import PrettyPrinter
-
-    PrettyPrinter().pprint(json.loads(given_case.json))
-
-    with TestRunner(given_case) as runner:
-        print(runner.run())
