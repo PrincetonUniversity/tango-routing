@@ -128,14 +128,14 @@ module LossMetricsManager : {
         // Update loss counters
         int<<32>> curr_cnt = 0;
         match path_id with
-        | 0 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts0, 1) + 1; }
-        | 1 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts1, 1) + 1; }
-        | 2 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts2, 1) + 1; }
-        | 3 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts3, 1) + 1; }
-        | 4 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts4, 1) + 1; }
-        | 5 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts5, 1) + 1; }
-        | 6 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts6, 1) + 1; }
-        | 7 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts7, 1) + 1; }
+        | 0 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts0, 1); }
+        | 1 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts1, 1); }
+        | 2 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts2, 1); }
+        | 3 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts3, 1); }
+        | 4 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts4, 1); }
+        | 5 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts5, 1); }
+        | 6 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts6, 1); }
+        | 7 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts7, 1); }
 
         // Calculate loss and updated last seen sequence number
         int<<32>> loss_found = (int<<32>>) Array.update(
@@ -155,8 +155,8 @@ module LossMetricsManager : {
                 path_id,
                 get_loss_sum,
                 loss_found,
-                get_loss_sum,
-                loss_found
+                reset_loss_sum,
+                0
             );
         } else {
             curr_loss_sum = Array.update(
@@ -164,8 +164,8 @@ module LossMetricsManager : {
                 path_id,
                 get_loss_sum,
                 loss_found,
-                reset_loss_sum,
-                0
+                get_loss_sum,
+                loss_found
             );
         }
 

@@ -82,20 +82,18 @@ module DelayMetricsManager : {
      * # Description
      * Update the stored delay sum.
      **/
-    memop update_delay_sum (
+    memop get_delay_sum (
         int<<'sz>> curr_delay_sum,
-        int<<'sz>> new_delay,
-        int<<'sz>> curr_count
+        int<<'sz>> new_delay
     ) {
-        bool should_reset = curr_count > 30;
+        return curr_delay_sum + new_delay;
+    }
 
-        if (should_reset) {
-            cell1 = 0;
-        } else {
-            if (true) { cell1 = curr_delay_sum + new_delay; }
-        }
-
-        if (should_reset) { return curr_delay_sum + new_delay; }
+    memop reset_delay_sum (
+        int<<'sz>> curr_delay_sum,
+        int<<'sz>> new_delay
+    ) {
+        return 0;
     }
 
 
@@ -107,28 +105,40 @@ module DelayMetricsManager : {
         // Count this packet as seen
         int delay_count = 0;
         match path_id with
-        | 0 -> { delay_count = (int<<32>>) Counter.add(self#delay_count0, 1) + 1; }
-        | 1 -> { delay_count = (int<<32>>) Counter.add(self#delay_count1, 1) + 1; }
-        | 2 -> { delay_count = (int<<32>>) Counter.add(self#delay_count2, 1) + 1; }
-        | 3 -> { delay_count = (int<<32>>) Counter.add(self#delay_count3, 1) + 1; }
-        | 4 -> { delay_count = (int<<32>>) Counter.add(self#delay_count4, 1) + 1; }
-        | 5 -> { delay_count = (int<<32>>) Counter.add(self#delay_count5, 1) + 1; }
-        | 6 -> { delay_count = (int<<32>>) Counter.add(self#delay_count6, 1) + 1; }
-        | 7 -> { delay_count = (int<<32>>) Counter.add(self#delay_count7, 1) + 1; }
+        | 0 -> { delay_count = (int<<32>>) Counter.add(self#delay_count0, 1); }
+        | 1 -> { delay_count = (int<<32>>) Counter.add(self#delay_count1, 1); }
+        | 2 -> { delay_count = (int<<32>>) Counter.add(self#delay_count2, 1); }
+        | 3 -> { delay_count = (int<<32>>) Counter.add(self#delay_count3, 1); }
+        | 4 -> { delay_count = (int<<32>>) Counter.add(self#delay_count4, 1); }
+        | 5 -> { delay_count = (int<<32>>) Counter.add(self#delay_count5, 1); }
+        | 6 -> { delay_count = (int<<32>>) Counter.add(self#delay_count6, 1); }
+        | 7 -> { delay_count = (int<<32>>) Counter.add(self#delay_count7, 1); }
 
         // Update and get delay
         int<<12>> curr_time = get_time_now_ms();
         int new_delay = (int<<32>>) (curr_time - timestamp);
 
         // Update delay sums
-        int<<32>> delay_sum = Array.update_complex(
-            self#delay_sums,
-            path_id,
-            update_delay_sum,
-            new_delay,
-            delay_count,
-            0
-        );
+        int<<32>> delay_sum = 0;
+        if (delay_count > 30) {
+            delay_sum = Array.update(
+                self#delay_sums,
+                path_id,
+                get_delay_sum,
+                new_delay,
+                reset_delay_sum,
+                0
+            );
+        } else {
+            delay_sum = Array.update(
+                self#delay_sums,
+                path_id,
+                get_delay_sum,
+                new_delay,
+                get_delay_sum,
+                new_delay
+            );
+        }
 
         // Update average delay
         int<<32>> delay_avg = Array.update_complex(
