@@ -270,7 +270,3 @@ def test_seq_num_sig_check_multipath() -> None:
         ).then(
             ExpectContains("invalid_pkt_manager_7(72) : [0u32]"),
         ).finish()
-
-
-if __name__ == "__main__":
-    test_seq_num_sig_check_multipath()

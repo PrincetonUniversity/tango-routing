@@ -42,7 +42,8 @@ module LossMetricsManager : {
         Counter.t<<6>> loss_counts6;
         Counter.t<<6>> loss_counts7;
         Array.t<<24>> seq_num_tracker;
-        PairArray.t<<32>> loss_tracker;
+        Array.t<<32>> loss_sums;
+        Array.t<<32>> loss_avgs;
     }
 
     constr t create () = {
@@ -55,32 +56,44 @@ module LossMetricsManager : {
         loss_counts6 = Counter.create(0);
         loss_counts7 = Counter.create(0);
         seq_num_tracker = Array.create(8);
-        loss_tracker = PairArray.create(8);
+        loss_sums = Array.create(8);
+        loss_avgs = Array.create(8);
     };
 
     /**
      * # Description
-     * Update the loss and the avg loss value.
+     * Update the stored loss sum.
+     **/
+    memop get_loss_sum (
+        int<<'sz>> curr_loss_sum,
+        int<<'sz>> new_loss
+    ) {
+        return curr_loss_sum + new_loss;
+    }
+
+    memop reset_loss_sum (
+        int<<'sz>> curr_loss_sum,
+        int<<'sz>> new_loss
+    ) {
+        return 0;
+    }
+     
+    /**
+     * # Description
+     * Update the stored average.
      **/
     memop update_loss_avg (
-        int<<'sz>> curr_loss_sum,
         int<<'sz>> curr_loss_avg,
-        int<<'sz>> new_loss,
+        int<<'sz>> loss_sum,
         int<<'sz>> avg_counter
     ) {
         bool should_reset = avg_counter > 62;
 
         if (should_reset) {
-            cell1 = 0;
-        } else {
-            if (true) { cell1 = curr_loss_sum + new_loss; }
+            cell1 = loss_sum;
         }
 
-        if (should_reset) {
-            cell2 = curr_loss_sum;
-        }
-        
-        if (true) { return cell2; }
+        if (true) { return cell1; }
     }
 
     /**
@@ -134,16 +147,39 @@ module LossMetricsManager : {
             sequence_num
         );
 
-        // Update and return average loss
-        int<<32>> avg_loss = PairArray.update(
-            self#loss_tracker,
-            path_id,
-            update_loss_avg,
-            loss_found,
-            curr_cnt,
-            0
-        );
+        // Update loss sum
+        int<<32>> curr_loss_sum = 0;
+        if (curr_cnt > 62) {
+            curr_loss_sum = Array.update(
+                self#loss_sums,
+                path_id,
+                get_loss_sum,
+                loss_found,
+                get_loss_sum,
+                loss_found
+            );
+        } else {
+            curr_loss_sum = Array.update(
+                self#loss_sums,
+                path_id,
+                get_loss_sum,
+                loss_found,
+                reset_loss_sum,
+                0
+            );
+        }
 
-        return avg_loss;
+        // Update loss average
+        int<<32>> avg_loss = 0;
+        if (curr_cnt > 62) {
+            avg_loss = curr_loss_sum;
+            Array.set(self#loss_avgs, path_id, curr_loss_sum);
+        } else {
+            avg_loss = Array.get(self#loss_avgs, path_id);
+        }
+
+        printf("loss: %d, loss-sum: %d, loss-avg: %d", loss_found, curr_loss_sum, avg_loss);
+
+        return (int<<32>>) avg_loss[31:6]; // 'divide' by 64
     }
 }

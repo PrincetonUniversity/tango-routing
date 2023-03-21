@@ -43,7 +43,8 @@ module DelayMetricsManager : {
         Counter.t<<5>> delay_count5;
         Counter.t<<5>> delay_count6;
         Counter.t<<5>> delay_count7;
-        PairArray.t<<32>> delay_sums;
+        Array.t<<32>> delay_sums;
+        Array.t<<32>> delay_avgs;
     }
 
     constr t create() = {
@@ -55,17 +56,34 @@ module DelayMetricsManager : {
         delay_count5 = Counter.create(0);
         delay_count6 = Counter.create(0);
         delay_count7 = Counter.create(0);
-        delay_sums = PairArray.create(8);
+        delay_sums = Array.create(8);
+        delay_avgs = Array.create(8);
     };
 
     /**
      * # Description
-     * Update the running sum of delays with the newest delay
-     * measurement and return it. If hit average count threshold, reset.
+     * Update the stored average delay.
      **/
     memop update_delay_avg (
-        int<<'sz>> curr_delay_sum,
         int<<'sz>> curr_delay_avg,
+        int<<'sz>> delay_sum,
+        int<<'sz>> curr_count
+    ) {
+        bool should_reset = curr_count > 30;
+
+        if (should_reset) {
+            cell1 = delay_sum;
+        }
+
+        if (true) { return cell1; }
+    }
+
+    /**
+     * # Description
+     * Update the stored delay sum.
+     **/
+    memop update_delay_sum (
+        int<<'sz>> curr_delay_sum,
         int<<'sz>> new_delay,
         int<<'sz>> curr_count
     ) {
@@ -77,11 +95,7 @@ module DelayMetricsManager : {
             if (true) { cell1 = curr_delay_sum + new_delay; }
         }
 
-        if (should_reset) {
-            cell2 = curr_delay_sum;
-        }
-        
-        if (true) { return cell2; }
+        if (should_reset) { return curr_delay_sum + new_delay; }
     }
 
 
@@ -104,13 +118,24 @@ module DelayMetricsManager : {
 
         // Update and get delay
         int<<12>> curr_time = get_time_now_ms();
-        int ts_diff = (int<<32>>) (curr_time - timestamp);
-        printf("Found ts diff: %d - %d = %d", curr_time, timestamp, ts_diff);
-        int<<32>> delay_avg = PairArray.update(
+        int new_delay = (int<<32>>) (curr_time - timestamp);
+
+        // Update delay sums
+        int<<32>> delay_sum = Array.update_complex(
             self#delay_sums,
             path_id,
+            update_delay_sum,
+            new_delay,
+            delay_count,
+            0
+        );
+
+        // Update average delay
+        int<<32>> delay_avg = Array.update_complex(
+            self#delay_avgs,
+            path_id,
             update_delay_avg,
-            ts_diff,
+            delay_sum,
             delay_count,
             0
         );
