@@ -232,5 +232,77 @@ def test_loss_route_update_spawn() -> None:
         ).finish()
 
 
-if __name__ == "__main__":
-    test_loss_route_update_spawn()
+def test_delay_route_update_spawn() -> None:
+    """Test that delay constraint violation results in reroute request."""
+    given_timeout = 295_000_000
+
+    given_traffic_mapping = ConfiguredTrafficClassMapper(
+        [FuzzyClassMapping(FuzzyFiveTuple(src_port=x), x - 1) for x in range(1, 9)],
+    )
+
+    given_header_mapping = ConfiguredHeaderMapper(
+        [TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+    )
+
+    given_policy_mapping = ConfiguredPolicyMapper(
+        [Policy(x, OptimizationStrategy.OPTIMIZE_DELAY) for x in range(0, 8)],
+    )
+
+    given_constraint_mapping = ConfiguredConstraintMapper(
+        [
+            ConstraintMapping(x, Constraint(100, OptimizationStrategy.OPTIMIZE_DELAY))
+            for x in range(0, 8)
+        ],
+    )
+
+    given_packets = []
+    given_num_packets = 33
+    for path in [0, 5]:
+        given_packets = [
+            *given_packets,
+            *[
+                TestEvent(
+                    IncomingTangoTraffic(
+                        EthernetHeader(x, 0, 0),
+                        IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
+                        TangoHeader(path, ts_out, 0, 0, 0),
+                        IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                        FiveTuple(0, 0, path + 1, 0, 0),
+                    ),
+                    timestamp=ts_in,
+                )
+                for x, ts_out, ts_in in zip(
+                    range(1, 1 + given_num_packets),
+                    [x + 10 for x in range(0, given_num_packets)],
+                    [(1_100_000 * x * path) + 1_100_001 for x in range(0, given_num_packets)],
+                    strict=True,
+                )
+            ],
+        ]
+
+    given_routes = [
+        TestEvent(ArraySet(ArrayName.ROUTE_MAPPINGS, x, x), timestamp=0) for x in range(0, 8)
+    ]
+
+    given_init_best_path = [
+        TestEvent(ArraySet(ArrayName.BEST_DELAY_VAL, 0, 2**32 - 1)),
+        TestEvent(ArraySet(ArrayName.BEST_DELAY_PATH, 0, 5)),
+        TestEvent(ArraySetRange(ArrayName.DELAY_AVGS, 0, 8, [2**32 - 1])),
+    ]
+
+    given_events = [*given_routes, *given_init_best_path, *given_packets]
+
+    given_case = TestCase(given_timeout, given_events)
+
+    with TestRunner(
+        given_case,
+        class_mapper=given_traffic_mapping,
+        header_mapper=given_header_mapping,
+        policy_mapper=given_policy_mapping,
+        constraint_mapper=given_constraint_mapping,
+    ) as when:
+        when.run().expect().then(
+            ExpectContains(
+                "route_update(31,0,0,0,0,7,0,0,0,0,0,13,1342177280,0) at port 1, t=166100001",
+            ),
+        ).finish()

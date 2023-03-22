@@ -6,7 +6,7 @@ include "../../../Types.dpt"
  * 
  * # Methods
  * create() -> Encryptor.t
- * encrypt(Encryptor.t, int<<64>>) -> TaggedCiphertext_t
+ * encrypt(Encryptor.t, EncodedUpdate_t) -> TaggedCiphertext_t
  **/
 module Encryptor : {
     global type t;
@@ -18,14 +18,14 @@ module Encryptor : {
     * 
     * # Parameters
     * self (t): self
-    * encoded_update (int<<64>>): fully encoded route mapping update
+    * encoded_update (EncodedUpdate_t): fully encoded route mapping update
     * 
     * # Returns
     * ciphertext (TaggedCiphertext_t): encrypted route update
     **/
     fun TaggedCiphertext_t encrypt (
         t self,
-        int<<64>> encoded_update
+        EncodedUpdate_t encoded_update
     ) [start <= self; end self];
 }
 {
@@ -43,7 +43,7 @@ module Encryptor : {
 
     fun TaggedCiphertext_t encrypt (
         t self,
-        int<<64>> encoded_update
+        EncodedUpdate_t encoded_update
     ) {
         int<<4>> curr_seq_num = Counter.add(self#seq_number, 1);
         int<<32>> pad0 = Array.get(self#one_time_pads0, curr_seq_num);
@@ -51,7 +51,8 @@ module Encryptor : {
 
         return {
             seq_num_tag = curr_seq_num;
-            ciphertext = encoded_update ^^ (pad1 ^ pad0);
+            ciphertext_lo = encoded_update#encoding_lo ^^ pad0;
+            ciphertext_hi = encoded_update#encoding_hi ^^ pad1;
         };
     }
 }

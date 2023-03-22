@@ -52,7 +52,7 @@ def test_timestamp_sig_check_one_path() -> None:
 
     with TestRunner(given_case, class_mapper=given_traffic_mapping) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(65) : [4u32]"),
+            ExpectContains("invalid_pkt_manager_0(67) : [4u32]"),
         ).then(
             ExpectContains(
                 "".join(
@@ -100,7 +100,7 @@ def test_seq_num_sig_check_one_path() -> None:
 
     with TestRunner(given_case, class_mapper=given_traffic_mapping) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(65) : [4u32]"),
+            ExpectContains("invalid_pkt_manager_0(67) : [4u32]"),
         ).then(
             ExpectContains(
                 "".join(
@@ -175,21 +175,21 @@ def test_timestamp_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(65) : [7u32]"),
+            ExpectContains("invalid_pkt_manager_0(67) : [7u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_1(66) : [6u32]"),
+            ExpectContains("invalid_pkt_manager_1(68) : [6u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_2(67) : [5u32]"),
+            ExpectContains("invalid_pkt_manager_2(69) : [5u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_3(68) : [4u32]"),
+            ExpectContains("invalid_pkt_manager_3(70) : [4u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_4(69) : [3u32]"),
+            ExpectContains("invalid_pkt_manager_4(71) : [3u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_5(70) : [2u32]"),
+            ExpectContains("invalid_pkt_manager_5(72) : [2u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_6(71) : [1u32]"),
+            ExpectContains("invalid_pkt_manager_6(73) : [1u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_7(72) : [0u32]"),
+            ExpectContains("invalid_pkt_manager_7(74) : [0u32]"),
         ).finish()
 
 
@@ -249,19 +249,19 @@ def test_seq_num_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(65) : [7u32]"),
+            ExpectContains("invalid_pkt_manager_0(67) : [7u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_1(66) : [6u32]"),
+            ExpectContains("invalid_pkt_manager_1(68) : [6u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_2(67) : [5u32]"),
+            ExpectContains("invalid_pkt_manager_2(69) : [5u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_3(68) : [4u32]"),
+            ExpectContains("invalid_pkt_manager_3(70) : [4u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_4(69) : [3u32]"),
+            ExpectContains("invalid_pkt_manager_4(71) : [3u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_5(70) : [2u32]"),
+            ExpectContains("invalid_pkt_manager_5(72) : [2u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_6(71) : [1u32]"),
+            ExpectContains("invalid_pkt_manager_6(73) : [1u32]"),
         ).then(
-            ExpectContains("invalid_pkt_manager_7(72) : [0u32]"),
+            ExpectContains("invalid_pkt_manager_7(74) : [0u32]"),
         ).finish()

@@ -9,7 +9,7 @@ include "Decryptor.dpt"
  * 
  * # Methods
  * create() -> EncryptionManager.t
- * encrypt(EncryptionManager.t, int<<4>>, int<<3>>) -> int<<64>>
+ * encrypt(EncryptionManager.t, int<<4>>, int<<3>>) -> TaggedCiphertext_t
  * decrypt(EncryptionManager.t, TaggedCiphertext_t) -> RouteUpdate_t
  **/
 module EncryptionManager : {
@@ -40,16 +40,14 @@ module EncryptionManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<4>>): one-way sequence number of update
-    * ciphertext (int<<64>>): signature to validate
+    * tagged_ciphertext (TaggedCiphertext_t): tagged ciphertext of encrypted route update
     * 
     * # Returns
     * plaintext (RouteUpdate_t): decrypted route update
     **/
     fun RouteUpdate_t decrypt (
         t self,
-        int<<4>> seq_number,
-        int<<64>> ciphertext
+        TaggedCiphertext_t tagged_ciphertext
     ) [start <= self; end self];
 }
 {
@@ -68,8 +66,8 @@ module EncryptionManager : {
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) {
-        int<<64>> encoded_update = encode_update(path_id, traffic_cls);
-        printf("encoed update: %d", encoded_update);
+        EncodedUpdate_t encoded_update = encode_update(path_id, traffic_cls);
+        printf("encoded update: [%d, %d]", encoded_update#encoding_hi, encoded_update#encoding_lo);
 
         TaggedCiphertext_t ciphertext =
             Encryptor.encrypt(self#encryptor, encoded_update);
@@ -79,11 +77,10 @@ module EncryptionManager : {
 
     fun RouteUpdate_t decrypt (
         t self,
-        int<<4>> seq_number,
-        int<<64>> ciphertext
+        TaggedCiphertext_t tagged_ciphertext
     ) {
-        int<<64>> plaintext =
-            Decryptor.decrypt(self#decryptor, seq_number, ciphertext);
+        EncodedUpdate_t plaintext =
+            Decryptor.decrypt(self#decryptor, tagged_ciphertext);
 
         return decode_update(plaintext);
     }

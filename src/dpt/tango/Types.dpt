@@ -128,11 +128,26 @@ type RouteUpdate_t = {
  *
  * # Properties
  * seq_num_tag (int<<4>>): sequence number corresponding to update
- * ciphertext (int<<64>>): encrypted route mapping update
+ * ciphertext_lo (int<<32>>): encrypted route mapping update lower order bits
+ * ciphertext_hi (int<<32>>): encrypted route mapping update higher order bits
  **/
 type TaggedCiphertext_t = {
    int<<4>> seq_num_tag;
-   int<<64>> ciphertext;
+   int<<32>> ciphertext_lo;
+   int<<32>> ciphertext_hi;
+}
+
+/**
+ * # Description
+ * Encoded version of a route update.
+ *
+ * # Properties
+ * encoding_lo (int<<32>>): encoded update lower order bits
+ * encoding_hi (int<<32>>): encoded update higher order bits
+ **/
+type EncodedUpdate_t = {
+   int<<32>> encoding_lo;
+   int<<32>> encoding_hi;
 }
 
 /**

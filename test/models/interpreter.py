@@ -6,13 +6,12 @@ from pathlib import Path
 from shutil import copytree, rmtree
 from subprocess import run as run_cmd
 from tempfile import mkdtemp
-
-from edu.princeton.tango.mappers.constraints_mapper import ConstraintMapper
 from test.models.error import DptError, UsageError
 from test.models.events import InterpreterEvent, TangoEvent
 from typing import Self
 
 from edu.princeton.tango.mappers import HeaderMapper, PolicyMapper, TrafficClassMapper
+from edu.princeton.tango.mappers.constraints_mapper import ConstraintMapper
 from edu.princeton.tango.mappers.mapper import Mapper
 
 

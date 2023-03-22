@@ -6,7 +6,7 @@ include "../../../Types.dpt"
  * 
  * # Methods
  * create() -> Decryptor.t
- * decrypt(Decryptor.t, int<<64>>) -> int<<64>>
+ * decrypt(Decryptor.t, TaggedCiphertext_t) -> EncodedUpdate_t
  **/
 module Decryptor : {
     global type t;
@@ -18,16 +18,14 @@ module Decryptor : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<4>>): sequence number of update
-    * ciphertext (int<<64>>): signature to validate
+    * tagged_ciphertext (TaggedCiphertext_t): ciphertext tagged with sequnce num
     * 
     * # Returns
-    * plaintext (int<<64>>): decrypted route update
+    * plaintext (EncodedUpdate_t): decrypted route update
     **/
-    fun int<<64>> decrypt (
+    fun EncodedUpdate_t decrypt (
         t self,
-        int<<4>> seq_number,
-        int<<64>> ciphertext
+        TaggedCiphertext_t tagged_ciphertext
     ) [start <= self; end self];
 }
 {
@@ -41,14 +39,16 @@ module Decryptor : {
         corresponding_otps1 = Array.create(16);
     };
 
-    fun int<<64>> decrypt (
+    fun EncodedUpdate_t decrypt (
         t self,
-        int<<4>> seq_number,
-        int<<64>> ciphertext
+        TaggedCiphertext_t tagged_ciphertext
     ) {
-        int<<32>> pad0 = Array.get(self#corresponding_otps0, seq_number);
-        int<<32>> pad1 = Array.get(self#corresponding_otps1, seq_number);
+        int<<32>> pad0 = Array.get(self#corresponding_otps0, tagged_ciphertext#seq_num_tag);
+        int<<32>> pad1 = Array.get(self#corresponding_otps1, tagged_ciphertext#seq_num_tag);
 
-        return ciphertext ^^ (pad1 ^ pad0);
+        return {
+            encoding_lo = tagged_ciphertext#ciphertext_lo ^^ pad0;
+            encoding_hi = tagged_ciphertext#ciphertext_hi ^^ pad1;
+        };
     }
 }

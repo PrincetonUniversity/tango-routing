@@ -77,7 +77,7 @@ global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.creat
  * # Generates
  * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
  **/
-event forward_flow (
+entry event forward_flow (
     EthernetHeader_t eth_header,
     IPv4Header_t ip_header,
     FiveTuple_t five_tuple
@@ -114,7 +114,8 @@ event incoming_tango_traffic (
  * eth_header (EthernetHeader_t): ethernet header to go back to peer
  * ip_header (IPv6Header_t): ip header corresponding to a given path
  * sequence_num (int<<4>>): sequence number corresponding to update
- * update (int<<64>>): encrypted version of the update
+ * update_lo (int<<32>>): encrypted version of the update lower order bits
+ * update_hi (int<<32>>): encrypted version of the update higher order bits
  **/
 event route_update (
     EthernetHeader_t eth_header,
@@ -292,6 +293,7 @@ handle incoming_tango_traffic (
         }
 
         // -- Trigger reroute if hard constraints are broken
+        // FIXME: ONLY TRIGGER ONCE
         if (
             (!is_within_constraints)
             && (tango_metrics_header#path_id != new_path_id)
@@ -319,8 +321,8 @@ handle incoming_tango_traffic (
                     tango_eth_header,
                     path_hdr,
                     enc_update#seq_num_tag,
-                    enc_update#ciphertext[31:0],
-                    enc_update#ciphertext[63:32]
+                    enc_update#ciphertext_lo,
+                    enc_update#ciphertext_hi
                 );
 
                 generate_port (out_peer_port, update);
@@ -339,9 +341,15 @@ handle route_update (
 ) {
 
     /* 1. Decrypt and verify update. */
+    TaggedCiphertext_t enc_update = {
+        seq_num_tag = sequence_num;
+        ciphertext_lo = update_lo;
+        ciphertext_hi = update_hi;
+    };
+
     // -- Decrypt
     RouteUpdate_t dec_update =
-        EncryptionManager.decrypt(incoming_encryption_manager, sequence_num, update_hi ^ update_lo);
+        EncryptionManager.decrypt(incoming_encryption_manager, enc_update);
 
     // -- Verify
     if (dec_update#is_valid) {
