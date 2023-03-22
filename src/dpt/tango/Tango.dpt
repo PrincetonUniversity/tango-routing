@@ -18,8 +18,8 @@ include "store_managers/metrics/LossMetricsManager.dpt"
  *                                                     EXTERNS                                                        *
  * ================================================================================================================== */
 
-const int out_peer_port = 1;
-const int out_port = 2;
+const int<<9>> out_peer_port = 1;
+const int<<9>> out_port = 2;
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
@@ -81,7 +81,11 @@ entry event forward_flow (
     EthernetHeader_t eth_header,
     IPv4Header_t ip_header,
     FiveTuple_t five_tuple
-);
+) [
+    route_manager < sequence_counters;
+    sequence_counters < outgoing_book_signature_manager;
+    outgoing_book_signature_manager < outgoing_metric_signature_manager
+];
 
 /**
  * # Description
@@ -104,7 +108,14 @@ event incoming_tango_traffic (
     TangoHeader_t tango_metrics_header,
     IPv4Header_t encaped_ip_header,
     FiveTuple_t encaped_five_tuple
-);
+) [
+    incoming_book_signature_manager < incoming_metric_signature_manager;
+    incoming_metric_signature_manager < invalid_pkt_manager;
+    incoming_metric_signature_manager < loss_metrics_manager;
+    loss_metrics_manager < delay_metrics_manager;
+    delay_metrics_manager < best_metrics_manager;
+    best_metrics_manager < outgoing_encryption_manager
+];
 
 /**
  * # Description
@@ -123,7 +134,9 @@ event route_update (
     int<<4>> sequence_num,
     int<<32>> update_lo,
     int<<32>> update_hi
-);
+) [
+    incoming_encryption_manager < route_manager
+];
 
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
@@ -139,7 +152,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
     if (traffic_class == 15) {
         event tunneled = forward_flow (eth_header, ip_header, five_tuple);
         generate_port (out_port, tunneled);
-    }
+    } else {
 
     // -- Find route cooresponding to traffic class.
     int<<3>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
@@ -189,7 +202,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
     );
 
     generate_port (out_peer_port, forward_tango_pkt);
-}
+}}
 
 handle incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
