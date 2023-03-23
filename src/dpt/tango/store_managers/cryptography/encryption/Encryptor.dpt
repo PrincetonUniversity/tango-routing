@@ -30,22 +30,30 @@ module Encryptor : {
 }
 {
     type t = {
-        Counter.t<<4>> seq_number;
+        Array.t<<4>> seq_number;
         Array.t<<32>> one_time_pads0;
         Array.t<<32>> one_time_pads1;
     }
 
     constr t create () = {
-        seq_number = Counter.create(0);
+        seq_number = Array.create(1);
         one_time_pads0 = Array.create(16);
         one_time_pads1 = Array.create(16);
     };
+
+    /**
+     * # Description
+     * Get next sequence number for pads.
+     **/
+    memop next(int<<'sz>> curr, int<<'sz>> ignore) {
+        return curr + 1;
+    }
 
     fun TaggedCiphertext_t encrypt (
         t self,
         EncodedUpdate_t encoded_update
     ) {
-        int<<4>> curr_seq_num = Counter.add(self#seq_number, 1);
+        int<<4>> curr_seq_num = Array.update(self#seq_number, 0, next, 1, next, 1);
         int<<32>> pad0 = Array.get(self#one_time_pads0, curr_seq_num);
         int<<32>> pad1 = Array.get(self#one_time_pads1, curr_seq_num);
 

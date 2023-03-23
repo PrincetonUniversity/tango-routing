@@ -6,8 +6,7 @@ include "../../Types.dpt"
  * 
  * # Methods
  * create() -> LossMetricsManager.t
- * update_loss(LossMetricsManager.t, int<<24>>, int<<3>>) -> int<<32>>
- * get_metrics(LossMetricsManager.t, int, int<<3>>) -> int<<32>>
+ * update_loss(LossMetricsManager.t, int, int<<24>>, int<<3>>) -> int<<32>>
  **/
 module LossMetricsManager : {
     global type t;
@@ -27,34 +26,19 @@ module LossMetricsManager : {
     **/
     fun int<<32>> update_loss (
         t self,
+        int avg_counter,
         int<<24>> sequence_num,
         int<<3>> path_id
     ) [start <= self; end self];
 }
 {
     type t = {
-        Counter.t<<6>> loss_counts0;
-        Counter.t<<6>> loss_counts1;
-        Counter.t<<6>> loss_counts2;
-        Counter.t<<6>> loss_counts3;
-        Counter.t<<6>> loss_counts4;
-        Counter.t<<6>> loss_counts5;
-        Counter.t<<6>> loss_counts6;
-        Counter.t<<6>> loss_counts7;
         Array.t<<24>> seq_num_tracker;
         Array.t<<32>> loss_sums;
         Array.t<<32>> loss_avgs;
     }
 
     constr t create () = {
-        loss_counts0 = Counter.create(0);
-        loss_counts1 = Counter.create(0);
-        loss_counts2 = Counter.create(0);
-        loss_counts3 = Counter.create(0);
-        loss_counts4 = Counter.create(0);
-        loss_counts5 = Counter.create(0);
-        loss_counts6 = Counter.create(0);
-        loss_counts7 = Counter.create(0);
         seq_num_tracker = Array.create(8);
         loss_sums = Array.create(8);
         loss_avgs = Array.create(8);
@@ -122,21 +106,10 @@ module LossMetricsManager : {
 
     fun int<<32>> update_loss (
         t self,
+        int avg_counter,
         int<<24>> sequence_num,
         int<<3>> path_id
     ) {
-        // Update loss counters
-        int<<32>> curr_cnt = 0;
-        match path_id with
-        | 0 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts0, 1); }
-        | 1 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts1, 1); }
-        | 2 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts2, 1); }
-        | 3 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts3, 1); }
-        | 4 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts4, 1); }
-        | 5 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts5, 1); }
-        | 6 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts6, 1); }
-        | 7 -> { curr_cnt = (int<<32>>) Counter.add(self#loss_counts7, 1); }
-
         // Calculate loss and updated last seen sequence number
         int<<32>> loss_found = (int<<32>>) Array.update(
             self#seq_num_tracker,
@@ -149,7 +122,7 @@ module LossMetricsManager : {
 
         // Update loss sum
         int<<32>> curr_loss_sum = 0;
-        if (curr_cnt > 62) {
+        if (avg_counter > 62) {
             curr_loss_sum = Array.update(
                 self#loss_sums,
                 path_id,
@@ -171,7 +144,7 @@ module LossMetricsManager : {
 
         // Update loss average
         int<<32>> avg_loss = 0;
-        if (curr_cnt > 62) {
+        if (avg_counter > 62) {
             avg_loss = curr_loss_sum;
             Array.set(self#loss_avgs, path_id, curr_loss_sum);
         } else {
@@ -180,6 +153,6 @@ module LossMetricsManager : {
 
         printf("loss: %d, loss-sum: %d, loss-avg: %d", loss_found, curr_loss_sum, avg_loss);
 
-        return (int<<32>>) avg_loss[31:6]; // Divide by '64'
+        return avg_loss;
     }
 }

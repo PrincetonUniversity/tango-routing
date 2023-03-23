@@ -1,0 +1,64 @@
+/**
+ * # Description
+ * Manage all traffic class to physical path ID mappings reroute issuings.
+ * 
+ * # Methods
+ * create() -> RerouteManager.t
+ * check_reroute(RerouteManager.t, int<<4>>, int<<3>>) -> bool
+ **/
+module RerouteManager : {
+    global type t;
+    constr t create ();
+
+    /**
+    * # Description
+    * Updates map with a new traffic class to physical path ID mapping.
+    * 
+    * # Parameters
+    * self (t): self
+    * traffic_cls (int<<4>>): traffic class to update mapping for
+    * path_id (int<<3>>): physical path ID to update mapping to
+    * 
+    * # Returns
+    * should_reroute (bool): should a reroute be triggered
+    **/
+    fun bool check_reroute (
+        t self,
+        int<<4>> traffic_cls,
+        int<<3>> path_id
+    ) [start <= self; end self];
+}
+{
+    type t = {
+        Array.t<<3>> route_mappings;
+    }
+
+    constr t create () = {
+        route_mappings = Array.create(16);
+    };
+
+    memop set_new(int<<'sz>> ignore, int<<'sz>> new) {
+        return new;
+    }
+
+    memop get_curr(int<<'sz>> curr, int<<'sz>> ignore) {
+        return curr;
+    }
+
+    fun bool check_reroute (
+        t self,
+        int<<4>> traffic_cls,
+        int<<3>> path_id
+    ) {
+        int<<3>> curr_path = Array.update(
+            self#route_mappings,
+            traffic_cls,
+            get_curr,
+            0,
+            set_new,
+            path_id
+        );
+
+        return path_id != curr_path;
+    }
+}

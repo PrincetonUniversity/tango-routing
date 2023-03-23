@@ -1,0 +1,68 @@
+/**
+ * # Description
+ * Keep track of number of incoming packets seen on each path for averaging.
+ * 
+ * # Methods
+ * create() -> MetricAverageTracker.t
+ * increment(MetricAverageTracker.t, int<<3>>) -> int<<24>>
+ **/
+module MetricAverageTracker : {
+    global type t;
+    constr t create ();
+
+   /**
+    * # Description
+    * Increments and returns the current, non-incremented number of packets
+    * seen before rollover on a given path.
+    * 
+    * # Parameters
+    * self (t): self
+    * path_id (int<<3>>): the path on which the packet is tunneled
+    * 
+    * # Returns
+    * packet_count (int<<6>>): number of packets seen on a given path
+    **/
+    fun int<<6>> increment (
+        t self,
+        int<<3>> path_id
+    ) [start <= self; end self];
+}
+{
+    type t = {
+        Array.t<<6>> packet_counts;
+    }
+
+    constr t create () = {
+        packet_counts = Array.create(8);
+    };
+
+    /**
+     * # Description
+     * Increment the stored number of packets seen.
+     **/
+    memop next(int<<'sz>> curr, int<<'sz>> ignore) {
+        return curr + 1;
+    }
+
+    /**
+     * # Description
+     * Get number of packets seen on a path (offset by one).
+     **/
+    memop get_curr(int<<'sz>> curr, int<<'sz>> ignore) {
+        return curr;
+    }
+
+    fun int<<6>> increment (
+        t self,
+        int<<3>> path_id
+    ) {
+        return Array.update(
+            self#packet_counts,
+            path_id,
+            get_curr,
+            0,
+            next,
+            0
+        );
+    }
+}

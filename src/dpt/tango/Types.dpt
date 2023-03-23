@@ -31,7 +31,8 @@ type EthernetHeader_t = {
  * dest_addr (int<<32>>): IPv4 address of receiver
  **/
 type IPv4Header_t = {
-   int<<8>>  version_ihl;
+   int<<4>>  version;
+   int<<4>>  ihl;
    int<<8>>  type_of_svc;
    int<<16>> len;
    int<<16>> id;

@@ -66,10 +66,7 @@ module EncryptionManager : {
         int<<4>> traffic_cls,
         int<<3>> path_id
     ) {
-        EncodedUpdate_t encoded_update = {
-            encoding_lo = 0;
-            encoding_hi = 0;
-        }; // encode_update(path_id, traffic_cls);
+        EncodedUpdate_t encoded_update = encode_update(path_id, traffic_cls);
         printf("encoded update: [%d, %d]", encoded_update#encoding_hi, encoded_update#encoding_lo);
 
         TaggedCiphertext_t ciphertext =
@@ -85,10 +82,6 @@ module EncryptionManager : {
         EncodedUpdate_t plaintext =
             Decryptor.decrypt(self#decryptor, tagged_ciphertext);
 
-        return {
-            is_valid = true;
-            traffic_class = 0;
-            new_path_id = 0;
-        }; // decode_update(plaintext);
+        return decode_update(plaintext);
     }
 }

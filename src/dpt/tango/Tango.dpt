@@ -1,18 +1,22 @@
 include "Time.dpt"
 include "Types.dpt"
+include "static_maps/EncodingMap.dpt"
 include "static_maps/TrafficClassConstraintMap.dpt"
 include "static_maps/TrafficClassMap.dpt"
 include "static_maps/TrafficClassOpmizationMap.dpt"
 include "static_maps/TunnelHeaderMap.dpt"
 include "store_managers/InvalidPacketManager.dpt"
+include "store_managers/RerouteManager.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/SequenceNumberManager.dpt"
-include "store_managers/cryptography/encryption/EncryptionManager.dpt"
+include "store_managers/cryptography/encryption/Decryptor.dpt"
+include "store_managers/cryptography/encryption/Encryptor.dpt"
 include "store_managers/cryptography/signatures/BookSignatureManager.dpt"
 include "store_managers/cryptography/signatures/MetricSignatureManager.dpt"
 include "store_managers/metrics/BestMetricsManager.dpt"
 include "store_managers/metrics/DelayMetricsManager.dpt"
 include "store_managers/metrics/LossMetricsManager.dpt"
+include "store_managers/metrics/MetricAverageTracker.dpt"
 
 /* ================================================================================================================== *
  *                                                     EXTERNS                                                        *
@@ -26,7 +30,7 @@ const int<<9>> out_port = 2;
  * ================================================================================================================== */
 
 // Decrypt path updates using one-time pads
-global EncryptionManager.t incoming_encryption_manager = EncryptionManager.create();
+global Decryptor.t decryptor = Decryptor.create();
 
 // Keep track of the traffic class to physical path ID mappings
 global RouteManager.t route_manager = RouteManager.create();
@@ -46,6 +50,9 @@ global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureMan
 // Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
 
+// Keep track of the number of packets seen on each path
+global MetricAverageTracker.t metric_avg_tracker = MetricAverageTracker.create();
+
 // Keep track of loss metrics of paths from peer
 global LossMetricsManager.t loss_metrics_manager = LossMetricsManager.create();
 
@@ -58,8 +65,11 @@ global InvalidPacketManager.t invalid_pkt_manager = InvalidPacketManager.create(
 // Keep track of the most performant paths
 global BestMetricsManager.t best_metrics_manager = BestMetricsManager.create();
 
+// Test if a reroute should be issued
+global RerouteManager.t reroute_manager = RerouteManager.create();
+
 // Encrypt path updates using one-time pads
-global EncryptionManager.t outgoing_encryption_manager = EncryptionManager.create();
+global Encryptor.t encryptor = Encryptor.create();
 
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *
@@ -111,10 +121,11 @@ event incoming_tango_traffic (
 ) [
     incoming_book_signature_manager < incoming_metric_signature_manager;
     incoming_metric_signature_manager < invalid_pkt_manager;
-    incoming_metric_signature_manager < loss_metrics_manager;
+    incoming_metric_signature_manager < metric_avg_tracker;
+    metric_avg_tracker < loss_metrics_manager;
     loss_metrics_manager < delay_metrics_manager;
     delay_metrics_manager < best_metrics_manager;
-    best_metrics_manager < outgoing_encryption_manager
+    best_metrics_manager < encryptor
 ];
 
 /**
@@ -135,7 +146,7 @@ event route_update (
     int<<32>> update_lo,
     int<<32>> update_hi
 ) [
-    incoming_encryption_manager < route_manager
+    decryptor < reroute_manager
 ];
 
 /* ================================================================================================================== *
@@ -184,10 +195,11 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         sequence_num = seq_number;
         book_signature = book_signature;
     };
-     
+
+    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#ihl ^ ((int<<5>>) 0))) + ip_header#len;
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
-        tango_tunnel_hdr,
+        { tango_tunnel_hdr with payload_len = payload_len},
         tango_metrics_hdr,
         ip_header,
         five_tuple
@@ -252,9 +264,16 @@ handle incoming_tango_traffic (
     } else {
 
         /* 2. Update Metrics. */
+        // -- Get the current number of packets seen on path
+        int<<32>> avg_count = (int<<32>>) MetricAverageTracker.increment(
+            metric_avg_tracker,
+            tango_metrics_header#path_id
+        );
+
         // -- Update Loss
         int<<32>> loss_metrics = LossMetricsManager.update_loss(
             loss_metrics_manager,
+            avg_count,
             tango_metrics_header#sequence_num,
             tango_metrics_header#path_id
         );
@@ -262,6 +281,7 @@ handle incoming_tango_traffic (
         // -- Update delay
         int<<32>> delay_metrics = DelayMetricsManager.update_delay(
             delay_metrics_manager,
+            avg_count,
             tango_metrics_header#timestamp,
             tango_metrics_header#path_id
         );
@@ -294,6 +314,9 @@ handle incoming_tango_traffic (
             delay_metrics
         );
 
+        // -- Trigger reroute if hard constraints are broken
+        if (!is_within_constraints) {
+
         // -- Get optimization policy of traffic class
         bool policy = map_traffic_class_to_policy(traffic_class);
 
@@ -305,12 +328,14 @@ handle incoming_tango_traffic (
             new_path_id = best_metrics#best_loss_id;
         }
 
-        // -- Trigger reroute if hard constraints are broken
-        // FIXME: ONLY TRIGGER ONCE
-        if (
-            (!is_within_constraints)
-            && (tango_metrics_header#path_id != new_path_id)
-        ) {
+        bool should_issue_reroute = RerouteManager.check_reroute(
+            reroute_manager,
+            traffic_class,
+            new_path_id
+        );
+
+        // -- Trigger reroute if one has not already been issued
+        if (should_issue_reroute) {
 
             printf("Triggering Reroute: { traffic_cls: %d, old_path_id: %d, new_path_id: %d }",
                 traffic_class,
@@ -319,28 +344,26 @@ handle incoming_tango_traffic (
             );
 
             // -- Encrypt reroute request
-            TaggedCiphertext_t enc_update = EncryptionManager.encrypt(
-                outgoing_encryption_manager,
-                traffic_class,
-                new_path_id
-            );
+            EncodedUpdate_t encoded_update = encode_update(new_path_id, traffic_class);
+
+            TaggedCiphertext_t encrypted_update = Encryptor.encrypt(encryptor, encoded_update);
 
             // -- multicast reroute request
             for (request_path < NUM_VALID_PATHS) {
                 IPv6Header_t path_hdr = map_path_to_tunnel_header((int<<3>>) size_to_int(request_path));
 
-                int<<4>> update_seq_num = enc_update#seq_num_tag;
+                int<<4>> update_seq_num = encrypted_update#seq_num_tag;
                 event update = route_update (
                     tango_eth_header,
-                    path_hdr,
+                    { path_hdr with payload_len = 72 },
                     (int<<8>>) update_seq_num,
-                    enc_update#ciphertext_lo,
-                    enc_update#ciphertext_hi
+                    encrypted_update#ciphertext_lo,
+                    encrypted_update#ciphertext_hi
                 );
 
                 generate_port (out_peer_port, update);
             }
-        }
+        }}
     }}
 }
 
@@ -360,14 +383,18 @@ handle route_update (
     };
 
     // -- Decrypt
-    RouteUpdate_t dec_update =
-        EncryptionManager.decrypt(incoming_encryption_manager, enc_update);
+    EncodedUpdate_t plaintext = Decryptor.decrypt(decryptor, enc_update);
+
+    RouteUpdate_t dec_update = decode_update(plaintext);
 
     // -- Verify
     if (dec_update#is_valid) {
 
         /* 2. Update route mapping. */
-        RouteManager.update_route(route_manager, dec_update#traffic_class, dec_update#new_path_id);
-
+        RouteManager.update_route(
+            route_manager,
+            dec_update#traffic_class,
+            dec_update#new_path_id
+        );
     }
 }

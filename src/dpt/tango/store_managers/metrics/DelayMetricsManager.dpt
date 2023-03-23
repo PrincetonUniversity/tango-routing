@@ -7,8 +7,7 @@ include "../../Time.dpt"
  * 
  * # Methods
  * create() -> DelayMetricsManager.t
- * update_delay(DelayMetricsManager.t, int, int<<3>>) -> int<<32>>
- * get_metrics(DelayMetricsManager.t, int, int<<3>>) -> int<<32>>
+ * update_delay(DelayMetricsManager.t, int, int<<12>>, int<<3>>) -> int<<32>>
  **/
 module DelayMetricsManager : {
     global type t;
@@ -28,6 +27,7 @@ module DelayMetricsManager : {
     **/
     fun int<<32>> update_delay (
         t self,
+        int avg_counter,
         int<<12>> timestamp,
         int<<3>> path_id
     ) [start <= self; end self];
@@ -35,27 +35,11 @@ module DelayMetricsManager : {
 }
 {
     type t = {
-        Counter.t<<5>> delay_count0;
-        Counter.t<<5>> delay_count1;
-        Counter.t<<5>> delay_count2;
-        Counter.t<<5>> delay_count3;
-        Counter.t<<5>> delay_count4;
-        Counter.t<<5>> delay_count5;
-        Counter.t<<5>> delay_count6;
-        Counter.t<<5>> delay_count7;
         Array.t<<32>> delay_sums;
         Array.t<<32>> delay_avgs;
     }
 
     constr t create() = {
-        delay_count0 = Counter.create(0);
-        delay_count1 = Counter.create(0);
-        delay_count2 = Counter.create(0);
-        delay_count3 = Counter.create(0);
-        delay_count4 = Counter.create(0);
-        delay_count5 = Counter.create(0);
-        delay_count6 = Counter.create(0);
-        delay_count7 = Counter.create(0);
         delay_sums = Array.create(8);
         delay_avgs = Array.create(8);
     };
@@ -69,7 +53,7 @@ module DelayMetricsManager : {
         int<<'sz>> delay_sum,
         int<<'sz>> curr_count
     ) {
-        bool should_reset = curr_count > 30;
+        bool should_reset = curr_count > 62;
 
         if (should_reset) {
             cell1 = delay_sum;
@@ -99,28 +83,17 @@ module DelayMetricsManager : {
 
     fun int<<32>> update_delay (
         t self,
+        int avg_counter,
         int<<12>> timestamp,
         int<<3>> path_id
     ) {
-        // Count this packet as seen
-        int delay_count = 0;
-        match path_id with
-        | 0 -> { delay_count = (int<<32>>) Counter.add(self#delay_count0, 1); }
-        | 1 -> { delay_count = (int<<32>>) Counter.add(self#delay_count1, 1); }
-        | 2 -> { delay_count = (int<<32>>) Counter.add(self#delay_count2, 1); }
-        | 3 -> { delay_count = (int<<32>>) Counter.add(self#delay_count3, 1); }
-        | 4 -> { delay_count = (int<<32>>) Counter.add(self#delay_count4, 1); }
-        | 5 -> { delay_count = (int<<32>>) Counter.add(self#delay_count5, 1); }
-        | 6 -> { delay_count = (int<<32>>) Counter.add(self#delay_count6, 1); }
-        | 7 -> { delay_count = (int<<32>>) Counter.add(self#delay_count7, 1); }
-
         // Update and get delay
         int<<12>> curr_time = get_time_now_ms();
         int new_delay = (int<<32>>) (curr_time - timestamp);
 
         // Update delay sums
         int<<32>> delay_sum = 0;
-        if (delay_count > 30) {
+        if (avg_counter > 62) {
             delay_sum = Array.update(
                 self#delay_sums,
                 path_id,
@@ -146,11 +119,10 @@ module DelayMetricsManager : {
             path_id,
             update_delay_avg,
             delay_sum,
-            delay_count,
+            avg_counter,
             0
         );
 
-        // Divide by '32'
-        return (int<<32>>) delay_avg[31:5];
+        return delay_avg;
     }
 }
