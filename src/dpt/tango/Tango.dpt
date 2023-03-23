@@ -131,7 +131,7 @@ event incoming_tango_traffic (
 event route_update (
     EthernetHeader_t eth_header,
     IPv6Header_t ip_header,
-    int<<4>> sequence_num,
+    int<<8>> sequence_num,
     int<<32>> update_lo,
     int<<32>> update_hi
 ) [
@@ -327,13 +327,13 @@ handle incoming_tango_traffic (
 
             // -- multicast reroute request
             for (request_path < NUM_VALID_PATHS) {
-                IPv6Header_t path_hdr =
-                    map_path_to_tunnel_header((int<<3>>) size_to_int(request_path));
+                IPv6Header_t path_hdr = map_path_to_tunnel_header((int<<3>>) size_to_int(request_path));
 
+                int<<4>> update_seq_num = enc_update#seq_num_tag;
                 event update = route_update (
                     tango_eth_header,
                     path_hdr,
-                    enc_update#seq_num_tag,
+                    (int<<8>>) update_seq_num,
                     enc_update#ciphertext_lo,
                     enc_update#ciphertext_hi
                 );
@@ -341,21 +341,20 @@ handle incoming_tango_traffic (
                 generate_port (out_peer_port, update);
             }
         }
-
     }}
 }
 
 handle route_update (
     EthernetHeader_t eth_header,
     IPv6Header_t ip_header,
-    int<<4>> sequence_num,
+    int<<8>> sequence_num,
     int<<32>> update_lo,
     int<<32>> update_hi
 ) {
 
     /* 1. Decrypt and verify update. */
     TaggedCiphertext_t enc_update = {
-        seq_num_tag = sequence_num;
+        seq_num_tag = (int<<4>>) sequence_num;
         ciphertext_lo = update_lo;
         ciphertext_hi = update_hi;
     };

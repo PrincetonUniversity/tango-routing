@@ -62,14 +62,14 @@ module BookSignatureManager : {
     }
 
     constr t create () = {
-        onebit_signatures0 = Array.create(16777216); // 2^24
-        onebit_signatures1 = Array.create(16777216);
-        onebit_signatures2 = Array.create(16777216);
-        onebit_signatures3 = Array.create(16777216);
-        onebit_signatures4 = Array.create(16777216);
-        onebit_signatures5 = Array.create(16777216);
-        onebit_signatures6 = Array.create(16777216);
-        onebit_signatures7 = Array.create(16777216);
+        onebit_signatures0 = Array.create(65536); // 2^16
+        onebit_signatures1 = Array.create(65536);
+        onebit_signatures2 = Array.create(65536);
+        onebit_signatures3 = Array.create(65536);
+        onebit_signatures4 = Array.create(65536);
+        onebit_signatures5 = Array.create(65536);
+        onebit_signatures6 = Array.create(65536);
+        onebit_signatures7 = Array.create(65536);
     };
 
     fun int<<1>> sign (
