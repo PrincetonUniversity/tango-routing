@@ -210,7 +210,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
         book_signature = book_signature;
     };
 
-    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#ihl ^ ((int<<5>>) 0))) + ip_header#len;
+    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#version_ihl[7:4] ^ ((int<<5>>) 0))) + ip_header#len; // FIXME: DIFF
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
         { tango_tunnel_hdr with payload_len = payload_len},

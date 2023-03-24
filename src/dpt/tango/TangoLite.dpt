@@ -107,7 +107,7 @@ exit event complete_forward (
  * request_route_update: sometimes responds to peer with route mapping update
  * complete_forward: forwards the packet on to its final destination
  **/
-event incoming_tango_traffic ( 
+event incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
@@ -161,14 +161,14 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
 
     /* 4. Encapsulate and forward packet. */
     TangoHeader_t tango_metrics_hdr = {
-        path_id = path_id;
-        timestamp = timestamp;
+        path_id = (int<<8>>) path_id;
+        timestamp = (int<<16>>) timestamp;
         signature = ts_signature;
         sequence_num = seq_number;
-        book_signature = book_signature;
+        book_signature = (int<<8>>) book_signature;
     };
 
-    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#ihl ^ ((int<<5>>) 0))) + ip_header#len;
+    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#version_ihl[7:4] ^ ((int<<5>>) 0))) + ip_header#len;
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
         { tango_tunnel_hdr with payload_len = payload_len},
@@ -207,17 +207,16 @@ handle incoming_tango_traffic (
         bool is_valid_seq_num = BookSignatureManager.verify(
             incoming_book_signature_manager,
             tango_metrics_header#sequence_num,
-            tango_metrics_header#path_id,
-            tango_metrics_header#book_signature
+            tango_metrics_header#path_id[2:0],
+            tango_metrics_header#book_signature[0:0]
         );
 
         bool is_valid_metrics = MetricSignatureManager.verify(
             incoming_metric_signature_manager,
-            tango_metrics_header#timestamp,
-            tango_metrics_header#path_id,
+            tango_metrics_header#timestamp[11:0],
+            tango_metrics_header#path_id[2:0],
             tango_metrics_header#signature
         );
-        printf("Found timestamp: %d", tango_metrics_header#timestamp);
 
         // TODO: Verify `path_id` matches expected header metadata
 
@@ -226,16 +225,16 @@ handle incoming_tango_traffic (
             printf("Invalid incoming packet found: { reason: { seq_num: %b, ts: %b } path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
                 is_valid_seq_num,
                 is_valid_metrics,
-                tango_metrics_header#path_id,
-                tango_metrics_header#timestamp,
+                tango_metrics_header#path_id[2:0],
+                tango_metrics_header#timestamp[11:0],
                 tango_metrics_header#signature,
                 tango_metrics_header#sequence_num,
-                tango_metrics_header#book_signature
+                tango_metrics_header#book_signature[0:0]
             );
 
             InvalidPacketManager.found_invalid_packet(
                 invalid_pkt_manager,
-                tango_metrics_header#path_id
+                tango_metrics_header#path_id[2:0]
             );
 
         } else {
@@ -244,7 +243,7 @@ handle incoming_tango_traffic (
             // -- Get the current number of packets seen on path
             int<<32>> avg_count = (int<<32>>) MetricAverageTracker.increment(
                 metric_avg_tracker,
-                tango_metrics_header#path_id
+                tango_metrics_header#path_id[2:0]
             );
 
             // -- Update Loss
@@ -252,19 +251,19 @@ handle incoming_tango_traffic (
                 loss_metrics_manager,
                 avg_count,
                 tango_metrics_header#sequence_num,
-                tango_metrics_header#path_id
+                tango_metrics_header#path_id[2:0]
             );
 
             // -- Update delay
             int<<32>> delay_metrics = DelayMetricsManager.update_delay(
                 delay_metrics_manager,
                 avg_count,
-                tango_metrics_header#timestamp,
-                tango_metrics_header#path_id
+                tango_metrics_header#timestamp[11:0],
+                tango_metrics_header#path_id[2:0]
             );
 
             printf("Metrics for path %d updated: { loss: %d, delay: %d }",
-                tango_metrics_header#path_id,
+                tango_metrics_header#path_id[2:0],
                 loss_metrics,
                 delay_metrics
             );

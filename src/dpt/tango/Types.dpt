@@ -31,8 +31,7 @@ type EthernetHeader_t = {
  * dest_addr (int<<32>>): IPv4 address of receiver
  **/
 type IPv4Header_t = {
-   int<<4>>  version;
-   int<<4>>  ihl;
+   int<<8>>  version_ihl;
    int<<8>>  type_of_svc;
    int<<16>> len;
    int<<16>> id;
@@ -59,9 +58,10 @@ type IPv4Header_t = {
  * dest_addr (int<<128>>): IPv6 address of receiver
  **/
 type IPv6Header_t = {
-   int<<4>>   version;
-   int<<8>>   traffic_class; // TODO: Should we reconsider naming
-   int<<20>>  flow_label;
+   // int<<4>>   version;
+   // int<<8>>   traffic_class; // TODO: Should we reconsider naming
+   // int<<20>>  flow_label;
+   int<<32>>  version_cls_flow;
    int<<16>>  payload_len;
    int<<8>>   next_header;
    int<<8>>   hop_limit;
@@ -102,11 +102,11 @@ type FiveTuple_t = {
  * book_signature (int<<1>>): signature of the sequence number
  **/
 type TangoHeader_t = {
-   int<<3>>   path_id;
-   int<<12>>  timestamp;
+   int<<8>>   path_id;
+   int<<16>>  timestamp;
    int<<32>> signature;
    int<<24>>  sequence_num;
-   int<<1>>   book_signature;
+   int<<8>>   book_signature;
 }
 
 /**
