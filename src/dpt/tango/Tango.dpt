@@ -77,7 +77,7 @@ global Encryptor.t encryptor = Encryptor.create();
 
 /**
  * # Description
- * Application packet tunneled or to tunnel out of system.
+ * Application packet tunneled through system.
  * 
  * # Parameters
  * eth_header (`EthernetHeader_t`): ethernet frame header
@@ -86,6 +86,7 @@ global Encryptor.t encryptor = Encryptor.create();
  *
  * # Generates
  * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
+ * complete_forward: not tango traffic
  **/
 entry event forward_flow (
     EthernetHeader_t eth_header,
@@ -96,6 +97,19 @@ entry event forward_flow (
     sequence_counters < outgoing_book_signature_manager;
     outgoing_book_signature_manager < outgoing_metric_signature_manager
 ];
+
+/**
+ * # Description
+ * Application packet to tunnel out of system.
+ * 
+ * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ **/
+exit event complete_forward (
+    EthernetHeader_t eth_header,
+    IPv4Header_t ip_header
+);
 
 /**
  * # Description
@@ -110,7 +124,7 @@ entry event forward_flow (
  *
  * # Generates
  * request_route_update: sometimes responds to peer with route mapping update
- * forward_flow: forwards the packet on to its final destination
+ * complete_forward: forwards the packet on to its final destination
  **/
 event incoming_tango_traffic ( 
     EthernetHeader_t tango_eth_header,
@@ -161,7 +175,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
 
     // -- Ignore if not tango traffic
     if (traffic_class == 15) {
-        event tunneled = forward_flow (eth_header, ip_header, five_tuple);
+        event tunneled = complete_forward (eth_header, ip_header);
         generate_port (out_port, tunneled);
     } else {
 
@@ -228,7 +242,7 @@ handle incoming_tango_traffic (
     // -- Skip if not tango traffic
     int<<4>> traffic_class = map_flow_to_traffic_class(encaped_five_tuple);
     if (traffic_class == 15) {
-        event tunneled = forward_flow (tango_eth_header, encaped_ip_header, encaped_five_tuple);
+        event tunneled = complete_forward (tango_eth_header, encaped_ip_header);
         generate_port (out_port, tunneled);
     } else {
     // -- Verify
@@ -302,7 +316,7 @@ handle incoming_tango_traffic (
             best_metrics#best_delay_id
         );
 
-        event tunneled = forward_flow (tango_eth_header, encaped_ip_header, encaped_five_tuple);
+        event tunneled = complete_forward (tango_eth_header, encaped_ip_header);
         generate_port (out_port, tunneled);
 
 
