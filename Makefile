@@ -1,16 +1,30 @@
 INTERPRETER=dpt
+COMPILER=dptc
 IMAGE=jsonch/lucid:lucid
-
+BUILD_DIR=target
+MAIN_FILE=src/dpt/tango/Tango.dpt
 SOURCES=$(shell find src -type f -name "*.dpt")
 
 all: lint test compile
 
+.PHONY: clean clobber test
+
 lint: $(SOURCES)
-	@$(INTERPRETER) src/dpt/tango/Tango.dpt
+	@$(INTERPRETER) $(MAIN_FILE)
 
 test: $(SOURCES)
-	@$(INTERPRETER) src/dpt/tango/Tango.dpt
+	@-[[ ! -d ".venv" ]] && python3.11 -m venv .venv
+	@. .venv/bin/activate
+	@pip install -e .
+	@pip install tox
+	@tox -e py11
 
 compile: $(SOURCES)
-	@-docker pull $(IMAGE)
-	@docker run -it --rm -v `pwd`:/workspace $(IMAGE) sh -c "cd /workspace && /app/dptc src/dpt/tango/Tango.dpt -o target"
+	@$(COMPILER) $(MAIN_FILE) -o $(BUILD_DIR)
+
+clean:
+	@rm -rf $(BUILD_DIR)
+
+clobber: clean
+	@rm -rf $(shell find src -type d -name "__pycache__")
+	@rm -rf $(shell find src -type d -name "*.egg-info")
