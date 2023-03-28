@@ -1,0 +1,832 @@
+memop LossMetricsManager_update_loss_avg(int<<32>> curr_loss_avg,int<<32>> loss_sum,int<<32>> avg_counter)
+ {{
+b1=(should_reset,avg_counter>62);
+b2=None
+cell1=(should_reset -> loss_sum), None
+cell2=None, None
+
+ret=(true -> cell1)
+}}
+memop DelayMetricsManager_update_delay_avg(int<<32>> curr_delay_avg,int<<32>> delay_sum,int<<32>> curr_count)
+ {{
+b1=(should_reset,curr_count>62);
+b2=None
+cell1=(should_reset -> delay_sum), None
+cell2=None, None
+
+ret=(true -> cell1)
+}}
+global Array.t<<3>> route_manager_0 = Array.create(16);
+
+global Array.t<<24>> sequence_counters_0 = Array.create(8);
+
+global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_1 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_2 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_3 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_4 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_5 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_6 = Array.create(65536);
+
+global Array.t<<1>> incoming_book_signature_manager_7 = Array.create(65536);
+
+global Array.t<<32>> incoming_metric_signature_manager_0 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_1 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_2 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_3 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_4 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_5 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_6 = Array.create(16);
+
+global Array.t<<32>> incoming_metric_signature_manager_7 = Array.create(16);
+
+global Array.t<<1>> outgoing_book_signature_manager_0 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_1 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_2 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_3 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_4 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_5 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_6 = Array.create(65536);
+
+global Array.t<<1>> outgoing_book_signature_manager_7 = Array.create(65536);
+
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_2 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_3 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_4 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_5 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
+
+global Array.t<<6>> metric_avg_tracker_0 = Array.create(8);
+
+global Array.t<<24>> loss_metrics_manager_0 = Array.create(8);
+
+global Array.t<<32>> loss_metrics_manager_1 = Array.create(8);
+
+global Array.t<<32>> loss_metrics_manager_2 = Array.create(8);
+
+global Array.t<<32>> delay_metrics_manager_0 = Array.create(8);
+
+global Array.t<<32>> delay_metrics_manager_1 = Array.create(8);
+
+global Array.t<<32>> invalid_pkt_manager_0 = Array.create(8);
+
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<32>> forward_flow_five_tuple_0,int<<32>> forward_flow_five_tuple_1,int<<16>> forward_flow_five_tuple_2,int<<16>> forward_flow_five_tuple_3,int<<8>> forward_flow_five_tuple_4);
+event complete_forward(int<<48>> complete_forward_eth_header_0,int<<48>> complete_forward_eth_header_1,int<<16>> complete_forward_eth_header_2,int<<8>> complete_forward_ip_header_0,int<<8>> complete_forward_ip_header_1,int<<16>> complete_forward_ip_header_2,int<<16>> complete_forward_ip_header_3,int<<16>> complete_forward_ip_header_4,int<<8>> complete_forward_ip_header_5,int<<8>> complete_forward_ip_header_6,int<<16>> complete_forward_ip_header_7,int<<32>> complete_forward_ip_header_8,int<<32>> complete_forward_ip_header_9);
+handle complete_forward(int<<48>> complete_forward_eth_header_0,int<<48>> complete_forward_eth_header_1,int<<16>> complete_forward_eth_header_2,int<<8>> complete_forward_ip_header_0,int<<8>> complete_forward_ip_header_1,int<<16>> complete_forward_ip_header_2,int<<16>> complete_forward_ip_header_3,int<<16>> complete_forward_ip_header_4,int<<8>> complete_forward_ip_header_5,int<<8>> complete_forward_ip_header_6,int<<16>> complete_forward_ip_header_7,int<<32>> complete_forward_ip_header_8,int<<32>> complete_forward_ip_header_9) {
+
+}
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<32>> incoming_tango_traffic_encaped_five_tuple_0,int<<32>> incoming_tango_traffic_encaped_five_tuple_1,int<<16>> incoming_tango_traffic_encaped_five_tuple_2,int<<16>> incoming_tango_traffic_encaped_five_tuple_3,int<<8>> incoming_tango_traffic_encaped_five_tuple_4);
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<32>> forward_flow_five_tuple_0,int<<32>> forward_flow_five_tuple_1,int<<16>> forward_flow_five_tuple_2,int<<16>> forward_flow_five_tuple_3,int<<8>> forward_flow_five_tuple_4) {
+
+}
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<32>> incoming_tango_traffic_encaped_five_tuple_0,int<<32>> incoming_tango_traffic_encaped_five_tuple_1,int<<16>> incoming_tango_traffic_encaped_five_tuple_2,int<<16>> incoming_tango_traffic_encaped_five_tuple_3,int<<8>> incoming_tango_traffic_encaped_five_tuple_4) {
+
+}
+// shared locals:
+
+// MAIN HANDLER 
+handler main(...){
+// Stage 0
+match event_id with 
+| 2 -> {
+Sys.invalidate.complete_forward(complete_forward_eth_header_0,complete_forward_eth_header_1,complete_forward_eth_header_2,complete_forward_ip_header_0,complete_forward_ip_header_1,complete_forward_ip_header_2,complete_forward_ip_header_3,complete_forward_ip_header_4,complete_forward_ip_header_5,complete_forward_ip_header_6,complete_forward_ip_header_7,complete_forward_ip_header_8,complete_forward_ip_header_9);
+}
+| 1 -> {
+int<<4>> map_flow_to_traffic_class_ret = 0;
+match (forward_flow_five_tuple_0,forward_flow_five_tuple_2,forward_flow_five_tuple_1,forward_flow_five_tuple_3,forward_flow_five_tuple_4) with 
+| _,_,_,_,_ -> {
+map_flow_to_traffic_class_ret = 15;
+}
+int<<4>> traffic_class = map_flow_to_traffic_class_ret;
+match traffic_class with 
+| 15 -> {
+int<<48>> tunneled_arg_0 = forward_flow_eth_header_0;
+int<<48>> tunneled_arg_1 = forward_flow_eth_header_1;
+int<<16>> tunneled_arg_2 = forward_flow_eth_header_2;
+int<<8>> tunneled_arg_3 = forward_flow_ip_header_0;
+int<<8>> tunneled_arg_4 = forward_flow_ip_header_1;
+int<<16>> tunneled_arg_5 = forward_flow_ip_header_2;
+int<<16>> tunneled_arg_6 = forward_flow_ip_header_3;
+int<<16>> tunneled_arg_7 = forward_flow_ip_header_4;
+int<<8>> tunneled_arg_8 = forward_flow_ip_header_5;
+int<<8>> tunneled_arg_9 = forward_flow_ip_header_6;
+int<<16>> tunneled_arg_10 = forward_flow_ip_header_7;
+int<<32>> tunneled_arg_11 = forward_flow_ip_header_8;
+int<<32>> tunneled_arg_12 = forward_flow_ip_header_9;
+generate_port (2, complete_forward(tunneled_arg_0,tunneled_arg_1,tunneled_arg_2,tunneled_arg_3,tunneled_arg_4,tunneled_arg_5,tunneled_arg_6,tunneled_arg_7,tunneled_arg_8,tunneled_arg_9,tunneled_arg_10,tunneled_arg_11,tunneled_arg_12));
+}
+| _ -> {
+int<<3>> RouteManager_get_path_id_ret = 0;
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,traffic_class,get_10102,0,0,0);
+int<<3>> path_id = RouteManager_get_path_id_ret;
+int<<32>> map_path_to_tunnel_header_ret_0 = 32;
+int<<16>> map_path_to_tunnel_header_ret_1 = 32;
+int<<8>> map_path_to_tunnel_header_ret_2 = 32;
+int<<8>> map_path_to_tunnel_header_ret_3 = 32;
+int<<128>> map_path_to_tunnel_header_ret_4 = 32;
+int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+match path_id with 
+| _ -> {
+map_path_to_tunnel_header_ret_0 = 0;
+map_path_to_tunnel_header_ret_1 = 0;
+map_path_to_tunnel_header_ret_2 = 0;
+map_path_to_tunnel_header_ret_3 = 0;
+map_path_to_tunnel_header_ret_4 = 0;
+map_path_to_tunnel_header_ret_5 = 0;
+}
+int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
+int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
+int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
+int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
+int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<24>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_next_SequenceNumberManager_next_10106,0,0,0);
+int<<24>> seq_number = SequenceNumberManager_increment_ret;
+int<<1>> BookSignatureManager_sign_ret = 0;
+match path_id with 
+| 0 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_0,seq_number,get_10110,0,0,0);
+}
+| 1 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_1,seq_number,get_10114,0,0,0);
+}
+| 2 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_2,seq_number,get_10118,0,0,0);
+}
+| 3 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_3,seq_number,get_10122,0,0,0);
+}
+| 4 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_4,seq_number,get_10126,0,0,0);
+}
+| 5 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_5,seq_number,get_10130,0,0,0);
+}
+| 6 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_6,seq_number,get_10134,0,0,0);
+}
+| 7 -> {
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_7,seq_number,get_10138,0,0,0);
+}
+| _ -> {
+
+}
+int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<32>> MetricSignatureManager_sign_ret = 32;
+match path_id with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[3 : 0]timestamp,get_10142,0,0,0);
+}
+| 1 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_1,[3 : 0]timestamp,get_10146,0,0,0);
+}
+| 2 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_2,[3 : 0]timestamp,get_10150,0,0,0);
+}
+| 3 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_3,[3 : 0]timestamp,get_10154,0,0,0);
+}
+| 4 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_4,[3 : 0]timestamp,get_10158,0,0,0);
+}
+| 5 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_5,[3 : 0]timestamp,get_10162,0,0,0);
+}
+| 6 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_6,[3 : 0]timestamp,get_10166,0,0,0);
+}
+| 7 -> {
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_7,[3 : 0]timestamp,get_10170,0,0,0);
+}
+| _ -> {
+
+}
+int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
+int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<32>> tango_metrics_hdr_2 = ts_signature;
+int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+int<<9>> to_immediate_tmp = [7 : 4]forward_flow_ip_header_0^0;
+int<<16>> to_immediate_tmp10080 = forward_flow_ip_header_2+(int<<16>>)to_immediate_tmp;
+int<<16>> payload_len = to_immediate_tmp10080+176;
+int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
+int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
+int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
+int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
+int<<16>> forward_tango_pkt_arg_4 = payload_len;
+int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
+int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
+int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
+int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
+int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;
+int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;
+int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;
+int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;
+int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;
+int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;
+int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;
+int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;
+int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;
+int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;
+int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;
+int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;
+int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;
+int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;
+int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;
+int<<32>> forward_tango_pkt_arg_24 = forward_flow_five_tuple_0;
+int<<32>> forward_tango_pkt_arg_25 = forward_flow_five_tuple_1;
+int<<16>> forward_tango_pkt_arg_26 = forward_flow_five_tuple_2;
+int<<16>> forward_tango_pkt_arg_27 = forward_flow_five_tuple_3;
+int<<8>> forward_tango_pkt_arg_28 = forward_flow_five_tuple_4;
+generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28));
+}
+Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_five_tuple_0,forward_flow_five_tuple_1,forward_flow_five_tuple_2,forward_flow_five_tuple_3,forward_flow_five_tuple_4);
+}
+| 3 -> {
+int<<4>> map_flow_to_traffic_class_ret8215 = 0;
+match (incoming_tango_traffic_encaped_five_tuple_0,incoming_tango_traffic_encaped_five_tuple_2,incoming_tango_traffic_encaped_five_tuple_1,incoming_tango_traffic_encaped_five_tuple_3,incoming_tango_traffic_encaped_five_tuple_4) with 
+| _,_,_,_,_ -> {
+map_flow_to_traffic_class_ret8215 = 15;
+}
+int<<4>> traffic_class8216 = map_flow_to_traffic_class_ret8215;
+match traffic_class8216 with 
+| 15 -> {
+int<<48>> tunneled_arg_0 = incoming_tango_traffic_tango_eth_header_0;
+int<<48>> tunneled_arg_1 = incoming_tango_traffic_tango_eth_header_1;
+int<<16>> tunneled_arg_2 = incoming_tango_traffic_tango_eth_header_2;
+int<<8>> tunneled_arg_3 = incoming_tango_traffic_encaped_ip_header_0;
+int<<8>> tunneled_arg_4 = incoming_tango_traffic_encaped_ip_header_1;
+int<<16>> tunneled_arg_5 = incoming_tango_traffic_encaped_ip_header_2;
+int<<16>> tunneled_arg_6 = incoming_tango_traffic_encaped_ip_header_3;
+int<<16>> tunneled_arg_7 = incoming_tango_traffic_encaped_ip_header_4;
+int<<8>> tunneled_arg_8 = incoming_tango_traffic_encaped_ip_header_5;
+int<<8>> tunneled_arg_9 = incoming_tango_traffic_encaped_ip_header_6;
+int<<16>> tunneled_arg_10 = incoming_tango_traffic_encaped_ip_header_7;
+int<<32>> tunneled_arg_11 = incoming_tango_traffic_encaped_ip_header_8;
+int<<32>> tunneled_arg_12 = incoming_tango_traffic_encaped_ip_header_9;
+generate_port (2, complete_forward(tunneled_arg_0,tunneled_arg_1,tunneled_arg_2,tunneled_arg_3,tunneled_arg_4,tunneled_arg_5,tunneled_arg_6,tunneled_arg_7,tunneled_arg_8,tunneled_arg_9,tunneled_arg_10,tunneled_arg_11,tunneled_arg_12));
+}
+| _ -> {
+int<<3>> path_id8218 = [2 : 0]incoming_tango_traffic_tango_metrics_header_0;
+int<<1>> signature = [0 : 0]incoming_tango_traffic_tango_metrics_header_4;
+int<<1>> BookSignatureManager_verify_ret = 0;
+match path_id8218 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10081 = Array.update_complex(incoming_book_signature_manager_0,incoming_tango_traffic_tango_metrics_header_3,get_10174,0,0,0);
+int<<32>> if_precomp = (int<<32>>)to_immediate_tmp10081-(int<<32>>)signature;
+match if_precomp with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 1 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10082 = Array.update_complex(incoming_book_signature_manager_1,incoming_tango_traffic_tango_metrics_header_3,get_10178,0,0,0);
+int<<32>> if_precomp10059 = (int<<32>>)to_immediate_tmp10082-(int<<32>>)signature;
+match if_precomp10059 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 2 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10083 = Array.update_complex(incoming_book_signature_manager_2,incoming_tango_traffic_tango_metrics_header_3,get_10182,0,0,0);
+int<<32>> if_precomp10060 = (int<<32>>)to_immediate_tmp10083-(int<<32>>)signature;
+match if_precomp10060 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 3 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10084 = Array.update_complex(incoming_book_signature_manager_3,incoming_tango_traffic_tango_metrics_header_3,get_10186,0,0,0);
+int<<32>> if_precomp10061 = (int<<32>>)to_immediate_tmp10084-(int<<32>>)signature;
+match if_precomp10061 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 4 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10085 = Array.update_complex(incoming_book_signature_manager_4,incoming_tango_traffic_tango_metrics_header_3,get_10190,0,0,0);
+int<<32>> if_precomp10062 = (int<<32>>)to_immediate_tmp10085-(int<<32>>)signature;
+match if_precomp10062 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 5 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10086 = Array.update_complex(incoming_book_signature_manager_5,incoming_tango_traffic_tango_metrics_header_3,get_10194,0,0,0);
+int<<32>> if_precomp10063 = (int<<32>>)to_immediate_tmp10086-(int<<32>>)signature;
+match if_precomp10063 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 6 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10087 = Array.update_complex(incoming_book_signature_manager_6,incoming_tango_traffic_tango_metrics_header_3,get_10198,0,0,0);
+int<<32>> if_precomp10064 = (int<<32>>)to_immediate_tmp10087-(int<<32>>)signature;
+match if_precomp10064 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 7 -> {
+BookSignatureManager_verify_ret = 0;
+int<<1>> to_immediate_tmp10088 = Array.update_complex(incoming_book_signature_manager_7,incoming_tango_traffic_tango_metrics_header_3,get_10202,0,0,0);
+int<<32>> if_precomp10065 = (int<<32>>)to_immediate_tmp10088-(int<<32>>)signature;
+match if_precomp10065 with 
+| 0 -> {
+BookSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| _ -> {
+
+}
+int<<1>> is_valid_seq_num = BookSignatureManager_verify_ret;
+int<<12>> timestamp8222 = [11 : 0]incoming_tango_traffic_tango_metrics_header_1;
+int<<3>> path_id8223 = [2 : 0]incoming_tango_traffic_tango_metrics_header_0;
+int<<1>> MetricSignatureManager_verify_ret = 0;
+match path_id8223 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10089 = Array.update_complex(incoming_metric_signature_manager_0,[3 : 0]timestamp8222,get_10206,0,0,0);
+int<<32>> if_precomp10066 = to_immediate_tmp10089-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10066 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 1 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10090 = Array.update_complex(incoming_metric_signature_manager_1,[3 : 0]timestamp8222,get_10210,0,0,0);
+int<<32>> if_precomp10067 = to_immediate_tmp10090-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10067 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 2 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10091 = Array.update_complex(incoming_metric_signature_manager_2,[3 : 0]timestamp8222,get_10214,0,0,0);
+int<<32>> if_precomp10068 = to_immediate_tmp10091-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10068 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 3 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10092 = Array.update_complex(incoming_metric_signature_manager_3,[3 : 0]timestamp8222,get_10218,0,0,0);
+int<<32>> if_precomp10069 = to_immediate_tmp10092-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10069 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 4 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10093 = Array.update_complex(incoming_metric_signature_manager_4,[3 : 0]timestamp8222,get_10222,0,0,0);
+int<<32>> if_precomp10070 = to_immediate_tmp10093-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10070 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 5 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10094 = Array.update_complex(incoming_metric_signature_manager_5,[3 : 0]timestamp8222,get_10226,0,0,0);
+int<<32>> if_precomp10071 = to_immediate_tmp10094-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10071 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 6 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10095 = Array.update_complex(incoming_metric_signature_manager_6,[3 : 0]timestamp8222,get_10230,0,0,0);
+int<<32>> if_precomp10072 = to_immediate_tmp10095-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10072 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| 7 -> {
+MetricSignatureManager_verify_ret = 0;
+int<<32>> to_immediate_tmp10096 = Array.update_complex(incoming_metric_signature_manager_7,[3 : 0]timestamp8222,get_10234,0,0,0);
+int<<32>> if_precomp10073 = to_immediate_tmp10096-incoming_tango_traffic_tango_metrics_header_2;
+match if_precomp10073 with 
+| 0 -> {
+MetricSignatureManager_verify_ret = 1;
+}
+| _ -> {
+
+}
+}
+| _ -> {
+
+}
+int<<1>> is_valid_metrics = MetricSignatureManager_verify_ret;
+match (is_valid_seq_num,is_valid_metrics) with 
+| _,_ -> {
+int<<3>> path_id8226 = [2 : 0]incoming_tango_traffic_tango_metrics_header_0;
+Array.update_complex(invalid_pkt_manager_0,path_id8226,InvalidPacketManager_increment,1,0,0);
+}
+}
+Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_five_tuple_0,incoming_tango_traffic_encaped_five_tuple_1,incoming_tango_traffic_encaped_five_tuple_2,incoming_tango_traffic_encaped_five_tuple_3,incoming_tango_traffic_encaped_five_tuple_4);
+}}
+memop InvalidPacketManager_increment(int<<32>> curr,int<<32>> inc_by,int<<32>> unused_10236)
+ {{
+b1=None;
+b2=(mbool_10235,true)
+cell1=None, None
+cell2=(mbool_10235 -> curr+inc_by), None
+
+ret=(true -> cell2)
+}}
+memop get_10234(int<<32>> mem_val_10231,int<<32>> unused_10233,int<<32>> unused_10232)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10231)
+}}
+memop get_10230(int<<32>> mem_val_10227,int<<32>> unused_10229,int<<32>> unused_10228)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10227)
+}}
+memop get_10226(int<<32>> mem_val_10223,int<<32>> unused_10225,int<<32>> unused_10224)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10223)
+}}
+memop get_10222(int<<32>> mem_val_10219,int<<32>> unused_10221,int<<32>> unused_10220)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10219)
+}}
+memop get_10218(int<<32>> mem_val_10215,int<<32>> unused_10217,int<<32>> unused_10216)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10215)
+}}
+memop get_10214(int<<32>> mem_val_10211,int<<32>> unused_10213,int<<32>> unused_10212)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10211)
+}}
+memop get_10210(int<<32>> mem_val_10207,int<<32>> unused_10209,int<<32>> unused_10208)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10207)
+}}
+memop get_10206(int<<32>> mem_val_10203,int<<32>> unused_10205,int<<32>> unused_10204)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10203)
+}}
+memop get_10202(int<<1>> mem_val_10199,int<<1>> unused_10201,int<<1>> unused_10200)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10199)
+}}
+memop get_10198(int<<1>> mem_val_10195,int<<1>> unused_10197,int<<1>> unused_10196)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10195)
+}}
+memop get_10194(int<<1>> mem_val_10191,int<<1>> unused_10193,int<<1>> unused_10192)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10191)
+}}
+memop get_10190(int<<1>> mem_val_10187,int<<1>> unused_10189,int<<1>> unused_10188)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10187)
+}}
+memop get_10186(int<<1>> mem_val_10183,int<<1>> unused_10185,int<<1>> unused_10184)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10183)
+}}
+memop get_10182(int<<1>> mem_val_10179,int<<1>> unused_10181,int<<1>> unused_10180)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10179)
+}}
+memop get_10178(int<<1>> mem_val_10175,int<<1>> unused_10177,int<<1>> unused_10176)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10175)
+}}
+memop get_10174(int<<1>> mem_val_10171,int<<1>> unused_10173,int<<1>> unused_10172)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10171)
+}}
+memop get_10170(int<<32>> mem_val_10167,int<<32>> unused_10169,int<<32>> unused_10168)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10167)
+}}
+memop get_10166(int<<32>> mem_val_10163,int<<32>> unused_10165,int<<32>> unused_10164)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10163)
+}}
+memop get_10162(int<<32>> mem_val_10159,int<<32>> unused_10161,int<<32>> unused_10160)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10159)
+}}
+memop get_10158(int<<32>> mem_val_10155,int<<32>> unused_10157,int<<32>> unused_10156)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10155)
+}}
+memop get_10154(int<<32>> mem_val_10151,int<<32>> unused_10153,int<<32>> unused_10152)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10151)
+}}
+memop get_10150(int<<32>> mem_val_10147,int<<32>> unused_10149,int<<32>> unused_10148)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10147)
+}}
+memop get_10146(int<<32>> mem_val_10143,int<<32>> unused_10145,int<<32>> unused_10144)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10143)
+}}
+memop get_10142(int<<32>> mem_val_10139,int<<32>> unused_10141,int<<32>> unused_10140)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10139)
+}}
+memop get_10138(int<<1>> mem_val_10135,int<<1>> unused_10137,int<<1>> unused_10136)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10135)
+}}
+memop get_10134(int<<1>> mem_val_10131,int<<1>> unused_10133,int<<1>> unused_10132)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10131)
+}}
+memop get_10130(int<<1>> mem_val_10127,int<<1>> unused_10129,int<<1>> unused_10128)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10127)
+}}
+memop get_10126(int<<1>> mem_val_10123,int<<1>> unused_10125,int<<1>> unused_10124)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10123)
+}}
+memop get_10122(int<<1>> mem_val_10119,int<<1>> unused_10121,int<<1>> unused_10120)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10119)
+}}
+memop get_10118(int<<1>> mem_val_10115,int<<1>> unused_10117,int<<1>> unused_10116)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10115)
+}}
+memop get_10114(int<<1>> mem_val_10111,int<<1>> unused_10113,int<<1>> unused_10112)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10111)
+}}
+memop get_10110(int<<1>> mem_val_10107,int<<1>> unused_10109,int<<1>> unused_10108)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10107)
+}}
+memop combined_memop_SequenceNumberManager_next_SequenceNumberManager_next_10106(int<<32>> curr,int<<32>> ignore,int<<32>> ignore_set_10103)
+ {{
+b1=(mbool_10104,true);
+b2=(mbool_10105,true)
+cell1=(mbool_10104 -> curr+1), None
+cell2=(mbool_10105 -> curr+1), None
+
+ret=(true -> cell2)
+}}
+memop get_10102(int<<3>> mem_val_10099,int<<3>> unused_10101,int<<3>> unused_10100)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_10099)
+}}

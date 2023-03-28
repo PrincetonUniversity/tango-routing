@@ -1,0 +1,416 @@
+// after phase: midendmemop MetricAverageTracker_next(int<<32>> curr,int<<32>> ignore)
+ {return curr+1;
+}
+
+memop MetricAverageTracker_get_curr(int<<32>> curr,int<<32>> ignore)
+ {return curr;
+}
+
+memop LossMetricsManager_get_loss_sum(int<<32>> curr_loss_sum,int<<32>> new_loss)
+ {return curr_loss_sum+new_loss;
+}
+
+memop LossMetricsManager_reset_loss_sum(int<<32>> curr_loss_sum,int<<32>> new_loss)
+ {return 0;
+}
+
+memop LossMetricsManager_update_loss_avg(int<<32>> curr_loss_avg,int<<32>> loss_sum,int<<32>> avg_counter)
+ {{
+b1=(should_reset,avg_counter>62);
+b2=None
+cell1=(should_reset -> loss_sum), None
+cell2=None, None
+
+ret=(true -> cell1)
+}}
+
+memop LossMetricsManager_store_larger(int<<32>> curr_seq_num,int<<32>> new_seq_num)
+ {if curr_seq_num<new_seq_num then new_seq_num else curr_seq_num}
+
+memop LossMetricsManager_calc_loss(int<<32>> curr_seq_num,int<<32>> new_seq_num)
+ {if curr_seq_num+1<new_seq_num then new_seq_num-curr_seq_num else 0}
+
+memop DelayMetricsManager_update_delay_avg(int<<32>> curr_delay_avg,int<<32>> delay_sum,int<<32>> curr_count)
+ {{
+b1=(should_reset,curr_count>62);
+b2=None
+cell1=(should_reset -> delay_sum), None
+cell2=None, None
+
+ret=(true -> cell1)
+}}
+
+memop DelayMetricsManager_get_delay_sum(int<<32>> curr_delay_sum,int<<32>> new_delay)
+ {return curr_delay_sum+new_delay;
+}
+
+memop DelayMetricsManager_reset_delay_sum(int<<32>> curr_delay_sum,int<<32>> new_delay)
+ {return 0;
+}
+
+memop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
+ {return curr+1;
+}
+
+memop InvalidPacketManager_increment(int<<32>> curr,int<<32>> inc_by)
+ {return curr+inc_by;
+}
+
+global Array.t<<3>> route_manager_0 = Array.create(16);
+
+
+global Array.t<<24>> sequence_counters_0 = Array.create(8);
+
+
+global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_1 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_2 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_3 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_4 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_5 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_6 = Array.create(65536);
+
+
+global Array.t<<1>> incoming_book_signature_manager_7 = Array.create(65536);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_1 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_2 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_3 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_4 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_5 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_6 = Array.create(16);
+
+
+global Array.t<<32>> incoming_metric_signature_manager_7 = Array.create(16);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_0 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_1 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_2 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_3 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_4 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_5 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_6 = Array.create(65536);
+
+
+global Array.t<<1>> outgoing_book_signature_manager_7 = Array.create(65536);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_2 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_3 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_4 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_5 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
+
+
+global Array.t<<6>> metric_avg_tracker_0 = Array.create(8);
+
+
+global Array.t<<24>> loss_metrics_manager_0 = Array.create(8);
+
+
+global Array.t<<32>> loss_metrics_manager_1 = Array.create(8);
+
+
+global Array.t<<32>> loss_metrics_manager_2 = Array.create(8);
+
+
+global Array.t<<32>> delay_metrics_manager_0 = Array.create(8);
+
+
+global Array.t<<32>> delay_metrics_manager_1 = Array.create(8);
+
+
+global Array.t<<32>> invalid_pkt_manager_0 = Array.create(8);
+
+
+entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<32>> five_tuple_0,int<<32>> five_tuple_1,int<<16>> five_tuple_2,int<<16>> five_tuple_3,int<<8>> five_tuple_4);
+
+exit event complete_forward(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9);
+
+event incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<128>> tango_ip_header_4,int<<128>> tango_ip_header_5,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<24>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<32>> encaped_five_tuple_0,int<<32>> encaped_five_tuple_1,int<<16>> encaped_five_tuple_2,int<<16>> encaped_five_tuple_3,int<<8>> encaped_five_tuple_4);
+
+handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<32>> five_tuple_0,int<<32>> five_tuple_1,int<<16>> five_tuple_2,int<<16>> five_tuple_3,int<<8>> five_tuple_4) {
+int<<4>> map_flow_to_traffic_class_ret = 0;
+match (five_tuple_0,five_tuple_2,five_tuple_1,five_tuple_3,five_tuple_4) with 
+| _,_,_,_,_ -> {
+printf "ERROR: traffic class map has not been configured!" ;
+map_flow_to_traffic_class_ret = 15;
+}
+int<<4>> traffic_class = map_flow_to_traffic_class_ret;
+if (traffic_class==15) {
+event tunneled = complete_forward(eth_header_0,eth_header_1,eth_header_2,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9);
+generate_port (2, tunneled);
+} else {
+int<<3>> RouteManager_get_path_id_ret = 0;
+RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
+int<<3>> path_id = RouteManager_get_path_id_ret;
+int<<32>> map_path_to_tunnel_header_ret_0 = 32;
+int<<16>> map_path_to_tunnel_header_ret_1 = 32;
+int<<8>> map_path_to_tunnel_header_ret_2 = 32;
+int<<8>> map_path_to_tunnel_header_ret_3 = 32;
+int<<128>> map_path_to_tunnel_header_ret_4 = 32;
+int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+match path_id with 
+| _ -> {
+printf "ERROR: tunnel header map has not been configured!" ;
+map_path_to_tunnel_header_ret_0 = 0;
+map_path_to_tunnel_header_ret_1 = 0;
+map_path_to_tunnel_header_ret_2 = 0;
+map_path_to_tunnel_header_ret_3 = 0;
+map_path_to_tunnel_header_ret_4 = 0;
+map_path_to_tunnel_header_ret_5 = 0;
+}
+int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
+int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
+int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
+int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
+int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<24>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_next,0,SequenceNumberManager_next,0);
+int<<24>> seq_number = SequenceNumberManager_increment_ret;
+int<<1>> BookSignatureManager_sign_ret = 0;
+match path_id with 
+| 0 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,seq_number);
+}
+| 1 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,seq_number);
+}
+| 2 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,seq_number);
+}
+| 3 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,seq_number);
+}
+| 4 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,seq_number);
+}
+| 5 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,seq_number);
+}
+| 6 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_number);
+}
+| 7 -> {
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
+}
+int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<32>> MetricSignatureManager_sign_ret = 32;
+match path_id with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+}
+| 1 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,[3 : 0]timestamp);
+}
+| 2 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_2,[3 : 0]timestamp);
+}
+| 3 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_3,[3 : 0]timestamp);
+}
+| 4 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_4,[3 : 0]timestamp);
+}
+| 5 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_5,[3 : 0]timestamp);
+}
+| 6 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_6,[3 : 0]timestamp);
+}
+| 7 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,[3 : 0]timestamp);
+}
+int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
+int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<32>> tango_metrics_hdr_2 = ts_signature;
+int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+int<<16>> payload_len = 176+(int<<16>>)[7 : 4]ip_header_0^(int<<5>>)0+ip_header_2;
+event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,payload_len,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9,five_tuple_0,five_tuple_1,five_tuple_2,five_tuple_3,five_tuple_4);
+printf "Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }" path_id,timestamp,ts_signature,seq_number,book_signature;
+generate_port (1, forward_tango_pkt);
+}
+}
+
+handle incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<128>> tango_ip_header_4,int<<128>> tango_ip_header_5,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<24>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<32>> encaped_five_tuple_0,int<<32>> encaped_five_tuple_1,int<<16>> encaped_five_tuple_2,int<<16>> encaped_five_tuple_3,int<<8>> encaped_five_tuple_4) {
+int<<4>> map_flow_to_traffic_class_ret = 0;
+match (encaped_five_tuple_0,encaped_five_tuple_2,encaped_five_tuple_1,encaped_five_tuple_3,encaped_five_tuple_4) with 
+| _,_,_,_,_ -> {
+printf "ERROR: traffic class map has not been configured!" ;
+map_flow_to_traffic_class_ret = 15;
+}
+int<<4>> traffic_class = map_flow_to_traffic_class_ret;
+if (traffic_class==15) {
+event tunneled = complete_forward(tango_eth_header_0,tango_eth_header_1,tango_eth_header_2,encaped_ip_header_0,encaped_ip_header_1,encaped_ip_header_2,encaped_ip_header_3,encaped_ip_header_4,encaped_ip_header_5,encaped_ip_header_6,encaped_ip_header_7,encaped_ip_header_8,encaped_ip_header_9);
+generate_port (2, tunneled);
+} else {
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+int<<1>> signature = [0 : 0]tango_metrics_header_4;
+bool BookSignatureManager_verify_ret = false;
+match path_id with 
+| 0 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_0,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 1 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_1,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 2 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_2,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 3 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_3,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 4 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_4,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 5 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_5,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 6 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_6,tango_metrics_header_3)==(int<<32>>)signature;
+}
+| 7 -> {
+BookSignatureManager_verify_ret = (int<<32>>)Array.get(incoming_book_signature_manager_7,tango_metrics_header_3)==(int<<32>>)signature;
+}
+bool is_valid_seq_num = BookSignatureManager_verify_ret;
+int<<12>> timestamp = [11 : 0]tango_metrics_header_1;
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+bool MetricSignatureManager_verify_ret = false;
+match path_id with 
+| 0 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_0,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 1 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_1,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 2 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_2,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 3 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_3,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 4 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_4,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 5 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_5,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 6 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_6,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+| 7 -> {
+MetricSignatureManager_verify_ret = Array.get(incoming_metric_signature_manager_7,[3 : 0]timestamp)==tango_metrics_header_2;
+}
+bool is_valid_metrics = MetricSignatureManager_verify_ret;
+if (!is_valid_seq_num&&is_valid_metrics) {
+printf "Invalid incoming packet found: { reason: { seq_num: %b, ts: %b } path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }" is_valid_seq_num,is_valid_metrics,[2 : 0]tango_metrics_header_0,[11 : 0]tango_metrics_header_1,tango_metrics_header_2,tango_metrics_header_3,[0 : 0]tango_metrics_header_4;
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+printf "Found invalid packet on path: %d" path_id;
+Array.setm(invalid_pkt_manager_0,path_id,InvalidPacketManager_increment,1);
+false;
+} else {
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+int<<6>> MetricAverageTracker_increment_ret = 32;
+MetricAverageTracker_increment_ret = Array.update(metric_avg_tracker_0,path_id,MetricAverageTracker_get_curr,0,MetricAverageTracker_next,0);
+int<<32>> avg_count = (int<<32>>)MetricAverageTracker_increment_ret;
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+int<<32>> LossMetricsManager_update_loss_ret = 32;
+int<<32>> loss_found = (int<<32>>)Array.update(loss_metrics_manager_0,path_id,LossMetricsManager_calc_loss,tango_metrics_header_3,LossMetricsManager_store_larger,tango_metrics_header_3);
+int<<32>> curr_loss_sum = 0;
+if (avg_count>62) {
+curr_loss_sum = Array.update(loss_metrics_manager_1,path_id,LossMetricsManager_get_loss_sum,loss_found,LossMetricsManager_reset_loss_sum,0);
+} else {
+curr_loss_sum = Array.update(loss_metrics_manager_1,path_id,LossMetricsManager_get_loss_sum,loss_found,LossMetricsManager_get_loss_sum,loss_found);
+}
+int<<32>> avg_loss = 0;
+if (avg_count>62) {
+avg_loss = curr_loss_sum;
+Array.set(loss_metrics_manager_2,path_id,curr_loss_sum);
+} else {
+avg_loss = Array.get(loss_metrics_manager_2,path_id);
+}
+printf "loss: %d, loss-sum: %d, loss-avg: %d" loss_found,curr_loss_sum,avg_loss;
+LossMetricsManager_update_loss_ret = avg_loss;
+int<<32>> loss_metrics = LossMetricsManager_update_loss_ret;
+int<<12>> timestamp = [11 : 0]tango_metrics_header_1;
+int<<3>> path_id = [2 : 0]tango_metrics_header_0;
+int<<32>> DelayMetricsManager_update_delay_ret = 32;
+int<<32>> time_now = Sys.time();
+int<<12>> curr_time = [31 : 20]time_now;
+int<<32>> new_delay = (int<<32>>)curr_time-timestamp;
+int<<32>> delay_sum = 0;
+if (avg_count>62) {
+delay_sum = Array.update(delay_metrics_manager_0,path_id,DelayMetricsManager_get_delay_sum,new_delay,DelayMetricsManager_reset_delay_sum,0);
+} else {
+delay_sum = Array.update(delay_metrics_manager_0,path_id,DelayMetricsManager_get_delay_sum,new_delay,DelayMetricsManager_get_delay_sum,new_delay);
+}
+int<<32>> delay_avg = Array.update_complex(delay_metrics_manager_1,path_id,DelayMetricsManager_update_delay_avg,delay_sum,avg_count,0);
+DelayMetricsManager_update_delay_ret = delay_avg;
+int<<32>> delay_metrics = DelayMetricsManager_update_delay_ret;
+printf "Metrics for path %d updated: { loss: %d, delay: %d }" [2 : 0]tango_metrics_header_0,loss_metrics,delay_metrics;
+event tunneled = complete_forward(tango_eth_header_0,tango_eth_header_1,tango_eth_header_2,encaped_ip_header_0,encaped_ip_header_1,encaped_ip_header_2,encaped_ip_header_3,encaped_ip_header_4,encaped_ip_header_5,encaped_ip_header_6,encaped_ip_header_7,encaped_ip_header_8,encaped_ip_header_9);
+generate_port (2, tunneled);
+}
+}
+}
