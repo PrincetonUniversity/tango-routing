@@ -176,10 +176,9 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, TCPHea
         book_signature = (int<<8>>) book_signature;
     };
 
-    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#version_ihl[7:4] ^ ((int<<5>>) 0))) + ip_header#len;
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
-        { tango_tunnel_hdr with payload_len = payload_len},
+        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
         tango_metrics_hdr,
         ip_header,
         tcp_header
