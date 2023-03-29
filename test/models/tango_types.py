@@ -1,5 +1,5 @@
 """Models of Tango record types."""
-from collections.abc import Iterable
+from collections.abc import Iterator
 from dataclasses import dataclass
 from test.models.error import ModelError
 from typing import Self
@@ -22,7 +22,7 @@ class EthernetHeader:
         if self.ethertype >= 2**16:
             raise ModelError("Too large of ethertype")
 
-    def __iter__(self: Self) -> Iterable[int]:
+    def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
         return iter(
             [
@@ -71,7 +71,7 @@ class IPv4Header:
         if self.dest_addr >= 2**32:
             raise ModelError("Too large of destination address")
 
-    def __iter__(self: Self) -> Iterable[int]:
+    def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
         return iter(
             [
@@ -112,7 +112,7 @@ class FiveTuple:
         if self.protocol >= 2**8:
             raise ModelError("Too large of protocol")
 
-    def __iter__(self: Self) -> Iterable[int]:
+    def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
         return iter(
             [
@@ -157,13 +157,18 @@ class IPv6Header:
         if self.dest_addr >= 2**128:
             raise ModelError("Too large of dest_addr")
 
-    def __iter__(self: Self) -> Iterable[int]:
+    def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
+        version_bin = f"{self.version:0{4}b}"
+        traffic_class_bin = f"{self.traffic_class:0{8}b}"
+        flow_label_bin = f"{self.flow_label:0{20}b}"
+        version_cls_flow_bin = "".join((flow_label_bin, traffic_class_bin, version_bin))
+
+        version_cls_flow = int(version_cls_flow_bin, 2)
+
         return iter(
             [
-                self.version,
-                self.traffic_class,
-                self.flow_label,
+                version_cls_flow,
                 self.payload_len,
                 self.next_header,
                 self.hop_limit,
@@ -196,7 +201,7 @@ class TangoHeader:
         if self.book_signature >= 2**1:
             raise ModelError("Too large of book_signature")
 
-    def __iter__(self: Self) -> Iterable[int]:
+    def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
         return iter(
             [

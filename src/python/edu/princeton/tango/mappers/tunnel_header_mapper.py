@@ -83,44 +83,48 @@ class IPv6Header:
 
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
-        if self.version >= 2**4:
+        if self.version >= 2 ** 4:
             raise InvalidParameterError(
                 f"`version` ({self.version}) is more than 4-bit!",
             )
 
-        if self.traffic_class >= 2**8:
+        if self.traffic_class >= 2 ** 8:
             raise InvalidParameterError(
                 f"`traffic_class` ({self.traffic_class}) is more than 8-bit!",
             )
 
-        if self.flow_label >= 2**20:
+        if self.flow_label >= 2 ** 20:
             raise InvalidParameterError(
                 f"`flow_label` ({self.flow_label}) is more than 20-bit!",
             )
 
-        if self.payload_len >= 2**16:
+        if self.payload_len >= 2 ** 16:
             raise InvalidParameterError(
                 f"`payload_len` ({self.payload_len}) is more than 16-bit!",
             )
 
-        if self.next_header >= 2**8:
+        if self.next_header >= 2 ** 8:
             raise InvalidParameterError(
                 f"`next_header` ({self.next_header}) is more than 8-bit!",
             )
 
-        if self.hop_limit >= 2**8:
+        if self.hop_limit >= 2 ** 8:
             raise InvalidParameterError(
                 f"`hop_limit` ({self.hop_limit}) is more than 8-bit!",
             )
 
     def __str__(self: Self) -> str:
         """Get lucid representation for header."""
+        version_bin = f"{self.version:0{4}b}"
+        traffic_class_bin = f"{self.traffic_class:0{8}b}"
+        flow_label_bin = f"{self.flow_label:0{20}b}"
+        version_cls_flow_bin = "".join((flow_label_bin, traffic_class_bin, version_bin))
+
+        version_cls_flow = int(version_cls_flow_bin, 2)
         return " ".join(
             (
                 "{",
-                f"version = {self.version};",
-                f"traffic_class = {self.traffic_class};",
-                f"flow_label = {self.flow_label};",
+                f"version_cls_flow = {version_cls_flow};"
                 f"payload_len = {self.payload_len};",
                 f"next_header = {self.next_header};",
                 f"hop_limit = {self.hop_limit};",

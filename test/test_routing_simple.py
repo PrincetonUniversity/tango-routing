@@ -1,6 +1,7 @@
 """Test simple traffic class to path routing."""
 
 
+from ipaddress import IPv6Address
 from test.models.events import ArrayName, ArraySet, ForwardFlow
 from test.models.interpreter import (
     ExpectationRunner,
@@ -32,7 +33,10 @@ def test_simple_route() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6Header(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6Header(0, 0, 0, 0, 0, 0, IPv6Address(x), IPv6Address(x)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = [
@@ -150,7 +154,10 @@ def test_multipath_timestamps() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6Header(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6Header(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = [
@@ -271,7 +278,10 @@ def test_multipath_sequence_nums() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6Header(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6Header(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = [
@@ -379,3 +389,7 @@ def test_multipath_sequence_nums() -> None:
                 ),
             ),
         ).finish()
+
+
+if __name__ == "__main__":
+    test_simple_route()

@@ -61,7 +61,9 @@ class TestEvent:
         self._timestamp = timestamp
         self._locations = locations
 
-    def as_dict(self: Self) -> dict[str, str]:
+    def as_dict(
+        self: Self,
+    ) -> dict[str, int | str | list[int | str] | dict[str, int | str | list[int | str]]]:
         """Convert to a dictionary."""
         event = self._event.as_dict()
 
@@ -239,7 +241,8 @@ class TestRunner:
 
     def close(self: Self) -> None:
         """Close a testing session and clean up."""
-        rmtree(self._tmp_dir)
+        if self._tmp_dir:
+            rmtree(self._tmp_dir)
 
     def _create_test_file(self: Self) -> None:
         """Make the json test file."""
@@ -251,22 +254,26 @@ class TestRunner:
 
     def _write_out_mapper(self: Self, mapper: Mapper | None = None) -> None:
         """Write out mappings to test configuration."""
-        if mapper:
+        if self._tmp_dir and mapper:
             path = Path(self._tmp_dir) / Path("static_maps") / Path(mapper.name)
             path.write_text(str(mapper))
 
     def _run_test(self: Self) -> str:
         """Run the test configuration."""
-        tango_src = Path(self._tmp_dir) / Path("Tango.dpt")
-        test_config = Path(self._tmp_dir) / Path("test.json")
-        cmd = ["dpt", str(tango_src), "--spec", str(test_config)]
+        if self._tmp_dir:
+            # tango_src = Path(self._tmp_dir) / Path("Tango.dpt")  # noqa: ERA001
+            tango_src = Path(self._tmp_dir) / Path("TangoLite.dpt")
+            test_config = Path(self._tmp_dir) / Path("test.json")
+            cmd = ["dpt", str(tango_src), "--spec", str(test_config)]
 
-        result = run_cmd(cmd, capture_output=True, text=True, check=False)
+            result = run_cmd(cmd, capture_output=True, text=True, check=False)
 
-        if result.returncode != 0:
-            raise DptError(f"Lucid compiler erred with following:\n\n{result.stderr}")
+            if result.returncode != 0:
+                raise DptError(f"Lucid compiler erred with following:\n\n{result.stderr}")
 
-        return result.stdout
+            return result.stdout
+
+        return ""
 
     def run(self: Self) -> TestResult:
         """Execute the interpreter."""

@@ -20,7 +20,7 @@ class InterpreterEvent(ABC):
     @abstractmethod
     def as_dict(
         self: Self,
-    ) -> dict[str, int | str | list[int | str] | dict[int | str | list[int | str]]]:
+    ) -> dict[str, int | str | list[int | str] | dict[str, int | str | list[int | str]]]:
         """Get dictionary representation of an interpreter event."""
 
 

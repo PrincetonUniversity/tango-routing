@@ -1,5 +1,6 @@
 """Test the collection of one-way path metrics."""
 
+from ipaddress import IPv6Address
 from test.models.events import ArrayName, ArraySet, ArraySetRange, IncomingTangoTraffic
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
 from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
@@ -27,7 +28,10 @@ def test_seq_num_metrics_multipath() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = []
@@ -89,7 +93,10 @@ def test_delay_metrics_multipath() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = []
@@ -151,7 +158,10 @@ def test_seq_num_best_metrics() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = []
@@ -214,7 +224,10 @@ def test_delay_best_metrics() -> None:
     )
 
     given_header_mapping = ConfiguredHeaderMapper(
-        [TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, 0, 0)) for x in range(0, 8)],
+        [
+            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
+            for x in range(0, 8)
+        ],
     )
 
     given_packets = []

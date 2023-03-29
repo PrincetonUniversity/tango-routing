@@ -100,19 +100,29 @@ class YAMLConfigParser(ConfigParser):
         mappings: list[FuzzyClassMapping] = []
         for traffic_class, matcher_mappings in tc_map.items():
             for matcher in matcher_mappings:
-                src_addr = (
-                    FuzzyIPv4Address(matcher.get("src_addr")) if matcher.get("src_addr") else None
-                )
-                dest_addr = (
-                    FuzzyIPv4Address(matcher.get("dest_addr")) if matcher.get("dest_addr") else None
-                )
+                raw_src_addr = matcher.get("src_addr")
+                src_addr = FuzzyIPv4Address(str(raw_src_addr)) if raw_src_addr else None
+
+                raw_src_port = matcher.get("src_port")
+                src_port = int(raw_src_port) if raw_src_port else None
+
+                raw_dest_addr = matcher.get("dest_addr")
+                dest_addr = FuzzyIPv4Address(str(raw_dest_addr)) if raw_dest_addr else None
+
+                raw_dest_port = matcher.get("dest_port")
+                dest_port = int(raw_dest_port) if raw_dest_port else None
+
+                raw_protocol = matcher.get("protocol")
+                protocol = int(raw_protocol) if raw_protocol else None
+
                 five_tuple = FuzzyFiveTuple(
                     src_addr,
-                    matcher.get("src_port"),
+                    src_port,
                     dest_addr,
-                    matcher.get("dest_port"),
-                    matcher.get("protocol"),
+                    dest_port,
+                    protocol,
                 )
+
                 mappings.append(
                     FuzzyClassMapping(five_tuple, traffic_class),
                 )
@@ -167,7 +177,7 @@ class YAMLConfigParser(ConfigParser):
                 ConstraintMapping(
                     traffic_class,
                     Constraint(
-                        constraint["constraint"],
+                        int(constraint["constraint"]),
                         OptimizationStrategy[constraint["policy"]],
                     ),
                 ),
