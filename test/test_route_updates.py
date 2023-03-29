@@ -3,7 +3,7 @@
 from ipaddress import IPv6Address
 from test.models.events import ArrayName, ArraySet, ArraySetRange, IncomingTangoTraffic, RouteUpdate
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
-from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
+from test.models.tango_types import EthernetHeader, IPv4Header, IPv6Header, TangoHeader, TCPHeader
 
 from edu.princeton.tango.mappers.constraints_mapper import (
     ConfiguredConstraintMapper,
@@ -122,7 +122,7 @@ def test_loss_route_update_spawn() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, 0, 0, seq_num, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        FiveTuple(0, 0, path + 1, 0, 0),
+                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
@@ -277,7 +277,7 @@ def test_delay_route_update_spawn() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, ts_out, 0, 0, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        FiveTuple(0, 0, path + 1, 0, 0),
+                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )

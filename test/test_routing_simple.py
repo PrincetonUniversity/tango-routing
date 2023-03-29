@@ -2,7 +2,7 @@
 
 
 from ipaddress import IPv6Address
-from test.models.events import ArrayName, ArraySet, ForwardFlow
+from test.models.events import ArrayGet, ArrayName, ArraySet, ForwardFlow
 from test.models.interpreter import (
     ExpectationRunner,
     ExpectContains,
@@ -10,7 +10,7 @@ from test.models.interpreter import (
     TestEvent,
     TestRunner,
 )
-from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header
+from test.models.tango_types import EthernetHeader, IPv4Header, TCPHeader
 
 from edu.princeton.tango.mappers.traffic_class_mapper import (
     ConfiguredTrafficClassMapper,
@@ -44,7 +44,7 @@ def test_simple_route() -> None:
             ForwardFlow(
                 EthernetHeader(x, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, x, 0, 0),
+                TCPHeader(x, 0, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts,
         )
@@ -67,7 +67,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0)",
+                        "(1,0,0,0,88,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0)",
                         " at port 1, t=2",
                     ),
                 ),
@@ -77,7 +77,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(2,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0)",
+                        "(2,0,0,0,88,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0)",
                         " at port 1, t=3",
                     ),
                 ),
@@ -87,7 +87,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(3,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0)",
+                        "(3,0,0,0,88,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0)",
                         " at port 1, t=6",
                     ),
                 ),
@@ -97,7 +97,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(4,0,0,0,0,3,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0)",
+                        "(4,0,0,0,88,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0)",
                         " at port 1, t=7",
                     ),
                 ),
@@ -107,7 +107,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(5,0,0,0,0,4,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0)",
+                        "(5,0,0,0,88,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0)",
                         " at port 1, t=10",
                     ),
                 ),
@@ -117,7 +117,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(6,0,0,0,0,5,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0)",
+                        "(6,0,0,0,88,0,0,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0)",
                         " at port 1, t=11",
                     ),
                 ),
@@ -127,7 +127,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(7,0,0,0,0,6,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0)",
+                        "(7,0,0,0,88,0,0,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0)",
                         " at port 1, t=14",
                     ),
                 ),
@@ -137,7 +137,7 @@ def test_simple_route() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(8,0,0,0,0,7,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0)",
+                        "(8,0,0,0,88,0,0,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0)",
                         " at port 1, t=15",
                     ),
                 ),
@@ -165,7 +165,7 @@ def test_multipath_timestamps() -> None:
             ForwardFlow(
                 EthernetHeader(x, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, x, 0, 0),
+                TCPHeader(x, 0, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts,
         )
@@ -186,12 +186,12 @@ def test_multipath_timestamps() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        when.run().expect().then(
+        ExpectationRunner(when.run()).then(
             ExpectContains(
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0)",
+                        "(1,0,0,0,88,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0)",
                         " at port 1, t=1001",
                     ),
                 ),
@@ -201,7 +201,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(2,0,0,0,0,1,0,0,0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0)",
+                        "(2,0,0,4096,88,0,0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0)",
                         " at port 1, t=1002",
                     ),
                 ),
@@ -211,7 +211,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(3,0,0,0,0,2,0,0,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0)",
+                        "(3,0,0,8192,88,0,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0)",
                         " at port 1, t=1003",
                     ),
                 ),
@@ -221,7 +221,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(4,0,0,0,0,3,0,0,0,0,0,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0)",
+                        "(4,0,0,12288,88,0,0,0,0,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0)",
                         " at port 1, t=1004",
                     ),
                 ),
@@ -231,7 +231,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(5,0,0,0,0,4,0,0,0,0,0,4,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0)",
+                        "(5,0,0,16384,88,0,0,0,0,4,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0)",
                         " at port 1, t=1005",
                     ),
                 ),
@@ -241,7 +241,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(6,0,0,0,0,5,0,0,0,0,0,5,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0)",
+                        "(6,0,0,20480,88,0,0,0,0,5,0,6,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0)",
                         " at port 1, t=1006",
                     ),
                 ),
@@ -251,7 +251,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(7,0,0,0,0,6,0,0,0,0,0,6,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0)",
+                        "(7,0,0,24576,88,0,0,0,0,6,0,7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0)",
                         " at port 1, t=1007",
                     ),
                 ),
@@ -261,7 +261,7 @@ def test_multipath_timestamps() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(8,0,0,0,0,7,0,0,0,0,0,7,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0)",
+                        "(8,0,0,28672,88,0,0,0,0,7,0,8,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0)",
                         " at port 1, t=1008",
                     ),
                 ),
@@ -289,7 +289,7 @@ def test_multipath_sequence_nums() -> None:
             ForwardFlow(
                 EthernetHeader(x, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, x, 0, 0),
+                TCPHeader(x, 0, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts,
         )
@@ -298,8 +298,9 @@ def test_multipath_sequence_nums() -> None:
 
     given_routes = [ArraySet(ArrayName.ROUTE_MAPPINGS, x, x) for x in range(0, 8)]
     given_book_sigs = [ArraySet(ArrayName[f"OUTGOING_BOOK_SIG_{x}"], 0, x % 2) for x in range(0, 8)]
+    get_book_sigs = [ArrayGet(ArrayName[f"OUTGOING_BOOK_SIG_{x}"], 0) for x in range(0, 8)]
 
-    given_events = [*given_routes, *given_book_sigs, *given_packets]
+    given_events = [*given_routes, *given_book_sigs, *get_book_sigs, *given_packets]
 
     given_case = TestCase(given_timeout, given_events)
 
@@ -308,12 +309,12 @@ def test_multipath_sequence_nums() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        when.run().expect().then(
+        ExpectationRunner(when.run()).then(
             ExpectContains(
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0)",
+                        "(1,0,0,0,88,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0)",
                         " at port 1, t=1001",
                     ),
                 ),
@@ -323,7 +324,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(2,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0)",
+                        "(2,0,0,4096,88,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0)",
                         " at port 1, t=1002",
                     ),
                 ),
@@ -333,7 +334,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(3,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0)",
+                        "(3,0,0,8192,88,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0)",
                         " at port 1, t=1003",
                     ),
                 ),
@@ -343,7 +344,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(4,0,0,0,0,3,0,0,0,0,0,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0)",
+                        "(4,0,0,12288,88,0,0,0,0,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0)",
                         " at port 1, t=1004",
                     ),
                 ),
@@ -353,7 +354,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(5,0,0,0,0,4,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0)",
+                        "(5,0,0,16384,88,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0)",
                         " at port 1, t=1005",
                     ),
                 ),
@@ -363,7 +364,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(6,0,0,0,0,5,0,0,0,0,0,5,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0)",
+                        "(6,0,0,20480,88,0,0,0,0,5,0,0,0,1,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0)",
                         " at port 1, t=1006",
                     ),
                 ),
@@ -373,7 +374,7 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(7,0,0,0,0,6,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0)",
+                        "(7,0,0,24576,88,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0)",
                         " at port 1, t=1007",
                     ),
                 ),
@@ -383,13 +384,9 @@ def test_multipath_sequence_nums() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(8,0,0,0,0,7,0,0,0,0,0,7,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0)",
+                        "(8,0,0,28672,88,0,0,0,0,7,0,0,0,1,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0)",
                         " at port 1, t=1008",
                     ),
                 ),
             ),
         ).finish()
-
-
-if __name__ == "__main__":
-    test_simple_route()

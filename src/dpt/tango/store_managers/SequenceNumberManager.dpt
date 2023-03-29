@@ -38,10 +38,18 @@ module SequenceNumberManager : {
 
     /**
      * # Description
-     * Get next sequence number for this path.
+     * Set next sequence number for this path.
      **/
     memop next(int<<'sz>> curr, int<<'sz>> ignore) {
         return curr + 1;
+    }
+
+    /**
+     * # Description
+     * Get current sequence number for this path.
+     **/
+    memop get_curr(int<<'sz>> curr, int<<'sz>> ignore) {
+        return curr;
     }
 
     fun int<<24>> increment (
@@ -51,7 +59,7 @@ module SequenceNumberManager : {
         return Array.update(
             self#seq_nums,
             path_id,
-            next,
+            get_curr,
             0,
             next,
             0

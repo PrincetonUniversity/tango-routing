@@ -14,22 +14,26 @@ _DEFAULT_CLASS_MAP: LiteralString = """include "../Types.dpt"
  * User-generated fuzzy mappings between a flow 5-tuple and traffic class.
  *
  * # Parameters
- * flow (FiveTuple_t): five-tuple describing a user flow
+ * src_addr (int<<32>>): source IPv4 adress
+ * src_port (int<<16>>): source host port
+ * dest_addr (int<<32>>): destination IPv4 adre
+ * dest_port (int<<16>>): destination host port
+ * protocol (int<<8>>): protocol used
  *
  * # Returns
  * traffic_class (int<<4>>): the traffic class associated with this five-tuple
  **/
-fun int<<4>> map_flow_to_traffic_class (FiveTuple_t flow) {
-    match (
-        flow#src_addr,
-        flow#src_port,
-        flow#dest_addr,
-        flow#dest_port,
-        flow#protocol
-    ) with
+fun int<<4>> map_flow_to_traffic_class (
+    int<<32>> src_addr,
+    int<<16>> src_port,
+    int<<32>> dest_addr,
+    int<<16>> dest_port,
+    int<<8>> protocol
+) {
+    match (src_addr, src_port, dest_addr, dest_port, protocol) with
     | _, _, _, _, _ -> {
         printf("ERROR: traffic class map has not been configured!");
-        return 0;
+        return 15;
     }
 }
 
@@ -42,19 +46,23 @@ _CLASS_MAP_TEMPLATE: LiteralString = """include "../Types.dpt"
  * User-generated fuzzy mappings between a flow 5-tuple and traffic class.
  *
  * # Parameters
- * flow (FiveTuple_t): five-tuple describing a user flow
+ * src_addr (int<<32>>): source IPv4 adress
+ * src_port (int<<16>>): source host port
+ * dest_addr (int<<32>>): destination IPv4 adre
+ * dest_port (int<<16>>): destination host port
+ * protocol (int<<8>>): protocol used
  *
  * # Returns
  * traffic_class (int<<4>>): the traffic class associated with this five-tuple
  **/
-fun int<<4>> map_flow_to_traffic_class (FiveTuple_t flow) {{
-    match (
-        flow#src_addr,
-        flow#src_port,
-        flow#dest_addr,
-        flow#dest_port,
-        flow#protocol
-    ) with
+fun int<<4>> map_flow_to_traffic_class (
+    int<<32>> src_addr,
+    int<<16>> src_port,
+    int<<32>> dest_addr,
+    int<<16>> dest_port,
+    int<<8>> protocol
+) {{
+    match (src_addr, src_port, dest_addr, dest_port, protocol) with
 {0}
 }}
 

@@ -88,39 +88,50 @@ class IPv4Header:
             ],
         )
 
-
 @dataclass
-class FiveTuple:
-    """Five Tuple of a packet."""
+class TCPHeader:
+    """TCP Header of a packet."""
 
-    src_addr: int
-    dest_addr: int
     src_port: int
     dest_port: int
-    protocol: int
+    sequence_num: int
+    ack_num: int
+    len_flags: int
+    window_sz: int
+    checksum: int
+    urg_ptr: int
 
     def __post_init__(self: Self) -> None:
         """Do sanitization."""
-        if self.src_addr >= 2**32:
-            raise ModelError("Too large of source address")
-        if self.dest_addr >= 2**32:
-            raise ModelError("Too large of destination address")
         if self.src_port >= 2**16:
             raise ModelError("Too large of source port")
         if self.dest_port >= 2**16:
             raise ModelError("Too large of destination port")
-        if self.protocol >= 2**8:
-            raise ModelError("Too large of protocol")
+        if self.sequence_num >= 2**32:
+            raise ModelError("Too large of sequence number")
+        if self.ack_num >= 2**32:
+            raise ModelError("Too large of acknowledgment number")
+        if self.len_flags >= 2**16:
+            raise ModelError("Too large of length + flags")
+        if self.window_sz >= 2**16:
+            raise ModelError("Too large of window size")
+        if self.checksum >= 2**16:
+            raise ModelError("Too large of checksum")
+        if self.urg_ptr >= 2**16:
+            raise ModelError("Too large of urgent pointer")
 
     def __iter__(self: Self) -> Iterator[int]:
         """Get iterable of values."""
         return iter(
             [
-                self.src_addr,
-                self.dest_addr,
                 self.src_port,
                 self.dest_port,
-                self.protocol,
+                self.sequence_num,
+                self.ack_num,
+                self.len_flags,
+                self.window_sz,
+                self.checksum,
+                self.urg_ptr,
             ],
         )
 

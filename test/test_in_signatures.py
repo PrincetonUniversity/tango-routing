@@ -3,7 +3,7 @@
 from ipaddress import IPv6Address
 from test.models.events import ArrayName, ArraySet, ArraySetRange, IncomingTangoTraffic
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
-from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header, IPv6Header, TangoHeader
+from test.models.tango_types import EthernetHeader, IPv4Header, IPv6Header, TangoHeader, TCPHeader
 
 from edu.princeton.tango.mappers.traffic_class_mapper import (
     ConfiguredTrafficClassMapper,
@@ -34,7 +34,7 @@ def test_timestamp_sig_check_one_path() -> None:
                 IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                 TangoHeader(0, ts_out, sig, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, 15, 0, 0),
+                TCPHeader(0, x, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts_in,
         )
@@ -82,7 +82,7 @@ def test_seq_num_sig_check_one_path() -> None:
                 IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                 TangoHeader(0, ts_out, 0, x - 1, sig),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, 15, 0, 0),
+                TCPHeader(0, x, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts_in,
         )
@@ -141,7 +141,7 @@ def test_timestamp_sig_check_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, ts_out, sig, 0, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        FiveTuple(0, 0, path + 1, 0, 0),
+                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
@@ -223,7 +223,7 @@ def test_seq_num_sig_check_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, 0, 0, seq_num, sig),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        FiveTuple(0, 0, path + 1, 0, 0),
+                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )

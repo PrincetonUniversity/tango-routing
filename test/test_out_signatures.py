@@ -2,7 +2,7 @@
 
 from test.models.events import ArrayName, ArraySet, ForwardFlow
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
-from test.models.tango_types import EthernetHeader, FiveTuple, IPv4Header
+from test.models.tango_types import EthernetHeader, IPv4Header, TCPHeader
 
 from edu.princeton.tango.mappers.traffic_class_mapper import (
     ConfiguredTrafficClassMapper,
@@ -22,7 +22,7 @@ def test_timestamp_simple() -> None:
     given_client_packet = ForwardFlow(
         EthernetHeader(0, 1, 2),
         IPv4Header(3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-        FiveTuple(13, 14, 15, 16, 17),
+        TCPHeader(13, 14, 15, 16, 17, 18, 19, 20),
     )
 
     given_metric_sigs = [ArraySet(ArrayName.OUTGOING_METRIC_SIG_0, x, x) for x in range(0, 16)]
@@ -105,7 +105,7 @@ def test_sequence_num_simple() -> None:
             ForwardFlow(
                 EthernetHeader(x, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                FiveTuple(0, 0, 15, 0, 0),
+                TCPHeader(13, 14, 15, 16, 17, 18, 19, 20),
             ),
             timestamp=ts,
         )
