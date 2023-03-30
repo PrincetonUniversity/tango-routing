@@ -184,12 +184,13 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, TCPHea
         tcp_header
     );
 
-    printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
+    printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d, port: %d }",
         path_id,
         timestamp,
         ts_signature,
         seq_number,
-        book_signature
+        book_signature,
+        out_peer_port
     );
 
     generate_port (out_peer_port, forward_tango_pkt);
@@ -284,6 +285,7 @@ handle incoming_tango_traffic (
 
             // -- Forward packet to final destination
             event tunneled = complete_forward (tango_eth_header, encaped_ip_header, encaped_tcp_header);
+            printf("Completing Forward on port: %d", out_port);
             generate_port (out_port, tunneled);
         }
     }

@@ -16,7 +16,7 @@ def test_timestamp_simple() -> None:
     given_timeout = 10000000
 
     given_traffic_mapping = ConfiguredTrafficClassMapper(
-        [FuzzyClassMapping(FuzzyFiveTuple(src_port=15), 0)],
+        [FuzzyClassMapping(FuzzyFiveTuple(src_port=13), 0)],
     )
 
     given_client_packet = ForwardFlow(
@@ -44,7 +44,7 @@ def test_timestamp_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)",
+                        "(0,1,2,0,93,0,0,0,0,0,0,0,0,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)",
                         " at port 1, t=2",
                     ),
                 ),
@@ -54,7 +54,7 @@ def test_timestamp_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(0,1,2,0,0,0,0,0,0,0,0,0,1,1,1,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)",
+                        "(0,1,2,0,93,0,0,0,0,0,1,1,1,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)",
                         " at port 1, t=1500001",
                     ),
                 ),
@@ -64,7 +64,7 @@ def test_timestamp_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(0,1,2,0,0,0,0,0,0,0,0,0,2,2,2,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)",
+                        "(0,1,2,0,93,0,0,0,0,0,2,2,2,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)",
                         " at port 1, t=3000001",
                     ),
                 ),
@@ -74,7 +74,7 @@ def test_timestamp_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(0,1,2,0,0,0,0,0,0,0,0,0,4,4,3,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)",
+                        "(0,1,2,0,93,0,0,0,0,0,4,4,3,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)",
                         " at port 1, t=4500001",
                     ),
                 ),
@@ -84,7 +84,7 @@ def test_timestamp_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(0,1,2,0,0,0,0,0,0,0,0,0,5,5,4,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)",
+                        "(0,1,2,0,93,0,0,0,0,0,5,5,4,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)",
                         " at port 1, t=6000001",
                     ),
                 ),
@@ -97,7 +97,7 @@ def test_sequence_num_simple() -> None:
     given_timeout = 10000000
 
     given_traffic_mapping = ConfiguredTrafficClassMapper(
-        [FuzzyClassMapping(FuzzyFiveTuple(src_port=15), 0)],
+        [FuzzyClassMapping(FuzzyFiveTuple(src_port=13), 0)],
     )
 
     given_packets = [
@@ -124,7 +124,7 @@ def test_sequence_num_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
+                        "(1,0,0,0,88,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18,19,20)",
                         " at port 1, t=2",
                     ),
                 ),
@@ -134,7 +134,7 @@ def test_sequence_num_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(2,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
+                        "(2,0,0,0,88,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18,19,20)",
                         " at port 1, t=1500001",
                     ),
                 ),
@@ -144,7 +144,7 @@ def test_sequence_num_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(3,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
+                        "(3,0,0,0,88,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18,19,20)",
                         " at port 1, t=3000001",
                     ),
                 ),
@@ -154,7 +154,7 @@ def test_sequence_num_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(4,0,0,0,0,0,0,0,0,0,0,0,4,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
+                        "(4,0,0,0,88,0,0,0,0,0,4,0,3,1,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18,19,20)",
                         " at port 1, t=4500001",
                     ),
                 ),
@@ -164,7 +164,7 @@ def test_sequence_num_simple() -> None:
                 "".join(
                     (
                         "incoming_tango_traffic",
-                        "(5,0,0,0,0,0,0,0,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
+                        "(5,0,0,0,88,0,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18,19,20)",
                         " at port 1, t=6000001",
                     ),
                 ),

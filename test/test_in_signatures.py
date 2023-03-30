@@ -34,7 +34,7 @@ def test_timestamp_sig_check_one_path() -> None:
                 IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                 TangoHeader(0, ts_out, sig, 0, 0),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                TCPHeader(0, x, 0, 0, 0, 0, 0, 0),
+                TCPHeader(15, x, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts_in,
         )
@@ -53,7 +53,14 @@ def test_timestamp_sig_check_one_path() -> None:
 
     with TestRunner(given_case, class_mapper=given_traffic_mapping) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(67) : [4u32]"),
+            ExpectContains(
+                "".join(
+                    (
+                        "invalid_pkt_manager_0(40) : ",
+                        "[4u32; 0u32; 0u32; 0u32; 0u32; 0u32; 0u32; 0u32]",
+                    ),
+                ),
+            ),
         ).then(
             ExpectContains(
                 "".join(
@@ -272,3 +279,7 @@ def test_seq_num_sig_check_multipath() -> None:
         ).then(
             ExpectContains("invalid_pkt_manager_7(74) : [0u32]"),
         ).finish()
+
+
+if __name__ == "__main__":
+    test_timestamp_sig_check_one_path()

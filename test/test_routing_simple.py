@@ -4,7 +4,6 @@
 from ipaddress import IPv6Address
 from test.models.events import ArrayGet, ArrayName, ArraySet, ForwardFlow
 from test.models.interpreter import (
-    ExpectationRunner,
     ExpectContains,
     TestCase,
     TestEvent,
@@ -62,7 +61,7 @@ def test_simple_route() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        ExpectationRunner(when.run()).then(
+        when.run().expect().then(
             ExpectContains(
                 "".join(
                     (
@@ -186,7 +185,7 @@ def test_multipath_timestamps() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        ExpectationRunner(when.run()).then(
+        when.run().expect().then(
             ExpectContains(
                 "".join(
                     (
@@ -309,7 +308,7 @@ def test_multipath_sequence_nums() -> None:
         class_mapper=given_traffic_mapping,
         header_mapper=given_header_mapping,
     ) as when:
-        ExpectationRunner(when.run()).then(
+        when.run().expect().then(
             ExpectContains(
                 "".join(
                     (
