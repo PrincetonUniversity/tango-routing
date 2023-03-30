@@ -90,6 +90,7 @@ module DelayMetricsManager : {
         // Update and get delay
         int<<12>> curr_time = get_time_now_ms();
         int new_delay = (int<<32>>) (curr_time - timestamp);
+        printf("curr_time: %d, timestamp: %d", curr_time, timestamp);
 
         // Update delay sums
         int<<32>> delay_sum = 0;

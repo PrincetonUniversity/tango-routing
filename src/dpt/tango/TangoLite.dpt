@@ -214,6 +214,14 @@ handle incoming_tango_traffic (
         encaped_ip_header#protocol
     );
 
+    printf("{ traffic_cls: %d, address: { src: %d, dst: %d }, port: { src: %d, dst: %d } }",
+        traffic_class,
+        encaped_ip_header#src_address,
+        encaped_tcp_header#src_port,
+        encaped_ip_header#dest_address,
+        encaped_tcp_header#dest_port
+    );
+
     if (traffic_class == 15) {
         event tunneled = complete_forward (tango_eth_header, encaped_ip_header, encaped_tcp_header);
         generate_port (out_port, tunneled);

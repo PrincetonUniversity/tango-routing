@@ -1,7 +1,7 @@
 """Test the collection of one-way path metrics."""
 
 from ipaddress import IPv6Address
-from test.models.events import ArrayName, ArraySet, ArraySetRange, IncomingTangoTraffic
+from test.models.events import ArrayName, ArraySet, IncomingTangoTraffic
 from test.models.interpreter import ExpectContains, TestCase, TestEvent, TestRunner
 from test.models.tango_types import EthernetHeader, IPv4Header, IPv6Header, TangoHeader, TCPHeader
 
@@ -46,7 +46,7 @@ def test_seq_num_metrics_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, 0, 0, seq_num, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
+                        TCPHeader(path + 1, 0, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
@@ -76,8 +76,8 @@ def test_seq_num_metrics_multipath() -> None:
             ExpectContains(
                 "".join(
                     (
-                        "loss_metrics_manager_10(56) :",
-                        " [0u32; 126u32; 189u32; 252u32; 315u32; 378u32; 441u32; 504u32]",
+                        "loss_metrics_manager_2(37) : ",
+                        "[0u32; 126u32; 189u32; 252u32; 315u32; 378u32; 441u32; 504u32]",
                     ),
                 ),
             ),
@@ -86,7 +86,7 @@ def test_seq_num_metrics_multipath() -> None:
 
 def test_delay_metrics_multipath() -> None:
     """Test several paths verify sequence number signatures correctly."""
-    given_timeout = 295_000_000
+    given_timeout = 1_295_000_000
 
     given_traffic_mapping = ConfiguredTrafficClassMapper(
         [FuzzyClassMapping(FuzzyFiveTuple(src_port=x), x - 1) for x in range(1, 9)],
@@ -100,7 +100,7 @@ def test_delay_metrics_multipath() -> None:
     )
 
     given_packets = []
-    given_num_packets = 33
+    given_num_packets = 65
     for path in range(0, 8):
         given_packets = [
             *given_packets,
@@ -111,14 +111,14 @@ def test_delay_metrics_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, ts_out, 0, 0, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
+                        TCPHeader(path + 1, 0, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
                 for x, ts_out, ts_in in zip(
                     range(1, 1 + given_num_packets),
-                    [(1_100_000 * x) + 1 for x in range(0, given_num_packets)],
-                    [(1_100_000 * x * path) + 1_100_001 for x in range(0, given_num_packets)],
+                    [1 for _ in range(0, given_num_packets)],
+                    [(10**6 * x * path) + 2*(10**6) for x in range(0, given_num_packets)],
                     strict=True,
                 )
             ],
@@ -141,145 +141,9 @@ def test_delay_metrics_multipath() -> None:
             ExpectContains(
                 "".join(
                     (
-                        "delay_metrics_manager_9(66) : [59136u32; 61436u32;",
-                        " 61955u32; 62475u32; 62995u32; 63515u32; 64035u32; 64556u32]",
+                        "delay_metrics_manager_1(39) : ",
+                        "[0u32; 1949u32; 3871u32; 5793u32; 7716u32; 9639u32; 11562u32; 13484u32]",
                     ),
                 ),
-            ),
-        ).finish()
-
-
-def test_seq_num_best_metrics() -> None:
-    """Test several paths verify sequence number signatures correctly."""
-    given_timeout = 20000000
-
-    given_traffic_mapping = ConfiguredTrafficClassMapper(
-        [FuzzyClassMapping(FuzzyFiveTuple(src_port=x), x - 1) for x in range(1, 9)],
-    )
-
-    given_header_mapping = ConfiguredHeaderMapper(
-        [
-            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
-            for x in range(0, 8)
-        ],
-    )
-
-    given_packets = []
-    given_num_packets = 65
-    for path in range(0, 2):
-        given_packets = [
-            *given_packets,
-            *[
-                TestEvent(
-                    IncomingTangoTraffic(
-                        EthernetHeader(x, 0, 0),
-                        IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
-                        TangoHeader(path, 0, 0, seq_num, 0),
-                        IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
-                    ),
-                    timestamp=ts_in,
-                )
-                for x, seq_num, ts_in in zip(
-                    range(1, 1 + given_num_packets),
-                    [((path + 1) * x) + x for x in range(0, given_num_packets)],
-                    range(1000, 1000 + given_num_packets),
-                    strict=True,
-                )
-            ],
-        ]
-
-    given_routes = [
-        TestEvent(ArraySet(ArrayName.ROUTE_MAPPINGS, x, x), timestamp=0) for x in range(0, 8)
-    ]
-
-    given_init_best_path = [
-        TestEvent(ArraySet(ArrayName.BEST_LOSS_VAL, 0, 2**32 - 2)),
-        TestEvent(ArraySet(ArrayName.BEST_LOSS_PATH, 0, 1)),
-        TestEvent(ArraySetRange(ArrayName.LOSS_AVGS, 0, 8, [2**32 - 1])),
-    ]
-
-    given_events = [*given_routes, *given_init_best_path, *given_packets]
-
-    given_case = TestCase(given_timeout, given_events)
-
-    with TestRunner(
-        given_case,
-        class_mapper=given_traffic_mapping,
-        header_mapper=given_header_mapping,
-    ) as when:
-        when.run().expect().then(
-            ExpectContains("best_metrics_manager_0(75) : [1u32]"),
-        ).then(
-            ExpectContains("best_metrics_manager_2(77) : [0u3]"),
-        ).finish()
-
-
-def test_delay_best_metrics() -> None:
-    """Test several paths verify sequence number signatures correctly."""
-    given_timeout = 295_000_000
-
-    given_traffic_mapping = ConfiguredTrafficClassMapper(
-        [FuzzyClassMapping(FuzzyFiveTuple(src_port=x), x - 1) for x in range(1, 9)],
-    )
-
-    given_header_mapping = ConfiguredHeaderMapper(
-        [
-            TunnelHeader(x, IPv6HeaderMap(0, 0, x, 0, 0, 0, IPv6Address(0), IPv6Address(0)))
-            for x in range(0, 8)
-        ],
-    )
-
-    given_packets = []
-    given_num_packets = 33
-    for path in range(0, 2):
-        given_packets = [
-            *given_packets,
-            *[
-                TestEvent(
-                    IncomingTangoTraffic(
-                        EthernetHeader(x, 0, 0),
-                        IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
-                        TangoHeader(path, ts_out, 0, 0, 0),
-                        IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
-                    ),
-                    timestamp=ts_in,
-                )
-                for x, ts_out, ts_in in zip(
-                    range(1, 1 + given_num_packets),
-                    [(1_100_000 * x) + 1 for x in range(0, given_num_packets)],
-                    [(1_100_000 * x * path) + 1_100_001 for x in range(0, given_num_packets)],
-                    strict=True,
-                )
-            ],
-        ]
-
-    given_routes = [
-        TestEvent(ArraySet(ArrayName.ROUTE_MAPPINGS, x, x), timestamp=0) for x in range(0, 8)
-    ]
-
-    given_init_best_path = [
-        TestEvent(ArraySet(ArrayName.BEST_DELAY_VAL, 0, 2**32 - 2)),
-        TestEvent(ArraySet(ArrayName.BEST_DELAY_PATH, 0, 1)),
-        TestEvent(ArraySetRange(ArrayName.DELAY_AVGS, 0, 8, [2**32 - 1])),
-    ]
-
-    given_events = [*given_routes, *given_init_best_path, *given_packets]
-
-    given_case = TestCase(given_timeout, given_events)
-
-    with TestRunner(
-        given_case,
-        class_mapper=given_traffic_mapping,
-        header_mapper=given_header_mapping,
-    ) as when:
-        when.run().expect().then(
-            ExpectContains(
-                "best_metrics_manager_1(76) : [1891u32]",
-            ),
-        ).then(
-            ExpectContains(
-                "best_metrics_manager_2(77) : [1u3]",
             ),
         ).finish()

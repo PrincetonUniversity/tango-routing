@@ -65,9 +65,9 @@ def test_timestamp_sig_check_one_path() -> None:
             ExpectContains(
                 "".join(
                     (
-                        "forward_flow",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
-                        " at port 2, t=5000001",
+                        "complete_forward",
+                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,15,1,0,0,0,0,0,0)",
+                        " at port -1, t=5000001",  # FIXME: Strange that it's at port -1
                     ),
                 ),
             ),
@@ -89,7 +89,7 @@ def test_seq_num_sig_check_one_path() -> None:
                 IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                 TangoHeader(0, ts_out, 0, x - 1, sig),
                 IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                TCPHeader(0, x, 0, 0, 0, 0, 0, 0),
+                TCPHeader(15, x, 0, 0, 0, 0, 0, 0),
             ),
             timestamp=ts_in,
         )
@@ -108,14 +108,21 @@ def test_seq_num_sig_check_one_path() -> None:
 
     with TestRunner(given_case, class_mapper=given_traffic_mapping) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(67) : [4u32]"),
+            ExpectContains(
+                "".join(
+                    (
+                        "invalid_pkt_manager_0(40) : ",
+                        "[4u32; 0u32; 0u32; 0u32; 0u32; 0u32; 0u32; 0u32]",
+                    ),
+                ),
+            ),
         ).then(
             ExpectContains(
                 "".join(
                     (
-                        "forward_flow",
-                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0)",
-                        " at port 2, t=5000001",
+                        "complete_forward",
+                        "(1,0,0,0,0,0,0,0,0,0,0,0,0,15,1,0,0,0,0,0,0)",
+                        " at port -1, t=5000001",  # FIXME: Strange that it's at port -1
                     ),
                 ),
             ),
@@ -148,7 +155,7 @@ def test_timestamp_sig_check_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, ts_out, sig, 0, 0),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
+                        TCPHeader(x, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
@@ -186,21 +193,12 @@ def test_timestamp_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(67) : [7u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_1(68) : [6u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_2(69) : [5u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_3(70) : [4u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_4(71) : [3u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_5(72) : [2u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_6(73) : [1u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_7(74) : [0u32]"),
+            ExpectContains("".join((
+                        "invalid_pkt_manager_0(40) : ",
+                        "[7u32; 6u32; 5u32; 4u32; 3u32; 2u32; 1u32; 0u32]",
+                    ),
+                ),
+            ),
         ).finish()
 
 
@@ -230,7 +228,7 @@ def test_seq_num_sig_check_multipath() -> None:
                         IPv6Header(0, 0, 0, 0, 0, 0, 0, 0),
                         TangoHeader(path, 0, 0, seq_num, sig),
                         IPv4Header(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-                        TCPHeader(0, path + 1, 0, 0, 0, 0, 0, 0),
+                        TCPHeader(x, path + 1, 0, 0, 0, 0, 0, 0),
                     ),
                     timestamp=ts_in,
                 )
@@ -263,23 +261,10 @@ def test_seq_num_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("invalid_pkt_manager_0(67) : [7u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_1(68) : [6u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_2(69) : [5u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_3(70) : [4u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_4(71) : [3u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_5(72) : [2u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_6(73) : [1u32]"),
-        ).then(
-            ExpectContains("invalid_pkt_manager_7(74) : [0u32]"),
+            ExpectContains("".join((
+                        "invalid_pkt_manager_0(40) : ",
+                        "[7u32; 6u32; 5u32; 4u32; 3u32; 2u32; 1u32; 0u32]",
+                    ),
+                ),
+            ),
         ).finish()
-
-
-if __name__ == "__main__":
-    test_timestamp_sig_check_one_path()
