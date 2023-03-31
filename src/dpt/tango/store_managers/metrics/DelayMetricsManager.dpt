@@ -64,22 +64,25 @@ module DelayMetricsManager : {
 
     /**
      * # Description
-     * Update the stored delay sum.
+     * Update the stored running sum of delay.
      **/
-    memop get_delay_sum (
+    memop update_delay_sum (
         int<<'sz>> curr_delay_sum,
-        int<<'sz>> new_delay
+        int<<'sz>> new_delay,
+        int<<'sz>> curr_count
     ) {
-        return curr_delay_sum + new_delay;
-    }
+        bool should_reset = curr_count > 62;
 
-    memop reset_delay_sum (
-        int<<'sz>> curr_delay_sum,
-        int<<'sz>> new_delay
-    ) {
-        return 0;
-    }
+        if (should_reset) {
+            cell1 = 0;
+        } else {
+            if (true) { cell1 = curr_delay_sum + new_delay; }
+        }
 
+        if (should_reset) {
+            return curr_delay_sum + new_delay;
+        }
+    }
 
     fun int<<32>> update_delay (
         t self,
@@ -87,32 +90,20 @@ module DelayMetricsManager : {
         int<<12>> timestamp,
         int<<3>> path_id
     ) {
-        // Update and get delay
+        // Calculate delay
         int<<12>> curr_time = get_time_now_ms();
         int new_delay = (int<<32>>) (curr_time - timestamp);
         printf("curr_time: %d, timestamp: %d", curr_time, timestamp);
 
-        // Update delay sums
-        int<<32>> delay_sum = 0;
-        if (avg_counter > 62) {
-            delay_sum = Array.update(
-                self#delay_sums,
-                path_id,
-                get_delay_sum,
-                new_delay,
-                reset_delay_sum,
-                0
-            );
-        } else {
-            delay_sum = Array.update(
-                self#delay_sums,
-                path_id,
-                get_delay_sum,
-                new_delay,
-                get_delay_sum,
-                new_delay
-            );
-        }
+        // Update running sum of delays
+        int<<32>> delay_sum = Array.update_complex(
+            self#delay_sums,
+            path_id,
+            update_delay_sum,
+            new_delay,
+            avg_counter,
+            0
+        );
 
         // Update average delay
         int<<32>> delay_avg = Array.update_complex(
