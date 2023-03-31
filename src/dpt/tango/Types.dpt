@@ -69,8 +69,6 @@ type IPv6Header_t = {
    int<<128>> dest_addr;
 }
 
-size ipv6_hdr_sz = 320;
-
 /**
  * # Description
  * A five-tuple describing a particular flow.
@@ -113,6 +111,23 @@ type TCPHeader_t = {
    int<<16>> window_sz;
    int<<16>> checksum;
    int<<16>> urg_ptr;
+}
+
+/**
+ * # Desctiption 
+ * UDP Header describing host source and destination ports.
+ *
+ * # Properties
+ * src_port (int<<16>>): host source port
+ * dest_port (int<<16>>): host destination port
+ * length (int<<16>>): length of payload
+ * checksum (int<<16>>): checksum of the header
+ **/
+type UDPHeader_t = {
+   int<<16>> src_port;
+   int<<16>> dest_port;
+   int<<16>> length;
+   int<<16>> checksum;
 }
 
 /**
