@@ -140,10 +140,10 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, TCPHea
     );
 
     // -- Ignore if not tango traffic
-    if (traffic_class == 15) {
-        event tunneled = complete_forward (eth_header, ip_header, tcp_header);
-        generate_port (out_port, tunneled);
-    } else {
+    // if (traffic_class == 15) {
+    //     event tunneled = complete_forward (eth_header, ip_header, tcp_header);
+    //     generate_port (out_port, tunneled);
+    // } else {
 
     // -- Find route cooresponding to traffic class.
     int<<3>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
@@ -194,7 +194,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, TCPHea
     );
 
     generate_port (out_peer_port, forward_tango_pkt);
-}}
+}//}
 
 handle incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
@@ -222,10 +222,10 @@ handle incoming_tango_traffic (
         encaped_tcp_header#dest_port
     );
 
-    if (traffic_class == 15) {
-        event tunneled = complete_forward (tango_eth_header, encaped_ip_header, encaped_tcp_header);
-        generate_port (out_port, tunneled);
-    } else {
+    // if (traffic_class == 15) {
+    //     event tunneled = complete_forward (tango_eth_header, encaped_ip_header, encaped_tcp_header);
+    //     generate_port (out_port, tunneled);
+    // } else {
         // -- Verify
         bool is_valid_seq_num = BookSignatureManager.verify(
             incoming_book_signature_manager,
@@ -296,5 +296,5 @@ handle incoming_tango_traffic (
             printf("Completing Forward on port: %d", out_port);
             generate_port (out_port, tunneled);
         }
-    }
+    // }
 }
