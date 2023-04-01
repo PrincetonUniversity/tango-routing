@@ -2,6 +2,7 @@
 import json
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
 from shutil import copytree, rmtree
 from subprocess import run as run_cmd
@@ -141,6 +142,14 @@ class TestCase:
         return json.dumps(self.as_dict())
 
 
+class TestBinary(Enum):
+    """Which lucid binary to run tests against."""
+
+    TANGO = "Tango.dpt"
+    TANGO_LITE = "TangoLite.dpt"
+    TANGO_MEASUREMENT = "TangoMeasurement.dpt"
+
+
 class TestResult:
     """Result of an interpreter run."""
 
@@ -214,6 +223,7 @@ class TestRunner:
         class_mapper: TrafficClassMapper | None = None,
         header_mapper: HeaderMapper | None = None,
         constraint_mapper: ConstraintMapper | None = None,
+        test_binary: TestBinary = TestBinary.TANGO_LITE,
     ) -> None:
         """Create test runner."""
         self._given = given
@@ -223,6 +233,7 @@ class TestRunner:
         self._constraint_mapper = constraint_mapper
         self._tmp_dir = None
         self._root_dir = Path(__file__).parent.parent.parent.absolute()
+        self._test_binary = test_binary
 
     def __enter__(self: Self) -> Self:
         """Enter into testing session within temp directory."""
@@ -262,7 +273,7 @@ class TestRunner:
         """Run the test configuration."""
         if self._tmp_dir:
             # tango_src = Path(self._tmp_dir) / Path("Tango.dpt")  # noqa: ERA001
-            tango_src = Path(self._tmp_dir) / Path("TangoLite.dpt")
+            tango_src = Path(self._tmp_dir) / Path(self._test_binary.value)
             test_config = Path(self._tmp_dir) / Path("test.json")
             cmd = ["dpt", str(tango_src), "--spec", str(test_config)]
 

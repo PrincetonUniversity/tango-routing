@@ -124,8 +124,8 @@ type TCPHeader_t = {
  * checksum (int<<16>>): checksum of the header
  **/
 type UDPHeader_t = {
-   int<<16>> src_port;
-   int<<16>> dest_port;
+   int<<16>> source_port;
+   int<<16>> destination_port;
    int<<16>> length;
    int<<16>> checksum;
 }
