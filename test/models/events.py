@@ -3,7 +3,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
 from test.models.error import ModelError
-from test.models.tango_types import EthernetHeader, IPv4Header, IPv6Header, TangoHeader, TCPHeader
+from test.models.tango_types import (
+    EthernetHeader,
+    IPv4Header,
+    IPv6Header,
+    TangoHeader,
+    TCPHeader,
+    UDPHeader,
+)
 from typing import Self
 
 
@@ -38,7 +45,7 @@ class ForwardFlow(TangoEvent):
 
     eth_header: EthernetHeader
     ip_header: IPv4Header
-    tcp_header: TCPHeader
+    transport_header: TCPHeader | UDPHeader
 
     @property
     def name(self: Self) -> str:
@@ -49,7 +56,7 @@ class ForwardFlow(TangoEvent):
         """Get dictionary representation of an interpreter event."""
         return {
             "name": self.name,
-            "args": list(self.eth_header) + list(self.ip_header) + list(self.tcp_header),
+            "args": list(self.eth_header) + list(self.ip_header) + list(self.transport_header),
         }
 
 

@@ -118,7 +118,7 @@ def test_delay_metrics_multipath() -> None:
                 for x, ts_out, ts_in in zip(
                     range(1, 1 + given_num_packets),
                     [1 for _ in range(0, given_num_packets)],
-                    [(10**6 * x * path) + 2*(10**6) for x in range(0, given_num_packets)],
+                    [(10**6 * x * path) + 2 * (10**6) for x in range(0, given_num_packets)],
                     strict=True,
                 )
             ],

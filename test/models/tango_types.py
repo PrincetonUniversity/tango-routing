@@ -88,6 +88,7 @@ class IPv4Header:
             ],
         )
 
+
 @dataclass
 class TCPHeader:
     """TCP Header of a packet."""
@@ -132,6 +133,38 @@ class TCPHeader:
                 self.window_sz,
                 self.checksum,
                 self.urg_ptr,
+            ],
+        )
+
+
+@dataclass
+class UDPHeader:
+    """UDP Header of a packet."""
+
+    src_port: int
+    dest_port: int
+    length: int
+    checksum: int
+
+    def __post_init__(self: Self) -> None:
+        """Do sanitization."""
+        if self.src_port >= 2**16:
+            raise ModelError("Too large of source port")
+        if self.dest_port >= 2**16:
+            raise ModelError("Too large of destination port")
+        if self.length >= 2**16:
+            raise ModelError("Too large of length")
+        if self.checksum >= 2**16:
+            raise ModelError("Too large of checksum")
+
+    def __iter__(self: Self) -> Iterator[int]:
+        """Get iterable of values."""
+        return iter(
+            [
+                self.src_port,
+                self.dest_port,
+                self.length,
+                self.checksum,
             ],
         )
 

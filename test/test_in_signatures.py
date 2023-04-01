@@ -193,7 +193,9 @@ def test_timestamp_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("".join((
+            ExpectContains(
+                "".join(
+                    (
                         "invalid_pkt_manager_0(40) : ",
                         "[7u32; 6u32; 5u32; 4u32; 3u32; 2u32; 1u32; 0u32]",
                     ),
@@ -261,7 +263,9 @@ def test_seq_num_sig_check_multipath() -> None:
         header_mapper=given_header_mapping,
     ) as when:
         when.run().expect().then(
-            ExpectContains("".join((
+            ExpectContains(
+                "".join(
+                    (
                         "invalid_pkt_manager_0(40) : ",
                         "[7u32; 6u32; 5u32; 4u32; 3u32; 2u32; 1u32; 0u32]",
                     ),
