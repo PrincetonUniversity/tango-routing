@@ -40,15 +40,15 @@ module SequenceNumberManager : {
      * # Description
      * Set next sequence number for this path.
      **/
-    memop next(int<<'sz>> curr, int<<'sz>> ignore) {
-        return curr + 1;
+    memop next(int<<'sz>> curr, int<<'sz>> inc) {
+        return curr + inc;
     }
 
     /**
      * # Description
      * Get current sequence number for this path.
      **/
-    memop get_curr(int<<'sz>> curr, int<<'sz>> ignore) {
+    memop get_curr(int<<'sz>> curr, int<<'sz>> inc) {
         return curr;
     }
 
@@ -62,7 +62,7 @@ module SequenceNumberManager : {
             get_curr,
             0,
             next,
-            0
+            (int<<24>>) 1
         );
     }
 }
