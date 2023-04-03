@@ -91,7 +91,7 @@ global Encryptor.t encryptor = Encryptor.create();
 entry event forward_flow (
     EthernetHeader_t eth_header,
     IPv4Header_t ip_header,
-    FiveTuple_t five_tuple
+    TCPHeader_t tcp_header
 ) [
     route_manager < sequence_counters;
     sequence_counters < outgoing_book_signature_manager;
@@ -131,7 +131,7 @@ event incoming_tango_traffic (
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
     IPv4Header_t encaped_ip_header,
-    FiveTuple_t encaped_five_tuple
+    TCPHeader_t encaped_tcp_header
 ) [
     incoming_book_signature_manager < incoming_metric_signature_manager;
     incoming_metric_signature_manager < invalid_pkt_manager;
@@ -167,11 +167,17 @@ event route_update (
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
 
-handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTuple_t five_tuple) {
+handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, TCPHeader_t tcp_header) {
 
     /* 1. Map flow to a specific physical route. */
     // -- Map flow to traffic class.
-    int<<4>> traffic_class = map_flow_to_traffic_class(five_tuple);
+    int<<4>> traffic_class = map_flow_to_traffic_class(
+        ip_header#src_address,
+        tcp_header#src_port,
+        ip_header#dest_address,
+        tcp_header#dest_port,
+        ip_header#protocol
+    );
 
     // -- Ignore if not tango traffic
     if (traffic_class == 15) {
@@ -203,20 +209,19 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, FiveTu
 
     /* 4. Encapsulate and forward packet. */
     TangoHeader_t tango_metrics_hdr = {
-        path_id = path_id;
-        timestamp = timestamp;
+        path_id = (int<<8>>) path_id;
+        timestamp = (int<<16>>) timestamp;
         signature = ts_signature;
         sequence_num = seq_number;
-        book_signature = book_signature;
+        book_signature = (int<<8>>) book_signature;
     };
 
-    int<<16>> payload_len = 176 + ((int<<16>>) (ip_header#version_ihl[7:4] ^ ((int<<5>>) 0))) + ip_header#len; // FIXME: DIFF
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
-        { tango_tunnel_hdr with payload_len = payload_len},
+        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
         tango_metrics_hdr,
         ip_header,
-        five_tuple
+        tcp_header
     );
 
     printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
@@ -235,12 +240,19 @@ handle incoming_tango_traffic (
     IPv6Header_t tango_ip_header,
     TangoHeader_t tango_metrics_header,
     IPv4Header_t encaped_ip_header,
-    FiveTuple_t encaped_five_tuple
+    TCPHeader_t encaped_tcp_header
 ) {
 
     /* 1. Validate signatures. */
     // -- Skip if not tango traffic
-    int<<4>> traffic_class = map_flow_to_traffic_class(encaped_five_tuple);
+    int<<4>> traffic_class = map_flow_to_traffic_class(
+        encaped_ip_header#src_address,
+        encaped_tcp_header#src_port,
+        encaped_ip_header#dest_address,
+        encaped_tcp_header#dest_port,
+        encaped_ip_header#protocol
+    );
+
     if (traffic_class == 15) {
         event tunneled = complete_forward (tango_eth_header, encaped_ip_header);
         generate_port (out_port, tunneled);
@@ -249,39 +261,42 @@ handle incoming_tango_traffic (
     bool is_valid_seq_num = BookSignatureManager.verify(
         incoming_book_signature_manager,
         tango_metrics_header#sequence_num,
-        tango_metrics_header#path_id,
-        tango_metrics_header#book_signature
+        tango_metrics_header#path_id[2:0],
+        tango_metrics_header#book_signature[0:0]
     );
 
     bool is_valid_metrics = MetricSignatureManager.verify(
         incoming_metric_signature_manager,
-        tango_metrics_header#timestamp,
-        tango_metrics_header#path_id,
+        tango_metrics_header#timestamp[11:0],
+        tango_metrics_header#path_id[2:0],
         tango_metrics_header#signature
     );
-    printf("Found timestamp: %d", tango_metrics_header#timestamp);
 
     // TODO: Verify `path_id` matches expected header metadata
 
     // -- Record and bail if invalid
-    if (!(is_valid_seq_num && is_valid_metrics)) {
+    if (!is_valid_seq_num || !is_valid_metrics) {
         printf("Invalid incoming packet found: { reason: { seq_num: %b, ts: %b } path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d }",
             is_valid_seq_num,
             is_valid_metrics,
-            tango_metrics_header#path_id,
-            tango_metrics_header#timestamp,
+            tango_metrics_header#path_id[2:0],
+            tango_metrics_header#timestamp[11:0],
             tango_metrics_header#signature,
             tango_metrics_header#sequence_num,
-            tango_metrics_header#book_signature
+            tango_metrics_header#book_signature[0:0]
         );
-        InvalidPacketManager.found_invalid_packet(invalid_pkt_manager, tango_metrics_header#path_id);
+
+        InvalidPacketManager.found_invalid_packet(
+            invalid_pkt_manager,
+            tango_metrics_header#path_id[2:0]
+        );
     } else {
 
         /* 2. Update Metrics. */
         // -- Get the current number of packets seen on path
         int<<32>> avg_count = (int<<32>>) MetricAverageTracker.increment(
             metric_avg_tracker,
-            tango_metrics_header#path_id
+            tango_metrics_header#path_id[2:0]
         );
 
         // -- Update Loss
@@ -289,21 +304,21 @@ handle incoming_tango_traffic (
             loss_metrics_manager,
             avg_count,
             tango_metrics_header#sequence_num,
-            tango_metrics_header#path_id
+            tango_metrics_header#path_id[2:0]
         );
 
         // -- Update delay
         int<<32>> delay_metrics = DelayMetricsManager.update_delay(
             delay_metrics_manager,
             avg_count,
-            tango_metrics_header#timestamp,
-            tango_metrics_header#path_id
+            tango_metrics_header#timestamp[11:0],
+            tango_metrics_header#path_id[2:0]
         );
 
         // -- Update best metrics
         BestMetrics_t best_metrics = BestMetricsManager.update(
             best_metrics_manager,
-            tango_metrics_header#path_id,
+            tango_metrics_header#path_id[2:0],
             loss_metrics,
             delay_metrics
         );
