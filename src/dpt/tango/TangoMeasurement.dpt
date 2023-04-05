@@ -2,16 +2,23 @@ include "Time.dpt"
 include "Types.dpt"
 include "static_maps/TrafficClassMap.dpt"
 include "static_maps/TunnelHeaderMap.dpt"
-include "store_managers/InvalidPacketManager.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/SequenceNumberManager.dpt"
 
 /* ================================================================================================================== *
- *                                                     EXTERNS                                                        *
+ *                                                   CONSNTANTS                                                       *
  * ================================================================================================================== */
 
-const int<<9>> out_peer_port = 1;
-const int<<9>> out_port = 2;
+// Port declarations
+const int<<9>> OUT_PORT = 2;
+
+// Tango UDP header to counter ECMP
+const UDPHeader_t TANGO_UDP_HEADER = {
+    source_port = 0;
+    destination_port = 0;
+    length = 0;
+    checksum = 0;
+};
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
@@ -53,6 +60,7 @@ entry event forward_flow (
  * # Parameters
  * tango_eth_header (EthernetHeader_t): tunneled ethernet frame header
  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_tango_udp_header (UDPHeader_t): udp header to counter ECMP
  * tango_metrics_header (TangoHeader_t): tango metric data and signatures
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  * encapedencaped_udp_header_tcp_header (UDPHeader_t): tcp header of tunneled packet
@@ -64,6 +72,7 @@ entry event forward_flow (
 exit event incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
+    UDPHeader_t tango_udp_header,
     TangoHeader_t tango_metrics_header,
     IPv4Header_t encaped_ip_header,
     UDPHeader_t encaped_udp_header
@@ -113,7 +122,8 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     event forward_tango_pkt = incoming_tango_traffic (
         eth_header,
-        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
+        { tango_tunnel_hdr with payload_len = 144 + ip_header#len },
+        TANGO_UDP_HEADER,
         tango_metrics_hdr,
         ip_header,
         udp_header
@@ -126,5 +136,5 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
         seq_number
     );
 
-    generate_port (out_peer_port, forward_tango_pkt);
+    generate_port (OUT_PORT, forward_tango_pkt);
 }

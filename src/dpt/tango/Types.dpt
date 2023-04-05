@@ -159,8 +159,8 @@ type TangoHeader_t = {
  **/
 type RouteUpdate_t = {
    bool     is_valid;
-   int<<4>> traffic_class;
-   int<<3>> new_path_id;
+   int<<8>> traffic_class;
+   int<<8>> new_path_id;
 }
 
 /**
