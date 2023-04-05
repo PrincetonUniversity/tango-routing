@@ -13,6 +13,7 @@
     - [incoming\_tango\_traffic](#incoming_tango_traffic)
     - [route\_update](#route_update)
     - [complete\_forward](#complete_forward)
+  - [Embedded Route Updates](#embedded-route-updates)
 
 ## Tango Peer-to-Peer Metrics Packet
 
@@ -140,7 +141,7 @@ event incoming_tango_traffic (
 
 ### route_update
 
-*Note*: This is no longer done in the dataplane in out implementation.
+*Note*: This is no longer done in the dataplane in out implementation. See next section for the embedded route update version.
 
 This is an encrypted traffic-class-to-path-id mapping sent between peer switches.
 
@@ -165,3 +166,36 @@ exit event complete_forward (
     UDPHeader_t udp_header
 );
 ```
+
+---
+
+## Embedded Route Updates
+
+For the Tofino-eBPF active routing experiment, we will be embedding the route updates within the UDP header of the IPv4/UDP client header which the Tofino will treat in a special manner. Specifically, the Tofino will use the lower *4-bits* of the source port and lower *3-bits* of the destination port as the *traffic class* which will now route to the new *path* respectively. Every other bit is unset.
+
+For brevity, the following is is lucid code that does this check:
+
+```lucid
+    // -- Encoding Scheme: only corresponding lowest-order bits are set to non-zero values
+    if ((udp_header#source_port[15:4] == 0) && (udp_header#destination_port[15:3] == 0)) {
+    
+        RouteManager.update_route(
+            route_manager,
+            udp_header#source_port[7:0],        // Traffic class to update
+            udp_header#destination_port[7:0]    // Path to update class mapping to
+        );
+    }
+```
+
+Again, for brevity, the following is the encoding scheme:
+
+| IPv4 Header |           Use          |
+|-------------|------------------------|
+| all fields  | Set to Route to Switch |
+
+| UDP Header  | Use                                               |
+|-------------|---------------------------------------------------|
+| Source Port | Lower 4 bits = traffic class, else upper bits = 0 |
+| Dest Port   | Lower 3 bits = path id, else upper bits = 0       |
+| Length      | N/A                                               |
+| Checksum    | N/A                                               |
