@@ -93,8 +93,8 @@ exit event incoming_tango_traffic (
 fun RouteUpdate_t get_route_update (UDPHeader_t header) {
     return {
         is_valid = (header#source_port[15:4] == 0) && (header#destination_port[15:3] == 0);
-        traffic_class = ((int<<4>>) 0) ^ header#source_port[3:0];
-        new_path_id = ((int<<5>>) 0) ^ header#destination_port[2:0];
+        traffic_class = header#source_port[7:0];
+        new_path_id = header#destination_port[7:0];
     };
 }
 
