@@ -12,9 +12,9 @@ include "../Types.dpt"
  * protocol (int<<8>>): protocol used
  *
  * # Returns
- * traffic_class (int<<4>>): the traffic class associated with this five-tuple
+ * traffic_class (int<<8>>): the traffic class associated with this five-tuple
  **/
-fun int<<4>> map_flow_to_traffic_class (
+fun int<<8>> map_flow_to_traffic_class (
     int<<32>> src_addr,
     int<<16>> src_port,
     int<<32>> dest_addr, 

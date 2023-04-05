@@ -4,7 +4,7 @@
  * 
  * # Methods
  * create() -> InvalidPacketManager.t
- * found_invalid_packet(InvalidPacketManager.t, int<<3>>) -> void
+ * found_invalid_packet(InvalidPacketManager.t, int<<8>>) -> void
  **/
 module InvalidPacketManager : {
     global type t;
@@ -16,11 +16,11 @@ module InvalidPacketManager : {
     * 
     * # Parameters
     * self (t): self
-    * path_id (int<<3>>): path upon the invalid packet was found
+    * path_id (int<<8>>): path upon the invalid packet was found
     **/
     fun void found_invalid_packet (
         t self,
-        int<<3>> path_id
+        int<<8>> path_id
     ) [start <= self; end self];
 }
 {
@@ -42,7 +42,7 @@ module InvalidPacketManager : {
 
     fun void found_invalid_packet (
         t self,
-        int<<3>> path_id
+        int<<8>> path_id
     ) {
         printf("Found invalid packet on path: %d", path_id);
 

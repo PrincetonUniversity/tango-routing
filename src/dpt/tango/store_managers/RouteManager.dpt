@@ -4,8 +4,8 @@
  * 
  * # Methods
  * create() -> RouteManager.t
- * update_route(RouteManager.t, int<<4>>, int<<3>>) -> void
- * get_path_id(RouteManager.t, int<<4>>) -> int<<3>>
+ * update_route(RouteManager.t, int<<8>>, int<<8>>) -> void
+ * get_path_id(RouteManager.t, int<<8>>) -> int<<8>>
  **/
 module RouteManager : {
     global type t;
@@ -22,8 +22,8 @@ module RouteManager : {
     **/
     fun void update_route (
         t self,
-        int<<4>> traffic_cls,
-        int<<3>> path_id
+        int<<8>> traffic_cls,
+        int<<8>> path_id
     ) [start <= self; end self];
     
     /**
@@ -32,19 +32,19 @@ module RouteManager : {
     * 
     * # Parameters
     * self (t): self
-    * traffic_cls (int<<4>>): traffic class to get mapping for
+    * traffic_cls (int<<8>>): traffic class to get mapping for
     * 
     * # Returns
-    * path_id (int<<3>>): mapped physical path ID
+    * path_id (int<<8>>): mapped physical path ID
     **/
-    fun int<<3>> get_path_id (
+    fun int<<8>> get_path_id (
         t self,
-        int<<4>> traffic_cls
+        int<<8>> traffic_cls
     ) [start <= self; end self];
 }
 {
     type t = {
-        Array.t<<3>> mappings;
+        Array.t<<8>> mappings;
     }
 
     constr t create () = {
@@ -53,15 +53,15 @@ module RouteManager : {
 
     fun void update_route (
         t self,
-        int<<4>> traffic_cls,
-        int<<3>> path_id
+        int<<8>> traffic_cls,
+        int<<8>> path_id
     ) {
         Array.set(self#mappings, traffic_cls, path_id);
     }
 
-    fun int<<3>> get_path_id (
+    fun int<<8>> get_path_id (
         t self,
-        int<<4>> traffic_cls
+        int<<8>> traffic_cls
     ) {
         return Array.get(self#mappings, traffic_cls);
     }

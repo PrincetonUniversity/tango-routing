@@ -77,7 +77,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 1. Map flow to a specific physical route. */
     // -- Map flow to traffic class.
-    int<<4>> traffic_class = map_flow_to_traffic_class(
+    int<<8>> traffic_class = map_flow_to_traffic_class(
         ip_header#src_address,
         udp_header#source_port,
         ip_header#dest_address,
@@ -86,7 +86,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
     );
 
     // -- Find route cooresponding to traffic class.
-    int<<3>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
+    int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
 
     // -- Get physical path header to tunnel with.
     IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
@@ -94,7 +94,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 2. Increment sequence number. */
     // -- Get updated sequence number
-    int<<24>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
 
 
     /* 3. Record path-specific timestamp. */
