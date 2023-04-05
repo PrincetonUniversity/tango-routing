@@ -118,13 +118,18 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
         /* 1. Map flow to a specific physical route. */
         // -- Map flow to traffic class.
-        int<<8>> traffic_class = map_flow_to_traffic_class(
+        int<<8>> traffic_class = 0;
+        match (
             ip_header#src_address,
             udp_header#source_port,
             ip_header#dest_address,
             udp_header#destination_port,
             ip_header#protocol
-        );
+        ) with
+        | _, _, _, _, _ -> {
+            printf("ERROR: traffic class map has not been configured!");
+            traffic_class = 15;
+        }
 
         // -- Find route cooresponding to traffic class.
         int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
