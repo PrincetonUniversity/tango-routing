@@ -171,7 +171,7 @@ exit event complete_forward (
 
 ## Embedded Route Updates
 
-For the Tofino-eBPF active routing experiment, we will be embedding the route updates within the UDP header of the IPv4/UDP client header which the Tofino will treat in a special manner. Specifically, the Tofino will use the lower *4-bits* of the source port and lower *3-bits* of the destination port as the *traffic class* which will now route to the new *path* respectively. Every other bit is unset.
+For the Tofino-eBPF active routing experiment, we will be embedding the route updates within the UDP header of the IPv4/UDP client header which the Tofino will treat in a special manner. Specifically, the Tofino will use the lower *4-bits* of the source port and lower *3-bits* of the destination port as the *traffic class* which will now route to the new *path* respectively. Every non-mapping bit is unset.
 
 For brevity, the following is is lucid code that does this check:
 
