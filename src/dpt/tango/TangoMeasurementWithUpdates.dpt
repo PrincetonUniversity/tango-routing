@@ -153,5 +153,5 @@ handle route_update (
     int<<8>> traffic_cls,
     int<<8>> path_id
 ) {
-    RouteManager.update_route(route_manager, (int<<4>>) traffic_cls, (int<<3>>) path_id);
+    RouteManager.update_route(route_manager, (int<<8>>) traffic_cls, (int<<8>>) path_id);
 }
