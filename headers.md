@@ -106,7 +106,7 @@ sequenceDiagram
     actor Host1
     Host1->>Tango1: forward_flow
     Tango1->>Tango2: incoming_tango_traffic
-    Tango2->>Tango1: gRPC(route_update)
+    Tango2->>Tango1: forward_flow(... UDP(route_update))
     actor Host2
     Tango2->>Host2: complete_forward
 ```
