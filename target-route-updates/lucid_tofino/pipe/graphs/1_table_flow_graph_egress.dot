@@ -1,0 +1,39 @@
+digraph egress {
+cond_2 [ shape=record, style="filled", fillcolor=cornsilk, label="eg_intr_md.egress_rid == 0\l\l
+ "];
+t_extract_port_event_0 [ shape=record, style="filled", fillcolor=cornsilk, label="t_extract_port_event_0\l\l
+M:\l
+ hdr.bridge_ev.port_event_id\l
+ eg_intr_md.egress_port\l
+\lW:\l
+ hdr.lucid_eth.$valid\l
+ hdr.wire_ev.$valid\l
+ hdr.bridge_ev.$valid\l
+ hdr.forward_flow.$valid\l
+ hdr.wire_ev.event_id\l
+ hdr.bridge_ev.port_event_id\l
+ hdr.bridge_ev.incoming_tango_traffic\l
+ hdr.bridge_ev.forward_flow\l
+ hdr.incoming_tango_traffic.$valid\l
+ "];
+t_extract_recirc_event_0 [ shape=record, style="filled", fillcolor=cornsilk, label="t_extract_recirc_event_0\l\l
+M:\l
+ eg_intr_md.egress_rid\l
+ hdr.bridge_ev.port_event_id\l
+ hdr.bridge_ev.incoming_tango_traffic\l
+ hdr.bridge_ev.forward_flow\l
+\lW:\l
+ hdr.forward_flow.$valid\l
+ hdr.wire_ev.event_id\l
+ hdr.bridge_ev.port_event_id\l
+ hdr.bridge_ev.incoming_tango_traffic\l
+ hdr.bridge_ev.forward_flow\l
+ hdr.incoming_tango_traffic.$valid\l
+ "];
+    PARSER -> cond_2
+    cond_2 -> t_extract_port_event_0
+    PARSER -> cond_2
+    cond_2 -> t_extract_recirc_event_0
+    t_extract_port_event_0 -> DEPARSER
+    t_extract_recirc_event_0 -> DEPARSER
+}

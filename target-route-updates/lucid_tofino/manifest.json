@@ -1,0 +1,67 @@
+{
+  "schema_version": "2.0.6",
+  "target": "tofino",
+  "build_date": "Wed Apr  5 20:45:27 2023",
+  "compiler_version": "9.7.1 (4316cda)",
+  "compilation_succeeded": true,
+  "compilation_time": "153.23561429977417",
+  "run_id": "5bbdea2dde7a23c0",
+  "architecture": "tna",
+  "architectureConfig": {
+    "name": "64q",
+    "pipes": [
+      {
+        "pipe": 0,
+        "ingress": {
+          "pipeName": "IngressControl",
+          "nextControl": [
+            {
+              "pipe": 0,
+              "pipeName": "EgressControl"
+            }
+          ]
+        },
+        "egress": {
+          "pipeName": "EgressControl",
+          "nextControl": []
+        }
+      }
+    ]
+  },
+  "programs": [
+    {
+      "program_name": "lucid.p4",
+      "p4_version": "p4-16",
+      "source_files": {
+        "src_root": "/u/bherber/tango-routing/target-route-updates",
+        "includes": [
+          "/data/bf-sde-9.7.1/install/share/p4c/p4include"
+        ],
+        "defines": [
+          "__TARGET_TOFINO__=1",
+          "__p4c__=1",
+          "__p4c_major__=9",
+          "__p4c_minor__=7",
+          "__p4c_patchlevel__=1",
+          "__p4c_version__=\"9.7.1\""
+        ]
+      },
+      "pipes": [
+        {
+          "pipe_id": 0,
+          "pipe_name": "pipe",
+          "files": {
+            "context": {
+              "path": "pipe/context.json"
+            },
+            "resources": [],
+            "graphs": [],
+            "logs": []
+          }
+        }
+      ]
+    }
+  ],
+  "compile_command": "/data/bf-sde-9.7.1/install/bin/bf-p4c --std p4-16 --target tofino --arch tna -o /u/bherber/tango-routing/target-route-updates/lucid_tofino --bf-rt-schema /u/bherber/tango-routing/target-route-updates/lucid_tofino/bf-rt.json /u/bherber/tango-routing/target-route-updates/lucid.p4 -Xp4c \"--table-placement-in-order\"",
+  "conf_file": "lucid.conf"
+}
