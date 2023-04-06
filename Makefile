@@ -1,8 +1,8 @@
 INTERPRETER=dpt
 COMPILER=./dptc
 IMAGE=jsonch/lucid:lucid
-BUILD_DIR=target
-MAIN_FILE=src/dpt/tango/TangoMeasurement.dpt
+BUILD_DIR=target-route-updates
+MAIN_FILE=src/dpt/tango/TangoMeasurementWithUpdates.dpt
 SOURCES=$(shell find src -type f -name "*.dpt")
 
 all: lint test compile

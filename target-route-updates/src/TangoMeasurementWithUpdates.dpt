@@ -10,8 +10,16 @@ include "store_managers/SequenceNumberManager.dpt"
  *                                                     EXTERNS                                                        *
  * ================================================================================================================== */
 
-const int<<9>> out_peer_port = 1;
-const int<<9>> out_port = 2;
+// Port declarations
+const int<<9>> OUT_PORT = 2;
+
+// Tango UDP header to counter ECMP
+const UDPHeader_t TANGO_UDP_HEADER = {
+    source_port = 8080;
+    destination_port = 8080;
+    length = 0;
+    checksum = 0;
+};
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
@@ -53,6 +61,7 @@ entry event forward_flow (
  * # Parameters
  * tango_eth_header (EthernetHeader_t): tunneled ethernet frame header
  * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_tango_udp_header (UDPHeader_t): udp header to counter ECMP
  * tango_metrics_header (TangoHeader_t): tango metric data and signatures
  * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
  * encapedencaped_udp_header_tcp_header (UDPHeader_t): tcp header of tunneled packet
@@ -64,27 +73,11 @@ entry event forward_flow (
 exit event incoming_tango_traffic (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
+    UDPHeader_t tango_udp_header,
     TangoHeader_t tango_metrics_header,
     IPv4Header_t encaped_ip_header,
     UDPHeader_t encaped_udp_header
 );
-
-/**
- * # Description
- * Tell peer to update a given route mapping for a traffic class.
- * 
- * # Parameters
- * eth_header (EthernetHeader_t): ethernet header to go back to peer
- * ip_header (IPv6Header_t): ip header corresponding to a given path
- * traffic_cls (int<<8>>): traffic class to update path mapping
- * path_id (int<<8>>): path id to update mapping to
- **/
-event route_update (
-    EthernetHeader_t eth_header,
-    IPv6Header_t ip_header,
-    int<<8>> traffic_cls,
-    int<<8>> path_id
-) [ route_manager <= route_manager ];
 
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
@@ -92,65 +85,71 @@ event route_update (
 
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
 
-    /* 1. Map flow to a specific physical route. */
-    // -- Map flow to traffic class.
-    int<<4>> traffic_class = map_flow_to_traffic_class(
-        ip_header#src_address,
-        udp_header#source_port,
-        ip_header#dest_address,
-        udp_header#destination_port,
-        ip_header#protocol
-    );
+    /* 0. Test if we got a reroute request. */
+    // -- Encoding Scheme: only corresponding lowest-order bits are set to non-zero values
+    if ((udp_header#source_port[15:4] == 0) && (udp_header#destination_port[15:3] == 0)) {
+    
+        RouteManager.update_route(
+            route_manager,
+            udp_header#source_port[7:0],        // Traffic class to update
+            udp_header#destination_port[7:0]    // Path to update class mapping to
+        );
 
-    // -- Find route cooresponding to traffic class.
-    int<<3>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
+    } else {
 
-    // -- Get physical path header to tunnel with.
-    IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
+        /* 1. Map flow to a specific physical route. */
+        // -- Map flow to traffic class.
+        int<<8>> traffic_class = map_flow_to_traffic_class(
+            ip_header#src_address,
+            udp_header#source_port,
+            ip_header#dest_address,
+            udp_header#destination_port,
+            ip_header#protocol
+        );
+
+        // -- Find route cooresponding to traffic class.
+        int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
+
+        // -- Get physical path header to tunnel with.
+        IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
 
 
-    /* 2. Increment sequence number. */
-    // -- Get updated sequence number
-    int<<24>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
+        /* 2. Increment sequence number. */
+        // -- Get updated sequence number
+        int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
 
 
-    /* 3. Record path-specific timestamp. */
-    // -- Get current time in milliseconds
-    int<<12>> timestamp = get_time_now_ms();
+        /* 3. Record path-specific timestamp. */
+        // -- Get current time in milliseconds
+        int<<12>> timestamp = get_time_now_ms();
 
 
-    /* 4. Encapsulate and forward packet. */
-    TangoHeader_t tango_metrics_hdr = {
-        path_id = (int<<8>>) path_id;
-        timestamp = (int<<16>>) timestamp;
-        signature = 0;
-        sequence_num = seq_number;
-        book_signature = 0;
-    };
+        /* 4. Encapsulate and forward packet. */
+        TangoHeader_t tango_metrics_hdr = {
+            path_id = (int<<8>>) path_id;
+            timestamp = (int<<16>>) timestamp;
+            signature = 0;
+            sequence_num = seq_number;
+            book_signature = 0;
+        };
 
-    event forward_tango_pkt = incoming_tango_traffic (
-        eth_header,
-        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
-        tango_metrics_hdr,
-        ip_header,
-        udp_header
-    );
+        event forward_tango_pkt = incoming_tango_traffic (
+            eth_header,
+            { tango_tunnel_hdr with payload_len = 18 + ip_header#len },
+            { TANGO_UDP_HEADER with length = 18 + ip_header#len },
+            tango_metrics_hdr,
+            ip_header,
+            udp_header
+        );
 
-    printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
-        path_id,
-        traffic_class,
-        timestamp,
-        seq_number
-    );
+        printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
+            path_id,
+            traffic_class,
+            timestamp,
+            seq_number
+        );
 
-    generate_port (out_peer_port, forward_tango_pkt);
-}
+        generate_port (OUT_PORT, forward_tango_pkt);
 
-handle route_update (
-    EthernetHeader_t eth_header,
-    IPv6Header_t ip_header,
-    int<<8>> traffic_cls,
-    int<<8>> path_id
-) {
-    RouteManager.update_route(route_manager, (int<<4>>) traffic_cls, (int<<3>>) path_id);
+    }
 }

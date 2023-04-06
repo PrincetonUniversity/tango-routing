@@ -1,278 +1,310 @@
 digraph G {
   "1: " [shape=box, ];
-  "277: " [shape=box, ];
-  "311: " [shape=box, ];
-  "595: Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,set_2365,path_id2050,0,0);" [
+  "70: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
   shape=box, ];
-  "564: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  "71: " [shape=box, ];
+  "72: " [shape=box, ];
+  "85: int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;" [
   shape=box, ];
-  "62: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
+  "97: int<<13>> if_precomp2377 = [15 : 3]forward_flow_udp_header_1-0;" [
   shape=box, ];
-  "622: Sys.invalidate.route_update(route_update_eth_header_0,route_update_eth_header_1,route_update_eth_header_2,route_update_ip_header_0,route_update_ip_header_1,route_update_ip_header_2,route_update_ip_header_3,route_update_ip_header_4,route_update_ip_header_5,route_update_traffic_cls,route_update_path_id);" [
+  "107: merged_var_traffic_class_traffic_cls_2392 = [7 : 0]forward_flow_udp_header_0;" [
   shape=box, ];
-  "95: int<<3>> RouteManager_get_path_id_ret = 0;" [shape=box, ];
-  "238: int<<24>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
-  "315: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  "113: int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;" [shape=box, ];
+  "132: Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,set_2383,path_id,0,0);" [
   shape=box, ];
-  "319: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
-  shape=box, ];
-  "361: int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;" [shape=box,
-                                                                    ];
-  "365: int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;" [shape=box,
-                                                                    ];
-  "369: int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;" [shape=box,
-                                                                    ];
-  "373: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;" [shape=box, ];
-  "377: int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;" [
-  shape=box, ];
-  "381: int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;" [
-  shape=box, ];
-  "385: int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;" [
-  shape=box, ];
-  "389: int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;" [
-  shape=box, ];
-  "393: int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;" [
-  shape=box, ];
-  "397: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;" [
-  shape=box, ];
-  "323: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" [
-  shape=box, ];
-  "401: int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;" [
-  shape=box, ];
-  "405: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;" [
-  shape=box, ];
-  "409: int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;" [
-  shape=box, ];
-  "413: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;" [
-  shape=box, ];
-  "417: int<<16>> forward_tango_pkt_arg_24 = forward_flow_udp_header_0;" [
-  shape=box, ];
-  "421: int<<16>> forward_tango_pkt_arg_25 = forward_flow_udp_header_1;" [
-  shape=box, ];
-  "425: int<<16>> forward_tango_pkt_arg_26 = forward_flow_udp_header_2;" [
-  shape=box, ];
-  "429: int<<16>> forward_tango_pkt_arg_27 = forward_flow_udp_header_3;" [
-  shape=box, ];
-  "327: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [shape=box, ];
-  "337: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+88;" [
-  shape=box, ];
-  "341: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [shape=box, ];
-  "345: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [shape=box, ];
-  "349: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [shape=box, ];
-  "353: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [shape=box, ];
-  "357: int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;" [shape=box, ];
-  "68: int<<4>> map_flow_to_traffic_class_ret = 0;" [shape=box, ];
-  "128: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" [shape=box, ];
-  "134: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" [shape=box, ];
-  "141: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" [shape=box, ];
-  "148: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" [shape=box, ];
-  "155: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" [shape=box, ];
-  "162: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" [shape=box, ];
-  "121: int<<3>> path_id = RouteManager_get_path_id_ret;" [shape=box, ];
-  "576: int<<3>> path_id2050 = (int<<3>>)route_update_path_id;" [shape=box, ];
-  "264: int<<24>> seq_number = SequenceNumberManager_increment_ret;" [
-  shape=box, ];
-  "283: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" [shape=box, ];
-  "289: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [shape=box, ];
-  "296: int<<32>> tango_metrics_hdr_2 = 0;" [shape=box, ];
-  "301: int<<24>> tango_metrics_hdr_3 = seq_number;" [shape=box, ];
-  "308: int<<8>> tango_metrics_hdr_4 = 0;" [shape=box, ];
-  "206: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" [
-  shape=box, ];
-  "210: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" [
-  shape=box, ];
-  "215: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" [
-  shape=box, ];
-  "220: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" [
-  shape=box, ];
-  "225: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" [
-  shape=box, ];
-  "230: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" [
-  shape=box, ];
-  "269: int<<32>> time_now = Sys.time();" [shape=box, ];
-  "275: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
-  "116: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,get_2357,0,0,0);" [
-  shape=box, ];
-  "259: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2361,0,1,0);" [
-  shape=box, ];
-  "83: map_flow_to_traffic_class_ret = 15;" [shape=box, ];
-  "170: map_path_to_tunnel_header_ret_0 = 0;" [shape=box, ];
-  "175: map_path_to_tunnel_header_ret_1 = 0;" [shape=box, ];
-  "181: map_path_to_tunnel_header_ret_2 = 0;" [shape=box, ];
-  "187: map_path_to_tunnel_header_ret_3 = 0;" [shape=box, ];
-  "193: map_path_to_tunnel_header_ret_4 = 0;" [shape=box, ];
-  "199: map_path_to_tunnel_header_ret_5 = 0;" [shape=box, ];
-  "88: merged_var_traffic_cls_traffic_class_2366 = map_flow_to_traffic_class_ret;" [
-  shape=box, ];
-  "570: merged_var_traffic_cls_traffic_class_2366 = (int<<4>>)route_update_traffic_cls;" [
-  shape=box, ];
-  "520: generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27));" [
-  shape=box, ];
-  "624: match (event_id) ...
-" [shape=box, ];
-  "84: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
+  "140: int<<8>> map_flow_to_traffic_class_ret = 32;" [shape=box, ];
+  "155: map_flow_to_traffic_class_ret = 15;" [shape=box, ];
+  "156: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
 " [
   shape=box, ];
-  "201: match (path_id) ...
+  "160: merged_var_traffic_class_traffic_cls_2392 = map_flow_to_traffic_class_ret;" [
+  shape=box, ];
+  "167: int<<8>> RouteManager_get_path_id_ret = 32;" [shape=box, ];
+  "188: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,get_2387,0,0,0);" [
+  shape=box, ];
+  "193: int<<8>> path_id2044 = RouteManager_get_path_id_ret;" [shape=box, ];
+  "200: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" [shape=box, ];
+  "206: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" [shape=box, ];
+  "213: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" [shape=box, ];
+  "220: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" [shape=box, ];
+  "227: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" [shape=box, ];
+  "234: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" [shape=box, ];
+  "242: map_path_to_tunnel_header_ret_0 = 0;" [shape=box, ];
+  "247: map_path_to_tunnel_header_ret_1 = 0;" [shape=box, ];
+  "253: map_path_to_tunnel_header_ret_2 = 0;" [shape=box, ];
+  "259: map_path_to_tunnel_header_ret_3 = 0;" [shape=box, ];
+  "265: map_path_to_tunnel_header_ret_4 = 0;" [shape=box, ];
+  "271: map_path_to_tunnel_header_ret_5 = 0;" [shape=box, ];
+  "273: match (path_id2044) ...
+" [shape=box, ];
+  "278: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" [
+  shape=box, ];
+  "282: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" [
+  shape=box, ];
+  "287: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" [
+  shape=box, ];
+  "292: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" [
+  shape=box, ];
+  "297: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" [
+  shape=box, ];
+  "302: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" [
+  shape=box, ];
+  "310: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
+  "331: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id2044,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2391,0,1,0);" [
+  shape=box, ];
+  "336: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  shape=box, ];
+  "341: int<<32>> time_now = Sys.time();" [shape=box, ];
+  "347: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
+  "349: " [shape=box, ];
+  "355: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id2044;" [shape=box, ];
+  "361: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [shape=box, ];
+  "368: int<<32>> tango_metrics_hdr_2 = 0;" [shape=box, ];
+  "373: int<<16>> tango_metrics_hdr_3 = seq_number;" [shape=box, ];
+  "380: int<<8>> tango_metrics_hdr_4 = 0;" [shape=box, ];
+  "383: " [shape=box, ];
+  "384: " [shape=box, ];
+  "388: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  shape=box, ];
+  "392: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
+  shape=box, ];
+  "396: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" [
+  shape=box, ];
+  "400: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [shape=box, ];
+  "410: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+18;" [
+  shape=box, ];
+  "414: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [shape=box, ];
+  "418: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [shape=box, ];
+  "422: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [shape=box, ];
+  "426: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [shape=box, ];
+  "432: int<<16>> forward_tango_pkt_arg_9 = 8080;" [shape=box, ];
+  "438: int<<16>> forward_tango_pkt_arg_10 = 8080;" [shape=box, ];
+  "448: int<<16>> forward_tango_pkt_arg_11 = forward_flow_ip_header_2+18;" [
+  shape=box, ];
+  "454: int<<16>> forward_tango_pkt_arg_12 = 0;" [shape=box, ];
+  "458: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_0;" [shape=box, ];
+  "462: int<<16>> forward_tango_pkt_arg_14 = tango_metrics_hdr_1;" [shape=box,
+                                                                    ];
+  "466: int<<32>> forward_tango_pkt_arg_15 = tango_metrics_hdr_2;" [shape=box,
+                                                                    ];
+  "470: int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_3;" [shape=box,
+                                                                    ];
+  "474: int<<8>> forward_tango_pkt_arg_17 = tango_metrics_hdr_4;" [shape=box, ];
+  "478: int<<8>> forward_tango_pkt_arg_18 = forward_flow_ip_header_0;" [
+  shape=box, ];
+  "482: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_1;" [
+  shape=box, ];
+  "486: int<<16>> forward_tango_pkt_arg_20 = forward_flow_ip_header_2;" [
+  shape=box, ];
+  "490: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_3;" [
+  shape=box, ];
+  "494: int<<16>> forward_tango_pkt_arg_22 = forward_flow_ip_header_4;" [
+  shape=box, ];
+  "498: int<<8>> forward_tango_pkt_arg_23 = forward_flow_ip_header_5;" [
+  shape=box, ];
+  "502: int<<8>> forward_tango_pkt_arg_24 = forward_flow_ip_header_6;" [
+  shape=box, ];
+  "506: int<<16>> forward_tango_pkt_arg_25 = forward_flow_ip_header_7;" [
+  shape=box, ];
+  "510: int<<32>> forward_tango_pkt_arg_26 = forward_flow_ip_header_8;" [
+  shape=box, ];
+  "514: int<<32>> forward_tango_pkt_arg_27 = forward_flow_ip_header_9;" [
+  shape=box, ];
+  "518: int<<16>> forward_tango_pkt_arg_28 = forward_flow_udp_header_0;" [
+  shape=box, ];
+  "522: int<<16>> forward_tango_pkt_arg_29 = forward_flow_udp_header_1;" [
+  shape=box, ];
+  "526: int<<16>> forward_tango_pkt_arg_30 = forward_flow_udp_header_2;" [
+  shape=box, ];
+  "530: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;" [
+  shape=box, ];
+  "634: generate_port (2, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));" [
+  shape=box, ];
+  "642: match (if_precomp,if_precomp2377) ...
+" [shape=box, ];
+  "681: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  shape=box, ];
+  "683: match (event_id) ...
 " [shape=box, ];
   
   
-  "1: " -> "624: match (event_id) ...
+  "1: " -> "683: match (event_id) ...
 " [label="", ];
-  "277: " -> "283: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" [
+  "71: " -> "72: " [label="", ];
+  "72: " -> "85: int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;" [
   label="", ];
-  "311: " -> "315: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  "85: int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;" -> "97: int<<13>> if_precomp2377 = [15 : 3]forward_flow_udp_header_1-0;" [
   label="", ];
-  "595: Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,set_2365,path_id2050,0,0);" -> "622: Sys.invalidate.route_update(route_update_eth_header_0,route_update_eth_header_1,route_update_eth_header_2,route_update_ip_header_0,route_update_ip_header_1,route_update_ip_header_2,route_update_ip_header_3,route_update_ip_header_4,route_update_ip_header_5,route_update_traffic_cls,route_update_path_id);" [
-  label="", ];
-  "95: int<<3>> RouteManager_get_path_id_ret = 0;" -> "116: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,get_2357,0,0,0);" [
-  label="", ];
-  "238: int<<24>> SequenceNumberManager_increment_ret = 32;" -> "259: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2361,0,1,0);" [
-  label="", ];
-  "315: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" -> "319: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
-  label="", ];
-  "319: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" -> "323: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" [
-  label="", ];
-  "361: int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;" -> "365: int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;" [
-  label="", ];
-  "365: int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;" -> "369: int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;" [
-  label="", ];
-  "369: int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;" -> "373: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;" [
-  label="", ];
-  "373: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;" -> "377: int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;" [
-  label="", ];
-  "377: int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;" -> "381: int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;" [
-  label="", ];
-  "381: int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;" -> "385: int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;" [
-  label="", ];
-  "385: int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;" -> "389: int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;" [
-  label="", ];
-  "389: int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;" -> "393: int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;" [
-  label="", ];
-  "393: int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;" -> "397: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;" [
-  label="", ];
-  "397: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;" -> "401: int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;" [
-  label="", ];
-  "323: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" -> "327: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [
-  label="", ];
-  "401: int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;" -> "405: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;" [
-  label="", ];
-  "405: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;" -> "409: int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;" [
-  label="", ];
-  "409: int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;" -> "413: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;" [
-  label="", ];
-  "413: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;" -> "417: int<<16>> forward_tango_pkt_arg_24 = forward_flow_udp_header_0;" [
-  label="", ];
-  "417: int<<16>> forward_tango_pkt_arg_24 = forward_flow_udp_header_0;" -> "421: int<<16>> forward_tango_pkt_arg_25 = forward_flow_udp_header_1;" [
-  label="", ];
-  "421: int<<16>> forward_tango_pkt_arg_25 = forward_flow_udp_header_1;" -> "425: int<<16>> forward_tango_pkt_arg_26 = forward_flow_udp_header_2;" [
-  label="", ];
-  "425: int<<16>> forward_tango_pkt_arg_26 = forward_flow_udp_header_2;" -> "429: int<<16>> forward_tango_pkt_arg_27 = forward_flow_udp_header_3;" [
-  label="", ];
-  "429: int<<16>> forward_tango_pkt_arg_27 = forward_flow_udp_header_3;" -> "520: generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27));" [
-  label="", ];
-  "327: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" -> "337: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+88;" [
-  label="", ];
-  "337: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+88;" -> "341: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [
-  label="", ];
-  "341: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" -> "345: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [
-  label="", ];
-  "345: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" -> "349: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [
-  label="", ];
-  "349: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" -> "353: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [
-  label="", ];
-  "353: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" -> "357: int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;" [
-  label="", ];
-  "357: int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;" -> "361: int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;" [
-  label="", ];
-  "68: int<<4>> map_flow_to_traffic_class_ret = 0;" -> "84: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
+  "97: int<<13>> if_precomp2377 = [15 : 3]forward_flow_udp_header_1-0;" -> "642: match (if_precomp,if_precomp2377) ...
 " [
   label="", ];
-  "128: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" -> "134: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" [
+  "107: merged_var_traffic_class_traffic_cls_2392 = [7 : 0]forward_flow_udp_header_0;" -> "113: int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;" [
   label="", ];
-  "134: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" -> "141: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" [
+  "113: int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;" -> "132: Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,set_2383,path_id,0,0);" [
   label="", ];
-  "141: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" -> "148: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" [
+  "132: Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,set_2383,path_id,0,0);" -> "681: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   label="", ];
-  "148: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" -> "155: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" [
-  label="", ];
-  "155: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" -> "162: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" [
-  label="", ];
-  "162: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" -> "201: match (path_id) ...
+  "140: int<<8>> map_flow_to_traffic_class_ret = 32;" -> "156: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
 " [
   label="", ];
-  "121: int<<3>> path_id = RouteManager_get_path_id_ret;" -> "128: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" [
+  "155: map_flow_to_traffic_class_ret = 15;" -> "160: merged_var_traffic_class_traffic_cls_2392 = map_flow_to_traffic_class_ret;" [
   label="", ];
-  "576: int<<3>> path_id2050 = (int<<3>>)route_update_path_id;" -> "595: Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,set_2365,path_id2050,0,0);" [
-  label="", ];
-  "264: int<<24>> seq_number = SequenceNumberManager_increment_ret;" -> "269: int<<32>> time_now = Sys.time();" [
-  label="", ];
-  "283: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" -> "289: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [
-  label="", ];
-  "289: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" -> "296: int<<32>> tango_metrics_hdr_2 = 0;" [
-  label="", ];
-  "296: int<<32>> tango_metrics_hdr_2 = 0;" -> "301: int<<24>> tango_metrics_hdr_3 = seq_number;" [
-  label="", ];
-  "301: int<<24>> tango_metrics_hdr_3 = seq_number;" -> "308: int<<8>> tango_metrics_hdr_4 = 0;" [
-  label="", ];
-  "308: int<<8>> tango_metrics_hdr_4 = 0;" -> "311: " [label="", ];
-  "206: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" -> "210: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" [
-  label="", ];
-  "210: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" -> "215: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" [
-  label="", ];
-  "215: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" -> "220: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" [
-  label="", ];
-  "220: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" -> "225: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" [
-  label="", ];
-  "225: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" -> "230: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" [
-  label="", ];
-  "230: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" -> "238: int<<24>> SequenceNumberManager_increment_ret = 32;" [
-  label="", ];
-  "269: int<<32>> time_now = Sys.time();" -> "275: int<<12>> timestamp = [31 : 20]time_now;" [
-  label="", ];
-  "275: int<<12>> timestamp = [31 : 20]time_now;" -> "277: " [label="", ];
-  "116: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_cls_traffic_class_2366,get_2357,0,0,0);" -> "121: int<<3>> path_id = RouteManager_get_path_id_ret;" [
-  label="", ];
-  "259: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2361,0,1,0);" -> "264: int<<24>> seq_number = SequenceNumberManager_increment_ret;" [
-  label="", ];
-  "83: map_flow_to_traffic_class_ret = 15;" -> "88: merged_var_traffic_cls_traffic_class_2366 = map_flow_to_traffic_class_ret;" [
-  label="", ];
-  "170: map_path_to_tunnel_header_ret_0 = 0;" -> "175: map_path_to_tunnel_header_ret_1 = 0;" [
-  label="", ];
-  "175: map_path_to_tunnel_header_ret_1 = 0;" -> "181: map_path_to_tunnel_header_ret_2 = 0;" [
-  label="", ];
-  "181: map_path_to_tunnel_header_ret_2 = 0;" -> "187: map_path_to_tunnel_header_ret_3 = 0;" [
-  label="", ];
-  "187: map_path_to_tunnel_header_ret_3 = 0;" -> "193: map_path_to_tunnel_header_ret_4 = 0;" [
-  label="", ];
-  "193: map_path_to_tunnel_header_ret_4 = 0;" -> "199: map_path_to_tunnel_header_ret_5 = 0;" [
-  label="", ];
-  "199: map_path_to_tunnel_header_ret_5 = 0;" -> "206: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" [
-  label="", ];
-  "88: merged_var_traffic_cls_traffic_class_2366 = map_flow_to_traffic_class_ret;" -> "95: int<<3>> RouteManager_get_path_id_ret = 0;" [
-  label="", ];
-  "570: merged_var_traffic_cls_traffic_class_2366 = (int<<4>>)route_update_traffic_cls;" -> "576: int<<3>> path_id2050 = (int<<3>>)route_update_path_id;" [
-  label="", ];
-  "520: generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27));" -> "564: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
-  label="", ];
-  "624: match (event_id) ...
-" -> "62: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
-  label="HIT{event_id~0==2;}", ];
-  "624: match (event_id) ...
-" -> "68: int<<4>> map_flow_to_traffic_class_ret = 0;" [
-  label="MISS{event_id~0==2;}
-HIT{event_id~0==1;}", ];
-  "624: match (event_id) ...
-" -> "570: merged_var_traffic_cls_traffic_class_2366 = (int<<4>>)route_update_traffic_cls;" [
-  label="MISS{event_id~0==2;
-event_id~0==1;}
-HIT{event_id~0==3;}", ];
-  "84: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
-" -> "83: map_flow_to_traffic_class_ret = 15;" [
+  "156: match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) ...
+" -> "155: map_flow_to_traffic_class_ret = 15;" [
   label="HIT{forward_flow_ip_header_8~0==_,forward_flow_udp_header_0~0==_,forward_flow_ip_header_9~0==_,forward_flow_udp_header_1~0==_,forward_flow_ip_header_6~0==_;}",
   ];
-  "201: match (path_id) ...
-" -> "170: map_path_to_tunnel_header_ret_0 = 0;" [
-  label="HIT{path_id~2015==_;}", ];
+  "160: merged_var_traffic_class_traffic_cls_2392 = map_flow_to_traffic_class_ret;" -> "167: int<<8>> RouteManager_get_path_id_ret = 32;" [
+  label="", ];
+  "167: int<<8>> RouteManager_get_path_id_ret = 32;" -> "188: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,get_2387,0,0,0);" [
+  label="", ];
+  "188: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,get_2387,0,0,0);" -> "193: int<<8>> path_id2044 = RouteManager_get_path_id_ret;" [
+  label="", ];
+  "193: int<<8>> path_id2044 = RouteManager_get_path_id_ret;" -> "200: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" [
+  label="", ];
+  "200: int<<32>> map_path_to_tunnel_header_ret_0 = 32;" -> "206: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" [
+  label="", ];
+  "206: int<<16>> map_path_to_tunnel_header_ret_1 = 32;" -> "213: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" [
+  label="", ];
+  "213: int<<8>> map_path_to_tunnel_header_ret_2 = 32;" -> "220: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" [
+  label="", ];
+  "220: int<<8>> map_path_to_tunnel_header_ret_3 = 32;" -> "227: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" [
+  label="", ];
+  "227: int<<128>> map_path_to_tunnel_header_ret_4 = 32;" -> "234: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" [
+  label="", ];
+  "234: int<<128>> map_path_to_tunnel_header_ret_5 = 32;" -> "273: match (path_id2044) ...
+" [
+  label="", ];
+  "242: map_path_to_tunnel_header_ret_0 = 0;" -> "247: map_path_to_tunnel_header_ret_1 = 0;" [
+  label="", ];
+  "247: map_path_to_tunnel_header_ret_1 = 0;" -> "253: map_path_to_tunnel_header_ret_2 = 0;" [
+  label="", ];
+  "253: map_path_to_tunnel_header_ret_2 = 0;" -> "259: map_path_to_tunnel_header_ret_3 = 0;" [
+  label="", ];
+  "259: map_path_to_tunnel_header_ret_3 = 0;" -> "265: map_path_to_tunnel_header_ret_4 = 0;" [
+  label="", ];
+  "265: map_path_to_tunnel_header_ret_4 = 0;" -> "271: map_path_to_tunnel_header_ret_5 = 0;" [
+  label="", ];
+  "271: map_path_to_tunnel_header_ret_5 = 0;" -> "278: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" [
+  label="", ];
+  "273: match (path_id2044) ...
+" -> "242: map_path_to_tunnel_header_ret_0 = 0;" [
+  label="HIT{path_id2044~2044==_;}", ];
+  "278: int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;" -> "282: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" [
+  label="", ];
+  "282: int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;" -> "287: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" [
+  label="", ];
+  "287: int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;" -> "292: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" [
+  label="", ];
+  "292: int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;" -> "297: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" [
+  label="", ];
+  "297: int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;" -> "302: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" [
+  label="", ];
+  "302: int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;" -> "310: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "310: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "331: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id2044,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2391,0,1,0);" [
+  label="", ];
+  "331: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id2044,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2391,0,1,0);" -> "336: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  label="", ];
+  "336: int<<16>> seq_number = SequenceNumberManager_increment_ret;" -> "341: int<<32>> time_now = Sys.time();" [
+  label="", ];
+  "341: int<<32>> time_now = Sys.time();" -> "347: int<<12>> timestamp = [31 : 20]time_now;" [
+  label="", ];
+  "347: int<<12>> timestamp = [31 : 20]time_now;" -> "349: " [label="", ];
+  "349: " -> "355: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id2044;" [
+  label="", ];
+  "355: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id2044;" -> "361: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [
+  label="", ];
+  "361: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" -> "368: int<<32>> tango_metrics_hdr_2 = 0;" [
+  label="", ];
+  "368: int<<32>> tango_metrics_hdr_2 = 0;" -> "373: int<<16>> tango_metrics_hdr_3 = seq_number;" [
+  label="", ];
+  "373: int<<16>> tango_metrics_hdr_3 = seq_number;" -> "380: int<<8>> tango_metrics_hdr_4 = 0;" [
+  label="", ];
+  "380: int<<8>> tango_metrics_hdr_4 = 0;" -> "383: " [label="", ];
+  "383: " -> "384: " [label="", ];
+  "384: " -> "388: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  label="", ];
+  "388: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" -> "392: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
+  label="", ];
+  "392: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" -> "396: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" [
+  label="", ];
+  "396: int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;" -> "400: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [
+  label="", ];
+  "400: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" -> "410: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+18;" [
+  label="", ];
+  "410: int<<16>> forward_tango_pkt_arg_4 = forward_flow_ip_header_2+18;" -> "414: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [
+  label="", ];
+  "414: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" -> "418: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [
+  label="", ];
+  "418: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" -> "422: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [
+  label="", ];
+  "422: int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" -> "426: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [
+  label="", ];
+  "426: int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" -> "432: int<<16>> forward_tango_pkt_arg_9 = 8080;" [
+  label="", ];
+  "432: int<<16>> forward_tango_pkt_arg_9 = 8080;" -> "438: int<<16>> forward_tango_pkt_arg_10 = 8080;" [
+  label="", ];
+  "438: int<<16>> forward_tango_pkt_arg_10 = 8080;" -> "448: int<<16>> forward_tango_pkt_arg_11 = forward_flow_ip_header_2+18;" [
+  label="", ];
+  "448: int<<16>> forward_tango_pkt_arg_11 = forward_flow_ip_header_2+18;" -> "454: int<<16>> forward_tango_pkt_arg_12 = 0;" [
+  label="", ];
+  "454: int<<16>> forward_tango_pkt_arg_12 = 0;" -> "458: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_0;" [
+  label="", ];
+  "458: int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_0;" -> "462: int<<16>> forward_tango_pkt_arg_14 = tango_metrics_hdr_1;" [
+  label="", ];
+  "462: int<<16>> forward_tango_pkt_arg_14 = tango_metrics_hdr_1;" -> "466: int<<32>> forward_tango_pkt_arg_15 = tango_metrics_hdr_2;" [
+  label="", ];
+  "466: int<<32>> forward_tango_pkt_arg_15 = tango_metrics_hdr_2;" -> "470: int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_3;" [
+  label="", ];
+  "470: int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_3;" -> "474: int<<8>> forward_tango_pkt_arg_17 = tango_metrics_hdr_4;" [
+  label="", ];
+  "474: int<<8>> forward_tango_pkt_arg_17 = tango_metrics_hdr_4;" -> "478: int<<8>> forward_tango_pkt_arg_18 = forward_flow_ip_header_0;" [
+  label="", ];
+  "478: int<<8>> forward_tango_pkt_arg_18 = forward_flow_ip_header_0;" -> "482: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_1;" [
+  label="", ];
+  "482: int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_1;" -> "486: int<<16>> forward_tango_pkt_arg_20 = forward_flow_ip_header_2;" [
+  label="", ];
+  "486: int<<16>> forward_tango_pkt_arg_20 = forward_flow_ip_header_2;" -> "490: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_3;" [
+  label="", ];
+  "490: int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_3;" -> "494: int<<16>> forward_tango_pkt_arg_22 = forward_flow_ip_header_4;" [
+  label="", ];
+  "494: int<<16>> forward_tango_pkt_arg_22 = forward_flow_ip_header_4;" -> "498: int<<8>> forward_tango_pkt_arg_23 = forward_flow_ip_header_5;" [
+  label="", ];
+  "498: int<<8>> forward_tango_pkt_arg_23 = forward_flow_ip_header_5;" -> "502: int<<8>> forward_tango_pkt_arg_24 = forward_flow_ip_header_6;" [
+  label="", ];
+  "502: int<<8>> forward_tango_pkt_arg_24 = forward_flow_ip_header_6;" -> "506: int<<16>> forward_tango_pkt_arg_25 = forward_flow_ip_header_7;" [
+  label="", ];
+  "506: int<<16>> forward_tango_pkt_arg_25 = forward_flow_ip_header_7;" -> "510: int<<32>> forward_tango_pkt_arg_26 = forward_flow_ip_header_8;" [
+  label="", ];
+  "510: int<<32>> forward_tango_pkt_arg_26 = forward_flow_ip_header_8;" -> "514: int<<32>> forward_tango_pkt_arg_27 = forward_flow_ip_header_9;" [
+  label="", ];
+  "514: int<<32>> forward_tango_pkt_arg_27 = forward_flow_ip_header_9;" -> "518: int<<16>> forward_tango_pkt_arg_28 = forward_flow_udp_header_0;" [
+  label="", ];
+  "518: int<<16>> forward_tango_pkt_arg_28 = forward_flow_udp_header_0;" -> "522: int<<16>> forward_tango_pkt_arg_29 = forward_flow_udp_header_1;" [
+  label="", ];
+  "522: int<<16>> forward_tango_pkt_arg_29 = forward_flow_udp_header_1;" -> "526: int<<16>> forward_tango_pkt_arg_30 = forward_flow_udp_header_2;" [
+  label="", ];
+  "526: int<<16>> forward_tango_pkt_arg_30 = forward_flow_udp_header_2;" -> "530: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;" [
+  label="", ];
+  "530: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;" -> "634: generate_port (2, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));" [
+  label="", ];
+  "634: generate_port (2, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));" -> "681: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  label="", ];
+  "642: match (if_precomp,if_precomp2377) ...
+" -> "107: merged_var_traffic_class_traffic_cls_2392 = [7 : 0]forward_flow_udp_header_0;" [
+  label="HIT{if_precomp~2376==0,if_precomp2377~2377==0;}", ];
+  "642: match (if_precomp,if_precomp2377) ...
+" -> "140: int<<8>> map_flow_to_traffic_class_ret = 32;" [
+  label="MISS{if_precomp~2376==0,if_precomp2377~2377==0;}
+HIT{if_precomp~2376==_,if_precomp2377~2377==_;}",
+  ];
+  "683: match (event_id) ...
+" -> "70: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
+  label="HIT{event_id~0==2;}", ];
+  "683: match (event_id) ...
+" -> "71: " [label="MISS{event_id~0==2;}
+HIT{event_id~0==1;}",
+                                          ];
   
   }
