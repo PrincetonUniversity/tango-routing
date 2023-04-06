@@ -11,7 +11,7 @@ handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_e
 
 }
 // shared locals:
-int<<8>> merged_var_traffic_class_traffic_cls_2392;
+int<<8>> merged_var_traffic_class_traffic_cls_2377;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -21,30 +21,29 @@ Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,
 }
 | 1 -> {
 int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;
-int<<13>> if_precomp2377 = [15 : 3]forward_flow_udp_header_1-0;
-match (if_precomp,if_precomp2377) with 
+int<<13>> if_precomp2362 = [15 : 3]forward_flow_udp_header_1-0;
+match (if_precomp,if_precomp2362) with 
 | 0,0 -> {
-merged_var_traffic_class_traffic_cls_2392 = [7 : 0]forward_flow_udp_header_0;
+merged_var_traffic_class_traffic_cls_2377 = [7 : 0]forward_flow_udp_header_0;
 int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;
-Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,set_2383,path_id,0,0);
+Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2377,set_2368,path_id,0,0);
 }
 | _,_ -> {
-int<<8>> map_flow_to_traffic_class_ret = 32;
+merged_var_traffic_class_traffic_cls_2377 = 0;
 match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
-map_flow_to_traffic_class_ret = 15;
+merged_var_traffic_class_traffic_cls_2377 = 15;
 }
-merged_var_traffic_class_traffic_cls_2392 = map_flow_to_traffic_class_ret;
 int<<8>> RouteManager_get_path_id_ret = 32;
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2392,get_2387,0,0,0);
-int<<8>> path_id2044 = RouteManager_get_path_id_ret;
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,merged_var_traffic_class_traffic_cls_2377,get_2372,0,0,0);
+int<<8>> path_id2030 = RouteManager_get_path_id_ret;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
 int<<128>> map_path_to_tunnel_header_ret_4 = 32;
 int<<128>> map_path_to_tunnel_header_ret_5 = 32;
-match path_id2044 with 
+match path_id2030 with 
 | _ -> {
 map_path_to_tunnel_header_ret_0 = 0;
 map_path_to_tunnel_header_ret_1 = 0;
@@ -60,11 +59,11 @@ int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
 int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
 int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
 int<<16>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id2044,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2391,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id2030,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2376,0,1,0);
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id2044;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id2030;
 int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
 int<<32>> tango_metrics_hdr_2 = 0;
 int<<16>> tango_metrics_hdr_3 = seq_number;
@@ -105,29 +104,29 @@ generate_port (2, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_p
 }
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2391(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2388)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2376(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2373)
  {{
-b1=(mbool_2389,true);
-b2=(mbool_2390,true)
-cell1=(mbool_2389 -> curr+inc_set_2388), None
-cell2=(mbool_2390 -> curr), None
+b1=(mbool_2374,true);
+b2=(mbool_2375,true)
+cell1=(mbool_2374 -> curr+inc_set_2373), None
+cell2=(mbool_2375 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_2387(int<<8>> mem_val_2384,int<<8>> unused_2386,int<<8>> unused_2385)
+memop get_2372(int<<8>> mem_val_2369,int<<8>> unused_2371,int<<8>> unused_2370)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_2384)
+ret=(true -> mem_val_2369)
 }}
-memop set_2383(int<<8>> mem_val_2382,int<<8>> new_val_2380,int<<8>> unused_2381)
+memop set_2368(int<<8>> mem_val_2367,int<<8>> new_val_2365,int<<8>> unused_2366)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_2380), None
+cell1=(true -> new_val_2365), None
 cell2=None, None
 
 ret=None

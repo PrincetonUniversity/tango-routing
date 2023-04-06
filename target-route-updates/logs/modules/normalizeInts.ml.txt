@@ -23,12 +23,10 @@ forward_flow_ip_header_2+18
 [transform_precompute_exps.visit_exp] atomic exp: [7 : 0]forward_flow_udp_header_0
 [transform_precompute_exps.visit_exp] exp: [7 : 0]forward_flow_udp_header_1
 [transform_precompute_exps.visit_exp] atomic exp: [7 : 0]forward_flow_udp_header_1
-[transform_precompute_exps.visit_exp] exp: 32
-[transform_precompute_exps.visit_exp] atomic exp: 32
+[transform_precompute_exps.visit_exp] exp: 0
+[transform_precompute_exps.visit_exp] atomic exp: 0
 [transform_precompute_exps.visit_exp] exp: 15
 [transform_precompute_exps.visit_exp] atomic exp: 15
-[transform_precompute_exps.visit_exp] exp: map_flow_to_traffic_class_ret
-[transform_precompute_exps.visit_exp] atomic exp: map_flow_to_traffic_class_ret
 [transform_precompute_exps.visit_exp] exp: 32
 [transform_precompute_exps.visit_exp] atomic exp: 32
 [transform_precompute_exps.visit_exp] exp: Array.get(route_manager_0,traffic_class)
@@ -190,12 +188,11 @@ int<<8>> traffic_cls = [7 : 0]forward_flow_udp_header_0;
 int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;
 Array.set(route_manager_0,traffic_cls,path_id);
 } else {
-int<<8>> map_flow_to_traffic_class_ret = 32;
+int<<8>> traffic_class = 0;
 match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
-map_flow_to_traffic_class_ret = 15;
+traffic_class = 15;
 }
-int<<8>> traffic_class = map_flow_to_traffic_class_ret;
 int<<8>> RouteManager_get_path_id_ret = 32;
 RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
 int<<8>> path_id = RouteManager_get_path_id_ret;
@@ -300,12 +297,11 @@ int<<8>> traffic_cls = [7 : 0]forward_flow_udp_header_0;
 int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;
 Array.set(route_manager_0,traffic_cls,path_id);
 } else {
-int<<8>> map_flow_to_traffic_class_ret = 32;
+int<<8>> traffic_class = 0;
 match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
-map_flow_to_traffic_class_ret = 15;
+traffic_class = 15;
 }
-int<<8>> traffic_class = map_flow_to_traffic_class_ret;
 int<<8>> RouteManager_get_path_id_ret = 32;
 RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
 int<<8>> path_id = RouteManager_get_path_id_ret;
@@ -410,12 +406,11 @@ int<<8>> traffic_cls = [7 : 0]forward_flow_udp_header_0;
 int<<8>> path_id = [7 : 0]forward_flow_udp_header_1;
 Array.set(route_manager_0,traffic_cls,path_id);
 } else {
-int<<8>> map_flow_to_traffic_class_ret = 32;
+int<<8>> traffic_class = 0;
 match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
-map_flow_to_traffic_class_ret = 15;
+traffic_class = 15;
 }
-int<<8>> traffic_class = map_flow_to_traffic_class_ret;
 int<<8>> RouteManager_get_path_id_ret = 32;
 RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
 int<<8>> path_id = RouteManager_get_path_id_ret;

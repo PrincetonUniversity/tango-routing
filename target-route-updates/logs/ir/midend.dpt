@@ -27,13 +27,12 @@ int<<8>> path_id = [7 : 0]udp_header_1;
 Array.set(route_manager_0,traffic_cls,path_id);
 false;
 } else {
-int<<8>> map_flow_to_traffic_class_ret = 32;
+int<<8>> traffic_class = 0;
 match (ip_header_8,udp_header_0,ip_header_9,udp_header_1,ip_header_6) with 
 | _,_,_,_,_ -> {
 printf "ERROR: traffic class map has not been configured!" ;
-map_flow_to_traffic_class_ret = 15;
+traffic_class = 15;
 }
-int<<8>> traffic_class = map_flow_to_traffic_class_ret;
 int<<8>> RouteManager_get_path_id_ret = 32;
 RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
 int<<8>> path_id = RouteManager_get_path_id_ret;
