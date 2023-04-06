@@ -1,11 +1,11 @@
 version:
   version: 1.0.1
-  run_id: "5bbdea2dde7a23c0"
+  run_id: "8ca31017bb85050c"
   target: Tofino
 phv ingress:
   ig_intr_md.ingress_mac_tstamp.0-15: TW10(0..15)
-  ig_intr_md.ingress_mac_tstamp.16-23: H76(0..7)
-  ig_intr_md.ingress_mac_tstamp.24-31: W52(0..7)
+  ig_intr_md.ingress_mac_tstamp.16-23: H75(0..7)
+  ig_intr_md.ingress_mac_tstamp.24-31: W45(0..7)
   ig_intr_md.ingress_mac_tstamp.32-39: B3
   ig_intr_md.ingress_mac_tstamp.40-47: B6
   hdr.lucid_eth.dst_addr.0-31: TW9
@@ -15,181 +15,173 @@ phv ingress:
   hdr.lucid_eth.etype: TH12
   hdr.wire_ev.event_id: B4
   hdr.bridge_ev.port_event_id: H39(8..15)
-  hdr.bridge_ev.flag_pad_2393: H39(2..7)
+  hdr.bridge_ev.flag_pad_2022: H39(2..7)
   hdr.bridge_ev.incoming_tango_traffic: H39(1)
   hdr.bridge_ev.forward_flow: H39(0)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-31: W42
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.32-47: H69
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31: W39
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47: H67
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2: H65
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15: H51
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31: H52
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1: H9
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2: H0(8..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3: H0(0..7)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15: H32
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31: H33
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47: H34
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63: H35
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79: H36
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95: H48
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111: H49
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127: H50
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-31: W49
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-63: W50
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.64-95: W51
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.96-127: W60
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0: W43(16..31)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1: W43(0..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2: H10
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3: H6
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-31: W55
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.32-47: H67
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31: W51
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47: H65
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2: H53
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15: H50
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31: H51
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1: W3(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2: W3(8..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3: W3(0..7)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15: H13
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31: H32
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47: H33
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63: H34
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79: H35
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95: H36
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111: H48
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127: H49
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-15: H1
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.16-31: H4
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47: H7
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63: H10
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.0-31: W57
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.32-63: W58
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0: W14(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1: W14(0..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2: W1(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3: W1(0..15)
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0: B1
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1.0-7: B8
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1.8-15: B9
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2: W48
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3: H70
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2: W43
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3: H68
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4: B5
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0: H4(8..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1: H4(0..7)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2: H11
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3: W13(16..31)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4: W13(0..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5: W7(24..31)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6: W7(16..23)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7: W7(0..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8: W35
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9: W33
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0: W1(16..31)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1: W1(0..15)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2: W10(16..31)
-  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3: W10(0..15)
-  hdr.forward_flow.forward_flow_eth_header_0.0-31: W41
-  hdr.forward_flow.forward_flow_eth_header_0.32-47: H68
-  hdr.forward_flow.forward_flow_eth_header_1.0-31: W38
-  hdr.forward_flow.forward_flow_eth_header_1.32-47: H66
-  hdr.forward_flow.forward_flow_eth_header_2: H64
-  hdr.forward_flow.forward_flow_ip_header_0: H3(8..15)
-  hdr.forward_flow.forward_flow_ip_header_1: H3(0..7)
-  hdr.forward_flow.forward_flow_ip_header_2: H8
-  hdr.forward_flow.forward_flow_ip_header_3: W12(16..31)
-  hdr.forward_flow.forward_flow_ip_header_4: W12(0..15)
-  hdr.forward_flow.forward_flow_ip_header_5: W6(24..31)
-  hdr.forward_flow.forward_flow_ip_header_6: W6(16..23)
-  hdr.forward_flow.forward_flow_ip_header_7: W6(0..15)
-  hdr.forward_flow.forward_flow_ip_header_8: W34
-  hdr.forward_flow.forward_flow_ip_header_9: W32
-  hdr.forward_flow.forward_flow_udp_header_0: W0(16..31)
-  hdr.forward_flow.forward_flow_udp_header_1: W0(0..15)
-  hdr.forward_flow.forward_flow_udp_header_2: W9(16..31)
-  hdr.forward_flow.forward_flow_udp_header_3: W9(0..15)
-  if_precomp_0.0-3: W4(0..3)
-  if_precomp_0.4-11: W5(0..7)
-  if_precomp2362_0: W3(0..12)
-  path_id_0: W2(0..7)
-  merged_var_traffic_class_traffic_cls.0-3: W3(13..16)
-  merged_var_traffic_class_traffic_cls.4-7: W4(4..7)
-  map_path_to_tunnel_header_ret_8.0-31: W55
-  map_path_to_tunnel_header_ret_8.32-63: W57
-  map_path_to_tunnel_header_ret_8.64-95: W59
-  map_path_to_tunnel_header_ret_8.96-127: W62
-  map_path_to_tunnel_header_ret_7.0-15: H41
-  map_path_to_tunnel_header_ret_7.16-31: H43
-  map_path_to_tunnel_header_ret_7.32-47: H45
-  map_path_to_tunnel_header_ret_7.48-63: H47
-  map_path_to_tunnel_header_ret_7.64-79: H38
-  map_path_to_tunnel_header_ret_7.80-95: H57
-  map_path_to_tunnel_header_ret_7.96-111: H59
-  map_path_to_tunnel_header_ret_7.112-127: H61
-  map_path_to_tunnel_header_ret_6: H1(0..7)
-  map_path_to_tunnel_header_ret_5: H2(8..15)
-  map_path_to_tunnel_header_ret.0-15: H63
-  map_path_to_tunnel_header_ret.16-31: H54
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0: W6(24..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1: W6(16..23)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2: W6(0..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3: W39(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4: W39(0..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5: W33(24..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6: W33(16..23)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7: W33(0..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8: W49
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9: W42
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0: W11(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1: W11(0..15)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2: W35(16..31)
+  hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3: W35(0..15)
+  hdr.forward_flow.forward_flow_eth_header_0.0-31: W54
+  hdr.forward_flow.forward_flow_eth_header_0.32-47: H66
+  hdr.forward_flow.forward_flow_eth_header_1.0-31: W50
+  hdr.forward_flow.forward_flow_eth_header_1.32-47: H64
+  hdr.forward_flow.forward_flow_eth_header_2: H52
+  hdr.forward_flow.forward_flow_ip_header_0: W0(24..31)
+  hdr.forward_flow.forward_flow_ip_header_1: W0(16..23)
+  hdr.forward_flow.forward_flow_ip_header_2: W0(0..15)
+  hdr.forward_flow.forward_flow_ip_header_3: W38(16..31)
+  hdr.forward_flow.forward_flow_ip_header_4: W38(0..15)
+  hdr.forward_flow.forward_flow_ip_header_5: W32(24..31)
+  hdr.forward_flow.forward_flow_ip_header_6: W32(16..23)
+  hdr.forward_flow.forward_flow_ip_header_7: W32(0..15)
+  hdr.forward_flow.forward_flow_ip_header_8: W48
+  hdr.forward_flow.forward_flow_ip_header_9: W41
+  hdr.forward_flow.forward_flow_udp_header_0: W10(16..31)
+  hdr.forward_flow.forward_flow_udp_header_1: W10(0..15)
+  hdr.forward_flow.forward_flow_udp_header_2: W34(16..31)
+  hdr.forward_flow.forward_flow_udp_header_3: W34(0..15)
+  if_precomp_0: W13(0..11)
+  if_precomp1991_0.0-4: W2(16..20)
+  if_precomp1991_0.5-12: W5(16..23)
+  path_id_0.0-2: W2(0..2)
+  path_id_0.3-7: W7(0..4)
+  merged_var_traffic_class_traffic_cls.0-3: W8(0..3)
+  merged_var_traffic_class_traffic_cls.4-7: W12(0..3)
+  tango_tunnel_hdr_12.0-31: W61
+  tango_tunnel_hdr_12.32-63: W63
+  tango_tunnel_hdr_11.0-15: H3
+  tango_tunnel_hdr_11.16-31: H6
+  tango_tunnel_hdr_11.32-47: H9
+  tango_tunnel_hdr_11.48-63: H12
+  tango_tunnel_hdr_10.0-15: H15
+  tango_tunnel_hdr_10.16-31: H41
+  tango_tunnel_hdr_10.32-47: H43
+  tango_tunnel_hdr_10.48-63: H45
+  tango_tunnel_hdr_10.64-79: H47
+  tango_tunnel_hdr_10.80-95: H38
+  tango_tunnel_hdr_10.96-111: H57
+  tango_tunnel_hdr_10.112-127: H59
+  tango_tunnel_hdr_9: W5(0..7)
+  tango_tunnel_hdr_8: W5(8..15)
+  tango_tunnel_hdr_7: W9(0..15)
+  tango_tunnel_hdr.0-15: H61
+  tango_tunnel_hdr.16-31: H63
   RouteManager_get_path_id_ret_0: B0
-  path_id2030_0: B2
-  forward_tango_pkt_arg_52: W11(0..15)
-  forward_tango_pkt_arg_51: W4(4..19)
-  forward_tango_pkt_arg_50: W2(0..15)
-  forward_tango_pkt_arg_49: W2(16..31)
-  forward_tango_pkt_arg_48: W36
-  forward_tango_pkt_arg_47: W37
-  forward_tango_pkt_arg_46: W8(0..15)
-  forward_tango_pkt_arg_45: W8(16..23)
-  forward_tango_pkt_arg_44: W8(24..31)
-  forward_tango_pkt_arg_43: W14(0..15)
-  forward_tango_pkt_arg_42: W3(13..28)
-  forward_tango_pkt_arg_41: H12
-  forward_tango_pkt_arg_40: H5(0..7)
-  forward_tango_pkt_arg_39: H5(8..15)
-  forward_tango_pkt_arg_38: H7
-  forward_tango_pkt_arg_37: H13
-  forward_tango_pkt_arg_36: W45(0..15)
-  forward_tango_pkt_arg_35: W45(16..31)
-  forward_tango_pkt_arg_34: H14
-  forward_tango_pkt_arg_33: H72
-  forward_tango_pkt_arg_32.0-31: W40
-  forward_tango_pkt_arg_32.32-47: H73
-  forward_tango_pkt_arg.0-31: W44
-  forward_tango_pkt_arg.32-47: H74
+  path_id1675_0: B2
+  forward_tango_pkt_arg_52: W37(0..15)
+  forward_tango_pkt_arg_51: W37(16..31)
+  forward_tango_pkt_arg_50: W12(0..15)
+  forward_tango_pkt_arg_49: W12(16..31)
+  forward_tango_pkt_arg_48: W44
+  forward_tango_pkt_arg_47: W52
+  forward_tango_pkt_arg_46: W36(0..15)
+  forward_tango_pkt_arg_45: W36(16..23)
+  forward_tango_pkt_arg_44: W36(24..31)
+  forward_tango_pkt_arg_43: W40(0..15)
+  forward_tango_pkt_arg_42: W40(16..31)
+  forward_tango_pkt_arg_41: W7(0..15)
+  forward_tango_pkt_arg_40: W7(16..23)
+  forward_tango_pkt_arg_39: W7(24..31)
+  forward_tango_pkt_arg_38: W2(0..15)
+  forward_tango_pkt_arg_37: W8(0..15)
+  forward_tango_pkt_arg_36: W15(0..15)
+  forward_tango_pkt_arg_35: W13(12..27)
+  forward_tango_pkt_arg_34: H54
+  forward_tango_pkt_arg_33.0-31: W53
+  forward_tango_pkt_arg_33.32-47: H72
+  forward_tango_pkt_arg.0-31: W56
+  forward_tango_pkt_arg.32-47: H73
   tango_metrics_hdr_6: B7
-  tango_metrics_hdr_5: W53
+  tango_metrics_hdr_5: W46
   tango_metrics_hdr: B0
-  time_now_0.0-7: H76(8..15)
-  time_now_0.8-15: W63(0..7)
+  time_now_0.0-7: H75(8..15)
+  time_now_0.8-15: W47(0..7)
   time_now_0.16-23: B10
   time_now_0.24-27: B11(4..7)
   time_now_0.28-31: B12(4..7)
-  SequenceNumberManager_increment_ret_0: H75
-  forward_tango_pkt_arg_55: B6
-  forward_tango_pkt_arg_54: W52
-  forward_tango_pkt_arg_53: B3
+  SequenceNumberManager_increment_ret_0: H74
+  forward_tango_pkt_arg_62: B6
+  forward_tango_pkt_arg_61: W45
+  forward_tango_pkt_arg_60: B3
   timestamp_0.0-3: B11(0..3)
   timestamp_0.4-7: B12(0..3)
   timestamp_0.8-11: B13(0..3)
-  tango_tunnel_hdr_8.0-31: W54
-  tango_tunnel_hdr_8.32-63: W56
-  tango_tunnel_hdr_8.64-95: W58
-  tango_tunnel_hdr_8.96-127: W61
-  tango_tunnel_hdr_7.0-15: H40
-  tango_tunnel_hdr_7.16-31: H42
-  tango_tunnel_hdr_7.32-47: H44
-  tango_tunnel_hdr_7.48-63: H46
-  tango_tunnel_hdr_7.64-79: H37
-  tango_tunnel_hdr_7.80-95: H56
-  tango_tunnel_hdr_7.96-111: H58
-  tango_tunnel_hdr_7.112-127: H60
-  tango_tunnel_hdr_6: H1(8..15)
-  tango_tunnel_hdr_5: H2(0..7)
-  tango_tunnel_hdr.0-15: H62
-  tango_tunnel_hdr.16-31: H53
+  forward_tango_pkt_arg_59.0-31: W60
+  forward_tango_pkt_arg_59.32-63: W62
+  forward_tango_pkt_arg_58.0-15: H2
+  forward_tango_pkt_arg_58.16-31: H5
+  forward_tango_pkt_arg_58.32-47: H8
+  forward_tango_pkt_arg_58.48-63: H11
+  forward_tango_pkt_arg_57.0-15: H14
+  forward_tango_pkt_arg_57.16-31: H40
+  forward_tango_pkt_arg_57.32-47: H42
+  forward_tango_pkt_arg_57.48-63: H44
+  forward_tango_pkt_arg_57.64-79: H46
+  forward_tango_pkt_arg_57.80-95: H37
+  forward_tango_pkt_arg_57.96-111: H56
+  forward_tango_pkt_arg_57.112-127: H58
+  forward_tango_pkt_arg_56: W4(0..7)
+  forward_tango_pkt_arg_55: W4(8..15)
+  forward_tango_pkt_arg_54: W4(16..31)
+  forward_tango_pkt_arg_53.0-15: H60
+  forward_tango_pkt_arg_53.16-31: H62
   tango_metrics_hdr_7.0-3: B10(0..3)
   tango_metrics_hdr_7.4-7: B0(4..7)
   tango_metrics_hdr_7.8-11: B7(4..7)
   tango_metrics_hdr_7.12-15: B11(4..7)
-  seq_number_0: H76
-  forward_tango_pkt_arg_60.0-31: W53
-  forward_tango_pkt_arg_60.32-63: W55
-  forward_tango_pkt_arg_60.64-95: W57
-  forward_tango_pkt_arg_60.96-127: W59
-  forward_tango_pkt_arg_59.0-15: H41
-  forward_tango_pkt_arg_59.16-31: H43
-  forward_tango_pkt_arg_59.32-47: H45
-  forward_tango_pkt_arg_59.48-63: H47
-  forward_tango_pkt_arg_59.64-79: H38
-  forward_tango_pkt_arg_59.80-95: H57
-  forward_tango_pkt_arg_59.96-111: H59
-  forward_tango_pkt_arg_59.112-127: H61
-  forward_tango_pkt_arg_58: H1(0..7)
-  forward_tango_pkt_arg_57: H2(8..15)
-  forward_tango_pkt_arg_56.0-15: H63
-  forward_tango_pkt_arg_56.16-31: H54
-  forward_tango_pkt_arg_61.0-3: B0(0..3)
-  forward_tango_pkt_arg_61.4-7: B11(0..3)
-  forward_tango_pkt_arg_61.8-11: B7(0..3)
-  forward_tango_pkt_arg_61.12-15: B12(0..3)
-  tango_metrics_hdr_8: H75
-  forward_tango_pkt_arg_62: H76
-  ig_intr_md_for_tm.ucast_egress_port: H15(0..8)
+  seq_number_0: H75
+  forward_tango_pkt_arg_63.0-3: B0(0..3)
+  forward_tango_pkt_arg_63.4-7: B11(0..3)
+  forward_tango_pkt_arg_63.8-11: B7(0..3)
+  forward_tango_pkt_arg_63.12-15: B12(0..3)
+  tango_metrics_hdr_8: H74
+  forward_tango_pkt_arg_64: H75
+  ig_intr_md_for_tm.ucast_egress_port: H0(0..8)
   hdr.lucid_eth.$valid: B14(0)
   hdr.wire_ev.$valid: B14(1)
   hdr.bridge_ev.$valid: B14(2)
@@ -209,7 +201,7 @@ phv egress:
   hdr.lucid_eth.etype: TH30
   hdr.wire_ev.event_id: B16
   hdr.bridge_ev.port_event_id: H17(8..15)
-  hdr.bridge_ev.flag_pad_2393: H17(2..7)
+  hdr.bridge_ev.flag_pad_2022: H17(2..7)
   hdr.bridge_ev.incoming_tango_traffic: H17(1)
   hdr.bridge_ev.forward_flow: H17(0)
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-15: TH26
@@ -232,13 +224,13 @@ phv egress:
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-63: TW16
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-95: TW17
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-127: TW18
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-31: TW15
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47: TH18
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63: TH19
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.64-79: TH20
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.80-95: TH21
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.96-111: TH22
-  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.112-127: TH23
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-15: TH20
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.16-31: TH21
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47: TH22
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63: TH23
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.0-31: TW15
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.32-47: TH18
+  hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.48-63: TH19
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0: TW6(16..31)
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1: TW6(0..15)
   hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2: TW5(16..31)
@@ -293,7 +285,7 @@ phv egress:
   hdr.forward_flow.$valid: B17(4)
 parser ingress:
   start: $entry_point
-  init_zero: [ W4, W5, W3, W2, W55, W57, W59, W62, H41, H43, H45, H47, H38, H57, H59, H61, H1, H2, H63, H54, B0, B2, W11, W36, W37, W8, W14, H12, H5, H7, H13, W45, H14, H72, W40, H73, W44, H74, B7, W53, W63, B10, B11, B12, H75, B13, W54, W56, W58, W61, H40, H42, H44, H46, H37, H56, H58, H60, H62, H53, B14 ]
+  init_zero: [ W13, W2, W5, W7, W8, W12, W61, W63, H3, H6, H9, H12, H15, H41, H43, H45, H47, H38, H57, H59, W9, H61, H63, B0, B2, W37, W44, W52, W36, W40, W15, H54, W53, H72, W56, H73, B7, W46, W47, B10, B11, B12, H74, B13, W60, W62, H2, H5, H8, H11, H14, H40, H42, H44, H46, H37, H56, H58, W4, H60, H62, B14 ]
   bitwise_or: [ B14 ]
   hdr_len_adj: 16
   states:
@@ -305,20 +297,20 @@ parser ingress:
     start:
       match: [ half ]
       0b*******011000100:
-        1..4: W52  # bit[32..39] -> W52 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[31:24].24-31
+        1..4: W45  # bit[32..39] -> W45 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[31:24].24-31
         2: B6  # ingress::ig_intr_md.ingress_mac_tstamp[47:40].40-47
         3: B3  # ingress::ig_intr_md.ingress_mac_tstamp[39:32].32-39
-        4..5: H76  # bit[40..47] -> H76 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[23:16].16-23
+        4..5: H75  # bit[40..47] -> H75 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[23:16].16-23
         4..7: TW10  # bit[48..63] -> TW10 bit[15..0]: ingress::ig_intr_md.ingress_mac_tstamp[15:0].0-15
         load: { half : 28..29 }
         shift: 16
         buf_req: 30
         next: parse_eth
       0x****:
-        1..4: W52  # bit[32..39] -> W52 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[31:24].24-31
+        1..4: W45  # bit[32..39] -> W45 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[31:24].24-31
         2: B6  # ingress::ig_intr_md.ingress_mac_tstamp[47:40].40-47
         3: B3  # ingress::ig_intr_md.ingress_mac_tstamp[39:32].32-39
-        4..5: H76  # bit[40..47] -> H76 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[23:16].16-23
+        4..5: H75  # bit[40..47] -> H75 bit[7..0]: ingress::ig_intr_md.ingress_mac_tstamp[23:16].16-23
         4..7: TW10  # bit[48..63] -> TW10 bit[15..0]: ingress::ig_intr_md.ingress_mac_tstamp[15:0].0-15
         shift: 16
         buf_req: 16
@@ -342,7 +334,7 @@ parser ingress:
         0: B4  # ingress::hdr.wire_ev.event_id
         1..2: H39
             # - bit[8..15] -> H39 bit[15..8]: ingress::hdr.bridge_ev.port_event_id
-            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2393
+            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2022
             # - bit[22] -> H39 bit[1]: ingress::hdr.bridge_ev.incoming_tango_traffic
             # - bit[23] -> H39 bit[0]: ingress::hdr.bridge_ev.forward_flow
         B14: 6
@@ -355,7 +347,7 @@ parser ingress:
         0: B4  # ingress::hdr.wire_ev.event_id
         1..2: H39
             # - bit[8..15] -> H39 bit[15..8]: ingress::hdr.bridge_ev.port_event_id
-            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2393
+            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2022
             # - bit[22] -> H39 bit[1]: ingress::hdr.bridge_ev.incoming_tango_traffic
             # - bit[23] -> H39 bit[0]: ingress::hdr.bridge_ev.forward_flow
         B14: 6
@@ -368,7 +360,7 @@ parser ingress:
         0: B4  # ingress::hdr.wire_ev.event_id
         1..2: H39
             # - bit[8..15] -> H39 bit[15..8]: ingress::hdr.bridge_ev.port_event_id
-            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2393
+            # - bit[16..21] -> H39 bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2022
             # - bit[22] -> H39 bit[1]: ingress::hdr.bridge_ev.incoming_tango_traffic
             # - bit[23] -> H39 bit[0]: ingress::hdr.bridge_ev.forward_flow
         B14: 6
@@ -379,242 +371,263 @@ parser ingress:
         next: parse_forward_flow
     parse_all_events:
       *:
-        0..1: H69  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[47:32].32-47
-        2..5: W42  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[31:0].0-31
-        6..7: H67  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[47:32].32-47
-        8..11: W39  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[31:0].0-31
-        12..13: H65  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2
-        14..15: H52  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[31:16].16-31
+        0..1: H67  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[47:32].32-47
+        2..5: W55  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[31:0].0-31
+        6..7: H65  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[47:32].32-47
+        8..11: W51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[31:0].0-31
+        12..13: H53  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2
+        14..15: H51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[31:16].16-31
+        18..21: W3
+            # - bit[144..159] -> W3 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1
+            # - bit[160..167] -> W3 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2
+            # - bit[168..175] -> W3 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3
         B14: 24
             # - value 1 -> B14 bit[3]: ingress::hdr.incoming_tango_traffic.$valid
             # - value 1 -> B14 bit[4]: ingress::hdr.forward_flow.$valid
         shift: 16
-        buf_req: 16
+        buf_req: 22
         next: parse_all_events.$split_0
     parse_all_events.$split_0:
       *:
-        0..1: H51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[15:0].0-15
-        2..3: H9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1
-        4..5: H0
-            # - bit[32..39] -> H0 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2
-            # - bit[40..47] -> H0 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3
-        6..7: H50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[127:112].112-127
-        22..25: W60  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[127:96].96-127
-        26..29: W51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[95:64].64-95
-        shift: 8
-        buf_req: 30
+        0..1: H50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[15:0].0-15
+        6..7: H49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[127:112].112-127
+        8..9: H48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[111:96].96-111
+        10..11: H36  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[95:80].80-95
+        shift: 12
+        buf_req: 12
         next: parse_all_events.$split_1
     parse_all_events.$split_1:
       *:
-        0..1: H49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[111:96].96-111
-        2..3: H48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[95:80].80-95
-        4..5: H36  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[79:64].64-79
-        6..7: H35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[63:48].48-63
-        22..25: W50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:32].32-63
-        26..29: W49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:0].0-31
+        0..1: H35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[79:64].64-79
+        2..3: H34  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[63:48].48-63
+        4..5: H33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[47:32].32-47
+        6..7: H32  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[31:16].16-31
+        18..21: W58  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[63:32].32-63
+        22..25: W57  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[31:0].0-31
+        26..29: W14
+            # - bit[208..223] -> W14 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0
+            # - bit[224..239] -> W14 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1
         shift: 8
         buf_req: 30
         next: parse_all_events.$split_2
     parse_all_events.$split_2:
       *:
-        0..1: H34  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[47:32].32-47
-        2..3: H33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[31:16].16-31
-        4..5: H32  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[15:0].0-15
-        22..25: W43
-            # - bit[176..191] -> W43 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0
-            # - bit[192..207] -> W43 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1
-        26..27: H10  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2
-        30: B1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0
-        31: B9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[15:8].8-15
-        shift: 28
-        buf_req: 32
+        0..1: H13  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[15:0].0-15
+        2..3: H10  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:48].48-63
+        4..5: H7  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[47:32].32-47
+        6..7: H4  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:16].16-31
+        22..25: W1
+            # - bit[176..191] -> W1 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2
+            # - bit[192..207] -> W1 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3
+        26: B1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0
+        27: B9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[15:8].8-15
+        28: B8  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[7:0].0-7
+        shift: 8
+        buf_req: 29
         next: parse_all_events.$split_3
     parse_all_events.$split_3:
       *:
-        0..1: H6  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3
-        4: B8  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[7:0].0-7
-        5..8: W48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2
-        9..10: H70  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3
-        11: B5  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4
-        12..13: H4
-            # - bit[96..103] -> H4 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0
-            # - bit[104..111] -> H4 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1
-        14..15: H11  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2
-        16..19: W13
-            # - bit[128..143] -> W13 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3
-            # - bit[144..159] -> W13 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4
-        20..23: W7
-            # - bit[160..167] -> W7 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5
-            # - bit[168..175] -> W7 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6
-            # - bit[176..191] -> W7 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7
-        24..27: W35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8
-        shift: 28
-        buf_req: 28
+        0..1: H1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[15:0].0-15
+        21..24: W43  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2
+        25..26: H68  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3
+        27: B5  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4
+        28..31: W6
+            # - bit[224..231] -> W6 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0
+            # - bit[232..239] -> W6 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1
+            # - bit[240..255] -> W6 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2
+        shift: 32
+        buf_req: 32
         next: parse_all_events.$split_4
     parse_all_events.$split_4:
       *:
-        0..3: W33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9
-        4..7: W1
-            # - bit[32..47] -> W1 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0
-            # - bit[48..63] -> W1 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1
-        8..11: W10
-            # - bit[64..79] -> W10 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2
-            # - bit[80..95] -> W10 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3
-        12..13: H68  # ingress::hdr.forward_flow.forward_flow_eth_header_0[47:32].32-47
-        14..17: W41  # ingress::hdr.forward_flow.forward_flow_eth_header_0[31:0].0-31
-        18..19: H66  # ingress::hdr.forward_flow.forward_flow_eth_header_1[47:32].32-47
-        24..25: H64  # ingress::hdr.forward_flow.forward_flow_eth_header_2
-        26..27: H3
-            # - bit[208..215] -> H3 bit[15..8]: ingress::hdr.forward_flow.forward_flow_ip_header_0
-            # - bit[216..223] -> H3 bit[7..0]: ingress::hdr.forward_flow.forward_flow_ip_header_1
-        shift: 20
-        buf_req: 28
+        0..3: W39
+            # - bit[0..15] -> W39 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3
+            # - bit[16..31] -> W39 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4
+        4..7: W33
+            # - bit[32..39] -> W33 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5
+            # - bit[40..47] -> W33 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6
+            # - bit[48..63] -> W33 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7
+        8..11: W49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8
+        12..15: W42  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9
+        24..25: H66  # ingress::hdr.forward_flow.forward_flow_eth_header_0[47:32].32-47
+        30..31: H64  # ingress::hdr.forward_flow.forward_flow_eth_header_1[47:32].32-47
+        shift: 16
+        buf_req: 32
         next: parse_all_events.$split_5
     parse_all_events.$split_5:
       *:
-        0..3: W38  # ingress::hdr.forward_flow.forward_flow_eth_header_1[31:0].0-31
-        8..9: H8  # ingress::hdr.forward_flow.forward_flow_ip_header_2
-        10..13: W12
-            # - bit[80..95] -> W12 bit[31..16]: ingress::hdr.forward_flow.forward_flow_ip_header_3
-            # - bit[96..111] -> W12 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_4
-        14..17: W6
-            # - bit[112..119] -> W6 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_5
-            # - bit[120..127] -> W6 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_6
-            # - bit[128..143] -> W6 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_7
-        18..21: W34  # ingress::hdr.forward_flow.forward_flow_ip_header_8
+        0..3: W11
+            # - bit[0..15] -> W11 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0
+            # - bit[16..31] -> W11 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1
+        4..7: W35
+            # - bit[32..47] -> W35 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2
+            # - bit[48..63] -> W35 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3
+        10..13: W54  # ingress::hdr.forward_flow.forward_flow_eth_header_0[31:0].0-31
+        16..19: W50  # ingress::hdr.forward_flow.forward_flow_eth_header_1[31:0].0-31
+        20..21: H52  # ingress::hdr.forward_flow.forward_flow_eth_header_2
         shift: 22
         buf_req: 22
         next: parse_all_events.$split_6
     parse_all_events.$split_6:
       *:
-        0..3: W32  # ingress::hdr.forward_flow.forward_flow_ip_header_9
-        4..7: W0
-            # - bit[32..47] -> W0 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_0
-            # - bit[48..63] -> W0 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_1
-        8..11: W9
-            # - bit[64..79] -> W9 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_2
-            # - bit[80..95] -> W9 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_3
+        0..3: W0
+            # - bit[0..7] -> W0 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_0
+            # - bit[8..15] -> W0 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_1
+            # - bit[16..31] -> W0 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_2
+        4..7: W38
+            # - bit[32..47] -> W38 bit[31..16]: ingress::hdr.forward_flow.forward_flow_ip_header_3
+            # - bit[48..63] -> W38 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_4
+        8..11: W32
+            # - bit[64..71] -> W32 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_5
+            # - bit[72..79] -> W32 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_6
+            # - bit[80..95] -> W32 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_7
+        12..15: W48  # ingress::hdr.forward_flow.forward_flow_ip_header_8
+        shift: 16
+        buf_req: 16
+        next: parse_all_events.$split_7
+    parse_all_events.$split_7:
+      *:
+        0..3: W41  # ingress::hdr.forward_flow.forward_flow_ip_header_9
+        4..7: W10
+            # - bit[32..47] -> W10 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_0
+            # - bit[48..63] -> W10 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_1
+        8..11: W34
+            # - bit[64..79] -> W34 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_2
+            # - bit[80..95] -> W34 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_3
         shift: 12
         buf_req: 12
         next: end
     parse_incoming_tango_traffic:
       *:
-        0..1: H69  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[47:32].32-47
-        2..5: W42  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[31:0].0-31
-        6..7: H67  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[47:32].32-47
-        8..11: W39  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[31:0].0-31
-        12..13: H65  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2
-        14..15: H52  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[31:16].16-31
+        0..1: H67  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[47:32].32-47
+        2..5: W55  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0[31:0].0-31
+        6..7: H65  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[47:32].32-47
+        8..11: W51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1[31:0].0-31
+        12..13: H53  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2
+        14..15: H51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[31:16].16-31
+        18..21: W3
+            # - bit[144..159] -> W3 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1
+            # - bit[160..167] -> W3 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2
+            # - bit[168..175] -> W3 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3
         B14: 8  # value 1 -> B14 bit[3]: ingress::hdr.incoming_tango_traffic.$valid
         shift: 16
-        buf_req: 16
+        buf_req: 22
         next: parse_incoming_tango_traffic.$split_0
     parse_incoming_tango_traffic.$split_0:
       *:
-        0..1: H51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[15:0].0-15
-        2..3: H9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1
-        4..5: H0
-            # - bit[32..39] -> H0 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2
-            # - bit[40..47] -> H0 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3
-        6..7: H50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[127:112].112-127
-        22..25: W60  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[127:96].96-127
-        26..29: W51  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[95:64].64-95
-        shift: 8
-        buf_req: 30
+        0..1: H50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0[15:0].0-15
+        6..7: H49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[127:112].112-127
+        8..9: H48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[111:96].96-111
+        10..11: H36  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[95:80].80-95
+        shift: 12
+        buf_req: 12
         next: parse_incoming_tango_traffic.$split_1
     parse_incoming_tango_traffic.$split_1:
       *:
-        0..1: H49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[111:96].96-111
-        2..3: H48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[95:80].80-95
-        4..5: H36  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[79:64].64-79
-        6..7: H35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[63:48].48-63
-        22..25: W50  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:32].32-63
-        26..29: W49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:0].0-31
+        0..1: H35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[79:64].64-79
+        2..3: H34  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[63:48].48-63
+        4..5: H33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[47:32].32-47
+        6..7: H32  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[31:16].16-31
+        18..21: W58  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[63:32].32-63
+        22..25: W57  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[31:0].0-31
+        26..29: W14
+            # - bit[208..223] -> W14 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0
+            # - bit[224..239] -> W14 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1
         shift: 8
         buf_req: 30
         next: parse_incoming_tango_traffic.$split_2
     parse_incoming_tango_traffic.$split_2:
       *:
-        0..1: H34  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[47:32].32-47
-        2..3: H33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[31:16].16-31
-        4..5: H32  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[15:0].0-15
-        22..25: W43
-            # - bit[176..191] -> W43 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0
-            # - bit[192..207] -> W43 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1
-        26..27: H10  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2
-        30: B1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0
-        31: B9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[15:8].8-15
-        shift: 28
-        buf_req: 32
+        0..1: H13  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[15:0].0-15
+        2..3: H10  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:48].48-63
+        4..5: H7  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[47:32].32-47
+        6..7: H4  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:16].16-31
+        22..25: W1
+            # - bit[176..191] -> W1 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2
+            # - bit[192..207] -> W1 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3
+        26: B1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0
+        27: B9  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[15:8].8-15
+        28: B8  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[7:0].0-7
+        shift: 8
+        buf_req: 29
         next: parse_incoming_tango_traffic.$split_3
     parse_incoming_tango_traffic.$split_3:
       *:
-        0..1: H6  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3
-        4: B8  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1[7:0].0-7
-        5..8: W48  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2
-        9..10: H70  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3
-        11: B5  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4
-        12..13: H4
-            # - bit[96..103] -> H4 bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0
-            # - bit[104..111] -> H4 bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1
-        14..15: H11  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2
-        16..19: W13
-            # - bit[128..143] -> W13 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3
-            # - bit[144..159] -> W13 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4
-        20..23: W7
-            # - bit[160..167] -> W7 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5
-            # - bit[168..175] -> W7 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6
-            # - bit[176..191] -> W7 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7
-        24..27: W35  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8
-        shift: 28
-        buf_req: 28
+        0..1: H1  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[15:0].0-15
+        21..24: W43  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2
+        25..26: H68  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3
+        27: B5  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4
+        28..31: W6
+            # - bit[224..231] -> W6 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0
+            # - bit[232..239] -> W6 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1
+            # - bit[240..255] -> W6 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2
+        shift: 32
+        buf_req: 32
         next: parse_incoming_tango_traffic.$split_4
     parse_incoming_tango_traffic.$split_4:
       *:
-        0..3: W33  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9
-        4..7: W1
-            # - bit[32..47] -> W1 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0
-            # - bit[48..63] -> W1 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1
-        8..11: W10
-            # - bit[64..79] -> W10 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2
-            # - bit[80..95] -> W10 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3
-        shift: 12
-        buf_req: 12
+        0..3: W39
+            # - bit[0..15] -> W39 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3
+            # - bit[16..31] -> W39 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4
+        4..7: W33
+            # - bit[32..39] -> W33 bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5
+            # - bit[40..47] -> W33 bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6
+            # - bit[48..63] -> W33 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7
+        8..11: W49  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8
+        12..15: W42  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9
+        shift: 16
+        buf_req: 16
+        next: parse_incoming_tango_traffic.$split_5
+    parse_incoming_tango_traffic.$split_5:
+      *:
+        0..3: W11
+            # - bit[0..15] -> W11 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0
+            # - bit[16..31] -> W11 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1
+        4..7: W35
+            # - bit[32..47] -> W35 bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2
+            # - bit[48..63] -> W35 bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3
+        shift: 8
+        buf_req: 8
         next: end
     parse_forward_flow:
       *:
-        0..1: H68  # ingress::hdr.forward_flow.forward_flow_eth_header_0[47:32].32-47
-        2..5: W41  # ingress::hdr.forward_flow.forward_flow_eth_header_0[31:0].0-31
-        6..7: H66  # ingress::hdr.forward_flow.forward_flow_eth_header_1[47:32].32-47
-        8..11: W38  # ingress::hdr.forward_flow.forward_flow_eth_header_1[31:0].0-31
-        12..13: H64  # ingress::hdr.forward_flow.forward_flow_eth_header_2
-        14..15: H3
-            # - bit[112..119] -> H3 bit[15..8]: ingress::hdr.forward_flow.forward_flow_ip_header_0
-            # - bit[120..127] -> H3 bit[7..0]: ingress::hdr.forward_flow.forward_flow_ip_header_1
-        18..21: W12
-            # - bit[144..159] -> W12 bit[31..16]: ingress::hdr.forward_flow.forward_flow_ip_header_3
-            # - bit[160..175] -> W12 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_4
-        22..25: W6
-            # - bit[176..183] -> W6 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_5
-            # - bit[184..191] -> W6 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_6
-            # - bit[192..207] -> W6 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_7
+        0..1: H66  # ingress::hdr.forward_flow.forward_flow_eth_header_0[47:32].32-47
+        2..5: W54  # ingress::hdr.forward_flow.forward_flow_eth_header_0[31:0].0-31
+        6..7: H64  # ingress::hdr.forward_flow.forward_flow_eth_header_1[47:32].32-47
+        8..11: W50  # ingress::hdr.forward_flow.forward_flow_eth_header_1[31:0].0-31
+        12..13: H52  # ingress::hdr.forward_flow.forward_flow_eth_header_2
+        14..17: W0
+            # - bit[112..119] -> W0 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_0
+            # - bit[120..127] -> W0 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_1
+            # - bit[128..143] -> W0 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_2
+        18..21: W38
+            # - bit[144..159] -> W38 bit[31..16]: ingress::hdr.forward_flow.forward_flow_ip_header_3
+            # - bit[160..175] -> W38 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_4
         B14: 16  # value 1 -> B14 bit[4]: ingress::hdr.forward_flow.$valid
-        shift: 16
-        buf_req: 26
+        shift: 22
+        buf_req: 22
         next: parse_forward_flow.$split_0
     parse_forward_flow.$split_0:
       *:
-        0..1: H8  # ingress::hdr.forward_flow.forward_flow_ip_header_2
-        10..13: W34  # ingress::hdr.forward_flow.forward_flow_ip_header_8
-        14..17: W32  # ingress::hdr.forward_flow.forward_flow_ip_header_9
-        18..21: W0
-            # - bit[144..159] -> W0 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_0
-            # - bit[160..175] -> W0 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_1
-        22..25: W9
-            # - bit[176..191] -> W9 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_2
-            # - bit[192..207] -> W9 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_3
-        shift: 26
-        buf_req: 26
+        0..3: W32
+            # - bit[0..7] -> W32 bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_5
+            # - bit[8..15] -> W32 bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_6
+            # - bit[16..31] -> W32 bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_7
+        4..7: W48  # ingress::hdr.forward_flow.forward_flow_ip_header_8
+        8..11: W41  # ingress::hdr.forward_flow.forward_flow_ip_header_9
+        12..15: W10
+            # - bit[96..111] -> W10 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_0
+            # - bit[112..127] -> W10 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_1
+        shift: 16
+        buf_req: 16
+        next: parse_forward_flow.$split_1
+    parse_forward_flow.$split_1:
+      *:
+        0..3: W34
+            # - bit[0..15] -> W34 bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_2
+            # - bit[16..31] -> W34 bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_3
+        shift: 4
+        buf_req: 4
         next: end
     default_setup:
       *:
@@ -636,87 +649,90 @@ deparser ingress:
     B4: B14(1)  # ingress::hdr.wire_ev.event_id if ingress::hdr.wire_ev.$valid
     H39: B14(2)
         # - bit[15..8]: ingress::hdr.bridge_ev.port_event_id if ingress::hdr.bridge_ev.$valid
-        # - bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2393 if ingress::hdr.bridge_ev.$valid
+        # - bit[7..2]: ingress::hdr.bridge_ev.flag_pad_2022 if ingress::hdr.bridge_ev.$valid
         # - bit[1]: ingress::hdr.bridge_ev.incoming_tango_traffic if ingress::hdr.bridge_ev.$valid
         # - bit[0]: ingress::hdr.bridge_ev.forward_flow if ingress::hdr.bridge_ev.$valid
-    H69: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.32-47 if ingress::hdr.incoming_tango_traffic.$valid
-    W42: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-31 if ingress::hdr.incoming_tango_traffic.$valid
-    H67: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47 if ingress::hdr.incoming_tango_traffic.$valid
-    W39: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31 if ingress::hdr.incoming_tango_traffic.$valid
-    H65: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2 if ingress::hdr.incoming_tango_traffic.$valid
-    H52: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31 if ingress::hdr.incoming_tango_traffic.$valid
-    H51: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15 if ingress::hdr.incoming_tango_traffic.$valid
-    H9: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1 if ingress::hdr.incoming_tango_traffic.$valid
-    H0: B14(3)
+    H67: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.32-47 if ingress::hdr.incoming_tango_traffic.$valid
+    W55: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-31 if ingress::hdr.incoming_tango_traffic.$valid
+    H65: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47 if ingress::hdr.incoming_tango_traffic.$valid
+    W51: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31 if ingress::hdr.incoming_tango_traffic.$valid
+    H53: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2 if ingress::hdr.incoming_tango_traffic.$valid
+    H51: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31 if ingress::hdr.incoming_tango_traffic.$valid
+    H50: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15 if ingress::hdr.incoming_tango_traffic.$valid
+    W3: B14(3)
+        # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3 if ingress::hdr.incoming_tango_traffic.$valid
-    H50: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127 if ingress::hdr.incoming_tango_traffic.$valid
-    H49: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111 if ingress::hdr.incoming_tango_traffic.$valid
-    H48: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95 if ingress::hdr.incoming_tango_traffic.$valid
-    H36: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79 if ingress::hdr.incoming_tango_traffic.$valid
-    H35: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63 if ingress::hdr.incoming_tango_traffic.$valid
-    H34: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47 if ingress::hdr.incoming_tango_traffic.$valid
-    H33: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31 if ingress::hdr.incoming_tango_traffic.$valid
-    H32: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15 if ingress::hdr.incoming_tango_traffic.$valid
-    W60: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.96-127 if ingress::hdr.incoming_tango_traffic.$valid
-    W51: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.64-95 if ingress::hdr.incoming_tango_traffic.$valid
-    W50: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-63 if ingress::hdr.incoming_tango_traffic.$valid
-    W49: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-31 if ingress::hdr.incoming_tango_traffic.$valid
-    W43: B14(3)
+    H49: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127 if ingress::hdr.incoming_tango_traffic.$valid
+    H48: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111 if ingress::hdr.incoming_tango_traffic.$valid
+    H36: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95 if ingress::hdr.incoming_tango_traffic.$valid
+    H35: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79 if ingress::hdr.incoming_tango_traffic.$valid
+    H34: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63 if ingress::hdr.incoming_tango_traffic.$valid
+    H33: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47 if ingress::hdr.incoming_tango_traffic.$valid
+    H32: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31 if ingress::hdr.incoming_tango_traffic.$valid
+    H13: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15 if ingress::hdr.incoming_tango_traffic.$valid
+    H10: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63 if ingress::hdr.incoming_tango_traffic.$valid
+    H7: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47 if ingress::hdr.incoming_tango_traffic.$valid
+    H4: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.16-31 if ingress::hdr.incoming_tango_traffic.$valid
+    H1: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-15 if ingress::hdr.incoming_tango_traffic.$valid
+    W58: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.32-63 if ingress::hdr.incoming_tango_traffic.$valid
+    W57: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.0-31 if ingress::hdr.incoming_tango_traffic.$valid
+    W14: B14(3)
         # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1 if ingress::hdr.incoming_tango_traffic.$valid
-    H10: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2 if ingress::hdr.incoming_tango_traffic.$valid
-    H6: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3 if ingress::hdr.incoming_tango_traffic.$valid
+    W1: B14(3)
+        # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2 if ingress::hdr.incoming_tango_traffic.$valid
+        # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3 if ingress::hdr.incoming_tango_traffic.$valid
     B1: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0 if ingress::hdr.incoming_tango_traffic.$valid
     B9: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1.8-15 if ingress::hdr.incoming_tango_traffic.$valid
     B8: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1.0-7 if ingress::hdr.incoming_tango_traffic.$valid
-    W48: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2 if ingress::hdr.incoming_tango_traffic.$valid
-    H70: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3 if ingress::hdr.incoming_tango_traffic.$valid
+    W43: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2 if ingress::hdr.incoming_tango_traffic.$valid
+    H68: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3 if ingress::hdr.incoming_tango_traffic.$valid
     B5: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4 if ingress::hdr.incoming_tango_traffic.$valid
-    H4: B14(3)
-        # - bit[15..8]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0 if ingress::hdr.incoming_tango_traffic.$valid
-        # - bit[7..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1 if ingress::hdr.incoming_tango_traffic.$valid
-    H11: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2 if ingress::hdr.incoming_tango_traffic.$valid
-    W13: B14(3)
+    W6: B14(3)
+        # - bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0 if ingress::hdr.incoming_tango_traffic.$valid
+        # - bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1 if ingress::hdr.incoming_tango_traffic.$valid
+        # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2 if ingress::hdr.incoming_tango_traffic.$valid
+    W39: B14(3)
         # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4 if ingress::hdr.incoming_tango_traffic.$valid
-    W7: B14(3)
+    W33: B14(3)
         # - bit[31..24]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[23..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7 if ingress::hdr.incoming_tango_traffic.$valid
-    W35: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8 if ingress::hdr.incoming_tango_traffic.$valid
-    W33: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9 if ingress::hdr.incoming_tango_traffic.$valid
-    W1: B14(3)
+    W49: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8 if ingress::hdr.incoming_tango_traffic.$valid
+    W42: B14(3)  # ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9 if ingress::hdr.incoming_tango_traffic.$valid
+    W11: B14(3)
         # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1 if ingress::hdr.incoming_tango_traffic.$valid
-    W10: B14(3)
+    W35: B14(3)
         # - bit[31..16]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2 if ingress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: ingress::hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3 if ingress::hdr.incoming_tango_traffic.$valid
-    H68: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_0.32-47 if ingress::hdr.forward_flow.$valid
-    W41: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_0.0-31 if ingress::hdr.forward_flow.$valid
-    H66: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_1.32-47 if ingress::hdr.forward_flow.$valid
-    W38: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_1.0-31 if ingress::hdr.forward_flow.$valid
-    H64: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_2 if ingress::hdr.forward_flow.$valid
-    H3: B14(4)
-        # - bit[15..8]: ingress::hdr.forward_flow.forward_flow_ip_header_0 if ingress::hdr.forward_flow.$valid
-        # - bit[7..0]: ingress::hdr.forward_flow.forward_flow_ip_header_1 if ingress::hdr.forward_flow.$valid
-    H8: B14(4)  # ingress::hdr.forward_flow.forward_flow_ip_header_2 if ingress::hdr.forward_flow.$valid
-    W12: B14(4)
+    H66: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_0.32-47 if ingress::hdr.forward_flow.$valid
+    W54: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_0.0-31 if ingress::hdr.forward_flow.$valid
+    H64: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_1.32-47 if ingress::hdr.forward_flow.$valid
+    W50: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_1.0-31 if ingress::hdr.forward_flow.$valid
+    H52: B14(4)  # ingress::hdr.forward_flow.forward_flow_eth_header_2 if ingress::hdr.forward_flow.$valid
+    W0: B14(4)
+        # - bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_0 if ingress::hdr.forward_flow.$valid
+        # - bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_1 if ingress::hdr.forward_flow.$valid
+        # - bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_2 if ingress::hdr.forward_flow.$valid
+    W38: B14(4)
         # - bit[31..16]: ingress::hdr.forward_flow.forward_flow_ip_header_3 if ingress::hdr.forward_flow.$valid
         # - bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_4 if ingress::hdr.forward_flow.$valid
-    W6: B14(4)
+    W32: B14(4)
         # - bit[31..24]: ingress::hdr.forward_flow.forward_flow_ip_header_5 if ingress::hdr.forward_flow.$valid
         # - bit[23..16]: ingress::hdr.forward_flow.forward_flow_ip_header_6 if ingress::hdr.forward_flow.$valid
         # - bit[15..0]: ingress::hdr.forward_flow.forward_flow_ip_header_7 if ingress::hdr.forward_flow.$valid
-    W34: B14(4)  # ingress::hdr.forward_flow.forward_flow_ip_header_8 if ingress::hdr.forward_flow.$valid
-    W32: B14(4)  # ingress::hdr.forward_flow.forward_flow_ip_header_9 if ingress::hdr.forward_flow.$valid
-    W0: B14(4)
+    W48: B14(4)  # ingress::hdr.forward_flow.forward_flow_ip_header_8 if ingress::hdr.forward_flow.$valid
+    W41: B14(4)  # ingress::hdr.forward_flow.forward_flow_ip_header_9 if ingress::hdr.forward_flow.$valid
+    W10: B14(4)
         # - bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_0 if ingress::hdr.forward_flow.$valid
         # - bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_1 if ingress::hdr.forward_flow.$valid
-    W9: B14(4)
+    W34: B14(4)
         # - bit[31..16]: ingress::hdr.forward_flow.forward_flow_udp_header_2 if ingress::hdr.forward_flow.$valid
         # - bit[15..0]: ingress::hdr.forward_flow.forward_flow_udp_header_3 if ingress::hdr.forward_flow.$valid
-  egress_unicast_port: H15(0..8)  # bit[8..0]: ingress::ig_intr_md_for_tm.ucast_egress_port
+  egress_unicast_port: H0(0..8)  # bit[8..0]: ingress::ig_intr_md_for_tm.ucast_egress_port
 parser egress:
   start: $entry_point
   init_zero: [ B17 ]
@@ -759,7 +775,7 @@ parser egress:
       0b******10:
         0..1: H17
             # - bit[0..7] -> H17 bit[15..8]: egress::hdr.bridge_ev.port_event_id
-            # - bit[8..13] -> H17 bit[7..2]: egress::hdr.bridge_ev.flag_pad_2393
+            # - bit[8..13] -> H17 bit[7..2]: egress::hdr.bridge_ev.flag_pad_2022
             # - bit[14] -> H17 bit[1]: egress::hdr.bridge_ev.incoming_tango_traffic
             # - bit[15] -> H17 bit[0]: egress::hdr.bridge_ev.forward_flow
         shift: 2
@@ -794,18 +810,18 @@ parser egress:
         23: TB12  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[23:16].16-23
         24: TB7  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[15:8].8-15
         25: TB6  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4[7:0].0-7
-        26..27: TH23  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[127:112].112-127
-        28..29: TH22  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[111:96].96-111
-        30..31: TH21  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[95:80].80-95
+        26..27: TH23  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:48].48-63
+        28..29: TH22  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[47:32].32-47
+        30..31: TH21  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:16].16-31
         shift: 32
         buf_req: 32
         next: parse_eventset_0.$split_1
     parse_eventset_0.$split_1:
       *:
-        0..1: TH20  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[79:64].64-79
-        2..3: TH19  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[63:48].48-63
-        4..5: TH18  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[47:32].32-47
-        6..9: TW15  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[31:0].0-31
+        0..1: TH20  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5[15:0].0-15
+        2..3: TH19  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[63:48].48-63
+        4..5: TH18  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[47:32].32-47
+        6..9: TW15  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6[31:0].0-31
         10..13: TW6
             # - bit[80..95] -> TW6 bit[31..16]: egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0
             # - bit[96..111] -> TW6 bit[15..0]: egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1
@@ -862,7 +878,7 @@ deparser egress:
     B16: B17(1)  # egress::hdr.wire_ev.event_id if egress::hdr.wire_ev.$valid
     H17: B17(2)
         # - bit[15..8]: egress::hdr.bridge_ev.port_event_id if egress::hdr.bridge_ev.$valid
-        # - bit[7..2]: egress::hdr.bridge_ev.flag_pad_2393 if egress::hdr.bridge_ev.$valid
+        # - bit[7..2]: egress::hdr.bridge_ev.flag_pad_2022 if egress::hdr.bridge_ev.$valid
         # - bit[1]: egress::hdr.bridge_ev.incoming_tango_traffic if egress::hdr.bridge_ev.$valid
         # - bit[0]: egress::hdr.bridge_ev.forward_flow if egress::hdr.bridge_ev.$valid
     TB21: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.40-47 if egress::hdr.incoming_tango_traffic.$valid
@@ -886,13 +902,13 @@ deparser egress:
     TB12: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-23 if egress::hdr.incoming_tango_traffic.$valid
     TB7: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.8-15 if egress::hdr.incoming_tango_traffic.$valid
     TB6: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-7 if egress::hdr.incoming_tango_traffic.$valid
-    TH23: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.112-127 if egress::hdr.incoming_tango_traffic.$valid
-    TH22: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.96-111 if egress::hdr.incoming_tango_traffic.$valid
-    TH21: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.80-95 if egress::hdr.incoming_tango_traffic.$valid
-    TH20: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.64-79 if egress::hdr.incoming_tango_traffic.$valid
-    TH19: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63 if egress::hdr.incoming_tango_traffic.$valid
-    TH18: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47 if egress::hdr.incoming_tango_traffic.$valid
-    TW15: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-31 if egress::hdr.incoming_tango_traffic.$valid
+    TH23: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63 if egress::hdr.incoming_tango_traffic.$valid
+    TH22: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47 if egress::hdr.incoming_tango_traffic.$valid
+    TH21: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.16-31 if egress::hdr.incoming_tango_traffic.$valid
+    TH20: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-15 if egress::hdr.incoming_tango_traffic.$valid
+    TH19: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.48-63 if egress::hdr.incoming_tango_traffic.$valid
+    TH18: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.32-47 if egress::hdr.incoming_tango_traffic.$valid
+    TW15: B17(3)  # egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.0-31 if egress::hdr.incoming_tango_traffic.$valid
     TW6: B17(3)
         # - bit[31..16]: egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0 if egress::hdr.incoming_tango_traffic.$valid
         # - bit[15..0]: egress::hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1 if egress::hdr.incoming_tango_traffic.$valid
@@ -966,7 +982,7 @@ stage 0 ingress:
       - handle: 0x20000000
       - p4_param_order: { ig_intr_md: 64 } 
   ternary_match table_0 0:
-    p4: { name: IngressControl.table_2392, size: 512 }
+    p4: { name: IngressControl.table_2021, size: 512 }
     p4_param_order: 
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: 2
@@ -1025,9 +1041,9 @@ stage 0 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000002
       - next_table: 0
-      - set if_precomp_0.0-3, hdr.forward_flow.forward_flow_udp_header_0(4..7)
-      - set if_precomp_0.4-11, hdr.forward_flow.forward_flow_udp_header_0(8..15)
-      - set if_precomp2362_0, hdr.forward_flow.forward_flow_udp_header_1(3..15)
+      - set if_precomp_0, hdr.forward_flow.forward_flow_udp_header_0(4..15)
+      - set if_precomp1991_0.0-4, hdr.forward_flow.forward_flow_udp_header_1(3..7)
+      - set if_precomp1991_0.5-12, hdr.forward_flow.forward_flow_udp_header_1(8..15)
       IngressControl.labeledstmt_3(2, 0):
       - hit_allowed: { allowed: true }
       - default_action: { allowed: true }
@@ -1042,14 +1058,14 @@ stage 0 ingress:
 stage 1 ingress:
   dependency: match
   ternary_match table_1 0:
-    p4: { name: IngressControl.table_2391, size: 512 }
+    p4: { name: IngressControl.table_2020, size: 512 }
     p4_param_order: 
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -1060,15 +1076,15 @@ stage 1 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x5 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x41 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_2 ]
     miss:  table_2
@@ -1091,7 +1107,7 @@ stage 1 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1120,7 +1136,7 @@ stage 1 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1149,7 +1165,7 @@ stage 1 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1178,7 +1194,7 @@ stage 1 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1207,7 +1223,7 @@ stage 1 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1225,12 +1241,13 @@ stage 1 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
-    format: { action: 0..1 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
+    format: { action: 0..1, immediate: 2..17 }
+    action_bus: { 96..99 : immediate(0..15) }
     instruction: table_1$tind(action, $DEFAULT)
     actions:
       IngressControl.labeledstmt_4(0, 0):
@@ -1238,12 +1255,15 @@ stage 1 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000005
       - next_table: 0
+      - {  }
       IngressControl.labeledstmt_5(1, 1):
       - hit_allowed: { allowed: true }
       - default_action: { allowed: true }
       - handle: 0x20000006
       - next_table: 0
-      - set path_id_0, hdr.forward_flow.forward_flow_udp_header_1(0..7)
+      - {  }
+      - set path_id_0.0-2, hdr.forward_flow.forward_flow_udp_header_1(0..2)
+      - set path_id_0.3-7, hdr.forward_flow.forward_flow_udp_header_1(3..7)
       - set merged_var_traffic_class_traffic_cls.0-3, hdr.forward_flow.forward_flow_udp_header_0(0..3)
       - set merged_var_traffic_class_traffic_cls.4-7, hdr.forward_flow.forward_flow_udp_header_0(4..7)
       IngressControl.labeledstmt_6(2, 2):
@@ -1251,42 +1271,46 @@ stage 1 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000007
       - next_table: 0
-      - set map_path_to_tunnel_header_ret_8.0-31, 32
-      - set map_path_to_tunnel_header_ret_8.32-63, 0
-      - set map_path_to_tunnel_header_ret_8.64-95, 0
-      - set map_path_to_tunnel_header_ret_8.96-127, 0
-      - set map_path_to_tunnel_header_ret_7.0-15, 32
-      - set map_path_to_tunnel_header_ret_7.16-31, 0
-      - set map_path_to_tunnel_header_ret_7.32-47, 0
-      - set map_path_to_tunnel_header_ret_7.48-63, 0
-      - set map_path_to_tunnel_header_ret_7.64-79, 0
-      - set map_path_to_tunnel_header_ret_7.80-95, 0
-      - set map_path_to_tunnel_header_ret_7.96-111, 0
-      - set map_path_to_tunnel_header_ret_7.112-127, 0
-      - set map_path_to_tunnel_header_ret.0-15, 32
-      - set map_path_to_tunnel_header_ret.16-31, 0
+      - { $data0: immediate(0..15), $constant0: $data0(0..7), $constant0: 220, $constant1: $data0(8..15), $constant1: 17 }
+      - set tango_tunnel_hdr_12.0-31, 0
+      - set tango_tunnel_hdr_12.32-63, 0
+      - set tango_tunnel_hdr_11.0-15, 0
+      - set tango_tunnel_hdr_11.16-31, 0
+      - set tango_tunnel_hdr_11.32-47, 0
+      - set tango_tunnel_hdr_11.48-63, 0
+      - set tango_tunnel_hdr_10.0-15, 0
+      - set tango_tunnel_hdr_10.16-31, 0
+      - set tango_tunnel_hdr_10.32-47, 0
+      - set tango_tunnel_hdr_10.48-63, 0
+      - set tango_tunnel_hdr_10.64-79, 0
+      - set tango_tunnel_hdr_10.80-95, 0
+      - set tango_tunnel_hdr_10.96-111, 0
+      - set tango_tunnel_hdr_10.112-127, 0
+      - set tango_tunnel_hdr_7, 0
+      - set tango_tunnel_hdr.0-15, 6
+      - set tango_tunnel_hdr.16-31, 0
       - set RouteManager_get_path_id_ret_0, 32
       - set merged_var_traffic_class_traffic_cls.0-3, 0
       - set merged_var_traffic_class_traffic_cls.4-7, 0
-      - set H1(0..7), 32
-      - set H2(8..15), 32
+      - set W5(0..15), $data0
       NoAction(-1, 3):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
       - handle: 0x20000008
       - next_table: 0
+      - {  }
     default_only_action: NoAction
 stage 2 ingress:
   dependency: match
   ternary_match table_2 0:
-    p4: { name: IngressControl.table_2390, size: 512 }
+    p4: { name: IngressControl.table_2019, size: 512 }
     p4_param_order: 
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -1297,15 +1321,15 @@ stage 2 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x5 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x41 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_3 ]
     miss:  table_3
@@ -1328,7 +1352,7 @@ stage 2 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1357,7 +1381,7 @@ stage 2 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1386,7 +1410,7 @@ stage 2 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1415,7 +1439,7 @@ stage 2 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1444,7 +1468,7 @@ stage 2 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1462,11 +1486,11 @@ stage 2 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     instruction: table_2$tind(action, $DEFAULT)
     actions:
@@ -1481,7 +1505,7 @@ stage 2 ingress:
       - handle: 0x2000000a
       - next_table: 0
       - set merged_var_traffic_class_traffic_cls.4-7, 0
-      - set W3(13..16), 4294967295
+      - set W8(0..3), 4294967295
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -1491,9 +1515,9 @@ stage 2 ingress:
 stage 3 ingress:
   dependency: match
   ternary_match table_3 0:
-    p4: { name: IngressControl.table_2389, size: 512 }
+    p4: { name: IngressControl.table_2018, size: 512 }
     p4_param_order: 
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
@@ -1509,24 +1533,24 @@ stage 3 ingress:
     - 0
     - 0
     hash_dist:
-      0: { hash: 0, mask: 0xff, shift: 3 }
+      0: { hash: 1, mask: 0xff, shift: 3 }
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
-      exact group 0: { 4: merged_var_traffic_class_traffic_cls.4-7, 13: merged_var_traffic_class_traffic_cls.0-3 }
-      hash 0:
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
+      exact group 0: { 64: merged_var_traffic_class_traffic_cls.0-3, 96: merged_var_traffic_class_traffic_cls.4-7 }
+      hash 1:
         0..3: merged_var_traffic_class_traffic_cls.0-3
         4..7: merged_var_traffic_class_traffic_cls.4-7
-      hash group 0:
-        table: [0]
+      hash group 1:
+        table: [1]
         seed: 0x0
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x5 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x41 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_4 ]
     miss:  table_4
@@ -1534,7 +1558,7 @@ stage 3 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1563,7 +1587,7 @@ stage 3 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1592,7 +1616,7 @@ stage 3 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1621,7 +1645,7 @@ stage 3 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1650,7 +1674,7 @@ stage 3 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1686,8 +1710,14 @@ stage 3 ingress:
     maprams: [ 0, 1 ]
     home_row: 15
     input_xbar:
-      exact group 0: { 64: path_id_0 }
-    data_bytemask: 1
+      exact group 0: { 0: path_id_0.0-2, 32: path_id_0.3-7 }
+      hash 0:
+        0..2: path_id_0.0-2
+        3..7: path_id_0.3-7
+      hash group 0:
+        table: [0]
+        seed: 0x0
+    hash_bytemask: 1
     format: { lo: 8 }
     actions:
       route_manager_0_regaction:
@@ -1699,19 +1729,19 @@ stage 3 ingress:
     bus: 0
     column: 2
     hash_dist:
-      0: { hash: 0, mask: 0xff, shift: 3 }
+      0: { hash: 1, mask: 0xff, shift: 3 }
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
-      exact group 0: { 4: merged_var_traffic_class_traffic_cls.4-7, 13: merged_var_traffic_class_traffic_cls.0-3 }
-      hash 0:
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
+      exact group 0: { 64: merged_var_traffic_class_traffic_cls.0-3, 96: merged_var_traffic_class_traffic_cls.4-7 }
+      hash 1:
         0..3: merged_var_traffic_class_traffic_cls.0-3
         4..7: merged_var_traffic_class_traffic_cls.4-7
-      hash group 0:
-        table: [0]
+      hash group 1:
+        table: [1]
         seed: 0x0
     format: { action: 0..1, meter_pfe: 2..2, meter_type: 3..5 }
     action_bus: { 0 : table_3$salu.route_manager_0(0..7) }
@@ -1745,14 +1775,14 @@ stage 3 ingress:
 stage 4 ingress:
   dependency: action
   ternary_match table_4 0:
-    p4: { name: IngressControl.table_2388, size: 512 }
+    p4: { name: IngressControl.table_2017, size: 512 }
     p4_param_order: 
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -1763,15 +1793,15 @@ stage 4 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x5 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x41 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_5 ]
     miss:  table_5
@@ -1794,7 +1824,7 @@ stage 4 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1823,7 +1853,7 @@ stage 4 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -1852,7 +1882,7 @@ stage 4 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1881,7 +1911,7 @@ stage 4 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1910,7 +1940,7 @@ stage 4 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -1928,11 +1958,11 @@ stage 4 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: hdr.wire_ev.event_id, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7) }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     instruction: table_4$tind(action, $DEFAULT)
     actions:
@@ -1946,7 +1976,7 @@ stage 4 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000011
       - next_table: 0
-      - set path_id2030_0, RouteManager_get_path_id_ret_0
+      - set path_id1675_0, RouteManager_get_path_id_ret_0
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -1956,15 +1986,15 @@ stage 4 ingress:
 stage 5 ingress:
   dependency: match
   ternary_match table_5 0:
-    p4: { name: IngressControl.table_2387, size: 512 }
+    p4: { name: IngressControl.table_2016, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -1975,15 +2005,15 @@ stage 5 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_6 ]
     miss:  table_6
@@ -1991,7 +2021,7 @@ stage 5 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2009,7 +2039,7 @@ stage 5 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2023,7 +2053,7 @@ stage 5 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2041,7 +2071,7 @@ stage 5 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2055,7 +2085,7 @@ stage 5 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2073,7 +2103,7 @@ stage 5 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2087,7 +2117,7 @@ stage 5 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2105,7 +2135,7 @@ stage 5 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2119,7 +2149,7 @@ stage 5 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2137,7 +2167,7 @@ stage 5 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2155,11 +2185,11 @@ stage 5 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     action: table_5$action_data($DIRECT, $DEFAULT)
     instruction: table_5$tind(action, $DEFAULT)
@@ -2175,51 +2205,50 @@ stage 5 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000014
       - next_table: 0
-      - { $constant0: $adf_h0(0..15), $constant0: 18, $constant1: $adf_h0(0..15), $constant1: 18, $data0: $adf_f1(0..31), $constant2: $data0(0..15), $constant2: 8080, $constant3: $data0(16..31), $constant3: 8080 }
-      - set forward_tango_pkt_arg_52, hdr.forward_flow.forward_flow_udp_header_3
-      - set forward_tango_pkt_arg_51, hdr.forward_flow.forward_flow_udp_header_2
+      - { $constant6: $adf_f0(0..31), $constant6: 8388608, $constant7: $adf_f1(0..31), $constant7: 637814080, $constant2: $adf_f2(0..15), $constant2: 18, $constant3: $adf_f2(0..15), $constant3: 18, $constant4: $adf_f3(0..15), $constant4: 8080, $constant5: $adf_f3(0..15), $constant5: 8080, $data0: $adf_f3(16..31), $constant0: $data0(0..7), $constant0: 220, $constant1: $data0(8..15), $constant1: 17 }
       - set forward_tango_pkt_arg_48, hdr.forward_flow.forward_flow_ip_header_9
       - set forward_tango_pkt_arg_47, hdr.forward_flow.forward_flow_ip_header_8
-      - set forward_tango_pkt_arg_43, hdr.forward_flow.forward_flow_ip_header_4
-      - set forward_tango_pkt_arg_42, hdr.forward_flow.forward_flow_ip_header_3
-      - set forward_tango_pkt_arg_41, hdr.forward_flow.forward_flow_ip_header_2
       - set forward_tango_pkt_arg_38, 0
-      - add forward_tango_pkt_arg_37, hdr.forward_flow.forward_flow_ip_header_2, $constant0
-      - add forward_tango_pkt_arg_34, hdr.forward_flow.forward_flow_ip_header_2, $constant1
-      - set forward_tango_pkt_arg_33, hdr.forward_flow.forward_flow_eth_header_2
-      - set forward_tango_pkt_arg_32.0-31, hdr.forward_flow.forward_flow_eth_header_1.0-31
-      - set forward_tango_pkt_arg_32.32-47, hdr.forward_flow.forward_flow_eth_header_1.32-47
+      - set forward_tango_pkt_arg_36, $constant5
+      - set forward_tango_pkt_arg_35, $constant4
+      - set forward_tango_pkt_arg_34, hdr.forward_flow.forward_flow_eth_header_2
+      - set forward_tango_pkt_arg_33.0-31, hdr.forward_flow.forward_flow_eth_header_1.0-31
+      - set forward_tango_pkt_arg_33.32-47, hdr.forward_flow.forward_flow_eth_header_1.32-47
       - set forward_tango_pkt_arg.0-31, hdr.forward_flow.forward_flow_eth_header_0.0-31
       - set forward_tango_pkt_arg.32-47, hdr.forward_flow.forward_flow_eth_header_0.32-47
       - set tango_metrics_hdr_6, 0
       - set tango_metrics_hdr_5, 0
-      - set tango_metrics_hdr, path_id2030_0
+      - set tango_metrics_hdr, path_id1675_0
       - set time_now_0.0-7, ig_intr_md.ingress_mac_tstamp.16-23
       - set time_now_0.8-15, ig_intr_md.ingress_mac_tstamp.24-31
       - set time_now_0.16-23, ig_intr_md.ingress_mac_tstamp.32-39
       - set time_now_0.24-27, ig_intr_md.ingress_mac_tstamp.40-47(0..3)
       - set time_now_0.28-31, ig_intr_md.ingress_mac_tstamp.40-47(4..7)
       - set SequenceNumberManager_increment_ret_0, 32
-      - set map_path_to_tunnel_header_ret_8.0-31, 0
-      - set map_path_to_tunnel_header_ret_8.32-63, 0
-      - set map_path_to_tunnel_header_ret_8.64-95, 0
-      - set map_path_to_tunnel_header_ret_8.96-127, 0
-      - set map_path_to_tunnel_header_ret_7.0-15, 0
-      - set map_path_to_tunnel_header_ret_7.16-31, 0
-      - set map_path_to_tunnel_header_ret_7.32-47, 0
-      - set map_path_to_tunnel_header_ret_7.48-63, 0
-      - set map_path_to_tunnel_header_ret_7.64-79, 0
-      - set map_path_to_tunnel_header_ret_7.80-95, 0
-      - set map_path_to_tunnel_header_ret_7.96-111, 0
-      - set map_path_to_tunnel_header_ret_7.112-127, 0
-      - set map_path_to_tunnel_header_ret_6, 0
-      - set map_path_to_tunnel_header_ret_5, 0
-      - set map_path_to_tunnel_header_ret.0-15, 0
-      - set map_path_to_tunnel_header_ret.16-31, 0
-      - set H5, H3
-      - set W2, W0
-      - set W8, W6
-      - set W45, $data0
+      - set tango_tunnel_hdr_12.0-31, $constant6
+      - set tango_tunnel_hdr_12.32-63, $constant7
+      - set tango_tunnel_hdr_11.0-15, 1
+      - set tango_tunnel_hdr_11.16-31, 0
+      - set tango_tunnel_hdr_11.32-47, 0
+      - set tango_tunnel_hdr_11.48-63, 0
+      - set tango_tunnel_hdr_10.0-15, 0
+      - set tango_tunnel_hdr_10.16-31, 0
+      - set tango_tunnel_hdr_10.32-47, 0
+      - set tango_tunnel_hdr_10.48-63, 0
+      - set tango_tunnel_hdr_10.64-79, 0
+      - set tango_tunnel_hdr_10.80-95, 0
+      - set tango_tunnel_hdr_10.96-111, 0
+      - set tango_tunnel_hdr_10.112-127, 0
+      - set tango_tunnel_hdr.0-15, 6
+      - set tango_tunnel_hdr.16-31, 0
+      - set W5(0..15), $data0
+      - set W7, W0
+      - add W8, $constant2, W0
+      - add W9, $constant3, W0
+      - set W12, W10
+      - set W36, W32
+      - set W37, W34
+      - set W40, W38
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -2228,27 +2257,27 @@ stage 5 ingress:
       - {  }
     default_only_action: NoAction
   action table_5$action_data:
-    p4: { name: IngressControl.table_2387$action }
+    p4: { name: IngressControl.table_2016$action }
     row: 15
     logical_bus: A
     column: 0
     vpns: [ 0 ]
     home_row:
     - 15
-    format IngressControl.labeledstmt_15: { $adf_h0: 0..15, $adf_f1: 32..63 }
-    action_bus: { 32..33 : $adf_h0, 100..103 : $adf_f1 }
+    format IngressControl.labeledstmt_15: { $adf_f0: 0..31, $adf_f1: 32..63, $adf_f2: 64..95, $adf_f3: 96..127 }
+    action_bus: { 96..99 : $adf_f2, 100..103 : $adf_f3, 104..107 : $adf_f0, 108..111 : $adf_f1 }
 stage 6 ingress:
   dependency: match
   ternary_match table_6 0:
-    p4: { name: IngressControl.table_2386, size: 512 }
+    p4: { name: IngressControl.table_2015, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -2261,21 +2290,21 @@ stage 6 ingress:
     hash_dist:
       0: { hash: 0, mask: 0xff, shift: 4 }
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
-      exact group 0: { 0: path_id2030_0 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
+      exact group 0: { 0: path_id1675_0 }
       hash 0:
-        0..7: path_id2030_0
+        0..7: path_id1675_0
       hash group 0:
         table: [0]
         seed: 0x0
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_7 ]
     miss:  table_7
@@ -2283,7 +2312,7 @@ stage 6 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2301,7 +2330,7 @@ stage 6 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2315,7 +2344,7 @@ stage 6 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2333,7 +2362,7 @@ stage 6 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2347,7 +2376,7 @@ stage 6 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2365,7 +2394,7 @@ stage 6 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2379,7 +2408,7 @@ stage 6 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2397,7 +2426,7 @@ stage 6 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2411,7 +2440,7 @@ stage 6 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2429,7 +2458,7 @@ stage 6 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2461,14 +2490,14 @@ stage 6 ingress:
     hash_dist:
       0: { hash: 0, mask: 0xff, shift: 4 }
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
-      exact group 0: { 0: path_id2030_0 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
+      exact group 0: { 0: path_id1675_0 }
       hash 0:
-        0..7: path_id2030_0
+        0..7: path_id1675_0
       hash group 0:
         table: [0]
         seed: 0x0
@@ -2487,29 +2516,30 @@ stage 6 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000017
       - next_table: 0
-      - set forward_tango_pkt_arg_55, tango_metrics_hdr_6
-      - set forward_tango_pkt_arg_54, tango_metrics_hdr_5
-      - set forward_tango_pkt_arg_53, tango_metrics_hdr
+      - set forward_tango_pkt_arg_62, tango_metrics_hdr_6
+      - set forward_tango_pkt_arg_61, tango_metrics_hdr_5
+      - set forward_tango_pkt_arg_60, tango_metrics_hdr
       - set timestamp_0.0-3, time_now_0.16-23(4..7)
       - set timestamp_0.4-7, time_now_0.24-27
       - set timestamp_0.8-11, time_now_0.28-31
       - set SequenceNumberManager_increment_ret_0, table_6$salu.sequence_counters_0
-      - set tango_tunnel_hdr_8.0-31, map_path_to_tunnel_header_ret_8.0-31
-      - set tango_tunnel_hdr_8.32-63, map_path_to_tunnel_header_ret_8.32-63
-      - set tango_tunnel_hdr_8.64-95, map_path_to_tunnel_header_ret_8.64-95
-      - set tango_tunnel_hdr_8.96-127, map_path_to_tunnel_header_ret_8.96-127
-      - set tango_tunnel_hdr_7.0-15, map_path_to_tunnel_header_ret_7.0-15
-      - set tango_tunnel_hdr_7.16-31, map_path_to_tunnel_header_ret_7.16-31
-      - set tango_tunnel_hdr_7.32-47, map_path_to_tunnel_header_ret_7.32-47
-      - set tango_tunnel_hdr_7.48-63, map_path_to_tunnel_header_ret_7.48-63
-      - set tango_tunnel_hdr_7.64-79, map_path_to_tunnel_header_ret_7.64-79
-      - set tango_tunnel_hdr_7.80-95, map_path_to_tunnel_header_ret_7.80-95
-      - set tango_tunnel_hdr_7.96-111, map_path_to_tunnel_header_ret_7.96-111
-      - set tango_tunnel_hdr_7.112-127, map_path_to_tunnel_header_ret_7.112-127
-      - set tango_tunnel_hdr_6, map_path_to_tunnel_header_ret_6
-      - set tango_tunnel_hdr_5, map_path_to_tunnel_header_ret_5
-      - set tango_tunnel_hdr.0-15, map_path_to_tunnel_header_ret.0-15
-      - set tango_tunnel_hdr.16-31, map_path_to_tunnel_header_ret.16-31
+      - set forward_tango_pkt_arg_59.0-31, tango_tunnel_hdr_12.0-31
+      - set forward_tango_pkt_arg_59.32-63, tango_tunnel_hdr_12.32-63
+      - set forward_tango_pkt_arg_58.0-15, tango_tunnel_hdr_11.0-15
+      - set forward_tango_pkt_arg_58.16-31, tango_tunnel_hdr_11.16-31
+      - set forward_tango_pkt_arg_58.32-47, tango_tunnel_hdr_11.32-47
+      - set forward_tango_pkt_arg_58.48-63, tango_tunnel_hdr_11.48-63
+      - set forward_tango_pkt_arg_57.0-15, tango_tunnel_hdr_10.0-15
+      - set forward_tango_pkt_arg_57.16-31, tango_tunnel_hdr_10.16-31
+      - set forward_tango_pkt_arg_57.32-47, tango_tunnel_hdr_10.32-47
+      - set forward_tango_pkt_arg_57.48-63, tango_tunnel_hdr_10.48-63
+      - set forward_tango_pkt_arg_57.64-79, tango_tunnel_hdr_10.64-79
+      - set forward_tango_pkt_arg_57.80-95, tango_tunnel_hdr_10.80-95
+      - set forward_tango_pkt_arg_57.96-111, tango_tunnel_hdr_10.96-111
+      - set forward_tango_pkt_arg_57.112-127, tango_tunnel_hdr_10.112-127
+      - set forward_tango_pkt_arg_53.0-15, tango_tunnel_hdr.0-15
+      - set forward_tango_pkt_arg_53.16-31, tango_tunnel_hdr.16-31
+      - deposit-field W4(16..31), W9(0..15), W5
       - table_6$salu.sequence_counters_0(sequence_counters_0_regaction, $hash_dist)
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
@@ -2520,15 +2550,15 @@ stage 6 ingress:
 stage 7 ingress:
   dependency: action
   ternary_match table_7 0:
-    p4: { name: IngressControl.table_2385, size: 512 }
+    p4: { name: IngressControl.table_2014, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -2539,15 +2569,15 @@ stage 7 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_8 ]
     miss:  table_8
@@ -2555,7 +2585,7 @@ stage 7 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2573,7 +2603,7 @@ stage 7 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2587,7 +2617,7 @@ stage 7 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2605,7 +2635,7 @@ stage 7 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2619,7 +2649,7 @@ stage 7 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2637,7 +2667,7 @@ stage 7 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2651,7 +2681,7 @@ stage 7 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2669,7 +2699,7 @@ stage 7 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2683,7 +2713,7 @@ stage 7 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2701,7 +2731,7 @@ stage 7 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2719,11 +2749,11 @@ stage 7 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     instruction: table_7$tind(action, $DEFAULT)
     actions:
@@ -2742,22 +2772,6 @@ stage 7 ingress:
       - set tango_metrics_hdr_7.4-7, timestamp_0.4-7
       - set tango_metrics_hdr_7.8-11, timestamp_0.8-11
       - set seq_number_0, SequenceNumberManager_increment_ret_0
-      - set forward_tango_pkt_arg_60.0-31, tango_tunnel_hdr_8.0-31
-      - set forward_tango_pkt_arg_60.32-63, tango_tunnel_hdr_8.32-63
-      - set forward_tango_pkt_arg_60.64-95, tango_tunnel_hdr_8.64-95
-      - set forward_tango_pkt_arg_60.96-127, tango_tunnel_hdr_8.96-127
-      - set forward_tango_pkt_arg_59.0-15, tango_tunnel_hdr_7.0-15
-      - set forward_tango_pkt_arg_59.16-31, tango_tunnel_hdr_7.16-31
-      - set forward_tango_pkt_arg_59.32-47, tango_tunnel_hdr_7.32-47
-      - set forward_tango_pkt_arg_59.48-63, tango_tunnel_hdr_7.48-63
-      - set forward_tango_pkt_arg_59.64-79, tango_tunnel_hdr_7.64-79
-      - set forward_tango_pkt_arg_59.80-95, tango_tunnel_hdr_7.80-95
-      - set forward_tango_pkt_arg_59.96-111, tango_tunnel_hdr_7.96-111
-      - set forward_tango_pkt_arg_59.112-127, tango_tunnel_hdr_7.112-127
-      - set forward_tango_pkt_arg_58, tango_tunnel_hdr_6
-      - set forward_tango_pkt_arg_57, tango_tunnel_hdr_5
-      - set forward_tango_pkt_arg_56.0-15, tango_tunnel_hdr.0-15
-      - set forward_tango_pkt_arg_56.16-31, tango_tunnel_hdr.16-31
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -2767,15 +2781,15 @@ stage 7 ingress:
 stage 8 ingress:
   dependency: action
   ternary_match table_8 0:
-    p4: { name: IngressControl.table_2384, size: 512 }
+    p4: { name: IngressControl.table_2013, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -2786,15 +2800,15 @@ stage 8 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_9 ]
     miss:  table_9
@@ -2802,7 +2816,7 @@ stage 8 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2820,7 +2834,7 @@ stage 8 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2834,7 +2848,7 @@ stage 8 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2852,7 +2866,7 @@ stage 8 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -2866,7 +2880,7 @@ stage 8 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2884,7 +2898,7 @@ stage 8 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2898,7 +2912,7 @@ stage 8 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2916,7 +2930,7 @@ stage 8 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2930,7 +2944,7 @@ stage 8 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -2948,7 +2962,7 @@ stage 8 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -2966,11 +2980,11 @@ stage 8 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     instruction: table_8$tind(action, $DEFAULT)
     actions:
@@ -2984,10 +2998,10 @@ stage 8 ingress:
       - default_action: { allowed: true }
       - handle: 0x2000001d
       - next_table: 0
-      - set forward_tango_pkt_arg_61.0-3, tango_metrics_hdr_7.0-3
-      - set forward_tango_pkt_arg_61.4-7, tango_metrics_hdr_7.4-7
-      - set forward_tango_pkt_arg_61.8-11, tango_metrics_hdr_7.8-11
-      - set forward_tango_pkt_arg_61.12-15, tango_metrics_hdr_7.12-15
+      - set forward_tango_pkt_arg_63.0-3, tango_metrics_hdr_7.0-3
+      - set forward_tango_pkt_arg_63.4-7, tango_metrics_hdr_7.4-7
+      - set forward_tango_pkt_arg_63.8-11, tango_metrics_hdr_7.8-11
+      - set forward_tango_pkt_arg_63.12-15, tango_metrics_hdr_7.12-15
       - set tango_metrics_hdr_8, seq_number_0
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
@@ -2998,15 +3012,15 @@ stage 8 ingress:
 stage 9 ingress:
   dependency: action
   ternary_match table_9 0:
-    p4: { name: IngressControl.table_2383, size: 512 }
+    p4: { name: IngressControl.table_2012, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -3017,15 +3031,15 @@ stage 9 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_10 ]
     miss:  table_10
@@ -3033,7 +3047,7 @@ stage 9 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3051,7 +3065,7 @@ stage 9 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -3065,7 +3079,7 @@ stage 9 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3083,7 +3097,7 @@ stage 9 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -3097,7 +3111,7 @@ stage 9 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3115,7 +3129,7 @@ stage 9 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3129,7 +3143,7 @@ stage 9 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3147,7 +3161,7 @@ stage 9 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3161,7 +3175,7 @@ stage 9 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3179,7 +3193,7 @@ stage 9 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3197,11 +3211,11 @@ stage 9 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0 }
     instruction: table_9$tind(action, $DEFAULT)
     actions:
@@ -3215,7 +3229,7 @@ stage 9 ingress:
       - default_action: { allowed: true }
       - handle: 0x20000020
       - next_table: 0
-      - set forward_tango_pkt_arg_62, tango_metrics_hdr_8
+      - set forward_tango_pkt_arg_64, tango_metrics_hdr_8
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -3225,15 +3239,15 @@ stage 9 ingress:
 stage 10 ingress:
   dependency: action
   ternary_match table_10 0:
-    p4: { name: IngressControl.table_2382, size: 512 }
+    p4: { name: IngressControl.table_2011, size: 512 }
     p4_param_order: 
-      path_id2030_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id2030" }
+      path_id1675_0: { type: ternary, size: 8, full_size: 8, key_name: "path_id1675" }
       hdr.forward_flow.forward_flow_ip_header_6: { type: ternary, size: 8, full_size: 8 }
       hdr.forward_flow.forward_flow_udp_header_1: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_9: { type: ternary, size: 32, full_size: 32 }
       hdr.forward_flow.forward_flow_udp_header_0: { type: ternary, size: 16, full_size: 16 }
       hdr.forward_flow.forward_flow_ip_header_8: { type: ternary, size: 32, full_size: 32 }
-      if_precomp2362_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp2362" }
+      if_precomp1991_0: { type: ternary, size: 13, full_size: 13, key_name: "if_precomp1991" }
       if_precomp_0: { type: ternary, size: 12, full_size: 12, key_name: "if_precomp" }
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: [ 0, 1, 2, 3 ]
@@ -3244,15 +3258,15 @@ stage 10 ingress:
     - 0
     - 0
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     match:
-    - { group: 0, byte_group: 1, byte_config: 0, dirtcam: 0x555 }
-    - { group: 1, byte_config: 3, dirtcam: 0x155 }
-    - { group: 2, dirtcam: 0x15 }
+    - { group: 0, byte_group: 3, byte_config: 0, dirtcam: 0x555 }
+    - { group: 1, byte_group: 3, byte_config: 1, dirtcam: 0x555 }
+    - { group: 2, byte_config: 3, dirtcam: 0x45 }
     - { group: 3, dirtcam: 0x155 }
     hit: [  table_11 ]
     miss:  table_11
@@ -3260,7 +3274,7 @@ stage 10 ingress:
       static_entries:
       - priority: 0
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3278,7 +3292,7 @@ stage 10 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -3292,7 +3306,7 @@ stage 10 ingress:
         action_parameters_values: []
       - priority: 1
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3310,7 +3324,7 @@ stage 10 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x1FFF"
         - field_name: if_precomp
@@ -3324,7 +3338,7 @@ stage 10 ingress:
         action_parameters_values: []
       - priority: 2
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3342,7 +3356,7 @@ stage 10 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3356,7 +3370,7 @@ stage 10 ingress:
         action_parameters_values: []
       - priority: 3
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3374,7 +3388,7 @@ stage 10 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3388,7 +3402,7 @@ stage 10 ingress:
         action_parameters_values: []
       - priority: 4
         match_key_fields_values:
-        - field_name: path_id2030
+        - field_name: path_id1675
           value: "0x0"
           mask: "0x0"
         - field_name: hdr.forward_flow.forward_flow_ip_header_6
@@ -3406,7 +3420,7 @@ stage 10 ingress:
         - field_name: hdr.forward_flow.forward_flow_ip_header_8
           value: "0x0"
           mask: "0x0"
-        - field_name: if_precomp2362
+        - field_name: if_precomp1991
           value: "0x0"
           mask: "0x0"
         - field_name: if_precomp
@@ -3424,11 +3438,11 @@ stage 10 ingress:
     bus: 0
     column: 2
     input_xbar:
-      ternary group 0: { 0: hdr.forward_flow.forward_flow_udp_header_1, 16: hdr.forward_flow.forward_flow_udp_header_0, 32: if_precomp2362_0(0..7) }
-      ternary group 1: { 0: hdr.forward_flow.forward_flow_ip_header_6, 8: hdr.forward_flow.forward_flow_ip_header_9(24..31), 16: if_precomp_0.4-11, 24: if_precomp2362_0(8..12), 32: hdr.forward_flow.forward_flow_ip_header_9(16..23) }
-      ternary group 2: { 0: path_id2030_0, 8: hdr.forward_flow.forward_flow_ip_header_8(0..7), 16: hdr.wire_ev.event_id }
-      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..15), 8: hdr.forward_flow.forward_flow_ip_header_8(16..31), 24: hdr.forward_flow.forward_flow_ip_header_9(0..7), 32: hdr.forward_flow.forward_flow_ip_header_8(8..15) }
-      byte group 1: { 0: if_precomp_0.0-3 }
+      ternary group 0: { 0: if_precomp_0, 16: hdr.forward_flow.forward_flow_ip_header_6, 24: hdr.forward_flow.forward_flow_ip_header_9(24..31), 32: hdr.forward_flow.forward_flow_ip_header_9(0..7) }
+      ternary group 1: { 0: if_precomp1991_0.5-12, 8: hdr.forward_flow.forward_flow_udp_header_0(8..15), 16: hdr.forward_flow.forward_flow_udp_header_1, 32: hdr.forward_flow.forward_flow_udp_header_0(0..7) }
+      ternary group 2: { 0: path_id1675_0, 8: hdr.wire_ev.event_id, 24: hdr.forward_flow.forward_flow_ip_header_8(16..23) }
+      ternary group 3: { 0: hdr.forward_flow.forward_flow_ip_header_9(8..23), 16: hdr.forward_flow.forward_flow_ip_header_8(24..31), 24: hdr.forward_flow.forward_flow_ip_header_8(0..15) }
+      byte group 3: { 0: if_precomp1991_0.0-4 }
     format: { action: 0..0, immediate: 1..32 }
     action_bus: { 64..65 : immediate(0..15), 66..67 : immediate(16..31) }
     instruction: table_10$tind(action, $DEFAULT)
@@ -3448,44 +3462,43 @@ stage 10 ingress:
       - set hdr.incoming_tango_traffic.$valid, 1
       - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.0-31, forward_tango_pkt_arg.0-31
       - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0.32-47, forward_tango_pkt_arg.32-47
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31, forward_tango_pkt_arg_32.0-31
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47, forward_tango_pkt_arg_32.32-47
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2, forward_tango_pkt_arg_33
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15, forward_tango_pkt_arg_56.0-15
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31, forward_tango_pkt_arg_56.16-31
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1, forward_tango_pkt_arg_34
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15, forward_tango_pkt_arg_59.0-15
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31, forward_tango_pkt_arg_59.16-31
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47, forward_tango_pkt_arg_59.32-47
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63, forward_tango_pkt_arg_59.48-63
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79, forward_tango_pkt_arg_59.64-79
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95, forward_tango_pkt_arg_59.80-95
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111, forward_tango_pkt_arg_59.96-111
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127, forward_tango_pkt_arg_59.112-127
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-31, forward_tango_pkt_arg_60.0-31
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-63, forward_tango_pkt_arg_60.32-63
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.64-95, forward_tango_pkt_arg_60.64-95
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.96-127, forward_tango_pkt_arg_60.96-127
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2, forward_tango_pkt_arg_37
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3, forward_tango_pkt_arg_38
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0, forward_tango_pkt_arg_53
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2, forward_tango_pkt_arg_54
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3, forward_tango_pkt_arg_62
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4, forward_tango_pkt_arg_55
-      - set hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2, forward_tango_pkt_arg_41
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.0-31, forward_tango_pkt_arg_33.0-31
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1.32-47, forward_tango_pkt_arg_33.32-47
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2, forward_tango_pkt_arg_34
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.0-15, forward_tango_pkt_arg_53.0-15
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0.16-31, forward_tango_pkt_arg_53.16-31
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.0-15, forward_tango_pkt_arg_57.0-15
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.16-31, forward_tango_pkt_arg_57.16-31
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.32-47, forward_tango_pkt_arg_57.32-47
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.48-63, forward_tango_pkt_arg_57.48-63
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.64-79, forward_tango_pkt_arg_57.64-79
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.80-95, forward_tango_pkt_arg_57.80-95
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.96-111, forward_tango_pkt_arg_57.96-111
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4.112-127, forward_tango_pkt_arg_57.112-127
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.0-15, forward_tango_pkt_arg_58.0-15
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.16-31, forward_tango_pkt_arg_58.16-31
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.32-47, forward_tango_pkt_arg_58.32-47
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5.48-63, forward_tango_pkt_arg_58.48-63
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.0-31, forward_tango_pkt_arg_59.0-31
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6.32-63, forward_tango_pkt_arg_59.32-63
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0, forward_tango_pkt_arg_60
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2, forward_tango_pkt_arg_61
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3, forward_tango_pkt_arg_64
+      - set hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4, forward_tango_pkt_arg_62
       - set hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8, forward_tango_pkt_arg_47
       - set hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9, forward_tango_pkt_arg_48
       - set ig_intr_md_for_tm.ucast_egress_port, 2
       - deposit-field B8(4..7), B11(0..3), B0
       - deposit-field B9(4..7), B12(0..3), B7
-      - deposit-field H0(0..7), H1(0..7), H2
-      - set H4, H5
       - bitmasked-set H39, $data0, H39
-      - set W1, W2
-      - set W7, W8
-      - deposit-field W10(16..31), W4(4..19), W11
-      - deposit-field W13(16..31), W3(13..28), W14
-      - set W43, W45
+      - deposit-field W1(16..31), W8(0..15), W2
+      - set W3, W4
+      - set W6, W7
+      - set W11, W12
+      - deposit-field W14(16..31), W13(12..27), W15
+      - set W33, W36
+      - set W35, W37
+      - set W39, W40
       NoAction(-1, 2):
       - hit_allowed: { allowed: false, reason: user_indicated_default_only }
       - default_only_action: { allowed: true }
@@ -3496,7 +3509,7 @@ stage 10 ingress:
 stage 11 ingress:
   dependency: action
   ternary_match table_11 0:
-    p4: { name: IngressControl.table_2381, size: 512 }
+    p4: { name: IngressControl.table_2010, size: 512 }
     p4_param_order: 
       hdr.wire_ev.event_id: { type: ternary, size: 8, full_size: 8 }
     row: 0
