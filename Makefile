@@ -3,6 +3,7 @@ COMPILER=./dptc
 IMAGE=jsonch/lucid:lucid
 BUILD_DIR=target-route-updates
 MAIN_FILE=src/dpt/tango/TangoMeasurementWithUpdates.dpt
+PORTS_CONFIG=ports.json
 SOURCES=$(shell find src -type f -name "*.dpt")
 
 all: lint test compile
@@ -20,7 +21,7 @@ test: $(SOURCES)
 	@tox -e py11
 
 compile: $(SOURCES)
-	@$(COMPILER) $(MAIN_FILE) -o $(BUILD_DIR)
+	@$(COMPILER) $(MAIN_FILE) -o $(BUILD_DIR) --ports $(PORTS_CONFIG)
 
 clean:
 	@rm -rf $(BUILD_DIR)

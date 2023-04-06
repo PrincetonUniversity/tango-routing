@@ -659,7 +659,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2=forward_t
    
 hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_tango_pkt_arg_33;
     hdr.bridge_ev.port_event_id=2;
-    ig_tm_md.ucast_egress_port=9w2;
+    ig_tm_md.ucast_egress_port=9w128;
   }
   action labeledstmt_26(){
     //NOOP

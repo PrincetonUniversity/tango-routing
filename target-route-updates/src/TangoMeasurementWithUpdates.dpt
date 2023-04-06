@@ -8,7 +8,7 @@ include "store_managers/SequenceNumberManager.dpt"
  * ================================================================================================================== */
 
 // Port declarations
-const int<<9>> OUT_PORT = 2;
+const int<<9>> OUT_PORT = 128;
 
 // Tango UDP header to counter ECMP
 const UDPHeader_t TANGO_UDP_HEADER = {
@@ -24,8 +24,8 @@ const IPv6Header_t IPV6_HEADER_TEMPLATE = {
     payload_len = 0;
     next_header = 17; // UDP
     hop_limit = 1500;
-    src_addr_lo = 0x123456789012;
     src_addr_hi = 0x345678901234;
+    src_addr_lo = 0x123456789012;
     dest_addr_hi = 0;
     dest_addr_lo = 0;
 };
