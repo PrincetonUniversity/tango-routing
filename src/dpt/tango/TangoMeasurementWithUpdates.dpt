@@ -20,13 +20,14 @@ const UDPHeader_t TANGO_UDP_HEADER = {
 
 // Tango IPv6 header template
 const IPv6Header_t IPV6_HEADER_TEMPLATE = {
-    version_cls_flow = 6;
+    version_cls_flow = 0x00600000;
     payload_len = 0;
     next_header = 17; // UDP
     hop_limit = 1500;
-    src_addr = 0;
-    dest_addr_lo = 0;
+    src_addr_lo = 0x123456789012;
+    src_addr_hi = 0x345678901234;
     dest_addr_hi = 0;
+    dest_addr_lo = 0;
 };
 
 /* ================================================================================================================== *
@@ -116,7 +117,6 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
             ip_header#protocol
         ) with
         | _, _, _, _, _ -> {
-            printf("ERROR: traffic class map has not been configured!");
             traffic_class = 15;
         }
 
@@ -128,7 +128,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
         match (path_id) with
         | _ -> {
             // dest: 2604:4540:80::1 --> 50532837584298871751240540595104514049
-            tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 18 + ip_header#len; dest_addr_lo = 1; dest_addr_hi = 2739390614536716288 };
+            tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 18 + ip_header#len; dest_addr_hi = 2739390614536716288; dest_addr_lo = 1; };
         }
 
 

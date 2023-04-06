@@ -59,15 +59,16 @@ type IPv4Header_t = {
  **/
 type IPv6Header_t = {
    // int<<4>>   version;
-   // int<<8>>   traffic_class; // TODO: Should we reconsider naming
+   // int<<8>>   traffic_class;
    // int<<20>>  flow_label;
    int<<32>>  version_cls_flow;
    int<<16>>  payload_len;
    int<<8>>   next_header;
    int<<8>>   hop_limit;
-   int<<128>> src_addr;
-   int<<64>> dest_addr_lo;
+   int<<64>> src_addr_hi;
+   int<<64>> src_addr_lo;
    int<<64>> dest_addr_hi;
+   int<<64>> dest_addr_lo;
 }
 
 /**
