@@ -66,7 +66,8 @@ type IPv6Header_t = {
    int<<8>>   next_header;
    int<<8>>   hop_limit;
    int<<128>> src_addr;
-   int<<128>> dest_addr;
+   int<<64>> dest_addr_lo;
+   int<<64>> dest_addr_hi;
 }
 
 /**

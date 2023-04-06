@@ -1,8 +1,5 @@
 include "Time.dpt"
 include "Types.dpt"
-include "static_maps/TrafficClassMap.dpt"
-include "static_maps/TunnelHeaderMap.dpt"
-include "store_managers/InvalidPacketManager.dpt"
 include "store_managers/RouteManager.dpt"
 include "store_managers/SequenceNumberManager.dpt"
 
@@ -19,6 +16,17 @@ const UDPHeader_t TANGO_UDP_HEADER = {
     destination_port = 8080;
     length = 0;
     checksum = 0;
+};
+
+// Tango IPv6 header template
+const IPv6Header_t IPV6_HEADER_TEMPLATE = {
+    version_cls_flow = 6;
+    payload_len = 0;
+    next_header = 17; // UDP
+    hop_limit = 1500;
+    src_addr = 0;
+    dest_addr_lo = 0;
+    dest_addr_hi = 0;
 };
 
 /* ================================================================================================================== *
@@ -99,13 +107,6 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
         /* 1. Map flow to a specific physical route. */
         // -- Map flow to traffic class.
-        // int<<8>> traffic_class = map_flow_to_traffic_class(
-        //     ip_header#src_address,
-        //     udp_header#source_port,
-        //     ip_header#dest_address,
-        //     udp_header#destination_port,
-        //     ip_header#protocol
-        // );
         int<<8>> traffic_class = 0;
         match (
             ip_header#src_address,
@@ -123,7 +124,12 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
         int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
 
         // -- Get physical path header to tunnel with.
-        IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header(path_id);
+        IPv6Header_t tango_tunnel_hdr = IPV6_HEADER_TEMPLATE;
+        match (path_id) with
+        | _ -> {
+            // dest: 2604:4540:80::1 --> 50532837584298871751240540595104514049
+            tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 18 + ip_header#len; dest_addr_lo = 1; dest_addr_hi = 2739390614536716288 };
+        }
 
 
         /* 2. Increment sequence number. */
@@ -147,7 +153,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
         event forward_tango_pkt = incoming_tango_traffic (
             eth_header,
-            { tango_tunnel_hdr with payload_len = 18 + ip_header#len },
+            tango_tunnel_hdr,
             { TANGO_UDP_HEADER with length = 18 + ip_header#len },
             tango_metrics_hdr,
             ip_header,

@@ -12,7 +12,7 @@ header wire_ev_t {
 }
 header bridge_ev_t {
   bit<8> port_event_id;
-  bit<6> flag_pad_2393;
+  bit<6> flag_pad_2022;
   bit<1> incoming_tango_traffic;
   bit<1> forward_flow;
 }
@@ -25,7 +25,8 @@ header incoming_tango_traffic_t {
   bit<8> incoming_tango_traffic_tango_ip_header_2;
   bit<8> incoming_tango_traffic_tango_ip_header_3;
   bit<128> incoming_tango_traffic_tango_ip_header_4;
-  bit<128> incoming_tango_traffic_tango_ip_header_5;
+  bit<64> incoming_tango_traffic_tango_ip_header_5;
+  bit<64> incoming_tango_traffic_tango_ip_header_6;
   bit<16> incoming_tango_traffic_tango_udp_header_0;
   bit<16> incoming_tango_traffic_tango_udp_header_1;
   bit<16> incoming_tango_traffic_tango_udp_header_2;
@@ -140,16 +141,16 @@ control IngressControl(inout hdr_t hdr,
     in ingress_intrinsic_metadata_from_parser_t ig_prsr_md,
     inout ingress_intrinsic_metadata_for_deparser_t ig_dprsr_md,
     inout ingress_intrinsic_metadata_for_tm_t ig_tm_md){
-  bit<8> merged_var_traffic_class_traffic_cls_2377;
+  bit<8> merged_var_traffic_class_traffic_cls_2006;
   action labeledstmt_28(){
     hdr.incoming_tango_traffic.setInvalid();
   }
   action labeledstmt_1(){
     labeledstmt_28();
   }
-  bit<13> if_precomp2362;
+  bit<13> if_precomp1991;
   action labeledstmt_30(){
-    if_precomp2362=((hdr.forward_flow.forward_flow_udp_header_1[15:3])-13w0);
+    if_precomp1991=((hdr.forward_flow.forward_flow_udp_header_1[15:3])-13w0);
   }
   bit<12> if_precomp;
   action labeledstmt_29(){
@@ -167,7 +168,7 @@ control IngressControl(inout hdr_t hdr,
   }
   action labeledstmt_32(){
    
-merged_var_traffic_class_traffic_cls_2377=(hdr.forward_flow.forward_flow_udp_header_0[7:0]);
+merged_var_traffic_class_traffic_cls_2006=(hdr.forward_flow.forward_flow_udp_header_0[7:0]);
   }
   bit<8> path_id;
   action labeledstmt_31(){
@@ -177,36 +178,40 @@ merged_var_traffic_class_traffic_cls_2377=(hdr.forward_flow.forward_flow_udp_hea
     labeledstmt_31();
     labeledstmt_32();
   }
-  action labeledstmt_40(){
-    merged_var_traffic_class_traffic_cls_2377=8w0;
+  action labeledstmt_41(){
+    merged_var_traffic_class_traffic_cls_2006=8w0;
   }
   bit<8> RouteManager_get_path_id_ret;
-  action labeledstmt_39(){
+  action labeledstmt_40(){
     RouteManager_get_path_id_ret=8w32;
   }
-  bit<32> map_path_to_tunnel_header_ret_0;
+  bit<32> tango_tunnel_hdr_0;
+  action labeledstmt_39(){
+    tango_tunnel_hdr_0=32w6;
+  }
+  bit<16> tango_tunnel_hdr_1;
   action labeledstmt_38(){
-    map_path_to_tunnel_header_ret_0=32w32;
+    tango_tunnel_hdr_1=16w0;
   }
-  bit<16> map_path_to_tunnel_header_ret_1;
+  bit<8> tango_tunnel_hdr_2;
   action labeledstmt_37(){
-    map_path_to_tunnel_header_ret_1=16w32;
+    tango_tunnel_hdr_2=8w17;
   }
-  bit<8> map_path_to_tunnel_header_ret_2;
+  bit<8> tango_tunnel_hdr_3;
   action labeledstmt_36(){
-    map_path_to_tunnel_header_ret_2=8w32;
+    tango_tunnel_hdr_3=8w220;
   }
-  bit<8> map_path_to_tunnel_header_ret_3;
+  bit<128> tango_tunnel_hdr_4;
   action labeledstmt_35(){
-    map_path_to_tunnel_header_ret_3=8w32;
+    tango_tunnel_hdr_4=128w0;
   }
-  bit<128> map_path_to_tunnel_header_ret_4;
+  bit<64> tango_tunnel_hdr_5;
   action labeledstmt_34(){
-    map_path_to_tunnel_header_ret_4=128w32;
+    tango_tunnel_hdr_5=64w0;
   }
-  bit<128> map_path_to_tunnel_header_ret_5;
+  bit<64> tango_tunnel_hdr_6;
   action labeledstmt_33(){
-    map_path_to_tunnel_header_ret_5=128w32;
+    tango_tunnel_hdr_6=64w0;
   }
   action labeledstmt_6(){
     labeledstmt_33();
@@ -217,21 +222,22 @@ merged_var_traffic_class_traffic_cls_2377=(hdr.forward_flow.forward_flow_udp_hea
     labeledstmt_38();
     labeledstmt_39();
     labeledstmt_40();
+    labeledstmt_41();
   }
   action labeledstmt_7(){
     //NOOP
   }
-  action labeledstmt_41(){
-    merged_var_traffic_class_traffic_cls_2377=8w15;
+  action labeledstmt_42(){
+    merged_var_traffic_class_traffic_cls_2006=8w15;
   }
   action labeledstmt_8(){
-    labeledstmt_41();
+    labeledstmt_42();
   }
   action labeledstmt_9(){
     //NOOP
   }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_2378 = {
+  route_manager_0_regaction_2007 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -242,15 +248,15 @@ merged_var_traffic_class_traffic_cls_2377=(hdr.forward_flow.forward_flow_udp_hea
       //NOOP
     }
   };
-  action labeledstmt_42(){
+  action labeledstmt_43(){
    
-route_manager_0_regaction_2378.execute(merged_var_traffic_class_traffic_cls_2377);
+route_manager_0_regaction_2007.execute(merged_var_traffic_class_traffic_cls_2006);
   }
   action labeledstmt_10(){
-    labeledstmt_42();
+    labeledstmt_43();
   }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_2379 = {
+  route_manager_0_regaction_2008 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -260,43 +266,46 @@ route_manager_0_regaction_2378.execute(merged_var_traffic_class_traffic_cls_2377
       }
     }
   };
-  action labeledstmt_43(){
+  action labeledstmt_44(){
    
-RouteManager_get_path_id_ret=route_manager_0_regaction_2379.execute(merged_var_traffic_class_traffic_cls_2377);
+RouteManager_get_path_id_ret=route_manager_0_regaction_2008.execute(merged_var_traffic_class_traffic_cls_2006);
   }
   action labeledstmt_11(){
-    labeledstmt_43();
+    labeledstmt_44();
   }
   action labeledstmt_12(){
     //NOOP
   }
-  bit<8> path_id2030;
-  action labeledstmt_44(){
-    path_id2030=RouteManager_get_path_id_ret;
+  bit<8> path_id1675;
+  action labeledstmt_45(){
+    path_id1675=RouteManager_get_path_id_ret;
   }
   action labeledstmt_13(){
-    labeledstmt_44();
+    labeledstmt_45();
   }
   action labeledstmt_14(){
     //NOOP
   }
+  action labeledstmt_78(){
+    tango_tunnel_hdr_0=32w6;
+  }
   action labeledstmt_77(){
-    map_path_to_tunnel_header_ret_0=32w0;
+    tango_tunnel_hdr_1=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
   }
   action labeledstmt_76(){
-    map_path_to_tunnel_header_ret_1=16w0;
+    tango_tunnel_hdr_2=8w17;
   }
   action labeledstmt_75(){
-    map_path_to_tunnel_header_ret_2=8w0;
+    tango_tunnel_hdr_3=8w220;
   }
   action labeledstmt_74(){
-    map_path_to_tunnel_header_ret_3=8w0;
+    tango_tunnel_hdr_4=128w0;
   }
   action labeledstmt_73(){
-    map_path_to_tunnel_header_ret_4=128w0;
+    tango_tunnel_hdr_5=64w1;
   }
   action labeledstmt_72(){
-    map_path_to_tunnel_header_ret_5=128w0;
+    tango_tunnel_hdr_6=64w2739390614536716288;
   }
   bit<16> SequenceNumberManager_increment_ret;
   action labeledstmt_71(){
@@ -308,7 +317,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_2379.execute(merged_var_t
   }
   bit<8> tango_metrics_hdr_0;
   action labeledstmt_69(){
-    tango_metrics_hdr_0=((bit<8>)path_id2030);
+    tango_metrics_hdr_0=((bit<8>)path_id1675);
   }
   bit<32> tango_metrics_hdr_2;
   action labeledstmt_68(){
@@ -330,86 +339,80 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_2379.execute(merged_var_t
   action labeledstmt_64(){
     forward_tango_pkt_arg_2=hdr.forward_flow.forward_flow_eth_header_2;
   }
-  bit<16> forward_tango_pkt_arg_4;
-  action labeledstmt_63(){
-   
-forward_tango_pkt_arg_4=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
-  }
-  bit<16> forward_tango_pkt_arg_9;
-  action labeledstmt_62(){
-    forward_tango_pkt_arg_9=16w8080;
-  }
   bit<16> forward_tango_pkt_arg_10;
-  action labeledstmt_61(){
+  action labeledstmt_63(){
     forward_tango_pkt_arg_10=16w8080;
   }
   bit<16> forward_tango_pkt_arg_11;
-  action labeledstmt_60(){
-   
-forward_tango_pkt_arg_11=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
+  action labeledstmt_62(){
+    forward_tango_pkt_arg_11=16w8080;
   }
   bit<16> forward_tango_pkt_arg_12;
-  action labeledstmt_59(){
-    forward_tango_pkt_arg_12=16w0;
+  action labeledstmt_61(){
+   
+forward_tango_pkt_arg_12=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
   }
-  bit<8> forward_tango_pkt_arg_18;
-  action labeledstmt_58(){
-    forward_tango_pkt_arg_18=hdr.forward_flow.forward_flow_ip_header_0;
+  bit<16> forward_tango_pkt_arg_13;
+  action labeledstmt_60(){
+    forward_tango_pkt_arg_13=16w0;
   }
   bit<8> forward_tango_pkt_arg_19;
-  action labeledstmt_57(){
-    forward_tango_pkt_arg_19=hdr.forward_flow.forward_flow_ip_header_1;
+  action labeledstmt_59(){
+    forward_tango_pkt_arg_19=hdr.forward_flow.forward_flow_ip_header_0;
   }
-  bit<16> forward_tango_pkt_arg_20;
-  action labeledstmt_56(){
-    forward_tango_pkt_arg_20=hdr.forward_flow.forward_flow_ip_header_2;
+  bit<8> forward_tango_pkt_arg_20;
+  action labeledstmt_58(){
+    forward_tango_pkt_arg_20=hdr.forward_flow.forward_flow_ip_header_1;
   }
   bit<16> forward_tango_pkt_arg_21;
-  action labeledstmt_55(){
-    forward_tango_pkt_arg_21=hdr.forward_flow.forward_flow_ip_header_3;
+  action labeledstmt_57(){
+    forward_tango_pkt_arg_21=hdr.forward_flow.forward_flow_ip_header_2;
   }
   bit<16> forward_tango_pkt_arg_22;
-  action labeledstmt_54(){
-    forward_tango_pkt_arg_22=hdr.forward_flow.forward_flow_ip_header_4;
+  action labeledstmt_56(){
+    forward_tango_pkt_arg_22=hdr.forward_flow.forward_flow_ip_header_3;
   }
-  bit<8> forward_tango_pkt_arg_23;
-  action labeledstmt_53(){
-    forward_tango_pkt_arg_23=hdr.forward_flow.forward_flow_ip_header_5;
+  bit<16> forward_tango_pkt_arg_23;
+  action labeledstmt_55(){
+    forward_tango_pkt_arg_23=hdr.forward_flow.forward_flow_ip_header_4;
   }
   bit<8> forward_tango_pkt_arg_24;
+  action labeledstmt_54(){
+    forward_tango_pkt_arg_24=hdr.forward_flow.forward_flow_ip_header_5;
+  }
+  bit<8> forward_tango_pkt_arg_25;
+  action labeledstmt_53(){
+    forward_tango_pkt_arg_25=hdr.forward_flow.forward_flow_ip_header_6;
+  }
+  bit<16> forward_tango_pkt_arg_26;
   action labeledstmt_52(){
-    forward_tango_pkt_arg_24=hdr.forward_flow.forward_flow_ip_header_6;
-  }
-  bit<16> forward_tango_pkt_arg_25;
-  action labeledstmt_51(){
-    forward_tango_pkt_arg_25=hdr.forward_flow.forward_flow_ip_header_7;
-  }
-  bit<32> forward_tango_pkt_arg_26;
-  action labeledstmt_50(){
-    forward_tango_pkt_arg_26=hdr.forward_flow.forward_flow_ip_header_8;
+    forward_tango_pkt_arg_26=hdr.forward_flow.forward_flow_ip_header_7;
   }
   bit<32> forward_tango_pkt_arg_27;
-  action labeledstmt_49(){
-    forward_tango_pkt_arg_27=hdr.forward_flow.forward_flow_ip_header_9;
+  action labeledstmt_51(){
+    forward_tango_pkt_arg_27=hdr.forward_flow.forward_flow_ip_header_8;
   }
-  bit<16> forward_tango_pkt_arg_28;
-  action labeledstmt_48(){
-    forward_tango_pkt_arg_28=hdr.forward_flow.forward_flow_udp_header_0;
+  bit<32> forward_tango_pkt_arg_28;
+  action labeledstmt_50(){
+    forward_tango_pkt_arg_28=hdr.forward_flow.forward_flow_ip_header_9;
   }
   bit<16> forward_tango_pkt_arg_29;
-  action labeledstmt_47(){
-    forward_tango_pkt_arg_29=hdr.forward_flow.forward_flow_udp_header_1;
+  action labeledstmt_49(){
+    forward_tango_pkt_arg_29=hdr.forward_flow.forward_flow_udp_header_0;
   }
   bit<16> forward_tango_pkt_arg_30;
-  action labeledstmt_46(){
-    forward_tango_pkt_arg_30=hdr.forward_flow.forward_flow_udp_header_2;
+  action labeledstmt_48(){
+    forward_tango_pkt_arg_30=hdr.forward_flow.forward_flow_udp_header_1;
   }
   bit<16> forward_tango_pkt_arg_31;
-  action labeledstmt_45(){
-    forward_tango_pkt_arg_31=hdr.forward_flow.forward_flow_udp_header_3;
+  action labeledstmt_47(){
+    forward_tango_pkt_arg_31=hdr.forward_flow.forward_flow_udp_header_2;
+  }
+  bit<16> forward_tango_pkt_arg_32;
+  action labeledstmt_46(){
+    forward_tango_pkt_arg_32=hdr.forward_flow.forward_flow_udp_header_3;
   }
   action labeledstmt_15(){
-    labeledstmt_45();
     labeledstmt_46();
     labeledstmt_47();
     labeledstmt_48();
@@ -442,36 +445,41 @@ forward_tango_pkt_arg_11=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
     labeledstmt_75();
     labeledstmt_76();
     labeledstmt_77();
+    labeledstmt_78();
   }
   action labeledstmt_16(){
     //NOOP
   }
-  bit<32> tango_tunnel_hdr_0;
+  bit<32> forward_tango_pkt_arg_3;
+  action labeledstmt_90(){
+    forward_tango_pkt_arg_3=tango_tunnel_hdr_0;
+  }
+  bit<16> forward_tango_pkt_arg_4;
+  action labeledstmt_89(){
+    forward_tango_pkt_arg_4=tango_tunnel_hdr_1;
+  }
+  bit<8> forward_tango_pkt_arg_5;
   action labeledstmt_88(){
-    tango_tunnel_hdr_0=map_path_to_tunnel_header_ret_0;
+    forward_tango_pkt_arg_5=tango_tunnel_hdr_2;
   }
-  bit<16> tango_tunnel_hdr_1;
+  bit<8> forward_tango_pkt_arg_6;
   action labeledstmt_87(){
-    tango_tunnel_hdr_1=map_path_to_tunnel_header_ret_1;
+    forward_tango_pkt_arg_6=tango_tunnel_hdr_3;
   }
-  bit<8> tango_tunnel_hdr_2;
+  bit<128> forward_tango_pkt_arg_7;
   action labeledstmt_86(){
-    tango_tunnel_hdr_2=map_path_to_tunnel_header_ret_2;
+    forward_tango_pkt_arg_7=tango_tunnel_hdr_4;
   }
-  bit<8> tango_tunnel_hdr_3;
+  bit<64> forward_tango_pkt_arg_8;
   action labeledstmt_85(){
-    tango_tunnel_hdr_3=map_path_to_tunnel_header_ret_3;
+    forward_tango_pkt_arg_8=tango_tunnel_hdr_5;
   }
-  bit<128> tango_tunnel_hdr_4;
+  bit<64> forward_tango_pkt_arg_9;
   action labeledstmt_84(){
-    tango_tunnel_hdr_4=map_path_to_tunnel_header_ret_4;
-  }
-  bit<128> tango_tunnel_hdr_5;
-  action labeledstmt_83(){
-    tango_tunnel_hdr_5=map_path_to_tunnel_header_ret_5;
+    forward_tango_pkt_arg_9=tango_tunnel_hdr_6;
   }
   RegisterAction<bit<16>,bit<8>,bit<16>>(sequence_counters_0)
-  sequence_counters_0_regaction_2380 = {
+  sequence_counters_0_regaction_2009 = {
     void apply(inout bit<16> cell1_remote,
         out bit<16> ret_remote){
       bit<16> cell1_local=cell1_remote;
@@ -487,28 +495,27 @@ forward_tango_pkt_arg_11=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
       }
     }
   };
-  action labeledstmt_82(){
+  action labeledstmt_83(){
    
-SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2380.execute(path_id2030);
+SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2009.execute(path_id1675);
   }
   bit<12> timestamp;
-  action labeledstmt_81(){
+  action labeledstmt_82(){
     timestamp=(time_now[31:20]);
   }
-  bit<8> forward_tango_pkt_arg_13;
+  bit<8> forward_tango_pkt_arg_14;
+  action labeledstmt_81(){
+    forward_tango_pkt_arg_14=tango_metrics_hdr_0;
+  }
+  bit<32> forward_tango_pkt_arg_16;
   action labeledstmt_80(){
-    forward_tango_pkt_arg_13=tango_metrics_hdr_0;
+    forward_tango_pkt_arg_16=tango_metrics_hdr_2;
   }
-  bit<32> forward_tango_pkt_arg_15;
+  bit<8> forward_tango_pkt_arg_18;
   action labeledstmt_79(){
-    forward_tango_pkt_arg_15=tango_metrics_hdr_2;
-  }
-  bit<8> forward_tango_pkt_arg_17;
-  action labeledstmt_78(){
-    forward_tango_pkt_arg_17=tango_metrics_hdr_4;
+    forward_tango_pkt_arg_18=tango_metrics_hdr_4;
   }
   action labeledstmt_17(){
-    labeledstmt_78();
     labeledstmt_79();
     labeledstmt_80();
     labeledstmt_81();
@@ -519,71 +526,48 @@ SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2380.execute(p
     labeledstmt_86();
     labeledstmt_87();
     labeledstmt_88();
+    labeledstmt_89();
+    labeledstmt_90();
   }
   action labeledstmt_18(){
     //NOOP
   }
-  bit<32> forward_tango_pkt_arg_3;
-  action labeledstmt_95(){
-    forward_tango_pkt_arg_3=tango_tunnel_hdr_0;
-  }
-  bit<8> forward_tango_pkt_arg_5;
-  action labeledstmt_94(){
-    forward_tango_pkt_arg_5=tango_tunnel_hdr_2;
-  }
-  bit<8> forward_tango_pkt_arg_6;
-  action labeledstmt_93(){
-    forward_tango_pkt_arg_6=tango_tunnel_hdr_3;
-  }
-  bit<128> forward_tango_pkt_arg_7;
-  action labeledstmt_92(){
-    forward_tango_pkt_arg_7=tango_tunnel_hdr_4;
-  }
-  bit<128> forward_tango_pkt_arg_8;
-  action labeledstmt_91(){
-    forward_tango_pkt_arg_8=tango_tunnel_hdr_5;
-  }
   bit<16> seq_number;
-  action labeledstmt_90(){
+  action labeledstmt_92(){
     seq_number=SequenceNumberManager_increment_ret;
   }
   bit<16> tango_metrics_hdr_1;
-  action labeledstmt_89(){
+  action labeledstmt_91(){
     tango_metrics_hdr_1=((bit<16>)timestamp);
   }
   action labeledstmt_19(){
-    labeledstmt_89();
-    labeledstmt_90();
     labeledstmt_91();
     labeledstmt_92();
-    labeledstmt_93();
-    labeledstmt_94();
-    labeledstmt_95();
   }
   action labeledstmt_20(){
     //NOOP
   }
   bit<16> tango_metrics_hdr_3;
-  action labeledstmt_97(){
+  action labeledstmt_94(){
     tango_metrics_hdr_3=seq_number;
   }
-  bit<16> forward_tango_pkt_arg_14;
-  action labeledstmt_96(){
-    forward_tango_pkt_arg_14=tango_metrics_hdr_1;
+  bit<16> forward_tango_pkt_arg_15;
+  action labeledstmt_93(){
+    forward_tango_pkt_arg_15=tango_metrics_hdr_1;
   }
   action labeledstmt_21(){
-    labeledstmt_96();
-    labeledstmt_97();
+    labeledstmt_93();
+    labeledstmt_94();
   }
   action labeledstmt_22(){
     //NOOP
   }
-  bit<16> forward_tango_pkt_arg_16;
-  action labeledstmt_98(){
-    forward_tango_pkt_arg_16=tango_metrics_hdr_3;
+  bit<16> forward_tango_pkt_arg_17;
+  action labeledstmt_95(){
+    forward_tango_pkt_arg_17=tango_metrics_hdr_3;
   }
   action labeledstmt_23(){
-    labeledstmt_98();
+    labeledstmt_95();
   }
   action labeledstmt_24(){
     //NOOP
@@ -610,64 +594,66 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4=forward_tang
    
 hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5=forward_tango_pkt_arg_8;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0=forward_tango_pkt_arg_9;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6=forward_tango_pkt_arg_9;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1=forward_tango_pkt_arg_10;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0=forward_tango_pkt_arg_10;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2=forward_tango_pkt_arg_11;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1=forward_tango_pkt_arg_11;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3=forward_tango_pkt_arg_12;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2=forward_tango_pkt_arg_12;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0=forward_tango_pkt_arg_13;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3=forward_tango_pkt_arg_13;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1=forward_tango_pkt_arg_14;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0=forward_tango_pkt_arg_14;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2=forward_tango_pkt_arg_15;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1=forward_tango_pkt_arg_15;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3=forward_tango_pkt_arg_16;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2=forward_tango_pkt_arg_16;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4=forward_tango_pkt_arg_17;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3=forward_tango_pkt_arg_17;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0=forward_tango_pkt_arg_18;
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4=forward_tango_pkt_arg_18;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1=forward_tango_pkt_arg_19;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0=forward_tango_pkt_arg_19;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2=forward_tango_pkt_arg_20;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1=forward_tango_pkt_arg_20;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3=forward_tango_pkt_arg_21;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2=forward_tango_pkt_arg_21;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4=forward_tango_pkt_arg_22;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3=forward_tango_pkt_arg_22;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5=forward_tango_pkt_arg_23;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4=forward_tango_pkt_arg_23;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6=forward_tango_pkt_arg_24;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5=forward_tango_pkt_arg_24;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7=forward_tango_pkt_arg_25;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6=forward_tango_pkt_arg_25;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8=forward_tango_pkt_arg_26;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7=forward_tango_pkt_arg_26;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9=forward_tango_pkt_arg_27;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_8=forward_tango_pkt_arg_27;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0=forward_tango_pkt_arg_28;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_9=forward_tango_pkt_arg_28;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1=forward_tango_pkt_arg_29;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0=forward_tango_pkt_arg_29;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2=forward_tango_pkt_arg_30;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1=forward_tango_pkt_arg_30;
    
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_tango_pkt_arg_31;
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2=forward_tango_pkt_arg_31;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_tango_pkt_arg_32;
     hdr.bridge_ev.port_event_id=2;
     ig_tm_md.ucast_egress_port=9w2;
   }
   action labeledstmt_26(){
     //NOOP
   }
-  action labeledstmt_99(){
+  action labeledstmt_96(){
     hdr.forward_flow.setInvalid();
   }
   action labeledstmt_27(){
-    labeledstmt_99();
+    labeledstmt_96();
   }
-  table table_2392 {
+  table table_2021 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -682,14 +668,14 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_3();
     } 
   } 
-  table table_2391 {
+  table table_2020 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -706,14 +692,14 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_) : labeledstmt_4();
     } 
   } 
-  table table_2390 {
+  table table_2019 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -729,9 +715,9 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_) : labeledstmt_7();
     } 
   } 
-  table table_2389 {
+  table table_2018 {
     key = {
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -753,14 +739,14 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_) : labeledstmt_9();
     } 
   } 
-  table table_2388 {
+  table table_2017 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -776,15 +762,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_) : labeledstmt_12();
     } 
   } 
-  table table_2387 {
+  table table_2016 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -800,15 +786,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_14();
     } 
   } 
-  table table_2386 {
+  table table_2015 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -824,15 +810,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_16();
     } 
   } 
-  table table_2385 {
+  table table_2014 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -848,15 +834,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_18();
     } 
   } 
-  table table_2384 {
+  table table_2013 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -872,15 +858,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_20();
     } 
   } 
-  table table_2383 {
+  table table_2012 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -896,15 +882,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_22();
     } 
   } 
-  table table_2382 {
+  table table_2011 {
     key = {
-      path_id2030 : ternary;
+      path_id1675 : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
       hdr.forward_flow.forward_flow_ip_header_9 : ternary;
       hdr.forward_flow.forward_flow_udp_header_0 : ternary;
       hdr.forward_flow.forward_flow_ip_header_8 : ternary;
-      if_precomp2362 : ternary;
+      if_precomp1991 : ternary;
       if_precomp : ternary;
       hdr.wire_ev.event_id : ternary;
     }
@@ -920,7 +906,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_,_,_,_,_,_,_) : labeledstmt_24();
     } 
   } 
-  table table_2381 {
+  table table_2010 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -935,18 +921,18 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
     } 
   } 
   apply {
-    table_2392.apply();
-    table_2391.apply();
-    table_2390.apply();
-    table_2389.apply();
-    table_2388.apply();
-    table_2387.apply();
-    table_2386.apply();
-    table_2385.apply();
-    table_2384.apply();
-    table_2383.apply();
-    table_2382.apply();
-    table_2381.apply();
+    table_2021.apply();
+    table_2020.apply();
+    table_2019.apply();
+    table_2018.apply();
+    table_2017.apply();
+    table_2016.apply();
+    table_2015.apply();
+    table_2014.apply();
+    table_2013.apply();
+    table_2012.apply();
+    table_2011.apply();
+    table_2010.apply();
   }
 } 
 control IngressDeparser(packet_out pkt,
@@ -1001,6 +987,8 @@ control EgressControl(inout hdr_t hdr,
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4")
  
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5")
+ 
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6")
  
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0")
  
