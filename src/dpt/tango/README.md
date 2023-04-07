@@ -1,7 +1,15 @@
 # Mini Test for Dynamic Routing with Local eBPF Node in Jen's Testbed 
 ### Cabernet802 (DPID 4, Port 16/0) for sending traffic
+Send traffic on interface enp134s0f0 with this command (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed):
+```
+iperf -t 50000000 -i 1 -V -M 100 -u -length .1k -c 2604:4540:80::1 -b .1M
+
+```
 ### Cabino1 as Tango switch 
 ### Cabernet804 (DPID 12, Port XX/0) as eBPF Tango node 
+```
+Use interface enp134s0f0 to send and receive traffic 
+```
 
 # Full Test for Dynamic Routing with external Vultr eBPF Node 
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
