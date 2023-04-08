@@ -1,14 +1,14 @@
 ---eliminateBools.ml log---
 -----before boolean elimination-------
-memop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
- {return curr+1;
+memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
 }
 
-memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> ignore)
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<24>> sequence_counters_0 = Array.create(8);
+global Array.t<<16>> sequence_counters_0 = Array.create(8);
 
 
 global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
@@ -107,28 +107,32 @@ global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 
-entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7);
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7);
+event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
 
-handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7) {
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
+
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3) {
 
 }
 
-handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7) {
-int<<4>> map_flow_to_traffic_class_ret = 0;
-match (forward_flow_ip_header_8,forward_flow_tcp_header_0,forward_flow_ip_header_9,forward_flow_tcp_header_1,forward_flow_ip_header_6) with 
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
+int<<8>> map_flow_to_traffic_class_ret = 32;
+match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
 map_flow_to_traffic_class_ret = 15;
 }
-int<<4>> traffic_class = map_flow_to_traffic_class_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<8>> traffic_class = map_flow_to_traffic_class_ret;
+int<<8>> path_id = (int<<8>>)traffic_class;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
-int<<128>> map_path_to_tunnel_header_ret_4 = 32;
-int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_4 = 32;
+int<<64>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_6 = 32;
+int<<64>> map_path_to_tunnel_header_ret_7 = 32;
 match path_id with 
 | _ -> {
 map_path_to_tunnel_header_ret_0 = 0;
@@ -137,51 +141,92 @@ map_path_to_tunnel_header_ret_2 = 0;
 map_path_to_tunnel_header_ret_3 = 0;
 map_path_to_tunnel_header_ret_4 = 0;
 map_path_to_tunnel_header_ret_5 = 0;
+map_path_to_tunnel_header_ret_6 = 0;
+map_path_to_tunnel_header_ret_7 = 0;
 }
 int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
 int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
 int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
 int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
-int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
-int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
-int<<3>> path_id = (int<<3>>)traffic_class;
-int<<24>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,0);
-int<<24>> seq_number = SequenceNumberManager_increment_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<64>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<64>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<64>> tango_tunnel_hdr_6 = map_path_to_tunnel_header_ret_6;
+int<<64>> tango_tunnel_hdr_7 = map_path_to_tunnel_header_ret_7;
+int<<8>> path_id = (int<<8>>)traffic_class;
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<48>> egress_packet_arg_0 = forward_flow_eth_header_0;
+int<<48>> egress_packet_arg_1 = forward_flow_eth_header_1;
+int<<16>> egress_packet_arg_2 = forward_flow_eth_header_2;
+int<<32>> egress_packet_arg_3 = tango_tunnel_hdr_0;
+int<<16>> egress_packet_arg_4 = 88+forward_flow_ip_header_2;
+int<<8>> egress_packet_arg_5 = tango_tunnel_hdr_2;
+int<<8>> egress_packet_arg_6 = tango_tunnel_hdr_3;
+int<<64>> egress_packet_arg_7 = tango_tunnel_hdr_4;
+int<<64>> egress_packet_arg_8 = tango_tunnel_hdr_5;
+int<<64>> egress_packet_arg_9 = tango_tunnel_hdr_6;
+int<<64>> egress_packet_arg_10 = tango_tunnel_hdr_7;
+int<<16>> egress_packet_arg_11 = 8080;
+int<<16>> egress_packet_arg_12 = 8080;
+int<<16>> egress_packet_arg_13 = 0;
+int<<16>> egress_packet_arg_14 = 0;
+int<<16>> egress_packet_arg_15 = seq_number;
+int<<8>> egress_packet_arg_16 = traffic_class;
+int<<16>> egress_packet_arg_17 = (int<<16>>)timestamp;
+int<<8>> egress_packet_arg_18 = forward_flow_ip_header_0;
+int<<8>> egress_packet_arg_19 = forward_flow_ip_header_1;
+int<<16>> egress_packet_arg_20 = forward_flow_ip_header_2;
+int<<16>> egress_packet_arg_21 = forward_flow_ip_header_3;
+int<<16>> egress_packet_arg_22 = forward_flow_ip_header_4;
+int<<8>> egress_packet_arg_23 = forward_flow_ip_header_5;
+int<<8>> egress_packet_arg_24 = forward_flow_ip_header_6;
+int<<16>> egress_packet_arg_25 = forward_flow_ip_header_7;
+int<<32>> egress_packet_arg_26 = forward_flow_ip_header_8;
+int<<32>> egress_packet_arg_27 = forward_flow_ip_header_9;
+int<<16>> egress_packet_arg_28 = forward_flow_udp_header_0;
+int<<16>> egress_packet_arg_29 = forward_flow_udp_header_1;
+int<<16>> egress_packet_arg_30 = forward_flow_udp_header_2;
+int<<16>> egress_packet_arg_31 = forward_flow_udp_header_3;
+generate_port (ingress_port, attach_signatures(egress_packet_arg_0,egress_packet_arg_1,egress_packet_arg_2,egress_packet_arg_3,egress_packet_arg_4,egress_packet_arg_5,egress_packet_arg_6,egress_packet_arg_7,egress_packet_arg_8,egress_packet_arg_9,egress_packet_arg_10,egress_packet_arg_11,egress_packet_arg_12,egress_packet_arg_13,egress_packet_arg_14,egress_packet_arg_15,egress_packet_arg_16,egress_packet_arg_17,egress_packet_arg_18,egress_packet_arg_19,egress_packet_arg_20,egress_packet_arg_21,egress_packet_arg_22,egress_packet_arg_23,egress_packet_arg_24,egress_packet_arg_25,egress_packet_arg_26,egress_packet_arg_27,egress_packet_arg_28,egress_packet_arg_29,egress_packet_arg_30,egress_packet_arg_31));
+}
+
+@egress handle attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3) {
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<1>> BookSignatureManager_sign_ret = 0;
 match path_id with 
 | 0 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,attach_signatures_seq_number);
 }
 | 1 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,attach_signatures_seq_number);
 }
 | 2 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,attach_signatures_seq_number);
 }
 | 3 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,attach_signatures_seq_number);
 }
 | 4 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,attach_signatures_seq_number);
 }
 | 5 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,attach_signatures_seq_number);
 }
 | 6 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,attach_signatures_seq_number);
 }
 | 7 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,attach_signatures_seq_number);
 }
 | _ -> {
 
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<32>> time_now = Sys.time();
-int<<12>> timestamp = [31 : 20]time_now;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<12>> timestamp = (int<<12>>)attach_signatures_timestamp;
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
 | 0 -> {
@@ -212,56 +257,58 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,
 
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)attach_signatures_traffic_class;
+int<<16>> tango_metrics_hdr_1 = attach_signatures_timestamp;
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = attach_signatures_seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
-int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
-int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
-int<<16>> forward_tango_pkt_arg_4 = 88+forward_flow_ip_header_2;
-int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
-int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
-int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
-int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
-int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;
-int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;
-int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;
-int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;
-int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;
-int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;
-int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;
-int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;
-int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;
-int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;
-int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;
-int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;
-int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;
-int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;
-int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;
-int<<16>> forward_tango_pkt_arg_24 = forward_flow_tcp_header_0;
-int<<16>> forward_tango_pkt_arg_25 = forward_flow_tcp_header_1;
-int<<32>> forward_tango_pkt_arg_26 = forward_flow_tcp_header_2;
-int<<32>> forward_tango_pkt_arg_27 = forward_flow_tcp_header_3;
-int<<16>> forward_tango_pkt_arg_28 = forward_flow_tcp_header_4;
-int<<16>> forward_tango_pkt_arg_29 = forward_flow_tcp_header_5;
-int<<16>> forward_tango_pkt_arg_30 = forward_flow_tcp_header_6;
-int<<16>> forward_tango_pkt_arg_31 = forward_flow_tcp_header_7;
-generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
+int<<48>> forward_tango_pkt_arg_0 = attach_signatures_tango_eth_header_0;
+int<<48>> forward_tango_pkt_arg_1 = attach_signatures_tango_eth_header_1;
+int<<16>> forward_tango_pkt_arg_2 = attach_signatures_tango_eth_header_2;
+int<<32>> forward_tango_pkt_arg_3 = attach_signatures_tango_ip_header_0;
+int<<16>> forward_tango_pkt_arg_4 = attach_signatures_tango_ip_header_1;
+int<<8>> forward_tango_pkt_arg_5 = attach_signatures_tango_ip_header_2;
+int<<8>> forward_tango_pkt_arg_6 = attach_signatures_tango_ip_header_3;
+int<<64>> forward_tango_pkt_arg_7 = attach_signatures_tango_ip_header_4;
+int<<64>> forward_tango_pkt_arg_8 = attach_signatures_tango_ip_header_5;
+int<<64>> forward_tango_pkt_arg_9 = attach_signatures_tango_ip_header_6;
+int<<64>> forward_tango_pkt_arg_10 = attach_signatures_tango_ip_header_7;
+int<<16>> forward_tango_pkt_arg_11 = attach_signatures_tango_udp_header_0;
+int<<16>> forward_tango_pkt_arg_12 = attach_signatures_tango_udp_header_1;
+int<<16>> forward_tango_pkt_arg_13 = attach_signatures_tango_udp_header_2;
+int<<16>> forward_tango_pkt_arg_14 = attach_signatures_tango_udp_header_3;
+int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
+int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
+int<<32>> forward_tango_pkt_arg_17 = tango_metrics_hdr_2;
+int<<16>> forward_tango_pkt_arg_18 = tango_metrics_hdr_3;
+int<<8>> forward_tango_pkt_arg_19 = tango_metrics_hdr_4;
+int<<8>> forward_tango_pkt_arg_20 = attach_signatures_encaped_ip_header_0;
+int<<8>> forward_tango_pkt_arg_21 = attach_signatures_encaped_ip_header_1;
+int<<16>> forward_tango_pkt_arg_22 = attach_signatures_encaped_ip_header_2;
+int<<16>> forward_tango_pkt_arg_23 = attach_signatures_encaped_ip_header_3;
+int<<16>> forward_tango_pkt_arg_24 = attach_signatures_encaped_ip_header_4;
+int<<8>> forward_tango_pkt_arg_25 = attach_signatures_encaped_ip_header_5;
+int<<8>> forward_tango_pkt_arg_26 = attach_signatures_encaped_ip_header_6;
+int<<16>> forward_tango_pkt_arg_27 = attach_signatures_encaped_ip_header_7;
+int<<32>> forward_tango_pkt_arg_28 = attach_signatures_encaped_ip_header_8;
+int<<32>> forward_tango_pkt_arg_29 = attach_signatures_encaped_ip_header_9;
+int<<16>> forward_tango_pkt_arg_30 = attach_signatures_encaped_udp_header_0;
+int<<16>> forward_tango_pkt_arg_31 = attach_signatures_encaped_udp_header_1;
+int<<16>> forward_tango_pkt_arg_32 = attach_signatures_encaped_udp_header_2;
+int<<16>> forward_tango_pkt_arg_33 = attach_signatures_encaped_udp_header_3;
+generate_port (128, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33));
 }
 -----end before boolean elimination-------
 -----after phase 1: non-immediate elimination-------
-memop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
- {return curr+1;
+memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
 }
 
-memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> ignore)
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<24>> sequence_counters_0 = Array.create(8);
+global Array.t<<16>> sequence_counters_0 = Array.create(8);
 
 
 global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
@@ -360,28 +407,32 @@ global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 
-entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7);
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7);
+event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
 
-handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7) {
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
+
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3) {
 
 }
 
-handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7) {
-int<<4>> map_flow_to_traffic_class_ret = 0;
-match (forward_flow_ip_header_8,forward_flow_tcp_header_0,forward_flow_ip_header_9,forward_flow_tcp_header_1,forward_flow_ip_header_6) with 
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
+int<<8>> map_flow_to_traffic_class_ret = 32;
+match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
 map_flow_to_traffic_class_ret = 15;
 }
-int<<4>> traffic_class = map_flow_to_traffic_class_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<8>> traffic_class = map_flow_to_traffic_class_ret;
+int<<8>> path_id = (int<<8>>)traffic_class;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
-int<<128>> map_path_to_tunnel_header_ret_4 = 32;
-int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_4 = 32;
+int<<64>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_6 = 32;
+int<<64>> map_path_to_tunnel_header_ret_7 = 32;
 match path_id with 
 | _ -> {
 map_path_to_tunnel_header_ret_0 = 0;
@@ -390,51 +441,92 @@ map_path_to_tunnel_header_ret_2 = 0;
 map_path_to_tunnel_header_ret_3 = 0;
 map_path_to_tunnel_header_ret_4 = 0;
 map_path_to_tunnel_header_ret_5 = 0;
+map_path_to_tunnel_header_ret_6 = 0;
+map_path_to_tunnel_header_ret_7 = 0;
 }
 int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
 int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
 int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
 int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
-int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
-int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
-int<<3>> path_id = (int<<3>>)traffic_class;
-int<<24>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,0);
-int<<24>> seq_number = SequenceNumberManager_increment_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<64>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<64>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<64>> tango_tunnel_hdr_6 = map_path_to_tunnel_header_ret_6;
+int<<64>> tango_tunnel_hdr_7 = map_path_to_tunnel_header_ret_7;
+int<<8>> path_id = (int<<8>>)traffic_class;
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<48>> egress_packet_arg_0 = forward_flow_eth_header_0;
+int<<48>> egress_packet_arg_1 = forward_flow_eth_header_1;
+int<<16>> egress_packet_arg_2 = forward_flow_eth_header_2;
+int<<32>> egress_packet_arg_3 = tango_tunnel_hdr_0;
+int<<16>> egress_packet_arg_4 = 88+forward_flow_ip_header_2;
+int<<8>> egress_packet_arg_5 = tango_tunnel_hdr_2;
+int<<8>> egress_packet_arg_6 = tango_tunnel_hdr_3;
+int<<64>> egress_packet_arg_7 = tango_tunnel_hdr_4;
+int<<64>> egress_packet_arg_8 = tango_tunnel_hdr_5;
+int<<64>> egress_packet_arg_9 = tango_tunnel_hdr_6;
+int<<64>> egress_packet_arg_10 = tango_tunnel_hdr_7;
+int<<16>> egress_packet_arg_11 = 8080;
+int<<16>> egress_packet_arg_12 = 8080;
+int<<16>> egress_packet_arg_13 = 0;
+int<<16>> egress_packet_arg_14 = 0;
+int<<16>> egress_packet_arg_15 = seq_number;
+int<<8>> egress_packet_arg_16 = traffic_class;
+int<<16>> egress_packet_arg_17 = (int<<16>>)timestamp;
+int<<8>> egress_packet_arg_18 = forward_flow_ip_header_0;
+int<<8>> egress_packet_arg_19 = forward_flow_ip_header_1;
+int<<16>> egress_packet_arg_20 = forward_flow_ip_header_2;
+int<<16>> egress_packet_arg_21 = forward_flow_ip_header_3;
+int<<16>> egress_packet_arg_22 = forward_flow_ip_header_4;
+int<<8>> egress_packet_arg_23 = forward_flow_ip_header_5;
+int<<8>> egress_packet_arg_24 = forward_flow_ip_header_6;
+int<<16>> egress_packet_arg_25 = forward_flow_ip_header_7;
+int<<32>> egress_packet_arg_26 = forward_flow_ip_header_8;
+int<<32>> egress_packet_arg_27 = forward_flow_ip_header_9;
+int<<16>> egress_packet_arg_28 = forward_flow_udp_header_0;
+int<<16>> egress_packet_arg_29 = forward_flow_udp_header_1;
+int<<16>> egress_packet_arg_30 = forward_flow_udp_header_2;
+int<<16>> egress_packet_arg_31 = forward_flow_udp_header_3;
+generate_port (ingress_port, attach_signatures(egress_packet_arg_0,egress_packet_arg_1,egress_packet_arg_2,egress_packet_arg_3,egress_packet_arg_4,egress_packet_arg_5,egress_packet_arg_6,egress_packet_arg_7,egress_packet_arg_8,egress_packet_arg_9,egress_packet_arg_10,egress_packet_arg_11,egress_packet_arg_12,egress_packet_arg_13,egress_packet_arg_14,egress_packet_arg_15,egress_packet_arg_16,egress_packet_arg_17,egress_packet_arg_18,egress_packet_arg_19,egress_packet_arg_20,egress_packet_arg_21,egress_packet_arg_22,egress_packet_arg_23,egress_packet_arg_24,egress_packet_arg_25,egress_packet_arg_26,egress_packet_arg_27,egress_packet_arg_28,egress_packet_arg_29,egress_packet_arg_30,egress_packet_arg_31));
+}
+
+@egress handle attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3) {
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<1>> BookSignatureManager_sign_ret = 0;
 match path_id with 
 | 0 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,attach_signatures_seq_number);
 }
 | 1 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,attach_signatures_seq_number);
 }
 | 2 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,attach_signatures_seq_number);
 }
 | 3 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,attach_signatures_seq_number);
 }
 | 4 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,attach_signatures_seq_number);
 }
 | 5 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,attach_signatures_seq_number);
 }
 | 6 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,attach_signatures_seq_number);
 }
 | 7 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,attach_signatures_seq_number);
 }
 | _ -> {
 
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<32>> time_now = Sys.time();
-int<<12>> timestamp = [31 : 20]time_now;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<12>> timestamp = (int<<12>>)attach_signatures_timestamp;
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
 | 0 -> {
@@ -465,56 +557,58 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,
 
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)attach_signatures_traffic_class;
+int<<16>> tango_metrics_hdr_1 = attach_signatures_timestamp;
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = attach_signatures_seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
-int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
-int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
-int<<16>> forward_tango_pkt_arg_4 = 88+forward_flow_ip_header_2;
-int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
-int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
-int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
-int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
-int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;
-int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;
-int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;
-int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;
-int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;
-int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;
-int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;
-int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;
-int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;
-int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;
-int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;
-int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;
-int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;
-int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;
-int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;
-int<<16>> forward_tango_pkt_arg_24 = forward_flow_tcp_header_0;
-int<<16>> forward_tango_pkt_arg_25 = forward_flow_tcp_header_1;
-int<<32>> forward_tango_pkt_arg_26 = forward_flow_tcp_header_2;
-int<<32>> forward_tango_pkt_arg_27 = forward_flow_tcp_header_3;
-int<<16>> forward_tango_pkt_arg_28 = forward_flow_tcp_header_4;
-int<<16>> forward_tango_pkt_arg_29 = forward_flow_tcp_header_5;
-int<<16>> forward_tango_pkt_arg_30 = forward_flow_tcp_header_6;
-int<<16>> forward_tango_pkt_arg_31 = forward_flow_tcp_header_7;
-generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
+int<<48>> forward_tango_pkt_arg_0 = attach_signatures_tango_eth_header_0;
+int<<48>> forward_tango_pkt_arg_1 = attach_signatures_tango_eth_header_1;
+int<<16>> forward_tango_pkt_arg_2 = attach_signatures_tango_eth_header_2;
+int<<32>> forward_tango_pkt_arg_3 = attach_signatures_tango_ip_header_0;
+int<<16>> forward_tango_pkt_arg_4 = attach_signatures_tango_ip_header_1;
+int<<8>> forward_tango_pkt_arg_5 = attach_signatures_tango_ip_header_2;
+int<<8>> forward_tango_pkt_arg_6 = attach_signatures_tango_ip_header_3;
+int<<64>> forward_tango_pkt_arg_7 = attach_signatures_tango_ip_header_4;
+int<<64>> forward_tango_pkt_arg_8 = attach_signatures_tango_ip_header_5;
+int<<64>> forward_tango_pkt_arg_9 = attach_signatures_tango_ip_header_6;
+int<<64>> forward_tango_pkt_arg_10 = attach_signatures_tango_ip_header_7;
+int<<16>> forward_tango_pkt_arg_11 = attach_signatures_tango_udp_header_0;
+int<<16>> forward_tango_pkt_arg_12 = attach_signatures_tango_udp_header_1;
+int<<16>> forward_tango_pkt_arg_13 = attach_signatures_tango_udp_header_2;
+int<<16>> forward_tango_pkt_arg_14 = attach_signatures_tango_udp_header_3;
+int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
+int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
+int<<32>> forward_tango_pkt_arg_17 = tango_metrics_hdr_2;
+int<<16>> forward_tango_pkt_arg_18 = tango_metrics_hdr_3;
+int<<8>> forward_tango_pkt_arg_19 = tango_metrics_hdr_4;
+int<<8>> forward_tango_pkt_arg_20 = attach_signatures_encaped_ip_header_0;
+int<<8>> forward_tango_pkt_arg_21 = attach_signatures_encaped_ip_header_1;
+int<<16>> forward_tango_pkt_arg_22 = attach_signatures_encaped_ip_header_2;
+int<<16>> forward_tango_pkt_arg_23 = attach_signatures_encaped_ip_header_3;
+int<<16>> forward_tango_pkt_arg_24 = attach_signatures_encaped_ip_header_4;
+int<<8>> forward_tango_pkt_arg_25 = attach_signatures_encaped_ip_header_5;
+int<<8>> forward_tango_pkt_arg_26 = attach_signatures_encaped_ip_header_6;
+int<<16>> forward_tango_pkt_arg_27 = attach_signatures_encaped_ip_header_7;
+int<<32>> forward_tango_pkt_arg_28 = attach_signatures_encaped_ip_header_8;
+int<<32>> forward_tango_pkt_arg_29 = attach_signatures_encaped_ip_header_9;
+int<<16>> forward_tango_pkt_arg_30 = attach_signatures_encaped_udp_header_0;
+int<<16>> forward_tango_pkt_arg_31 = attach_signatures_encaped_udp_header_1;
+int<<16>> forward_tango_pkt_arg_32 = attach_signatures_encaped_udp_header_2;
+int<<16>> forward_tango_pkt_arg_33 = attach_signatures_encaped_udp_header_3;
+generate_port (128, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33));
 }
 -----end after phase 1: non-immediate elimination-------
 -----after phase 2: if expression cannonization-------
-memop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
- {return curr+1;
+memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
 }
 
-memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> ignore)
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<24>> sequence_counters_0 = Array.create(8);
+global Array.t<<16>> sequence_counters_0 = Array.create(8);
 
 
 global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
@@ -613,28 +707,32 @@ global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 
-entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7);
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7);
+event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
 
-handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7) {
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
+
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3) {
 
 }
 
-handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7) {
-int<<4>> map_flow_to_traffic_class_ret = 0;
-match (forward_flow_ip_header_8,forward_flow_tcp_header_0,forward_flow_ip_header_9,forward_flow_tcp_header_1,forward_flow_ip_header_6) with 
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
+int<<8>> map_flow_to_traffic_class_ret = 32;
+match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
 map_flow_to_traffic_class_ret = 15;
 }
-int<<4>> traffic_class = map_flow_to_traffic_class_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<8>> traffic_class = map_flow_to_traffic_class_ret;
+int<<8>> path_id = (int<<8>>)traffic_class;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
-int<<128>> map_path_to_tunnel_header_ret_4 = 32;
-int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_4 = 32;
+int<<64>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_6 = 32;
+int<<64>> map_path_to_tunnel_header_ret_7 = 32;
 match path_id with 
 | _ -> {
 map_path_to_tunnel_header_ret_0 = 0;
@@ -643,51 +741,92 @@ map_path_to_tunnel_header_ret_2 = 0;
 map_path_to_tunnel_header_ret_3 = 0;
 map_path_to_tunnel_header_ret_4 = 0;
 map_path_to_tunnel_header_ret_5 = 0;
+map_path_to_tunnel_header_ret_6 = 0;
+map_path_to_tunnel_header_ret_7 = 0;
 }
 int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
 int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
 int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
 int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
-int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
-int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
-int<<3>> path_id = (int<<3>>)traffic_class;
-int<<24>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,0);
-int<<24>> seq_number = SequenceNumberManager_increment_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<64>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<64>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<64>> tango_tunnel_hdr_6 = map_path_to_tunnel_header_ret_6;
+int<<64>> tango_tunnel_hdr_7 = map_path_to_tunnel_header_ret_7;
+int<<8>> path_id = (int<<8>>)traffic_class;
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<48>> egress_packet_arg_0 = forward_flow_eth_header_0;
+int<<48>> egress_packet_arg_1 = forward_flow_eth_header_1;
+int<<16>> egress_packet_arg_2 = forward_flow_eth_header_2;
+int<<32>> egress_packet_arg_3 = tango_tunnel_hdr_0;
+int<<16>> egress_packet_arg_4 = 88+forward_flow_ip_header_2;
+int<<8>> egress_packet_arg_5 = tango_tunnel_hdr_2;
+int<<8>> egress_packet_arg_6 = tango_tunnel_hdr_3;
+int<<64>> egress_packet_arg_7 = tango_tunnel_hdr_4;
+int<<64>> egress_packet_arg_8 = tango_tunnel_hdr_5;
+int<<64>> egress_packet_arg_9 = tango_tunnel_hdr_6;
+int<<64>> egress_packet_arg_10 = tango_tunnel_hdr_7;
+int<<16>> egress_packet_arg_11 = 8080;
+int<<16>> egress_packet_arg_12 = 8080;
+int<<16>> egress_packet_arg_13 = 0;
+int<<16>> egress_packet_arg_14 = 0;
+int<<16>> egress_packet_arg_15 = seq_number;
+int<<8>> egress_packet_arg_16 = traffic_class;
+int<<16>> egress_packet_arg_17 = (int<<16>>)timestamp;
+int<<8>> egress_packet_arg_18 = forward_flow_ip_header_0;
+int<<8>> egress_packet_arg_19 = forward_flow_ip_header_1;
+int<<16>> egress_packet_arg_20 = forward_flow_ip_header_2;
+int<<16>> egress_packet_arg_21 = forward_flow_ip_header_3;
+int<<16>> egress_packet_arg_22 = forward_flow_ip_header_4;
+int<<8>> egress_packet_arg_23 = forward_flow_ip_header_5;
+int<<8>> egress_packet_arg_24 = forward_flow_ip_header_6;
+int<<16>> egress_packet_arg_25 = forward_flow_ip_header_7;
+int<<32>> egress_packet_arg_26 = forward_flow_ip_header_8;
+int<<32>> egress_packet_arg_27 = forward_flow_ip_header_9;
+int<<16>> egress_packet_arg_28 = forward_flow_udp_header_0;
+int<<16>> egress_packet_arg_29 = forward_flow_udp_header_1;
+int<<16>> egress_packet_arg_30 = forward_flow_udp_header_2;
+int<<16>> egress_packet_arg_31 = forward_flow_udp_header_3;
+generate_port (ingress_port, attach_signatures(egress_packet_arg_0,egress_packet_arg_1,egress_packet_arg_2,egress_packet_arg_3,egress_packet_arg_4,egress_packet_arg_5,egress_packet_arg_6,egress_packet_arg_7,egress_packet_arg_8,egress_packet_arg_9,egress_packet_arg_10,egress_packet_arg_11,egress_packet_arg_12,egress_packet_arg_13,egress_packet_arg_14,egress_packet_arg_15,egress_packet_arg_16,egress_packet_arg_17,egress_packet_arg_18,egress_packet_arg_19,egress_packet_arg_20,egress_packet_arg_21,egress_packet_arg_22,egress_packet_arg_23,egress_packet_arg_24,egress_packet_arg_25,egress_packet_arg_26,egress_packet_arg_27,egress_packet_arg_28,egress_packet_arg_29,egress_packet_arg_30,egress_packet_arg_31));
+}
+
+@egress handle attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3) {
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<1>> BookSignatureManager_sign_ret = 0;
 match path_id with 
 | 0 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,attach_signatures_seq_number);
 }
 | 1 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,attach_signatures_seq_number);
 }
 | 2 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,attach_signatures_seq_number);
 }
 | 3 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,attach_signatures_seq_number);
 }
 | 4 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,attach_signatures_seq_number);
 }
 | 5 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,attach_signatures_seq_number);
 }
 | 6 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,attach_signatures_seq_number);
 }
 | 7 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,attach_signatures_seq_number);
 }
 | _ -> {
 
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<32>> time_now = Sys.time();
-int<<12>> timestamp = [31 : 20]time_now;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<12>> timestamp = (int<<12>>)attach_signatures_timestamp;
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
 | 0 -> {
@@ -718,56 +857,58 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,
 
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)attach_signatures_traffic_class;
+int<<16>> tango_metrics_hdr_1 = attach_signatures_timestamp;
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = attach_signatures_seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
-int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
-int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
-int<<16>> forward_tango_pkt_arg_4 = 88+forward_flow_ip_header_2;
-int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
-int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
-int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
-int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
-int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;
-int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;
-int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;
-int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;
-int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;
-int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;
-int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;
-int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;
-int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;
-int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;
-int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;
-int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;
-int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;
-int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;
-int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;
-int<<16>> forward_tango_pkt_arg_24 = forward_flow_tcp_header_0;
-int<<16>> forward_tango_pkt_arg_25 = forward_flow_tcp_header_1;
-int<<32>> forward_tango_pkt_arg_26 = forward_flow_tcp_header_2;
-int<<32>> forward_tango_pkt_arg_27 = forward_flow_tcp_header_3;
-int<<16>> forward_tango_pkt_arg_28 = forward_flow_tcp_header_4;
-int<<16>> forward_tango_pkt_arg_29 = forward_flow_tcp_header_5;
-int<<16>> forward_tango_pkt_arg_30 = forward_flow_tcp_header_6;
-int<<16>> forward_tango_pkt_arg_31 = forward_flow_tcp_header_7;
-generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
+int<<48>> forward_tango_pkt_arg_0 = attach_signatures_tango_eth_header_0;
+int<<48>> forward_tango_pkt_arg_1 = attach_signatures_tango_eth_header_1;
+int<<16>> forward_tango_pkt_arg_2 = attach_signatures_tango_eth_header_2;
+int<<32>> forward_tango_pkt_arg_3 = attach_signatures_tango_ip_header_0;
+int<<16>> forward_tango_pkt_arg_4 = attach_signatures_tango_ip_header_1;
+int<<8>> forward_tango_pkt_arg_5 = attach_signatures_tango_ip_header_2;
+int<<8>> forward_tango_pkt_arg_6 = attach_signatures_tango_ip_header_3;
+int<<64>> forward_tango_pkt_arg_7 = attach_signatures_tango_ip_header_4;
+int<<64>> forward_tango_pkt_arg_8 = attach_signatures_tango_ip_header_5;
+int<<64>> forward_tango_pkt_arg_9 = attach_signatures_tango_ip_header_6;
+int<<64>> forward_tango_pkt_arg_10 = attach_signatures_tango_ip_header_7;
+int<<16>> forward_tango_pkt_arg_11 = attach_signatures_tango_udp_header_0;
+int<<16>> forward_tango_pkt_arg_12 = attach_signatures_tango_udp_header_1;
+int<<16>> forward_tango_pkt_arg_13 = attach_signatures_tango_udp_header_2;
+int<<16>> forward_tango_pkt_arg_14 = attach_signatures_tango_udp_header_3;
+int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
+int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
+int<<32>> forward_tango_pkt_arg_17 = tango_metrics_hdr_2;
+int<<16>> forward_tango_pkt_arg_18 = tango_metrics_hdr_3;
+int<<8>> forward_tango_pkt_arg_19 = tango_metrics_hdr_4;
+int<<8>> forward_tango_pkt_arg_20 = attach_signatures_encaped_ip_header_0;
+int<<8>> forward_tango_pkt_arg_21 = attach_signatures_encaped_ip_header_1;
+int<<16>> forward_tango_pkt_arg_22 = attach_signatures_encaped_ip_header_2;
+int<<16>> forward_tango_pkt_arg_23 = attach_signatures_encaped_ip_header_3;
+int<<16>> forward_tango_pkt_arg_24 = attach_signatures_encaped_ip_header_4;
+int<<8>> forward_tango_pkt_arg_25 = attach_signatures_encaped_ip_header_5;
+int<<8>> forward_tango_pkt_arg_26 = attach_signatures_encaped_ip_header_6;
+int<<16>> forward_tango_pkt_arg_27 = attach_signatures_encaped_ip_header_7;
+int<<32>> forward_tango_pkt_arg_28 = attach_signatures_encaped_ip_header_8;
+int<<32>> forward_tango_pkt_arg_29 = attach_signatures_encaped_ip_header_9;
+int<<16>> forward_tango_pkt_arg_30 = attach_signatures_encaped_udp_header_0;
+int<<16>> forward_tango_pkt_arg_31 = attach_signatures_encaped_udp_header_1;
+int<<16>> forward_tango_pkt_arg_32 = attach_signatures_encaped_udp_header_2;
+int<<16>> forward_tango_pkt_arg_33 = attach_signatures_encaped_udp_header_3;
+generate_port (128, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33));
 }
 -----end after phase 2: if expression cannonization-------
 -----after phase 3: immediate elimination-------
-memop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
- {return curr+1;
+memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
 }
 
-memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> ignore)
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<24>> sequence_counters_0 = Array.create(8);
+global Array.t<<16>> sequence_counters_0 = Array.create(8);
 
 
 global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
@@ -866,28 +1007,32 @@ global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 
-entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7);
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7);
+event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
 
-handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<128>> incoming_tango_traffic_tango_ip_header_4,int<<128>> incoming_tango_traffic_tango_ip_header_5,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<24>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_tcp_header_0,int<<16>> incoming_tango_traffic_encaped_tcp_header_1,int<<32>> incoming_tango_traffic_encaped_tcp_header_2,int<<32>> incoming_tango_traffic_encaped_tcp_header_3,int<<16>> incoming_tango_traffic_encaped_tcp_header_4,int<<16>> incoming_tango_traffic_encaped_tcp_header_5,int<<16>> incoming_tango_traffic_encaped_tcp_header_6,int<<16>> incoming_tango_traffic_encaped_tcp_header_7) {
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
+
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3) {
 
 }
 
-handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_tcp_header_0,int<<16>> forward_flow_tcp_header_1,int<<32>> forward_flow_tcp_header_2,int<<32>> forward_flow_tcp_header_3,int<<16>> forward_flow_tcp_header_4,int<<16>> forward_flow_tcp_header_5,int<<16>> forward_flow_tcp_header_6,int<<16>> forward_flow_tcp_header_7) {
-int<<4>> map_flow_to_traffic_class_ret = 0;
-match (forward_flow_ip_header_8,forward_flow_tcp_header_0,forward_flow_ip_header_9,forward_flow_tcp_header_1,forward_flow_ip_header_6) with 
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
+int<<8>> map_flow_to_traffic_class_ret = 32;
+match (forward_flow_ip_header_8,forward_flow_udp_header_0,forward_flow_ip_header_9,forward_flow_udp_header_1,forward_flow_ip_header_6) with 
 | _,_,_,_,_ -> {
 map_flow_to_traffic_class_ret = 15;
 }
-int<<4>> traffic_class = map_flow_to_traffic_class_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<8>> traffic_class = map_flow_to_traffic_class_ret;
+int<<8>> path_id = (int<<8>>)traffic_class;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
-int<<128>> map_path_to_tunnel_header_ret_4 = 32;
-int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_4 = 32;
+int<<64>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_6 = 32;
+int<<64>> map_path_to_tunnel_header_ret_7 = 32;
 match path_id with 
 | _ -> {
 map_path_to_tunnel_header_ret_0 = 0;
@@ -896,51 +1041,92 @@ map_path_to_tunnel_header_ret_2 = 0;
 map_path_to_tunnel_header_ret_3 = 0;
 map_path_to_tunnel_header_ret_4 = 0;
 map_path_to_tunnel_header_ret_5 = 0;
+map_path_to_tunnel_header_ret_6 = 0;
+map_path_to_tunnel_header_ret_7 = 0;
 }
 int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
 int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
 int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
 int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
-int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
-int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
-int<<3>> path_id = (int<<3>>)traffic_class;
-int<<24>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,0);
-int<<24>> seq_number = SequenceNumberManager_increment_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<64>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<64>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<64>> tango_tunnel_hdr_6 = map_path_to_tunnel_header_ret_6;
+int<<64>> tango_tunnel_hdr_7 = map_path_to_tunnel_header_ret_7;
+int<<8>> path_id = (int<<8>>)traffic_class;
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<48>> egress_packet_arg_0 = forward_flow_eth_header_0;
+int<<48>> egress_packet_arg_1 = forward_flow_eth_header_1;
+int<<16>> egress_packet_arg_2 = forward_flow_eth_header_2;
+int<<32>> egress_packet_arg_3 = tango_tunnel_hdr_0;
+int<<16>> egress_packet_arg_4 = 88+forward_flow_ip_header_2;
+int<<8>> egress_packet_arg_5 = tango_tunnel_hdr_2;
+int<<8>> egress_packet_arg_6 = tango_tunnel_hdr_3;
+int<<64>> egress_packet_arg_7 = tango_tunnel_hdr_4;
+int<<64>> egress_packet_arg_8 = tango_tunnel_hdr_5;
+int<<64>> egress_packet_arg_9 = tango_tunnel_hdr_6;
+int<<64>> egress_packet_arg_10 = tango_tunnel_hdr_7;
+int<<16>> egress_packet_arg_11 = 8080;
+int<<16>> egress_packet_arg_12 = 8080;
+int<<16>> egress_packet_arg_13 = 0;
+int<<16>> egress_packet_arg_14 = 0;
+int<<16>> egress_packet_arg_15 = seq_number;
+int<<8>> egress_packet_arg_16 = traffic_class;
+int<<16>> egress_packet_arg_17 = (int<<16>>)timestamp;
+int<<8>> egress_packet_arg_18 = forward_flow_ip_header_0;
+int<<8>> egress_packet_arg_19 = forward_flow_ip_header_1;
+int<<16>> egress_packet_arg_20 = forward_flow_ip_header_2;
+int<<16>> egress_packet_arg_21 = forward_flow_ip_header_3;
+int<<16>> egress_packet_arg_22 = forward_flow_ip_header_4;
+int<<8>> egress_packet_arg_23 = forward_flow_ip_header_5;
+int<<8>> egress_packet_arg_24 = forward_flow_ip_header_6;
+int<<16>> egress_packet_arg_25 = forward_flow_ip_header_7;
+int<<32>> egress_packet_arg_26 = forward_flow_ip_header_8;
+int<<32>> egress_packet_arg_27 = forward_flow_ip_header_9;
+int<<16>> egress_packet_arg_28 = forward_flow_udp_header_0;
+int<<16>> egress_packet_arg_29 = forward_flow_udp_header_1;
+int<<16>> egress_packet_arg_30 = forward_flow_udp_header_2;
+int<<16>> egress_packet_arg_31 = forward_flow_udp_header_3;
+generate_port (ingress_port, attach_signatures(egress_packet_arg_0,egress_packet_arg_1,egress_packet_arg_2,egress_packet_arg_3,egress_packet_arg_4,egress_packet_arg_5,egress_packet_arg_6,egress_packet_arg_7,egress_packet_arg_8,egress_packet_arg_9,egress_packet_arg_10,egress_packet_arg_11,egress_packet_arg_12,egress_packet_arg_13,egress_packet_arg_14,egress_packet_arg_15,egress_packet_arg_16,egress_packet_arg_17,egress_packet_arg_18,egress_packet_arg_19,egress_packet_arg_20,egress_packet_arg_21,egress_packet_arg_22,egress_packet_arg_23,egress_packet_arg_24,egress_packet_arg_25,egress_packet_arg_26,egress_packet_arg_27,egress_packet_arg_28,egress_packet_arg_29,egress_packet_arg_30,egress_packet_arg_31));
+}
+
+@egress handle attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3) {
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<1>> BookSignatureManager_sign_ret = 0;
 match path_id with 
 | 0 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_0,attach_signatures_seq_number);
 }
 | 1 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_1,attach_signatures_seq_number);
 }
 | 2 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_2,attach_signatures_seq_number);
 }
 | 3 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_3,attach_signatures_seq_number);
 }
 | 4 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_4,attach_signatures_seq_number);
 }
 | 5 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_5,attach_signatures_seq_number);
 }
 | 6 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,attach_signatures_seq_number);
 }
 | 7 -> {
-BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
+BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,attach_signatures_seq_number);
 }
 | _ -> {
 
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<32>> time_now = Sys.time();
-int<<12>> timestamp = [31 : 20]time_now;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<12>> timestamp = (int<<12>>)attach_signatures_timestamp;
+int<<3>> path_id = (int<<3>>)attach_signatures_traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
 | 0 -> {
@@ -971,43 +1157,45 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,
 
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)attach_signatures_traffic_class;
+int<<16>> tango_metrics_hdr_1 = attach_signatures_timestamp;
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = attach_signatures_seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
-int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
-int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
-int<<16>> forward_tango_pkt_arg_4 = 88+forward_flow_ip_header_2;
-int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
-int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
-int<<128>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
-int<<128>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
-int<<8>> forward_tango_pkt_arg_9 = tango_metrics_hdr_0;
-int<<16>> forward_tango_pkt_arg_10 = tango_metrics_hdr_1;
-int<<32>> forward_tango_pkt_arg_11 = tango_metrics_hdr_2;
-int<<24>> forward_tango_pkt_arg_12 = tango_metrics_hdr_3;
-int<<8>> forward_tango_pkt_arg_13 = tango_metrics_hdr_4;
-int<<8>> forward_tango_pkt_arg_14 = forward_flow_ip_header_0;
-int<<8>> forward_tango_pkt_arg_15 = forward_flow_ip_header_1;
-int<<16>> forward_tango_pkt_arg_16 = forward_flow_ip_header_2;
-int<<16>> forward_tango_pkt_arg_17 = forward_flow_ip_header_3;
-int<<16>> forward_tango_pkt_arg_18 = forward_flow_ip_header_4;
-int<<8>> forward_tango_pkt_arg_19 = forward_flow_ip_header_5;
-int<<8>> forward_tango_pkt_arg_20 = forward_flow_ip_header_6;
-int<<16>> forward_tango_pkt_arg_21 = forward_flow_ip_header_7;
-int<<32>> forward_tango_pkt_arg_22 = forward_flow_ip_header_8;
-int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_9;
-int<<16>> forward_tango_pkt_arg_24 = forward_flow_tcp_header_0;
-int<<16>> forward_tango_pkt_arg_25 = forward_flow_tcp_header_1;
-int<<32>> forward_tango_pkt_arg_26 = forward_flow_tcp_header_2;
-int<<32>> forward_tango_pkt_arg_27 = forward_flow_tcp_header_3;
-int<<16>> forward_tango_pkt_arg_28 = forward_flow_tcp_header_4;
-int<<16>> forward_tango_pkt_arg_29 = forward_flow_tcp_header_5;
-int<<16>> forward_tango_pkt_arg_30 = forward_flow_tcp_header_6;
-int<<16>> forward_tango_pkt_arg_31 = forward_flow_tcp_header_7;
-generate_port (1, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
+int<<48>> forward_tango_pkt_arg_0 = attach_signatures_tango_eth_header_0;
+int<<48>> forward_tango_pkt_arg_1 = attach_signatures_tango_eth_header_1;
+int<<16>> forward_tango_pkt_arg_2 = attach_signatures_tango_eth_header_2;
+int<<32>> forward_tango_pkt_arg_3 = attach_signatures_tango_ip_header_0;
+int<<16>> forward_tango_pkt_arg_4 = attach_signatures_tango_ip_header_1;
+int<<8>> forward_tango_pkt_arg_5 = attach_signatures_tango_ip_header_2;
+int<<8>> forward_tango_pkt_arg_6 = attach_signatures_tango_ip_header_3;
+int<<64>> forward_tango_pkt_arg_7 = attach_signatures_tango_ip_header_4;
+int<<64>> forward_tango_pkt_arg_8 = attach_signatures_tango_ip_header_5;
+int<<64>> forward_tango_pkt_arg_9 = attach_signatures_tango_ip_header_6;
+int<<64>> forward_tango_pkt_arg_10 = attach_signatures_tango_ip_header_7;
+int<<16>> forward_tango_pkt_arg_11 = attach_signatures_tango_udp_header_0;
+int<<16>> forward_tango_pkt_arg_12 = attach_signatures_tango_udp_header_1;
+int<<16>> forward_tango_pkt_arg_13 = attach_signatures_tango_udp_header_2;
+int<<16>> forward_tango_pkt_arg_14 = attach_signatures_tango_udp_header_3;
+int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
+int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
+int<<32>> forward_tango_pkt_arg_17 = tango_metrics_hdr_2;
+int<<16>> forward_tango_pkt_arg_18 = tango_metrics_hdr_3;
+int<<8>> forward_tango_pkt_arg_19 = tango_metrics_hdr_4;
+int<<8>> forward_tango_pkt_arg_20 = attach_signatures_encaped_ip_header_0;
+int<<8>> forward_tango_pkt_arg_21 = attach_signatures_encaped_ip_header_1;
+int<<16>> forward_tango_pkt_arg_22 = attach_signatures_encaped_ip_header_2;
+int<<16>> forward_tango_pkt_arg_23 = attach_signatures_encaped_ip_header_3;
+int<<16>> forward_tango_pkt_arg_24 = attach_signatures_encaped_ip_header_4;
+int<<8>> forward_tango_pkt_arg_25 = attach_signatures_encaped_ip_header_5;
+int<<8>> forward_tango_pkt_arg_26 = attach_signatures_encaped_ip_header_6;
+int<<16>> forward_tango_pkt_arg_27 = attach_signatures_encaped_ip_header_7;
+int<<32>> forward_tango_pkt_arg_28 = attach_signatures_encaped_ip_header_8;
+int<<32>> forward_tango_pkt_arg_29 = attach_signatures_encaped_ip_header_9;
+int<<16>> forward_tango_pkt_arg_30 = attach_signatures_encaped_udp_header_0;
+int<<16>> forward_tango_pkt_arg_31 = attach_signatures_encaped_udp_header_1;
+int<<16>> forward_tango_pkt_arg_32 = attach_signatures_encaped_udp_header_2;
+int<<16>> forward_tango_pkt_arg_33 = attach_signatures_encaped_udp_header_3;
+generate_port (128, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33));
 }
 -----end after phase 3: immediate elimination-------

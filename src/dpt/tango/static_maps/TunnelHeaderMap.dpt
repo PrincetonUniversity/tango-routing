@@ -8,8 +8,10 @@ const IPv6Header_t DUMMY_HDR = {
     payload_len = 0;
     next_header = 0;
     hop_limit = 0;
-    src_addr = 0;
-    dest_addr = 0;
+    src_addr_lo = 0;
+    src_addr_hi = 0;
+    dest_addr_lo = 0;
+    dest_addr_hi = 0;
 };
 
 size NUM_VALID_PATHS = 1;

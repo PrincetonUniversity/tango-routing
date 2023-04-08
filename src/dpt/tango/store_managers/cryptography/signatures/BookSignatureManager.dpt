@@ -4,8 +4,8 @@
  * 
  * # Methods
  * create() -> BookSignatureManager.t
- * sign(BookSignatureManager.t, int<<24>>, int<<3>>) -> int<<1>>
- * verify(BookSignatureManager.t, int<<24>>, int<<3>>, int<<1>>) -> bool
+ * sign(BookSignatureManager.t, int<<16>>, int<<3>>) -> int<<1>>
+ * verify(BookSignatureManager.t, int<<16>>, int<<3>>, int<<1>>) -> bool
  **/
 module BookSignatureManager : {
     global type t;
@@ -17,7 +17,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<24>>): sequence number to sign
+    * seq_number (int<<16>>): sequence number to sign
     * path_id (int<<3>>): path ID of associated sequence number
     * 
     * # Returns
@@ -25,7 +25,7 @@ module BookSignatureManager : {
     **/
     fun int<<1>> sign (
         t self,
-        int<<24>> seq_number,
+        int<<16>> seq_number,
         int<<3>> path_id
     ) [start <= self; end self];
 
@@ -35,7 +35,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<24>>): sequence number signed
+    * seq_number (int<<16>>): sequence number signed
     * path_id (int<<3>>): path ID of associated sequence number
     * signature (int<<1>>): signature to validate
     * 
@@ -44,7 +44,7 @@ module BookSignatureManager : {
     **/
     fun bool verify (
         t self,
-        int<<24>> seq_number,
+        int<<16>> seq_number,
         int<<3>> path_id,
         int<<1>> signature
     ) [start <= self; end self];
@@ -74,7 +74,7 @@ module BookSignatureManager : {
 
     fun int<<1>> sign (
         t self,
-        int<<24>> seq_number,
+        int<<16>> seq_number,
         int<<3>> path_id
     ) {
         match path_id with
@@ -90,7 +90,7 @@ module BookSignatureManager : {
 
     fun bool verify (
         t self,
-        int<<24>> seq_number,
+        int<<16>> seq_number,
         int<<3>> path_id,
         int<<1>> signature
     ) {

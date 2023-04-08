@@ -1,8 +1,8 @@
 INTERPRETER=dpt
 COMPILER=./dptc
 IMAGE=jsonch/lucid:lucid
-BUILD_DIR=target-route-updates
-MAIN_FILE=src/dpt/tango/TangoMeasurementWithUpdates.dpt
+BUILD_DIR=target-stress
+MAIN_FILE=src/dpt/tango/TangoStress.dpt
 PORTS_CONFIG=ports.json
 SOURCES=$(shell find src -type f -name "*.dpt")
 

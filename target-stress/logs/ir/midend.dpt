@@ -1,12 +1,12 @@
-// after phase: midendmemop SequenceNumberManager_next(int<<32>> curr,int<<32>> ignore)
- {return curr+1;
+// after phase: midendmemop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
 }
 
-memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> ignore)
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<24>> sequence_counters_0 = Array.create(8);
+global Array.t<<16>> sequence_counters_0 = Array.create(8);
 
 
 global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
@@ -105,25 +105,29 @@ global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 
-entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> tcp_header_0,int<<16>> tcp_header_1,int<<32>> tcp_header_2,int<<32>> tcp_header_3,int<<16>> tcp_header_4,int<<16>> tcp_header_5,int<<16>> tcp_header_6,int<<16>> tcp_header_7);
+entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3);
 
-exit event incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<128>> tango_ip_header_4,int<<128>> tango_ip_header_5,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<24>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<16>> encaped_tcp_header_0,int<<16>> encaped_tcp_header_1,int<<32>> encaped_tcp_header_2,int<<32>> encaped_tcp_header_3,int<<16>> encaped_tcp_header_4,int<<16>> encaped_tcp_header_5,int<<16>> encaped_tcp_header_6,int<<16>> encaped_tcp_header_7);
+event attach_signatures(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<64>> tango_ip_header_4,int<<64>> tango_ip_header_5,int<<64>> tango_ip_header_6,int<<64>> tango_ip_header_7,int<<16>> tango_udp_header_0,int<<16>> tango_udp_header_1,int<<16>> tango_udp_header_2,int<<16>> tango_udp_header_3,int<<16>> seq_number,int<<8>> traffic_class,int<<16>> timestamp,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<16>> encaped_udp_header_0,int<<16>> encaped_udp_header_1,int<<16>> encaped_udp_header_2,int<<16>> encaped_udp_header_3);
 
-handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> tcp_header_0,int<<16>> tcp_header_1,int<<32>> tcp_header_2,int<<32>> tcp_header_3,int<<16>> tcp_header_4,int<<16>> tcp_header_5,int<<16>> tcp_header_6,int<<16>> tcp_header_7) {
-int<<4>> map_flow_to_traffic_class_ret = 0;
-match (ip_header_8,tcp_header_0,ip_header_9,tcp_header_1,ip_header_6) with 
+exit event incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<64>> tango_ip_header_4,int<<64>> tango_ip_header_5,int<<64>> tango_ip_header_6,int<<64>> tango_ip_header_7,int<<16>> tango_udp_header_0,int<<16>> tango_udp_header_1,int<<16>> tango_udp_header_2,int<<16>> tango_udp_header_3,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<16>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<16>> encaped_udp_header_0,int<<16>> encaped_udp_header_1,int<<16>> encaped_udp_header_2,int<<16>> encaped_udp_header_3);
+
+handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3) {
+int<<8>> map_flow_to_traffic_class_ret = 32;
+match (ip_header_8,udp_header_0,ip_header_9,udp_header_1,ip_header_6) with 
 | _,_,_,_,_ -> {
 printf "ERROR: traffic class map has not been configured!" ;
 map_flow_to_traffic_class_ret = 15;
 }
-int<<4>> traffic_class = map_flow_to_traffic_class_ret;
-int<<3>> path_id = (int<<3>>)traffic_class;
+int<<8>> traffic_class = map_flow_to_traffic_class_ret;
+int<<8>> path_id = (int<<8>>)traffic_class;
 int<<32>> map_path_to_tunnel_header_ret_0 = 32;
 int<<16>> map_path_to_tunnel_header_ret_1 = 32;
 int<<8>> map_path_to_tunnel_header_ret_2 = 32;
 int<<8>> map_path_to_tunnel_header_ret_3 = 32;
-int<<128>> map_path_to_tunnel_header_ret_4 = 32;
-int<<128>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_4 = 32;
+int<<64>> map_path_to_tunnel_header_ret_5 = 32;
+int<<64>> map_path_to_tunnel_header_ret_6 = 32;
+int<<64>> map_path_to_tunnel_header_ret_7 = 32;
 match path_id with 
 | _ -> {
 printf "ERROR: tunnel header map has not been configured!" ;
@@ -133,17 +137,28 @@ map_path_to_tunnel_header_ret_2 = 0;
 map_path_to_tunnel_header_ret_3 = 0;
 map_path_to_tunnel_header_ret_4 = 0;
 map_path_to_tunnel_header_ret_5 = 0;
+map_path_to_tunnel_header_ret_6 = 0;
+map_path_to_tunnel_header_ret_7 = 0;
 }
 int<<32>> tango_tunnel_hdr_0 = map_path_to_tunnel_header_ret_0;
 int<<16>> tango_tunnel_hdr_1 = map_path_to_tunnel_header_ret_1;
 int<<8>> tango_tunnel_hdr_2 = map_path_to_tunnel_header_ret_2;
 int<<8>> tango_tunnel_hdr_3 = map_path_to_tunnel_header_ret_3;
-int<<128>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
-int<<128>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
-int<<3>> path_id = (int<<3>>)traffic_class;
-int<<24>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,0);
-int<<24>> seq_number = SequenceNumberManager_increment_ret;
+int<<64>> tango_tunnel_hdr_4 = map_path_to_tunnel_header_ret_4;
+int<<64>> tango_tunnel_hdr_5 = map_path_to_tunnel_header_ret_5;
+int<<64>> tango_tunnel_hdr_6 = map_path_to_tunnel_header_ret_6;
+int<<64>> tango_tunnel_hdr_7 = map_path_to_tunnel_header_ret_7;
+int<<8>> path_id = (int<<8>>)traffic_class;
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,(int<<16>>)1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+event egress_packet = attach_signatures(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,88+ip_header_2,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,8080,8080,0,0,seq_number,traffic_class,(int<<16>>)timestamp,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
+generate_port (ingress_port, egress_packet);
+}
+
+@egress handle attach_signatures(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<64>> tango_ip_header_4,int<<64>> tango_ip_header_5,int<<64>> tango_ip_header_6,int<<64>> tango_ip_header_7,int<<16>> tango_udp_header_0,int<<16>> tango_udp_header_1,int<<16>> tango_udp_header_2,int<<16>> tango_udp_header_3,int<<16>> seq_number,int<<8>> traffic_class,int<<16>> timestamp,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<16>> encaped_udp_header_0,int<<16>> encaped_udp_header_1,int<<16>> encaped_udp_header_2,int<<16>> encaped_udp_header_3) {
 int<<3>> path_id = (int<<3>>)traffic_class;
 int<<1>> BookSignatureManager_sign_ret = 0;
 match path_id with 
@@ -172,8 +187,7 @@ BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_6,seq_
 BookSignatureManager_sign_ret = Array.get(outgoing_book_signature_manager_7,seq_number);
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<32>> time_now = Sys.time();
-int<<12>> timestamp = [31 : 20]time_now;
+int<<12>> timestamp = (int<<12>>)timestamp;
 int<<3>> path_id = (int<<3>>)traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
@@ -203,11 +217,11 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<16>> tango_metrics_hdr_1 = timestamp;
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<24>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,88+ip_header_2,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9,tcp_header_0,tcp_header_1,tcp_header_2,tcp_header_3,tcp_header_4,tcp_header_5,tcp_header_6,tcp_header_7);
-printf "Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d, port: %d }" (int<<3>>)traffic_class,timestamp,ts_signature,seq_number,book_signature,1;
-generate_port (1, forward_tango_pkt);
+event forward_tango_pkt = incoming_tango_traffic(tango_eth_header_0,tango_eth_header_1,tango_eth_header_2,tango_ip_header_0,tango_ip_header_1,tango_ip_header_2,tango_ip_header_3,tango_ip_header_4,tango_ip_header_5,tango_ip_header_6,tango_ip_header_7,tango_udp_header_0,tango_udp_header_1,tango_udp_header_2,tango_udp_header_3,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,encaped_ip_header_0,encaped_ip_header_1,encaped_ip_header_2,encaped_ip_header_3,encaped_ip_header_4,encaped_ip_header_5,encaped_ip_header_6,encaped_ip_header_7,encaped_ip_header_8,encaped_ip_header_9,encaped_udp_header_0,encaped_udp_header_1,encaped_udp_header_2,encaped_udp_header_3);
+printf "Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d, port: %d }" (int<<3>>)traffic_class,timestamp,ts_signature,seq_number,book_signature,128;
+generate_port (128, forward_tango_pkt);
 }
