@@ -28,18 +28,6 @@ const UDPHeader_t TANGO_UDP_HEADER = {
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
 
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
-global BookSignatureManager.t incoming_book_signature_manager = BookSignatureManager.create();
-
-// Provide read access to precomputed timestamp + path ID signatures for validation
-global MetricSignatureManager.t incoming_metric_signature_manager = MetricSignatureManager.create();
-
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
-
-// Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
-
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *
  * ================================================================================================================== */
@@ -62,6 +50,48 @@ entry event forward_flow (
     IPv4Header_t ip_header,
     UDPHeader_t udp_header
 ) [ sequence_counters <= sequence_counters ];
+
+handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
+
+    /* 1. Map flow to a specific physical route. */
+    // -- Map flow to traffic class.
+    int<<8>> traffic_class = map_flow_to_traffic_class(
+        ip_header#src_address,
+        udp_header#source_port,
+        ip_header#dest_address,
+        udp_header#destination_port,
+        ip_header#protocol
+    );
+
+    // -- Get physical path header to tunnel with.
+    IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header((int<<8>>) traffic_class);
+
+    /* 2. Get metric values. */
+    // -- Get updated sequence number
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, (int<<8>>) traffic_class);
+
+    // -- Get current time in milliseconds
+    int<<12>> timestamp = get_time_now_ms();
+    
+    event egress_packet = attach_signatures (
+        eth_header,
+        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
+        TANGO_UDP_HEADER,
+        seq_number,
+        traffic_class,
+        (int<<16>>) timestamp,
+        ip_header,
+        udp_header
+    );
+
+    generate_port (ingress_port, egress_packet);
+}
+
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers
+global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
+
+// Provide read access to precomputed timestamp + path ID signatures
+global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
 
 /**
  * # Description
@@ -106,42 +136,6 @@ exit event incoming_tango_traffic (
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
-
-handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
-
-    /* 1. Map flow to a specific physical route. */
-    // -- Map flow to traffic class.
-    int<<8>> traffic_class = map_flow_to_traffic_class(
-        ip_header#src_address,
-        udp_header#source_port,
-        ip_header#dest_address,
-        udp_header#destination_port,
-        ip_header#protocol
-    );
-
-    // -- Get physical path header to tunnel with.
-    IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header((int<<8>>) traffic_class);
-
-    /* 2. Get metric values. */
-    // -- Get updated sequence number
-    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, (int<<8>>) traffic_class);
-
-    // -- Get current time in milliseconds
-    int<<12>> timestamp = get_time_now_ms();
-    
-    event egress_packet = attach_signatures (
-        eth_header,
-        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
-        TANGO_UDP_HEADER,
-        seq_number,
-        traffic_class,
-        (int<<16>>) timestamp,
-        ip_header,
-        udp_header
-    );
-
-    generate_port (ingress_port, egress_packet);
-}
 
 @egress
 handle attach_signatures (
