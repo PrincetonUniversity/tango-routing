@@ -10,8 +10,7 @@ include "store_managers/SequenceNumberManager.dpt"
  *                                                     EXTERNS                                                        *
  * ================================================================================================================== */
 
-const int<<9>> out_peer_port = 1;
-const int<<9>> out_port = 2;
+const int<<9>> OUT_PORT = 2;
 
 /* ================================================================================================================== *
  *                                                     GLOBALS                                                        *
@@ -126,5 +125,5 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
         seq_number
     );
 
-    generate_port (out_peer_port, forward_tango_pkt);
+    generate_port (OUT_PORT, forward_tango_pkt);
 }
