@@ -1,9 +1,6 @@
 @egress handle attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3) {
 
 }
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
-event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
-entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
 
 global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
@@ -36,38 +33,9 @@ global Array.t<<1>> outgoing_book_signature_manager_1 = Array.create(65536);
 
 global Array.t<<1>> outgoing_book_signature_manager_0 = Array.create(65536);
 
-global Array.t<<32>> incoming_metric_signature_manager_7 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_6 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_5 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_4 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_3 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_2 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_1 = Array.create(16);
-
-global Array.t<<32>> incoming_metric_signature_manager_0 = Array.create(16);
-
-global Array.t<<1>> incoming_book_signature_manager_7 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_6 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_5 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_4 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_3 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_2 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_1 = Array.create(65536);
-
-global Array.t<<1>> incoming_book_signature_manager_0 = Array.create(65536);
-
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_0,int<<8>> incoming_tango_traffic_encaped_ip_header_1,int<<16>> incoming_tango_traffic_encaped_ip_header_2,int<<16>> incoming_tango_traffic_encaped_ip_header_3,int<<16>> incoming_tango_traffic_encaped_ip_header_4,int<<8>> incoming_tango_traffic_encaped_ip_header_5,int<<8>> incoming_tango_traffic_encaped_ip_header_6,int<<16>> incoming_tango_traffic_encaped_ip_header_7,int<<32>> incoming_tango_traffic_encaped_ip_header_8,int<<32>> incoming_tango_traffic_encaped_ip_header_9,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3);
+event attach_signatures(int<<48>> attach_signatures_tango_eth_header_0,int<<48>> attach_signatures_tango_eth_header_1,int<<16>> attach_signatures_tango_eth_header_2,int<<32>> attach_signatures_tango_ip_header_0,int<<16>> attach_signatures_tango_ip_header_1,int<<8>> attach_signatures_tango_ip_header_2,int<<8>> attach_signatures_tango_ip_header_3,int<<64>> attach_signatures_tango_ip_header_4,int<<64>> attach_signatures_tango_ip_header_5,int<<64>> attach_signatures_tango_ip_header_6,int<<64>> attach_signatures_tango_ip_header_7,int<<16>> attach_signatures_tango_udp_header_0,int<<16>> attach_signatures_tango_udp_header_1,int<<16>> attach_signatures_tango_udp_header_2,int<<16>> attach_signatures_tango_udp_header_3,int<<16>> attach_signatures_seq_number,int<<8>> attach_signatures_traffic_class,int<<16>> attach_signatures_timestamp,int<<8>> attach_signatures_encaped_ip_header_0,int<<8>> attach_signatures_encaped_ip_header_1,int<<16>> attach_signatures_encaped_ip_header_2,int<<16>> attach_signatures_encaped_ip_header_3,int<<16>> attach_signatures_encaped_ip_header_4,int<<8>> attach_signatures_encaped_ip_header_5,int<<8>> attach_signatures_encaped_ip_header_6,int<<16>> attach_signatures_encaped_ip_header_7,int<<32>> attach_signatures_encaped_ip_header_8,int<<32>> attach_signatures_encaped_ip_header_9,int<<16>> attach_signatures_encaped_udp_header_0,int<<16>> attach_signatures_encaped_udp_header_1,int<<16>> attach_signatures_encaped_udp_header_2,int<<16>> attach_signatures_encaped_udp_header_3);
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
 // shared locals:
 
 // MAIN HANDLER 
@@ -81,7 +49,7 @@ labeledstmt_90();
 labeledstmt_91();
 }
 // Stage 1
-match (path_id5098,event_id,path_id5102) with 
+match (path_id4832,event_id,path_id4836) with 
 | 0,2,0 -> {
 labeledstmt_92();
 }
@@ -328,7 +296,7 @@ labeledstmt_92();
 | _,_,_ -> {
 labeledstmt_94();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_95();
 }
@@ -353,7 +321,7 @@ labeledstmt_96();
 | _,_ -> {
 labeledstmt_95();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_97();
 }
@@ -375,7 +343,7 @@ labeledstmt_98();
 | _,_ -> {
 labeledstmt_97();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_99();
 }
@@ -395,7 +363,7 @@ labeledstmt_100();
 labeledstmt_99();
 }
 // Stage 2
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_101();
 }
@@ -411,7 +379,7 @@ labeledstmt_102();
 | _,_ -> {
 labeledstmt_101();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_103();
 }
@@ -424,7 +392,7 @@ labeledstmt_104();
 | _,_ -> {
 labeledstmt_103();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_105();
 }
@@ -434,7 +402,7 @@ labeledstmt_106();
 | _,_ -> {
 labeledstmt_105();
 }
-match (path_id5098,event_id) with 
+match (path_id4832,event_id) with 
 | 0,2 -> {
 labeledstmt_107();
 }
@@ -442,7 +410,7 @@ labeledstmt_107();
 labeledstmt_108();
 }
 // Stage 3
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_109();
 }
@@ -473,7 +441,7 @@ labeledstmt_109();
 | _,_ -> {
 labeledstmt_111();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_112();
 }
@@ -498,7 +466,7 @@ labeledstmt_113();
 | _,_ -> {
 labeledstmt_112();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_114();
 }
@@ -520,7 +488,7 @@ labeledstmt_115();
 | _,_ -> {
 labeledstmt_114();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_116();
 }
@@ -540,7 +508,7 @@ labeledstmt_117();
 labeledstmt_116();
 }
 // Stage 4
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_118();
 }
@@ -559,7 +527,7 @@ labeledstmt_118();
 | _,_ -> {
 labeledstmt_120();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_121();
 }
@@ -572,7 +540,7 @@ labeledstmt_122();
 | _,_ -> {
 labeledstmt_121();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_123();
 }
@@ -582,7 +550,7 @@ labeledstmt_124();
 | _,_ -> {
 labeledstmt_123();
 }
-match (path_id5102,event_id) with 
+match (path_id4836,event_id) with 
 | 0,2 -> {
 labeledstmt_125();
 }
@@ -621,149 +589,149 @@ labeledstmt_133();
 | _ -> {
 labeledstmt_134();
 }}
-memop get_6175(int<<32>> mem_val_6172,int<<32>> unused_6174,int<<32>> unused_6173)
+memop get_5717(int<<32>> mem_val_5714,int<<32>> unused_5716,int<<32>> unused_5715)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6172)
+ret=(true -> mem_val_5714)
 }}
-memop get_6171(int<<32>> mem_val_6168,int<<32>> unused_6170,int<<32>> unused_6169)
+memop get_5713(int<<32>> mem_val_5710,int<<32>> unused_5712,int<<32>> unused_5711)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6168)
+ret=(true -> mem_val_5710)
 }}
-memop get_6167(int<<32>> mem_val_6164,int<<32>> unused_6166,int<<32>> unused_6165)
+memop get_5709(int<<32>> mem_val_5706,int<<32>> unused_5708,int<<32>> unused_5707)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6164)
+ret=(true -> mem_val_5706)
 }}
-memop get_6163(int<<32>> mem_val_6160,int<<32>> unused_6162,int<<32>> unused_6161)
+memop get_5705(int<<32>> mem_val_5702,int<<32>> unused_5704,int<<32>> unused_5703)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6160)
+ret=(true -> mem_val_5702)
 }}
-memop get_6159(int<<32>> mem_val_6156,int<<32>> unused_6158,int<<32>> unused_6157)
+memop get_5701(int<<32>> mem_val_5698,int<<32>> unused_5700,int<<32>> unused_5699)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6156)
+ret=(true -> mem_val_5698)
 }}
-memop get_6155(int<<32>> mem_val_6152,int<<32>> unused_6154,int<<32>> unused_6153)
+memop get_5697(int<<32>> mem_val_5694,int<<32>> unused_5696,int<<32>> unused_5695)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6152)
+ret=(true -> mem_val_5694)
 }}
-memop get_6151(int<<32>> mem_val_6148,int<<32>> unused_6150,int<<32>> unused_6149)
+memop get_5693(int<<32>> mem_val_5690,int<<32>> unused_5692,int<<32>> unused_5691)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6148)
+ret=(true -> mem_val_5690)
 }}
-memop get_6147(int<<32>> mem_val_6144,int<<32>> unused_6146,int<<32>> unused_6145)
+memop get_5689(int<<32>> mem_val_5686,int<<32>> unused_5688,int<<32>> unused_5687)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6144)
+ret=(true -> mem_val_5686)
 }}
-memop get_6143(int<<1>> mem_val_6140,int<<1>> unused_6142,int<<1>> unused_6141)
+memop get_5685(int<<1>> mem_val_5682,int<<1>> unused_5684,int<<1>> unused_5683)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6140)
+ret=(true -> mem_val_5682)
 }}
-memop get_6139(int<<1>> mem_val_6136,int<<1>> unused_6138,int<<1>> unused_6137)
+memop get_5681(int<<1>> mem_val_5678,int<<1>> unused_5680,int<<1>> unused_5679)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6136)
+ret=(true -> mem_val_5678)
 }}
-memop get_6135(int<<1>> mem_val_6132,int<<1>> unused_6134,int<<1>> unused_6133)
+memop get_5677(int<<1>> mem_val_5674,int<<1>> unused_5676,int<<1>> unused_5675)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6132)
+ret=(true -> mem_val_5674)
 }}
-memop get_6131(int<<1>> mem_val_6128,int<<1>> unused_6130,int<<1>> unused_6129)
+memop get_5673(int<<1>> mem_val_5670,int<<1>> unused_5672,int<<1>> unused_5671)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6128)
+ret=(true -> mem_val_5670)
 }}
-memop get_6127(int<<1>> mem_val_6124,int<<1>> unused_6126,int<<1>> unused_6125)
+memop get_5669(int<<1>> mem_val_5666,int<<1>> unused_5668,int<<1>> unused_5667)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6124)
+ret=(true -> mem_val_5666)
 }}
-memop get_6123(int<<1>> mem_val_6120,int<<1>> unused_6122,int<<1>> unused_6121)
+memop get_5665(int<<1>> mem_val_5662,int<<1>> unused_5664,int<<1>> unused_5663)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6120)
+ret=(true -> mem_val_5662)
 }}
-memop get_6119(int<<1>> mem_val_6116,int<<1>> unused_6118,int<<1>> unused_6117)
+memop get_5661(int<<1>> mem_val_5658,int<<1>> unused_5660,int<<1>> unused_5659)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6116)
+ret=(true -> mem_val_5658)
 }}
-memop get_6115(int<<1>> mem_val_6112,int<<1>> unused_6114,int<<1>> unused_6113)
+memop get_5657(int<<1>> mem_val_5654,int<<1>> unused_5656,int<<1>> unused_5655)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_6112)
+ret=(true -> mem_val_5654)
 }}
 labeled_statement labeledstmt_172{
 int<<16>> forward_tango_pkt_arg_33 = attach_signatures_encaped_udp_header_3;
@@ -865,16 +833,16 @@ labeled_statement labeledstmt_140{
 int<<32>> MetricSignatureManager_sign_ret = 32;
 }
 labeled_statement labeledstmt_139{
-int<<3>> path_id5102 = (int<<3>>)attach_signatures_traffic_class;
+int<<3>> path_id4836 = (int<<3>>)attach_signatures_traffic_class;
 }
 labeled_statement labeledstmt_138{
-int<<12>> timestamp5101 = (int<<12>>)attach_signatures_timestamp;
+int<<12>> timestamp4835 = (int<<12>>)attach_signatures_timestamp;
 }
 labeled_statement labeledstmt_137{
 int<<1>> BookSignatureManager_sign_ret = 0;
 }
 labeled_statement labeledstmt_136{
-int<<3>> path_id5098 = (int<<3>>)attach_signatures_traffic_class;
+int<<3>> path_id4832 = (int<<3>>)attach_signatures_traffic_class;
 }
 labeled_statement labeledstmt_135{
 drop_ctl = 1;
@@ -937,7 +905,7 @@ labeledstmt_174();
 labeledstmt_175();
 }
 labeled_statement labeledstmt_176{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_7,attach_signatures_seq_number,get_6143,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_7,attach_signatures_seq_number,get_5685,0,0,0);
 }
 labeled_statement labeledstmt_93{
 labeledstmt_176();
@@ -952,7 +920,7 @@ labeled_statement labeledstmt_95{
 
 }
 labeled_statement labeledstmt_177{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_6,attach_signatures_seq_number,get_6139,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_6,attach_signatures_seq_number,get_5681,0,0,0);
 }
 labeled_statement labeledstmt_96{
 labeledstmt_177();
@@ -961,7 +929,7 @@ labeled_statement labeledstmt_97{
 
 }
 labeled_statement labeledstmt_178{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_5,attach_signatures_seq_number,get_6135,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_5,attach_signatures_seq_number,get_5677,0,0,0);
 }
 labeled_statement labeledstmt_98{
 labeledstmt_178();
@@ -970,7 +938,7 @@ labeled_statement labeledstmt_99{
 
 }
 labeled_statement labeledstmt_179{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_4,attach_signatures_seq_number,get_6131,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_4,attach_signatures_seq_number,get_5673,0,0,0);
 }
 labeled_statement labeledstmt_100{
 labeledstmt_179();
@@ -979,7 +947,7 @@ labeled_statement labeledstmt_101{
 
 }
 labeled_statement labeledstmt_180{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_3,attach_signatures_seq_number,get_6127,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_3,attach_signatures_seq_number,get_5669,0,0,0);
 }
 labeled_statement labeledstmt_102{
 labeledstmt_180();
@@ -988,7 +956,7 @@ labeled_statement labeledstmt_103{
 
 }
 labeled_statement labeledstmt_181{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_2,attach_signatures_seq_number,get_6123,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_2,attach_signatures_seq_number,get_5665,0,0,0);
 }
 labeled_statement labeledstmt_104{
 labeledstmt_181();
@@ -997,13 +965,13 @@ labeled_statement labeledstmt_105{
 
 }
 labeled_statement labeledstmt_182{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_1,attach_signatures_seq_number,get_6119,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_1,attach_signatures_seq_number,get_5661,0,0,0);
 }
 labeled_statement labeledstmt_106{
 labeledstmt_182();
 }
 labeled_statement labeledstmt_183{
-BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_0,attach_signatures_seq_number,get_6115,0,0,0);
+BookSignatureManager_sign_ret = Array.update_complex(outgoing_book_signature_manager_0,attach_signatures_seq_number,get_5657,0,0,0);
 }
 labeled_statement labeledstmt_107{
 labeledstmt_183();
@@ -1022,7 +990,7 @@ labeledstmt_184();
 labeledstmt_185();
 }
 labeled_statement labeledstmt_186{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_7,[3 : 0]timestamp5101,get_6175,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_7,[3 : 0]timestamp4835,get_5717,0,0,0);
 }
 labeled_statement labeledstmt_110{
 labeledstmt_186();
@@ -1036,7 +1004,7 @@ labeled_statement labeledstmt_112{
 
 }
 labeled_statement labeledstmt_187{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_6,[3 : 0]timestamp5101,get_6171,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_6,[3 : 0]timestamp4835,get_5713,0,0,0);
 }
 labeled_statement labeledstmt_113{
 labeledstmt_187();
@@ -1045,7 +1013,7 @@ labeled_statement labeledstmt_114{
 
 }
 labeled_statement labeledstmt_188{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_5,[3 : 0]timestamp5101,get_6167,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_5,[3 : 0]timestamp4835,get_5709,0,0,0);
 }
 labeled_statement labeledstmt_115{
 labeledstmt_188();
@@ -1054,7 +1022,7 @@ labeled_statement labeledstmt_116{
 
 }
 labeled_statement labeledstmt_189{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_4,[3 : 0]timestamp5101,get_6163,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_4,[3 : 0]timestamp4835,get_5705,0,0,0);
 }
 labeled_statement labeledstmt_117{
 labeledstmt_189();
@@ -1066,7 +1034,7 @@ labeled_statement labeledstmt_118{
 labeledstmt_190();
 }
 labeled_statement labeledstmt_191{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_3,[3 : 0]timestamp5101,get_6159,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_3,[3 : 0]timestamp4835,get_5701,0,0,0);
 }
 labeled_statement labeledstmt_119{
 labeledstmt_191();
@@ -1079,7 +1047,7 @@ labeled_statement labeledstmt_121{
 
 }
 labeled_statement labeledstmt_192{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_2,[3 : 0]timestamp5101,get_6155,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_2,[3 : 0]timestamp4835,get_5697,0,0,0);
 }
 labeled_statement labeledstmt_122{
 labeledstmt_192();
@@ -1088,13 +1056,13 @@ labeled_statement labeledstmt_123{
 
 }
 labeled_statement labeledstmt_193{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_1,[3 : 0]timestamp5101,get_6151,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_1,[3 : 0]timestamp4835,get_5693,0,0,0);
 }
 labeled_statement labeledstmt_124{
 labeledstmt_193();
 }
 labeled_statement labeledstmt_194{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[3 : 0]timestamp5101,get_6147,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[3 : 0]timestamp4835,get_5689,0,0,0);
 }
 labeled_statement labeledstmt_125{
 labeledstmt_194();

@@ -12,7 +12,7 @@ header wire_ev_t {
 }
 header bridge_ev_t {
   bit<8> port_event_id;
-  bit<5> flag_pad_6224;
+  bit<5> flag_pad_5766;
   bit<1> forward_flow;
   bit<1> attach_signatures;
   bit<1> incoming_tango_traffic;
@@ -117,38 +117,6 @@ struct hdr_t {
 struct meta_t {
   bit<8> egress_event_id;
 }
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_7;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_6;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_5;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_4;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_3;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_2;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_1;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_0;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_7;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_6;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_5;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_4;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_3;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_2;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_1;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_0;
 Register<bit<16>,_>(32w8) sequence_counters_0;
 Register<bit<32>,_>(32w16)
 outgoing_metric_signature_manager_7;
@@ -180,39 +148,7 @@ Register<bit<1>,_>(32w65536)
 outgoing_book_signature_manager_2;
 Register<bit<1>,_>(32w65536)
 outgoing_book_signature_manager_1;
-Register<bit<1>,_>(32w65536)
-outgoing_book_signature_manager_0;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_7;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_6;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_5;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_4;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_3;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_2;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_1;
-Register<bit<32>,_>(32w16)
-incoming_metric_signature_manager_0;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_7;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_6;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_5;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_4;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_3;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_2;
-Register<bit<1>,_>(32w65536)
-incoming_book_signature_manager_1;
-Register<bit<1>,_>(32w65536) incoming_book_signature_manager_0;
+Register<bit<1>,_>(32w65536) outgoing_book_signature_manager_0;
 //Main program components (ingress/egress parser, control, deparser)
 parser IngressParser(packet_in pkt,
     out hdr_t hdr,
@@ -390,9 +326,9 @@ control IngressControl(inout hdr_t hdr,
   action labeledstmt_61(){
     map_path_to_tunnel_header_ret_7=64w0;
   }
-  bit<8> path_id5060;
+  bit<8> path_id4794;
   action labeledstmt_60(){
-    path_id5060=((bit<8>)traffic_class);
+    path_id4794=((bit<8>)traffic_class);
   }
   bit<16> SequenceNumberManager_increment_ret;
   action labeledstmt_59(){
@@ -566,7 +502,7 @@ control IngressControl(inout hdr_t hdr,
     tango_tunnel_hdr_7=map_path_to_tunnel_header_ret_7;
   }
   RegisterAction<bit<16>,bit<8>,bit<16>>(sequence_counters_0)
-  sequence_counters_0_regaction_6176 = {
+  sequence_counters_0_regaction_5718 = {
     void apply(inout bit<16> cell1_remote,
         out bit<16> ret_remote){
       bit<16> cell1_local=cell1_remote;
@@ -584,7 +520,7 @@ control IngressControl(inout hdr_t hdr,
   };
   action labeledstmt_70(){
    
-SequenceNumberManager_increment_ret=sequence_counters_0_regaction_6176.execute(path_id5060);
+SequenceNumberManager_increment_ret=sequence_counters_0_regaction_5718.execute(path_id4794);
   }
   bit<12> timestamp;
   action labeledstmt_69(){
@@ -745,7 +681,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
   action labeledstmt_21(){
     //NOOP
   }
-  table table_6186 {
+  table table_5728 {
     key = {
       hdr.wire_ev.event_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -765,7 +701,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_) : labeledstmt_3();
     } 
   } 
-  table table_6185 {
+  table table_5727 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
@@ -783,7 +719,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_) : labeledstmt_5();
     } 
   } 
-  table table_6184 {
+  table table_5726 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
@@ -801,7 +737,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_) : labeledstmt_7();
     } 
   } 
-  table table_6183 {
+  table table_5725 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
@@ -819,7 +755,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_) : labeledstmt_9();
     } 
   } 
-  table table_6182 {
+  table table_5724 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -838,7 +774,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_,_) : labeledstmt_11();
     } 
   } 
-  table table_6181 {
+  table table_5723 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -857,7 +793,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_,_) : labeledstmt_13();
     } 
   } 
-  table table_6180 {
+  table table_5722 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -876,7 +812,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_,_) : labeledstmt_15();
     } 
   } 
-  table table_6179 {
+  table table_5721 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -895,7 +831,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_,_) : labeledstmt_17();
     } 
   } 
-  table table_6178 {
+  table table_5720 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -914,7 +850,7 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
       (_,_,_,_,_,_,_) : labeledstmt_19();
     } 
   } 
-  table table_6177 {
+  table table_5719 {
     key = {
       path_id : ternary;
       hdr.forward_flow.forward_flow_ip_header_6 : ternary;
@@ -934,16 +870,16 @@ hdr.attach_signatures.attach_signatures_encaped_udp_header_3=egress_packet_arg_3
     } 
   } 
   apply {
-    table_6186.apply();
-    table_6185.apply();
-    table_6184.apply();
-    table_6183.apply();
-    table_6182.apply();
-    table_6181.apply();
-    table_6180.apply();
-    table_6179.apply();
-    table_6178.apply();
-    table_6177.apply();
+    table_5728.apply();
+    table_5727.apply();
+    table_5726.apply();
+    table_5725.apply();
+    table_5724.apply();
+    table_5723.apply();
+    table_5722.apply();
+    table_5721.apply();
+    table_5720.apply();
+    table_5719.apply();
   }
 } 
 control IngressDeparser(packet_out pkt,
@@ -1420,24 +1356,24 @@ tango_metrics_hdr_0=((bit<8>)hdr.attach_signatures.attach_signatures_traffic_cla
   action labeledstmt_140(){
     MetricSignatureManager_sign_ret=32w32;
   }
-  bit<3> path_id5102;
+  bit<3> path_id4836;
   action labeledstmt_139(){
    
-path_id5102=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
+path_id4836=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
   }
-  bit<12> timestamp5101;
+  bit<12> timestamp4835;
   action labeledstmt_138(){
    
-timestamp5101=((bit<12>)hdr.attach_signatures.attach_signatures_timestamp);
+timestamp4835=((bit<12>)hdr.attach_signatures.attach_signatures_timestamp);
   }
   bit<1> BookSignatureManager_sign_ret;
   action labeledstmt_137(){
     BookSignatureManager_sign_ret=1w0;
   }
-  bit<3> path_id5098;
+  bit<3> path_id4832;
   action labeledstmt_136(){
    
-path_id5098=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
+path_id4832=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
   }
   action labeledstmt_135(){
     eg_dprsr_md.drop_ctl=3w1;
@@ -1503,7 +1439,7 @@ path_id5098=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
     labeledstmt_175();
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_7)
-  outgoing_book_signature_manager_7_regaction_6187 = {
+  outgoing_book_signature_manager_7_regaction_5729 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1515,7 +1451,7 @@ path_id5098=((bit<3>)hdr.attach_signatures.attach_signatures_traffic_class);
   };
   action labeledstmt_176(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_7_regaction_6187.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_7_regaction_5729.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_93(){
     labeledstmt_176();
@@ -1530,7 +1466,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_7_regaction_6187.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_6)
-  outgoing_book_signature_manager_6_regaction_6188 = {
+  outgoing_book_signature_manager_6_regaction_5730 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1542,7 +1478,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_7_regaction_6187.e
   };
   action labeledstmt_177(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_6_regaction_6188.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_6_regaction_5730.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_96(){
     labeledstmt_177();
@@ -1551,7 +1487,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_6_regaction_6188.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_5)
-  outgoing_book_signature_manager_5_regaction_6189 = {
+  outgoing_book_signature_manager_5_regaction_5731 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1563,7 +1499,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_6_regaction_6188.e
   };
   action labeledstmt_178(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_5_regaction_6189.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_5_regaction_5731.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_98(){
     labeledstmt_178();
@@ -1572,7 +1508,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_5_regaction_6189.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_4)
-  outgoing_book_signature_manager_4_regaction_6190 = {
+  outgoing_book_signature_manager_4_regaction_5732 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1584,7 +1520,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_5_regaction_6189.e
   };
   action labeledstmt_179(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_4_regaction_6190.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_4_regaction_5732.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_100(){
     labeledstmt_179();
@@ -1593,7 +1529,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_4_regaction_6190.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_3)
-  outgoing_book_signature_manager_3_regaction_6191 = {
+  outgoing_book_signature_manager_3_regaction_5733 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1605,7 +1541,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_4_regaction_6190.e
   };
   action labeledstmt_180(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_3_regaction_6191.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_3_regaction_5733.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_102(){
     labeledstmt_180();
@@ -1614,7 +1550,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_3_regaction_6191.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_2)
-  outgoing_book_signature_manager_2_regaction_6192 = {
+  outgoing_book_signature_manager_2_regaction_5734 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1626,7 +1562,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_3_regaction_6191.e
   };
   action labeledstmt_181(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_2_regaction_6192.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_2_regaction_5734.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_104(){
     labeledstmt_181();
@@ -1635,7 +1571,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_2_regaction_6192.e
     //NOOP
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_1)
-  outgoing_book_signature_manager_1_regaction_6193 = {
+  outgoing_book_signature_manager_1_regaction_5735 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1647,13 +1583,13 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_2_regaction_6192.e
   };
   action labeledstmt_182(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_1_regaction_6193.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_1_regaction_5735.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_106(){
     labeledstmt_182();
   }
   RegisterAction<bit<1>,bit<16>,bit<1>>(outgoing_book_signature_manager_0)
-  outgoing_book_signature_manager_0_regaction_6194 = {
+  outgoing_book_signature_manager_0_regaction_5736 = {
     void apply(inout bit<1> cell1_remote,
         out bit<1> ret_remote){
       bit<1> cell1_local=cell1_remote;
@@ -1665,7 +1601,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_1_regaction_6193.e
   };
   action labeledstmt_183(){
    
-BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_6194.execute(hdr.attach_signatures.attach_signatures_seq_number);
+BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_5736.execute(hdr.attach_signatures.attach_signatures_seq_number);
   }
   action labeledstmt_107(){
     labeledstmt_183();
@@ -1685,7 +1621,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_6194.e
     labeledstmt_185();
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_7)
-  outgoing_metric_signature_manager_7_regaction_6195 = {
+  outgoing_metric_signature_manager_7_regaction_5737 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1697,7 +1633,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_6194.e
   };
   action labeledstmt_186(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_6195.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_5737.execute((timestamp4835[3:0]));
   }
   action labeledstmt_110(){
     labeledstmt_186();
@@ -1711,7 +1647,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_61
     //NOOP
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_6)
-  outgoing_metric_signature_manager_6_regaction_6196 = {
+  outgoing_metric_signature_manager_6_regaction_5738 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1723,7 +1659,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_61
   };
   action labeledstmt_187(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_6196.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_5738.execute((timestamp4835[3:0]));
   }
   action labeledstmt_113(){
     labeledstmt_187();
@@ -1732,7 +1668,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_61
     //NOOP
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_5)
-  outgoing_metric_signature_manager_5_regaction_6197 = {
+  outgoing_metric_signature_manager_5_regaction_5739 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1744,7 +1680,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_61
   };
   action labeledstmt_188(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_6197.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_5739.execute((timestamp4835[3:0]));
   }
   action labeledstmt_115(){
     labeledstmt_188();
@@ -1753,7 +1689,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_61
     //NOOP
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_4)
-  outgoing_metric_signature_manager_4_regaction_6198 = {
+  outgoing_metric_signature_manager_4_regaction_5740 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1765,7 +1701,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_61
   };
   action labeledstmt_189(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_6198.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_5740.execute((timestamp4835[3:0]));
   }
   action labeledstmt_117(){
     labeledstmt_189();
@@ -1778,7 +1714,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_61
     labeledstmt_190();
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_3)
-  outgoing_metric_signature_manager_3_regaction_6199 = {
+  outgoing_metric_signature_manager_3_regaction_5741 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1790,7 +1726,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_61
   };
   action labeledstmt_191(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_6199.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_5741.execute((timestamp4835[3:0]));
   }
   action labeledstmt_119(){
     labeledstmt_191();
@@ -1803,7 +1739,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_61
     //NOOP
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_2)
-  outgoing_metric_signature_manager_2_regaction_6200 = {
+  outgoing_metric_signature_manager_2_regaction_5742 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1815,7 +1751,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_61
   };
   action labeledstmt_192(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_6200.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_5742.execute((timestamp4835[3:0]));
   }
   action labeledstmt_122(){
     labeledstmt_192();
@@ -1824,7 +1760,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_62
     //NOOP
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_1)
-  outgoing_metric_signature_manager_1_regaction_6201 = {
+  outgoing_metric_signature_manager_1_regaction_5743 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1836,13 +1772,13 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_62
   };
   action labeledstmt_193(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_6201.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_5743.execute((timestamp4835[3:0]));
   }
   action labeledstmt_124(){
     labeledstmt_193();
   }
   RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_0)
-  outgoing_metric_signature_manager_0_regaction_6202 = {
+  outgoing_metric_signature_manager_0_regaction_5744 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -1854,7 +1790,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_62
   };
   action labeledstmt_194(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_6202.execute((timestamp5101[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_5744.execute((timestamp4835[3:0]));
   }
   action labeledstmt_125(){
     labeledstmt_194();
@@ -1972,7 +1908,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
   action labeledstmt_134(){
     //NOOP
   }
-  table table_6223 {
+  table table_5765 {
     key = {
       meta.egress_event_id : ternary;
     }
@@ -1985,13 +1921,13 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_91();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6220")
-  @ignore_table_dependency("EgressControl.table_6221")
-  @ignore_table_dependency("EgressControl.table_6222")table table_6219 {
+  @ignore_table_dependency("EgressControl.table_5762")
+  @ignore_table_dependency("EgressControl.table_5763")
+  @ignore_table_dependency("EgressControl.table_5764")table table_5761 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
-      path_id5102 : ternary;
+      path_id4836 : ternary;
     }
     actions = {
       labeledstmt_92;
@@ -2083,11 +2019,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_,_) : labeledstmt_94();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6219")
-  @ignore_table_dependency("EgressControl.table_6221")
-  @ignore_table_dependency("EgressControl.table_6222")table table_6220 {
+  @ignore_table_dependency("EgressControl.table_5761")
+  @ignore_table_dependency("EgressControl.table_5763")
+  @ignore_table_dependency("EgressControl.table_5764")table table_5762 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2105,11 +2041,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_95();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6219")
-  @ignore_table_dependency("EgressControl.table_6220")
-  @ignore_table_dependency("EgressControl.table_6222")table table_6221 {
+  @ignore_table_dependency("EgressControl.table_5761")
+  @ignore_table_dependency("EgressControl.table_5762")
+  @ignore_table_dependency("EgressControl.table_5764")table table_5763 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2126,11 +2062,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_97();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6219")
-  @ignore_table_dependency("EgressControl.table_6220")
-  @ignore_table_dependency("EgressControl.table_6221")table table_6222 {
+  @ignore_table_dependency("EgressControl.table_5761")
+  @ignore_table_dependency("EgressControl.table_5762")
+  @ignore_table_dependency("EgressControl.table_5763")table table_5764 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2146,11 +2082,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_99();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6216")
-  @ignore_table_dependency("EgressControl.table_6217")
-  @ignore_table_dependency("EgressControl.table_6218")table table_6215 {
+  @ignore_table_dependency("EgressControl.table_5758")
+  @ignore_table_dependency("EgressControl.table_5759")
+  @ignore_table_dependency("EgressControl.table_5760")table table_5757 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2165,11 +2101,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_101();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6215")
-  @ignore_table_dependency("EgressControl.table_6217")
-  @ignore_table_dependency("EgressControl.table_6218")table table_6216 {
+  @ignore_table_dependency("EgressControl.table_5757")
+  @ignore_table_dependency("EgressControl.table_5759")
+  @ignore_table_dependency("EgressControl.table_5760")table table_5758 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2183,11 +2119,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_103();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6215")
-  @ignore_table_dependency("EgressControl.table_6216")
-  @ignore_table_dependency("EgressControl.table_6218")table table_6217 {
+  @ignore_table_dependency("EgressControl.table_5757")
+  @ignore_table_dependency("EgressControl.table_5758")
+  @ignore_table_dependency("EgressControl.table_5760")table table_5759 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2200,11 +2136,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_105();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6215")
-  @ignore_table_dependency("EgressControl.table_6216")
-  @ignore_table_dependency("EgressControl.table_6217")table table_6218 {
+  @ignore_table_dependency("EgressControl.table_5757")
+  @ignore_table_dependency("EgressControl.table_5758")
+  @ignore_table_dependency("EgressControl.table_5759")table table_5760 {
     key = {
-      path_id5098 : ternary;
+      path_id4832 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2216,11 +2152,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_108();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6212")
-  @ignore_table_dependency("EgressControl.table_6213")
-  @ignore_table_dependency("EgressControl.table_6214")table table_6211 {
+  @ignore_table_dependency("EgressControl.table_5754")
+  @ignore_table_dependency("EgressControl.table_5755")
+  @ignore_table_dependency("EgressControl.table_5756")table table_5753 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2241,11 +2177,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_111();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6211")
-  @ignore_table_dependency("EgressControl.table_6213")
-  @ignore_table_dependency("EgressControl.table_6214")table table_6212 {
+  @ignore_table_dependency("EgressControl.table_5753")
+  @ignore_table_dependency("EgressControl.table_5755")
+  @ignore_table_dependency("EgressControl.table_5756")table table_5754 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2263,11 +2199,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_112();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6211")
-  @ignore_table_dependency("EgressControl.table_6212")
-  @ignore_table_dependency("EgressControl.table_6214")table table_6213 {
+  @ignore_table_dependency("EgressControl.table_5753")
+  @ignore_table_dependency("EgressControl.table_5754")
+  @ignore_table_dependency("EgressControl.table_5756")table table_5755 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2284,11 +2220,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_114();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6211")
-  @ignore_table_dependency("EgressControl.table_6212")
-  @ignore_table_dependency("EgressControl.table_6213")table table_6214 {
+  @ignore_table_dependency("EgressControl.table_5753")
+  @ignore_table_dependency("EgressControl.table_5754")
+  @ignore_table_dependency("EgressControl.table_5755")table table_5756 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2304,11 +2240,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_116();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6208")
-  @ignore_table_dependency("EgressControl.table_6209")
-  @ignore_table_dependency("EgressControl.table_6210")table table_6207 {
+  @ignore_table_dependency("EgressControl.table_5750")
+  @ignore_table_dependency("EgressControl.table_5751")
+  @ignore_table_dependency("EgressControl.table_5752")table table_5749 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2325,11 +2261,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_120();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6207")
-  @ignore_table_dependency("EgressControl.table_6209")
-  @ignore_table_dependency("EgressControl.table_6210")table table_6208 {
+  @ignore_table_dependency("EgressControl.table_5749")
+  @ignore_table_dependency("EgressControl.table_5751")
+  @ignore_table_dependency("EgressControl.table_5752")table table_5750 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2343,11 +2279,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_121();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6207")
-  @ignore_table_dependency("EgressControl.table_6208")
-  @ignore_table_dependency("EgressControl.table_6210")table table_6209 {
+  @ignore_table_dependency("EgressControl.table_5749")
+  @ignore_table_dependency("EgressControl.table_5750")
+  @ignore_table_dependency("EgressControl.table_5752")table table_5751 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2360,11 +2296,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_123();
     } 
   } 
-  @ignore_table_dependency("EgressControl.table_6207")
-  @ignore_table_dependency("EgressControl.table_6208")
-  @ignore_table_dependency("EgressControl.table_6209")table table_6210 {
+  @ignore_table_dependency("EgressControl.table_5749")
+  @ignore_table_dependency("EgressControl.table_5750")
+  @ignore_table_dependency("EgressControl.table_5751")table table_5752 {
     key = {
-      path_id5102 : ternary;
+      path_id4836 : ternary;
       meta.egress_event_id : ternary;
     }
     actions = {
@@ -2376,7 +2312,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_126();
     } 
   } 
-  table table_6206 {
+  table table_5748 {
     key = {
       meta.egress_event_id : ternary;
     }
@@ -2389,7 +2325,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_128();
     } 
   } 
-  table table_6205 {
+  table table_5747 {
     key = {
       meta.egress_event_id : ternary;
     }
@@ -2402,7 +2338,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_130();
     } 
   } 
-  table table_6204 {
+  table table_5746 {
     key = {
       meta.egress_event_id : ternary;
     }
@@ -2415,7 +2351,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_132();
     } 
   } 
-  table table_6203 {
+  table table_5745 {
     key = {
       meta.egress_event_id : ternary;
     }
@@ -2435,27 +2371,27 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
     } else {
       t_extract_recirc_event.apply();
     }
-    table_6223.apply();
-    table_6219.apply();
-    table_6220.apply();
-    table_6221.apply();
-    table_6222.apply();
-    table_6215.apply();
-    table_6216.apply();
-    table_6217.apply();
-    table_6218.apply();
-    table_6211.apply();
-    table_6212.apply();
-    table_6213.apply();
-    table_6214.apply();
-    table_6207.apply();
-    table_6208.apply();
-    table_6209.apply();
-    table_6210.apply();
-    table_6206.apply();
-    table_6205.apply();
-    table_6204.apply();
-    table_6203.apply();
+    table_5765.apply();
+    table_5761.apply();
+    table_5762.apply();
+    table_5763.apply();
+    table_5764.apply();
+    table_5757.apply();
+    table_5758.apply();
+    table_5759.apply();
+    table_5760.apply();
+    table_5753.apply();
+    table_5754.apply();
+    table_5755.apply();
+    table_5756.apply();
+    table_5749.apply();
+    table_5750.apply();
+    table_5751.apply();
+    table_5752.apply();
+    table_5748.apply();
+    table_5747.apply();
+    table_5746.apply();
+    table_5745.apply();
   }
 } 
 control EgressDeparse(packet_out pkt,

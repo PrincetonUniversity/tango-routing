@@ -28,18 +28,6 @@ const UDPHeader_t TANGO_UDP_HEADER = {
 // Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
 global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
 
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers for validation
-global BookSignatureManager.t incoming_book_signature_manager = BookSignatureManager.create();
-
-// Provide read access to precomputed timestamp + path ID signatures for validation
-global MetricSignatureManager.t incoming_metric_signature_manager = MetricSignatureManager.create();
-
-// Provide read access to precomputed 1-bit signatures derived from sequence numbers
-global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
-
-// Provide read access to precomputed timestamp + path ID signatures
-global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
-
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *
  * ================================================================================================================== */
@@ -76,7 +64,7 @@ event attach_signatures (
     int<<16>> timestamp,
     IPv4Header_t encaped_ip_header,
     UDPHeader_t encaped_udp_header
-) [ outgoing_book_signature_manager < outgoing_metric_signature_manager ];
+);
 
 /**
  * # Description
@@ -142,6 +130,12 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     generate_port (ingress_port, egress_packet);
 }
+
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers
+global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
+
+// Provide read access to precomputed timestamp + path ID signatures
+global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
 
 @egress
 handle attach_signatures (
