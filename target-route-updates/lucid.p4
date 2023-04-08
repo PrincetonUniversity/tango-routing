@@ -79,8 +79,8 @@ struct hdr_t {
   forward_flow_t forward_flow;
 }
 struct meta_t {  }
-Register<bit<8>,_>(32w16) route_manager_0;
-Register<bit<16>,_>(32w8) sequence_counters_0;
+Register<bit<8>,_>(32w32) route_manager_0;
+Register<bit<16>,_>(32w32) sequence_counters_0;
 //Main program components (ingress/egress parser, control, deparser)
 parser IngressParser(packet_in pkt,
     out hdr_t hdr,
