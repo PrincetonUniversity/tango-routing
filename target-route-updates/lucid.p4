@@ -78,7 +78,9 @@ struct hdr_t {
   incoming_tango_traffic_t incoming_tango_traffic;
   forward_flow_t forward_flow;
 }
-struct meta_t {  }
+struct meta_t {
+  bit<8> egress_event_id;
+}
 Register<bit<8>,_>(32w32) route_manager_0;
 Register<bit<16>,_>(32w32) sequence_counters_0;
 //Main program components (ingress/egress parser, control, deparser)
@@ -970,6 +972,7 @@ parser EgressParser(packet_in pkt,
     pkt.extract(hdr.lucid_eth);
     pkt.extract(hdr.wire_ev);
     pkt.extract(hdr.bridge_ev);
+    meta.egress_event_id=0;
     transition select(hdr.bridge_ev.incoming_tango_traffic,
 hdr.bridge_ev.forward_flow){
       (1, 0) : parse_eventset_0;
@@ -1077,6 +1080,7 @@ control EgressControl(inout hdr_t hdr,
   action incoming_tango_traffic_recirc(){
     hdr.forward_flow.setInvalid();
     hdr.wire_ev.event_id=2;
+    meta.egress_event_id=2;
     hdr.bridge_ev.port_event_id=0;
     hdr.bridge_ev.incoming_tango_traffic=0;
     hdr.bridge_ev.forward_flow=0;
@@ -1084,23 +1088,27 @@ control EgressControl(inout hdr_t hdr,
   action forward_flow_recirc(){
     hdr.incoming_tango_traffic.setInvalid();
     hdr.wire_ev.event_id=1;
+    meta.egress_event_id=1;
     hdr.bridge_ev.port_event_id=0;
     hdr.bridge_ev.incoming_tango_traffic=0;
     hdr.bridge_ev.forward_flow=0;
   }
   action incoming_tango_traffic_to_external(){
+    meta.egress_event_id=2;
     hdr.lucid_eth.setInvalid();
     hdr.wire_ev.setInvalid();
     hdr.bridge_ev.setInvalid();
     hdr.forward_flow.setInvalid();
   }
   action forward_flow_to_external(){
+    meta.egress_event_id=1;
     hdr.lucid_eth.setInvalid();
     hdr.wire_ev.setInvalid();
     hdr.bridge_ev.setInvalid();
     hdr.incoming_tango_traffic.setInvalid();
   }
   action incoming_tango_traffic_to_internal(){
+    meta.egress_event_id=2;
     hdr.wire_ev.event_id=2;
     hdr.bridge_ev.port_event_id=0;
     hdr.bridge_ev.incoming_tango_traffic=0;
@@ -1108,6 +1116,7 @@ control EgressControl(inout hdr_t hdr,
     hdr.forward_flow.setInvalid();
   }
   action forward_flow_to_internal(){
+    meta.egress_event_id=1;
     hdr.wire_ev.event_id=1;
     hdr.bridge_ev.port_event_id=0;
     hdr.bridge_ev.incoming_tango_traffic=0;
