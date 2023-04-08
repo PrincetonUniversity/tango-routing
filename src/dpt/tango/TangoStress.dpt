@@ -51,6 +51,50 @@ entry event forward_flow (
     UDPHeader_t udp_header
 ) [ sequence_counters <= sequence_counters ];
 
+/**
+ * # Description
+ * Egress event for forwarding a flow
+ **/
+event attach_signatures (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    UDPHeader_t tango_udp_header,
+    int<<16>> seq_number,
+    int<<8>> traffic_class,
+    int<<16>> timestamp,
+    IPv4Header_t encaped_ip_header,
+    UDPHeader_t encaped_udp_header
+);
+
+/**
+ * # Description
+ * Incoming Tango data traffic from peer node.
+ * 
+ * # Parameters
+ * tango_eth_header (EthernetHeader_t): tunneled ethernet frame header
+ * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_tango_udp_header (UDPHeader_t): udp header to counter ECMP
+ * tango_metrics_header (TangoHeader_t): tango metric data and signatures
+ * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
+ * encaped_udp_header (UDPHeader_t): tcp header of tunneled packet
+ *
+ * # Generates
+ * request_route_update: sometimes responds to peer with route mapping update
+ * complete_forward: forwards the packet on to its final destination
+ **/
+exit event incoming_tango_traffic (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    UDPHeader_t tango_udp_header,
+    TangoHeader_t tango_metrics_header,
+    IPv4Header_t encaped_ip_header,
+    UDPHeader_t encaped_udp_header
+);
+
+/* ================================================================================================================== *
+ *                                                    HANDLERS                                                        *
+ * ================================================================================================================== */
+
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
 
     /* 1. Map flow to a specific physical route. */
@@ -92,50 +136,6 @@ global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureMan
 
 // Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
-
-/**
- * # Description
- * Egress event for forwarding a flow
- **/
-event attach_signatures (
-    EthernetHeader_t tango_eth_header,
-    IPv6Header_t tango_ip_header,
-    UDPHeader_t tango_udp_header,
-    int<<16>> seq_number,
-    int<<8>> traffic_class,
-    int<<16>> timestamp,
-    IPv4Header_t encaped_ip_header,
-    UDPHeader_t encaped_udp_header
-) [ outgoing_book_signature_manager < outgoing_metric_signature_manager ];
-
-/**
- * # Description
- * Incoming Tango data traffic from peer node.
- * 
- * # Parameters
- * tango_eth_header (EthernetHeader_t): tunneled ethernet frame header
- * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
- * tango_tango_udp_header (UDPHeader_t): udp header to counter ECMP
- * tango_metrics_header (TangoHeader_t): tango metric data and signatures
- * encaped_ip_header (IPv4Header_t): flow IPv4 header tunneled thrpugh path
- * encaped_udp_header (UDPHeader_t): tcp header of tunneled packet
- *
- * # Generates
- * request_route_update: sometimes responds to peer with route mapping update
- * complete_forward: forwards the packet on to its final destination
- **/
-exit event incoming_tango_traffic (
-    EthernetHeader_t tango_eth_header,
-    IPv6Header_t tango_ip_header,
-    UDPHeader_t tango_udp_header,
-    TangoHeader_t tango_metrics_header,
-    IPv4Header_t encaped_ip_header,
-    UDPHeader_t encaped_udp_header
-);
-
-/* ================================================================================================================== *
- *                                                    HANDLERS                                                        *
- * ================================================================================================================== */
 
 @egress
 handle attach_signatures (
