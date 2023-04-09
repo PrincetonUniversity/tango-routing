@@ -1,0 +1,67 @@
+// after phase: midendmemop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
+ {return curr+inc;
+}
+
+memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
+ {return curr;
+}
+
+global Array.t<<8>> route_manager_0 = Array.create(32);
+
+
+global Array.t<<16>> sequence_counters_0 = Array.create(32);
+
+
+entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3);
+
+exit event incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<64>> tango_ip_header_4,int<<64>> tango_ip_header_5,int<<64>> tango_ip_header_6,int<<64>> tango_ip_header_7,int<<16>> tango_udp_header_0,int<<16>> tango_udp_header_1,int<<16>> tango_udp_header_2,int<<16>> tango_udp_header_3,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<16>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<8>> encaped_ip_header_0,int<<8>> encaped_ip_header_1,int<<16>> encaped_ip_header_2,int<<16>> encaped_ip_header_3,int<<16>> encaped_ip_header_4,int<<8>> encaped_ip_header_5,int<<8>> encaped_ip_header_6,int<<16>> encaped_ip_header_7,int<<32>> encaped_ip_header_8,int<<32>> encaped_ip_header_9,int<<16>> encaped_udp_header_0,int<<16>> encaped_udp_header_1,int<<16>> encaped_udp_header_2,int<<16>> encaped_udp_header_3);
+
+handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3) {
+if ([15 : 4]udp_header_0==0&&[15 : 3]udp_header_1==0) {
+int<<8>> traffic_cls = [7 : 0]udp_header_0;
+int<<8>> path_id = [7 : 0]udp_header_1;
+Array.set(route_manager_0,traffic_cls,path_id);
+false;
+} else {
+int<<8>> traffic_class = 0;
+match (ip_header_8,udp_header_0,ip_header_9,udp_header_1,ip_header_6) with 
+| _,_,_,_,_ -> {
+traffic_class = 15;
+}
+int<<8>> RouteManager_get_path_id_ret = 32;
+RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
+int<<8>> path_id = RouteManager_get_path_id_ret;
+int<<32>> tango_tunnel_hdr_0 = 6291456;
+int<<16>> tango_tunnel_hdr_1 = 0;
+int<<8>> tango_tunnel_hdr_2 = 17;
+int<<8>> tango_tunnel_hdr_3 = 220;
+int<<64>> tango_tunnel_hdr_4 = 57545994539572;
+int<<64>> tango_tunnel_hdr_5 = 20015998341138;
+int<<64>> tango_tunnel_hdr_6 = 0;
+int<<64>> tango_tunnel_hdr_7 = 0;
+match path_id with 
+| _ -> {
+tango_tunnel_hdr_0 = 6291456;
+tango_tunnel_hdr_1 = 18+ip_header_2;
+tango_tunnel_hdr_2 = 17;
+tango_tunnel_hdr_3 = 220;
+tango_tunnel_hdr_4 = 57545994539572;
+tango_tunnel_hdr_5 = 20015998341138;
+tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_7 = 1;
+}
+int<<16>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,(int<<16>>)1);
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<32>> time_now = Sys.time();
+int<<12>> timestamp = [31 : 20]time_now;
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
+int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+int<<32>> tango_metrics_hdr_2 = 0;
+int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<8>> tango_metrics_hdr_4 = 0;
+event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,8080,8080,18+ip_header_2,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
+printf "Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }" path_id,traffic_class,timestamp,seq_number;
+generate_port (128, forward_tango_pkt);
+}
+}
