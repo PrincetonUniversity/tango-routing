@@ -30,7 +30,7 @@ compile: $(SOURCES)
 	@cat $(BUILD_DIR)-v4.compile.log | grep error &> /dev/null && echo "ERROR compiling v4!" || echo "SUCCESS compiling v4!"
 	@echo ""
 	@echo "compiling $(MAIN_FILE1) [build log: $(BUILD_DIR)-v6.compile.log]..."
-	@$(COMPILER) $(MAIN_FILE0) -o $(BUILD_DIR)-v4 --ports $(PORTS_CONFIG) &> "$(BUILD_DIR)-v6.compile.log"
+	@$(COMPILER) $(MAIN_FILE0) -o $(BUILD_DIR)-v6 --ports $(PORTS_CONFIG) &> "$(BUILD_DIR)-v6.compile.log"
 	@cat $(BUILD_DIR)-v6.compile.log | grep error &> /dev/null && echo "ERROR compiling v6!" || echo "SUCCESS compiling v6!"
 
 clean:
