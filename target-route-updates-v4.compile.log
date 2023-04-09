@@ -1,0 +1,647 @@
+compiler: Compilation to P4 started...
+dpt: -------Checking well-formedness---------
+dpt: ---------typing1---------
+dpt: ---------Concretizing symbolics-------------
+dpt: ---------Aliasing Modules-------------
+dpt: ---------Making returns explicit-------------
+dpt: -----------renaming-----------
+dpt: -------Eliminating modules---------
+dpt: -------Inlining size declarations---------
+dpt: ---------typing2---------
+dpt: -------Eliminating type aliases 2---------
+dpt: -----------inlining functions-----------
+dpt: -----------inlining tables-----------
+dpt: ---------Eliminating events with global arguments----------
+dpt: ---------------typing3-------------
+dpt: -------Eliminating vectors-------
+dpt: -----------re-renaming-----------
+dpt: -------Eliminating EStmts-------
+dpt: -------Eliminating records-------
+dpt: -------Eliminating tuples-------
+dpt: -------Inlining Constants-------
+dpt: -----------re-re-renaming-----------
+dpt: ---------------typing again-------------
+dpt: -------Translating to core syntax---------
+compiler: Starting P4-Tofino compilation. Using switch port configuration: 
+recirc dpid: 196
+lucid internal ports: 
+lucid external ports: 128@100Gb/s, 4@100Gb/s
+dpt: -------Eliminating extern calls--------
+dpt: -------Eliminating value cast ops--------
+dpt: -------Eliminating range relational ops--------
+dpt: -------Adding default branches--------
+dpt: -------Breaking down compound expressions--------
+Tofino translation: making branch variables single assignment
+Tofino translation: partial ssa finished
+dpt: -------Breaking down compound expressions--------
+Tofino translation: Starting cannonization before IR...
+Tofino translation: boolean elimination complete. 
+Tofino translation: Normalizing relational ops...
+Tofino translation: Normalizing if expressions...
+Tofino translation: if-else cannonization complete.
+Tofino translation: immediate elimination complete.
+normalizeIntOps: assignments transformed to balanced exps
+normalizeIntOps: expressions atomized
+dpt: -------making var names unique--------
+-------- layout ----------
+number of nodes in dfg: 79
+[dfg_to_sgdfg] number of vertex_stmts in statement_groups before constructing dfg: 79
+[dfg_to_sgdfg] number of statement group nodes in dfg: 78
+[dfg_to_sgdfg] number of vertex_stmts in dfg: 79
+placing IR statement 1 / 79 into current pipeline:
+--- 0 IR statements in 0 physical tables across 0 stages ---
+
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 2 / 79 into current pipeline:
+--- 1 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 1, IR statements: 1, statement groups: 1)]
+placing IR statement 3 / 79 into current pipeline:
+--- 2 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 2, IR statements: 2, statement groups: 2)]
+placing IR statement 4 / 79 into current pipeline:
+--- 3 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 3, statement groups: 3)]
+placing IR statement 5 / 79 into current pipeline:
+--- 4 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 4, statement groups: 4)]
+placing IR statement 6 / 79 into current pipeline:
+--- 5 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 5, statement groups: 5)]
+placing IR statement 7 / 79 into current pipeline:
+--- 6 IR statements in 1 physical tables across 1 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 8 / 79 into current pipeline:
+--- 7 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+placing IR statement 9 / 79 into current pipeline:
+--- 8 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+placing IR statement 10 / 79 into current pipeline:
+--- 9 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 3, statement groups: 3)]
+placing IR statement 11 / 79 into current pipeline:
+--- 10 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 4, statement groups: 4)]
+placing IR statement 12 / 79 into current pipeline:
+--- 11 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 5, statement groups: 5)]
+placing IR statement 13 / 79 into current pipeline:
+--- 12 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 6, statement groups: 6)]
+placing IR statement 14 / 79 into current pipeline:
+--- 13 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 7, statement groups: 7)]
+placing IR statement 15 / 79 into current pipeline:
+--- 14 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 8, statement groups: 8)]
+placing IR statement 16 / 79 into current pipeline:
+--- 15 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 9, statement groups: 9)]
+placing IR statement 17 / 79 into current pipeline:
+--- 16 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 10, statement groups: 10)]
+placing IR statement 18 / 79 into current pipeline:
+--- 17 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 11, statement groups: 11)]
+placing IR statement 19 / 79 into current pipeline:
+--- 18 IR statements in 2 physical tables across 2 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 20 / 79 into current pipeline:
+--- 19 IR statements in 3 physical tables across 3 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 22 / 79 into current pipeline:
+--- 21 IR statements in 4 physical tables across 4 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 23 / 79 into current pipeline:
+--- 22 IR statements in 5 physical tables across 5 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 24 / 79 into current pipeline:
+--- 23 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+placing IR statement 25 / 79 into current pipeline:
+--- 24 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+placing IR statement 26 / 79 into current pipeline:
+--- 25 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 3, statement groups: 3)]
+placing IR statement 27 / 79 into current pipeline:
+--- 26 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 4, statement groups: 4)]
+placing IR statement 28 / 79 into current pipeline:
+--- 27 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 5, statement groups: 5)]
+placing IR statement 29 / 79 into current pipeline:
+--- 28 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 6, statement groups: 6)]
+placing IR statement 30 / 79 into current pipeline:
+--- 29 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 7, statement groups: 7)]
+placing IR statement 31 / 79 into current pipeline:
+--- 30 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 8, statement groups: 8)]
+placing IR statement 32 / 79 into current pipeline:
+--- 31 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 9, statement groups: 9)]
+placing IR statement 33 / 79 into current pipeline:
+--- 32 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 10, statement groups: 10)]
+placing IR statement 34 / 79 into current pipeline:
+--- 33 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 11, statement groups: 11)]
+placing IR statement 35 / 79 into current pipeline:
+--- 34 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+placing IR statement 36 / 79 into current pipeline:
+--- 35 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+placing IR statement 37 / 79 into current pipeline:
+--- 36 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 14, statement groups: 14)]
+placing IR statement 38 / 79 into current pipeline:
+--- 37 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 15, statement groups: 15)]
+placing IR statement 39 / 79 into current pipeline:
+--- 38 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 16, statement groups: 16)]
+placing IR statement 40 / 79 into current pipeline:
+--- 39 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 17, statement groups: 17)]
+placing IR statement 41 / 79 into current pipeline:
+--- 40 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 18, statement groups: 18)]
+placing IR statement 42 / 79 into current pipeline:
+--- 41 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 19, statement groups: 19)]
+placing IR statement 43 / 79 into current pipeline:
+--- 42 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 20, statement groups: 20)]
+placing IR statement 44 / 79 into current pipeline:
+--- 43 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 21, statement groups: 21)]
+placing IR statement 45 / 79 into current pipeline:
+--- 44 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 22, statement groups: 22)]
+placing IR statement 46 / 79 into current pipeline:
+--- 45 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 23, statement groups: 23)]
+placing IR statement 47 / 79 into current pipeline:
+--- 46 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 24, statement groups: 24)]
+placing IR statement 48 / 79 into current pipeline:
+--- 47 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 25, statement groups: 25)]
+placing IR statement 49 / 79 into current pipeline:
+--- 48 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 26, statement groups: 26)]
+placing IR statement 50 / 79 into current pipeline:
+--- 49 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 27, statement groups: 27)]
+placing IR statement 51 / 79 into current pipeline:
+--- 50 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 28, statement groups: 28)]
+placing IR statement 52 / 79 into current pipeline:
+--- 51 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 29, statement groups: 29)]
+placing IR statement 53 / 79 into current pipeline:
+--- 52 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 30, statement groups: 30)]
+placing IR statement 54 / 79 into current pipeline:
+--- 53 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 31, statement groups: 31)]
+placing IR statement 55 / 79 into current pipeline:
+--- 54 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 32, statement groups: 32)]
+placing IR statement 56 / 79 into current pipeline:
+--- 55 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 33, statement groups: 33)]
+placing IR statement 57 / 79 into current pipeline:
+--- 56 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 34, statement groups: 34)]
+placing IR statement 58 / 79 into current pipeline:
+--- 57 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 35, statement groups: 35)]
+placing IR statement 59 / 79 into current pipeline:
+--- 58 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 36, statement groups: 36)]
+placing IR statement 60 / 79 into current pipeline:
+--- 59 IR statements in 6 physical tables across 6 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 61 / 79 into current pipeline:
+--- 60 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+placing IR statement 62 / 79 into current pipeline:
+--- 61 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+placing IR statement 63 / 79 into current pipeline:
+--- 62 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 3, statement groups: 3)]
+placing IR statement 64 / 79 into current pipeline:
+--- 63 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 4, statement groups: 4)]
+placing IR statement 65 / 79 into current pipeline:
+--- 64 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 5, statement groups: 5)]
+placing IR statement 66 / 79 into current pipeline:
+--- 65 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 6, statement groups: 6)]
+placing IR statement 67 / 79 into current pipeline:
+--- 66 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 7, statement groups: 7)]
+placing IR statement 68 / 79 into current pipeline:
+--- 67 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 8, statement groups: 8)]
+placing IR statement 69 / 79 into current pipeline:
+--- 68 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 9, statement groups: 9)]
+placing IR statement 70 / 79 into current pipeline:
+--- 69 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 10, statement groups: 10)]
+placing IR statement 71 / 79 into current pipeline:
+--- 70 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 11, statement groups: 11)]
+placing IR statement 72 / 79 into current pipeline:
+--- 71 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+placing IR statement 73 / 79 into current pipeline:
+--- 72 IR statements in 7 physical tables across 7 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 74 / 79 into current pipeline:
+--- 73 IR statements in 8 physical tables across 8 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+placing IR statement 75 / 79 into current pipeline:
+--- 74 IR statements in 8 physical tables across 8 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 76 / 79 into current pipeline:
+--- 75 IR statements in 9 physical tables across 9 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 8 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+placing IR statement 77 / 79 into current pipeline:
+--- 76 IR statements in 9 physical tables across 9 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 8 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 78 / 79 into current pipeline:
+--- 77 IR statements in 10 physical tables across 10 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 8 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 9 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+[try_place_in_stage] attempting to create new table in stage.
+placing IR statement 79 / 79 into current pipeline:
+--- 78 IR statements in 11 physical tables across 11 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 8 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 9 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 10 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+[try_place_in_stage] attempting to create new table in stage.
+[coreLayoutNew] final pipeline
+--- 79 IR statements in 12 physical tables across 12 stages ---
+stage 0 -- 1 tables: [(branches: 3, IR statements: 6, statement groups: 6)]
+stage 1 -- 1 tables: [(branches: 5, IR statements: 12, statement groups: 12)]
+stage 2 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 3 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 1)]
+stage 4 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 5 -- 1 tables: [(branches: 5, IR statements: 37, statement groups: 37)]
+stage 6 -- 1 tables: [(branches: 5, IR statements: 13, statement groups: 13)]
+stage 7 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 8 -- 1 tables: [(branches: 5, IR statements: 2, statement groups: 2)]
+stage 9 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 10 -- 1 tables: [(branches: 5, IR statements: 1, statement groups: 1)]
+stage 11 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
+compiler: Compilation to P4 finished. Writing to build directory:target-route-updates-v4
+Packager: Packaging lucid tofino app in: target-route-updates-v4
+Packager: copying runtime libraries from: /Users/benjaminherber/Documents/Year5/Tango/tango-routing.nosync/tofinoLibs
+Packager: Lucid app generation complete in: target-route-updates-v4
