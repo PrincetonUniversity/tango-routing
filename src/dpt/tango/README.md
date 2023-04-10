@@ -9,8 +9,10 @@ Send traffic on interface enp134s0f0 with this command (remove -V for non IPv6 t
 ```bash
 # Create route to a "fake" assigned ipv6 address and mac on switch, through the interface
 sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
-
-iperf -t 50000000 -i 1 -V -B enp134s0f0 -M 100 -u -length .1k -c 2604:4540:80::1 -b .1M
+# Specify interface to get to the switch gateway 
+sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
+# Send command 
+iperf -t 50000000 -i 1 -V -M 100 -u -c fc::2 -b 100k
 
 ```
 
