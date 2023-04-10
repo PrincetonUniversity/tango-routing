@@ -12,7 +12,7 @@ sudo ifconfig enp134s0f0 <ip6 address>
 sudo ifconfig enp134s0f0 hw ether <mac address> 
 # Create route to switch "gateway" with assigned ipv6 address and mac, through the interface
 sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
-# Specify interface to get to the switch gateway 
+# Add route to destination IPv6 address through switch gateway interface 
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
 # Iperf command to send packets (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed)
 iperf -t 50000000 -i 1 -V -M 100 -u -c fc::2 -b 100k
