@@ -116,19 +116,20 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     // -- Get current time in milliseconds
     int<<12>> timestamp = get_time_now_ms();
-    
-    event egress_packet = attach_signatures (
-        eth_header,
-        { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
-        TANGO_UDP_HEADER,
-        seq_number,
-        traffic_class,
-        (int<<16>>) timestamp,
-        ip_header,
-        udp_header
-    );
 
-    generate_port (ingress_port, egress_packet);
+    generate_port (
+        ingress_port,
+        attach_signatures (
+            eth_header,
+            { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
+            TANGO_UDP_HEADER,
+            seq_number,
+            traffic_class,
+            (int<<16>>) timestamp,
+            ip_header,
+            udp_header
+        )
+    );
 }
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
@@ -165,15 +166,6 @@ handle attach_signatures (
         book_signature = (int<<8>>) book_signature;
     };
 
-    event forward_tango_pkt = incoming_tango_traffic (
-        tango_eth_header,
-        tango_ip_header,
-        tango_udp_header,
-        tango_metrics_hdr,
-        encaped_ip_header,
-        encaped_udp_header
-    );
-
     printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d, port: %d }",
         (int<<3>>) traffic_class,
         timestamp,
@@ -183,5 +175,15 @@ handle attach_signatures (
         OUT_PORT
     );
 
-    generate_port (OUT_PORT, forward_tango_pkt);
+    generate_port (
+        OUT_PORT,
+        incoming_tango_traffic (
+            tango_eth_header,
+            tango_ip_header,
+            tango_udp_header,
+            tango_metrics_hdr,
+            encaped_ip_header,
+            encaped_udp_header
+        )
+    );
 }
