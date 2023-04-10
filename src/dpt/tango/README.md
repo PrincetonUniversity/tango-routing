@@ -4,7 +4,7 @@
 
 ### Cabernet802 (DPID 4, Port 16/0) for sending traffic
 
-Send traffic on interface enp134s0f0 with this command (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed):
+Configure routing for interface enp134s0f0 and send traffic with iperf:
 
 ```bash
 # Set up local IP and MAC 
@@ -14,7 +14,7 @@ sudo ifconfig enp134s0f0 hw ether <mac address>
 sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
 # Specify interface to get to the switch gateway 
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
-# Iperf command to send packets 
+# Iperf command to send packets (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed)
 iperf -t 50000000 -i 1 -V -M 100 -u -c fc::2 -b 100k
 
 ```
