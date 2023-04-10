@@ -12,8 +12,32 @@ iperf -t 50000000 -i 1 -V -M 100 -u -length .1k -c 2604:4540:80::1 -b .1M
 ```
 
 ### Cabino1 as Tango switch
+```
+sudo su
+cd /data/bf-sde-9.7.1
+source set_sde.bash 
+cd /u/sy6/tango
+$SDE/p4_build.sh v4.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
+$SDE/./run_switchd.sh -p v4
 
-### Cabernet804 (DPID 12, Port XX/0) as eBPF Tango node
+# From bfshell>
+ucli
+pm
+
+# From bf-sde.pm>, bring up ports for cab802 (16/0) and cab803(15/0)
+port-add 16/0 100G NONE
+port-add 15/0 100G NONE
+an-set 16/0 2
+an-set 15/0 2
+port-enb 16/0
+port-enb 15/0
+
+# View sending rates on the ports 
+rate-period 1
+rate-show
+```
+
+### Cabernet803 (DPID 12, Port 15/0) as eBPF Tango node
 
 ```plaintext
 Use interface enp134s0f0 to send and receive traffic 
@@ -58,5 +82,7 @@ pub key.
 ```
 
 ### Cabino4 as Tango switch
+Run it as sudo.
+The SDE is located in /root/software. 
 
 ### External Vultr eBPF Tango node
