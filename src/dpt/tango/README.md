@@ -7,6 +7,9 @@
 Send traffic on interface enp134s0f0 with this command (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed):
 
 ```bash
+# Create route to a "fake" assigned ipv6 address and mac on switch, through the interface
+sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
+
 iperf -t 50000000 -i 1 -V -B enp134s0f0 -M 100 -u -length .1k -c 2604:4540:80::1 -b .1M
 
 ```
