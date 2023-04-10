@@ -25,8 +25,8 @@ Configure routing for interface enp134s0f0 and send traffic with iperf:
 # Set up local IP and MAC 
 sudo ifconfig enp134s0f0 <ip6 address> 
 sudo ifconfig enp134s0f0 hw ether <mac address> 
-# Create route to switch "gateway" with assigned ipv6 address and mac, through the interface
-sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
+# Create route to switch "gateway" with an ipv6 address and the destination MAC of the eBPF server
+sudo ip -6 neigh add fc::3 lladdr 50:6b:4b:c4:01:80 dev enp134s0f0
 # Add route to destination IPv6 address through switch gateway interface 
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
 # Iperf command to send packets (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed)
