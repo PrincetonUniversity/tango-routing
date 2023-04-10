@@ -7,11 +7,14 @@
 Send traffic on interface enp134s0f0 with this command (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed):
 
 ```bash
-# Create route to a "fake" assigned ipv6 address and mac on switch, through the interface
+# Set up local IP and MAC 
+sudo ifconfig enp134s0f0 <ip6 address> 
+sudo ifconfig enp134s0f0 hw ether <mac address> 
+# Create route to switch "gateway" with assigned ipv6 address and mac, through the interface
 sudo ip -6 neigh add fc::3 lladdr 00:00:00:00:00:01 dev enp134s0f0
 # Specify interface to get to the switch gateway 
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
-# Send command 
+# Iperf command to send packets 
 iperf -t 50000000 -i 1 -V -M 100 -u -c fc::2 -b 100k
 
 ```
