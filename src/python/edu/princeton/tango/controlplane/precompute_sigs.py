@@ -1,19 +1,12 @@
 """Precompute the sequence number and timestamp signatures."""
 
 import sys
-from dataclasses import dataclass
 from datetime import timedelta
 from hashlib import sha256
 from pathlib import Path
 from pickle import dump as pickle
 
-
-@dataclass
-class PrecomputedSignatures:
-    """All precomputed signatures."""
-
-    timestamp_signatures: list[int]
-    sequence_num_signatures: list[int]
+from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatures
 
 
 def hash_int(num: int) -> int:
@@ -53,7 +46,7 @@ def main() -> None:
     filepath = Path(sys.argv[1]).absolute()
 
     test_time_len = timedelta(minutes=1)
-    num_packets = 2 ** 5
+    num_packets = 2 ** 16
 
     timestamp_sigs = compute_timestamp_signatures(test_time_len)
     seq_num_sigs = compute_sequence_num_signatures(num_packets)
