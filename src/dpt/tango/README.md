@@ -7,14 +7,13 @@
 To mirror the full interdomain test, the mini test will be with IPv6 internal packets wrapped in IPv6 external tunnel packets.
 
 The addressing scheme is as follows:
-Cabernet802:
+Cabernet802 addressing:
 fc::1 dev enp134s0f0 (global scope)
 sends UDP packets to 2604:4540:80::1 (src fc::1 out dev enp134s0f0)
 
 Cabino1:
-gets packets to 2604:4540:80::1 on Port 16/0 and encapsulates to an address in 2604:4540:80::/44
+gets packets to 2604:4540:80::1 on Port 16/0 and encapsulates to an address in 2604:4540:80::/44 and forwards them to Cabernet803
 
-Cabernet802 will send packets via iperf over enp134s0f0.
 
 
 ### Cabernet802 (DPID 4, Port 16/0) for sending traffic
