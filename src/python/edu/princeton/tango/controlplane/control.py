@@ -1,10 +1,16 @@
 """Control plane implementation for stress test."""
 
 import logging
+import sys
+from datetime import datetime, timedelta
 from enum import StrEnum
+from pathlib import Path
+from pickle import load as unpickle
+from time import sleep
 from typing import Any, Self
 
 import bfrt_grpc.client as gc
+from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatures  # noqa: TCH002
 
 logging.basicConfig(level=logging.INFO)
 
@@ -95,30 +101,59 @@ class Table:
 
 def main() -> None:
     """I don't know what I am doing... just guessing here..."""
+    logger = logging.getLogger(__name__)
+    refresh_cycle_period = timedelta(milliseconds=16)
+
+    if len(sys.argv) != 2:
+        logger.error("Usage: <program> <pickle-filepath>")
+        sys.exit(1)
+
+    pickle_filename = Path(sys.argv[1]).absolute()
+    logger.info("Reading pickled signatures @ file://%s ...", str(pickle_filename))
+    with pickle_filename.open("rb") as file:
+        unpickled_data: PrecomputedSignatures = unpickle(file)  # noqa: S301
+
     with TofinoRuntimeClient() as client:
         ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
         seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
 
-        # FIXME: Replace with pickled values.
-        match_key_names = []
-        match_key_vals = []
+        try:
+            while True:
+                timestart = datetime.now()  # noqa: DTZ005
+                # FIXME: Replace with pickled values.
+                match_key_names = []
+                match_key_vals = []
 
-        action_data_names = []
-        action_data_vals = []
+                action_data_names = []
 
-        keys = [
-            gc.KeyTuple(name=name, value=val)
-            for name, val in zip(match_key_names, match_key_vals, strict=True)
-        ]
+                keys = [
+                    gc.KeyTuple(name=name, value=val)
+                    for name, val in zip(match_key_names, match_key_vals, strict=True)
+                ]
 
-        datums = [
-            gc.DataTuple(name=name, val=val)
-            for name, val in zip(action_data_names, action_data_vals, strict=True)
-        ]
+                datums_ts = [
+                    gc.DataTuple(name=name, val=val)
+                    for name, val in zip(
+                        action_data_names, unpickled_data.timestamp_signatures, strict=True,
+                    )
+                ]
 
-        # FIXME: dummy calls
-        ts_table.add_entry(keys, datums, ActionName.UNKNOWN)
-        seq_num_table.add_entry(keys, datums, ActionName.UNKNOWN)
+                datums_seq_num = [
+                    gc.DataTuple(name=name, val=val)
+                    for name, val in zip(
+                        action_data_names, unpickled_data.sequence_num_signatures, strict=True,
+                    )
+                ]
+
+                # FIXME: dummy calls
+                ts_table.add_entry(keys, datums_ts, ActionName.UNKNOWN)
+                seq_num_table.add_entry(keys, datums_seq_num, ActionName.UNKNOWN)
+
+                timeend = datetime.now()  # noqa: DTZ005
+                sleep((refresh_cycle_period - (timeend - timestart)).total_seconds())
+        except KeyboardInterrupt:
+            logger.info("Caught keyboard exception... Gracefully exciting...")
+            sys.exit(0)
 
 
 if __name__ == "__main__":
