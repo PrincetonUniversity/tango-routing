@@ -67,6 +67,7 @@ sudo ifconfig enp134s0f0np0 up
 
 
 ## Full Test for Dynamic Routing with external Vultr eBPF Node
+![full_test](images/dyn_routing_testbed.png)
 
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
