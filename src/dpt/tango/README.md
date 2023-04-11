@@ -106,6 +106,9 @@ pub key.
 ```
 
 ### Cabino4 as Tango switch
+```
+Make sure the P4 switch runs the correct program that forwards everything between the two switch-ports (the switch-port that connects to the CS uplink and the switch-port that connects to cab-fruity-03). 
+```
 Run it as sudo.
 The SDE is located in /root/software. 
 
