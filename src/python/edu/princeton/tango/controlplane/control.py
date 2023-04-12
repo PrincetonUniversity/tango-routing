@@ -1,6 +1,7 @@
 """Control plane implementation for stress test."""
 
 import logging
+import os
 import sys
 from datetime import datetime, timedelta
 from enum import StrEnum
@@ -11,6 +12,10 @@ from typing import Any, Self
 
 import bfrt_grpc.client as gc
 from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatures  # noqa: TCH002
+
+PY_VERSION = f"{str(sys.version_info.major)}.{str(sys.version_info.minor)}"
+sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/"))
+sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/"))
 
 logging.basicConfig(level=logging.INFO)
 
@@ -134,14 +139,18 @@ def main() -> None:
                 datums_ts = [
                     gc.DataTuple(name=name, val=val)
                     for name, val in zip(
-                        action_data_names, unpickled_data.timestamp_signatures, strict=True,
+                        action_data_names,
+                        unpickled_data.timestamp_signatures,
+                        strict=True,
                     )
                 ]
 
                 datums_seq_num = [
                     gc.DataTuple(name=name, val=val)
                     for name, val in zip(
-                        action_data_names, unpickled_data.sequence_num_signatures, strict=True,
+                        action_data_names,
+                        unpickled_data.sequence_num_signatures,
+                        strict=True,
                     )
                 ]
 
