@@ -29,7 +29,7 @@ sudo ip -6 neigh add fc::3 lladdr 50:6b:4b:c4:01:80 dev enp134s0f0
 # Add route to destination IPv6 address through switch gateway interface 
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
 # Iperf command to send packets (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed)
-iperf -t 50000000 -i 1 -V -M 100 -u -c fc::2 -b 100k
+iperf -t 50000000 -i 1 -V -u -c 2604:4540:80::1 -l1000 -b 100k
 
 ```
 
