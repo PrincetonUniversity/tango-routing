@@ -101,6 +101,22 @@ class Table:
             target=gc.Target(),
             key_list=[keys],
             data_list=[datums],
+        )
+# FIXME: Why is this a list? Can we set many / Batch requests?
+
+    def add_bulk_entry(
+        self: Self,
+        key_list: list[gc.KeyTuple],
+        data_list: list[gc.DataTuple],
+        # action_name: ActionName,
+    ) -> None:
+        """Add key-date entries to table."""
+        keys = [[self._table.make_key(key)] for key in key_list]
+        datums = [[self._table.make_data(datum)] for datum in data_list]
+        self._table.entry_add(
+            target=gc.Target(),
+            key_list=keys,
+            data_list=datums,
         )  # FIXME: Why is this a list? Can we set many / Batch requests?
 
 
@@ -120,43 +136,27 @@ def main() -> None:
 
     with TofinoRuntimeClient() as client:
         ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
-        seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
+        # seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
 
         try:
             while True:
                 timestart = datetime.now()  # noqa: DTZ005
                 # FIXME: Replace with pickled values.
-                match_key_names = []
-                match_key_vals = []
+                register_index_key = "$REGISTER_INDEX"
+                ts_sig_field_name = "outgoing_metric_signature_manager_0.f1"
 
-                action_data_names = []
-
-                keys = [
-                    gc.KeyTuple(name=name, value=val)
-                    for name, val in zip(match_key_names, match_key_vals, strict=True)
+                keys_ts = [
+                    gc.KeyTuple(name=register_index_key, value=idx)
+                    for idx in range(0, refresh_cycle_period.microseconds // 1000)
                 ]
 
                 datums_ts = [
-                    gc.DataTuple(name=name, val=val)
-                    for name, val in zip(
-                        action_data_names,
-                        unpickled_data.timestamp_signatures,
-                        strict=True,
-                    )
-                ]
-
-                datums_seq_num = [
-                    gc.DataTuple(name=name, val=val)
-                    for name, val in zip(
-                        action_data_names,
-                        unpickled_data.sequence_num_signatures,
-                        strict=True,
-                    )
+                    gc.DataTuple(name=ts_sig_field_name, val=val)
+                    for val in unpickled_data.timestamp_signatures
                 ]
 
                 # FIXME: dummy calls
-                ts_table.add_entry(keys, datums_ts, ActionName.UNKNOWN)
-                seq_num_table.add_entry(keys, datums_seq_num, ActionName.UNKNOWN)
+                ts_table.add_bulk_entry(keys_ts, datums_ts)
 
                 timeend = datetime.now()  # noqa: DTZ005
                 sleep((refresh_cycle_period - (timeend - timestart)).total_seconds())
