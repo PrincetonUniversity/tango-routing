@@ -39,8 +39,8 @@ sudo su
 cd /data/bf-sde-9.7.1
 source set_sde.bash 
 cd /u/sy6/tango
-$SDE/p4_build.sh v4.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
-$SDE/./run_switchd.sh -p v4
+$SDE/p4_build.sh v6.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
+$SDE/./run_switchd.sh -p v6
 
 # From bfshell> get to bf-sde.pm>, bring up ports for cab802 (16/0) and cab803(15/0), and view sending rates on the ports 
 ucli
