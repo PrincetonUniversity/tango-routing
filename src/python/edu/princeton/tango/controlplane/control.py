@@ -95,12 +95,12 @@ class Table:
 
     def add_entry(
         self: "Table",
-        key_list: List[gc.KeyTuple],
-        data_list: List[gc.DataTuple],
+        key: gc.KeyTuple,
+        data: gc.DataTuple,
     ) -> None:
         """Add key-date entries to table."""
-        keys = self._table.make_key(key_list)
-        datums = self._table.make_data(data_list)
+        keys = self._table.make_key([key])
+        datums = self._table.make_data([data])
         self._table.entry_add(
             target=gc.Target(),
             key_list=[keys],
@@ -115,8 +115,8 @@ class Table:
         data_list: List[gc.DataTuple],
     ) -> None:
         """Add key-date entries to table."""
-        keys = [[self._table.make_key(key)] for key in key_list]
-        datums = [[self._table.make_data(datum)] for datum in data_list]
+        keys = [self._table.make_key([key]) for key in key_list]
+        datums = [self._table.make_data([datum]) for datum in data_list]
         self._table.entry_add(
             target=gc.Target(),
             key_list=keys,
