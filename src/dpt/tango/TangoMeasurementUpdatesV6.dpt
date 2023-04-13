@@ -154,7 +154,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
         };
 
         event forward_tango_pkt = incoming_tango_traffic (
-            eth_header,
+            { eth_header with ethertype = 0x86DD },
             tango_tunnel_hdr,
             { TANGO_UDP_HEADER with length = 58 + ip_header#payload_len },
             tango_metrics_hdr,
