@@ -190,6 +190,7 @@ def main() -> None:
                 ts_table.add_bulk_entry(keys_ts, datums_ts)
                 seq_num_table.add_bulk_entry(keys_seq, datums_seq)
 
+                logger.info("Finished refresh cycle...")
                 timeend = datetime.now()  # noqa: DTZ005
                 sleep((refresh_cycle_period - (timeend - timestart)).total_seconds())
         except KeyboardInterrupt:
