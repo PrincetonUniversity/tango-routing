@@ -31,7 +31,7 @@ traffic_class = 15;
 int<<8>> RouteManager_get_path_id_ret = 32;
 RouteManager_get_path_id_ret = Array.get(route_manager_0,traffic_class);
 int<<8>> path_id = RouteManager_get_path_id_ret;
-int<<32>> tango_tunnel_hdr_0 = 6291456;
+int<<32>> tango_tunnel_hdr_0 = 1610612736;
 int<<16>> tango_tunnel_hdr_1 = 0;
 int<<8>> tango_tunnel_hdr_2 = 17;
 int<<8>> tango_tunnel_hdr_3 = 220;
@@ -41,7 +41,7 @@ int<<64>> tango_tunnel_hdr_6 = 0;
 int<<64>> tango_tunnel_hdr_7 = 0;
 match path_id with 
 | _ -> {
-tango_tunnel_hdr_0 = 6291456;
+tango_tunnel_hdr_0 = 1610612736;
 tango_tunnel_hdr_1 = 18+ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
@@ -62,6 +62,6 @@ int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = 0;
 event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,8080,8080,18+ip_header_2,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,ip_header_8,ip_header_9,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
 printf "Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }" path_id,traffic_class,timestamp,seq_number;
-generate_port (128, forward_tango_pkt);
+generate_port (12, forward_tango_pkt);
 }
 }

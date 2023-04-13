@@ -190,7 +190,7 @@ merged_var_traffic_class_traffic_cls_2026=(hdr.forward_flow.forward_flow_udp_hea
   }
   bit<32> tango_tunnel_hdr_0;
   action labeledstmt_40(){
-    tango_tunnel_hdr_0=32w6291456;
+    tango_tunnel_hdr_0=32w1610612736;
   }
   bit<16> tango_tunnel_hdr_1;
   action labeledstmt_39(){
@@ -295,7 +295,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_2028.execute(merged_var_t
     //NOOP
   }
   action labeledstmt_80(){
-    tango_tunnel_hdr_0=32w6291456;
+    tango_tunnel_hdr_0=32w1610612736;
   }
   action labeledstmt_79(){
     tango_tunnel_hdr_1=(hdr.forward_flow.forward_flow_ip_header_2+16w18);
@@ -661,7 +661,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2=forward_t
    
 hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_tango_pkt_arg_33;
     hdr.bridge_ev.port_event_id=2;
-    ig_tm_md.ucast_egress_port=9w128;
+    ig_tm_md.ucast_egress_port=9w12;
   }
   action labeledstmt_26(){
     //NOOP
