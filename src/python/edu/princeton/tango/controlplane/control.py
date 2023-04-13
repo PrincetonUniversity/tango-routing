@@ -171,7 +171,7 @@ def main() -> None:
                 ]
 
                 keys_seq = [
-                    gc.KeyTuple(name=seq_num_field_name, value=idx)
+                    gc.KeyTuple(name=register_index_key, value=idx)
                     for idx in range(
                         (count % 8) * seq_sigs_refresh_per_cycle,
                         ((count % 8) * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle,
