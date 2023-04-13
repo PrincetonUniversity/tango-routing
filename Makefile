@@ -28,8 +28,8 @@ compile: $(SOURCES)
 	@$(COMPILER) $(MAIN_FILE)V4.dpt -o $(BUILD_DIR)-v4 --ports $(PORTS_CONFIG) > "$(BUILD_DIR)-v4.compile.log"
 	@echo "compiling $(MAIN_FILE)V6.dpt [build log: $(BUILD_DIR)-v6.compile.log]..."
 	@$(COMPILER) $(MAIN_FILE)V6.dpt -o $(BUILD_DIR)-v6 --ports $(PORTS_CONFIG) > "$(BUILD_DIR)-v6.compile.log"
-	@cat $(BUILD_DIR)-v4.compile.log | grep error &> /dev/null && echo "ERROR compiling v4!" || echo "SUCCESS compiling v4!"
-	@cat $(BUILD_DIR)-v6.compile.log | grep error &> /dev/null && echo "ERROR compiling v6!" || echo "SUCCESS compiling v6!"
+	@cat $(BUILD_DIR)-v4.compile.log | grep error > /dev/null && echo "ERROR compiling v4!" || echo "SUCCESS compiling v4!"
+	@cat $(BUILD_DIR)-v6.compile.log | grep error > /dev/null && echo "ERROR compiling v6!" || echo "SUCCESS compiling v6!"
 
 clean:
 	@rm -rf $(BUILD_DIR)
