@@ -20,7 +20,7 @@ const UDPHeader_t TANGO_UDP_HEADER = {
 
 // Tango IPv6 header template
 const IPv6Header_t IPV6_HEADER_TEMPLATE = {
-    version_cls_flow = 0x00600000;
+    version_cls_flow = 0x60000000;
     payload_len = 0;
     next_header = 17; // UDP
     hop_limit = 1500;
