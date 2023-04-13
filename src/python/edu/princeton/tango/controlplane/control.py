@@ -4,11 +4,11 @@ import logging
 import os
 import sys
 from datetime import datetime, timedelta
-from enum import StrEnum
+from enum import Enum
 from pathlib import Path
 from pickle import load as unpickle
 from time import sleep
-from typing import Any, Self
+from typing import Any, Optional
 
 import bfrt_grpc.client as gc
 from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatures  # noqa: TCH002
@@ -16,7 +16,7 @@ from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatu
 PY_VERSION = f"{str(sys.version_info.major)}.{str(sys.version_info.minor)}"
 sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/"))
 sys.path.append(
-    os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/")
+    os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/"),
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -26,9 +26,9 @@ class TofinoRuntimeClient:
     """Wrapper around bfrt gRPC client."""
 
     def __init__(
-        self: Self,
-        grpc_addr: str | None = None,
-        client_id: int | None = None,
+        self: "TofinoRuntimeClient",
+        grpc_addr: Optional[str] = None,
+        client_id: Optional[int] = None,
     ) -> None:
         """Create a wrapper gRPC runtime client."""
         self._grpc_addr = grpc_addr or "localhost:50052"
@@ -38,11 +38,11 @@ class TofinoRuntimeClient:
         self._logger = logging.getLogger(__name__)
 
     @property
-    def runtime_info(self: Self) -> Any:  # noqa: ANN401
+    def runtime_info(self: "TofinoRuntimeClient") -> Any:  # noqa: ANN401
         """Runtime context."""
         return self._bfrt_info
 
-    def __enter__(self: Self) -> Self:
+    def __enter__(self: "TofinoRuntimeClient") -> "TofinoRuntimeClient":
         """Open gRPC Connection."""
         self._client = gc.ClientInterface(
             grpc_addr=self._grpc_addr,
@@ -60,45 +60,38 @@ class TofinoRuntimeClient:
 
         return self
 
-    def __exit__(self: Self, _, __, ___):  # noqa: ANN204, ANN001, RUF100
+    def __exit__(self: "TofinoRuntimeClient", _, __, ___):  # noqa: ANN204, ANN001, RUF100
         """Close gRPC connection."""
         del self._client
         self._logger.info("Closed connection to BF Runtime Server on client %d...", self._client_id)
 
-    def reset_tables(self: Self) -> None:
+    def reset_tables(self: "TofinoRuntimeClient") -> None:
         """Destroy all table entries."""
         self._client.clear_all_tables()
 
 
-class TableName(StrEnum):
+class TableName(Enum):
     """All tables in p4 program of note."""
 
     TIMESTAMP_SIGS = "pipe.outgoing_metric_signature_manager_0"
     SEQ_NUM_SIGS = "pipe.outgoing_book_signature_manager_0"
 
 
-class ActionName(StrEnum):
-    """Actions available for tables."""
-
-    UNKNOWN = "INDEX"  # FIXME: heh?
-
-
 class Table:
     """Wrapper around Tofino table interface."""
 
-    def __init__(self: Self, name: TableName, client: TofinoRuntimeClient) -> None:
+    def __init__(self: "Table", name: TableName, client: TofinoRuntimeClient) -> None:
         """Create an alias to interact with a table."""
         self._table = client.runtime_info.table_dict[name.value]
 
     def add_entry(
-        self: Self,
-        key_list: list[gc.KeyTuple],
-        data_list: list[gc.DataTuple],
-        action_name: ActionName,
+        self: "Table",
+        key_list: "list[gc.KeyTuple]",
+        data_list: "list[gc.DataTuple]",
     ) -> None:
         """Add key-date entries to table."""
         keys = self._table.make_key(key_list)
-        datums = self._table.make_data(data_list, action_name=action_name.value)
+        datums = self._table.make_data(data_list)
         self._table.entry_add(
             target=gc.Target(),
             key_list=[keys],
@@ -108,10 +101,9 @@ class Table:
     # FIXME: Why is this a list? Can we set many / Batch requests?
 
     def add_bulk_entry(
-        self: Self,
-        key_list: list[gc.KeyTuple],
-        data_list: list[gc.DataTuple],
-        # action_name: ActionName,
+        self: "Table",
+        key_list: "list[gc.KeyTuple]",
+        data_list: "list[gc.DataTuple]",
     ) -> None:
         """Add key-date entries to table."""
         keys = [[self._table.make_key(key)] for key in key_list]
