@@ -3,15 +3,13 @@
 import logging
 import os
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
 from pathlib import Path
 from pickle import load as unpickle
 from time import sleep
-from typing import Any, Optional
-
-import bfrt_grpc.client as gc
-from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatures  # noqa: TCH002
+from typing import Any, List, Optional
 
 PY_VERSION = f"{str(sys.version_info.major)}.{str(sys.version_info.minor)}"
 sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/"))
@@ -19,7 +17,18 @@ sys.path.append(
     os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/"),
 )
 
+import bfrt_grpc.client as gc
+
+
 logging.basicConfig(level=logging.INFO)
+
+
+@dataclass
+class PrecomputedSignatures:
+    """All precomputed signatures."""
+
+    timestamp_signatures: List[int]
+    sequence_num_signatures: List[int]
 
 
 class TofinoRuntimeClient:
@@ -86,8 +95,8 @@ class Table:
 
     def add_entry(
         self: "Table",
-        key_list: "list[gc.KeyTuple]",
-        data_list: "list[gc.DataTuple]",
+        key_list: List[gc.KeyTuple],
+        data_list: List[gc.DataTuple],
     ) -> None:
         """Add key-date entries to table."""
         keys = self._table.make_key(key_list)
@@ -102,8 +111,8 @@ class Table:
 
     def add_bulk_entry(
         self: "Table",
-        key_list: "list[gc.KeyTuple]",
-        data_list: "list[gc.DataTuple]",
+        key_list: List[gc.KeyTuple],
+        data_list: List[gc.DataTuple],
     ) -> None:
         """Add key-date entries to table."""
         keys = [[self._table.make_key(key)] for key in key_list]
