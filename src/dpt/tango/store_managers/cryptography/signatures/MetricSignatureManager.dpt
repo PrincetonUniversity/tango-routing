@@ -63,14 +63,14 @@ module MetricSignatureManager : {
 
     constr t create () = {
         // ASSUMPTION:16ms control loop
-        signatures0 = Array.create(16);
-        signatures1 = Array.create(16);
-        signatures2 = Array.create(16);
-        signatures3 = Array.create(16);
-        signatures4 = Array.create(16);
-        signatures5 = Array.create(16);
-        signatures6 = Array.create(16);
-        signatures7 = Array.create(16);
+        signatures0 = Array.create(32);
+        signatures1 = Array.create(32);
+        signatures2 = Array.create(32);
+        signatures3 = Array.create(32);
+        signatures4 = Array.create(32);
+        signatures5 = Array.create(32);
+        signatures6 = Array.create(32);
+        signatures7 = Array.create(32);
     };
 
     fun int<<32>> sign (
@@ -79,14 +79,14 @@ module MetricSignatureManager : {
         int<<3>> path_id
     ) {
         match path_id with
-        | 0 -> { return Array.get(self#signatures0, timestamp[3:0]); }
-        | 1 -> { return Array.get(self#signatures1, timestamp[3:0]); }
-        | 2 -> { return Array.get(self#signatures2, timestamp[3:0]); }
-        | 3 -> { return Array.get(self#signatures3, timestamp[3:0]); }
-        | 4 -> { return Array.get(self#signatures4, timestamp[3:0]); }
-        | 5 -> { return Array.get(self#signatures5, timestamp[3:0]); }
-        | 6 -> { return Array.get(self#signatures6, timestamp[3:0]); }
-        | 7 -> { return Array.get(self#signatures7, timestamp[3:0]); }
+        | 0 -> { return Array.get(self#signatures0, timestamp[4:0]); }
+        | 1 -> { return Array.get(self#signatures1, timestamp[4:0]); }
+        | 2 -> { return Array.get(self#signatures2, timestamp[4:0]); }
+        | 3 -> { return Array.get(self#signatures3, timestamp[4:0]); }
+        | 4 -> { return Array.get(self#signatures4, timestamp[4:0]); }
+        | 5 -> { return Array.get(self#signatures5, timestamp[4:0]); }
+        | 6 -> { return Array.get(self#signatures6, timestamp[4:0]); }
+        | 7 -> { return Array.get(self#signatures7, timestamp[4:0]); }
     }
 
     fun bool verify (
@@ -97,28 +97,28 @@ module MetricSignatureManager : {
     ) {
        match path_id with
         | 0 -> {
-            return Array.get(self#signatures0, timestamp[3:0]) == signature;
+            return Array.get(self#signatures0, timestamp[4:0]) == signature;
         }
         | 1 -> {
-            return Array.get(self#signatures1, timestamp[3:0]) == signature;
+            return Array.get(self#signatures1, timestamp[4:0]) == signature;
         }
         | 2 -> {
-            return Array.get(self#signatures2, timestamp[3:0]) == signature;
+            return Array.get(self#signatures2, timestamp[4:0]) == signature;
         }
         | 3 -> {
-            return Array.get(self#signatures3, timestamp[3:0]) == signature;
+            return Array.get(self#signatures3, timestamp[4:0]) == signature;
         }
         | 4 -> {
-            return Array.get(self#signatures4, timestamp[3:0]) == signature;
+            return Array.get(self#signatures4, timestamp[4:0]) == signature;
         }
         | 5 -> {
-            return Array.get(self#signatures5, timestamp[3:0]) == signature;
+            return Array.get(self#signatures5, timestamp[4:0]) == signature;
         }
         | 6 -> {
-            return Array.get(self#signatures6, timestamp[3:0]) == signature;
+            return Array.get(self#signatures6, timestamp[4:0]) == signature;
         }
         | 7 -> {
-            return Array.get(self#signatures7, timestamp[3:0]) == signature;
+            return Array.get(self#signatures7, timestamp[4:0]) == signature;
         }
     }
 }

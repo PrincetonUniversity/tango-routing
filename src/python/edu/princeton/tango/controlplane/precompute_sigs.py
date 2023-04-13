@@ -46,10 +46,12 @@ def main() -> None:
     filepath = Path(sys.argv[1]).absolute()
 
     test_time_len = timedelta(minutes=1)
-    num_packets = 2 ** 16
+    packets_per_seq_book = 2 ** 16
+    num_books = 512
+    num_seq_sigs = packets_per_seq_book * num_books
 
     timestamp_sigs = compute_timestamp_signatures(test_time_len)
-    seq_num_sigs = compute_sequence_num_signatures(num_packets)
+    seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs)
 
     pickle_signatures(filepath, ts_sigs=timestamp_sigs, seq_sigs=seq_num_sigs)
     print(f"\n-- SUCCESS --\n\nPickled signatures @ file://{filepath}")  # noqa: T201

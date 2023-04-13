@@ -118,21 +118,21 @@ struct meta_t {
   bit<8> egress_event_id;
 }
 Register<bit<16>,_>(32w8) sequence_counters_0;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_7;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_6;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_5;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_4;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_3;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_2;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_1;
-Register<bit<32>,_>(32w16)
+Register<bit<32>,_>(32w32)
 outgoing_metric_signature_manager_0;
 Register<bit<1>,_>(32w65536)
 outgoing_book_signature_manager_7;
@@ -1236,7 +1236,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_5716.e
   action labeledstmt_75(){
     labeledstmt_118();
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_7)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_7)
   outgoing_metric_signature_manager_7_regaction_5717 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1249,7 +1249,7 @@ BookSignatureManager_sign_ret=outgoing_book_signature_manager_0_regaction_5716.e
   };
   action labeledstmt_119(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_5717.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_5717.execute((timestamp4818[4:0]));
   }
   action labeledstmt_76(){
     labeledstmt_119();
@@ -1261,7 +1261,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_57
   action labeledstmt_78(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_6)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_6)
   outgoing_metric_signature_manager_6_regaction_5718 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1274,7 +1274,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_7_regaction_57
   };
   action labeledstmt_120(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_5718.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_5718.execute((timestamp4818[4:0]));
   }
   action labeledstmt_79(){
     labeledstmt_120();
@@ -1282,7 +1282,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_57
   action labeledstmt_80(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_5)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_5)
   outgoing_metric_signature_manager_5_regaction_5719 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1295,7 +1295,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_6_regaction_57
   };
   action labeledstmt_121(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_5719.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_5719.execute((timestamp4818[4:0]));
   }
   action labeledstmt_81(){
     labeledstmt_121();
@@ -1303,7 +1303,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_57
   action labeledstmt_82(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_4)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_4)
   outgoing_metric_signature_manager_4_regaction_5720 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1316,7 +1316,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_5_regaction_57
   };
   action labeledstmt_122(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_5720.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_5720.execute((timestamp4818[4:0]));
   }
   action labeledstmt_83(){
     labeledstmt_122();
@@ -1328,7 +1328,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_57
   action labeledstmt_84(){
     labeledstmt_123();
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_3)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_3)
   outgoing_metric_signature_manager_3_regaction_5721 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1341,7 +1341,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_4_regaction_57
   };
   action labeledstmt_124(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_5721.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_5721.execute((timestamp4818[4:0]));
   }
   action labeledstmt_85(){
     labeledstmt_124();
@@ -1353,7 +1353,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_57
   action labeledstmt_87(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_2)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_2)
   outgoing_metric_signature_manager_2_regaction_5722 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1366,7 +1366,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_3_regaction_57
   };
   action labeledstmt_125(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_5722.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_5722.execute((timestamp4818[4:0]));
   }
   action labeledstmt_88(){
     labeledstmt_125();
@@ -1374,7 +1374,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_57
   action labeledstmt_89(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_1)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_1)
   outgoing_metric_signature_manager_1_regaction_5723 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1387,12 +1387,12 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_2_regaction_57
   };
   action labeledstmt_126(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_5723.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_5723.execute((timestamp4818[4:0]));
   }
   action labeledstmt_90(){
     labeledstmt_126();
   }
-  RegisterAction<bit<32>,bit<4>,bit<32>>(outgoing_metric_signature_manager_0)
+  RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_0)
   outgoing_metric_signature_manager_0_regaction_5724 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
@@ -1405,7 +1405,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_1_regaction_57
   };
   action labeledstmt_127(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_5724.execute((timestamp4818[3:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_5724.execute((timestamp4818[4:0]));
   }
   action labeledstmt_91(){
     labeledstmt_127();

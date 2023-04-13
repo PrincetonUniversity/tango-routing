@@ -39,28 +39,28 @@ global Array.t<<1>> outgoing_book_signature_manager_6 = Array.create(65536);
 global Array.t<<1>> outgoing_book_signature_manager_7 = Array.create(65536);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_2 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_2 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_3 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_3 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_4 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_4 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_5 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_5 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_6 = Array.create(32);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(16);
+global Array.t<<32>> outgoing_metric_signature_manager_7 = Array.create(32);
 
 
 handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3) {
@@ -143,28 +143,28 @@ int<<3>> path_id = (int<<3>>)traffic_class;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match path_id with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
 }
 | 1 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,[4 : 0]timestamp);
 }
 | 2 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_2,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_2,[4 : 0]timestamp);
 }
 | 3 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_3,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_3,[4 : 0]timestamp);
 }
 | 4 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_4,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_4,[4 : 0]timestamp);
 }
 | 5 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_5,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_5,[4 : 0]timestamp);
 }
 | 6 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_6,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_6,[4 : 0]timestamp);
 }
 | 7 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_7,[4 : 0]timestamp);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)traffic_class;

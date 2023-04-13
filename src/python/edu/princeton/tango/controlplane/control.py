@@ -15,7 +15,9 @@ from edu.princeton.tango.controlplane.pickle_interface import PrecomputedSignatu
 
 PY_VERSION = f"{str(sys.version_info.major)}.{str(sys.version_info.minor)}"
 sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/"))
-sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/"))
+sys.path.append(
+    os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/bfrt_grpc/")
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -102,7 +104,8 @@ class Table:
             key_list=[keys],
             data_list=[datums],
         )
-# FIXME: Why is this a list? Can we set many / Batch requests?
+
+    # FIXME: Why is this a list? Can we set many / Batch requests?
 
     def add_bulk_entry(
         self: Self,
@@ -124,6 +127,8 @@ def main() -> None:
     """I don't know what I am doing... just guessing here..."""
     logger = logging.getLogger(__name__)
     refresh_cycle_period = timedelta(milliseconds=16)
+    refresh_ms = refresh_cycle_period.microseconds // 1000
+    seq_sigs_refresh_per_cycle = 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
 
     if len(sys.argv) != 2:
         logger.error("Usage: <program> <pickle-filepath>")
@@ -136,32 +141,58 @@ def main() -> None:
 
     with TofinoRuntimeClient() as client:
         ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
-        # seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
+        seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
 
         try:
+            count = 0
             while True:
                 timestart = datetime.now()  # noqa: DTZ005
-                # FIXME: Replace with pickled values.
+
+                logger.info("Refreshing signature values...")
+
                 register_index_key = "$REGISTER_INDEX"
                 ts_sig_field_name = "outgoing_metric_signature_manager_0.f1"
+                seq_num_field_name = "outgoing_book_signature_manager_0.f1"
 
                 keys_ts = [
                     gc.KeyTuple(name=register_index_key, value=idx)
-                    for idx in range(0, refresh_cycle_period.microseconds // 1000)
+                    for idx in range(
+                        (count % 2) * refresh_ms,
+                        ((count % 2) * refresh_ms) + refresh_ms,
+                    )
                 ]
 
                 datums_ts = [
                     gc.DataTuple(name=ts_sig_field_name, val=val)
-                    for val in unpickled_data.timestamp_signatures
+                    for val in unpickled_data.timestamp_signatures[
+                        (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
+                    ]
                 ]
 
-                # FIXME: dummy calls
+                keys_seq = [
+                    gc.KeyTuple(name=seq_num_field_name, value=idx)
+                    for idx in range(
+                        (count % 8) * seq_sigs_refresh_per_cycle,
+                        ((count % 8) * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle,
+                    )
+                ]
+
+                datums_seq = [
+                    gc.DataTuple(name=seq_num_field_name, val=val)
+                    for val in unpickled_data.sequence_num_signatures[
+                        (count * seq_sigs_refresh_per_cycle) : (
+                            (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
+                        )
+                    ]
+                ]
+
                 ts_table.add_bulk_entry(keys_ts, datums_ts)
+                seq_num_table.add_bulk_entry(keys_seq, datums_seq)
 
                 timeend = datetime.now()  # noqa: DTZ005
                 sleep((refresh_cycle_period - (timeend - timestart)).total_seconds())
         except KeyboardInterrupt:
-            logger.info("Caught keyboard exception... Gracefully exciting...")
+            logger.info("Caught user interrupt... Gracefully exciting...")
             sys.exit(0)
 
 
