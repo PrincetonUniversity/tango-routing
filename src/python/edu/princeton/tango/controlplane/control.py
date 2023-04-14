@@ -107,8 +107,6 @@ class Table:
             data_list=[datums],
         )
 
-    # FIXME: Why is this a list? Can we set many / Batch requests?
-
     def add_bulk_entry(
         self: "Table",
         key_list: List[gc.KeyTuple],
@@ -121,7 +119,29 @@ class Table:
             target=gc.Target(),
             key_list=keys,
             data_list=datums,
-        )  # FIXME: Why is this a list? Can we set many / Batch requests?
+        )
+
+    def get_entry(
+        self: "Table",
+        key: gc.KeyTuple,
+    ) -> Any:  # noqa: ANN401
+        """Add key-date entries to table."""
+        keys = self._table.make_key([key])
+        return self._table.entry_get(
+            target=gc.Target(),
+            key_list=[keys],
+        )
+
+    def get_bulk_entry(
+        self: "Table",
+        key_list: List[gc.KeyTuple],
+    ) -> Any:  # noqa: ANN401
+        """Add key-date entries to table."""
+        keys = [self._table.make_key([key]) for key in key_list]
+        return self._table.entry_get(
+            target=gc.Target(),
+            key_list=keys,
+        )
 
 
 def main() -> None:
@@ -129,7 +149,7 @@ def main() -> None:
     logger = logging.getLogger(__name__)
     refresh_cycle_period = timedelta(milliseconds=16)
     refresh_ms = refresh_cycle_period.microseconds // 1000
-    seq_sigs_refresh_per_cycle = 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
+    seq_sigs_refresh_per_cycle = 10 # 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
 
     if len(sys.argv) != 2:
         logger.error("Usage: <program> <pickle-filepath>")
@@ -146,7 +166,7 @@ def main() -> None:
 
         try:
             count = 0
-            while True:
+            while count == 0:
                 count = count + 1
                 timestart = datetime.now()  # noqa: DTZ005
 
@@ -192,6 +212,17 @@ def main() -> None:
                 seq_num_table.add_bulk_entry(keys_seq, datums_seq)
 
                 logger.info("Finished refresh cycle...")
+
+                ts_entries = ts_table.get_bulk_entry(keys_ts)
+                seq_num_entries = seq_num_table.get_bulk_entry(keys_seq)
+
+                logger.info("Printing Ts. signatures found on switch...")
+                for data, key in ts_entries:
+                    print(f"{key.to_dict()} -> {data.to_dict()}")
+                logger.info("Printing Seq. Num. signatures found on switch...")
+                for data, key in seq_num_entries:
+                    print(f"{key.to_dict()} -> {data.to_dict()}")
+
                 timeend = datetime.now()  # noqa: DTZ005
                 sleep((refresh_cycle_period - (timeend - timestart)).total_seconds())
         except KeyboardInterrupt:
