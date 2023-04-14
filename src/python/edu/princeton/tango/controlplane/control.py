@@ -149,7 +149,7 @@ def main() -> None:
     logger = logging.getLogger(__name__)
     refresh_cycle_period = timedelta(milliseconds=16)
     refresh_ms = refresh_cycle_period.microseconds // 1000
-    seq_sigs_refresh_per_cycle = 10  # 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
+    seq_sigs_refresh_per_cycle = 1000  # 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
 
     if len(sys.argv) != 2:
         logger.error("Usage: <program> <pickle-filepath>")
@@ -210,21 +210,12 @@ def main() -> None:
                 ts_table.add_bulk_entry(keys_ts, datums_ts)
                 seq_num_table.add_bulk_entry(keys_seq, datums_seq)
 
-                logger.info("Finished refresh cycle...")
-
-                ts_entries = ts_table.get_bulk_entry(keys_ts)
-                seq_num_entries = seq_num_table.get_bulk_entry(keys_seq)
-
-                print("\nPrinting Ts. signatures found on switch...")
-                for data, key in ts_entries:
-                    print(f"{key.to_dict()} -> {data.to_dict()}")
-                print("\nPrinting Seq. Num. signatures found on switch...")
-                for data, key in seq_num_entries:
-                    print(f"{key.to_dict()} -> {data.to_dict()}")
 
                 count = count + 1
                 timeend = datetime.now()  # noqa: DTZ005
-                sleeptime = (refresh_cycle_period - (timestart - timeend)).total_seconds()
+                runtime = timeend - timestart
+                logger.info("Finished refresh cycle in %f ms...", runtime.total_seconds() * 1000)
+                sleeptime = (refresh_cycle_period - runtime).total_seconds()
                 sleep(sleeptime if sleeptime > 0 else 0)
         except KeyboardInterrupt:
             logger.info("Caught user interrupt... Gracefully exciting...")
