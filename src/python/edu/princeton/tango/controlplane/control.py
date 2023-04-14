@@ -147,6 +147,7 @@ def main() -> None:
         try:
             count = 0
             while True:
+                count = count + 1
                 timestart = datetime.now()  # noqa: DTZ005
 
                 logger.info("Refreshing signature values...")
