@@ -13,6 +13,18 @@ include "store_managers/cryptography/signatures/MetricSignatureManager.dpt"
 // Port declarations
 const int<<9>> OUT_PORT = 128;
 
+// Tango IPv6 Header
+const IPv6Header_t TANGO_V6_HEADER = {
+    version_cls_flow = 0;
+    payload_len = 0;
+    next_header = 0;
+    hop_limit = 0;
+    src_addr_lo = 0;
+    src_addr_hi = 0;
+    dest_addr_lo = 0;
+    dest_addr_hi = 0;
+};
+
 // Tango UDP header to counter ECMP
 const UDPHeader_t TANGO_UDP_HEADER = {
     source_port = 8080;
@@ -59,9 +71,7 @@ event attach_signatures (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     UDPHeader_t tango_udp_header,
-    int<<16>> seq_number,
-    int<<8>> traffic_class,
-    int<<16>> timestamp,
+    TangoHeader_t tango_metrics_hdr,
     IPv4Header_t encaped_ip_header,
     UDPHeader_t encaped_udp_header
 );
@@ -98,34 +108,33 @@ exit event incoming_tango_traffic (
 handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
 
     /* 1. Map flow to a specific physical route. */
-    // -- Map flow to traffic class.
-    int<<8>> traffic_class = map_flow_to_traffic_class(
-        ip_header#src_address,
-        udp_header#source_port,
-        ip_header#dest_address,
-        udp_header#destination_port,
-        ip_header#protocol
-    );
 
     // -- Get physical path header to tunnel with.
-    IPv6Header_t tango_tunnel_hdr = map_path_to_tunnel_header((int<<8>>) traffic_class);
+    IPv6Header_t tango_tunnel_hdr = TANGO_V6_HEADER;
 
     /* 2. Get metric values. */
     // -- Get updated sequence number
-    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, (int<<8>>) traffic_class);
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters);
 
     // -- Get current time in milliseconds
     int<<12>> timestamp = get_time_now_ms();
+
+    // -- get Tango encapsulation
+    TangoHeader_t tango_metrics_hdr = {
+        path_id = 0;
+        timestamp = (int<<16>>) timestamp;
+        signature = 0;
+        sequence_num = seq_number;
+        book_signature = 0;
+    };
 
     generate_port (
         ingress_port,
         attach_signatures (
             eth_header,
-            { tango_tunnel_hdr with payload_len = 88 + ip_header#len },
+            { tango_tunnel_hdr with payload_len = 18 + ip_header#len },
             TANGO_UDP_HEADER,
-            seq_number,
-            traffic_class,
-            (int<<16>>) timestamp,
+            tango_metrics_hdr,
             ip_header,
             udp_header
         )
@@ -143,45 +152,25 @@ handle attach_signatures (
     EthernetHeader_t tango_eth_header,
     IPv6Header_t tango_ip_header,
     UDPHeader_t tango_udp_header,
-    int<<16>> seq_number,
-    int<<8>> traffic_class,
-    int<<16>> timestamp,
+    TangoHeader_t tango_metrics_hdr,
     IPv4Header_t encaped_ip_header,
     UDPHeader_t encaped_udp_header
 ) {
     /* 3. Sign metric values. */
     // -- Get signature corresponding to sequence number
-    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, (int<<3>>) traffic_class);
+    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, tango_metrics_hdr#sequence_num);
 
     // -- Get precomputed path-specific signature
-    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, (int<<12>>) timestamp, (int<<3>>) traffic_class);
+    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, (int<<12>>) (tango_metrics_hdr#timestamp));
 
-
-    /* 4. Encapsulate and forward packet. */
-    TangoHeader_t tango_metrics_hdr = {
-        path_id = (int<<8>>) traffic_class;
-        timestamp = timestamp;
-        signature = ts_signature;
-        sequence_num = seq_number;
-        book_signature = (int<<8>>) book_signature;
-    };
-
-    printf("Encapsulating packet with: { path_id: %d, timestamp: %d, ts_signature: %d, seq_number: %d, book_signature: %d, port: %d }",
-        (int<<3>>) traffic_class,
-        timestamp,
-        ts_signature,
-        seq_number,
-        book_signature,
-        OUT_PORT
-    );
-
+    /* 4. Tunnel packet to peer node. */
     generate_port (
         OUT_PORT,
         incoming_tango_traffic (
             tango_eth_header,
             tango_ip_header,
             tango_udp_header,
-            tango_metrics_hdr,
+            { tango_metrics_hdr with signature = ts_signature; book_signature = (int<<8>>) book_signature },
             encaped_ip_header,
             encaped_udp_header
         )

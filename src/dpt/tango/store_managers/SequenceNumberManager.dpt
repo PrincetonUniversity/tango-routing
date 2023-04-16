@@ -23,8 +23,7 @@ module SequenceNumberManager : {
     * sequence_number (int<<16>>): the current, non-incremented sequence number
     **/
     fun int<<16>> increment (
-        t self,
-        int<<8>> path_id
+        t self
     ) [start <= self; end self];
 }
 {
@@ -33,7 +32,7 @@ module SequenceNumberManager : {
     }
 
     constr t create () = {
-        seq_nums = Array.create(8);
+        seq_nums = Array.create(1);
     };
 
     /**
@@ -53,12 +52,11 @@ module SequenceNumberManager : {
     }
 
     fun int<<16>> increment (
-        t self,
-        int<<8>> path_id
+        t self
     ) {
         return Array.update(
             self#seq_nums,
-            path_id,
+            0,
             get_curr,
             0,
             next,
