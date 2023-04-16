@@ -51,25 +51,25 @@ module BookSignatureManager : {
 }
 {
     type t = {
-        Array.t<<1>> onebit_signatures0;
-        Array.t<<1>> onebit_signatures1;
-        Array.t<<1>> onebit_signatures2;
-        Array.t<<1>> onebit_signatures3;
-        Array.t<<1>> onebit_signatures4;
-        Array.t<<1>> onebit_signatures5;
-        Array.t<<1>> onebit_signatures6;
-        Array.t<<1>> onebit_signatures7;
+        Array.t<<32>> onebit_signatures0;
+        Array.t<<32>> onebit_signatures1;
+        Array.t<<32>> onebit_signatures2;
+        Array.t<<32>> onebit_signatures3;
+        Array.t<<32>> onebit_signatures4;
+        Array.t<<32>> onebit_signatures5;
+        Array.t<<32>> onebit_signatures6;
+        Array.t<<32>> onebit_signatures7;
     }
 
     constr t create () = {
-        onebit_signatures0 = Array.create(65536); // 2^16
-        onebit_signatures1 = Array.create(65536);
-        onebit_signatures2 = Array.create(65536);
-        onebit_signatures3 = Array.create(65536);
-        onebit_signatures4 = Array.create(65536);
-        onebit_signatures5 = Array.create(65536);
-        onebit_signatures6 = Array.create(65536);
-        onebit_signatures7 = Array.create(65536);
+        onebit_signatures0 = Array.create(2048); // 2^16 / 32 = 2^11
+        onebit_signatures1 = Array.create(2048);
+        onebit_signatures2 = Array.create(2048);
+        onebit_signatures3 = Array.create(2048);
+        onebit_signatures4 = Array.create(2048);
+        onebit_signatures5 = Array.create(2048);
+        onebit_signatures6 = Array.create(2048);
+        onebit_signatures7 = Array.create(2048);
     };
 
     fun int<<1>> sign (
@@ -77,15 +77,263 @@ module BookSignatureManager : {
         int<<16>> seq_number,
         int<<3>> path_id
     ) {
-        match path_id with
-        | 0 -> { return Array.get(self#onebit_signatures0, seq_number); }
-        | 1 -> { return Array.get(self#onebit_signatures1, seq_number); }
-        | 2 -> { return Array.get(self#onebit_signatures2, seq_number); }
-        | 3 -> { return Array.get(self#onebit_signatures3, seq_number); }
-        | 4 -> { return Array.get(self#onebit_signatures4, seq_number); }
-        | 5 -> { return Array.get(self#onebit_signatures5, seq_number); }
-        | 6 -> { return Array.get(self#onebit_signatures6, seq_number); }
-        | 7 -> { return Array.get(self#onebit_signatures7, seq_number); }
+        match (path_id, seq_number[4:0]) with
+        | 0, 0 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[0:0]; }
+        | 0, 1 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[1:1]; }
+        | 0, 2 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[2:2]; }
+        | 0, 3 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[3:3]; }
+        | 0, 4 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[4:4]; }
+        | 0, 5 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[5:5]; }
+        | 0, 6 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[6:6]; }
+        | 0, 7 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[7:7]; }
+        | 0, 8 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[8:8]; }
+        | 0, 9 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[9:9]; }
+        | 0, 10 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[10:10]; }
+        | 0, 11 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[11:11]; }
+        | 0, 12 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[12:12]; }
+        | 0, 13 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[13:13]; }
+        | 0, 14 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[14:14]; }
+        | 0, 15 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[15:15]; }
+        | 0, 16 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[16:16]; }
+        | 0, 17 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[17:17]; }
+        | 0, 18 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[18:18]; }
+        | 0, 19 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[19:19]; }
+        | 0, 20 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[20:20]; }
+        | 0, 21 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[21:21]; }
+        | 0, 22 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[22:22]; }
+        | 0, 23 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[23:23]; }
+        | 0, 24 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[24:24]; }
+        | 0, 25 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[25:25]; }
+        | 0, 26 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[26:26]; }
+        | 0, 27 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[27:27]; }
+        | 0, 28 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[28:28]; }
+        | 0, 29 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[29:29]; }
+        | 0, 30 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[30:30]; }
+        | 0, 31 -> { return Array.get(self#onebit_signatures0, seq_number[15:5])[31:31]; }
+        | 1, 0 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[0:0]; }
+        | 1, 1 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[1:1]; }
+        | 1, 2 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[2:2]; }
+        | 1, 3 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[3:3]; }
+        | 1, 4 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[4:4]; }
+        | 1, 5 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[5:5]; }
+        | 1, 6 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[6:6]; }
+        | 1, 7 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[7:7]; }
+        | 1, 8 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[8:8]; }
+        | 1, 9 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[9:9]; }
+        | 1, 10 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[10:10]; }
+        | 1, 11 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[11:11]; }
+        | 1, 12 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[12:12]; }
+        | 1, 13 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[13:13]; }
+        | 1, 14 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[14:14]; }
+        | 1, 15 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[15:15]; }
+        | 1, 16 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[16:16]; }
+        | 1, 17 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[17:17]; }
+        | 1, 18 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[18:18]; }
+        | 1, 19 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[19:19]; }
+        | 1, 20 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[20:20]; }
+        | 1, 21 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[21:21]; }
+        | 1, 22 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[22:22]; }
+        | 1, 23 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[23:23]; }
+        | 1, 24 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[24:24]; }
+        | 1, 25 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[25:25]; }
+        | 1, 26 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[26:26]; }
+        | 1, 27 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[27:27]; }
+        | 1, 28 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[28:28]; }
+        | 1, 29 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[29:29]; }
+        | 1, 30 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[30:30]; }
+        | 1, 31 -> { return Array.get(self#onebit_signatures1, seq_number[15:5])[31:31]; }
+        | 2, 0 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[0:0]; }
+        | 2, 1 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[1:1]; }
+        | 2, 2 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[2:2]; }
+        | 2, 3 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[3:3]; }
+        | 2, 4 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[4:4]; }
+        | 2, 5 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[5:5]; }
+        | 2, 6 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[6:6]; }
+        | 2, 7 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[7:7]; }
+        | 2, 8 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[8:8]; }
+        | 2, 9 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[9:9]; }
+        | 2, 10 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[10:10]; }
+        | 2, 11 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[11:11]; }
+        | 2, 12 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[12:12]; }
+        | 2, 13 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[13:13]; }
+        | 2, 14 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[14:14]; }
+        | 2, 15 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[15:15]; }
+        | 2, 16 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[16:16]; }
+        | 2, 17 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[17:17]; }
+        | 2, 18 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[18:18]; }
+        | 2, 19 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[19:19]; }
+        | 2, 20 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[20:20]; }
+        | 2, 21 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[21:21]; }
+        | 2, 22 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[22:22]; }
+        | 2, 23 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[23:23]; }
+        | 2, 24 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[24:24]; }
+        | 2, 25 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[25:25]; }
+        | 2, 26 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[26:26]; }
+        | 2, 27 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[27:27]; }
+        | 2, 28 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[28:28]; }
+        | 2, 29 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[29:29]; }
+        | 2, 30 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[30:30]; }
+        | 2, 31 -> { return Array.get(self#onebit_signatures2, seq_number[15:5])[31:31]; }
+        | 3, 0 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[0:0]; }
+        | 3, 1 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[1:1]; }
+        | 3, 2 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[2:2]; }
+        | 3, 3 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[3:3]; }
+        | 3, 4 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[4:4]; }
+        | 3, 5 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[5:5]; }
+        | 3, 6 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[6:6]; }
+        | 3, 7 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[7:7]; }
+        | 3, 8 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[8:8]; }
+        | 3, 9 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[9:9]; }
+        | 3, 10 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[10:10]; }
+        | 3, 11 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[11:11]; }
+        | 3, 12 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[12:12]; }
+        | 3, 13 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[13:13]; }
+        | 3, 14 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[14:14]; }
+        | 3, 15 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[15:15]; }
+        | 3, 16 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[16:16]; }
+        | 3, 17 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[17:17]; }
+        | 3, 18 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[18:18]; }
+        | 3, 19 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[19:19]; }
+        | 3, 20 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[20:20]; }
+        | 3, 21 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[21:21]; }
+        | 3, 22 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[22:22]; }
+        | 3, 23 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[23:23]; }
+        | 3, 24 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[24:24]; }
+        | 3, 25 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[25:25]; }
+        | 3, 26 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[26:26]; }
+        | 3, 27 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[27:27]; }
+        | 3, 28 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[28:28]; }
+        | 3, 29 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[29:29]; }
+        | 3, 30 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[30:30]; }
+        | 3, 31 -> { return Array.get(self#onebit_signatures3, seq_number[15:5])[31:31]; }
+        | 4, 0 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[0:0]; }
+        | 4, 1 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[1:1]; }
+        | 4, 2 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[2:2]; }
+        | 4, 3 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[3:3]; }
+        | 4, 4 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[4:4]; }
+        | 4, 5 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[5:5]; }
+        | 4, 6 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[6:6]; }
+        | 4, 7 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[7:7]; }
+        | 4, 8 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[8:8]; }
+        | 4, 9 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[9:9]; }
+        | 4, 10 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[10:10]; }
+        | 4, 11 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[11:11]; }
+        | 4, 12 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[12:12]; }
+        | 4, 13 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[13:13]; }
+        | 4, 14 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[14:14]; }
+        | 4, 15 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[15:15]; }
+        | 4, 16 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[16:16]; }
+        | 4, 17 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[17:17]; }
+        | 4, 18 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[18:18]; }
+        | 4, 19 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[19:19]; }
+        | 4, 20 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[20:20]; }
+        | 4, 21 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[21:21]; }
+        | 4, 22 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[22:22]; }
+        | 4, 23 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[23:23]; }
+        | 4, 24 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[24:24]; }
+        | 4, 25 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[25:25]; }
+        | 4, 26 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[26:26]; }
+        | 4, 27 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[27:27]; }
+        | 4, 28 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[28:28]; }
+        | 4, 29 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[29:29]; }
+        | 4, 30 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[30:30]; }
+        | 4, 31 -> { return Array.get(self#onebit_signatures4, seq_number[15:5])[31:31]; }
+        | 5, 0 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[0:0]; }
+        | 5, 1 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[1:1]; }
+        | 5, 2 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[2:2]; }
+        | 5, 3 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[3:3]; }
+        | 5, 4 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[4:4]; }
+        | 5, 5 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[5:5]; }
+        | 5, 6 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[6:6]; }
+        | 5, 7 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[7:7]; }
+        | 5, 8 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[8:8]; }
+        | 5, 9 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[9:9]; }
+        | 5, 10 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[10:10]; }
+        | 5, 11 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[11:11]; }
+        | 5, 12 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[12:12]; }
+        | 5, 13 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[13:13]; }
+        | 5, 14 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[14:14]; }
+        | 5, 15 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[15:15]; }
+        | 5, 16 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[16:16]; }
+        | 5, 17 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[17:17]; }
+        | 5, 18 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[18:18]; }
+        | 5, 19 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[19:19]; }
+        | 5, 20 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[20:20]; }
+        | 5, 21 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[21:21]; }
+        | 5, 22 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[22:22]; }
+        | 5, 23 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[23:23]; }
+        | 5, 24 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[24:24]; }
+        | 5, 25 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[25:25]; }
+        | 5, 26 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[26:26]; }
+        | 5, 27 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[27:27]; }
+        | 5, 28 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[28:28]; }
+        | 5, 29 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[29:29]; }
+        | 5, 30 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[30:30]; }
+        | 5, 31 -> { return Array.get(self#onebit_signatures5, seq_number[15:5])[31:31]; }
+        | 6, 0 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[0:0]; }
+        | 6, 1 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[1:1]; }
+        | 6, 2 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[2:2]; }
+        | 6, 3 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[3:3]; }
+        | 6, 4 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[4:4]; }
+        | 6, 5 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[5:5]; }
+        | 6, 6 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[6:6]; }
+        | 6, 7 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[7:7]; }
+        | 6, 8 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[8:8]; }
+        | 6, 9 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[9:9]; }
+        | 6, 10 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[10:10]; }
+        | 6, 11 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[11:11]; }
+        | 6, 12 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[12:12]; }
+        | 6, 13 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[13:13]; }
+        | 6, 14 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[14:14]; }
+        | 6, 15 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[15:15]; }
+        | 6, 16 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[16:16]; }
+        | 6, 17 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[17:17]; }
+        | 6, 18 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[18:18]; }
+        | 6, 19 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[19:19]; }
+        | 6, 20 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[20:20]; }
+        | 6, 21 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[21:21]; }
+        | 6, 22 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[22:22]; }
+        | 6, 23 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[23:23]; }
+        | 6, 24 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[24:24]; }
+        | 6, 25 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[25:25]; }
+        | 6, 26 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[26:26]; }
+        | 6, 27 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[27:27]; }
+        | 6, 28 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[28:28]; }
+        | 6, 29 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[29:29]; }
+        | 6, 30 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[30:30]; }
+        | 6, 31 -> { return Array.get(self#onebit_signatures6, seq_number[15:5])[31:31]; }
+        | 7, 0 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[0:0]; }
+        | 7, 1 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[1:1]; }
+        | 7, 2 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[2:2]; }
+        | 7, 3 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[3:3]; }
+        | 7, 4 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[4:4]; }
+        | 7, 5 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[5:5]; }
+        | 7, 6 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[6:6]; }
+        | 7, 7 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[7:7]; }
+        | 7, 8 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[8:8]; }
+        | 7, 9 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[9:9]; }
+        | 7, 10 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[10:10]; }
+        | 7, 11 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[11:11]; }
+        | 7, 12 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[12:12]; }
+        | 7, 13 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[13:13]; }
+        | 7, 14 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[14:14]; }
+        | 7, 15 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[15:15]; }
+        | 7, 16 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[16:16]; }
+        | 7, 17 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[17:17]; }
+        | 7, 18 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[18:18]; }
+        | 7, 19 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[19:19]; }
+        | 7, 20 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[20:20]; }
+        | 7, 21 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[21:21]; }
+        | 7, 22 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[22:22]; }
+        | 7, 23 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[23:23]; }
+        | 7, 24 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[24:24]; }
+        | 7, 25 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[25:25]; }
+        | 7, 26 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[26:26]; }
+        | 7, 27 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[27:27]; }
+        | 7, 28 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[28:28]; }
+        | 7, 29 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[29:29]; }
+        | 7, 30 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[30:30]; }
+        | 7, 31 -> { return Array.get(self#onebit_signatures7, seq_number[15:5])[31:31]; }
     }
 
     fun bool verify (
@@ -94,30 +342,262 @@ module BookSignatureManager : {
         int<<3>> path_id,
         int<<1>> signature
     ) {
-        match path_id with
-        | 0 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number)) == ((int<<32>>) signature);
-        }
-        | 1 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number)) == ((int<<32>>) signature);
-        }
-        | 2 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number)) == ((int<<32>>) signature);
-        }
-        | 3 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number)) == ((int<<32>>) signature);
-        }
-        | 4 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number)) == ((int<<32>>) signature);
-        }
-        | 5 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number)) == ((int<<32>>) signature);
-        }
-        | 6 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number)) == ((int<<32>>) signature);
-        }
-        | 7 -> {
-            return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number)) == ((int<<32>>) signature);
-        }
+        match (path_id, seq_number[4:0]) with
+        | 0, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 0, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 0, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 0, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 0, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 0, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 0, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 0, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 0, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 0, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 0, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 0, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 0, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 0, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 0, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 0, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 0, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 0, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 0, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 0, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 0, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 0, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 0, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 0, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 0, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 0, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 0, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 0, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 0, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 0, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 0, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 0, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures0, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 1, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 1, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 1, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 1, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 1, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 1, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 1, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 1, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 1, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 1, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 1, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 1, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 1, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 1, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 1, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 1, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 1, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 1, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 1, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 1, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 1, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 1, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 1, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 1, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 1, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 1, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 1, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 1, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 1, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 1, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 1, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 1, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures1, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 2, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 2, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 2, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 2, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 2, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 2, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 2, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 2, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 2, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 2, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 2, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 2, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 2, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 2, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 2, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 2, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 2, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 2, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 2, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 2, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 2, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 2, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 2, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 2, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 2, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 2, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 2, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 2, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 2, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 2, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 2, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 2, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures2, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 3, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 3, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 3, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 3, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 3, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 3, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 3, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 3, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 3, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 3, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 3, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 3, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 3, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 3, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 3, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 3, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 3, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 3, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 3, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 3, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 3, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 3, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 3, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 3, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 3, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 3, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 3, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 3, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 3, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 3, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 3, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 3, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures3, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 4, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 4, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 4, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 4, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 4, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 4, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 4, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 4, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 4, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 4, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 4, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 4, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 4, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 4, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 4, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 4, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 4, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 4, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 4, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 4, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 4, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 4, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 4, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 4, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 4, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 4, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 4, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 4, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 4, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 4, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 4, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 4, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures4, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 5, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 5, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 5, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 5, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 5, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 5, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 5, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 5, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 5, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 5, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 5, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 5, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 5, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 5, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 5, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 5, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 5, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 5, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 5, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 5, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 5, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 5, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 5, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 5, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 5, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 5, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 5, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 5, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 5, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 5, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 5, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 5, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures5, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 6, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 6, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 6, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 6, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 6, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 6, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 6, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 6, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 6, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 6, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 6, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 6, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 6, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 6, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 6, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 6, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 6, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 6, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 6, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 6, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 6, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 6, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 6, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 6, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 6, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 6, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 6, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 6, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 6, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 6, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 6, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 6, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures6, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
+        | 7, 0 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[0:0]) == ((int<<32>>) signature); }
+        | 7, 1 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[1:1]) == ((int<<32>>) signature); }
+        | 7, 2 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[2:2]) == ((int<<32>>) signature); }
+        | 7, 3 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[3:3]) == ((int<<32>>) signature); }
+        | 7, 4 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[4:4]) == ((int<<32>>) signature); }
+        | 7, 5 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[5:5]) == ((int<<32>>) signature); }
+        | 7, 6 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[6:6]) == ((int<<32>>) signature); }
+        | 7, 7 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[7:7]) == ((int<<32>>) signature); }
+        | 7, 8 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[8:8]) == ((int<<32>>) signature); }
+        | 7, 9 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[9:9]) == ((int<<32>>) signature); }
+        | 7, 10 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[10:10]) == ((int<<32>>) signature); }
+        | 7, 11 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[11:11]) == ((int<<32>>) signature); }
+        | 7, 12 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[12:12]) == ((int<<32>>) signature); }
+        | 7, 13 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[13:13]) == ((int<<32>>) signature); }
+        | 7, 14 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[14:14]) == ((int<<32>>) signature); }
+        | 7, 15 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[15:15]) == ((int<<32>>) signature); }
+        | 7, 16 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[16:16]) == ((int<<32>>) signature); }
+        | 7, 17 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[17:17]) == ((int<<32>>) signature); }
+        | 7, 18 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[18:18]) == ((int<<32>>) signature); }
+        | 7, 19 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[19:19]) == ((int<<32>>) signature); }
+        | 7, 20 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[20:20]) == ((int<<32>>) signature); }
+        | 7, 21 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[21:21]) == ((int<<32>>) signature); }
+        | 7, 22 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[22:22]) == ((int<<32>>) signature); }
+        | 7, 23 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[23:23]) == ((int<<32>>) signature); }
+        | 7, 24 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[24:24]) == ((int<<32>>) signature); }
+        | 7, 25 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[25:25]) == ((int<<32>>) signature); }
+        | 7, 26 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[26:26]) == ((int<<32>>) signature); }
+        | 7, 27 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[27:27]) == ((int<<32>>) signature); }
+        | 7, 28 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[28:28]) == ((int<<32>>) signature); }
+        | 7, 29 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[29:29]) == ((int<<32>>) signature); }
+        | 7, 30 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[30:30]) == ((int<<32>>) signature); }
+        | 7, 31 -> { return ((int<<32>>) Array.get(self#onebit_signatures7, seq_number[15:5])[31:31]) == ((int<<32>>) signature); }
     }
 }

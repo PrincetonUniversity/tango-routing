@@ -232,18 +232,18 @@ def hash_int(num: int) -> int:
     )
 
 
-def compute_timestamp_signatures(test_length: timedelta) -> list[int]:
+def compute_timestamp_signatures(test_length: timedelta) -> List[int]:
     """Generate signaures for all timestamps."""
     num_signaures_needed = test_length // timedelta(milliseconds=1)
     return [hash_int(i) for i in range(0, num_signaures_needed)]
 
 
-def compute_sequence_num_signatures(num_seq_nums: int) -> list[int]:
+def compute_sequence_num_signatures(num_seq_nums: int) -> List[int]:
     """Generate signaures for all sequence numbers."""
     return [hash_int(i) & 1 for i in range(0, num_seq_nums)]
 
 
-def pickle_signatures(filename: Path, ts_sigs: list[int], seq_sigs: list[int]) -> None:
+def pickle_signatures(filename: Path, ts_sigs: List[int], seq_sigs: List[int]) -> None:
     """Pickle the precomputed signatures."""
     with filename.open("wb") as file:
         pickle(
