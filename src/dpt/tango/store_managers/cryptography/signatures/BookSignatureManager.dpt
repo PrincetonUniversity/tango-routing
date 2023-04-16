@@ -63,12 +63,12 @@ module BookSignatureManager : {
         match (seq_number[4:0]) with
         | 0 -> {
             int<<32>> sig_bitstring = (Array.get(self#onebit_signatures, seq_number[15:5]));
-            return ((int<<1>>) (sig_bitstring[1:0]));
+            return ((int<<1>>) (1));
         }
-        | 1 -> {
-            int<<32>> sig_bitstring = (Array.get(self#onebit_signatures, seq_number[15:5]));
-            return ((int<<1>>) (sig_bitstring[2:1]));
-        }
+        // | 1 -> {
+        //     int<<32>> sig_bitstring = (Array.get(self#onebit_signatures, seq_number[15:5]));
+        //     return ((int<<1>>) (sig_bitstring[2:1]));
+        // }
         // | 2 -> {
         //     int<<32>> sig_bitstring = (Array.get(self#onebit_signatures, seq_number[15:5]));
         //     return ((int<<1>>) (sig_bitstring[3:2]));
