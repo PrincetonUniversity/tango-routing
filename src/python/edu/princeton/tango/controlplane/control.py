@@ -3,10 +3,13 @@
 import logging
 import os
 import sys
+from argparse import ArgumentParser
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
+from hashlib import sha256
 from pathlib import Path
+from pickle import dump as pickle
 from pickle import load as unpickle
 from time import sleep
 from typing import Any, List, Optional
@@ -144,8 +147,8 @@ class Table:
         )
 
 
-def main() -> None:
-    """I don't know what I am doing... just guessing here..."""
+def start_controller(signature_file: Path) -> None:
+    """Populate the Tofino with precomputed signatures."""
     logger = logging.getLogger(__name__)
     refresh_cycle_period = timedelta(milliseconds=16)
     refresh_ms = refresh_cycle_period.microseconds // 1000
@@ -155,7 +158,7 @@ def main() -> None:
         logger.error("Usage: <program> <pickle-filepath>")
         sys.exit(1)
 
-    pickle_filename = Path(sys.argv[1]).absolute()
+    pickle_filename = signature_file.absolute()
     logger.info("Reading pickled signatures @ file://%s ...", str(pickle_filename))
     with pickle_filename.open("rb") as file:
         unpickled_data: PrecomputedSignatures = unpickle(file)  # noqa: S301
@@ -210,7 +213,6 @@ def main() -> None:
                 ts_table.add_bulk_entry(keys_ts, datums_ts)
                 seq_num_table.add_bulk_entry(keys_seq, datums_seq)
 
-
                 count = count + 1
                 timeend = datetime.now()  # noqa: DTZ005
                 runtime = timeend - timestart
@@ -220,6 +222,99 @@ def main() -> None:
         except KeyboardInterrupt:
             logger.info("Caught user interrupt... Gracefully exciting...")
             sys.exit(0)
+
+
+def hash_int(num: int) -> int:
+    """Hash an int into a 32-bit integer."""
+    return int.from_bytes(
+        sha256(num.to_bytes((num.bit_length() + 7) // 8, "big")).digest()[-4:],
+        "big",
+    )
+
+
+def compute_timestamp_signatures(test_length: timedelta) -> list[int]:
+    """Generate signaures for all timestamps."""
+    num_signaures_needed = test_length // timedelta(milliseconds=1)
+    return [hash_int(i) for i in range(0, num_signaures_needed)]
+
+
+def compute_sequence_num_signatures(num_seq_nums: int) -> list[int]:
+    """Generate signaures for all sequence numbers."""
+    return [hash_int(i) & 1 for i in range(0, num_seq_nums)]
+
+
+def pickle_signatures(filename: Path, ts_sigs: list[int], seq_sigs: list[int]) -> None:
+    """Pickle the precomputed signatures."""
+    with filename.open("wb") as file:
+        pickle(
+            PrecomputedSignatures(timestamp_signatures=ts_sigs, sequence_num_signatures=seq_sigs),
+            file,
+        )
+
+
+def start_signature_computation(signature_file: Path) -> None:
+    """Genreate pickle file containing all precomputed signatures."""
+    filepath = signature_file.absolute()
+
+    test_time_len = timedelta(minutes=1)
+    packets_per_seq_book = 2 ** 16
+    num_books = 512
+    num_seq_sigs = packets_per_seq_book * num_books
+
+    timestamp_sigs = compute_timestamp_signatures(test_time_len)
+    seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs)
+
+    pickle_signatures(filepath, ts_sigs=timestamp_sigs, seq_sigs=seq_num_sigs)
+    print(f"\n-- SUCCESS --\n\nPickled signatures @ file://{filepath}")  # noqa: T201
+
+
+def create_cli_parser() -> ArgumentParser:
+    """Create a cli parser for control plane interaction."""
+    parser = ArgumentParser(description="Tango control plane cli.")
+    subparsers = parser.add_subparsers(help="Subcommands")
+
+    controller = subparsers.add_parser(
+        "control",
+        description="Interact with the control plane on the Tofino.",
+    )
+    controller.add_argument(
+        "-f",
+        "--file",
+        dest="pickled_file",
+        required=True,
+        nargs=1,
+        type=Path,
+        help="Path to file containing precomputed signatures.",
+    )
+
+    precompute = subparsers.add_parser(
+        "precompute",
+        description="Interact with precomputation of crytographic signatures.",
+    )
+    precompute.add_argument(
+        "-f",
+        "--file",
+        dest="file_to_pickle",
+        required=True,
+        nargs=1,
+        type=Path,
+        help="Path to file to dump precomputed signatures.",
+    )
+
+    return parser
+
+
+def main() -> None:
+    """Cli to gernerate signatures and write them to the Tofino at runtime."""
+    parser = create_cli_parser()
+    args = vars(parser.parse_args())
+
+    if controller_file := args.get("pickled_file"):
+        start_controller(controller_file[0])
+    elif precompute_file := args.get("file_to_pickle"):
+        start_signature_computation(precompute_file[0])
+    else:
+        parser.print_usage()
 
 
 if __name__ == "__main__":
