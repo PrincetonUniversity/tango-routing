@@ -62,7 +62,7 @@ module BookSignatureManager : {
     ) {
         int<<32>> sig_bitstring = Array.get(self#onebit_signatures, (seq_number[15:5]));
         match (seq_number[4:0]) with
-        | 0 -> { return sig_bitstring[0:0]; }
+        | 0 -> { return 1; }
         
     }
 }
