@@ -279,7 +279,7 @@ def compute_sequence_num_signatures(num_seq_nums: int) -> Tuple[List[int], List[
             for curr_round in range(0, num_seq_nums // 32)
         ]
 
-        keys = list(range(0, len(data_entries)))
+        keys = [idx % 2048 for idx in range(0, len(data_entries))]
 
         return (keys, data_entries)
 
