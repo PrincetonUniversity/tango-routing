@@ -164,10 +164,6 @@ def start_controller(signature_file: Path) -> None:
     refresh_ms = refresh_cycle_period.microseconds // 1000
     seq_sigs_refresh_per_cycle = 1000  # 9766 * refresh_ms  # NOTE: 1280 byte pkts -> 9766 pkts / ms
 
-    if len(sys.argv) != 2:
-        logger.error("Usage: <program> <pickle-filepath>")
-        sys.exit(1)
-
     pickle_filename = signature_file.absolute()
     logger.info("Reading pickled signatures @ file://%s ...", str(pickle_filename))
     with pickle_filename.open("rb") as file:
