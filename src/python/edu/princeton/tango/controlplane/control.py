@@ -30,8 +30,8 @@ logging.basicConfig(level=logging.INFO)
 class PrecomputedSignatures:
     """All precomputed signatures."""
 
-    timestamp_signatures: List[Tuple[Any, Any]]
-    sequence_num_signatures: List[Tuple[Any, Any]]
+    timestamp_signatures: Tuple[List[Any], List[Any]]
+    sequence_num_signatures: Tuple[List[Any], List[Any]]
 
 
 class TofinoRuntimeClient:
@@ -184,44 +184,26 @@ def start_controller(signature_file: Path) -> None:
 
                 logger.info("Refreshing signature values...")
 
-                register_index_key = "$REGISTER_INDEX"
-                ts_sig_field_name = "outgoing_metric_signature_manager_0.f1"
-                seq_num_field_name = "outgoing_book_signature_manager_0.f1"
+                ts_keys = unpickled_data.timestamp_signatures[0][
+                    (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
+                ]
+                ts_data = unpickled_data.timestamp_signatures[1][
+                    (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
+                ]
 
-                keys_ts = [
-                    gc.KeyTuple(name=register_index_key, value=idx)
-                    for idx in range(
-                        (count % 2) * refresh_ms,
-                        ((count % 2) * refresh_ms) + refresh_ms,
+                seq_keys = unpickled_data.sequence_num_signatures[0][
+                    (count * seq_sigs_refresh_per_cycle) : (
+                        (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
+                    )
+                ]
+                seq_data = unpickled_data.sequence_num_signatures[1][
+                    (count * seq_sigs_refresh_per_cycle) : (
+                        (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
                     )
                 ]
 
-                datums_ts = [
-                    gc.DataTuple(name=ts_sig_field_name, val=val)
-                    for val in unpickled_data.timestamp_signatures[
-                        (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
-                    ]
-                ]
-
-                keys_seq = [
-                    gc.KeyTuple(name=register_index_key, value=idx)
-                    for idx in range(
-                        (count % 8) * seq_sigs_refresh_per_cycle,
-                        ((count % 8) * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle,
-                    )
-                ]
-
-                datums_seq = [
-                    gc.DataTuple(name=seq_num_field_name, val=val)
-                    for val in unpickled_data.sequence_num_signatures[
-                        (count * seq_sigs_refresh_per_cycle) : (
-                            (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
-                        )
-                    ]
-                ]
-
-                ts_table.add_bulk_entry(keys_ts, datums_ts)
-                seq_num_table.add_bulk_entry(keys_seq, datums_seq)
+                ts_table.add_bulk_entry(keys=ts_keys, data_entries=ts_data)
+                seq_num_table.add_bulk_entry(keys=seq_keys, data_entries=seq_data)
 
                 count = count + 1
                 timeend = datetime.now()  # noqa: DTZ005
@@ -242,7 +224,9 @@ def hash_int(num: int) -> int:
     )
 
 
-def compute_timestamp_signatures(test_length: timedelta, table: Table) -> List[Tuple[Any, Any]]:
+def compute_timestamp_signatures(
+    test_length: timedelta, table: Table,
+) -> Tuple[List[Any], List[Any]]:
     """Generate signaures for all timestamps."""
     num_signaures_needed = test_length // timedelta(milliseconds=1)
 
@@ -254,11 +238,11 @@ def compute_timestamp_signatures(test_length: timedelta, table: Table) -> List[T
             values=[ms % 32 for ms in range(0, len(data_values))],
         )
         data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_book_signature_manager_0.f1", # FIXME
+            fieldname="outgoing_book_signature_manager_0.f1",  # FIXME
             values=data_values,
         )
 
-        return list(zip(keys, data_entries, strict=True))
+        return (keys, data_entries)
 
     print(  # noqa: T201
         "\n-- ERROR --\n\nNumber of timestamps numbers is _not_ control-loop divisible (32ms)!",
@@ -266,8 +250,7 @@ def compute_timestamp_signatures(test_length: timedelta, table: Table) -> List[T
     sys.exit(1)
 
 
-
-def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> List[Tuple[Any, Any]]:
+def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> Tuple[List[Any], List[Any]]:
     """Generate signaures for all sequence numbers."""
     if (num_seq_nums % 32) == 0:
         data_values = [
@@ -291,11 +274,11 @@ def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> List[Tup
             values=list(range(0, len(data_values))),
         )
         data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_book_signature_manager_0.f1", #FIXME
+            fieldname="outgoing_book_signature_manager_0.f1",  # FIXME
             values=data_values,
         )
 
-        return list(zip(keys, data_entries, strict=True))
+        return (keys, data_entries)
 
     print(  # noqa: T201
         "\n-- ERROR --\n\nNumber of sequence numbers is _not_ word divisible (32-bit words)!",
@@ -305,8 +288,8 @@ def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> List[Tup
 
 def pickle_signatures(
     filename: Path,
-    ts_sigs: List[Tuple[Any, Any]],
-    seq_sigs: List[Tuple[Any, Any]],
+    ts_sigs: Tuple[List[Any], List[Any]],
+    seq_sigs: Tuple[List[Any], List[Any]],
 ) -> None:
     """Pickle the precomputed signatures."""
     with filename.open("wb") as file:
