@@ -12,7 +12,7 @@ from pathlib import Path
 from pickle import dump as pickle
 from pickle import load as unpickle
 from time import sleep
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Tuple
 
 PY_VERSION = f"{str(sys.version_info.major)}.{str(sys.version_info.minor)}"
 sys.path.append(os.path.expandvars(f"$SDE/install/lib/python{PY_VERSION}/site-packages/tofino/"))
@@ -30,8 +30,8 @@ logging.basicConfig(level=logging.INFO)
 class PrecomputedSignatures:
     """All precomputed signatures."""
 
-    timestamp_signatures: List[int]
-    sequence_num_signatures: List[int]
+    timestamp_signatures: List[Tuple[Any, Any]]
+    sequence_num_signatures: List[Tuple[Any, Any]]
 
 
 class TofinoRuntimeClient:
@@ -96,51 +96,61 @@ class Table:
         """Create an alias to interact with a table."""
         self._table = client.runtime_info.table_dict[name.value]
 
+    def create_key(self: "Table", keyname: str, value: int) -> Any:  # noqa: ANN401
+        """Create a single key to match into a table with."""
+        return self._table.make_key([gc.KeyTuple(name=keyname, value=value)])
+
+    def create_bulk_key(self: "Table", keyname: str, values: List[int]) -> List[Any]:
+        """Create multiple keys to match into a table with for same keytype."""
+        return [self._table.make_key([gc.KeyTuple(name=keyname, value=val)]) for val in values]
+
+    def create_data_entry(self: "Table", fieldname: str, value: int) -> Any:  # noqa: ANN401
+        """Create a data entry to action on the table entry with."""
+        return self._table.make_data([gc.DataTuple(name=fieldname, val=value)])
+
+    def create_bulk_data_entry(self: "Table", fieldname: str, values: List[int]) -> List[Any]:
+        """Create a bulk data entry to action on the table entry on same fieldname."""
+        return [self._table.make_data([gc.DataTuple(name=fieldname, val=val)]) for val in values]
+
     def add_entry(
         self: "Table",
-        key: gc.KeyTuple,
-        data: gc.DataTuple,
+        key: Any,  # noqa: ANN401
+        data: Any,  # noqa: ANN401
     ) -> None:
         """Add key-date entries to table."""
-        keys = self._table.make_key([key])
-        datums = self._table.make_data([data])
         self._table.entry_add(
             target=gc.Target(),
-            key_list=[keys],
-            data_list=[datums],
+            key_list=[key],
+            data_list=[data],
         )
 
     def add_bulk_entry(
         self: "Table",
-        key_list: List[gc.KeyTuple],
-        data_list: List[gc.DataTuple],
+        keys: List[Any],
+        data_entries: List[Any],
     ) -> None:
         """Add key-date entries to table."""
-        keys = [self._table.make_key([key]) for key in key_list]
-        datums = [self._table.make_data([datum]) for datum in data_list]
         self._table.entry_add(
             target=gc.Target(),
             key_list=keys,
-            data_list=datums,
+            data_list=data_entries,
         )
 
     def get_entry(
         self: "Table",
-        key: gc.KeyTuple,
+        key: Any,  # noqa: ANN401
     ) -> Any:  # noqa: ANN401
         """Add key-date entries to table."""
-        keys = self._table.make_key([key])
         return self._table.entry_get(
             target=gc.Target(),
-            key_list=[keys],
+            key_list=key,
         )
 
     def get_bulk_entry(
         self: "Table",
-        key_list: List[gc.KeyTuple],
+        keys: List[Any],
     ) -> Any:  # noqa: ANN401
         """Add key-date entries to table."""
-        keys = [self._table.make_key([key]) for key in key_list]
         return self._table.entry_get(
             target=gc.Target(),
             key_list=keys,
@@ -232,18 +242,72 @@ def hash_int(num: int) -> int:
     )
 
 
-def compute_timestamp_signatures(test_length: timedelta) -> List[int]:
+def compute_timestamp_signatures(test_length: timedelta, table: Table) -> List[Tuple[Any, Any]]:
     """Generate signaures for all timestamps."""
     num_signaures_needed = test_length // timedelta(milliseconds=1)
-    return [hash_int(i) for i in range(0, num_signaures_needed)]
+
+    if (num_signaures_needed % 32) == 0:
+        data_values = [hash_int(i) for i in range(0, num_signaures_needed)]
+
+        keys = table.create_bulk_key(
+            keyname="$REGISTER_INDEX",
+            values=[ms % 32 for ms in range(0, len(data_values))],
+        )
+        data_entries = table.create_bulk_data_entry(
+            fieldname="outgoing_book_signature_manager_0.f1", # FIXME
+            values=data_values,
+        )
+
+        return list(zip(keys, data_entries, strict=True))
+
+    print(  # noqa: T201
+        "\n-- ERROR --\n\nNumber of timestamps numbers is _not_ control-loop divisible (32ms)!",
+    )
+    sys.exit(1)
 
 
-def compute_sequence_num_signatures(num_seq_nums: int) -> List[int]:
+
+def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> List[Tuple[Any, Any]]:
     """Generate signaures for all sequence numbers."""
-    return [hash_int(i) & 1 for i in range(0, num_seq_nums)]
+    if (num_seq_nums % 32) == 0:
+        data_values = [
+            int(
+                "".join(
+                    map(
+                        str,
+                        [
+                            hash_int(i) & 1
+                            for i in reversed(range(curr_round * 32, (curr_round * 32) + 32))
+                        ],
+                    ),
+                ),
+                base=2,
+            )
+            for curr_round in range(0, num_seq_nums // 32)
+        ]
+
+        keys = table.create_bulk_key(
+            keyname="$REGISTER_INDEX",
+            values=list(range(0, len(data_values))),
+        )
+        data_entries = table.create_bulk_data_entry(
+            fieldname="outgoing_book_signature_manager_0.f1", #FIXME
+            values=data_values,
+        )
+
+        return list(zip(keys, data_entries, strict=True))
+
+    print(  # noqa: T201
+        "\n-- ERROR --\n\nNumber of sequence numbers is _not_ word divisible (32-bit words)!",
+    )
+    sys.exit(1)
 
 
-def pickle_signatures(filename: Path, ts_sigs: List[int], seq_sigs: List[int]) -> None:
+def pickle_signatures(
+    filename: Path,
+    ts_sigs: List[Tuple[Any, Any]],
+    seq_sigs: List[Tuple[Any, Any]],
+) -> None:
     """Pickle the precomputed signatures."""
     with filename.open("wb") as file:
         pickle(
@@ -261,8 +325,11 @@ def start_signature_computation(signature_file: Path) -> None:
     num_books = 512
     num_seq_sigs = packets_per_seq_book * num_books
 
-    timestamp_sigs = compute_timestamp_signatures(test_time_len)
-    seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs)
+    with TofinoRuntimeClient() as client:
+        ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
+        seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
+        timestamp_sigs = compute_timestamp_signatures(test_time_len, ts_table)
+        seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs, seq_num_table)
 
     pickle_signatures(filepath, ts_sigs=timestamp_sigs, seq_sigs=seq_num_sigs)
     print(f"\n-- SUCCESS --\n\nPickled signatures @ file://{filepath}")  # noqa: T201
