@@ -30,8 +30,8 @@ logging.basicConfig(level=logging.INFO)
 class PrecomputedSignatures:
     """All precomputed signatures."""
 
-    timestamp_signatures: Tuple[List[Any], List[Any]]
-    sequence_num_signatures: Tuple[List[Any], List[Any]]
+    timestamp_signatures: Tuple[List[int], List[int]]
+    sequence_num_signatures: Tuple[List[int], List[int]]
 
 
 class TofinoRuntimeClient:
@@ -173,10 +173,31 @@ def start_controller(signature_file: Path) -> None:
     with pickle_filename.open("rb") as file:
         unpickled_data: PrecomputedSignatures = unpickle(file)  # noqa: S301
 
+    logger.info("Connecting to gRPC server...")
     with TofinoRuntimeClient() as client:
+        logger.info("Parsing pickled signatures into gRPC calls...")
         ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
         seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
 
+        ts_keys = ts_table.create_bulk_key(
+            keyname="$REGISTER_INDEX",
+            values=unpickled_data.timestamp_signatures[0],
+        )
+        ts_data = ts_table.create_bulk_data_entry(
+            fieldname="outgoing_metric_signature_manager_0.f1",
+            values=unpickled_data.timestamp_signatures[1],
+        )
+
+        seq_keys = seq_num_table.create_bulk_key(
+            keyname="$REGISTER_INDEX",
+            values=unpickled_data.sequence_num_signatures[0],
+        )
+        seq_data = seq_num_table.create_bulk_data_entry(
+            fieldname="outgoing_book_signature_manager_0.f1",
+            values=unpickled_data.sequence_num_signatures[1],
+        )
+
+        logger.info("Entering control loop...")
         try:
             count = 0
             while count < 2:
@@ -184,26 +205,25 @@ def start_controller(signature_file: Path) -> None:
 
                 logger.info("Refreshing signature values...")
 
-                ts_keys = unpickled_data.timestamp_signatures[0][
-                    (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
-                ]
-                ts_data = unpickled_data.timestamp_signatures[1][
-                    (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
-                ]
+                ts_table.add_bulk_entry(
+                    keys=ts_keys[(count * refresh_ms) : ((count * refresh_ms) + refresh_ms)],
+                    data_entries=ts_data[
+                        (count * refresh_ms) : ((count * refresh_ms) + refresh_ms)
+                    ],
+                )
 
-                seq_keys = unpickled_data.sequence_num_signatures[0][
-                    (count * seq_sigs_refresh_per_cycle) : (
-                        (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
-                    )
-                ]
-                seq_data = unpickled_data.sequence_num_signatures[1][
-                    (count * seq_sigs_refresh_per_cycle) : (
-                        (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
-                    )
-                ]
-
-                ts_table.add_bulk_entry(keys=ts_keys, data_entries=ts_data)
-                seq_num_table.add_bulk_entry(keys=seq_keys, data_entries=seq_data)
+                seq_num_table.add_bulk_entry(
+                    keys=seq_keys[
+                        (count * seq_sigs_refresh_per_cycle) : (
+                            (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
+                        )
+                    ],
+                    data_entries=seq_data[
+                        (count * seq_sigs_refresh_per_cycle) : (
+                            (count * seq_sigs_refresh_per_cycle) + seq_sigs_refresh_per_cycle
+                        )
+                    ],
+                )
 
                 count = count + 1
                 timeend = datetime.now()  # noqa: DTZ005
@@ -225,35 +245,29 @@ def hash_int(num: int) -> int:
 
 
 def compute_timestamp_signatures(
-    test_length: timedelta, table: Table,
-) -> Tuple[List[Any], List[Any]]:
+    test_length: timedelta,
+) -> Tuple[List[int], List[int]]:
     """Generate signaures for all timestamps."""
+    logger = logging.getLogger(__name__)
+    logger.info("Calculating timestamp signatures...")
     num_signaures_needed = test_length // timedelta(milliseconds=1)
 
     if (num_signaures_needed % 32) == 0:
-        data_values = [hash_int(i) for i in range(0, num_signaures_needed)]
-
-        keys = table.create_bulk_key(
-            keyname="$REGISTER_INDEX",
-            values=[ms % 32 for ms in range(0, len(data_values))],
-        )
-        data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_metric_signature_manager_0.f1",
-            values=data_values,
-        )
+        data_entries = [hash_int(i) for i in range(0, num_signaures_needed)]
+        keys = [ms % 32 for ms in range(0, len(data_entries))]
 
         return (keys, data_entries)
 
-    print(  # noqa: T201
-        "\n-- ERROR --\n\nNumber of timestamps numbers is _not_ control-loop divisible (32ms)!",
-    )
+    logger.error("Number of timestamps numbers is _not_ control-loop divisible (32ms)!")
     sys.exit(1)
 
 
-def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> Tuple[List[Any], List[Any]]:
+def compute_sequence_num_signatures(num_seq_nums: int) -> Tuple[List[int], List[int]]:
     """Generate signaures for all sequence numbers."""
+    logger = logging.getLogger(__name__)
+    logger.info("Calculating sequence number signatures...")
     if (num_seq_nums % 32) == 0:
-        data_values = [
+        data_entries = [
             int(
                 "".join(
                     map(
@@ -269,27 +283,18 @@ def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> Tuple[Li
             for curr_round in range(0, num_seq_nums // 32)
         ]
 
-        keys = table.create_bulk_key(
-            keyname="$REGISTER_INDEX",
-            values=list(range(0, len(data_values))),
-        )
-        data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_book_signature_manager_0.f1",
-            values=data_values,
-        )
+        keys = list(range(0, len(data_entries)))
 
         return (keys, data_entries)
 
-    print(  # noqa: T201
-        "\n-- ERROR --\n\nNumber of sequence numbers is _not_ word divisible (32-bit words)!",
-    )
+    logger.error("Number of sequence numbers is _not_ word divisible (32-bit words)!")
     sys.exit(1)
 
 
 def pickle_signatures(
     filename: Path,
-    ts_sigs: Tuple[List[Any], List[Any]],
-    seq_sigs: Tuple[List[Any], List[Any]],
+    ts_sigs: Tuple[List[int], List[int]],
+    seq_sigs: Tuple[List[int], List[int]],
 ) -> None:
     """Pickle the precomputed signatures."""
     with filename.open("wb") as file:
@@ -301,6 +306,7 @@ def pickle_signatures(
 
 def start_signature_computation(signature_file: Path) -> None:
     """Genreate pickle file containing all precomputed signatures."""
+    logger = logging.getLogger(__name__)
     filepath = signature_file.absolute()
 
     test_time_len = timedelta(minutes=1)
@@ -308,14 +314,11 @@ def start_signature_computation(signature_file: Path) -> None:
     num_books = 512
     num_seq_sigs = packets_per_seq_book * num_books
 
-    with TofinoRuntimeClient() as client:
-        ts_table = Table(TableName.TIMESTAMP_SIGS, client=client)
-        seq_num_table = Table(TableName.SEQ_NUM_SIGS, client=client)
-        timestamp_sigs = compute_timestamp_signatures(test_time_len, ts_table)
-        seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs, seq_num_table)
+    timestamp_sigs = compute_timestamp_signatures(test_time_len)
+    seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs)
 
     pickle_signatures(filepath, ts_sigs=timestamp_sigs, seq_sigs=seq_num_sigs)
-    print(f"\n-- SUCCESS --\n\nPickled signatures @ file://{filepath}")  # noqa: T201
+    logger.info("Pickled signatures @ file://%s", filepath)
 
 
 def create_cli_parser() -> ArgumentParser:
