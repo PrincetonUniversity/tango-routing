@@ -94,6 +94,6 @@ module BookSignatureManager : {
         | 28 -> { return sig_bitstring[28:28]; }
         | 29 -> { return sig_bitstring[29:29]; }
         | 30 -> { return sig_bitstring[30:30]; }
-        | 31 -> { return sig_bitstring[31:31]; }
+        | _ -> { return sig_bitstring[31:31]; }
     }
 }
