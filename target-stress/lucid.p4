@@ -12,7 +12,7 @@ header wire_ev_t {
 }
 header bridge_ev_t {
   bit<8> port_event_id;
-  bit<6> flag_pad_2767;
+  bit<6> flag_pad_2763;
   bit<1> incoming_tango_traffic;
   bit<1> forward_flow;
 }
@@ -195,7 +195,7 @@ control IngressControl(inout hdr_t hdr,
     timestamp=(time_now[31:20]);
   }
   RegisterAction<bit<16>,bit<32>,bit<16>>(sequence_counters_0)
-  sequence_counters_0_regaction_2753 = {
+  sequence_counters_0_regaction_2749 = {
     void apply(inout bit<16> cell1_remote,
         out bit<16> ret_remote){
       bit<16> cell1_local=cell1_remote;
@@ -213,7 +213,7 @@ control IngressControl(inout hdr_t hdr,
   };
   action labeledstmt_60(){
    
-SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2753.execute(32w0);
+SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2749.execute(32w0);
   }
   action labeledstmt_5(){
     labeledstmt_60();
@@ -223,7 +223,7 @@ SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2753.execute(3
     //NOOP
   }
   RegisterAction<bit<32>,bit<5>,bit<32>>(outgoing_metric_signature_manager_0)
-  outgoing_metric_signature_manager_0_regaction_2754 = {
+  outgoing_metric_signature_manager_0_regaction_2750 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -235,13 +235,13 @@ SequenceNumberManager_increment_ret=sequence_counters_0_regaction_2753.execute(3
   };
   action labeledstmt_64(){
    
-MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_2754.execute((timestamp[4:0]));
+MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_2750.execute((timestamp[4:0]));
   }
   bit<16> tango_metrics_hdr_1;
-  CRCPolynomial<bit<16>>(1,false, false, false, 0, 0) hash_27550_crc;
-  Hash<bit<16>>(HashAlgorithm_t.CUSTOM,hash_27550_crc) hash_27550;
+  CRCPolynomial<bit<16>>(1,false, false, false, 0, 0) hash_27510_crc;
+  Hash<bit<16>>(HashAlgorithm_t.CUSTOM,hash_27510_crc) hash_27510;
   action labeledstmt_63(){
-    tango_metrics_hdr_1=hash_27550.get({timestamp});
+    tango_metrics_hdr_1=hash_27510.get({timestamp});
   }
   bit<16> seq_number;
   action labeledstmt_62(){
@@ -261,7 +261,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_27
   }
   bit<32> sig_bitstring;
   RegisterAction<bit<32>,bit<11>,bit<32>>(outgoing_book_signature_manager_0)
-  outgoing_book_signature_manager_0_regaction_2756 = {
+  outgoing_book_signature_manager_0_regaction_2752 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -273,7 +273,7 @@ MetricSignatureManager_sign_ret=outgoing_metric_signature_manager_0_regaction_27
   };
   action labeledstmt_67(){
    
-sig_bitstring=outgoing_book_signature_manager_0_regaction_2756.execute((seq_number[15:5]));
+sig_bitstring=outgoing_book_signature_manager_0_regaction_2752.execute((seq_number[15:5]));
   }
   bit<5> bitwhack_index;
   action labeledstmt_66(){
@@ -593,7 +593,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
   action labeledstmt_52(){
     labeledstmt_104();
   }
-  table table_2766 {
+  table table_2762 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -608,7 +608,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_3();
     } 
   } 
-  table table_2765 {
+  table table_2761 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -622,7 +622,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_4();
     } 
   } 
-  table table_2764 {
+  table table_2760 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -636,7 +636,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_6();
     } 
   } 
-  table table_2763 {
+  table table_2759 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -650,7 +650,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_8();
     } 
   } 
-  @ignore_table_dependency("IngressControl.table_2762")table table_2761 {
+  @ignore_table_dependency("IngressControl.table_2758")table table_2757 {
     key = {
       hdr.wire_ev.event_id : ternary;
       bitwhack_index : ternary;
@@ -723,12 +723,11 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (1,28) : labeledstmt_39();
       (1,29) : labeledstmt_40();
       (1,30) : labeledstmt_41();
-      (1,31) : labeledstmt_42();
-      (1,_) : labeledstmt_10();
+      (1,_) : labeledstmt_42();
       (_,_) : labeledstmt_10();
     } 
   } 
-  @ignore_table_dependency("IngressControl.table_2761")table table_2762 {
+  @ignore_table_dependency("IngressControl.table_2757")table table_2758 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -742,7 +741,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_43();
     } 
   } 
-  table table_2760 {
+  table table_2756 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -756,7 +755,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_45();
     } 
   } 
-  table table_2759 {
+  table table_2755 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -770,7 +769,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_47();
     } 
   } 
-  table table_2758 {
+  table table_2754 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -784,7 +783,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
       (_) : labeledstmt_49();
     } 
   } 
-  table table_2757 {
+  table table_2753 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -799,16 +798,16 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=hdr.forwa
     } 
   } 
   apply {
-    table_2766.apply();
-    table_2765.apply();
-    table_2764.apply();
-    table_2763.apply();
-    table_2761.apply();
     table_2762.apply();
+    table_2761.apply();
     table_2760.apply();
     table_2759.apply();
-    table_2758.apply();
     table_2757.apply();
+    table_2758.apply();
+    table_2756.apply();
+    table_2755.apply();
+    table_2754.apply();
+    table_2753.apply();
   }
 } 
 control IngressDeparser(packet_out pkt,

@@ -4,7 +4,7 @@
 precondition_of_vertex:
 
 -****----
-successor node: 557: match (event_id) with
+successor node: 556: match (event_id) with
 
 original out edge condition: 
 
@@ -13,7 +13,7 @@ new out edge condition:
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:557: match (event_id) ...
+[propagate_edge_constraints] vertex:556: match (event_id) ...
 
 precondition_of_vertex:
 
@@ -38,7 +38,7 @@ precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+successor node: 103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 original out edge condition: 
 
 new out edge condition: 
@@ -54,7 +54,7 @@ HIT{event_id~0==2;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+[propagate_edge_constraints] vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -115,7 +115,7 @@ precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+successor node: 150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 original out edge condition: 
 
 new out edge condition: 
@@ -124,7 +124,7 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+[propagate_edge_constraints] vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -143,7 +143,7 @@ precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 320: match (bitwhack_index) with
+successor node: 319: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
 | 1 -> {BookSignatureManager_sign_ret = [1 : 1]sig_bitstring;}
 | 2 -> {BookSignatureManager_sign_ret = [2 : 2]sig_bitstring;}
@@ -175,8 +175,7 @@ successor node: 320: match (bitwhack_index) with
 | 28 -> {BookSignatureManager_sign_ret = [28 : 28]sig_bitstring;}
 | 29 -> {BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;}
 | 30 -> {BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;}
-| 31 -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
-| _ -> {}
+| _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
 original out edge condition: 
 
 new out edge condition: 
@@ -185,7 +184,7 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:320: match (bitwhack_index) with
+[propagate_edge_constraints] vertex:319: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
 | 1 -> {BookSignatureManager_sign_ret = [1 : 1]sig_bitstring;}
 | 2 -> {BookSignatureManager_sign_ret = [2 : 2]sig_bitstring;}
@@ -217,13 +216,12 @@ HIT{event_id~0==1;}
 | 28 -> {BookSignatureManager_sign_ret = [28 : 28]sig_bitstring;}
 | 29 -> {BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;}
 | 30 -> {BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;}
-| 31 -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
-| _ -> {}
+| _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+successor node: 326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 original out edge condition: 
 
 new out edge condition: 
@@ -232,12 +230,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+[propagate_edge_constraints] vertex:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 334: int<<32>> MetricSignatureManager_sign_ret = 32;
+successor node: 333: int<<32>> MetricSignatureManager_sign_ret = 32;
 original out edge condition: 
 
 new out edge condition: 
@@ -246,12 +244,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:334: int<<32>> MetricSignatureManager_sign_ret = 32;
+[propagate_edge_constraints] vertex:333: int<<32>> MetricSignatureManager_sign_ret = 32;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+successor node: 356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 original out edge condition: 
 
 new out edge condition: 
@@ -260,12 +258,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+[propagate_edge_constraints] vertex:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+successor node: 361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 original out edge condition: 
 
 new out edge condition: 
@@ -274,12 +272,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[propagate_edge_constraints] vertex:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 364: 
+successor node: 363: 
 original out edge condition: 
 
 new out edge condition: 
@@ -288,12 +286,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:364: 
+[propagate_edge_constraints] vertex:363: 
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 370: int<<8>> tango_metrics_hdr_0 = 0;
+successor node: 369: int<<8>> tango_metrics_hdr_0 = 0;
 original out edge condition: 
 
 new out edge condition: 
@@ -302,12 +300,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:370: int<<8>> tango_metrics_hdr_0 = 0;
+[propagate_edge_constraints] vertex:369: int<<8>> tango_metrics_hdr_0 = 0;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+successor node: 379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 original out edge condition: 
 
 new out edge condition: 
@@ -316,12 +314,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[propagate_edge_constraints] vertex:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+successor node: 384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 original out edge condition: 
 
 new out edge condition: 
@@ -330,12 +328,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[propagate_edge_constraints] vertex:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 390: int<<16>> tango_metrics_hdr_3 = seq_number;
+successor node: 389: int<<16>> tango_metrics_hdr_3 = seq_number;
 original out edge condition: 
 
 new out edge condition: 
@@ -344,12 +342,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:390: int<<16>> tango_metrics_hdr_3 = seq_number;
+[propagate_edge_constraints] vertex:389: int<<16>> tango_metrics_hdr_3 = seq_number;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+successor node: 396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 original out edge condition: 
 
 new out edge condition: 
@@ -358,7 +356,21 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[propagate_edge_constraints] vertex:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+precondition_of_vertex:
+MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+-****----
+successor node: 399: 
+original out edge condition: 
+
+new out edge condition: 
+MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+-****----
+------
+------
+[propagate_edge_constraints] vertex:399: 
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -377,7 +389,7 @@ precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 401: 
+successor node: 410: int<<16>> precompute = forward_flow_ip_header_2+18;
 original out edge condition: 
 
 new out edge condition: 
@@ -386,12 +398,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:401: 
+[propagate_edge_constraints] vertex:410: int<<16>> precompute = forward_flow_ip_header_2+18;
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 411: int<<16>> precompute = forward_flow_ip_header_2+18;
+successor node: 509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 original out edge condition: 
 
 new out edge condition: 
@@ -400,12 +412,12 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:411: int<<16>> precompute = forward_flow_ip_header_2+18;
+[propagate_edge_constraints] vertex:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 -****----
-successor node: 510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+successor node: 554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 original out edge condition: 
 
 new out edge condition: 
@@ -414,21 +426,7 @@ HIT{event_id~0==1;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
-precondition_of_vertex:
-MISS{event_id~0==2;}
-HIT{event_id~0==1;}
--****----
-successor node: 555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
-original out edge condition: 
-
-new out edge condition: 
-MISS{event_id~0==2;}
-HIT{event_id~0==1;}
--****----
-------
-------
-[propagate_edge_constraints] vertex:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+[propagate_edge_constraints] vertex:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 precondition_of_vertex:
 MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -440,7 +438,7 @@ NORMALIZED NO CONDITION VERTEX:1: match () with
 ORIGINAL VERTEX:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]vertex:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:557: match (event_id) with
+[NODE IN EDGES]SRC:556: match (event_id) with
 
 [NODE IN EDGES]DST:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]in edge:HIT{event_id~0==2;}
@@ -448,23 +446,23 @@ INPUT PC:HIT{event_id~0==2;}
 NORMALIZED VERTEX:74: match (event_id) with
 | 2 -> {Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);}
 | _ -> {}
-ORIGINAL VERTEX:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
-[NODE IN EDGES]vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+ORIGINAL VERTEX:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
+[NODE IN EDGES]vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:80: int<<16>> SequenceNumberManager_increment_ret = 32;
-[NODE IN EDGES]DST:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+[NODE IN EDGES]DST:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 NORMALIZED VERTEX:103: match (event_id) with
 | 2 -> {}
-| 1 -> {SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);}
+| 1 -> {SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);}
 | _ -> {}
 ORIGINAL VERTEX:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]vertex:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:557: match (event_id) with
+[NODE IN EDGES]SRC:556: match (event_id) with
 
 [NODE IN EDGES]DST:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
@@ -478,7 +476,7 @@ NORMALIZED VERTEX:80: match (event_id) with
 ORIGINAL VERTEX:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]vertex:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+[NODE IN EDGES]SRC:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]DST:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -488,18 +486,18 @@ NORMALIZED VERTEX:108: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> seq_number = SequenceNumberManager_increment_ret;}
 | _ -> {}
-ORIGINAL VERTEX:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
-[NODE IN EDGES]vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+ORIGINAL VERTEX:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
+[NODE IN EDGES]vertex:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:80: int<<16>> SequenceNumberManager_increment_ret = 32;
-[NODE IN EDGES]DST:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+[NODE IN EDGES]DST:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 NORMALIZED VERTEX:103: match (event_id) with
 | 2 -> {}
-| 1 -> {SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);}
+| 1 -> {SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);}
 | _ -> {}
 ORIGINAL VERTEX:113: int<<32>> time_now = Sys.time();
 [NODE IN EDGES]vertex:113: int<<32>> time_now = Sys.time();
@@ -517,7 +515,7 @@ NORMALIZED VERTEX:113: match (event_id) with
 ORIGINAL VERTEX:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]vertex:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+[NODE IN EDGES]SRC:103: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 [NODE IN EDGES]DST:108: int<<16>> seq_number = SequenceNumberManager_increment_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -579,18 +577,18 @@ NORMALIZED VERTEX:119: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<12>> timestamp = [31 : 20]time_now;}
 | _ -> {}
-ORIGINAL VERTEX:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
-[NODE IN EDGES]vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+ORIGINAL VERTEX:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
+[NODE IN EDGES]vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:126: int<<1>> BookSignatureManager_sign_ret = 0;
-[NODE IN EDGES]DST:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+[NODE IN EDGES]DST:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 NORMALIZED VERTEX:150: match (event_id) with
 | 2 -> {}
-| 1 -> {int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);}
+| 1 -> {int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);}
 | _ -> {}
 ORIGINAL VERTEX:126: int<<1>> BookSignatureManager_sign_ret = 0;
 [NODE IN EDGES]vertex:126: int<<1>> BookSignatureManager_sign_ret = 0;
@@ -608,7 +606,7 @@ NORMALIZED VERTEX:126: match (event_id) with
 ORIGINAL VERTEX:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]vertex:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+[NODE IN EDGES]SRC:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]DST:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -618,23 +616,23 @@ NORMALIZED VERTEX:156: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<5>> bitwhack_index = [4 : 0]seq_number;}
 | _ -> {}
-ORIGINAL VERTEX:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
-[NODE IN EDGES]vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+ORIGINAL VERTEX:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
+[NODE IN EDGES]vertex:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:126: int<<1>> BookSignatureManager_sign_ret = 0;
-[NODE IN EDGES]DST:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+[NODE IN EDGES]DST:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 NORMALIZED VERTEX:150: match (event_id) with
 | 2 -> {}
-| 1 -> {int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);}
+| 1 -> {int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);}
 | _ -> {}
 ORIGINAL VERTEX:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]vertex:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+[NODE IN EDGES]SRC:150: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 [NODE IN EDGES]DST:156: int<<5>> bitwhack_index = [4 : 0]seq_number;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -644,10 +642,10 @@ NORMALIZED VERTEX:156: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<5>> bitwhack_index = [4 : 0]seq_number;}
 | _ -> {}
-ORIGINAL VERTEX:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
-[NODE IN EDGES]vertex:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+ORIGINAL VERTEX:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
+[NODE IN EDGES]vertex:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:320: match (bitwhack_index) with
+[NODE IN EDGES]SRC:319: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
 | 1 -> {BookSignatureManager_sign_ret = [1 : 1]sig_bitstring;}
 | 2 -> {BookSignatureManager_sign_ret = [2 : 2]sig_bitstring;}
@@ -679,34 +677,33 @@ ORIGINAL VERTEX:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
 | 28 -> {BookSignatureManager_sign_ret = [28 : 28]sig_bitstring;}
 | 29 -> {BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;}
 | 30 -> {BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;}
-| 31 -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
-| _ -> {}
-[NODE IN EDGES]DST:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+| _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
+[NODE IN EDGES]DST:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:327: match (event_id) with
+NORMALIZED VERTEX:326: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<1>> book_signature = BookSignatureManager_sign_ret;}
 | _ -> {}
-ORIGINAL VERTEX:334: int<<32>> MetricSignatureManager_sign_ret = 32;
-[NODE IN EDGES]vertex:334: int<<32>> MetricSignatureManager_sign_ret = 32;
+ORIGINAL VERTEX:333: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]vertex:333: int<<32>> MetricSignatureManager_sign_ret = 32;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
-[NODE IN EDGES]DST:334: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]SRC:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
+[NODE IN EDGES]DST:333: int<<32>> MetricSignatureManager_sign_ret = 32;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:334: match (event_id) with
+NORMALIZED VERTEX:333: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> MetricSignatureManager_sign_ret = 32;}
 | _ -> {}
-ORIGINAL VERTEX:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
-[NODE IN EDGES]vertex:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+ORIGINAL VERTEX:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
+[NODE IN EDGES]vertex:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:320: match (bitwhack_index) with
+[NODE IN EDGES]SRC:319: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
 | 1 -> {BookSignatureManager_sign_ret = [1 : 1]sig_bitstring;}
 | 2 -> {BookSignatureManager_sign_ret = [2 : 2]sig_bitstring;}
@@ -738,229 +735,254 @@ ORIGINAL VERTEX:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
 | 28 -> {BookSignatureManager_sign_ret = [28 : 28]sig_bitstring;}
 | 29 -> {BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;}
 | 30 -> {BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;}
-| 31 -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
-| _ -> {}
-[NODE IN EDGES]DST:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
+| _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
+[NODE IN EDGES]DST:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:327: match (event_id) with
+NORMALIZED VERTEX:326: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<1>> book_signature = BookSignatureManager_sign_ret;}
 | _ -> {}
-ORIGINAL VERTEX:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
-[NODE IN EDGES]vertex:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+ORIGINAL VERTEX:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
+[NODE IN EDGES]vertex:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:334: int<<32>> MetricSignatureManager_sign_ret = 32;
-[NODE IN EDGES]DST:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+[NODE IN EDGES]SRC:333: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]DST:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:357: match (event_id) with
+NORMALIZED VERTEX:356: match (event_id) with
 | 2 -> {}
-| 1 -> {MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);}
+| 1 -> {MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);}
 | _ -> {}
-ORIGINAL VERTEX:334: int<<32>> MetricSignatureManager_sign_ret = 32;
-[NODE IN EDGES]vertex:334: int<<32>> MetricSignatureManager_sign_ret = 32;
+ORIGINAL VERTEX:333: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]vertex:333: int<<32>> MetricSignatureManager_sign_ret = 32;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:327: int<<1>> book_signature = BookSignatureManager_sign_ret;
-[NODE IN EDGES]DST:334: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]SRC:326: int<<1>> book_signature = BookSignatureManager_sign_ret;
+[NODE IN EDGES]DST:333: int<<32>> MetricSignatureManager_sign_ret = 32;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:334: match (event_id) with
+NORMALIZED VERTEX:333: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> MetricSignatureManager_sign_ret = 32;}
 | _ -> {}
-ORIGINAL VERTEX:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-[NODE IN EDGES]vertex:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+ORIGINAL VERTEX:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]vertex:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
-[NODE IN EDGES]DST:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]SRC:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
+[NODE IN EDGES]DST:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:362: match (event_id) with
+NORMALIZED VERTEX:361: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> ts_signature = MetricSignatureManager_sign_ret;}
 | _ -> {}
-ORIGINAL VERTEX:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
-[NODE IN EDGES]vertex:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+ORIGINAL VERTEX:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
+[NODE IN EDGES]vertex:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:334: int<<32>> MetricSignatureManager_sign_ret = 32;
-[NODE IN EDGES]DST:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+[NODE IN EDGES]SRC:333: int<<32>> MetricSignatureManager_sign_ret = 32;
+[NODE IN EDGES]DST:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:357: match (event_id) with
+NORMALIZED VERTEX:356: match (event_id) with
 | 2 -> {}
-| 1 -> {MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);}
+| 1 -> {MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);}
 | _ -> {}
-ORIGINAL VERTEX:364: 
-[NODE IN EDGES]vertex:364: 
+ORIGINAL VERTEX:363: 
+[NODE IN EDGES]vertex:363: 
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-[NODE IN EDGES]DST:364: 
+[NODE IN EDGES]SRC:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]DST:363: 
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:364: match (event_id) with
+NORMALIZED VERTEX:363: match (event_id) with
 | 2 -> {}
 | 1 -> {}
 | _ -> {}
-ORIGINAL VERTEX:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-[NODE IN EDGES]vertex:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+ORIGINAL VERTEX:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]vertex:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:357: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
-[NODE IN EDGES]DST:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]SRC:356: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
+[NODE IN EDGES]DST:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:362: match (event_id) with
+NORMALIZED VERTEX:361: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> ts_signature = MetricSignatureManager_sign_ret;}
 | _ -> {}
-ORIGINAL VERTEX:370: int<<8>> tango_metrics_hdr_0 = 0;
-[NODE IN EDGES]vertex:370: int<<8>> tango_metrics_hdr_0 = 0;
+ORIGINAL VERTEX:369: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]vertex:369: int<<8>> tango_metrics_hdr_0 = 0;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:364: 
-[NODE IN EDGES]DST:370: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]SRC:363: 
+[NODE IN EDGES]DST:369: int<<8>> tango_metrics_hdr_0 = 0;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:370: match (event_id) with
+NORMALIZED VERTEX:369: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<8>> tango_metrics_hdr_0 = 0;}
 | _ -> {}
-ORIGINAL VERTEX:364: 
-[NODE IN EDGES]vertex:364: 
+ORIGINAL VERTEX:363: 
+[NODE IN EDGES]vertex:363: 
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:362: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
-[NODE IN EDGES]DST:364: 
+[NODE IN EDGES]SRC:361: int<<32>> ts_signature = MetricSignatureManager_sign_ret;
+[NODE IN EDGES]DST:363: 
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:364: match (event_id) with
+NORMALIZED VERTEX:363: match (event_id) with
 | 2 -> {}
 | 1 -> {}
 | _ -> {}
-ORIGINAL VERTEX:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
-[NODE IN EDGES]vertex:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+ORIGINAL VERTEX:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]vertex:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:370: int<<8>> tango_metrics_hdr_0 = 0;
-[NODE IN EDGES]DST:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]SRC:369: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]DST:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:380: match (event_id) with
+NORMALIZED VERTEX:379: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);}
 | _ -> {}
-ORIGINAL VERTEX:370: int<<8>> tango_metrics_hdr_0 = 0;
-[NODE IN EDGES]vertex:370: int<<8>> tango_metrics_hdr_0 = 0;
+ORIGINAL VERTEX:369: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]vertex:369: int<<8>> tango_metrics_hdr_0 = 0;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:364: 
-[NODE IN EDGES]DST:370: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]SRC:363: 
+[NODE IN EDGES]DST:369: int<<8>> tango_metrics_hdr_0 = 0;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:370: match (event_id) with
+NORMALIZED VERTEX:369: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<8>> tango_metrics_hdr_0 = 0;}
 | _ -> {}
-ORIGINAL VERTEX:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
-[NODE IN EDGES]vertex:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+ORIGINAL VERTEX:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]vertex:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
-[NODE IN EDGES]DST:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]SRC:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]DST:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:385: match (event_id) with
+NORMALIZED VERTEX:384: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> tango_metrics_hdr_2 = ts_signature;}
 | _ -> {}
-ORIGINAL VERTEX:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
-[NODE IN EDGES]vertex:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+ORIGINAL VERTEX:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]vertex:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:370: int<<8>> tango_metrics_hdr_0 = 0;
-[NODE IN EDGES]DST:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]SRC:369: int<<8>> tango_metrics_hdr_0 = 0;
+[NODE IN EDGES]DST:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:380: match (event_id) with
+NORMALIZED VERTEX:379: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);}
 | _ -> {}
-ORIGINAL VERTEX:390: int<<16>> tango_metrics_hdr_3 = seq_number;
-[NODE IN EDGES]vertex:390: int<<16>> tango_metrics_hdr_3 = seq_number;
+ORIGINAL VERTEX:389: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]vertex:389: int<<16>> tango_metrics_hdr_3 = seq_number;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
-[NODE IN EDGES]DST:390: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]SRC:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]DST:389: int<<16>> tango_metrics_hdr_3 = seq_number;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:390: match (event_id) with
+NORMALIZED VERTEX:389: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> tango_metrics_hdr_3 = seq_number;}
 | _ -> {}
-ORIGINAL VERTEX:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
-[NODE IN EDGES]vertex:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+ORIGINAL VERTEX:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]vertex:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:380: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
-[NODE IN EDGES]DST:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]SRC:379: int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
+[NODE IN EDGES]DST:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:385: match (event_id) with
+NORMALIZED VERTEX:384: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<32>> tango_metrics_hdr_2 = ts_signature;}
 | _ -> {}
-ORIGINAL VERTEX:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-[NODE IN EDGES]vertex:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+ORIGINAL VERTEX:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]vertex:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:390: int<<16>> tango_metrics_hdr_3 = seq_number;
-[NODE IN EDGES]DST:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]SRC:389: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]DST:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:397: match (event_id) with
+NORMALIZED VERTEX:396: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;}
 | _ -> {}
-ORIGINAL VERTEX:390: int<<16>> tango_metrics_hdr_3 = seq_number;
-[NODE IN EDGES]vertex:390: int<<16>> tango_metrics_hdr_3 = seq_number;
+ORIGINAL VERTEX:389: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]vertex:389: int<<16>> tango_metrics_hdr_3 = seq_number;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:385: int<<32>> tango_metrics_hdr_2 = ts_signature;
-[NODE IN EDGES]DST:390: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]SRC:384: int<<32>> tango_metrics_hdr_2 = ts_signature;
+[NODE IN EDGES]DST:389: int<<16>> tango_metrics_hdr_3 = seq_number;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:390: match (event_id) with
+NORMALIZED VERTEX:389: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> tango_metrics_hdr_3 = seq_number;}
+| _ -> {}
+ORIGINAL VERTEX:399: 
+[NODE IN EDGES]vertex:399: 
+[NODE IN EDGES]in edges:
+[NODE IN EDGES]SRC:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]DST:399: 
+[NODE IN EDGES]in edge:MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+INPUT PC:MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+NORMALIZED VERTEX:399: match (event_id) with
+| 2 -> {}
+| 1 -> {}
+| _ -> {}
+ORIGINAL VERTEX:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]vertex:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]in edges:
+[NODE IN EDGES]SRC:389: int<<16>> tango_metrics_hdr_3 = seq_number;
+[NODE IN EDGES]DST:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]in edge:MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+INPUT PC:MISS{event_id~0==2;}
+HIT{event_id~0==1;}
+NORMALIZED VERTEX:396: match (event_id) with
+| 2 -> {}
+| 1 -> {int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;}
 | _ -> {}
 ORIGINAL VERTEX:400: 
 [NODE IN EDGES]vertex:400: 
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]SRC:399: 
 [NODE IN EDGES]DST:400: 
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
@@ -970,140 +992,114 @@ NORMALIZED VERTEX:400: match (event_id) with
 | 2 -> {}
 | 1 -> {}
 | _ -> {}
-ORIGINAL VERTEX:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-[NODE IN EDGES]vertex:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+ORIGINAL VERTEX:399: 
+[NODE IN EDGES]vertex:399: 
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:390: int<<16>> tango_metrics_hdr_3 = seq_number;
-[NODE IN EDGES]DST:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]SRC:396: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
+[NODE IN EDGES]DST:399: 
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:397: match (event_id) with
+NORMALIZED VERTEX:399: match (event_id) with
 | 2 -> {}
-| 1 -> {int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;}
+| 1 -> {}
 | _ -> {}
-ORIGINAL VERTEX:401: 
-[NODE IN EDGES]vertex:401: 
+ORIGINAL VERTEX:410: int<<16>> precompute = forward_flow_ip_header_2+18;
+[NODE IN EDGES]vertex:410: int<<16>> precompute = forward_flow_ip_header_2+18;
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:400: 
-[NODE IN EDGES]DST:401: 
+[NODE IN EDGES]DST:410: int<<16>> precompute = forward_flow_ip_header_2+18;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:401: match (event_id) with
-| 2 -> {}
-| 1 -> {}
-| _ -> {}
-ORIGINAL VERTEX:400: 
-[NODE IN EDGES]vertex:400: 
-[NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:397: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-[NODE IN EDGES]DST:400: 
-[NODE IN EDGES]in edge:MISS{event_id~0==2;}
-HIT{event_id~0==1;}
-INPUT PC:MISS{event_id~0==2;}
-HIT{event_id~0==1;}
-NORMALIZED VERTEX:400: match (event_id) with
-| 2 -> {}
-| 1 -> {}
-| _ -> {}
-ORIGINAL VERTEX:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]vertex:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:401: 
-[NODE IN EDGES]DST:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]in edge:MISS{event_id~0==2;}
-HIT{event_id~0==1;}
-INPUT PC:MISS{event_id~0==2;}
-HIT{event_id~0==1;}
-NORMALIZED VERTEX:411: match (event_id) with
+NORMALIZED VERTEX:410: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> precompute = forward_flow_ip_header_2+18;}
 | _ -> {}
-ORIGINAL VERTEX:401: 
-[NODE IN EDGES]vertex:401: 
+ORIGINAL VERTEX:400: 
+[NODE IN EDGES]vertex:400: 
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:400: 
-[NODE IN EDGES]DST:401: 
+[NODE IN EDGES]SRC:399: 
+[NODE IN EDGES]DST:400: 
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:401: match (event_id) with
+NORMALIZED VERTEX:400: match (event_id) with
 | 2 -> {}
 | 1 -> {}
 | _ -> {}
-ORIGINAL VERTEX:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
-[NODE IN EDGES]vertex:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+ORIGINAL VERTEX:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]vertex:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]DST:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]SRC:410: int<<16>> precompute = forward_flow_ip_header_2+18;
+[NODE IN EDGES]DST:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:510: match (event_id) with
+NORMALIZED VERTEX:509: match (event_id) with
 | 2 -> {}
 | 1 -> {generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));}
 | _ -> {}
-ORIGINAL VERTEX:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]vertex:411: int<<16>> precompute = forward_flow_ip_header_2+18;
+ORIGINAL VERTEX:410: int<<16>> precompute = forward_flow_ip_header_2+18;
+[NODE IN EDGES]vertex:410: int<<16>> precompute = forward_flow_ip_header_2+18;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:401: 
-[NODE IN EDGES]DST:411: int<<16>> precompute = forward_flow_ip_header_2+18;
+[NODE IN EDGES]SRC:400: 
+[NODE IN EDGES]DST:410: int<<16>> precompute = forward_flow_ip_header_2+18;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:411: match (event_id) with
+NORMALIZED VERTEX:410: match (event_id) with
 | 2 -> {}
 | 1 -> {int<<16>> precompute = forward_flow_ip_header_2+18;}
 | _ -> {}
-ORIGINAL VERTEX:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
-[NODE IN EDGES]vertex:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+ORIGINAL VERTEX:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+[NODE IN EDGES]vertex:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
-[NODE IN EDGES]DST:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+[NODE IN EDGES]SRC:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]DST:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:555: match (event_id) with
+NORMALIZED VERTEX:554: match (event_id) with
 | 2 -> {}
 | 1 -> {Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);}
 | _ -> {}
-ORIGINAL VERTEX:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
-[NODE IN EDGES]vertex:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+ORIGINAL VERTEX:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]vertex:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:411: int<<16>> precompute = forward_flow_ip_header_2+18;
-[NODE IN EDGES]DST:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]SRC:410: int<<16>> precompute = forward_flow_ip_header_2+18;
+[NODE IN EDGES]DST:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:510: match (event_id) with
+NORMALIZED VERTEX:509: match (event_id) with
 | 2 -> {}
 | 1 -> {generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));}
 | _ -> {}
-ORIGINAL VERTEX:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
-[NODE IN EDGES]vertex:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+ORIGINAL VERTEX:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+[NODE IN EDGES]vertex:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:510: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
-[NODE IN EDGES]DST:555: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+[NODE IN EDGES]SRC:509: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+[NODE IN EDGES]DST:554: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
 INPUT PC:MISS{event_id~0==2;}
 HIT{event_id~0==1;}
-NORMALIZED VERTEX:555: match (event_id) with
+NORMALIZED VERTEX:554: match (event_id) with
 | 2 -> {}
 | 1 -> {Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);}
 | _ -> {}
 ORIGINAL VERTEX:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]vertex:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:557: match (event_id) with
+[NODE IN EDGES]SRC:556: match (event_id) with
 
 [NODE IN EDGES]DST:74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
 [NODE IN EDGES]in edge:HIT{event_id~0==2;}
@@ -1114,7 +1110,7 @@ NORMALIZED VERTEX:74: match (event_id) with
 ORIGINAL VERTEX:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]vertex:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:557: match (event_id) with
+[NODE IN EDGES]SRC:556: match (event_id) with
 
 [NODE IN EDGES]DST:80: int<<16>> SequenceNumberManager_increment_ret = 32;
 [NODE IN EDGES]in edge:MISS{event_id~0==2;}

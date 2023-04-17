@@ -158,11 +158,8 @@ labeledstmt_40();
 | 1,30 -> {
 labeledstmt_41();
 }
-| 1,31 -> {
-labeledstmt_42();
-}
 | 1,_ -> {
-labeledstmt_10();
+labeledstmt_42();
 }
 | _,_ -> {
 labeledstmt_10();
@@ -221,15 +218,6 @@ labeledstmt_52();
 | _ -> {
 labeledstmt_51();
 }}
-memop get_2752(int<<32>> mem_val_2749,int<<32>> unused_2751,int<<32>> unused_2750)
- {{
-b1=None;
-b2=None
-cell1=None, None
-cell2=None, None
-
-ret=(true -> mem_val_2749)
-}}
 memop get_2748(int<<32>> mem_val_2745,int<<32>> unused_2747,int<<32>> unused_2746)
  {{
 b1=None;
@@ -239,12 +227,21 @@ cell2=None, None
 
 ret=(true -> mem_val_2745)
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2741)
+memop get_2744(int<<32>> mem_val_2741,int<<32>> unused_2743,int<<32>> unused_2742)
  {{
-b1=(mbool_2742,true);
-b2=(mbool_2743,true)
-cell1=(mbool_2742 -> curr+inc_set_2741), None
-cell2=(mbool_2743 -> curr), None
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_2741)
+}}
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2737)
+ {{
+b1=(mbool_2738,true);
+b2=(mbool_2739,true)
+cell1=(mbool_2738 -> curr+inc_set_2737), None
+cell2=(mbool_2739 -> curr), None
 
 ret=(true -> cell2)
 }}
@@ -290,7 +287,7 @@ labeled_statement labeledstmt_61{
 int<<12>> timestamp = [31 : 20]time_now;
 }
 labeled_statement labeledstmt_60{
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 }
 labeled_statement labeledstmt_5{
 labeledstmt_60();
@@ -300,7 +297,7 @@ labeled_statement labeledstmt_6{
 
 }
 labeled_statement labeledstmt_64{
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 }
 labeled_statement labeledstmt_63{
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -320,7 +317,7 @@ labeled_statement labeledstmt_68{
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 }
 labeled_statement labeledstmt_67{
-int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 }
 labeled_statement labeledstmt_66{
 int<<5>> bitwhack_index = [4 : 0]seq_number;

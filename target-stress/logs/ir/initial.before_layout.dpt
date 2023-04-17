@@ -23,12 +23,12 @@ Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,
 }
 | 1 -> {
 int<<16>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740,0,1,0);
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
 int<<1>> BookSignatureManager_sign_ret = 0;
-int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2748,0,0,0);
+int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,[15 : 5]seq_number,get_2744,0,0,0);
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -124,15 +124,12 @@ BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;
 | 30 -> {
 BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 }
-| 31 -> {
-BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
-}
 | _ -> {
-
+BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2752,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[4 : 0]timestamp,get_2748,0,0,0);
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -143,15 +140,6 @@ int<<16>> precompute = forward_flow_ip_header_2+18;
 generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }}
-memop get_2752(int<<32>> mem_val_2749,int<<32>> unused_2751,int<<32>> unused_2750)
- {{
-b1=None;
-b2=None
-cell1=None, None
-cell2=None, None
-
-ret=(true -> mem_val_2749)
-}}
 memop get_2748(int<<32>> mem_val_2745,int<<32>> unused_2747,int<<32>> unused_2746)
  {{
 b1=None;
@@ -161,12 +149,21 @@ cell2=None, None
 
 ret=(true -> mem_val_2745)
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2744(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2741)
+memop get_2744(int<<32>> mem_val_2741,int<<32>> unused_2743,int<<32>> unused_2742)
  {{
-b1=(mbool_2742,true);
-b2=(mbool_2743,true)
-cell1=(mbool_2742 -> curr+inc_set_2741), None
-cell2=(mbool_2743 -> curr), None
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_2741)
+}}
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_2740(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_2737)
+ {{
+b1=(mbool_2738,true);
+b2=(mbool_2739,true)
+cell1=(mbool_2738 -> curr+inc_set_2737), None
+cell2=(mbool_2739 -> curr), None
 
 ret=(true -> cell2)
 }}
