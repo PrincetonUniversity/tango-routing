@@ -120,7 +120,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
     // -- get Tango encapsulation
     TangoHeader_t tango_metrics_hdr = {
         path_id = 0;
-        timestamp = (int<<16>>) timestamp;
+        timestamp = hash<<16>>(1, timestamp);
         signature = ts_signature;
         sequence_num = seq_number;
         book_signature = (int<<8>>) book_signature;

@@ -64,36 +64,36 @@ module BookSignatureManager : {
         int<<5>> bitwhack_index = seq_number[4:0]; // Needed to satisfy Lucid compiler
         match (bitwhack_index) with
         | 0 -> { return sig_bitstring[0:0]; }
-        // | 1 -> { return sig_bitstring[1:1]; }
-        // | 2 -> { return sig_bitstring[2:2]; }
-        // | 3 -> { return sig_bitstring[3:3]; }
-        // | 4 -> { return sig_bitstring[4:4]; }
-        // | 5 -> { return sig_bitstring[5:5]; }
-        // | 6 -> { return sig_bitstring[6:6]; }
-        // | 7 -> { return sig_bitstring[7:7]; }
-        // | 8 -> { return sig_bitstring[8:8]; }
-        // | 9 -> { return sig_bitstring[9:9]; }
-        // | 10 -> { return sig_bitstring[10:10]; }
-        // | 11 -> { return sig_bitstring[11:11]; }
-        // | 12 -> { return sig_bitstring[12:12]; }
-        // | 13 -> { return sig_bitstring[13:13]; }
-        // | 14 -> { return sig_bitstring[14:14]; }
-        // | 15 -> { return sig_bitstring[15:15]; }
-        // | 16 -> { return sig_bitstring[16:16]; }
-        // | 17 -> { return sig_bitstring[17:17]; }
-        // | 18 -> { return sig_bitstring[18:18]; }
-        // | 19 -> { return sig_bitstring[19:19]; }
-        // | 20 -> { return sig_bitstring[20:20]; }
-        // | 21 -> { return sig_bitstring[21:21]; }
-        // | 22 -> { return sig_bitstring[22:22]; }
-        // | 23 -> { return sig_bitstring[23:23]; }
-        // | 24 -> { return sig_bitstring[24:24]; }
-        // | 25 -> { return sig_bitstring[25:25]; }
-        // | 26 -> { return sig_bitstring[26:26]; }
-        // | 27 -> { return sig_bitstring[27:27]; }
-        // | 28 -> { return sig_bitstring[28:28]; }
-        // | 29 -> { return sig_bitstring[29:29]; }
-        // | 30 -> { return sig_bitstring[30:30]; }
-        // | 31 -> { return sig_bitstring[31:31]; }
+        | 1 -> { return sig_bitstring[1:1]; }
+        | 2 -> { return sig_bitstring[2:2]; }
+        | 3 -> { return sig_bitstring[3:3]; }
+        | 4 -> { return sig_bitstring[4:4]; }
+        | 5 -> { return sig_bitstring[5:5]; }
+        | 6 -> { return sig_bitstring[6:6]; }
+        | 7 -> { return sig_bitstring[7:7]; }
+        | 8 -> { return sig_bitstring[8:8]; }
+        | 9 -> { return sig_bitstring[9:9]; }
+        | 10 -> { return sig_bitstring[10:10]; }
+        | 11 -> { return sig_bitstring[11:11]; }
+        | 12 -> { return sig_bitstring[12:12]; }
+        | 13 -> { return sig_bitstring[13:13]; }
+        | 14 -> { return sig_bitstring[14:14]; }
+        | 15 -> { return sig_bitstring[15:15]; }
+        | 16 -> { return sig_bitstring[16:16]; }
+        | 17 -> { return sig_bitstring[17:17]; }
+        | 18 -> { return sig_bitstring[18:18]; }
+        | 19 -> { return sig_bitstring[19:19]; }
+        | 20 -> { return sig_bitstring[20:20]; }
+        | 21 -> { return sig_bitstring[21:21]; }
+        | 22 -> { return sig_bitstring[22:22]; }
+        | 23 -> { return sig_bitstring[23:23]; }
+        | 24 -> { return sig_bitstring[24:24]; }
+        | 25 -> { return sig_bitstring[25:25]; }
+        | 26 -> { return sig_bitstring[26:26]; }
+        | 27 -> { return sig_bitstring[27:27]; }
+        | 28 -> { return sig_bitstring[28:28]; }
+        | 29 -> { return sig_bitstring[29:29]; }
+        | 30 -> { return sig_bitstring[30:30]; }
+        | 31 -> { return sig_bitstring[31:31]; }
     }
 }
