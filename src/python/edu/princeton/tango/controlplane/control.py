@@ -238,7 +238,7 @@ def compute_timestamp_signatures(
             values=[ms % 32 for ms in range(0, len(data_values))],
         )
         data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_book_signature_manager_0.f1",  # FIXME
+            fieldname="outgoing_metric_signature_manager_0.f1",
             values=data_values,
         )
 
@@ -274,7 +274,7 @@ def compute_sequence_num_signatures(num_seq_nums: int, table: Table) -> Tuple[Li
             values=list(range(0, len(data_values))),
         )
         data_entries = table.create_bulk_data_entry(
-            fieldname="outgoing_book_signature_manager_0.f1",  # FIXME
+            fieldname="outgoing_book_signature_manager_0.f1",
             values=data_values,
         )
 
