@@ -170,14 +170,13 @@ Array.set(outgoing_book_signature_manager_0,1024+(int<<11>>)word_addr,curr_signa
 }
 false;
 } else {
-int<<4>> sig_addr = (int<<4>>)sig_idx;
 int<<1>> block_idx = (int<<1>>)block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_idx,curr_signature);
 }
 | _ -> {
-Array.set(outgoing_metric_signature_manager_0,16+(int<<5>>)sig_addr,curr_signature);
+Array.set(outgoing_metric_signature_manager_0,16+(int<<5>>)sig_idx,curr_signature);
 }
 false;
 }

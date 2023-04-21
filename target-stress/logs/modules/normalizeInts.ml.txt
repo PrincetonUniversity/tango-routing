@@ -33,12 +33,12 @@ forward_flow_ip_header_2+18
 (int<<11>>)word_addr+1024
 [balance_assign_exp] flat args: 
 [balance_assign_exp]16
-[balance_assign_exp](int<<5>>)sig_addr
+[balance_assign_exp](int<<5>>)set_signature_sig_idx
 ---[balance_assign_exp] flat args--- 
 [balance_assign_exp] original expression:
-16+(int<<5>>)sig_addr
+16+(int<<5>>)set_signature_sig_idx
 [balance_assign_exp] balanced expression:
-(int<<5>>)sig_addr+16
+(int<<5>>)set_signature_sig_idx+16
 [balance_assign_exp] flat args: 
 [balance_assign_exp]set_signature_sig_idx
 [balance_assign_exp]1
@@ -175,12 +175,10 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: (int<<32>>)block_idx
 [transform_precompute_exps.visit_exp] exp: (int<<11>>)word_addr+1024
 [transform_precompute_exps.visit_exp] atomic exp: (int<<11>>)word_addr+1024
-[transform_precompute_exps.visit_exp] exp: (int<<4>>)set_signature_sig_idx
-[transform_precompute_exps.visit_exp] atomic exp: (int<<4>>)set_signature_sig_idx
 [transform_precompute_exps.visit_exp] exp: (int<<1>>)set_signature_block_idx
 [transform_precompute_exps.visit_exp] atomic exp: (int<<1>>)set_signature_block_idx
-[transform_precompute_exps.visit_exp] exp: (int<<5>>)sig_addr+16
-[transform_precompute_exps.visit_exp] atomic exp: (int<<5>>)sig_addr+16
+[transform_precompute_exps.visit_exp] exp: (int<<5>>)set_signature_sig_idx+16
+[transform_precompute_exps.visit_exp] atomic exp: (int<<5>>)set_signature_sig_idx+16
 [transform_precompute_exps.visit_exp] exp: 1+set_signature_sig_idx
 [transform_precompute_exps.visit_exp] atomic exp: 1+set_signature_sig_idx
 original program: 
@@ -370,14 +368,13 @@ int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)sig_addr;
+int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -573,14 +570,13 @@ int<<11>> precompute = (int<<11>>)word_addr+1024;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = (int<<5>>)sig_addr+16;
+int<<5>> precompute = (int<<5>>)set_signature_sig_idx+16;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -779,14 +775,13 @@ int<<11>> precompute = (int<<11>>)word_addr+1024;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = (int<<5>>)sig_addr+16;
+int<<5>> precompute = (int<<5>>)set_signature_sig_idx+16;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }

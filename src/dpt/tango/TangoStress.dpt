@@ -198,7 +198,7 @@ handle set_signature (
     } else {
         MetricSignatureManager.set_signature(
             outgoing_metric_signature_manager,
-            (int<<4>>) sig_idx,
+            sig_idx,
             curr_signature,
             (int<<1>>) block_idx
         );

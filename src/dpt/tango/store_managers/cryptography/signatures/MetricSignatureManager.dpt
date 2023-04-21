@@ -40,7 +40,7 @@ module MetricSignatureManager : {
     **/
     fun void set_signature (
         t self,
-        int<<4>> sig_addr,
+        int<<16>> sig_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) [start <= self; end self];
@@ -98,7 +98,7 @@ module MetricSignatureManager : {
 
     fun void set_signature (
         t self,
-        int<<4>> sig_addr,
+        int<<16>> sig_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) {

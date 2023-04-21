@@ -185,14 +185,13 @@ int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)sig_addr;
+int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -388,14 +387,13 @@ int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)sig_addr;
+int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -592,14 +590,13 @@ int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)sig_addr;
+int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -796,14 +793,13 @@ int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)sig_addr;
+int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
