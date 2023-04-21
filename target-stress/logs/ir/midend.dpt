@@ -6,7 +6,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<15>> sequence_counters_0 = Array.create(1);
+global Array.t<<16>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -25,7 +25,7 @@ exit event set_next_signature(int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block
 
 handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3) {
 int<<15>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,(int<<15>>)1);
+SequenceNumberManager_increment_ret = (int<<15>>)Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,(int<<16>>)1);
 int<<15>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;

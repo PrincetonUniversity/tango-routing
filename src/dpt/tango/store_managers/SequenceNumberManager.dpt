@@ -28,7 +28,7 @@ module SequenceNumberManager : {
 }
 {
     type t = {
-        Array.t<<15>> seq_nums;
+        Array.t<<16>> seq_nums;
     }
 
     constr t create () = {
@@ -54,13 +54,13 @@ module SequenceNumberManager : {
     fun int<<15>> increment (
         t self
     ) {
-        return Array.update(
+        return (int<<15>>) Array.update(
             self#seq_nums,
             0,
             get_curr,
             0,
             next,
-            (int<<15>>) 1
+            (int<<16>>) 1
         );
     }
 }
