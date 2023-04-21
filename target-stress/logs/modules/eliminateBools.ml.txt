@@ -173,15 +173,14 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 
 handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 if ((int<<32>>)set_signature_sig_type==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -375,15 +374,14 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 
 handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 if ((int<<32>>)set_signature_sig_type==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -578,15 +576,14 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -781,15 +778,14 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {

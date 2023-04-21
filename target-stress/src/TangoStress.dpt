@@ -191,7 +191,7 @@ handle set_signature (
     if (((int<<32>>) sig_type) == 0) {
         BookSignatureManager.set_signature_word(
             outgoing_book_signature_manager,
-            (int<<10>>) sig_idx,
+            sig_idx,
             curr_signature,
             (int<<1>>) block_idx
         );

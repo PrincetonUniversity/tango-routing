@@ -158,15 +158,14 @@ generate_port (128, incoming_tango_traffic(eth_header_0,eth_header_1,34525,0,18+
 
 handle set_signature(int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> curr_signature,int<<32>> next_signature) {
 if ((int<<32>>)sig_type==0) {
-int<<10>> word_addr = (int<<10>>)sig_idx;
 int<<1>> block_idx = (int<<1>>)block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)sig_idx,curr_signature);
 }
 | _ -> {
-Array.set(outgoing_book_signature_manager_0,1024+(int<<11>>)word_addr,curr_signature);
+Array.set(outgoing_book_signature_manager_0,1024+(int<<11>>)sig_idx,curr_signature);
 }
 false;
 } else {

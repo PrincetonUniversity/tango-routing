@@ -1,15 +1,14 @@
 ---normalizeBools.ml log---
 original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -26,15 +25,14 @@ Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_sign
 new if statement: 
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)word_addr;
+int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -62,11 +60,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~4160 tmp_val_id~4161)
+converting: (= if_precomp~4144 tmp_val_id~4145)
 
-converting: if_precomp~4160
+converting: if_precomp~4144
 
-converting: tmp_val_id~4161
+converting: tmp_val_id~4145
 
 old expression:  if_precomp==0
 
@@ -78,13 +76,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4162))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4146))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4162)
+converting: (= set_signature_next_signature~0 tmp_val_id~4146)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4162
+converting: tmp_val_id~4146
 
 old expression:  set_signature_next_signature!=0
 
