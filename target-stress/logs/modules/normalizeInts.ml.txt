@@ -8,13 +8,13 @@
 [balance_assign_exp] balanced expression:
 (int<<11>>)[14 : 5]seq_number+1024
 [balance_assign_exp] flat args: 
-[balance_assign_exp]0
-[balance_assign_exp][3 : 0]timestamp
+[balance_assign_exp]16
+[balance_assign_exp](int<<5>>)[3 : 0]timestamp
 ---[balance_assign_exp] flat args--- 
 [balance_assign_exp] original expression:
-0+[3 : 0]timestamp
+16+(int<<5>>)[3 : 0]timestamp
 [balance_assign_exp] balanced expression:
-[3 : 0]timestamp+0
+(int<<5>>)[3 : 0]timestamp+16
 [balance_assign_exp] flat args: 
 [balance_assign_exp]18
 [balance_assign_exp]forward_flow_ip_header_2
@@ -32,13 +32,13 @@ forward_flow_ip_header_2+18
 [balance_assign_exp] balanced expression:
 (int<<11>>)word_addr+1024
 [balance_assign_exp] flat args: 
-[balance_assign_exp]0
-[balance_assign_exp]sig_addr
+[balance_assign_exp]16
+[balance_assign_exp](int<<5>>)sig_addr
 ---[balance_assign_exp] flat args--- 
 [balance_assign_exp] original expression:
-0+sig_addr
+16+(int<<5>>)sig_addr
 [balance_assign_exp] balanced expression:
-sig_addr+0
+(int<<5>>)sig_addr+16
 [balance_assign_exp] flat args: 
 [balance_assign_exp]set_signature_sig_idx
 [balance_assign_exp]1
@@ -143,10 +143,12 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: [4 : 4]timestamp
 [transform_precompute_exps.visit_exp] exp: 32
 [transform_precompute_exps.visit_exp] atomic exp: 32
-[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp)
-[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp)
-[transform_precompute_exps.visit_exp] exp: [3 : 0]timestamp+0
-[transform_precompute_exps.visit_exp] atomic exp: [3 : 0]timestamp+0
+[transform_precompute_exps.visit_exp] exp: (int<<5>>)[3 : 0]timestamp
+[transform_precompute_exps.visit_exp] atomic exp: (int<<5>>)[3 : 0]timestamp
+[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_metric_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_metric_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] exp: (int<<5>>)[3 : 0]timestamp+16
+[transform_precompute_exps.visit_exp] atomic exp: to_immediate_tmp+16
 [transform_precompute_exps.visit_exp] exp: Array.get(outgoing_metric_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_metric_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] exp: MetricSignatureManager_sign_ret
@@ -177,8 +179,8 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: (int<<4>>)set_signature_sig_idx
 [transform_precompute_exps.visit_exp] exp: (int<<1>>)set_signature_block_idx
 [transform_precompute_exps.visit_exp] atomic exp: (int<<1>>)set_signature_block_idx
-[transform_precompute_exps.visit_exp] exp: sig_addr+0
-[transform_precompute_exps.visit_exp] atomic exp: sig_addr+0
+[transform_precompute_exps.visit_exp] exp: (int<<5>>)sig_addr+16
+[transform_precompute_exps.visit_exp] atomic exp: (int<<5>>)sig_addr+16
 [transform_precompute_exps.visit_exp] exp: 1+set_signature_sig_idx
 [transform_precompute_exps.visit_exp] atomic exp: 1+set_signature_sig_idx
 original program: 
@@ -336,10 +338,11 @@ int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match block_idx with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+int<<5>> precompute = (int<<5>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 | _ -> {
-int<<4>> precompute = 0+[3 : 0]timestamp;
+int<<5>> precompute = 16+(int<<5>>)[3 : 0]timestamp;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
@@ -371,10 +374,10 @@ int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<4>> precompute = 0+sig_addr;
+int<<5>> precompute = 16+(int<<5>>)sig_addr;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -538,10 +541,11 @@ int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match block_idx with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+int<<5>> precompute = (int<<5>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 | _ -> {
-int<<4>> precompute = [3 : 0]timestamp+0;
+int<<5>> precompute = (int<<5>>)[3 : 0]timestamp+16;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
@@ -573,10 +577,10 @@ int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<4>> precompute = sig_addr+0;
+int<<5>> precompute = (int<<5>>)sig_addr+16;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -742,10 +746,12 @@ int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match block_idx with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+int<<5>> precompute = (int<<5>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 | _ -> {
-int<<4>> precompute = [3 : 0]timestamp+0;
+int<<5>> to_immediate_tmp = (int<<5>>)[3 : 0]timestamp;
+int<<5>> precompute = to_immediate_tmp+16;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
@@ -777,10 +783,10 @@ int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
 int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<4>> precompute = sig_addr+0;
+int<<5>> precompute = (int<<5>>)sig_addr+16;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }

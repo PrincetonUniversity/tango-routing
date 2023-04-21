@@ -142,10 +142,10 @@ int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
 match block_idx with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,(int<<5>>)[3 : 0]timestamp);
 }
 | _ -> {
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,0+[3 : 0]timestamp);
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,16+(int<<5>>)[3 : 0]timestamp);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
@@ -174,10 +174,10 @@ int<<4>> sig_addr = (int<<4>>)sig_idx;
 int<<1>> block_idx = (int<<1>>)block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,sig_addr,curr_signature);
+Array.set(outgoing_metric_signature_manager_0,(int<<5>>)sig_addr,curr_signature);
 }
 | _ -> {
-Array.set(outgoing_metric_signature_manager_0,0+sig_addr,curr_signature);
+Array.set(outgoing_metric_signature_manager_0,16+(int<<5>>)sig_addr,curr_signature);
 }
 false;
 }
