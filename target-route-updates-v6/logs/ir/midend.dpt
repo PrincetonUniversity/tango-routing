@@ -16,6 +16,8 @@ entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>>
 
 exit event incoming_tango_traffic(int<<48>> tango_eth_header_0,int<<48>> tango_eth_header_1,int<<16>> tango_eth_header_2,int<<32>> tango_ip_header_0,int<<16>> tango_ip_header_1,int<<8>> tango_ip_header_2,int<<8>> tango_ip_header_3,int<<64>> tango_ip_header_4,int<<64>> tango_ip_header_5,int<<64>> tango_ip_header_6,int<<64>> tango_ip_header_7,int<<16>> tango_udp_header_0,int<<16>> tango_udp_header_1,int<<16>> tango_udp_header_2,int<<16>> tango_udp_header_3,int<<8>> tango_metrics_header_0,int<<16>> tango_metrics_header_1,int<<32>> tango_metrics_header_2,int<<16>> tango_metrics_header_3,int<<8>> tango_metrics_header_4,int<<32>> encaped_ip_header_0,int<<16>> encaped_ip_header_1,int<<8>> encaped_ip_header_2,int<<8>> encaped_ip_header_3,int<<64>> encaped_ip_header_4,int<<64>> encaped_ip_header_5,int<<64>> encaped_ip_header_6,int<<64>> encaped_ip_header_7,int<<16>> encaped_udp_header_0,int<<16>> encaped_udp_header_1,int<<16>> encaped_udp_header_2,int<<16>> encaped_udp_header_3);
 
+event update_route(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> update_0,int<<8>> update_1);
+
 handle forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3) {
 if ([15 : 4]udp_header_0==0&&[15 : 3]udp_header_1==0) {
 int<<8>> traffic_cls = [7 : 0]udp_header_0;
@@ -60,8 +62,13 @@ int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
 int<<32>> tango_metrics_hdr_2 = 0;
 int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = 0;
-event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,eth_header_2,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,8080,8080,58+ip_header_1,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
+event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,8080,8080,58+ip_header_1,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
 printf "Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }" path_id,traffic_class,timestamp,seq_number;
 generate_port (12, forward_tango_pkt);
 }
+}
+
+handle update_route(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> update_0,int<<8>> update_1) {
+Array.set(route_manager_0,update_0,update_1);
+false;
 }

@@ -88,6 +88,27 @@ exit event incoming_tango_traffic (
     UDPHeader_t encaped_udp_header
 );
 
+/**
+ * # Description
+ * Incoming Tango data traffic from peer node.
+ * 
+ * # Parameters
+ * eth_header (EthernetHeader_t): ethernet frame header
+ * ip_header (IPv6Header_t): IPv6 header
+ * tango_udp_header (UDPHeader_t): udp header to counter ECMP
+ * update (RouteUpdate_t): requested route update by remote node
+ *
+ * # Generates
+ * request_route_update: sometimes responds to peer with route mapping update
+ * complete_forward: forwards the packet on to its final destination
+ **/
+event update_route (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    RouteUpdate_t update
+) [ route_manager <= route_manager ];
+
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
@@ -154,7 +175,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
         };
 
         event forward_tango_pkt = incoming_tango_traffic (
-            eth_header,
+            { eth_header with ethertype = 0x86DD },
             tango_tunnel_hdr,
             { TANGO_UDP_HEADER with length = 58 + ip_header#payload_len },
             tango_metrics_hdr,
@@ -172,4 +193,13 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
         generate_port (OUT_PORT, forward_tango_pkt);
 
     }
+}
+
+handle update_route (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    RouteUpdate_t update
+) {
+    RouteManager.update_route(route_manager, update#traffic_class, update#new_path_id);
 }

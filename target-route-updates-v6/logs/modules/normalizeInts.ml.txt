@@ -89,8 +89,8 @@ forward_flow_ip_header_1+58
 [transform_precompute_exps.visit_exp] atomic exp: forward_flow_eth_header_0
 [transform_precompute_exps.visit_exp] exp: forward_flow_eth_header_1
 [transform_precompute_exps.visit_exp] atomic exp: forward_flow_eth_header_1
-[transform_precompute_exps.visit_exp] exp: forward_flow_eth_header_2
-[transform_precompute_exps.visit_exp] atomic exp: forward_flow_eth_header_2
+[transform_precompute_exps.visit_exp] exp: 34525
+[transform_precompute_exps.visit_exp] atomic exp: 34525
 [transform_precompute_exps.visit_exp] exp: tango_tunnel_hdr_0
 [transform_precompute_exps.visit_exp] atomic exp: tango_tunnel_hdr_0
 [transform_precompute_exps.visit_exp] exp: tango_tunnel_hdr_1
@@ -172,6 +172,8 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1);
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
 int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;
 int<<13>> if_precomp = [15 : 3]forward_flow_udp_header_1-0;
@@ -219,7 +221,7 @@ int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = 0;
 int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
 int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
+int<<16>> forward_tango_pkt_arg_2 = 34525;
 int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
 int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;
 int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
@@ -252,6 +254,10 @@ int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;
 generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
 }
 }
+
+handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1) {
+Array.set(route_manager_0,update_route_update_0,update_route_update_1);
+}
 program after exp tree balancing: 
 memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
  {return curr+inc;
@@ -274,6 +280,8 @@ event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0
 handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_udp_header_0,int<<16>> incoming_tango_traffic_tango_udp_header_1,int<<16>> incoming_tango_traffic_tango_udp_header_2,int<<16>> incoming_tango_traffic_tango_udp_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_udp_header_0,int<<16>> incoming_tango_traffic_encaped_udp_header_1,int<<16>> incoming_tango_traffic_encaped_udp_header_2,int<<16>> incoming_tango_traffic_encaped_udp_header_3) {
 
 }
+
+event update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1);
 
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
 int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;
@@ -322,7 +330,7 @@ int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = 0;
 int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
 int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
+int<<16>> forward_tango_pkt_arg_2 = 34525;
 int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
 int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;
 int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
@@ -354,6 +362,10 @@ int<<16>> forward_tango_pkt_arg_30 = forward_flow_udp_header_2;
 int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;
 generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
 }
+}
+
+handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1) {
+Array.set(route_manager_0,update_route_update_0,update_route_update_1);
 }
 program after precomputation pass: 
 memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
@@ -378,6 +390,8 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1);
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
 int<<12>> if_precomp = [15 : 4]forward_flow_udp_header_0-0;
 int<<13>> if_precomp = [15 : 3]forward_flow_udp_header_1-0;
@@ -425,7 +439,7 @@ int<<16>> tango_metrics_hdr_3 = seq_number;
 int<<8>> tango_metrics_hdr_4 = 0;
 int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
 int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
-int<<16>> forward_tango_pkt_arg_2 = forward_flow_eth_header_2;
+int<<16>> forward_tango_pkt_arg_2 = 34525;
 int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
 int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;
 int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
@@ -457,5 +471,9 @@ int<<16>> forward_tango_pkt_arg_30 = forward_flow_udp_header_2;
 int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_3;
 generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31));
 }
+}
+
+handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_udp_header_0,int<<16>> update_route_udp_header_1,int<<16>> update_route_udp_header_2,int<<16>> update_route_udp_header_3,int<<8>> update_route_update_0,int<<8>> update_route_update_1) {
+Array.set(route_manager_0,update_route_update_0,update_route_update_1);
 }
 compute expressions simplified.
