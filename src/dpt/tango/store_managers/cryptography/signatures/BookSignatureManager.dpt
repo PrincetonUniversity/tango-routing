@@ -41,7 +41,7 @@ module BookSignatureManager : {
     **/
     fun void set_signature_word (
         t self,
-        int<<16>> word_addr,
+        int<<11>> word_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) [start <= self; end self];
@@ -122,13 +122,13 @@ module BookSignatureManager : {
 
     fun void set_signature_word (
         t self,
-        int<<16>> word_addr,
+        int<<11>> word_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) {
         int<<32>> block = (int<<32>>) block_idx;
         match (block) with
-        | 0 -> { Array.set(self#onebit_signatures, ((int<<11>>) word_addr), signature); }
-        | _ -> { Array.set(self#onebit_signatures, 1024 + ((int<<11>>) word_addr), signature); }
+        | 0 -> { Array.set(self#onebit_signatures, word_addr, signature); }
+        | _ -> { Array.set(self#onebit_signatures, 1024 + word_addr, signature); }
     }
 }

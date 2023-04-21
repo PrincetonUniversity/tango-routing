@@ -191,16 +191,16 @@ handle set_signature (
     if (((int<<32>>) sig_type) == 0) {
         BookSignatureManager.set_signature_word(
             outgoing_book_signature_manager,
-            sig_idx,
+            sig_idx[10:0],
             curr_signature,
-            (int<<1>>) block_idx
+            block_idx[0:0]
         );
     } else {
         MetricSignatureManager.set_signature(
             outgoing_metric_signature_manager,
-            sig_idx,
+            sig_idx[4:0],
             curr_signature,
-            (int<<1>>) block_idx
+            block_idx[0:0]
         );
     }
 

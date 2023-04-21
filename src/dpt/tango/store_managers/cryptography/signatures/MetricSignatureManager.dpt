@@ -40,7 +40,7 @@ module MetricSignatureManager : {
     **/
     fun void set_signature (
         t self,
-        int<<16>> sig_addr,
+        int<<5>> sig_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) [start <= self; end self];
@@ -98,12 +98,12 @@ module MetricSignatureManager : {
 
     fun void set_signature (
         t self,
-        int<<16>> sig_addr,
+        int<<5>> sig_addr,
         int<<32>> signature,
         int<<1>> block_idx
     ) {
         match (block_idx) with
-        | 0 -> { Array.set(self#ts_signatures, ((int<<5>>) sig_addr), signature); }
-        | _ -> { Array.set(self#ts_signatures, 16 + ((int<<5>>) sig_addr), signature); }
+        | 0 -> { Array.set(self#ts_signatures, sig_addr, signature); }
+        | _ -> { Array.set(self#ts_signatures, 16 + sig_addr, signature); }
     }
 }

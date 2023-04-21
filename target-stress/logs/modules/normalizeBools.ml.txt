@@ -1,48 +1,52 @@
 ---normalizeBools.ml log---
 original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
-int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<11>> word_addr = [10 : 0]set_signature_sig_idx;
+int<<1>> block_idx = [0 : 0]set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
+int<<11>> precompute = 1024+word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<5>> sig_addr = [4 : 0]set_signature_sig_idx;
+int<<1>> block_idx = [0 : 0]set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
+int<<5>> precompute = 16+sig_addr;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
 new if statement: 
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<11>> word_addr = [10 : 0]set_signature_sig_idx;
+int<<1>> block_idx = [0 : 0]set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,(int<<11>>)set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<11>> precompute = 1024+(int<<11>>)set_signature_sig_idx;
+int<<11>> precompute = 1024+word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
-int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<5>> sig_addr = [4 : 0]set_signature_sig_idx;
+int<<1>> block_idx = [0 : 0]set_signature_block_idx;
 match block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,(int<<5>>)set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<5>> precompute = 16+(int<<5>>)set_signature_sig_idx;
+int<<5>> precompute = 16+sig_addr;
 Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
 }
 }
@@ -60,11 +64,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~4144 tmp_val_id~4145)
+converting: (= if_precomp~4124 tmp_val_id~4125)
 
-converting: if_precomp~4144
+converting: if_precomp~4124
 
-converting: tmp_val_id~4145
+converting: tmp_val_id~4125
 
 old expression:  if_precomp==0
 
@@ -76,13 +80,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4146))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4126))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4146)
+converting: (= set_signature_next_signature~0 tmp_val_id~4126)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4146
+converting: tmp_val_id~4126
 
 old expression:  set_signature_next_signature!=0
 
