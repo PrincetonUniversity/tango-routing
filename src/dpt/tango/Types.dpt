@@ -160,7 +160,6 @@ type TangoHeader_t = {
  * new_path_id (int<<3>>): physical path ID to update mapping to
  **/
 type RouteUpdate_t = {
-   bool     is_valid;
    int<<8>> traffic_class;
    int<<8>> new_path_id;
 }
