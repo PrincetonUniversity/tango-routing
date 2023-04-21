@@ -12,6 +12,7 @@ include "store_managers/cryptography/signatures/MetricSignatureManager.dpt"
 
 // Port declarations
 const int<<9>> OUT_PORT = 128;
+const int<<9>> RECIRC_PORT = 196;
 
 // Tango IPv6 Header
 const IPv6Header_t TANGO_V6_HEADER = {
@@ -60,8 +61,7 @@ global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignat
  * udp_header (`UDPHeader_t`): TCP header of incoming packet
  *
  * # Generates
- * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
- * complete_forward: not tango traffic
+ * incoming_tango_traffic: flow packet wrapped with tango data sent to peer node
  **/
 entry event forward_flow (
     EthernetHeader_t eth_header,
@@ -97,6 +97,47 @@ exit event incoming_tango_traffic (
     UDPHeader_t encaped_udp_header
 );
 
+/**
+ * # Description
+ * Set signataure for a given index and block.
+ * 
+ * # Parameters
+ * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
+ * sig_idx (int<<16>>): index to place signature at
+ * block_idx (int<<8>>): block to write too
+ * curr_signature (int<<32>>): current signature to write
+ * next_signature (int<<32>>): next signature to be written after current is sliced
+ *
+ * # Generates
+ * set_next_signature: set the next signature contained in packet.
+ **/
+entry event set_signature (
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> curr_signature,
+    int<<32>> next_signature
+) [
+    outgoing_book_signature_manager < outgoing_metric_signature_manager
+];
+
+/**
+ * # Description
+ * Set signataure for a given index and block.
+ * 
+ * # Parameters
+ * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
+ * sig_idx (int<<16>>): index to place signature at
+ * block_idx (int<<8>>): block to write too
+ * next_signature (int<<32>>): next signature to be written after current is sliced
+ **/
+exit event set_next_signature (
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> next_signature
+);
+
 /* ================================================================================================================== *
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
@@ -105,24 +146,24 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 1. Get metric values. */
     // -- Get updated sequence number
-    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters);
+    int<<8>> seq_number = SequenceNumberManager.increment(sequence_counters);
 
     // -- Get current time in milliseconds
     int<<12>> timestamp = get_time_now_ms();
 
     /* 2. Sign metric values. */
     // -- Get signature corresponding to sequence number
-    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number);
+    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, timestamp[4:4]);
 
     // -- Get precomputed path-specific signature
-    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp);
+    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp, timestamp[4:4]);
 
     // -- get Tango encapsulation
     TangoHeader_t tango_metrics_hdr = {
         path_id = 0;
         timestamp = hash<<16>>(1, timestamp);
         signature = ts_signature;
-        sequence_num = seq_number;
+        sequence_num = (int<<16>>) seq_number;
         book_signature = (int<<8>>) book_signature;
     };
 
@@ -138,4 +179,40 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
             udp_header
         )
     );
+}
+
+handle set_signature (
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> curr_signature,
+    int<<32>> next_signature
+) {
+    if (((int<<32>>) sig_type) == 0) {
+        BookSignatureManager.set_signature_word(
+            outgoing_book_signature_manager,
+            (int<<10>>) sig_idx,
+            curr_signature,
+            (int<<1>>) block_idx
+        );
+    } else {
+        MetricSignatureManager.set_signature(
+            outgoing_metric_signature_manager,
+            (int<<4>>) sig_idx,
+            curr_signature,
+            (int<<1>>) block_idx
+        );
+    }
+
+    if (next_signature != 0) {
+        generate_port(
+            RECIRC_PORT,
+            set_next_signature(
+                sig_type,
+                sig_idx,
+                block_idx,
+                next_signature
+            )
+        );
+    }
 }

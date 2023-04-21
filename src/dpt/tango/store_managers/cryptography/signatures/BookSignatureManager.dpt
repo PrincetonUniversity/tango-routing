@@ -4,8 +4,8 @@
  * 
  * # Methods
  * create() -> BookSignatureManager.t
- * sign(BookSignatureManager.t, int<<16>>, int<<3>>) -> int<<1>>
- * verify(BookSignatureManager.t, int<<16>>, int<<3>>, int<<1>>) -> bool
+ * sign(BookSignatureManager.t, int<<8>>, int<<3>>) -> int<<1>>
+ * verify(BookSignatureManager.t, int<<8>>, int<<3>>, int<<1>>) -> bool
  **/
 module BookSignatureManager : {
     global type t;
@@ -17,7 +17,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<16>>): sequence number to sign
+    * seq_number (int<<8>>): sequence number to sign
     * path_id (int<<3>>): path ID of associated sequence number
     * 
     * # Returns
@@ -25,7 +25,25 @@ module BookSignatureManager : {
     **/
     fun int<<1>> sign (
         t self,
-        int<<16>> seq_number
+        int<<8>> seq_number,
+        int<<1>> block_idx
+    ) [start <= self; end self];
+
+    /**
+    * # Description
+    * Set a signature word (32 signatures) for a given word address
+    * 
+    * # Parameters
+    * self (t): self
+    * word_addr (int<<11>>): index of which signature word to populate
+    * signature (int<<32>>): path ID of associated sequence number
+    * block_idx (int<<1>>): block which to write to in book
+    **/
+    fun void set_signature_word (
+        t self,
+        int<<10>> word_addr,
+        int<<32>> signature,
+        int<<1>> block_idx
     ) [start <= self; end self];
 
    /**
@@ -34,7 +52,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<16>>): sequence number signed
+    * seq_number (int<<8>>): sequence number signed
     * path_id (int<<3>>): path ID of associated sequence number
     * signature (int<<1>>): signature to validate
     * 
@@ -43,7 +61,7 @@ module BookSignatureManager : {
     **/
     // fun bool verify (
     //     t self,
-    //     int<<16>> seq_number,
+    //     int<<8>> seq_number,
     //     int<<1>> signature
     // ) [start <= self; end self];
 }
@@ -58,9 +76,14 @@ module BookSignatureManager : {
 
     fun int<<1>> sign (
         t self,
-        int<<16>> seq_number
+        int<<8>> seq_number,
+        int<<1>> block_idx
     ) {
-        int<<32>> sig_bitstring = Array.get(self#onebit_signatures, (seq_number[15:5]));
+        int<<32>> sig_bitstring = 0;
+        match (block_idx) with
+        | 0 -> { sig_bitstring = Array.get(self#onebit_signatures, (seq_number[7:5])); }
+        | _ -> { sig_bitstring = Array.get(self#onebit_signatures, 1024 + (seq_number[7:5])); }
+
         int<<5>> bitwhack_index = seq_number[4:0]; // Needed to satisfy Lucid compiler
         match (bitwhack_index) with
         | 0 -> { return sig_bitstring[0:0]; }
@@ -95,5 +118,17 @@ module BookSignatureManager : {
         | 29 -> { return sig_bitstring[29:29]; }
         | 30 -> { return sig_bitstring[30:30]; }
         | _ -> { return sig_bitstring[31:31]; }
+    }
+
+    fun void set_signature_word (
+        t self,
+        int<<10>> word_addr,
+        int<<32>> signature,
+        int<<1>> block_idx
+    ) {
+        int<<32>> block = (int<<32>>) block_idx;
+        match (block) with
+        | 0 -> { Array.set(self#onebit_signatures, word_addr, signature); }
+        | _ -> { Array.set(self#onebit_signatures, 1024 + word_addr, signature); }
     }
 }

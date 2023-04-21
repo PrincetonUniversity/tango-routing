@@ -4,7 +4,7 @@
  * 
  * # Methods
  * create() -> SequenceNumberManager.t
- * increment(SequenceNumberManager.t, int<<8>>) -> int<<16>>
+ * increment(SequenceNumberManager.t, int<<8>>) -> int<<8>>
  **/
 module SequenceNumberManager : {
     global type t;
@@ -20,15 +20,15 @@ module SequenceNumberManager : {
     * path_id (int<<8>>): the path on which the packet is tunneled
     * 
     * # Returns
-    * sequence_number (int<<16>>): the current, non-incremented sequence number
+    * sequence_number (int<<8>>): the current, non-incremented sequence number
     **/
-    fun int<<16>> increment (
+    fun int<<8>> increment (
         t self
     ) [start <= self; end self];
 }
 {
     type t = {
-        Array.t<<16>> seq_nums;
+        Array.t<<8>> seq_nums;
     }
 
     constr t create () = {
@@ -51,7 +51,7 @@ module SequenceNumberManager : {
         return curr;
     }
 
-    fun int<<16>> increment (
+    fun int<<8>> increment (
         t self
     ) {
         return Array.update(
@@ -60,7 +60,7 @@ module SequenceNumberManager : {
             get_curr,
             0,
             next,
-            (int<<16>>) 1
+            (int<<8>>) 1
         );
     }
 }
