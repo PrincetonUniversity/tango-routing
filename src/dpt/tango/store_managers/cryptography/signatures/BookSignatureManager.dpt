@@ -81,8 +81,8 @@ module BookSignatureManager : {
     ) {
         int<<32>> sig_bitstring = 0;
         match (block_idx) with
-        | 0 -> { sig_bitstring = Array.get(self#onebit_signatures, (seq_number[7:5])); }
-        | _ -> { sig_bitstring = Array.get(self#onebit_signatures, 1024 + (seq_number[7:5])); }
+        | 0 -> { sig_bitstring = Array.get(self#onebit_signatures, ((int<<11>>) seq_number[7:5])); }
+        | _ -> { sig_bitstring = Array.get(self#onebit_signatures, ((int<<11>>) (1024 + (seq_number[7:5])))); }
 
         int<<5>> bitwhack_index = seq_number[4:0]; // Needed to satisfy Lucid compiler
         match (bitwhack_index) with

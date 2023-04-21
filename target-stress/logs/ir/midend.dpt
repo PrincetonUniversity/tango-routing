@@ -34,10 +34,10 @@ int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
 match block_idx with 
 | 0 -> {
-sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,(int<<11>>)[7 : 5]seq_number);
 }
 | _ -> {
-sig_bitstring = Array.get(outgoing_book_signature_manager_0,0+[7 : 5]seq_number);
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,(int<<11>>)0+[7 : 5]seq_number);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 

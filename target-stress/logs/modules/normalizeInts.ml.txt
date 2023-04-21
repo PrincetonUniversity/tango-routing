@@ -1,14 +1,6 @@
 ---normalizeInts.ml log---
 [balance_assign_exp] flat args: 
 [balance_assign_exp]0
-[balance_assign_exp][7 : 5]seq_number
----[balance_assign_exp] flat args--- 
-[balance_assign_exp] original expression:
-0+[7 : 5]seq_number
-[balance_assign_exp] balanced expression:
-[7 : 5]seq_number+0
-[balance_assign_exp] flat args: 
-[balance_assign_exp]0
 [balance_assign_exp][3 : 0]timestamp
 ---[balance_assign_exp] flat args--- 
 [balance_assign_exp] original expression:
@@ -63,10 +55,12 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: 0
 [transform_precompute_exps.visit_exp] exp: 0
 [transform_precompute_exps.visit_exp] atomic exp: 0
-[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number)
-[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number)
-[transform_precompute_exps.visit_exp] exp: [7 : 5]seq_number+0
-[transform_precompute_exps.visit_exp] atomic exp: [7 : 5]seq_number+0
+[transform_precompute_exps.visit_exp] exp: (int<<11>>)[7 : 5]seq_number
+[transform_precompute_exps.visit_exp] atomic exp: (int<<11>>)[7 : 5]seq_number
+[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_book_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_book_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] exp: (int<<11>>)0+[7 : 5]seq_number
+[transform_precompute_exps.visit_exp] atomic exp: (int<<11>>)to_immediate_tmp
 [transform_precompute_exps.visit_exp] exp: Array.get(outgoing_book_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_book_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] exp: [4 : 0]seq_number
@@ -224,10 +218,11 @@ int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
 match block_idx with 
 | 0 -> {
-sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+int<<11>> precompute = (int<<11>>)[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 | _ -> {
-int<<3>> precompute = 0+[7 : 5]seq_number;
+int<<11>> precompute = (int<<11>>)0+[7 : 5]seq_number;
 sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
@@ -425,10 +420,11 @@ int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
 match block_idx with 
 | 0 -> {
-sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+int<<11>> precompute = (int<<11>>)[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 | _ -> {
-int<<3>> precompute = [7 : 5]seq_number+0;
+int<<11>> precompute = (int<<11>>)0+[7 : 5]seq_number;
 sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
@@ -626,10 +622,12 @@ int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
 match block_idx with 
 | 0 -> {
-sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+int<<11>> precompute = (int<<11>>)[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 | _ -> {
-int<<3>> precompute = [7 : 5]seq_number+0;
+int<<3>> to_immediate_tmp = 0+[7 : 5]seq_number;
+int<<11>> precompute = (int<<11>>)to_immediate_tmp;
 sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
