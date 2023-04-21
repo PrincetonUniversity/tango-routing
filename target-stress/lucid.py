@@ -88,7 +88,7 @@ fecs = {"BF_FEC_TYP_NONE": 0,
   "BF_FEC_TYP_RS_IN": (1 << 2),
   "BF_FEC_TYP_RS_KL": (1 << 3)}
 ### dynamic compiler-generated definitions
-ports = [(128, port_speeds[100]), (4, port_speeds[100])]
-mc_groups = [(640, [(4, 0)]), (516, [(128, 0)]), (1, [(196, 1)]), (2, [(196, 1), (196, 2)])]
+ports = [(4, port_speeds[100])]
+mc_groups = [(516, []), (1, [(0, 1)]), (2, [(0, 1), (0, 2)]), (3, [(0, 1), (0, 2), (0, 3)]), (4, [(0, 1), (0, 2), (0, 3), (0, 4)])]
 
 main()

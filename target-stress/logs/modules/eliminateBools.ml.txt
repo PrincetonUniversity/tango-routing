@@ -8,7 +8,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<16>> sequence_counters_0 = Array.create(1);
+global Array.t<<8>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -25,14 +25,31 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
+
+event set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
+
+handle set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
+
+}
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
-int<<16>> SequenceNumberManager_increment_ret = 32;
+int<<8>> SequenceNumberManager_increment_ret = 32;
 SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
-int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<8>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<1>> block_idx = [2 : 2]timestamp;
 int<<1>> BookSignatureManager_sign_ret = 0;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,[15 : 5]seq_number);
+int<<32>> sig_bitstring = 0;
+match block_idx with 
+| 0 -> {
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+}
+| _ -> {
+int<<3>> precompute = 0+[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -132,16 +149,55 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+match block_idx with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+}
+| _ -> {
+int<<4>> precompute = 0+[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 int<<16>> precompute = 18+forward_flow_ip_header_2;
 generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+}
+
+handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+if ((int<<32>>)set_signature_sig_type==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
 }
 -----end before boolean elimination-------
 -----after phase 1: non-immediate elimination-------
@@ -153,7 +209,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<16>> sequence_counters_0 = Array.create(1);
+global Array.t<<8>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -170,14 +226,31 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
+
+event set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
+
+handle set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
+
+}
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
-int<<16>> SequenceNumberManager_increment_ret = 32;
+int<<8>> SequenceNumberManager_increment_ret = 32;
 SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
-int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<8>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<1>> block_idx = [2 : 2]timestamp;
 int<<1>> BookSignatureManager_sign_ret = 0;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,[15 : 5]seq_number);
+int<<32>> sig_bitstring = 0;
+match block_idx with 
+| 0 -> {
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+}
+| _ -> {
+int<<3>> precompute = 0+[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -277,16 +350,55 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+match block_idx with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+}
+| _ -> {
+int<<4>> precompute = 0+[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 int<<16>> precompute = 18+forward_flow_ip_header_2;
 generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+}
+
+handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+if ((int<<32>>)set_signature_sig_type==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
 }
 -----end after phase 1: non-immediate elimination-------
 -----after phase 2: if expression cannonization-------
@@ -298,7 +410,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<16>> sequence_counters_0 = Array.create(1);
+global Array.t<<8>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -315,14 +427,31 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
+
+event set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
+
+handle set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
+
+}
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
-int<<16>> SequenceNumberManager_increment_ret = 32;
+int<<8>> SequenceNumberManager_increment_ret = 32;
 SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
-int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<8>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<1>> block_idx = [2 : 2]timestamp;
 int<<1>> BookSignatureManager_sign_ret = 0;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,[15 : 5]seq_number);
+int<<32>> sig_bitstring = 0;
+match block_idx with 
+| 0 -> {
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+}
+| _ -> {
+int<<3>> precompute = 0+[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -422,16 +551,56 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+match block_idx with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+}
+| _ -> {
+int<<4>> precompute = 0+[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 int<<16>> precompute = 18+forward_flow_ip_header_2;
 generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+}
+
+handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
+if (if_precomp==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
 }
 -----end after phase 2: if expression cannonization-------
 -----after phase 3: immediate elimination-------
@@ -443,7 +612,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
-global Array.t<<16>> sequence_counters_0 = Array.create(1);
+global Array.t<<8>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -460,14 +629,31 @@ handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_
 
 }
 
+event set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
+
+event set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
+
+handle set_next_signature(int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
+
+}
+
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
-int<<16>> SequenceNumberManager_increment_ret = 32;
+int<<8>> SequenceNumberManager_increment_ret = 32;
 SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,0,SequenceNumberManager_get_curr,0,SequenceNumberManager_next,1);
-int<<16>> seq_number = SequenceNumberManager_increment_ret;
+int<<8>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<1>> block_idx = [2 : 2]timestamp;
 int<<1>> BookSignatureManager_sign_ret = 0;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,[15 : 5]seq_number);
+int<<32>> sig_bitstring = 0;
+match block_idx with 
+| 0 -> {
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,[7 : 5]seq_number);
+}
+| _ -> {
+int<<3>> precompute = 0+[7 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -567,15 +753,55 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<1>> block_idx = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+match block_idx with 
+| 0 -> {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[3 : 0]timestamp);
+}
+| _ -> {
+int<<4>> precompute = 0+[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
-int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
 int<<16>> precompute = 18+forward_flow_ip_header_2;
 generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+}
+
+handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
+if (if_precomp==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
 }
 -----end after phase 3: immediate elimination-------

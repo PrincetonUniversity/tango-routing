@@ -1,1 +1,96 @@
 ---normalizeBools.ml log---
+original if statement: 
+if ((int<<32>>)set_signature_sig_type==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+new if statement: 
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
+if (if_precomp==0) {
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx;
+match block with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<10>> precompute = 0+word_addr;
+Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
+}
+} else {
+int<<4>> sig_addr = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
+match block_idx with 
+| 0 -> {
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
+}
+| _ -> {
+int<<4>> precompute = 0+sig_addr;
+Array.set(outgoing_metric_signature_manager_0,precompute,set_signature_curr_signature);
+}
+}
+original if statement: 
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
+new if statement: 
+if (set_signature_next_signature!=0) {
+int<<16>> precompute = set_signature_sig_idx+1;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+} 
+converting expression to dnf form: if_precomp==0
+
+converted expression into a disjunction of 1 exprs
+
+converting: (= if_precomp~4057 tmp_val_id~4058)
+
+converting: if_precomp~4057
+
+converting: tmp_val_id~4058
+
+old expression:  if_precomp==0
+
+new expression:  if_precomp==0
+
+new expression show: if_precomp==0
+
+converting expression to dnf form: set_signature_next_signature!=0
+
+converted expression into a disjunction of 1 exprs
+
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4059))
+
+converting: (= set_signature_next_signature~0 tmp_val_id~4059)
+
+converting: set_signature_next_signature~0
+
+converting: tmp_val_id~4059
+
+old expression:  set_signature_next_signature!=0
+
+new expression:  set_signature_next_signature!=0
+
+new expression show: set_signature_next_signature!=0
+

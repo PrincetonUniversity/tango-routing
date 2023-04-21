@@ -111,7 +111,7 @@ exit event incoming_tango_traffic (
  * # Generates
  * set_next_signature: set the next signature contained in packet.
  **/
-entry event set_signature (
+event set_signature (
     int<<8>> sig_type,
     int<<16>> sig_idx,
     int<<8>> block_idx,
@@ -209,7 +209,7 @@ handle set_signature (
             RECIRC_PORT,
             set_next_signature(
                 sig_type,
-                sig_idx,
+                sig_idx + 1,
                 block_idx,
                 next_signature
             )

@@ -51,6 +51,18 @@ def deparse_eventpacket(event, payload):
   return None
 
 
+set_next_signature = namedtuple("set_next_signature", "set_next_signature_sig_type set_next_signature_sig_idx set_next_signature_block_idx set_next_signature_next_signature")
+set_next_signature.fmt = "!BHBI"
+set_next_signature.id  = 4
+set_next_signature.name = set_next_signature
+
+
+set_signature = namedtuple("set_signature", "set_signature_sig_type set_signature_sig_idx set_signature_block_idx set_signature_curr_signature set_signature_next_signature")
+set_signature.fmt = "!BHBII"
+set_signature.id  = 3
+set_signature.name = set_signature
+
+
 incoming_tango_traffic = namedtuple("incoming_tango_traffic", "incoming_tango_traffic_tango_eth_header_0 incoming_tango_traffic_tango_eth_header_1 incoming_tango_traffic_tango_eth_header_2 incoming_tango_traffic_tango_ip_header_0 incoming_tango_traffic_tango_ip_header_1 incoming_tango_traffic_tango_ip_header_2 incoming_tango_traffic_tango_ip_header_3 incoming_tango_traffic_tango_ip_header_4 incoming_tango_traffic_tango_ip_header_5 incoming_tango_traffic_tango_ip_header_6 incoming_tango_traffic_tango_ip_header_7 incoming_tango_traffic_tango_udp_header_0 incoming_tango_traffic_tango_udp_header_1 incoming_tango_traffic_tango_udp_header_2 incoming_tango_traffic_tango_udp_header_3 incoming_tango_traffic_tango_metrics_header_0 incoming_tango_traffic_tango_metrics_header_1 incoming_tango_traffic_tango_metrics_header_2 incoming_tango_traffic_tango_metrics_header_3 incoming_tango_traffic_tango_metrics_header_4 incoming_tango_traffic_encaped_ip_header_0 incoming_tango_traffic_encaped_ip_header_1 incoming_tango_traffic_encaped_ip_header_2 incoming_tango_traffic_encaped_ip_header_3 incoming_tango_traffic_encaped_ip_header_4 incoming_tango_traffic_encaped_ip_header_5 incoming_tango_traffic_encaped_ip_header_6 incoming_tango_traffic_encaped_ip_header_7 incoming_tango_traffic_encaped_ip_header_8 incoming_tango_traffic_encaped_ip_header_9 incoming_tango_traffic_encaped_udp_header_0 incoming_tango_traffic_encaped_udp_header_1 incoming_tango_traffic_encaped_udp_header_2 incoming_tango_traffic_encaped_udp_header_3")
 incoming_tango_traffic.fmt = "!6s6sHIHBB8s8s8s8sHHHHBHIHBBBHHHBBHIIHHHH"
 incoming_tango_traffic.id  = 2
@@ -63,7 +75,7 @@ forward_flow.id  = 1
 forward_flow.name = forward_flow
 
 
-events = [incoming_tango_traffic, forward_flow]
+events = [set_next_signature, set_signature, incoming_tango_traffic, forward_flow]
 
 
 ############ raw socket helpers ############
