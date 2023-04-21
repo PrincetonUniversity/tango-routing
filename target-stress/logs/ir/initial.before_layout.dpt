@@ -1,4 +1,4 @@
-global Array.t<<8>> sequence_counters_0 = Array.create(1);
+global Array.t<<15>> sequence_counters_0 = Array.create(1);
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
 
@@ -21,8 +21,8 @@ handle set_signature(int<<8>> set_signature_sig_type,int<<16>> set_signature_sig
 
 }
 // shared locals:
-int<<4>> merged_var_precompute4082_sig_addr_precompute4079_4125;
-int<<10>> merged_var_precompute4081_word_addr_precompute4078_precompute_4124;
+int<<4>> merged_var_precompute4108_sig_addr_precompute4105_4151;
+int<<11>> merged_var_precompute4107_precompute4104_precompute_4150;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -34,9 +34,9 @@ Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,
 Sys.invalidate.set_next_signature(set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);
 }
 | 1 -> {
-int<<8>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4091,0,1,0);
-int<<8>> seq_number = SequenceNumberManager_increment_ret;
+int<<15>> SequenceNumberManager_increment_ret = 32;
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4117,0,1,0);
+int<<15>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
 int<<1>> block_idx = [2 : 2]timestamp;
@@ -44,13 +44,13 @@ int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
 match block_idx with 
 | 0 -> {
-merged_var_precompute4081_word_addr_precompute4078_precompute_4124 = (int<<11>>)[7 : 5]seq_number;
-sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4081_word_addr_precompute4078_precompute_4124,get_4095,0,0,0);
+merged_var_precompute4107_precompute4104_precompute_4150 = (int<<11>>)[14 : 5]seq_number;
+sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4107_precompute4104_precompute_4150,get_4121,0,0,0);
 }
 | _ -> {
-int<<3>> to_immediate_tmp = 0+[7 : 5]seq_number;
-merged_var_precompute4081_word_addr_precompute4078_precompute_4124 = (int<<11>>)to_immediate_tmp;
-sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4081_word_addr_precompute4078_precompute_4124,get_4099,0,0,0);
+int<<11>> to_immediate_tmp = (int<<11>>)[14 : 5]seq_number;
+merged_var_precompute4107_precompute4104_precompute_4150 = to_immediate_tmp+1024;
+sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4107_precompute4104_precompute_4150,get_4125,0,0,0);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
@@ -151,15 +151,15 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
-int<<1>> block_idx3479 = [4 : 4]timestamp;
+int<<1>> block_idx3499 = [4 : 4]timestamp;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-match block_idx3479 with 
+match block_idx3499 with 
 | 0 -> {
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[3 : 0]timestamp,get_4103,0,0,0);
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,[3 : 0]timestamp,get_4129,0,0,0);
 }
 | _ -> {
-merged_var_precompute4082_sig_addr_precompute4079_4125 = [3 : 0]timestamp+0;
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4082_sig_addr_precompute4079_4125,get_4107,0,0,0);
+merged_var_precompute4108_sig_addr_precompute4105_4151 = [3 : 0]timestamp+0;
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4108_sig_addr_precompute4105_4151,get_4133,0,0,0);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
@@ -167,36 +167,36 @@ int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
 int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<16>> precompute4080 = forward_flow_ip_header_2+18;
-generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4080,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+int<<16>> precompute4106 = forward_flow_ip_header_2+18;
+generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4106,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }
 | 3 -> {
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 match if_precomp with 
 | 0 -> {
-merged_var_precompute4081_word_addr_precompute4078_precompute_4124 = (int<<10>>)set_signature_sig_idx;
-int<<1>> block_idx3493 = (int<<1>>)set_signature_block_idx;
-int<<32>> block = (int<<32>>)block_idx3493;
+int<<10>> word_addr = (int<<10>>)set_signature_sig_idx;
+int<<1>> block_idx3513 = (int<<1>>)set_signature_block_idx;
+int<<32>> block = (int<<32>>)block_idx3513;
 match block with 
 | 0 -> {
-Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4081_word_addr_precompute4078_precompute_4124,set_4111,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_4137,set_signature_curr_signature,0,0);
 }
 | _ -> {
-merged_var_precompute4081_word_addr_precompute4078_precompute_4124 = merged_var_precompute4081_word_addr_precompute4078_precompute_4124+0;
-Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4081_word_addr_precompute4078_precompute_4124,set_4115,set_signature_curr_signature,0,0);
+merged_var_precompute4107_precompute4104_precompute_4150 = (int<<11>>)word_addr+1024;
+Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4107_precompute4104_precompute_4150,set_4141,set_signature_curr_signature,0,0);
 }
 }
 | _ -> {
-merged_var_precompute4082_sig_addr_precompute4079_4125 = (int<<4>>)set_signature_sig_idx;
-int<<1>> block_idx3496 = (int<<1>>)set_signature_block_idx;
-match block_idx3496 with 
+merged_var_precompute4108_sig_addr_precompute4105_4151 = (int<<4>>)set_signature_sig_idx;
+int<<1>> block_idx3516 = (int<<1>>)set_signature_block_idx;
+match block_idx3516 with 
 | 0 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4082_sig_addr_precompute4079_4125,set_4119,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4108_sig_addr_precompute4105_4151,set_4145,set_signature_curr_signature,0,0);
 }
 | _ -> {
-merged_var_precompute4082_sig_addr_precompute4079_4125 = merged_var_precompute4082_sig_addr_precompute4079_4125+0;
-Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4082_sig_addr_precompute4079_4125,set_4123,set_signature_curr_signature,0,0);
+merged_var_precompute4108_sig_addr_precompute4105_4151 = merged_var_precompute4108_sig_addr_precompute4105_4151+0;
+Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4108_sig_addr_precompute4105_4151,set_4149,set_signature_curr_signature,0,0);
 }
 }
 match set_signature_next_signature with 
@@ -204,89 +204,89 @@ match set_signature_next_signature with
 
 }
 | _ -> {
-int<<16>> precompute4083 = 1+set_signature_sig_idx;
-generate_port (196, set_next_signature(set_signature_sig_type,precompute4083,set_signature_block_idx,set_signature_next_signature));
+int<<16>> precompute4109 = 1+set_signature_sig_idx;
+generate_port (196, set_next_signature(set_signature_sig_type,precompute4109,set_signature_block_idx,set_signature_next_signature));
 }
 Sys.invalidate.set_signature(set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);
 }}
-memop set_4123(int<<32>> mem_val_4122,int<<32>> new_val_4120,int<<32>> unused_4121)
+memop set_4149(int<<32>> mem_val_4148,int<<32>> new_val_4146,int<<32>> unused_4147)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4120), None
+cell1=(true -> new_val_4146), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4119(int<<32>> mem_val_4118,int<<32>> new_val_4116,int<<32>> unused_4117)
+memop set_4145(int<<32>> mem_val_4144,int<<32>> new_val_4142,int<<32>> unused_4143)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4116), None
+cell1=(true -> new_val_4142), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4115(int<<32>> mem_val_4114,int<<32>> new_val_4112,int<<32>> unused_4113)
+memop set_4141(int<<32>> mem_val_4140,int<<32>> new_val_4138,int<<32>> unused_4139)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4112), None
+cell1=(true -> new_val_4138), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4111(int<<32>> mem_val_4110,int<<32>> new_val_4108,int<<32>> unused_4109)
+memop set_4137(int<<32>> mem_val_4136,int<<32>> new_val_4134,int<<32>> unused_4135)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4108), None
+cell1=(true -> new_val_4134), None
 cell2=None, None
 
 ret=None
 }}
-memop get_4107(int<<32>> mem_val_4104,int<<32>> unused_4106,int<<32>> unused_4105)
+memop get_4133(int<<32>> mem_val_4130,int<<32>> unused_4132,int<<32>> unused_4131)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4104)
+ret=(true -> mem_val_4130)
 }}
-memop get_4103(int<<32>> mem_val_4100,int<<32>> unused_4102,int<<32>> unused_4101)
+memop get_4129(int<<32>> mem_val_4126,int<<32>> unused_4128,int<<32>> unused_4127)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4100)
+ret=(true -> mem_val_4126)
 }}
-memop get_4099(int<<32>> mem_val_4096,int<<32>> unused_4098,int<<32>> unused_4097)
+memop get_4125(int<<32>> mem_val_4122,int<<32>> unused_4124,int<<32>> unused_4123)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4096)
+ret=(true -> mem_val_4122)
 }}
-memop get_4095(int<<32>> mem_val_4092,int<<32>> unused_4094,int<<32>> unused_4093)
+memop get_4121(int<<32>> mem_val_4118,int<<32>> unused_4120,int<<32>> unused_4119)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4092)
+ret=(true -> mem_val_4118)
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4091(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4088)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4117(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4114)
  {{
-b1=(mbool_4089,true);
-b2=(mbool_4090,true)
-cell1=(mbool_4089 -> curr+inc_set_4088), None
-cell2=(mbool_4090 -> curr), None
+b1=(mbool_4115,true);
+b2=(mbool_4116,true)
+cell1=(mbool_4115 -> curr+inc_set_4114), None
+cell2=(mbool_4116 -> curr), None
 
 ret=(true -> cell2)
 }}

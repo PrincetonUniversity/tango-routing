@@ -6,10 +6,10 @@ int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<10>> precompute = 0+word_addr;
+int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -32,10 +32,10 @@ int<<1>> block_idx = (int<<1>>)set_signature_block_idx;
 int<<32>> block = (int<<32>>)block_idx;
 match block with 
 | 0 -> {
-Array.set(outgoing_book_signature_manager_0,word_addr,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,(int<<11>>)word_addr,set_signature_curr_signature);
 }
 | _ -> {
-int<<10>> precompute = 0+word_addr;
+int<<11>> precompute = 1024+(int<<11>>)word_addr;
 Array.set(outgoing_book_signature_manager_0,precompute,set_signature_curr_signature);
 }
 } else {
@@ -64,11 +64,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~4084 tmp_val_id~4085)
+converting: (= if_precomp~4110 tmp_val_id~4111)
 
-converting: if_precomp~4084
+converting: if_precomp~4110
 
-converting: tmp_val_id~4085
+converting: tmp_val_id~4111
 
 old expression:  if_precomp==0
 
@@ -80,13 +80,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4086))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4112))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4086)
+converting: (= set_signature_next_signature~0 tmp_val_id~4112)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4086
+converting: tmp_val_id~4112
 
 old expression:  set_signature_next_signature!=0
 

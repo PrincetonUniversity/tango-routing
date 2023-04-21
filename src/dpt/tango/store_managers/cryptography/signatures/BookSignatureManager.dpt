@@ -4,8 +4,8 @@
  * 
  * # Methods
  * create() -> BookSignatureManager.t
- * sign(BookSignatureManager.t, int<<8>>, int<<3>>) -> int<<1>>
- * verify(BookSignatureManager.t, int<<8>>, int<<3>>, int<<1>>) -> bool
+ * sign(BookSignatureManager.t, int<<15>>, int<<3>>) -> int<<1>>
+ * verify(BookSignatureManager.t, int<<15>>, int<<3>>, int<<1>>) -> bool
  **/
 module BookSignatureManager : {
     global type t;
@@ -17,7 +17,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<8>>): sequence number to sign
+    * seq_number (int<<15>>): sequence number to sign
     * path_id (int<<3>>): path ID of associated sequence number
     * 
     * # Returns
@@ -25,7 +25,7 @@ module BookSignatureManager : {
     **/
     fun int<<1>> sign (
         t self,
-        int<<8>> seq_number,
+        int<<15>> seq_number,
         int<<1>> block_idx
     ) [start <= self; end self];
 
@@ -52,7 +52,7 @@ module BookSignatureManager : {
     * 
     * # Parameters
     * self (t): self
-    * seq_number (int<<8>>): sequence number signed
+    * seq_number (int<<15>>): sequence number signed
     * path_id (int<<3>>): path ID of associated sequence number
     * signature (int<<1>>): signature to validate
     * 
@@ -61,7 +61,7 @@ module BookSignatureManager : {
     **/
     // fun bool verify (
     //     t self,
-    //     int<<8>> seq_number,
+    //     int<<15>> seq_number,
     //     int<<1>> signature
     // ) [start <= self; end self];
 }
@@ -76,13 +76,13 @@ module BookSignatureManager : {
 
     fun int<<1>> sign (
         t self,
-        int<<8>> seq_number,
+        int<<15>> seq_number,
         int<<1>> block_idx
     ) {
         int<<32>> sig_bitstring = 0;
         match (block_idx) with
-        | 0 -> { sig_bitstring = Array.get(self#onebit_signatures, ((int<<11>>) seq_number[7:5])); }
-        | _ -> { sig_bitstring = Array.get(self#onebit_signatures, ((int<<11>>) (1024 + (seq_number[7:5])))); }
+        | 0 -> { sig_bitstring = Array.get(self#onebit_signatures, ((int<<11>>) seq_number[14:5])); }
+        | _ -> { sig_bitstring = Array.get(self#onebit_signatures, 1024 + ((int<<11>>) (seq_number[14:5]))); }
 
         int<<5>> bitwhack_index = seq_number[4:0]; // Needed to satisfy Lucid compiler
         match (bitwhack_index) with
@@ -128,7 +128,7 @@ module BookSignatureManager : {
     ) {
         int<<32>> block = (int<<32>>) block_idx;
         match (block) with
-        | 0 -> { Array.set(self#onebit_signatures, word_addr, signature); }
-        | _ -> { Array.set(self#onebit_signatures, 1024 + word_addr, signature); }
+        | 0 -> { Array.set(self#onebit_signatures, ((int<<11>>) word_addr), signature); }
+        | _ -> { Array.set(self#onebit_signatures, 1024 + ((int<<11>>) word_addr), signature); }
     }
 }

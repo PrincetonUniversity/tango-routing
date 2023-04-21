@@ -146,7 +146,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 1. Get metric values. */
     // -- Get updated sequence number
-    int<<8>> seq_number = SequenceNumberManager.increment(sequence_counters);
+    int<<15>> seq_number = SequenceNumberManager.increment(sequence_counters);
 
     // -- Get current time in milliseconds
     int<<12>> timestamp = get_time_now_ms();
