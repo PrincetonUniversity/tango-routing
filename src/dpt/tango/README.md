@@ -4,17 +4,17 @@
 
 ### IP addressing and ip route commands for mini test
 
-To mirror the full interdomain test, the mini test will be with IPv6 internal packets wrapped in IPv6 external tunnel packets.
+To mirror the full interdomain test, the mini test will be with IPv6 internal
+packets wrapped in IPv6 external tunnel packets.
 
 The addressing scheme is as follows:
 Cabernet802 addressing:
-fc::1 dev enp134s0f0 (global scope)
-sends UDP packets to 2604:4540:80::1 (src fc::1 out dev enp134s0f0)
+`fc::1 dev enp134s0f0` (global scope)
+sends UDP packets to `2604:4540:80::1` (src `fc::1 out dev enp134s0f0`)
 
 Cabino1:
-gets packets to 2604:4540:80::1 on Port 16/0 and encapsulates to an address in 2604:4540:80::/44 and forwards them to Cabernet803
-
-
+gets packets to `2604:4540:80::1` on Port 16/0 and encapsulates to an address in
+`2604:4540:80::/44` and forwards them to Cabernet803
 
 ### Cabernet802 (DPID 4, Port 16/0) for sending traffic
 
@@ -34,6 +34,7 @@ iperf -t 50000000 -i 1 -V -u -c 2604:4540:80::1 -l1000 -b 100k
 ```
 
 ### Cabino1 as Tango switch
+
 ```bash
 sudo su
 cd /data/bf-sde-9.7.1
@@ -64,9 +65,8 @@ sudo ifconfig enp134s0f0np0 up
  sudo tcpdump -evvvnX -i enp134s0f0np0
 ```
 
-
-
 ## Full Test for Dynamic Routing with external Vultr eBPF Node
+
 ![full_test](images/dyn_routing_testbed.png)
 
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
@@ -106,10 +106,70 @@ pub key.
 ```
 
 ### Cabino4 as Tango switch
+
+```plaintext
+Make sure the P4 switch runs the correct program that forwards everything between
+the two switch-ports (the switch-port that connects to the CS uplink and the
+switch-port that connects to cab-fruity-03). 
 ```
-Make sure the P4 switch runs the correct program that forwards everything between the two switch-ports (the switch-port that connects to the CS uplink and the switch-port that connects to cab-fruity-03). 
-```
+
 Run it as sudo.
-The SDE is located in /root/software. 
+The SDE is located in /root/software.
 
 ### External Vultr eBPF Tango node
+
+## Route Configuration
+
+Currently, we have a set-up for 16 static (keep-alive) routes and two dynamic
+(active) routes. They are separated into two groups for testing with two remote
+nodes. The route is selected based on the incoming UDP packet's *source port*.
+The first group of static routes are mapped from UDP ports [5000, 5007] to
+traffic classes [0, 7]. The other static routes are mapped from UDP ports [6000,
+6007] to traffic classes [8, 15]. The active routes are UDP port 5008 to traffic
+classs 30 and UDP port 6008 to traffic class 31. This is outlined in the
+following:
+
+### Static "Keep Alive" Routes
+
+| UDP Source Port | Traffic Class | eBPF Node | IPv6 Destination |
+|-----------------|---------------|-----------|------------------|
+| 5000            | 0             |           |                  |
+| 5001            | 1             |           |                  |
+| 5002            | 2             |           |                  |
+| 5003            | 3             |           |                  |
+| 5004            | 4             |           |                  |
+| 5005            | 5             |           |                  |
+| 5006            | 6             |           |                  |
+| 5007            | 7             |           |                  |
+| 6000            | 8             |           |                  |
+| 6001            | 9             |           |                  |
+| 6002            | 10            |           |                  |
+| 6003            | 11            |           |                  |
+| 6004            | 12            |           |                  |
+| 6005            | 13            |           |                  |
+| 6006            | 14            |           |                  |
+| 6007            | 15            |           |                  |
+
+### Dynamic "Active" Routes
+
+| UDP Source Port | Traffic Class | eBPF Node |
+|-----------------|---------------|-----------|
+| 5008            | 30            |           |
+| 6008            | 31            |           |
+
+### IPv6 Address Conversion
+
+If you need to add a new IPv6 Address to the Lucid program, you must convert it
+into two 64-bit integers. There is a provided command in the cli to do this. For
+example, given a file with each IPv6 human-readable format on each line,
+`addrs.lst`, the following command will convert each field into a
+lucid-compatible format and print them to stdout.
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install .
+tango addrconv --file addrs.lst
+deactivate
+rm -rf .venv
+```

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import click
 from edu.princeton.tango.config_parser import DefaultConfigParser, YAMLConfigParser
+from edu.princeton.tango.ipv6_to_lucid import convert_ipv6_to_lucid
 
 
 @click.group()
@@ -66,6 +67,18 @@ def config(
         str(configs.constraint_mapper),
         encoding="utf-8",
     )
+
+
+@cli.command()
+@click.option(
+    "--file",
+    type=click.Path(exists=True),
+    help="List file containing IPv6 Addresses to convert.",
+    required=True,
+)
+def addrconv(file: str) -> None:
+    """Convert a list of IPv6 Addresses to lucid format."""
+    convert_ipv6_to_lucid(Path(file))
 
 
 if __name__ == "__main__":

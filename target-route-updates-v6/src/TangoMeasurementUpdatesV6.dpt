@@ -115,84 +115,71 @@ event update_route (
 
 handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHeader_t udp_header) {
 
-    /* 0. Test if we got a reroute request. */
-    // -- Encoding Scheme: only corresponding lowest-order bits are set to non-zero values
-    if ((udp_header#source_port[15:4] == 0) && (udp_header#destination_port[15:3] == 0)) {
-    
-        RouteManager.update_route(
-            route_manager,
-            udp_header#source_port[7:0],        // Traffic class to update
-            udp_header#destination_port[7:0]    // Path to update class mapping to
-        );
-
-    } else {
-
-        /* 1. Map flow to a specific physical route. */
-        // -- Map flow to traffic class.
-        int<<8>> traffic_class = 0;
-        match (
-            ip_header#src_addr_lo,
-            ip_header#src_addr_hi,
-            udp_header#source_port,
-            ip_header#dest_addr_lo,
-            ip_header#dest_addr_hi,
-            udp_header#destination_port,
-            ip_header#next_header
-        ) with
-        | _, _, _, _, _, _, _ -> {
-            traffic_class = 15;
-        }
-
-        // -- Find route cooresponding to traffic class.
-        int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
-
-        // -- Get physical path header to tunnel with.
-        IPv6Header_t tango_tunnel_hdr = IPV6_HEADER_TEMPLATE;
-        match (path_id) with
-        | _ -> {
-            // dest: 2604:4540:80::1 --> 50532837584298871751240540595104514049
-            tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614536716288; dest_addr_lo = 1; };
-        }
-
-
-        /* 2. Increment sequence number. */
-        // -- Get updated sequence number
-        int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
-
-
-        /* 3. Record path-specific timestamp. */
-        // -- Get current time in milliseconds
-        int<<12>> timestamp = get_time_now_ms();
-
-
-        /* 4. Encapsulate and forward packet. */
-        TangoHeader_t tango_metrics_hdr = {
-            path_id = (int<<8>>) path_id;
-            timestamp = (int<<16>>) timestamp;
-            signature = 0;
-            sequence_num = seq_number;
-            book_signature = 0;
-        };
-
-        event forward_tango_pkt = incoming_tango_traffic (
-            { eth_header with ethertype = 0x86DD },
-            tango_tunnel_hdr,
-            { TANGO_UDP_HEADER with length = 58 + ip_header#payload_len },
-            tango_metrics_hdr,
-            ip_header,
-            udp_header
-        );
-
-        printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
-            path_id,
-            traffic_class,
-            timestamp,
-            seq_number
-        );
-
-        generate_port (OUT_PORT, forward_tango_pkt);
-
+    /* 1. Map flow to a specific physical route. */
+    // -- Map flow to traffic class.
+    int<<8>> traffic_class = 0;
+    match (
+        ip_header#src_addr_lo,
+        ip_header#src_addr_hi,
+        udp_header#source_port,
+        ip_header#dest_addr_lo,
+        ip_header#dest_addr_hi,
+        udp_header#destination_port,
+        ip_header#next_header
+    ) with
+    | _, _, _, _, _, _, _ -> {
+        traffic_class = 15;
     }
+
+    // -- Find route cooresponding to traffic class.
+    int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
+
+    // -- Get physical path header to tunnel with.
+    IPv6Header_t tango_tunnel_hdr = IPV6_HEADER_TEMPLATE;
+    match (path_id) with
+    | _ -> {
+        // dest: 2604:4540:80::1 --> 50532837584298871751240540595104514049
+        tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614536716288; dest_addr_lo = 1; };
+    }
+
+
+    /* 2. Increment sequence number. */
+    // -- Get updated sequence number
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
+
+
+    /* 3. Record path-specific timestamp. */
+    // -- Get current time in milliseconds
+    int<<12>> timestamp = get_time_now_ms();
+
+
+    /* 4. Encapsulate and forward packet. */
+    TangoHeader_t tango_metrics_hdr = {
+        path_id = (int<<8>>) path_id;
+        timestamp = (int<<16>>) timestamp;
+        signature = 0;
+        sequence_num = seq_number;
+        book_signature = 0;
+    };
+
+    event forward_tango_pkt = incoming_tango_traffic (
+        { eth_header with ethertype = 0x86DD },
+        tango_tunnel_hdr,
+        { TANGO_UDP_HEADER with length = 58 + ip_header#payload_len },
+        tango_metrics_hdr,
+        ip_header,
+        udp_header
+    );
+
+    printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
+        path_id,
+        traffic_class,
+        timestamp,
+        seq_number
+    );
+
+    generate_port (OUT_PORT, forward_tango_pkt);
+
 }
 
 handle update_route (
