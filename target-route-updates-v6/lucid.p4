@@ -109,7 +109,7 @@ parser IngressParser(packet_in pkt,
     pkt.extract(ig_intr_md);
     pkt.advance(64);
     transition select(ig_intr_md.ingress_port){
-      (12) : port_12_default_update_route;
+      (4) : port_4_default_update_route;
       (196) : parse_lucid_eth;
       (_) : default_setup;
     }
@@ -138,7 +138,7 @@ parser IngressParser(packet_in pkt,
       (1) : parse_forward_flow;
     }
   }
-  state port_12_default_update_route {
+  state port_4_default_update_route {
     hdr.wire_ev.setValid();
     hdr.bridge_ev.setValid();
     hdr.wire_ev.event_id=3;
