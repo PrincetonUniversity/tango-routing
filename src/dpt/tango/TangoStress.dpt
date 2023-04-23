@@ -203,7 +203,7 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    if (sig_type == 0) {
+    if (((int<<32>>) sig_type) == 0) {
         BookSignatureManager.sign(
             outgoing_book_signature_manager,
             curr_signature[15:0]
