@@ -59,10 +59,10 @@ rate-show
 ### Cabernet803 (DPID 12, Port 15/0) as eBPF Tango node
 
 ```bash
-Use interface enp134s0f0np0 to send and receive traffic 
+# Use interface enp134s0f0np0 to send and receive traffic 
 
 sudo ifconfig enp134s0f0np0 up 
- sudo tcpdump -evvvnX -i enp134s0f0np0
+sudo tcpdump -evvvnX -i enp134s0f0np0
 ```
 
 ## Full Test for Dynamic Routing with external Vultr eBPF Node
@@ -172,4 +172,85 @@ pip install .
 tango addrconv --file addrs.lst
 deactivate
 rm -rf .venv
+```
+
+## Triggering Reroutes
+
+There is a custom Route Update packet that the eBPF node can send back to the switch in order to remap a particular traffic class to a sepcific path identifier, thereby rerouting the entire class. The packet is of the following form:
+
+```lucid
+type RouteUpdate_t = {
+   int<<8>> traffic_class;
+   int<<8>> new_path_id;
+}
+
+event update_route (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    RouteUpdate_t update
+)
+```
+
+A Scapy program to form these packets with custom layers would look something akin to the following:
+
+```python
+"""Send reroutes to switch."""
+
+from scapy.layers.inet6 import IP, UDP, ByteField, Ether, Packet
+from scapy.sendrecv import sendp
+
+
+class UpdateRoute(Packet):
+    """Update route layer to trigger reroute on Tango node."""
+
+    name = "TangoUpdateRoute"
+    fields_desc = [ByteField("traffic_class", 0), ByteField("new_path_id", 0)]
+
+
+def main() -> None:
+    """Send reroute packets to switch."""
+    pkts = [
+        Ether()
+        / IP()
+        / UDP()
+        / UpdateRoute(traffic_class=i, new_path_id=(7 - (i % 8)))
+        for i in range(0, 32)
+    ]
+
+    sendp(pkts, iface="enp134s0f1np0")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+A script like the previously described must be run to initialize the static route mappings upon start-up of the Tofino. In order to execute a script like this `from Cabertnet802` to `Cabino2`, the following set of commands must be run on `Cabino2`:
+
+```bash
+sudo su
+cd /data/bf-sde-9.7.1
+source set_sde.bash 
+cd /u/bherber/tango-routing
+$SDE/p4_build.sh v6.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
+$SDE/./run_switchd.sh -p v6
+
+# From bfshell> get to bf-sde.pm>, bring up ports for cab802 (16/0) and cab803(15/0), and view sending rates on the ports 
+ucli
+pm
+port-add 16/0 100G NONE
+an-set 16/0 2
+port-enb 16/0
+rate-period 1
+rate-show
+```
+
+The following must be run to set-up the ehternet interfaces on `Cabernet802`'s NIC:
+
+```bash
+sudo ifconfig enp134s0f1 fc::2
+sudo ifconfig enp134s0f1 hw ether 50:6b:4b:c4:01:91 
+sudo ip -6 neigh add fc::3 lladdr 00:90:fb:5e:d6:94 dev enp134s0f1
+sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f1
 ```
