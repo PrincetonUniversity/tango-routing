@@ -19,13 +19,13 @@ digraph G {
 " [shape=box, ];
   "174: match (event_id) ...
 " [shape=box, ];
-  "182: match (event_id) ...
+  "181: match (event_id) ...
 " [shape=box, ];
-  "204: match (event_id) ...
+  "203: match (event_id) ...
 " [shape=box, ];
-  "211: match (event_id) ...
+  "210: match (event_id) ...
 " [shape=box, ];
-  "374: match (event_id,bitwhack_index) with
+  "373: match (event_id,bitwhack_index) with
 | 2, _ -> {}
 | 4, _ -> {}
 | 1, 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
@@ -62,57 +62,105 @@ digraph G {
 | 1, _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
 | _, _ -> {}" [
   shape=box, ];
-  "381: match (event_id) ...
+  "380: match (event_id) ...
 " [shape=box, ];
-  "388: match (event_id) ...
+  "387: match (event_id) ...
 " [shape=box, ];
-  "395: match (event_id) ...
+  "394: match (event_id) ...
 " [shape=box, ];
-  "416: match (event_id) ...
+  "415: match (event_id) ...
 " [shape=box, ];
-  "422: match (event_id) ...
+  "421: match (event_id) ...
 " [shape=box, ];
-  "424: match (event_id) ...
+  "423: match (event_id) ...
 " [shape=box, ];
-  "430: match (event_id) ...
+  "429: match (event_id) ...
 " [shape=box, ];
-  "440: match (event_id) ...
+  "439: match (event_id) ...
 " [shape=box, ];
-  "445: match (event_id) ...
+  "444: match (event_id) ...
 " [shape=box, ];
-  "452: match (event_id) ...
+  "451: match (event_id) ...
 " [shape=box, ];
-  "459: match (event_id) ...
+  "458: match (event_id) ...
+" [shape=box, ];
+  "461: match (event_id) ...
 " [shape=box, ];
   "462: match (event_id) ...
 " [shape=box, ];
-  "463: match (event_id) ...
+  "472: match (event_id) ...
 " [shape=box, ];
-  "473: match (event_id) ...
+  "571: match (event_id) ...
 " [shape=box, ];
-  "572: match (event_id) ...
+  "616: match (event_id) ...
 " [shape=box, ];
-  "617: match (event_id) ...
+  "625: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "624: match (event_id) ...
+  "631: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "630: match (event_id) ...
+  "638: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "637: match (event_id) ...
+  "660: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "658: match (event_id) ...
+  "667: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "664: match (set_signature_next_signature,event_id) ...
+  "830: match (set_signature_sig_type,event_id,bitwhack_index3425) with
+| 0, 2, _ -> {}
+| 0, 4, _ -> {}
+| 0, 1, _ -> {}
+| 0, 3, 0 -> {BookSignatureManager_sign_ret3423 = [0 : 0]sig_bitstring3424;}
+| 0, 3, 1 -> {BookSignatureManager_sign_ret3423 = [1 : 1]sig_bitstring3424;}
+| 0, 3, 2 -> {BookSignatureManager_sign_ret3423 = [2 : 2]sig_bitstring3424;}
+| 0, 3, 3 -> {BookSignatureManager_sign_ret3423 = [3 : 3]sig_bitstring3424;}
+| 0, 3, 4 -> {BookSignatureManager_sign_ret3423 = [4 : 4]sig_bitstring3424;}
+| 0, 3, 5 -> {BookSignatureManager_sign_ret3423 = [5 : 5]sig_bitstring3424;}
+| 0, 3, 6 -> {BookSignatureManager_sign_ret3423 = [6 : 6]sig_bitstring3424;}
+| 0, 3, 7 -> {BookSignatureManager_sign_ret3423 = [7 : 7]sig_bitstring3424;}
+| 0, 3, 8 -> {BookSignatureManager_sign_ret3423 = [8 : 8]sig_bitstring3424;}
+| 0, 3, 9 -> {BookSignatureManager_sign_ret3423 = [9 : 9]sig_bitstring3424;}
+| 0, 3, 10 -> {BookSignatureManager_sign_ret3423 = [10 : 10]sig_bitstring3424;}
+| 0, 3, 11 -> {BookSignatureManager_sign_ret3423 = [11 : 11]sig_bitstring3424;}
+| 0, 3, 12 -> {BookSignatureManager_sign_ret3423 = [12 : 12]sig_bitstring3424;}
+| 0, 3, 13 -> {BookSignatureManager_sign_ret3423 = [13 : 13]sig_bitstring3424;}
+| 0, 3, 14 -> {BookSignatureManager_sign_ret3423 = [14 : 14]sig_bitstring3424;}
+| 0, 3, 15 -> {BookSignatureManager_sign_ret3423 = [15 : 15]sig_bitstring3424;}
+| 0, 3, 16 -> {BookSignatureManager_sign_ret3423 = [16 : 16]sig_bitstring3424;}
+| 0, 3, 17 -> {BookSignatureManager_sign_ret3423 = [17 : 17]sig_bitstring3424;}
+| 0, 3, 18 -> {BookSignatureManager_sign_ret3423 = [18 : 18]sig_bitstring3424;}
+| 0, 3, 19 -> {BookSignatureManager_sign_ret3423 = [19 : 19]sig_bitstring3424;}
+| 0, 3, 20 -> {BookSignatureManager_sign_ret3423 = [20 : 20]sig_bitstring3424;}
+| 0, 3, 21 -> {BookSignatureManager_sign_ret3423 = [21 : 21]sig_bitstring3424;}
+| 0, 3, 22 -> {BookSignatureManager_sign_ret3423 = [22 : 22]sig_bitstring3424;}
+| 0, 3, 23 -> {BookSignatureManager_sign_ret3423 = [23 : 23]sig_bitstring3424;}
+| 0, 3, 24 -> {BookSignatureManager_sign_ret3423 = [24 : 24]sig_bitstring3424;}
+| 0, 3, 25 -> {BookSignatureManager_sign_ret3423 = [25 : 25]sig_bitstring3424;}
+| 0, 3, 26 -> {BookSignatureManager_sign_ret3423 = [26 : 26]sig_bitstring3424;}
+| 0, 3, 27 -> {BookSignatureManager_sign_ret3423 = [27 : 27]sig_bitstring3424;}
+| 0, 3, 28 -> {BookSignatureManager_sign_ret3423 = [28 : 28]sig_bitstring3424;}
+| 0, 3, 29 -> {BookSignatureManager_sign_ret3423 = [29 : 29]sig_bitstring3424;}
+| 0, 3, 30 -> {BookSignatureManager_sign_ret3423 = [30 : 30]sig_bitstring3424;}
+| 0, 3, _ -> {BookSignatureManager_sign_ret3423 = [31 : 31]sig_bitstring3424;}
+| _, _, _ -> {}" [
+  shape=box, ];
+  "840: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "665: match (set_signature_next_signature,event_id) ...
+  "846: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "675: match (set_signature_next_signature,event_id) ...
+  "853: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "685: match (set_signature_next_signature,event_id) ...
+  "874: match (set_signature_sig_type,event_id) ...
 " [shape=box, ];
-  "730: match (set_signature_next_signature,event_id) ...
+  "881: match (set_signature_next_signature,event_id) ...
 " [shape=box, ];
-  "778: match (event_id) ...
+  "882: match (set_signature_next_signature,event_id) ...
+" [shape=box, ];
+  "892: match (set_signature_next_signature,event_id) ...
+" [shape=box, ];
+  "902: match (set_signature_next_signature,event_id) ...
+" [shape=box, ];
+  "947: match (set_signature_next_signature,event_id) ...
+" [shape=box, ];
+  "995: match (event_id) ...
 " [shape=box, ];
   
   
@@ -132,12 +180,25 @@ event_id~0==4;}
 HIT{event_id~0==1;}",
                                                       ];
   "1: match () ...
-" -> "624: match (event_id) ...
-" [label="MISS{event_id~0==2;
-event_id~0==4;
-event_id~0==1;}
-HIT{event_id~0==3;}",
-                                                      ];
+" -> "625: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "1: match () ...
+" -> "840: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;
+set_signature_sig_type~0==0,event_id~0==3;
+set_signature_sig_type~0==_,event_id~0==2;
+set_signature_sig_type~0==_,event_id~0==4;
+set_signature_sig_type~0==_,event_id~0==1;}
+HIT{set_signature_sig_type~0==_,event_id~0==3;}",
+  ];
   "121: match (event_id) ...
 " -> "145: match (event_id) ...
 " [label="MISS{event_id~0==2;
@@ -175,25 +236,25 @@ event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
   "174: match (event_id) ...
-" -> "182: match (event_id) ...
+" -> "181: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "182: match (event_id) ...
-" -> "204: match (event_id) ...
+  "181: match (event_id) ...
+" -> "203: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "204: match (event_id) ...
-" -> "211: match (event_id) ...
+  "203: match (event_id) ...
+" -> "210: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "211: match (event_id) ...
-" -> "374: match (event_id,bitwhack_index) with
+  "210: match (event_id) ...
+" -> "373: match (event_id,bitwhack_index) with
 | 2, _ -> {}
 | 4, _ -> {}
 | 1, 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
@@ -232,7 +293,7 @@ HIT{event_id~0==1;}",
   label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}", ];
-  "374: match (event_id,bitwhack_index) with
+  "373: match (event_id,bitwhack_index) with
 | 2, _ -> {}
 | 4, _ -> {}
 | 1, 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
@@ -267,132 +328,256 @@ HIT{event_id~0==1;}", ];
 | 1, 29 -> {BookSignatureManager_sign_ret = [29 : 29]sig_bitstring;}
 | 1, 30 -> {BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;}
 | 1, _ -> {BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;}
-| _, _ -> {}" -> "381: match (event_id) ...
+| _, _ -> {}" -> "380: match (event_id) ...
 " [
   label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}", ];
-  "381: match (event_id) ...
-" -> "388: match (event_id) ...
+  "380: match (event_id) ...
+" -> "387: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "388: match (event_id) ...
-" -> "395: match (event_id) ...
+  "387: match (event_id) ...
+" -> "394: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "395: match (event_id) ...
-" -> "416: match (event_id) ...
+  "394: match (event_id) ...
+" -> "415: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "416: match (event_id) ...
-" -> "422: match (event_id) ...
+  "415: match (event_id) ...
+" -> "421: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "422: match (event_id) ...
-" -> "424: match (event_id) ...
+  "421: match (event_id) ...
+" -> "423: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "424: match (event_id) ...
-" -> "430: match (event_id) ...
+  "423: match (event_id) ...
+" -> "429: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "430: match (event_id) ...
-" -> "440: match (event_id) ...
+  "429: match (event_id) ...
+" -> "439: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "440: match (event_id) ...
-" -> "445: match (event_id) ...
+  "439: match (event_id) ...
+" -> "444: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "445: match (event_id) ...
-" -> "452: match (event_id) ...
+  "444: match (event_id) ...
+" -> "451: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "452: match (event_id) ...
-" -> "459: match (event_id) ...
+  "451: match (event_id) ...
+" -> "458: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "459: match (event_id) ...
+  "458: match (event_id) ...
+" -> "461: match (event_id) ...
+" [label="MISS{event_id~0==2;
+event_id~0==4;}
+HIT{event_id~0==1;}",
+                                                                ];
+  "461: match (event_id) ...
 " -> "462: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
   "462: match (event_id) ...
-" -> "463: match (event_id) ...
+" -> "472: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "463: match (event_id) ...
-" -> "473: match (event_id) ...
+  "472: match (event_id) ...
+" -> "571: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "473: match (event_id) ...
-" -> "572: match (event_id) ...
+  "571: match (event_id) ...
+" -> "616: match (event_id) ...
 " [label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}",
                                                                 ];
-  "572: match (event_id) ...
-" -> "617: match (event_id) ...
-" [label="MISS{event_id~0==2;
-event_id~0==4;}
-HIT{event_id~0==1;}",
-                                                                ];
-  "624: match (event_id) ...
-" -> "630: match (event_id) ...
-" [label="MISS{event_id~0==2;
-event_id~0==4;
-event_id~0==1;}
-HIT{event_id~0==3;}",
-                                                                ];
-  "630: match (event_id) ...
-" -> "637: match (event_id) ...
-" [label="MISS{event_id~0==2;
-event_id~0==4;
-event_id~0==1;}
-HIT{event_id~0==3;}",
-                                                                ];
-  "637: match (event_id) ...
-" -> "658: match (event_id) ...
-" [label="MISS{event_id~0==2;
-event_id~0==4;
-event_id~0==1;}
-HIT{event_id~0==3;}",
-                                                                ];
-  "658: match (event_id) ...
-" -> "664: match (set_signature_next_signature,event_id) ...
+  "625: match (set_signature_sig_type,event_id) ...
+" -> "631: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "631: match (set_signature_sig_type,event_id) ...
+" -> "638: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "638: match (set_signature_sig_type,event_id) ...
+" -> "660: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "660: match (set_signature_sig_type,event_id) ...
+" -> "667: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "667: match (set_signature_sig_type,event_id) ...
+" -> "830: match (set_signature_sig_type,event_id,bitwhack_index3425) with
+| 0, 2, _ -> {}
+| 0, 4, _ -> {}
+| 0, 1, _ -> {}
+| 0, 3, 0 -> {BookSignatureManager_sign_ret3423 = [0 : 0]sig_bitstring3424;}
+| 0, 3, 1 -> {BookSignatureManager_sign_ret3423 = [1 : 1]sig_bitstring3424;}
+| 0, 3, 2 -> {BookSignatureManager_sign_ret3423 = [2 : 2]sig_bitstring3424;}
+| 0, 3, 3 -> {BookSignatureManager_sign_ret3423 = [3 : 3]sig_bitstring3424;}
+| 0, 3, 4 -> {BookSignatureManager_sign_ret3423 = [4 : 4]sig_bitstring3424;}
+| 0, 3, 5 -> {BookSignatureManager_sign_ret3423 = [5 : 5]sig_bitstring3424;}
+| 0, 3, 6 -> {BookSignatureManager_sign_ret3423 = [6 : 6]sig_bitstring3424;}
+| 0, 3, 7 -> {BookSignatureManager_sign_ret3423 = [7 : 7]sig_bitstring3424;}
+| 0, 3, 8 -> {BookSignatureManager_sign_ret3423 = [8 : 8]sig_bitstring3424;}
+| 0, 3, 9 -> {BookSignatureManager_sign_ret3423 = [9 : 9]sig_bitstring3424;}
+| 0, 3, 10 -> {BookSignatureManager_sign_ret3423 = [10 : 10]sig_bitstring3424;}
+| 0, 3, 11 -> {BookSignatureManager_sign_ret3423 = [11 : 11]sig_bitstring3424;}
+| 0, 3, 12 -> {BookSignatureManager_sign_ret3423 = [12 : 12]sig_bitstring3424;}
+| 0, 3, 13 -> {BookSignatureManager_sign_ret3423 = [13 : 13]sig_bitstring3424;}
+| 0, 3, 14 -> {BookSignatureManager_sign_ret3423 = [14 : 14]sig_bitstring3424;}
+| 0, 3, 15 -> {BookSignatureManager_sign_ret3423 = [15 : 15]sig_bitstring3424;}
+| 0, 3, 16 -> {BookSignatureManager_sign_ret3423 = [16 : 16]sig_bitstring3424;}
+| 0, 3, 17 -> {BookSignatureManager_sign_ret3423 = [17 : 17]sig_bitstring3424;}
+| 0, 3, 18 -> {BookSignatureManager_sign_ret3423 = [18 : 18]sig_bitstring3424;}
+| 0, 3, 19 -> {BookSignatureManager_sign_ret3423 = [19 : 19]sig_bitstring3424;}
+| 0, 3, 20 -> {BookSignatureManager_sign_ret3423 = [20 : 20]sig_bitstring3424;}
+| 0, 3, 21 -> {BookSignatureManager_sign_ret3423 = [21 : 21]sig_bitstring3424;}
+| 0, 3, 22 -> {BookSignatureManager_sign_ret3423 = [22 : 22]sig_bitstring3424;}
+| 0, 3, 23 -> {BookSignatureManager_sign_ret3423 = [23 : 23]sig_bitstring3424;}
+| 0, 3, 24 -> {BookSignatureManager_sign_ret3423 = [24 : 24]sig_bitstring3424;}
+| 0, 3, 25 -> {BookSignatureManager_sign_ret3423 = [25 : 25]sig_bitstring3424;}
+| 0, 3, 26 -> {BookSignatureManager_sign_ret3423 = [26 : 26]sig_bitstring3424;}
+| 0, 3, 27 -> {BookSignatureManager_sign_ret3423 = [27 : 27]sig_bitstring3424;}
+| 0, 3, 28 -> {BookSignatureManager_sign_ret3423 = [28 : 28]sig_bitstring3424;}
+| 0, 3, 29 -> {BookSignatureManager_sign_ret3423 = [29 : 29]sig_bitstring3424;}
+| 0, 3, 30 -> {BookSignatureManager_sign_ret3423 = [30 : 30]sig_bitstring3424;}
+| 0, 3, _ -> {BookSignatureManager_sign_ret3423 = [31 : 31]sig_bitstring3424;}
+| _, _, _ -> {}" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;}
+HIT{set_signature_sig_type~0==0,event_id~0==3;}",
+  ];
+  "830: match (set_signature_sig_type,event_id,bitwhack_index3425) with
+| 0, 2, _ -> {}
+| 0, 4, _ -> {}
+| 0, 1, _ -> {}
+| 0, 3, 0 -> {BookSignatureManager_sign_ret3423 = [0 : 0]sig_bitstring3424;}
+| 0, 3, 1 -> {BookSignatureManager_sign_ret3423 = [1 : 1]sig_bitstring3424;}
+| 0, 3, 2 -> {BookSignatureManager_sign_ret3423 = [2 : 2]sig_bitstring3424;}
+| 0, 3, 3 -> {BookSignatureManager_sign_ret3423 = [3 : 3]sig_bitstring3424;}
+| 0, 3, 4 -> {BookSignatureManager_sign_ret3423 = [4 : 4]sig_bitstring3424;}
+| 0, 3, 5 -> {BookSignatureManager_sign_ret3423 = [5 : 5]sig_bitstring3424;}
+| 0, 3, 6 -> {BookSignatureManager_sign_ret3423 = [6 : 6]sig_bitstring3424;}
+| 0, 3, 7 -> {BookSignatureManager_sign_ret3423 = [7 : 7]sig_bitstring3424;}
+| 0, 3, 8 -> {BookSignatureManager_sign_ret3423 = [8 : 8]sig_bitstring3424;}
+| 0, 3, 9 -> {BookSignatureManager_sign_ret3423 = [9 : 9]sig_bitstring3424;}
+| 0, 3, 10 -> {BookSignatureManager_sign_ret3423 = [10 : 10]sig_bitstring3424;}
+| 0, 3, 11 -> {BookSignatureManager_sign_ret3423 = [11 : 11]sig_bitstring3424;}
+| 0, 3, 12 -> {BookSignatureManager_sign_ret3423 = [12 : 12]sig_bitstring3424;}
+| 0, 3, 13 -> {BookSignatureManager_sign_ret3423 = [13 : 13]sig_bitstring3424;}
+| 0, 3, 14 -> {BookSignatureManager_sign_ret3423 = [14 : 14]sig_bitstring3424;}
+| 0, 3, 15 -> {BookSignatureManager_sign_ret3423 = [15 : 15]sig_bitstring3424;}
+| 0, 3, 16 -> {BookSignatureManager_sign_ret3423 = [16 : 16]sig_bitstring3424;}
+| 0, 3, 17 -> {BookSignatureManager_sign_ret3423 = [17 : 17]sig_bitstring3424;}
+| 0, 3, 18 -> {BookSignatureManager_sign_ret3423 = [18 : 18]sig_bitstring3424;}
+| 0, 3, 19 -> {BookSignatureManager_sign_ret3423 = [19 : 19]sig_bitstring3424;}
+| 0, 3, 20 -> {BookSignatureManager_sign_ret3423 = [20 : 20]sig_bitstring3424;}
+| 0, 3, 21 -> {BookSignatureManager_sign_ret3423 = [21 : 21]sig_bitstring3424;}
+| 0, 3, 22 -> {BookSignatureManager_sign_ret3423 = [22 : 22]sig_bitstring3424;}
+| 0, 3, 23 -> {BookSignatureManager_sign_ret3423 = [23 : 23]sig_bitstring3424;}
+| 0, 3, 24 -> {BookSignatureManager_sign_ret3423 = [24 : 24]sig_bitstring3424;}
+| 0, 3, 25 -> {BookSignatureManager_sign_ret3423 = [25 : 25]sig_bitstring3424;}
+| 0, 3, 26 -> {BookSignatureManager_sign_ret3423 = [26 : 26]sig_bitstring3424;}
+| 0, 3, 27 -> {BookSignatureManager_sign_ret3423 = [27 : 27]sig_bitstring3424;}
+| 0, 3, 28 -> {BookSignatureManager_sign_ret3423 = [28 : 28]sig_bitstring3424;}
+| 0, 3, 29 -> {BookSignatureManager_sign_ret3423 = [29 : 29]sig_bitstring3424;}
+| 0, 3, 30 -> {BookSignatureManager_sign_ret3423 = [30 : 30]sig_bitstring3424;}
+| 0, 3, _ -> {BookSignatureManager_sign_ret3423 = [31 : 31]sig_bitstring3424;}
+| _, _, _ -> {}" -> "881: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
 set_signature_next_signature~0==0,event_id~0==1;}
 HIT{set_signature_next_signature~0==0,event_id~0==3;}",
   ];
-  "658: match (event_id) ...
-" -> "665: match (set_signature_next_signature,event_id) ...
+  "830: match (set_signature_sig_type,event_id,bitwhack_index3425) with
+| 0, 2, _ -> {}
+| 0, 4, _ -> {}
+| 0, 1, _ -> {}
+| 0, 3, 0 -> {BookSignatureManager_sign_ret3423 = [0 : 0]sig_bitstring3424;}
+| 0, 3, 1 -> {BookSignatureManager_sign_ret3423 = [1 : 1]sig_bitstring3424;}
+| 0, 3, 2 -> {BookSignatureManager_sign_ret3423 = [2 : 2]sig_bitstring3424;}
+| 0, 3, 3 -> {BookSignatureManager_sign_ret3423 = [3 : 3]sig_bitstring3424;}
+| 0, 3, 4 -> {BookSignatureManager_sign_ret3423 = [4 : 4]sig_bitstring3424;}
+| 0, 3, 5 -> {BookSignatureManager_sign_ret3423 = [5 : 5]sig_bitstring3424;}
+| 0, 3, 6 -> {BookSignatureManager_sign_ret3423 = [6 : 6]sig_bitstring3424;}
+| 0, 3, 7 -> {BookSignatureManager_sign_ret3423 = [7 : 7]sig_bitstring3424;}
+| 0, 3, 8 -> {BookSignatureManager_sign_ret3423 = [8 : 8]sig_bitstring3424;}
+| 0, 3, 9 -> {BookSignatureManager_sign_ret3423 = [9 : 9]sig_bitstring3424;}
+| 0, 3, 10 -> {BookSignatureManager_sign_ret3423 = [10 : 10]sig_bitstring3424;}
+| 0, 3, 11 -> {BookSignatureManager_sign_ret3423 = [11 : 11]sig_bitstring3424;}
+| 0, 3, 12 -> {BookSignatureManager_sign_ret3423 = [12 : 12]sig_bitstring3424;}
+| 0, 3, 13 -> {BookSignatureManager_sign_ret3423 = [13 : 13]sig_bitstring3424;}
+| 0, 3, 14 -> {BookSignatureManager_sign_ret3423 = [14 : 14]sig_bitstring3424;}
+| 0, 3, 15 -> {BookSignatureManager_sign_ret3423 = [15 : 15]sig_bitstring3424;}
+| 0, 3, 16 -> {BookSignatureManager_sign_ret3423 = [16 : 16]sig_bitstring3424;}
+| 0, 3, 17 -> {BookSignatureManager_sign_ret3423 = [17 : 17]sig_bitstring3424;}
+| 0, 3, 18 -> {BookSignatureManager_sign_ret3423 = [18 : 18]sig_bitstring3424;}
+| 0, 3, 19 -> {BookSignatureManager_sign_ret3423 = [19 : 19]sig_bitstring3424;}
+| 0, 3, 20 -> {BookSignatureManager_sign_ret3423 = [20 : 20]sig_bitstring3424;}
+| 0, 3, 21 -> {BookSignatureManager_sign_ret3423 = [21 : 21]sig_bitstring3424;}
+| 0, 3, 22 -> {BookSignatureManager_sign_ret3423 = [22 : 22]sig_bitstring3424;}
+| 0, 3, 23 -> {BookSignatureManager_sign_ret3423 = [23 : 23]sig_bitstring3424;}
+| 0, 3, 24 -> {BookSignatureManager_sign_ret3423 = [24 : 24]sig_bitstring3424;}
+| 0, 3, 25 -> {BookSignatureManager_sign_ret3423 = [25 : 25]sig_bitstring3424;}
+| 0, 3, 26 -> {BookSignatureManager_sign_ret3423 = [26 : 26]sig_bitstring3424;}
+| 0, 3, 27 -> {BookSignatureManager_sign_ret3423 = [27 : 27]sig_bitstring3424;}
+| 0, 3, 28 -> {BookSignatureManager_sign_ret3423 = [28 : 28]sig_bitstring3424;}
+| 0, 3, 29 -> {BookSignatureManager_sign_ret3423 = [29 : 29]sig_bitstring3424;}
+| 0, 3, 30 -> {BookSignatureManager_sign_ret3423 = [30 : 30]sig_bitstring3424;}
+| 0, 3, _ -> {BookSignatureManager_sign_ret3423 = [31 : 31]sig_bitstring3424;}
+| _, _, _ -> {}" -> "882: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
@@ -403,16 +588,52 @@ set_signature_next_signature~0==_,event_id~0==4;
 set_signature_next_signature~0==_,event_id~0==1;}
 HIT{set_signature_next_signature~0==_,event_id~0==3;}",
   ];
-  "664: match (set_signature_next_signature,event_id) ...
-" -> "778: match (event_id) ...
+  "840: match (set_signature_sig_type,event_id) ...
+" -> "846: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;
+set_signature_sig_type~0==0,event_id~0==3;
+set_signature_sig_type~0==_,event_id~0==2;
+set_signature_sig_type~0==_,event_id~0==4;
+set_signature_sig_type~0==_,event_id~0==1;}
+HIT{set_signature_sig_type~0==_,event_id~0==3;}",
+  ];
+  "846: match (set_signature_sig_type,event_id) ...
+" -> "853: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;
+set_signature_sig_type~0==0,event_id~0==3;
+set_signature_sig_type~0==_,event_id~0==2;
+set_signature_sig_type~0==_,event_id~0==4;
+set_signature_sig_type~0==_,event_id~0==1;}
+HIT{set_signature_sig_type~0==_,event_id~0==3;}",
+  ];
+  "853: match (set_signature_sig_type,event_id) ...
+" -> "874: match (set_signature_sig_type,event_id) ...
+" [
+  label="MISS{set_signature_sig_type~0==0,event_id~0==2;
+set_signature_sig_type~0==0,event_id~0==4;
+set_signature_sig_type~0==0,event_id~0==1;
+set_signature_sig_type~0==0,event_id~0==3;
+set_signature_sig_type~0==_,event_id~0==2;
+set_signature_sig_type~0==_,event_id~0==4;
+set_signature_sig_type~0==_,event_id~0==1;}
+HIT{set_signature_sig_type~0==_,event_id~0==3;}",
+  ];
+  "874: match (set_signature_sig_type,event_id) ...
+" -> "881: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
 set_signature_next_signature~0==0,event_id~0==1;}
 HIT{set_signature_next_signature~0==0,event_id~0==3;}",
   ];
-  "665: match (set_signature_next_signature,event_id) ...
-" -> "675: match (set_signature_next_signature,event_id) ...
+  "874: match (set_signature_sig_type,event_id) ...
+" -> "882: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
@@ -423,8 +644,16 @@ set_signature_next_signature~0==_,event_id~0==4;
 set_signature_next_signature~0==_,event_id~0==1;}
 HIT{set_signature_next_signature~0==_,event_id~0==3;}",
   ];
-  "675: match (set_signature_next_signature,event_id) ...
-" -> "685: match (set_signature_next_signature,event_id) ...
+  "881: match (set_signature_next_signature,event_id) ...
+" -> "995: match (event_id) ...
+" [
+  label="MISS{set_signature_next_signature~0==0,event_id~0==2;
+set_signature_next_signature~0==0,event_id~0==4;
+set_signature_next_signature~0==0,event_id~0==1;}
+HIT{set_signature_next_signature~0==0,event_id~0==3;}",
+  ];
+  "882: match (set_signature_next_signature,event_id) ...
+" -> "892: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
@@ -435,8 +664,8 @@ set_signature_next_signature~0==_,event_id~0==4;
 set_signature_next_signature~0==_,event_id~0==1;}
 HIT{set_signature_next_signature~0==_,event_id~0==3;}",
   ];
-  "685: match (set_signature_next_signature,event_id) ...
-" -> "730: match (set_signature_next_signature,event_id) ...
+  "892: match (set_signature_next_signature,event_id) ...
+" -> "902: match (set_signature_next_signature,event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
@@ -447,8 +676,20 @@ set_signature_next_signature~0==_,event_id~0==4;
 set_signature_next_signature~0==_,event_id~0==1;}
 HIT{set_signature_next_signature~0==_,event_id~0==3;}",
   ];
-  "730: match (set_signature_next_signature,event_id) ...
-" -> "778: match (event_id) ...
+  "902: match (set_signature_next_signature,event_id) ...
+" -> "947: match (set_signature_next_signature,event_id) ...
+" [
+  label="MISS{set_signature_next_signature~0==0,event_id~0==2;
+set_signature_next_signature~0==0,event_id~0==4;
+set_signature_next_signature~0==0,event_id~0==1;
+set_signature_next_signature~0==0,event_id~0==3;
+set_signature_next_signature~0==_,event_id~0==2;
+set_signature_next_signature~0==_,event_id~0==4;
+set_signature_next_signature~0==_,event_id~0==1;}
+HIT{set_signature_next_signature~0==_,event_id~0==3;}",
+  ];
+  "947: match (set_signature_next_signature,event_id) ...
+" -> "995: match (event_id) ...
 " [
   label="MISS{set_signature_next_signature~0==0,event_id~0==2;
 set_signature_next_signature~0==0,event_id~0==4;
