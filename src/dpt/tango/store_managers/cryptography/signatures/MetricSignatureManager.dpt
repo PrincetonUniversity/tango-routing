@@ -25,8 +25,7 @@ module MetricSignatureManager : {
     **/
     fun int<<32>> sign (
         t self,
-        int<<12>> timestamp,
-        int<<1>> block_idx
+        int<<12>> timestamp
     ) [start <= self; end self];
 
     /**
@@ -40,9 +39,8 @@ module MetricSignatureManager : {
     **/
     fun void set_signature (
         t self,
-        int<<5>> sig_addr,
-        int<<32>> signature,
-        int<<1>> block_idx
+        int<<16>> sig_addr,
+        int<<32>> signature
     ) [start <= self; end self];
 
    /**
@@ -61,8 +59,7 @@ module MetricSignatureManager : {
     fun bool verify (
         t self,
         int<<12>> timestamp,
-        int<<32>> signature,
-        int<<1>> block_idx
+        int<<32>> signature
     ) [start <= self; end self];
 }
 {
@@ -77,33 +74,33 @@ module MetricSignatureManager : {
 
     fun int<<32>> sign (
         t self,
-        int<<12>> timestamp,
-        int<<1>> block_idx
+        int<<12>> timestamp
     ) {
-        match (block_idx) with
-        | 0 -> { return Array.get(self#ts_signatures, ((int<<5>>) timestamp[3:0])); }
-        | _ -> { return Array.get(self#ts_signatures, 16 + ((int<<5>>) timestamp[3:0])); }
+        return Array.get(self#ts_signatures, timestamp[4:0]);
+        // match (block_idx) with
+        // | 0 -> { return Array.get(self#ts_signatures, ((int<<5>>) timestamp[3:0])); }
+        // | _ -> { return Array.get(self#ts_signatures, 16 + ((int<<5>>) timestamp[3:0])); }
     }
 
     fun bool verify (
         t self,
         int<<12>> timestamp,
-        int<<32>> signature,
-        int<<1>> block_idx
+        int<<32>> signature
     ) {
-        match (block_idx) with
-        | 0 -> { return Array.get(self#ts_signatures, timestamp[3:0]) == signature; }
-        | _ -> { return Array.get(self#ts_signatures, 16 + timestamp[3:0]) == signature; }
+        return Array.get(self#ts_signatures, timestamp[3:0]) == signature;
+        // match (block_idx) with
+        // | 0 -> { return Array.get(self#ts_signatures, timestamp[3:0]) == signature; }
+        // | _ -> { return Array.get(self#ts_signatures, 16 + timestamp[3:0]) == signature; }
     }
 
     fun void set_signature (
         t self,
-        int<<5>> sig_addr,
-        int<<32>> signature,
-        int<<1>> block_idx
+        int<<16>> sig_addr,
+        int<<32>> signature
     ) {
-        match (block_idx) with
-        | 0 -> { Array.set(self#ts_signatures, sig_addr, signature); }
-        | _ -> { Array.set(self#ts_signatures, 16 + sig_addr, signature); }
+        Array.set(self#ts_signatures, sig_addr, signature);
+        // match (block_idx) with
+        // | 0 -> { Array.set(self#ts_signatures, sig_addr, signature); }
+        // | _ -> { Array.set(self#ts_signatures, 16 + sig_addr, signature); }
     }
 }

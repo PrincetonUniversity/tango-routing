@@ -102,6 +102,9 @@ exit event incoming_tango_traffic (
  * Set signataure for a given index and block.
  * 
  * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): TCP header of incoming packet
  * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
  * sig_idx (int<<16>>): index to place signature at
  * block_idx (int<<8>>): block to write too
@@ -112,6 +115,9 @@ exit event incoming_tango_traffic (
  * set_next_signature: set the next signature contained in packet.
  **/
 event set_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
     int<<8>> sig_type,
     int<<16>> sig_idx,
     int<<8>> block_idx,
@@ -126,12 +132,18 @@ event set_signature (
  * Set signataure for a given index and block.
  * 
  * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): TCP header of incoming packet
  * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
  * sig_idx (int<<16>>): index to place signature at
  * block_idx (int<<8>>): block to write too
  * next_signature (int<<32>>): next signature to be written after current is sliced
  **/
 exit event set_next_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
     int<<8>> sig_type,
     int<<16>> sig_idx,
     int<<8>> block_idx,
@@ -146,17 +158,17 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 1. Get metric values. */
     // -- Get updated sequence number
-    int<<15>> seq_number = SequenceNumberManager.increment(sequence_counters);
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters);
 
     // -- Get current time in milliseconds
     int<<12>> timestamp = get_time_now_ms();
 
     /* 2. Sign metric values. */
     // -- Get signature corresponding to sequence number
-    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, timestamp[2:2]);
+    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number);
 
     // -- Get precomputed path-specific signature
-    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp, timestamp[4:4]);
+    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp);
 
     // -- get Tango encapsulation
     TangoHeader_t tango_metrics_hdr = {
@@ -182,6 +194,9 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 }
 
 handle set_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
     int<<8>> sig_type,
     int<<16>> sig_idx,
     int<<8>> block_idx,
@@ -191,16 +206,14 @@ handle set_signature (
     if (((int<<32>>) sig_type) == 0) {
         BookSignatureManager.set_signature_word(
             outgoing_book_signature_manager,
-            sig_idx[10:0],
-            curr_signature,
-            block_idx[0:0]
+            sig_idx,
+            curr_signature
         );
     } else {
         MetricSignatureManager.set_signature(
             outgoing_metric_signature_manager,
-            sig_idx[4:0],
-            curr_signature,
-            block_idx[0:0]
+            sig_idx,
+            curr_signature
         );
     }
 
@@ -208,6 +221,9 @@ handle set_signature (
         generate_port(
             RECIRC_PORT,
             set_next_signature(
+                eth_header,
+                { ip_header with payload_len = ip_header#payload_len - 32 },
+                udp_header,
                 sig_type,
                 sig_idx + 1,
                 block_idx,
