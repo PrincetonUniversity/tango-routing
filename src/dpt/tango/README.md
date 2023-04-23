@@ -197,7 +197,7 @@ A Scapy program to form these packets with custom layers would look something ak
 ```python
 """Send reroutes to switch."""
 
-from scapy.layers.inet6 import IP, UDP, ByteField, Ether, Packet
+from scapy.layers.inet6 import IPv6, UDP, ByteField, Ether, Packet
 from scapy.sendrecv import sendp
 
 
@@ -212,13 +212,13 @@ def main() -> None:
     """Send reroute packets to switch."""
     pkts = [
         Ether()
-        / IP()
+        / IPv6()
         / UDP()
         / UpdateRoute(traffic_class=i, new_path_id=(7 - (i % 8)))
         for i in range(0, 32)
     ]
 
-    sendp(pkts, iface="enp134s0f1np0")
+    sendp(pkts, iface="enp134s0f1")
 
 
 if __name__ == "__main__":
