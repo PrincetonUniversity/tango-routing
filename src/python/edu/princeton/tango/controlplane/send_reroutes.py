@@ -1,10 +1,10 @@
 """Send reroutes to switch."""
 
-from scapy.layers.inet6 import UDP, ByteField, Ether, Packet, IPv6
+from scapy.layers.inet6 import UDP, ByteField, Ether, IPv6, Packet
 from scapy.sendrecv import sendp
 
 
-class UpdateRoute(Packet):
+class RouteUpdate(Packet):
     """Update route layer to trigger reroute on Tango node."""
 
     name = "TangoUpdateRoute"
@@ -17,7 +17,7 @@ def main() -> None:
         Ether()
         / IPv6()
         / UDP()
-        / UpdateRoute(traffic_class=i, new_path_id=(7 - (i % 8)))
+        / RouteUpdate(traffic_class=i, new_path_id=(7 - (i % 8)))
         for i in range(0, 32)
     ]
 
