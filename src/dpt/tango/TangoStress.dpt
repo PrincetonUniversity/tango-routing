@@ -203,19 +203,19 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    if (((int<<32>>) sig_type) == 0) {
-        BookSignatureManager.set_signature_word(
-            outgoing_book_signature_manager,
-            sig_idx,
-            curr_signature
-        );
-    } else {
-        MetricSignatureManager.set_signature(
-            outgoing_metric_signature_manager,
-            sig_idx,
-            curr_signature
-        );
-    }
+    // if (((int<<32>>) sig_type) == 0) {
+    //     BookSignatureManager.set_signature_word(
+    //         outgoing_book_signature_manager,
+    //         sig_idx,
+    //         curr_signature
+    //     );
+    // } else {
+    //     MetricSignatureManager.set_signature(
+    //         outgoing_metric_signature_manager,
+    //         sig_idx,
+    //         curr_signature
+    //     );
+    // }
 
     if (next_signature != 0) {
         generate_port(
