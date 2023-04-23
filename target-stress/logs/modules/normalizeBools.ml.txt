@@ -1,6 +1,6 @@
 ---normalizeBools.ml log---
 original if statement: 
-if (set_signature_sig_type==0) {
+if ((int<<32>>)set_signature_sig_type==0) {
 int<<16>> seq_number = [15 : 0]set_signature_curr_signature;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
@@ -110,7 +110,8 @@ int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 }
 new if statement: 
-if (set_signature_sig_type==0) {
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
+if (if_precomp==0) {
 int<<16>> seq_number = [15 : 0]set_signature_curr_signature;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
@@ -231,33 +232,33 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } 
-converting expression to dnf form: set_signature_sig_type==0
+converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= set_signature_sig_type~0 tmp_val_id~4225)
+converting: (= if_precomp~4238 tmp_val_id~4239)
 
-converting: set_signature_sig_type~0
+converting: if_precomp~4238
 
-converting: tmp_val_id~4225
+converting: tmp_val_id~4239
 
-old expression:  set_signature_sig_type==0
+old expression:  if_precomp==0
 
-new expression:  set_signature_sig_type==0
+new expression:  if_precomp==0
 
-new expression show: set_signature_sig_type==0
+new expression show: if_precomp==0
 
 converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4226))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4240))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4226)
+converting: (= set_signature_next_signature~0 tmp_val_id~4240)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4226
+converting: tmp_val_id~4240
 
 old expression:  set_signature_next_signature!=0
 
