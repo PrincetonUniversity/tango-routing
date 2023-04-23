@@ -76,7 +76,7 @@ module MetricSignatureManager : {
         t self,
         int<<12>> timestamp
     ) {
-        return Array.get(self#ts_signatures, timestamp[4:0]);
+        return Array.get(self#ts_signatures, ((int<<16>>) (timestamp[4:0])));
         // match (block_idx) with
         // | 0 -> { return Array.get(self#ts_signatures, ((int<<5>>) timestamp[3:0])); }
         // | _ -> { return Array.get(self#ts_signatures, 16 + ((int<<5>>) timestamp[3:0])); }
@@ -87,7 +87,7 @@ module MetricSignatureManager : {
         int<<12>> timestamp,
         int<<32>> signature
     ) {
-        return Array.get(self#ts_signatures, timestamp[3:0]) == signature;
+        return Array.get(self#ts_signatures, ((int<<16>>) (timestamp[4:0]))) == signature;
         // match (block_idx) with
         // | 0 -> { return Array.get(self#ts_signatures, timestamp[3:0]) == signature; }
         // | _ -> { return Array.get(self#ts_signatures, 16 + timestamp[3:0]) == signature; }

@@ -142,7 +142,8 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -309,7 +310,8 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -476,7 +478,8 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -644,7 +647,8 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,[4 : 0]timestamp);
+int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
