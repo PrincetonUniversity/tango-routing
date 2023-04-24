@@ -25,10 +25,10 @@ handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signatur
 
 }
 // shared locals:
-int<<16>> outgoing_metric_signature_manager_1_idx_4692;
-int<<16>> outgoing_metric_signature_manager_0_idx_4691;
-int<<16>> merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690;
-int<<16>> merged_var_sig_idx_copy_precompute_4689;
+int<<16>> outgoing_metric_signature_manager_1_idx_4814;
+int<<16>> outgoing_metric_signature_manager_0_idx_4813;
+int<<16>> merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812;
+int<<16>> merged_var_sig_idx_copy_precompute_4811;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -41,22 +41,24 @@ Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signa
 }
 | 1 -> {
 int<<16>> SequenceNumberManager_increment_ret = 32;
-int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4656,0,1,0);
+int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4778,0,1,0);
 SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<12>> to_immediate_tmp4773 = hash<<12>>(1,timestamp);
+int<<8>> book_blk_idx = (int<<8>>)[2 : 2]to_immediate_tmp4773;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
-int<<32>> if_precomp = 0-0;
+int<<32>> if_precomp = (int<<32>>)book_blk_idx-0;
 match if_precomp with 
 | 0 -> {
-merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690 = (int<<16>>)[15 : 5]seq_number;
-sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690,get_4660,0,0,0);
+merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812 = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812,get_4782,0,0,0);
 }
 | _ -> {
-merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690 = (int<<16>>)[15 : 5]seq_number;
-sig_bitstring = Array.update_complex(outgoing_book_signature_manager_1,merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690,get_4664,0,0,0);
+merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812 = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.update_complex(outgoing_book_signature_manager_1,merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812,get_4786,0,0,0);
 }
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
@@ -157,18 +159,20 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<12>> to_immediate_tmp4774 = hash<<12>>(1,timestamp);
+int<<8>> metric_blk_idx = (int<<8>>)[4 : 4]to_immediate_tmp4774;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-int<<32>> if_precomp4646 = 0-0;
-match if_precomp4646 with 
+int<<32>> if_precomp4766 = (int<<32>>)metric_blk_idx-0;
+match if_precomp4766 with 
 | 0 -> {
-int<<16>> precompute4640 = (int<<16>>)[3 : 0]timestamp;
-outgoing_metric_signature_manager_0_idx_4691 = precompute4640;
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4691,get_4668,0,0,0);
+int<<16>> precompute4760 = (int<<16>>)[3 : 0]timestamp;
+outgoing_metric_signature_manager_0_idx_4813 = precompute4760;
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4813,get_4790,0,0,0);
 }
 | _ -> {
-int<<16>> precompute4641 = (int<<16>>)[3 : 0]timestamp;
-outgoing_metric_signature_manager_1_idx_4692 = precompute4641;
-MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_1,outgoing_metric_signature_manager_1_idx_4692,get_4672,0,0,0);
+int<<16>> precompute4761 = (int<<16>>)[3 : 0]timestamp;
+outgoing_metric_signature_manager_1_idx_4814 = precompute4761;
+MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_1,outgoing_metric_signature_manager_1_idx_4814,get_4794,0,0,0);
 }
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
@@ -176,34 +180,34 @@ int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
 int<<32>> tango_metrics_hdr_2 = ts_signature;
 int<<16>> tango_metrics_hdr_3 = (int<<16>>)seq_number;
 int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;
-int<<16>> precompute4642 = forward_flow_ip_header_2+18;
-generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4642,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
+int<<16>> precompute4762 = forward_flow_ip_header_2+18;
+generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4762,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }
 | 3 -> {
-merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690 = hash<<16>>(1,set_signature_sig_idx);
+merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812 = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
-int<<32>> if_precomp4647 = (int<<32>>)set_signature_sig_type-0;
-match if_precomp4647 with 
+int<<32>> if_precomp4767 = (int<<32>>)set_signature_sig_type-0;
+match if_precomp4767 with 
 | 0 -> {
 match block_idx_copy with 
 | 0 -> {
-Array.update_complex(outgoing_book_signature_manager_0,merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690,set_4676,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812,set_4798,sig_copy,0,0);
 }
 | _ -> {
-Array.update_complex(outgoing_book_signature_manager_1,merged_var_merged_var_sig_idx_copy_precompute_4689_precompute4639_4690,set_4680,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,merged_var_merged_var_sig_idx_copy_precompute_4811_precompute4759_4812,set_4802,sig_copy,0,0);
 }
 }
 | _ -> {
 match set_signature_block_idx with 
 | 0 -> {
-outgoing_metric_signature_manager_0_idx_4691 = set_signature_sig_idx;
-Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4691,set_4684,set_signature_curr_signature,0,0);
+outgoing_metric_signature_manager_0_idx_4813 = set_signature_sig_idx;
+Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4813,set_4806,set_signature_curr_signature,0,0);
 }
 | _ -> {
-outgoing_metric_signature_manager_1_idx_4692 = set_signature_sig_idx;
-Array.update_complex(outgoing_metric_signature_manager_1,outgoing_metric_signature_manager_1_idx_4692,set_4688,set_signature_curr_signature,0,0);
+outgoing_metric_signature_manager_1_idx_4814 = set_signature_sig_idx;
+Array.update_complex(outgoing_metric_signature_manager_1,outgoing_metric_signature_manager_1_idx_4814,set_4810,set_signature_curr_signature,0,0);
 }
 }
 match set_signature_next_signature with 
@@ -211,90 +215,90 @@ match set_signature_next_signature with
 
 }
 | _ -> {
-int<<16>> precompute4643 = set_signature_ip_header_1-32;
-int<<16>> precompute4644 = 1+set_signature_sig_idx;
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4643,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4644,set_signature_block_idx,set_signature_next_signature));
+int<<16>> precompute4763 = set_signature_ip_header_1-32;
+int<<16>> precompute4764 = 1+set_signature_sig_idx;
+generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4763,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4764,set_signature_block_idx,set_signature_next_signature));
 }
 Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);
 }}
-memop set_4688(int<<32>> mem_val_4687,int<<32>> new_val_4685,int<<32>> unused_4686)
+memop set_4810(int<<32>> mem_val_4809,int<<32>> new_val_4807,int<<32>> unused_4808)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4685), None
+cell1=(true -> new_val_4807), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4684(int<<32>> mem_val_4683,int<<32>> new_val_4681,int<<32>> unused_4682)
+memop set_4806(int<<32>> mem_val_4805,int<<32>> new_val_4803,int<<32>> unused_4804)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4681), None
+cell1=(true -> new_val_4803), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4680(int<<32>> mem_val_4679,int<<32>> new_val_4677,int<<32>> unused_4678)
+memop set_4802(int<<32>> mem_val_4801,int<<32>> new_val_4799,int<<32>> unused_4800)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4677), None
+cell1=(true -> new_val_4799), None
 cell2=None, None
 
 ret=None
 }}
-memop set_4676(int<<32>> mem_val_4675,int<<32>> new_val_4673,int<<32>> unused_4674)
+memop set_4798(int<<32>> mem_val_4797,int<<32>> new_val_4795,int<<32>> unused_4796)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4673), None
+cell1=(true -> new_val_4795), None
 cell2=None, None
 
 ret=None
 }}
-memop get_4672(int<<32>> mem_val_4669,int<<32>> unused_4671,int<<32>> unused_4670)
+memop get_4794(int<<32>> mem_val_4791,int<<32>> unused_4793,int<<32>> unused_4792)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4669)
+ret=(true -> mem_val_4791)
 }}
-memop get_4668(int<<32>> mem_val_4665,int<<32>> unused_4667,int<<32>> unused_4666)
+memop get_4790(int<<32>> mem_val_4787,int<<32>> unused_4789,int<<32>> unused_4788)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4665)
+ret=(true -> mem_val_4787)
 }}
-memop get_4664(int<<32>> mem_val_4661,int<<32>> unused_4663,int<<32>> unused_4662)
+memop get_4786(int<<32>> mem_val_4783,int<<32>> unused_4785,int<<32>> unused_4784)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4661)
+ret=(true -> mem_val_4783)
 }}
-memop get_4660(int<<32>> mem_val_4657,int<<32>> unused_4659,int<<32>> unused_4658)
+memop get_4782(int<<32>> mem_val_4779,int<<32>> unused_4781,int<<32>> unused_4780)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4657)
+ret=(true -> mem_val_4779)
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4656(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4653)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4778(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4775)
  {{
-b1=(mbool_4654,true);
-b2=(mbool_4655,true)
-cell1=(mbool_4654 -> curr+inc_set_4653), None
-cell2=(mbool_4655 -> curr), None
+b1=(mbool_4776,true);
+b2=(mbool_4777,true)
+cell1=(mbool_4776 -> curr+inc_set_4775), None
+cell2=(mbool_4777 -> curr), None
 
 ret=(true -> cell2)
 }}

@@ -165,10 +165,12 @@ handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHea
 
     /* 2. Sign metric values. */
     // -- Get signature corresponding to sequence number
-    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, 0);
+    int<<8>> book_blk_idx = ((int<<8>>) (hash<<12>>(1, timestamp)[2:2]));
+    int<<1>> book_signature = BookSignatureManager.sign(outgoing_book_signature_manager, seq_number, book_blk_idx);
 
     // -- Get precomputed path-specific signature
-    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp, 0);
+    int<<8>> metric_blk_idx = ((int<<8>>) (hash<<12>>(1, timestamp)[4:4]));
+    int<<32>> ts_signature = MetricSignatureManager.sign(outgoing_metric_signature_manager, timestamp, metric_blk_idx);
 
     // -- get Tango encapsulation
     TangoHeader_t tango_metrics_hdr = {

@@ -43,9 +43,10 @@ SequenceNumberManager_increment_ret = (int<<16>>)Array.update(sequence_counters_
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
+int<<8>> book_blk_idx = (int<<8>>)[2 : 2]hash<<12>>(1,timestamp);
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = 0;
-if ((int<<32>>)0==0) {
+if ((int<<32>>)book_blk_idx==0) {
 sig_bitstring = Array.get(outgoing_book_signature_manager_0,(int<<16>>)[15 : 5]seq_number);
 } else {
 sig_bitstring = Array.get(outgoing_book_signature_manager_1,(int<<16>>)[15 : 5]seq_number);
@@ -149,8 +150,9 @@ BookSignatureManager_sign_ret = [30 : 30]sig_bitstring;
 BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
+int<<8>> metric_blk_idx = (int<<8>>)[4 : 4]hash<<12>>(1,timestamp);
 int<<32>> MetricSignatureManager_sign_ret = 32;
-if ((int<<32>>)0==0) {
+if ((int<<32>>)metric_blk_idx==0) {
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,(int<<16>>)[3 : 0]timestamp);
 } else {
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,(int<<16>>)[3 : 0]timestamp);
