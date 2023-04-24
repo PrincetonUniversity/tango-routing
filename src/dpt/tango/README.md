@@ -69,6 +69,53 @@ sudo tcpdump -evvvnX -i enp134s0f0np0
 
 ![full_test](images/dyn_routing_testbed.png)
 
+
+### Cabino4 as Simple Forwarding Switch (Remember to Build for Tofino 1!)
+
+```plaintext
+Access cabino4 through ssh with public key. Note that the DNS resolution might not be working, so use the IP address (172.17.0.95) directly. 
+ssh soph@172.17.0.95
+Make sure the P4 switch runs the correct program that forwards everything between
+the two switch-ports (the switch-port that connects to the CS uplink and the
+switch-port that connects to cab-fruity-03). 
+```
+
+cd /data/bf-sde-9.12.0
+source set_sde.bash
+cd /data/shared
+$SDE/p4_build.sh tango_forwarding.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
+$SDE/./run_switchd.sh -p tango_forwarding
+ucli
+pm
+port-add 4/0 10G NONE
+port-add 16/0 10G NONE
+port-add 32/1 10G NONE
+an-set 4/0 2
+an-set 16/0 2
+an-set 32/1 2
+port-enb 4/0
+port-enb 16/0
+port-enb 32/1
+show 
+
+
+### Cab2no1 as Tango Switch (Remember to Build for Tofino 2!)  
+cd /data/bf-sde-9.12.0
+source set_sde.bash
+cd to where your program is 
+$SDE/p4_build.sh program.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=t2na
+$SDE/./run_switchd.sh -p program –arch tf2
+ucli
+pm
+port-add 16/0 10G NONE
+port-add 32/3 10G NONE
+an-set 16/0 2
+an-set 32/3 2
+port-enb 16/0
+port-enb 32/3
+show 
+
+
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
 ```plaintext
@@ -105,16 +152,6 @@ I can create accounts for folks. Let me know your preferred username and SSH
 pub key.
 ```
 
-### Cabino4 as Tango switch
-
-```plaintext
-Make sure the P4 switch runs the correct program that forwards everything between
-the two switch-ports (the switch-port that connects to the CS uplink and the
-switch-port that connects to cab-fruity-03). 
-```
-
-Run it as sudo.
-The SDE is located in /root/software.
 
 ### External Vultr eBPF Tango node
 
