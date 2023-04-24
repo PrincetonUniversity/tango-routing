@@ -5,7 +5,7 @@ digraph G {
   "115: Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);" [
   shape=box, ];
   "121: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
-  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3996,0,1,0);" [
+  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4039,0,1,0);" [
   shape=box, ];
   "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
   shape=box, ];
@@ -15,8 +15,8 @@ digraph G {
   "167: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
   "174: int<<1>> BookSignatureManager_sign_ret = 0;" [shape=box, ];
   "182: int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;" [shape=box, ];
-  "185: outgoing_book_signature_manager_0_idx_4013 = precompute;" [shape=box, ];
-  "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,get_4000,0,0,0);" [
+  "185: outgoing_book_signature_manager_0_idx_4056 = precompute;" [shape=box, ];
+  "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,get_4043,0,0,0);" [
   shape=box, ];
   "215: int<<5>> bitwhack_index = [4 : 0]seq_number;" [shape=box, ];
   "378: match (bitwhack_index) with
@@ -55,10 +55,10 @@ digraph G {
   shape=box, ];
   "385: int<<1>> book_signature = BookSignatureManager_sign_ret;" [shape=box, ];
   "392: int<<32>> MetricSignatureManager_sign_ret = 32;" [shape=box, ];
-  "400: int<<16>> precompute3985 = (int<<16>>)[4 : 0]timestamp;" [shape=box, ];
-  "403: outgoing_metric_signature_manager_0_idx_4014 = precompute3985;" [
+  "400: int<<16>> precompute4028 = (int<<16>>)[4 : 0]timestamp;" [shape=box, ];
+  "403: outgoing_metric_signature_manager_0_idx_4057 = precompute4028;" [
   shape=box, ];
-  "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,get_4004,0,0,0);" [
+  "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,get_4047,0,0,0);" [
   shape=box, ];
   "431: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [shape=box,
                                                                     ];
@@ -70,43 +70,45 @@ digraph G {
   "468: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;" [shape=box, ];
   "471: " [shape=box, ];
   "472: " [shape=box, ];
-  "482: int<<16>> precompute3986 = forward_flow_ip_header_2+18;" [shape=box, ];
-  "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute3986,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "482: int<<16>> precompute4029 = forward_flow_ip_header_2+18;" [shape=box, ];
+  "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4029,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   shape=box, ];
   "626: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   shape=box, ];
-  "628: " [shape=box, ];
-  "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  "637: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" [
   shape=box, ];
-  "645: outgoing_book_signature_manager_0_idx_4013 = set_signature_sig_idx;" [
+  "638: " [shape=box, ];
+  "650: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
   shape=box, ];
-  "664: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,set_4008,set_signature_curr_signature,0,0);" [
+  "655: outgoing_book_signature_manager_0_idx_4056 = set_signature_sig_idx;" [
   shape=box, ];
-  "668: outgoing_metric_signature_manager_0_idx_4014 = set_signature_sig_idx;" [
+  "674: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,set_4051,sig_copy,0,0);" [
   shape=box, ];
-  "687: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,set_4012,set_signature_curr_signature,0,0);" [
+  "678: outgoing_metric_signature_manager_0_idx_4057 = set_signature_sig_idx;" [
   shape=box, ];
-  "689: match (if_precomp) ...
+  "697: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,set_4055,set_signature_curr_signature,0,0);" [
+  shape=box, ];
+  "699: match (if_precomp) ...
 " [shape=box, ];
-  "694: " [shape=box, ];
-  "695: " [shape=box, ];
-  "705: int<<16>> precompute3987 = set_signature_ip_header_1-32;" [shape=box, ];
-  "715: int<<16>> precompute3988 = 1+set_signature_sig_idx;" [shape=box, ];
-  "760: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3987,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3988,set_signature_block_idx,set_signature_next_signature));" [
+  "704: " [shape=box, ];
+  "705: " [shape=box, ];
+  "715: int<<16>> precompute4030 = set_signature_ip_header_1-32;" [shape=box, ];
+  "725: int<<16>> precompute4031 = 1+set_signature_sig_idx;" [shape=box, ];
+  "770: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4030,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4031,set_signature_block_idx,set_signature_next_signature));" [
   shape=box, ];
-  "764: match (set_signature_next_signature) ...
+  "774: match (set_signature_next_signature) ...
 " [shape=box, ];
-  "808: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "819: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   shape=box, ];
-  "810: match (event_id) ...
+  "821: match (event_id) ...
 " [shape=box, ];
   
   
-  "1: " -> "810: match (event_id) ...
+  "1: " -> "821: match (event_id) ...
 " [label="", ];
-  "121: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3996,0,1,0);" [
+  "121: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4039,0,1,0);" [
   label="", ];
-  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3996,0,1,0);" -> "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
+  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4039,0,1,0);" -> "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
   label="", ];
   "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" -> "156: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
   label="", ];
@@ -118,11 +120,11 @@ digraph G {
   label="", ];
   "174: int<<1>> BookSignatureManager_sign_ret = 0;" -> "182: int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;" [
   label="", ];
-  "182: int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;" -> "185: outgoing_book_signature_manager_0_idx_4013 = precompute;" [
+  "182: int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;" -> "185: outgoing_book_signature_manager_0_idx_4056 = precompute;" [
   label="", ];
-  "185: outgoing_book_signature_manager_0_idx_4013 = precompute;" -> "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,get_4000,0,0,0);" [
+  "185: outgoing_book_signature_manager_0_idx_4056 = precompute;" -> "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,get_4043,0,0,0);" [
   label="", ];
-  "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,get_4000,0,0,0);" -> "215: int<<5>> bitwhack_index = [4 : 0]seq_number;" [
+  "207: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,get_4043,0,0,0);" -> "215: int<<5>> bitwhack_index = [4 : 0]seq_number;" [
   label="", ];
   "215: int<<5>> bitwhack_index = [4 : 0]seq_number;" -> "378: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
@@ -194,13 +196,13 @@ digraph G {
   label="", ];
   "385: int<<1>> book_signature = BookSignatureManager_sign_ret;" -> "392: int<<32>> MetricSignatureManager_sign_ret = 32;" [
   label="", ];
-  "392: int<<32>> MetricSignatureManager_sign_ret = 32;" -> "400: int<<16>> precompute3985 = (int<<16>>)[4 : 0]timestamp;" [
+  "392: int<<32>> MetricSignatureManager_sign_ret = 32;" -> "400: int<<16>> precompute4028 = (int<<16>>)[4 : 0]timestamp;" [
   label="", ];
-  "400: int<<16>> precompute3985 = (int<<16>>)[4 : 0]timestamp;" -> "403: outgoing_metric_signature_manager_0_idx_4014 = precompute3985;" [
+  "400: int<<16>> precompute4028 = (int<<16>>)[4 : 0]timestamp;" -> "403: outgoing_metric_signature_manager_0_idx_4057 = precompute4028;" [
   label="", ];
-  "403: outgoing_metric_signature_manager_0_idx_4014 = precompute3985;" -> "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,get_4004,0,0,0);" [
+  "403: outgoing_metric_signature_manager_0_idx_4057 = precompute4028;" -> "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,get_4047,0,0,0);" [
   label="", ];
-  "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,get_4004,0,0,0);" -> "431: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [
+  "424: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,get_4047,0,0,0);" -> "431: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [
   label="", ];
   "431: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" -> "433: " [
   label="", ];
@@ -216,68 +218,71 @@ digraph G {
   "468: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;" -> "471: " [
   label="", ];
   "471: " -> "472: " [label="", ];
-  "472: " -> "482: int<<16>> precompute3986 = forward_flow_ip_header_2+18;" [
+  "472: " -> "482: int<<16>> precompute4029 = forward_flow_ip_header_2+18;" [
   label="", ];
-  "482: int<<16>> precompute3986 = forward_flow_ip_header_2+18;" -> "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute3986,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "482: int<<16>> precompute4029 = forward_flow_ip_header_2+18;" -> "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4029,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   label="", ];
-  "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute3986,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "626: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  "581: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4029,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "626: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   label="", ];
-  "628: " -> "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  "637: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" -> "638: " [
   label="", ];
-  "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" -> "689: match (if_precomp) ...
+  "638: " -> "650: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  label="", ];
+  "650: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" -> "699: match (if_precomp) ...
 " [
   label="", ];
-  "645: outgoing_book_signature_manager_0_idx_4013 = set_signature_sig_idx;" -> "664: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,set_4008,set_signature_curr_signature,0,0);" [
+  "655: outgoing_book_signature_manager_0_idx_4056 = set_signature_sig_idx;" -> "674: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,set_4051,sig_copy,0,0);" [
   label="", ];
-  "664: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4013,set_4008,set_signature_curr_signature,0,0);" -> "764: match (set_signature_next_signature) ...
+  "674: Array.update_complex(outgoing_book_signature_manager_0,outgoing_book_signature_manager_0_idx_4056,set_4051,sig_copy,0,0);" -> "774: match (set_signature_next_signature) ...
 " [
   label="", ];
-  "668: outgoing_metric_signature_manager_0_idx_4014 = set_signature_sig_idx;" -> "687: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,set_4012,set_signature_curr_signature,0,0);" [
+  "678: outgoing_metric_signature_manager_0_idx_4057 = set_signature_sig_idx;" -> "697: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,set_4055,set_signature_curr_signature,0,0);" [
   label="", ];
-  "687: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4014,set_4012,set_signature_curr_signature,0,0);" -> "764: match (set_signature_next_signature) ...
+  "697: Array.update_complex(outgoing_metric_signature_manager_0,outgoing_metric_signature_manager_0_idx_4057,set_4055,set_signature_curr_signature,0,0);" -> "774: match (set_signature_next_signature) ...
 " [
   label="", ];
-  "689: match (if_precomp) ...
-" -> "645: outgoing_book_signature_manager_0_idx_4013 = set_signature_sig_idx;" [
-  label="HIT{if_precomp~3989==0;}", ];
-  "689: match (if_precomp) ...
-" -> "668: outgoing_metric_signature_manager_0_idx_4014 = set_signature_sig_idx;" [
-  label="MISS{if_precomp~3989==0;}
-HIT{if_precomp~3989==_;}", ];
-  "694: " -> "808: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "699: match (if_precomp) ...
+" -> "655: outgoing_book_signature_manager_0_idx_4056 = set_signature_sig_idx;" [
+  label="HIT{if_precomp~4032==0;}", ];
+  "699: match (if_precomp) ...
+" -> "678: outgoing_metric_signature_manager_0_idx_4057 = set_signature_sig_idx;" [
+  label="MISS{if_precomp~4032==0;}
+HIT{if_precomp~4032==_;}", ];
+  "704: " -> "819: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   label="", ];
-  "695: " -> "705: int<<16>> precompute3987 = set_signature_ip_header_1-32;" [
+  "705: " -> "715: int<<16>> precompute4030 = set_signature_ip_header_1-32;" [
   label="", ];
-  "705: int<<16>> precompute3987 = set_signature_ip_header_1-32;" -> "715: int<<16>> precompute3988 = 1+set_signature_sig_idx;" [
+  "715: int<<16>> precompute4030 = set_signature_ip_header_1-32;" -> "725: int<<16>> precompute4031 = 1+set_signature_sig_idx;" [
   label="", ];
-  "715: int<<16>> precompute3988 = 1+set_signature_sig_idx;" -> "760: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3987,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3988,set_signature_block_idx,set_signature_next_signature));" [
+  "725: int<<16>> precompute4031 = 1+set_signature_sig_idx;" -> "770: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4030,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4031,set_signature_block_idx,set_signature_next_signature));" [
   label="", ];
-  "760: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3987,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3988,set_signature_block_idx,set_signature_next_signature));" -> "808: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "770: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4030,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4031,set_signature_block_idx,set_signature_next_signature));" -> "819: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   label="", ];
-  "764: match (set_signature_next_signature) ...
-" -> "694: " [label="HIT{set_signature_next_signature~0==0;}",
+  "774: match (set_signature_next_signature) ...
+" -> "704: " [label="HIT{set_signature_next_signature~0==0;}",
                                                                ];
-  "764: match (set_signature_next_signature) ...
-" -> "695: " [label="MISS{set_signature_next_signature~0==0;}
+  "774: match (set_signature_next_signature) ...
+" -> "705: " [label="MISS{set_signature_next_signature~0==0;}
 HIT{set_signature_next_signature~0==_;}",
                                                                ];
-  "810: match (event_id) ...
+  "821: match (event_id) ...
 " -> "74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
   label="HIT{event_id~0==2;}", ];
-  "810: match (event_id) ...
+  "821: match (event_id) ...
 " -> "115: Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);" [
   label="MISS{event_id~0==2;}
 HIT{event_id~0==4;}", ];
-  "810: match (event_id) ...
+  "821: match (event_id) ...
 " -> "121: int<<16>> SequenceNumberManager_increment_ret = 32;" [
   label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}", ];
-  "810: match (event_id) ...
-" -> "628: " [label="MISS{event_id~0==2;
+  "821: match (event_id) ...
+" -> "637: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" [
+  label="MISS{event_id~0==2;
 event_id~0==4;
 event_id~0==1;}
 HIT{event_id~0==3;}",
-                                           ];
+  ];
   
   }

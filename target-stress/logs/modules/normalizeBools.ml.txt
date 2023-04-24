@@ -1,14 +1,14 @@
 ---normalizeBools.ml log---
 original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
-Array.set(outgoing_book_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,set_signature_sig_idx,sig_copy);
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
 new if statement: 
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-Array.set(outgoing_book_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_book_signature_manager_0,set_signature_sig_idx,sig_copy);
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
@@ -28,11 +28,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~3989 tmp_val_id~3990)
+converting: (= if_precomp~4032 tmp_val_id~4033)
 
-converting: if_precomp~3989
+converting: if_precomp~4032
 
-converting: tmp_val_id~3990
+converting: tmp_val_id~4033
 
 old expression:  if_precomp==0
 
@@ -44,13 +44,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~3991))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4034))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~3991)
+converting: (= set_signature_next_signature~0 tmp_val_id~4034)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~3991
+converting: tmp_val_id~4034
 
 old expression:  set_signature_next_signature!=0
 
