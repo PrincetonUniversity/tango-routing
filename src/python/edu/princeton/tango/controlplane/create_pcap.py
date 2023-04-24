@@ -27,6 +27,7 @@ logging.basicConfig(level=logging.INFO)
 PKT_PREFIX_BYTES = 66
 MTU_BYTES = 1500
 INT_BYTES = 4
+NULL_BYTE = 4
 
 
 @dataclass
@@ -76,14 +77,16 @@ def create_signature_packet(
 ) -> Packet:
     """Create a packet containing all signatures in payload."""
     logger = logging.getLogger(__name__)
+    null_sig_token = Signature(0)
 
-    if (PKT_PREFIX_BYTES + (len(signatures) * INT_BYTES)) >= MTU_BYTES:
+    if (PKT_PREFIX_BYTES + (len(signatures) * INT_BYTES) + NULL_BYTE) >= MTU_BYTES:
         logger.error("Too many signatures were attemped to be fit in a single packet!")
         sys.exit(-1)
 
     pkt = Ether() / IPv6() / UDP() / SignatureMetadata(sigs_type.value, start_idx, block_idx)
     for sig in signatures:
         pkt = pkt / Signature(sig)
+    pkt = pkt / null_sig_token
 
     return pkt
 
@@ -196,7 +199,7 @@ def main() -> None:
     with pickle_file.open("rb") as file:
         unpickled_data: PrecomputedSignatures = unpickle(file)  # noqa: S301
 
-    max_sigs_per_pkt = (MTU_BYTES - PKT_PREFIX_BYTES) // INT_BYTES
+    max_sigs_per_pkt = (MTU_BYTES - PKT_PREFIX_BYTES - NULL_BYTE) // INT_BYTES
 
     logger.info("Writing out timestamp signatures to pcap...")
     write_ts_sigs_to_pcap(ts_blk_sz, unpickled_data.timestamp_signatures, max_sigs_per_pkt)
