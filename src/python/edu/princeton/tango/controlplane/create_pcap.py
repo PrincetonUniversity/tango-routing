@@ -134,7 +134,7 @@ def write_seq_sigs_to_pcap(
         for pkt_round in range(0, num_seq_pkts):
             seq_pkts.extend(
                 create_signature_packet(
-                    SignatureType.TS_SIG,
+                    SignatureType.SEQNUM_SIG,
                     raw_seq_num_sigs[:max_sigs_per_pkt],
                     (pkt_round * max_sigs_per_pkt),
                     book % 2,
@@ -145,7 +145,7 @@ def write_seq_sigs_to_pcap(
         if seq_blk_sz % max_sigs_per_pkt:
             seq_pkts.extend(
                 create_signature_packet(
-                    SignatureType.TS_SIG,
+                    SignatureType.SEQNUM_SIG,
                     raw_seq_num_sigs[: (seq_blk_sz % max_sigs_per_pkt)],
                     (num_seq_pkts * max_sigs_per_pkt),
                     book % 2,
