@@ -74,12 +74,20 @@ sudo tcpdump -evvvnX -i enp134s0f0np0
 
 ```plaintext
 Access cabino4 through ssh with public key. Note that the DNS resolution might not be working, so use the IP address (172.17.0.95) directly. 
-ssh soph@172.17.0.95
+e.g., ssh soph@172.17.0.95
+Install tango_forwarding.p4 program on the P4 switch.
+In the P4 switch, send all IPv4 traffic and IPv6 ICMP traffic to/from cab-fruity-03, just 
+make it pass through. This will allow cab-fruity-03 to get an IPv4 address from 
+the subnet "outside the CS firewall", which will allow you to SSH into it. 
+AND cab-fruity-03 will get an IPv6 address too, which can be used to SSH into 
+or reach the Internet via IPv6.
 Make sure the P4 switch runs the correct program that forwards everything between
-the two switch-ports (the switch-port that connects to the CS uplink and the
-switch-port that connects to cab-fruity-03). 
+the three switch-ports (the switch-port that connects to the CS uplink, the
+switch-port that connects to cab-fruity-03, and the switch-port connecting to the Tango switch). 
 ```
 
+
+```bash
 cd /data/bf-sde-9.12.0
 source set_sde.bash
 cd /data/shared
@@ -97,9 +105,10 @@ port-enb 4/0
 port-enb 16/0
 port-enb 32/1
 show 
-
+```
 
 ### Cab2no1 as Tango Switch (Remember to Build for Tofino 2!)  
+```bash
 cd /data/bf-sde-9.12.0
 source set_sde.bash
 cd to where your program is 
@@ -114,24 +123,12 @@ an-set 32/3 2
 port-enb 16/0
 port-enb 32/3
 show 
-
+```
 
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
 ```plaintext
-Steps to get access to cab-fruity-03
-------------------------------------
-
-Install Tango P4 program on the P4 switch.
-In the P4 switch, For the IPv4 and the IPv6 traffic to/from cab-fruity-03, just 
-make it pass through. This will allow cab-fruity-03 to get an IPv4 address from 
-the subnet "outside the CS firewall", which will allow you to SSH into it. 
-AND cab-fruity-03 will get an IPv6 address too, which can be used to SSH into 
-or reach the Internet via IPv6.
-```
-
-```plaintext
-Additional Notes (from Joon)
+Steps to get access to cab-fruity-03 and notes (from Joon)
 ----------------------------
 
 cab-fruity-03 is unreachable with regular ssh access because it lost its old 
