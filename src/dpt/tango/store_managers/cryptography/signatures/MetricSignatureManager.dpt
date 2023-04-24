@@ -25,7 +25,8 @@ module MetricSignatureManager : {
     **/
     fun int<<32>> sign (
         t self,
-        int<<12>> timestamp
+        int<<12>> timestamp,
+        int<<8>> block_idx
     ) [start <= self; end self];
 
     /**
@@ -40,26 +41,8 @@ module MetricSignatureManager : {
     fun void set_signature (
         t self,
         int<<16>> sig_addr,
-        int<<32>> signature
-    ) [start <= self; end self];
-
-   /**
-    * # Description
-    * Verifies a signature for a given timestamp and physical path ID
-    * 
-    * # Parameters
-    * self (t): self
-    * timestamp (int<<12>>): timestamp of packet send/receive
-    * path_id (int<<3>>): the physcial path ID packet is/was sent on
-    * signature (int<<32>> signature): signature to validate
-    * 
-    * # Returns
-    * is_valid (bool): if signature is valid
-    **/
-    fun bool verify (
-        t self,
-        int<<12>> timestamp,
-        int<<32>> signature
+        int<<32>> signature,
+        int<<8>> block_idx
     ) [start <= self; end self];
 }
 {
@@ -74,7 +57,8 @@ module MetricSignatureManager : {
 
     fun int<<32>> sign (
         t self,
-        int<<12>> timestamp
+        int<<12>> timestamp,
+        int<<8>> block_idx
     ) {
         return Array.get(self#ts_signatures, ((int<<16>>) (timestamp[4:0])));
         // match (block_idx) with
@@ -82,21 +66,11 @@ module MetricSignatureManager : {
         // | _ -> { return Array.get(self#ts_signatures, 16 + ((int<<5>>) timestamp[3:0])); }
     }
 
-    fun bool verify (
-        t self,
-        int<<12>> timestamp,
-        int<<32>> signature
-    ) {
-        return Array.get(self#ts_signatures, ((int<<16>>) (timestamp[4:0]))) == signature;
-        // match (block_idx) with
-        // | 0 -> { return Array.get(self#ts_signatures, timestamp[3:0]) == signature; }
-        // | _ -> { return Array.get(self#ts_signatures, 16 + timestamp[3:0]) == signature; }
-    }
-
     fun void set_signature (
         t self,
         int<<16>> sig_addr,
-        int<<32>> signature
+        int<<32>> signature,
+        int<<8>> block_idx
     ) {
         Array.set(self#ts_signatures, sig_addr, signature);
         // match (block_idx) with

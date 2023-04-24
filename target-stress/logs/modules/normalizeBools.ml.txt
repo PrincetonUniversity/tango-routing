@@ -1,14 +1,43 @@
 ---normalizeBools.ml log---
 original if statement: 
+if (0==0) {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_1,precompute);
+}
+new if statement: 
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_1,precompute);
+}
+original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
-Array.set(outgoing_book_signature_manager_0,idx_copy,sig_copy);
+match block_idx_copy with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
+}
+| _ -> {
+Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
+}
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
 new if statement: 
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-Array.set(outgoing_book_signature_manager_0,idx_copy,sig_copy);
+match block_idx_copy with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
+}
+| _ -> {
+Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
+}
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
@@ -28,11 +57,27 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~4074 tmp_val_id~4075)
+converting: (= if_precomp~4353 tmp_val_id~4355)
 
-converting: if_precomp~4074
+converting: if_precomp~4353
 
-converting: tmp_val_id~4075
+converting: tmp_val_id~4355
+
+old expression:  if_precomp==0
+
+new expression:  if_precomp==0
+
+new expression show: if_precomp==0
+
+converting expression to dnf form: if_precomp==0
+
+converted expression into a disjunction of 1 exprs
+
+converting: (= if_precomp~4354 tmp_val_id~4356)
+
+converting: if_precomp~4354
+
+converting: tmp_val_id~4356
 
 old expression:  if_precomp==0
 
@@ -44,13 +89,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4076))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4357))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4076)
+converting: (= set_signature_next_signature~0 tmp_val_id~4357)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4076
+converting: tmp_val_id~4357
 
 old expression:  set_signature_next_signature!=0
 

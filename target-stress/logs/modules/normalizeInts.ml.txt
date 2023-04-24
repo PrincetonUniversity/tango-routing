@@ -27,10 +27,18 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: [31 : 20]time_now
 [transform_precompute_exps.visit_exp] exp: 0
 [transform_precompute_exps.visit_exp] atomic exp: 0
+[transform_precompute_exps.visit_exp] exp: 0
+[transform_precompute_exps.visit_exp] atomic exp: 0
+[transform_precompute_exps.visit_exp] exp: 0-0
+[transform_precompute_exps.visit_exp] atomic exp: 0-0
 [transform_precompute_exps.visit_exp] exp: (int<<16>>)[15 : 5]seq_number
 [transform_precompute_exps.visit_exp] atomic exp: (int<<16>>)[15 : 5]seq_number
 [transform_precompute_exps.visit_exp] exp: Array.get(outgoing_book_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_book_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] exp: (int<<16>>)[15 : 5]seq_number
+[transform_precompute_exps.visit_exp] atomic exp: (int<<16>>)[15 : 5]seq_number
+[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_book_signature_manager_1,precompute)
+[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_book_signature_manager_1,precompute)
 [transform_precompute_exps.visit_exp] exp: [4 : 0]seq_number
 [transform_precompute_exps.visit_exp] atomic exp: [4 : 0]seq_number
 [transform_precompute_exps.visit_exp] exp: [0 : 0]sig_bitstring
@@ -123,6 +131,8 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: hash<<16>>(1,set_signature_sig_idx)
 [transform_precompute_exps.visit_exp] exp: hash<<32>>(1,set_signature_curr_signature)
 [transform_precompute_exps.visit_exp] atomic exp: hash<<32>>(1,set_signature_curr_signature)
+[transform_precompute_exps.visit_exp] exp: hash<<8>>(1,set_signature_block_idx)
+[transform_precompute_exps.visit_exp] atomic exp: hash<<8>>(1,set_signature_block_idx)
 [transform_precompute_exps.visit_exp] exp: (int<<32>>)set_signature_sig_type-0
 [transform_precompute_exps.visit_exp] atomic exp: (int<<32>>)set_signature_sig_type-0
 [transform_precompute_exps.visit_exp] exp: set_signature_ip_header_1-32
@@ -142,6 +152,9 @@ global Array.t<<16>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
+
+
+global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
@@ -170,8 +183,15 @@ int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
 int<<1>> BookSignatureManager_sign_ret = 0;
+int<<32>> sig_bitstring = 0;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_1,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -285,11 +305,18 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
-int<<16>> idx_copy = hash<<16>>(1,set_signature_sig_idx);
+int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-Array.set(outgoing_book_signature_manager_0,idx_copy,sig_copy);
+match block_idx_copy with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
+}
+| _ -> {
+Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
+}
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
@@ -312,6 +339,9 @@ global Array.t<<16>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
+
+
+global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
@@ -340,8 +370,15 @@ int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
 int<<1>> BookSignatureManager_sign_ret = 0;
+int<<32>> sig_bitstring = 0;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_1,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -455,11 +492,18 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
-int<<16>> idx_copy = hash<<16>>(1,set_signature_sig_idx);
+int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-Array.set(outgoing_book_signature_manager_0,idx_copy,sig_copy);
+match block_idx_copy with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
+}
+| _ -> {
+Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
+}
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
@@ -482,6 +526,9 @@ global Array.t<<16>> sequence_counters_0 = Array.create(1);
 
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
+
+
+global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
@@ -511,8 +558,15 @@ int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
 int<<1>> BookSignatureManager_sign_ret = 0;
+int<<32>> sig_bitstring = 0;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
-int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
+sig_bitstring = Array.get(outgoing_book_signature_manager_1,precompute);
+}
 int<<5>> bitwhack_index = [4 : 0]seq_number;
 match bitwhack_index with 
 | 0 -> {
@@ -626,11 +680,18 @@ generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flo
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
-int<<16>> idx_copy = hash<<16>>(1,set_signature_sig_idx);
+int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-Array.set(outgoing_book_signature_manager_0,idx_copy,sig_copy);
+match block_idx_copy with 
+| 0 -> {
+Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
+}
+| _ -> {
+Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
+}
 } else {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
 }
