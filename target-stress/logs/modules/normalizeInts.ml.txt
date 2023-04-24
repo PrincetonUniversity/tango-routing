@@ -109,10 +109,16 @@ set_signature_sig_idx+1
 [transform_precompute_exps.visit_exp] atomic exp: BookSignatureManager_sign_ret
 [transform_precompute_exps.visit_exp] exp: 32
 [transform_precompute_exps.visit_exp] atomic exp: 32
-[transform_precompute_exps.visit_exp] exp: (int<<16>>)[4 : 0]timestamp
-[transform_precompute_exps.visit_exp] atomic exp: (int<<16>>)[4 : 0]timestamp
+[transform_precompute_exps.visit_exp] exp: 0-0
+[transform_precompute_exps.visit_exp] atomic exp: 0-0
+[transform_precompute_exps.visit_exp] exp: (int<<16>>)[3 : 0]timestamp
+[transform_precompute_exps.visit_exp] atomic exp: (int<<16>>)[3 : 0]timestamp
 [transform_precompute_exps.visit_exp] exp: Array.get(outgoing_metric_signature_manager_0,precompute)
 [transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_metric_signature_manager_0,precompute)
+[transform_precompute_exps.visit_exp] exp: (int<<16>>)[3 : 0]timestamp
+[transform_precompute_exps.visit_exp] atomic exp: (int<<16>>)[3 : 0]timestamp
+[transform_precompute_exps.visit_exp] exp: Array.get(outgoing_metric_signature_manager_1,precompute)
+[transform_precompute_exps.visit_exp] atomic exp: Array.get(outgoing_metric_signature_manager_1,precompute)
 [transform_precompute_exps.visit_exp] exp: MetricSignatureManager_sign_ret
 [transform_precompute_exps.visit_exp] atomic exp: MetricSignatureManager_sign_ret
 [transform_precompute_exps.visit_exp] exp: 0
@@ -157,7 +163,10 @@ global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
 global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
 
 
 entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
@@ -292,8 +301,14 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -318,7 +333,13 @@ Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
 Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 } else {
+match set_signature_block_idx with 
+| 0 -> {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+}
+| _ -> {
+Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signature_curr_signature);
+}
 }
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
@@ -344,7 +365,10 @@ global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
 global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
 
 
 entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
@@ -479,8 +503,14 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -505,7 +535,13 @@ Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
 Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 } else {
+match set_signature_block_idx with 
+| 0 -> {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+}
+| _ -> {
+Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signature_curr_signature);
+}
 }
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
@@ -531,7 +567,10 @@ global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
 global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
 
 
 entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<8>> forward_flow_ip_header_0,int<<8>> forward_flow_ip_header_1,int<<16>> forward_flow_ip_header_2,int<<16>> forward_flow_ip_header_3,int<<16>> forward_flow_ip_header_4,int<<8>> forward_flow_ip_header_5,int<<8>> forward_flow_ip_header_6,int<<16>> forward_flow_ip_header_7,int<<32>> forward_flow_ip_header_8,int<<32>> forward_flow_ip_header_9,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
@@ -667,8 +706,14 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-int<<16>> precompute = (int<<16>>)[4 : 0]timestamp;
+int<<32>> if_precomp = 0-0;
+if (if_precomp==0) {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
 MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,precompute);
+} else {
+int<<16>> precompute = (int<<16>>)[3 : 0]timestamp;
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,precompute);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -693,7 +738,13 @@ Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
 Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 } else {
+match set_signature_block_idx with 
+| 0 -> {
 Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+}
+| _ -> {
+Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signature_curr_signature);
+}
 }
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;

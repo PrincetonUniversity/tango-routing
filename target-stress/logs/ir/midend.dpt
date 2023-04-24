@@ -15,7 +15,10 @@ global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
 global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 
 
-global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(32);
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
 
 
 entry event forward_flow(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3);
@@ -147,7 +150,11 @@ BookSignatureManager_sign_ret = [31 : 31]sig_bitstring;
 }
 int<<1>> book_signature = BookSignatureManager_sign_ret;
 int<<32>> MetricSignatureManager_sign_ret = 32;
-MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,(int<<16>>)[4 : 0]timestamp);
+if ((int<<32>>)0==0) {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,(int<<16>>)[3 : 0]timestamp);
+} else {
+MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_1,(int<<16>>)[3 : 0]timestamp);
+}
 int<<32>> ts_signature = MetricSignatureManager_sign_ret;
 int<<8>> tango_metrics_hdr_0 = 0;
 int<<16>> tango_metrics_hdr_1 = hash<<16>>(1,timestamp);
@@ -171,7 +178,13 @@ Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 false;
 } else {
+match block_idx with 
+| 0 -> {
 Array.set(outgoing_metric_signature_manager_0,sig_idx,curr_signature);
+}
+| _ -> {
+Array.set(outgoing_metric_signature_manager_1,sig_idx,curr_signature);
+}
 false;
 }
 if (next_signature!=0) {
