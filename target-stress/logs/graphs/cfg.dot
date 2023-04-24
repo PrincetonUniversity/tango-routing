@@ -5,7 +5,7 @@ digraph G {
   "115: Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);" [
   shape=box, ];
   "121: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
-  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4245,0,1,0);" [
+  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4287,0,1,0);" [
   shape=box, ];
   "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
   shape=box, ];
@@ -14,9 +14,9 @@ digraph G {
   "161: int<<32>> time_now = Sys.time();" [shape=box, ];
   "167: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
   "174: int<<1>> BookSignatureManager_sign_ret = 0;" [shape=box, ];
-  "181: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number;" [
+  "181: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number;" [
   shape=box, ];
-  "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4249,0,0,0);" [
+  "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4291,0,0,0);" [
   shape=box, ];
   "210: int<<5>> bitwhack_index = [4 : 0]seq_number;" [shape=box, ];
   "373: match (bitwhack_index) with
@@ -55,9 +55,9 @@ digraph G {
   shape=box, ];
   "380: int<<1>> book_signature = BookSignatureManager_sign_ret;" [shape=box, ];
   "387: int<<32>> MetricSignatureManager_sign_ret = 32;" [shape=box, ];
-  "394: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp;" [
+  "394: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp;" [
   shape=box, ];
-  "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4253,0,0,0);" [
+  "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4295,0,0,0);" [
   shape=box, ];
   "421: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [shape=box,
                                                                     ];
@@ -69,84 +69,85 @@ digraph G {
   "458: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;" [shape=box, ];
   "461: " [shape=box, ];
   "462: " [shape=box, ];
-  "472: int<<16>> precompute4233 = forward_flow_ip_header_2+18;" [shape=box, ];
-  "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4233,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "472: int<<16>> precompute4275 = forward_flow_ip_header_2+18;" [shape=box, ];
+  "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4275,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   shape=box, ];
   "616: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   shape=box, ];
-  "618: " [shape=box, ];
-  "630: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  "627: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" [
   shape=box, ];
-  "638: int<<16>> seq_number3432 = [15 : 0]set_signature_curr_signature;" [
+  "628: " [shape=box, ];
+  "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
   shape=box, ];
-  "644: int<<1>> BookSignatureManager_sign_ret3433 = 0;" [shape=box, ];
-  "651: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number3432;" [
+  "648: int<<16>> seq_number3466 = [15 : 0]sig_copy;" [shape=box, ];
+  "654: int<<1>> BookSignatureManager_sign_ret3467 = 0;" [shape=box, ];
+  "661: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number3466;" [
   shape=box, ];
-  "673: int<<32>> sig_bitstring3434 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4257,0,0,0);" [
+  "683: int<<32>> sig_bitstring3468 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4299,0,0,0);" [
   shape=box, ];
-  "680: int<<5>> bitwhack_index3435 = [4 : 0]seq_number3432;" [shape=box, ];
-  "843: match (bitwhack_index3435) with
-| 0 -> {BookSignatureManager_sign_ret3433 = [0 : 0]sig_bitstring3434;}
-| 1 -> {BookSignatureManager_sign_ret3433 = [1 : 1]sig_bitstring3434;}
-| 2 -> {BookSignatureManager_sign_ret3433 = [2 : 2]sig_bitstring3434;}
-| 3 -> {BookSignatureManager_sign_ret3433 = [3 : 3]sig_bitstring3434;}
-| 4 -> {BookSignatureManager_sign_ret3433 = [4 : 4]sig_bitstring3434;}
-| 5 -> {BookSignatureManager_sign_ret3433 = [5 : 5]sig_bitstring3434;}
-| 6 -> {BookSignatureManager_sign_ret3433 = [6 : 6]sig_bitstring3434;}
-| 7 -> {BookSignatureManager_sign_ret3433 = [7 : 7]sig_bitstring3434;}
-| 8 -> {BookSignatureManager_sign_ret3433 = [8 : 8]sig_bitstring3434;}
-| 9 -> {BookSignatureManager_sign_ret3433 = [9 : 9]sig_bitstring3434;}
-| 10 -> {BookSignatureManager_sign_ret3433 = [10 : 10]sig_bitstring3434;}
-| 11 -> {BookSignatureManager_sign_ret3433 = [11 : 11]sig_bitstring3434;}
-| 12 -> {BookSignatureManager_sign_ret3433 = [12 : 12]sig_bitstring3434;}
-| 13 -> {BookSignatureManager_sign_ret3433 = [13 : 13]sig_bitstring3434;}
-| 14 -> {BookSignatureManager_sign_ret3433 = [14 : 14]sig_bitstring3434;}
-| 15 -> {BookSignatureManager_sign_ret3433 = [15 : 15]sig_bitstring3434;}
-| 16 -> {BookSignatureManager_sign_ret3433 = [16 : 16]sig_bitstring3434;}
-| 17 -> {BookSignatureManager_sign_ret3433 = [17 : 17]sig_bitstring3434;}
-| 18 -> {BookSignatureManager_sign_ret3433 = [18 : 18]sig_bitstring3434;}
-| 19 -> {BookSignatureManager_sign_ret3433 = [19 : 19]sig_bitstring3434;}
-| 20 -> {BookSignatureManager_sign_ret3433 = [20 : 20]sig_bitstring3434;}
-| 21 -> {BookSignatureManager_sign_ret3433 = [21 : 21]sig_bitstring3434;}
-| 22 -> {BookSignatureManager_sign_ret3433 = [22 : 22]sig_bitstring3434;}
-| 23 -> {BookSignatureManager_sign_ret3433 = [23 : 23]sig_bitstring3434;}
-| 24 -> {BookSignatureManager_sign_ret3433 = [24 : 24]sig_bitstring3434;}
-| 25 -> {BookSignatureManager_sign_ret3433 = [25 : 25]sig_bitstring3434;}
-| 26 -> {BookSignatureManager_sign_ret3433 = [26 : 26]sig_bitstring3434;}
-| 27 -> {BookSignatureManager_sign_ret3433 = [27 : 27]sig_bitstring3434;}
-| 28 -> {BookSignatureManager_sign_ret3433 = [28 : 28]sig_bitstring3434;}
-| 29 -> {BookSignatureManager_sign_ret3433 = [29 : 29]sig_bitstring3434;}
-| 30 -> {BookSignatureManager_sign_ret3433 = [30 : 30]sig_bitstring3434;}
-| _ -> {BookSignatureManager_sign_ret3433 = [31 : 31]sig_bitstring3434;}" [
+  "690: int<<5>> bitwhack_index3469 = [4 : 0]seq_number3466;" [shape=box, ];
+  "853: match (bitwhack_index3469) with
+| 0 -> {BookSignatureManager_sign_ret3467 = [0 : 0]sig_bitstring3468;}
+| 1 -> {BookSignatureManager_sign_ret3467 = [1 : 1]sig_bitstring3468;}
+| 2 -> {BookSignatureManager_sign_ret3467 = [2 : 2]sig_bitstring3468;}
+| 3 -> {BookSignatureManager_sign_ret3467 = [3 : 3]sig_bitstring3468;}
+| 4 -> {BookSignatureManager_sign_ret3467 = [4 : 4]sig_bitstring3468;}
+| 5 -> {BookSignatureManager_sign_ret3467 = [5 : 5]sig_bitstring3468;}
+| 6 -> {BookSignatureManager_sign_ret3467 = [6 : 6]sig_bitstring3468;}
+| 7 -> {BookSignatureManager_sign_ret3467 = [7 : 7]sig_bitstring3468;}
+| 8 -> {BookSignatureManager_sign_ret3467 = [8 : 8]sig_bitstring3468;}
+| 9 -> {BookSignatureManager_sign_ret3467 = [9 : 9]sig_bitstring3468;}
+| 10 -> {BookSignatureManager_sign_ret3467 = [10 : 10]sig_bitstring3468;}
+| 11 -> {BookSignatureManager_sign_ret3467 = [11 : 11]sig_bitstring3468;}
+| 12 -> {BookSignatureManager_sign_ret3467 = [12 : 12]sig_bitstring3468;}
+| 13 -> {BookSignatureManager_sign_ret3467 = [13 : 13]sig_bitstring3468;}
+| 14 -> {BookSignatureManager_sign_ret3467 = [14 : 14]sig_bitstring3468;}
+| 15 -> {BookSignatureManager_sign_ret3467 = [15 : 15]sig_bitstring3468;}
+| 16 -> {BookSignatureManager_sign_ret3467 = [16 : 16]sig_bitstring3468;}
+| 17 -> {BookSignatureManager_sign_ret3467 = [17 : 17]sig_bitstring3468;}
+| 18 -> {BookSignatureManager_sign_ret3467 = [18 : 18]sig_bitstring3468;}
+| 19 -> {BookSignatureManager_sign_ret3467 = [19 : 19]sig_bitstring3468;}
+| 20 -> {BookSignatureManager_sign_ret3467 = [20 : 20]sig_bitstring3468;}
+| 21 -> {BookSignatureManager_sign_ret3467 = [21 : 21]sig_bitstring3468;}
+| 22 -> {BookSignatureManager_sign_ret3467 = [22 : 22]sig_bitstring3468;}
+| 23 -> {BookSignatureManager_sign_ret3467 = [23 : 23]sig_bitstring3468;}
+| 24 -> {BookSignatureManager_sign_ret3467 = [24 : 24]sig_bitstring3468;}
+| 25 -> {BookSignatureManager_sign_ret3467 = [25 : 25]sig_bitstring3468;}
+| 26 -> {BookSignatureManager_sign_ret3467 = [26 : 26]sig_bitstring3468;}
+| 27 -> {BookSignatureManager_sign_ret3467 = [27 : 27]sig_bitstring3468;}
+| 28 -> {BookSignatureManager_sign_ret3467 = [28 : 28]sig_bitstring3468;}
+| 29 -> {BookSignatureManager_sign_ret3467 = [29 : 29]sig_bitstring3468;}
+| 30 -> {BookSignatureManager_sign_ret3467 = [30 : 30]sig_bitstring3468;}
+| _ -> {BookSignatureManager_sign_ret3467 = [31 : 31]sig_bitstring3468;}" [
   shape=box, ];
-  "853: int<<12>> timestamp3436 = [11 : 0]set_signature_curr_signature;" [
+  "863: int<<12>> timestamp3470 = [11 : 0]set_signature_curr_signature;" [
   shape=box, ];
-  "859: int<<32>> MetricSignatureManager_sign_ret3437 = 32;" [shape=box, ];
-  "866: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp3436;" [
+  "869: int<<32>> MetricSignatureManager_sign_ret3471 = 32;" [shape=box, ];
+  "876: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp3470;" [
   shape=box, ];
-  "887: MetricSignatureManager_sign_ret3437 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4261,0,0,0);" [
+  "897: MetricSignatureManager_sign_ret3471 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4303,0,0,0);" [
   shape=box, ];
-  "891: match (if_precomp) ...
+  "901: match (if_precomp) ...
 " [shape=box, ];
-  "896: " [shape=box, ];
-  "897: " [shape=box, ];
-  "907: int<<16>> precompute4236 = set_signature_ip_header_1-32;" [shape=box, ];
-  "917: int<<16>> precompute4237 = 1+set_signature_sig_idx;" [shape=box, ];
-  "962: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4236,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4237,set_signature_block_idx,set_signature_next_signature));" [
+  "906: " [shape=box, ];
+  "907: " [shape=box, ];
+  "917: int<<16>> precompute4278 = set_signature_ip_header_1-32;" [shape=box, ];
+  "927: int<<16>> precompute4279 = 1+set_signature_sig_idx;" [shape=box, ];
+  "972: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4278,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4279,set_signature_block_idx,set_signature_next_signature));" [
   shape=box, ];
-  "966: match (set_signature_next_signature) ...
+  "976: match (set_signature_next_signature) ...
 " [shape=box, ];
-  "1010: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "1021: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   shape=box, ];
-  "1012: match (event_id) ...
+  "1023: match (event_id) ...
 " [shape=box, ];
   
   
-  "1: " -> "1012: match (event_id) ...
+  "1: " -> "1023: match (event_id) ...
 " [label="", ];
-  "121: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4245,0,1,0);" [
+  "121: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4287,0,1,0);" [
   label="", ];
-  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4245,0,1,0);" -> "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
+  "145: int<<16>> to_immediate_tmp = Array.update_complex(sequence_counters_0,0,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4287,0,1,0);" -> "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" [
   label="", ];
   "150: SequenceNumberManager_increment_ret = (int<<16>>)to_immediate_tmp;" -> "156: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
   label="", ];
@@ -156,11 +157,11 @@ digraph G {
   label="", ];
   "167: int<<12>> timestamp = [31 : 20]time_now;" -> "174: int<<1>> BookSignatureManager_sign_ret = 0;" [
   label="", ];
-  "174: int<<1>> BookSignatureManager_sign_ret = 0;" -> "181: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number;" [
+  "174: int<<1>> BookSignatureManager_sign_ret = 0;" -> "181: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number;" [
   label="", ];
-  "181: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number;" -> "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4249,0,0,0);" [
+  "181: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number;" -> "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4291,0,0,0);" [
   label="", ];
-  "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4249,0,0,0);" -> "210: int<<5>> bitwhack_index = [4 : 0]seq_number;" [
+  "203: int<<32>> sig_bitstring = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4291,0,0,0);" -> "210: int<<5>> bitwhack_index = [4 : 0]seq_number;" [
   label="", ];
   "210: int<<5>> bitwhack_index = [4 : 0]seq_number;" -> "373: match (bitwhack_index) with
 | 0 -> {BookSignatureManager_sign_ret = [0 : 0]sig_bitstring;}
@@ -232,11 +233,11 @@ digraph G {
   label="", ];
   "380: int<<1>> book_signature = BookSignatureManager_sign_ret;" -> "387: int<<32>> MetricSignatureManager_sign_ret = 32;" [
   label="", ];
-  "387: int<<32>> MetricSignatureManager_sign_ret = 32;" -> "394: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp;" [
+  "387: int<<32>> MetricSignatureManager_sign_ret = 32;" -> "394: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp;" [
   label="", ];
-  "394: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp;" -> "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4253,0,0,0);" [
+  "394: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp;" -> "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4295,0,0,0);" [
   label="", ];
-  "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4253,0,0,0);" -> "421: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [
+  "415: MetricSignatureManager_sign_ret = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4295,0,0,0);" -> "421: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" [
   label="", ];
   "421: int<<32>> ts_signature = MetricSignatureManager_sign_ret;" -> "423: " [
   label="", ];
@@ -252,144 +253,147 @@ digraph G {
   "458: int<<8>> tango_metrics_hdr_4 = (int<<8>>)book_signature;" -> "461: " [
   label="", ];
   "461: " -> "462: " [label="", ];
-  "462: " -> "472: int<<16>> precompute4233 = forward_flow_ip_header_2+18;" [
+  "462: " -> "472: int<<16>> precompute4275 = forward_flow_ip_header_2+18;" [
   label="", ];
-  "472: int<<16>> precompute4233 = forward_flow_ip_header_2+18;" -> "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4233,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "472: int<<16>> precompute4275 = forward_flow_ip_header_2+18;" -> "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4275,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   label="", ];
-  "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4233,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "616: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  "571: generate_port (128, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,0,precompute4275,0,0,0,0,0,0,8080,8080,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,tango_metrics_hdr_3,tango_metrics_hdr_4,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "616: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   label="", ];
-  "618: " -> "630: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  "627: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" -> "628: " [
   label="", ];
-  "630: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" -> "891: match (if_precomp) ...
+  "628: " -> "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" [
+  label="", ];
+  "640: int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;" -> "901: match (if_precomp) ...
 " [
   label="", ];
-  "638: int<<16>> seq_number3432 = [15 : 0]set_signature_curr_signature;" -> "644: int<<1>> BookSignatureManager_sign_ret3433 = 0;" [
+  "648: int<<16>> seq_number3466 = [15 : 0]sig_copy;" -> "654: int<<1>> BookSignatureManager_sign_ret3467 = 0;" [
   label="", ];
-  "644: int<<1>> BookSignatureManager_sign_ret3433 = 0;" -> "651: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number3432;" [
+  "654: int<<1>> BookSignatureManager_sign_ret3467 = 0;" -> "661: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number3466;" [
   label="", ];
-  "651: merged_var_precompute4234_precompute_4262 = (int<<16>>)[15 : 5]seq_number3432;" -> "673: int<<32>> sig_bitstring3434 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4257,0,0,0);" [
+  "661: merged_var_precompute4276_precompute_4304 = (int<<16>>)[15 : 5]seq_number3466;" -> "683: int<<32>> sig_bitstring3468 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4299,0,0,0);" [
   label="", ];
-  "673: int<<32>> sig_bitstring3434 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4234_precompute_4262,get_4257,0,0,0);" -> "680: int<<5>> bitwhack_index3435 = [4 : 0]seq_number3432;" [
+  "683: int<<32>> sig_bitstring3468 = Array.update_complex(outgoing_book_signature_manager_0,merged_var_precompute4276_precompute_4304,get_4299,0,0,0);" -> "690: int<<5>> bitwhack_index3469 = [4 : 0]seq_number3466;" [
   label="", ];
-  "680: int<<5>> bitwhack_index3435 = [4 : 0]seq_number3432;" -> "843: match (bitwhack_index3435) with
-| 0 -> {BookSignatureManager_sign_ret3433 = [0 : 0]sig_bitstring3434;}
-| 1 -> {BookSignatureManager_sign_ret3433 = [1 : 1]sig_bitstring3434;}
-| 2 -> {BookSignatureManager_sign_ret3433 = [2 : 2]sig_bitstring3434;}
-| 3 -> {BookSignatureManager_sign_ret3433 = [3 : 3]sig_bitstring3434;}
-| 4 -> {BookSignatureManager_sign_ret3433 = [4 : 4]sig_bitstring3434;}
-| 5 -> {BookSignatureManager_sign_ret3433 = [5 : 5]sig_bitstring3434;}
-| 6 -> {BookSignatureManager_sign_ret3433 = [6 : 6]sig_bitstring3434;}
-| 7 -> {BookSignatureManager_sign_ret3433 = [7 : 7]sig_bitstring3434;}
-| 8 -> {BookSignatureManager_sign_ret3433 = [8 : 8]sig_bitstring3434;}
-| 9 -> {BookSignatureManager_sign_ret3433 = [9 : 9]sig_bitstring3434;}
-| 10 -> {BookSignatureManager_sign_ret3433 = [10 : 10]sig_bitstring3434;}
-| 11 -> {BookSignatureManager_sign_ret3433 = [11 : 11]sig_bitstring3434;}
-| 12 -> {BookSignatureManager_sign_ret3433 = [12 : 12]sig_bitstring3434;}
-| 13 -> {BookSignatureManager_sign_ret3433 = [13 : 13]sig_bitstring3434;}
-| 14 -> {BookSignatureManager_sign_ret3433 = [14 : 14]sig_bitstring3434;}
-| 15 -> {BookSignatureManager_sign_ret3433 = [15 : 15]sig_bitstring3434;}
-| 16 -> {BookSignatureManager_sign_ret3433 = [16 : 16]sig_bitstring3434;}
-| 17 -> {BookSignatureManager_sign_ret3433 = [17 : 17]sig_bitstring3434;}
-| 18 -> {BookSignatureManager_sign_ret3433 = [18 : 18]sig_bitstring3434;}
-| 19 -> {BookSignatureManager_sign_ret3433 = [19 : 19]sig_bitstring3434;}
-| 20 -> {BookSignatureManager_sign_ret3433 = [20 : 20]sig_bitstring3434;}
-| 21 -> {BookSignatureManager_sign_ret3433 = [21 : 21]sig_bitstring3434;}
-| 22 -> {BookSignatureManager_sign_ret3433 = [22 : 22]sig_bitstring3434;}
-| 23 -> {BookSignatureManager_sign_ret3433 = [23 : 23]sig_bitstring3434;}
-| 24 -> {BookSignatureManager_sign_ret3433 = [24 : 24]sig_bitstring3434;}
-| 25 -> {BookSignatureManager_sign_ret3433 = [25 : 25]sig_bitstring3434;}
-| 26 -> {BookSignatureManager_sign_ret3433 = [26 : 26]sig_bitstring3434;}
-| 27 -> {BookSignatureManager_sign_ret3433 = [27 : 27]sig_bitstring3434;}
-| 28 -> {BookSignatureManager_sign_ret3433 = [28 : 28]sig_bitstring3434;}
-| 29 -> {BookSignatureManager_sign_ret3433 = [29 : 29]sig_bitstring3434;}
-| 30 -> {BookSignatureManager_sign_ret3433 = [30 : 30]sig_bitstring3434;}
-| _ -> {BookSignatureManager_sign_ret3433 = [31 : 31]sig_bitstring3434;}" [
+  "690: int<<5>> bitwhack_index3469 = [4 : 0]seq_number3466;" -> "853: match (bitwhack_index3469) with
+| 0 -> {BookSignatureManager_sign_ret3467 = [0 : 0]sig_bitstring3468;}
+| 1 -> {BookSignatureManager_sign_ret3467 = [1 : 1]sig_bitstring3468;}
+| 2 -> {BookSignatureManager_sign_ret3467 = [2 : 2]sig_bitstring3468;}
+| 3 -> {BookSignatureManager_sign_ret3467 = [3 : 3]sig_bitstring3468;}
+| 4 -> {BookSignatureManager_sign_ret3467 = [4 : 4]sig_bitstring3468;}
+| 5 -> {BookSignatureManager_sign_ret3467 = [5 : 5]sig_bitstring3468;}
+| 6 -> {BookSignatureManager_sign_ret3467 = [6 : 6]sig_bitstring3468;}
+| 7 -> {BookSignatureManager_sign_ret3467 = [7 : 7]sig_bitstring3468;}
+| 8 -> {BookSignatureManager_sign_ret3467 = [8 : 8]sig_bitstring3468;}
+| 9 -> {BookSignatureManager_sign_ret3467 = [9 : 9]sig_bitstring3468;}
+| 10 -> {BookSignatureManager_sign_ret3467 = [10 : 10]sig_bitstring3468;}
+| 11 -> {BookSignatureManager_sign_ret3467 = [11 : 11]sig_bitstring3468;}
+| 12 -> {BookSignatureManager_sign_ret3467 = [12 : 12]sig_bitstring3468;}
+| 13 -> {BookSignatureManager_sign_ret3467 = [13 : 13]sig_bitstring3468;}
+| 14 -> {BookSignatureManager_sign_ret3467 = [14 : 14]sig_bitstring3468;}
+| 15 -> {BookSignatureManager_sign_ret3467 = [15 : 15]sig_bitstring3468;}
+| 16 -> {BookSignatureManager_sign_ret3467 = [16 : 16]sig_bitstring3468;}
+| 17 -> {BookSignatureManager_sign_ret3467 = [17 : 17]sig_bitstring3468;}
+| 18 -> {BookSignatureManager_sign_ret3467 = [18 : 18]sig_bitstring3468;}
+| 19 -> {BookSignatureManager_sign_ret3467 = [19 : 19]sig_bitstring3468;}
+| 20 -> {BookSignatureManager_sign_ret3467 = [20 : 20]sig_bitstring3468;}
+| 21 -> {BookSignatureManager_sign_ret3467 = [21 : 21]sig_bitstring3468;}
+| 22 -> {BookSignatureManager_sign_ret3467 = [22 : 22]sig_bitstring3468;}
+| 23 -> {BookSignatureManager_sign_ret3467 = [23 : 23]sig_bitstring3468;}
+| 24 -> {BookSignatureManager_sign_ret3467 = [24 : 24]sig_bitstring3468;}
+| 25 -> {BookSignatureManager_sign_ret3467 = [25 : 25]sig_bitstring3468;}
+| 26 -> {BookSignatureManager_sign_ret3467 = [26 : 26]sig_bitstring3468;}
+| 27 -> {BookSignatureManager_sign_ret3467 = [27 : 27]sig_bitstring3468;}
+| 28 -> {BookSignatureManager_sign_ret3467 = [28 : 28]sig_bitstring3468;}
+| 29 -> {BookSignatureManager_sign_ret3467 = [29 : 29]sig_bitstring3468;}
+| 30 -> {BookSignatureManager_sign_ret3467 = [30 : 30]sig_bitstring3468;}
+| _ -> {BookSignatureManager_sign_ret3467 = [31 : 31]sig_bitstring3468;}" [
   label="", ];
-  "843: match (bitwhack_index3435) with
-| 0 -> {BookSignatureManager_sign_ret3433 = [0 : 0]sig_bitstring3434;}
-| 1 -> {BookSignatureManager_sign_ret3433 = [1 : 1]sig_bitstring3434;}
-| 2 -> {BookSignatureManager_sign_ret3433 = [2 : 2]sig_bitstring3434;}
-| 3 -> {BookSignatureManager_sign_ret3433 = [3 : 3]sig_bitstring3434;}
-| 4 -> {BookSignatureManager_sign_ret3433 = [4 : 4]sig_bitstring3434;}
-| 5 -> {BookSignatureManager_sign_ret3433 = [5 : 5]sig_bitstring3434;}
-| 6 -> {BookSignatureManager_sign_ret3433 = [6 : 6]sig_bitstring3434;}
-| 7 -> {BookSignatureManager_sign_ret3433 = [7 : 7]sig_bitstring3434;}
-| 8 -> {BookSignatureManager_sign_ret3433 = [8 : 8]sig_bitstring3434;}
-| 9 -> {BookSignatureManager_sign_ret3433 = [9 : 9]sig_bitstring3434;}
-| 10 -> {BookSignatureManager_sign_ret3433 = [10 : 10]sig_bitstring3434;}
-| 11 -> {BookSignatureManager_sign_ret3433 = [11 : 11]sig_bitstring3434;}
-| 12 -> {BookSignatureManager_sign_ret3433 = [12 : 12]sig_bitstring3434;}
-| 13 -> {BookSignatureManager_sign_ret3433 = [13 : 13]sig_bitstring3434;}
-| 14 -> {BookSignatureManager_sign_ret3433 = [14 : 14]sig_bitstring3434;}
-| 15 -> {BookSignatureManager_sign_ret3433 = [15 : 15]sig_bitstring3434;}
-| 16 -> {BookSignatureManager_sign_ret3433 = [16 : 16]sig_bitstring3434;}
-| 17 -> {BookSignatureManager_sign_ret3433 = [17 : 17]sig_bitstring3434;}
-| 18 -> {BookSignatureManager_sign_ret3433 = [18 : 18]sig_bitstring3434;}
-| 19 -> {BookSignatureManager_sign_ret3433 = [19 : 19]sig_bitstring3434;}
-| 20 -> {BookSignatureManager_sign_ret3433 = [20 : 20]sig_bitstring3434;}
-| 21 -> {BookSignatureManager_sign_ret3433 = [21 : 21]sig_bitstring3434;}
-| 22 -> {BookSignatureManager_sign_ret3433 = [22 : 22]sig_bitstring3434;}
-| 23 -> {BookSignatureManager_sign_ret3433 = [23 : 23]sig_bitstring3434;}
-| 24 -> {BookSignatureManager_sign_ret3433 = [24 : 24]sig_bitstring3434;}
-| 25 -> {BookSignatureManager_sign_ret3433 = [25 : 25]sig_bitstring3434;}
-| 26 -> {BookSignatureManager_sign_ret3433 = [26 : 26]sig_bitstring3434;}
-| 27 -> {BookSignatureManager_sign_ret3433 = [27 : 27]sig_bitstring3434;}
-| 28 -> {BookSignatureManager_sign_ret3433 = [28 : 28]sig_bitstring3434;}
-| 29 -> {BookSignatureManager_sign_ret3433 = [29 : 29]sig_bitstring3434;}
-| 30 -> {BookSignatureManager_sign_ret3433 = [30 : 30]sig_bitstring3434;}
-| _ -> {BookSignatureManager_sign_ret3433 = [31 : 31]sig_bitstring3434;}" -> "966: match (set_signature_next_signature) ...
+  "853: match (bitwhack_index3469) with
+| 0 -> {BookSignatureManager_sign_ret3467 = [0 : 0]sig_bitstring3468;}
+| 1 -> {BookSignatureManager_sign_ret3467 = [1 : 1]sig_bitstring3468;}
+| 2 -> {BookSignatureManager_sign_ret3467 = [2 : 2]sig_bitstring3468;}
+| 3 -> {BookSignatureManager_sign_ret3467 = [3 : 3]sig_bitstring3468;}
+| 4 -> {BookSignatureManager_sign_ret3467 = [4 : 4]sig_bitstring3468;}
+| 5 -> {BookSignatureManager_sign_ret3467 = [5 : 5]sig_bitstring3468;}
+| 6 -> {BookSignatureManager_sign_ret3467 = [6 : 6]sig_bitstring3468;}
+| 7 -> {BookSignatureManager_sign_ret3467 = [7 : 7]sig_bitstring3468;}
+| 8 -> {BookSignatureManager_sign_ret3467 = [8 : 8]sig_bitstring3468;}
+| 9 -> {BookSignatureManager_sign_ret3467 = [9 : 9]sig_bitstring3468;}
+| 10 -> {BookSignatureManager_sign_ret3467 = [10 : 10]sig_bitstring3468;}
+| 11 -> {BookSignatureManager_sign_ret3467 = [11 : 11]sig_bitstring3468;}
+| 12 -> {BookSignatureManager_sign_ret3467 = [12 : 12]sig_bitstring3468;}
+| 13 -> {BookSignatureManager_sign_ret3467 = [13 : 13]sig_bitstring3468;}
+| 14 -> {BookSignatureManager_sign_ret3467 = [14 : 14]sig_bitstring3468;}
+| 15 -> {BookSignatureManager_sign_ret3467 = [15 : 15]sig_bitstring3468;}
+| 16 -> {BookSignatureManager_sign_ret3467 = [16 : 16]sig_bitstring3468;}
+| 17 -> {BookSignatureManager_sign_ret3467 = [17 : 17]sig_bitstring3468;}
+| 18 -> {BookSignatureManager_sign_ret3467 = [18 : 18]sig_bitstring3468;}
+| 19 -> {BookSignatureManager_sign_ret3467 = [19 : 19]sig_bitstring3468;}
+| 20 -> {BookSignatureManager_sign_ret3467 = [20 : 20]sig_bitstring3468;}
+| 21 -> {BookSignatureManager_sign_ret3467 = [21 : 21]sig_bitstring3468;}
+| 22 -> {BookSignatureManager_sign_ret3467 = [22 : 22]sig_bitstring3468;}
+| 23 -> {BookSignatureManager_sign_ret3467 = [23 : 23]sig_bitstring3468;}
+| 24 -> {BookSignatureManager_sign_ret3467 = [24 : 24]sig_bitstring3468;}
+| 25 -> {BookSignatureManager_sign_ret3467 = [25 : 25]sig_bitstring3468;}
+| 26 -> {BookSignatureManager_sign_ret3467 = [26 : 26]sig_bitstring3468;}
+| 27 -> {BookSignatureManager_sign_ret3467 = [27 : 27]sig_bitstring3468;}
+| 28 -> {BookSignatureManager_sign_ret3467 = [28 : 28]sig_bitstring3468;}
+| 29 -> {BookSignatureManager_sign_ret3467 = [29 : 29]sig_bitstring3468;}
+| 30 -> {BookSignatureManager_sign_ret3467 = [30 : 30]sig_bitstring3468;}
+| _ -> {BookSignatureManager_sign_ret3467 = [31 : 31]sig_bitstring3468;}" -> "976: match (set_signature_next_signature) ...
 " [
   label="", ];
-  "853: int<<12>> timestamp3436 = [11 : 0]set_signature_curr_signature;" -> "859: int<<32>> MetricSignatureManager_sign_ret3437 = 32;" [
+  "863: int<<12>> timestamp3470 = [11 : 0]set_signature_curr_signature;" -> "869: int<<32>> MetricSignatureManager_sign_ret3471 = 32;" [
   label="", ];
-  "859: int<<32>> MetricSignatureManager_sign_ret3437 = 32;" -> "866: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp3436;" [
+  "869: int<<32>> MetricSignatureManager_sign_ret3471 = 32;" -> "876: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp3470;" [
   label="", ];
-  "866: merged_var_precompute4235_precompute4232_4263 = (int<<16>>)[4 : 0]timestamp3436;" -> "887: MetricSignatureManager_sign_ret3437 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4261,0,0,0);" [
+  "876: merged_var_precompute4277_precompute4274_4305 = (int<<16>>)[4 : 0]timestamp3470;" -> "897: MetricSignatureManager_sign_ret3471 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4303,0,0,0);" [
   label="", ];
-  "887: MetricSignatureManager_sign_ret3437 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4235_precompute4232_4263,get_4261,0,0,0);" -> "966: match (set_signature_next_signature) ...
+  "897: MetricSignatureManager_sign_ret3471 = Array.update_complex(outgoing_metric_signature_manager_0,merged_var_precompute4277_precompute4274_4305,get_4303,0,0,0);" -> "976: match (set_signature_next_signature) ...
 " [
   label="", ];
-  "891: match (if_precomp) ...
-" -> "638: int<<16>> seq_number3432 = [15 : 0]set_signature_curr_signature;" [
-  label="HIT{if_precomp~4238==0;}", ];
-  "891: match (if_precomp) ...
-" -> "853: int<<12>> timestamp3436 = [11 : 0]set_signature_curr_signature;" [
-  label="MISS{if_precomp~4238==0;}
-HIT{if_precomp~4238==_;}", ];
-  "896: " -> "1010: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "901: match (if_precomp) ...
+" -> "648: int<<16>> seq_number3466 = [15 : 0]sig_copy;" [
+  label="HIT{if_precomp~4280==0;}", ];
+  "901: match (if_precomp) ...
+" -> "863: int<<12>> timestamp3470 = [11 : 0]set_signature_curr_signature;" [
+  label="MISS{if_precomp~4280==0;}
+HIT{if_precomp~4280==_;}", ];
+  "906: " -> "1021: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   label="", ];
-  "897: " -> "907: int<<16>> precompute4236 = set_signature_ip_header_1-32;" [
+  "907: " -> "917: int<<16>> precompute4278 = set_signature_ip_header_1-32;" [
   label="", ];
-  "907: int<<16>> precompute4236 = set_signature_ip_header_1-32;" -> "917: int<<16>> precompute4237 = 1+set_signature_sig_idx;" [
+  "917: int<<16>> precompute4278 = set_signature_ip_header_1-32;" -> "927: int<<16>> precompute4279 = 1+set_signature_sig_idx;" [
   label="", ];
-  "917: int<<16>> precompute4237 = 1+set_signature_sig_idx;" -> "962: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4236,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4237,set_signature_block_idx,set_signature_next_signature));" [
+  "927: int<<16>> precompute4279 = 1+set_signature_sig_idx;" -> "972: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4278,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4279,set_signature_block_idx,set_signature_next_signature));" [
   label="", ];
-  "962: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4236,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4237,set_signature_block_idx,set_signature_next_signature));" -> "1010: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
+  "972: generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute4278,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute4279,set_signature_block_idx,set_signature_next_signature));" -> "1021: Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);" [
   label="", ];
-  "966: match (set_signature_next_signature) ...
-" -> "896: " [label="HIT{set_signature_next_signature~0==0;}",
+  "976: match (set_signature_next_signature) ...
+" -> "906: " [label="HIT{set_signature_next_signature~0==0;}",
                                                                ];
-  "966: match (set_signature_next_signature) ...
-" -> "897: " [label="MISS{set_signature_next_signature~0==0;}
+  "976: match (set_signature_next_signature) ...
+" -> "907: " [label="MISS{set_signature_next_signature~0==0;}
 HIT{set_signature_next_signature~0==_;}",
                                                                ];
-  "1012: match (event_id) ...
+  "1023: match (event_id) ...
 " -> "74: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_ip_header_8,incoming_tango_traffic_encaped_ip_header_9,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);" [
   label="HIT{event_id~0==2;}", ];
-  "1012: match (event_id) ...
+  "1023: match (event_id) ...
 " -> "115: Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);" [
   label="MISS{event_id~0==2;}
 HIT{event_id~0==4;}", ];
-  "1012: match (event_id) ...
+  "1023: match (event_id) ...
 " -> "121: int<<16>> SequenceNumberManager_increment_ret = 32;" [
   label="MISS{event_id~0==2;
 event_id~0==4;}
 HIT{event_id~0==1;}", ];
-  "1012: match (event_id) ...
-" -> "618: " [label="MISS{event_id~0==2;
+  "1023: match (event_id) ...
+" -> "627: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" [
+  label="MISS{event_id~0==2;
 event_id~0==4;
 event_id~0==1;}
 HIT{event_id~0==3;}",
-                                            ];
+  ];
   
   }

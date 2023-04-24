@@ -150,8 +150,9 @@ generate_port (128, incoming_tango_traffic(eth_header_0,eth_header_1,34525,0,18+
 }
 
 handle set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> curr_signature,int<<32>> next_signature) {
+int<<32>> sig_copy = hash<<32>>(1,curr_signature);
 if ((int<<32>>)sig_type==0) {
-int<<16>> seq_number = [15 : 0]curr_signature;
+int<<16>> seq_number = [15 : 0]sig_copy;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,(int<<16>>)[15 : 5]seq_number);
 int<<5>> bitwhack_index = [4 : 0]seq_number;

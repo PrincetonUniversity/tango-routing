@@ -1,7 +1,7 @@
 ---normalizeBools.ml log---
 original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
-int<<16>> seq_number = [15 : 0]set_signature_curr_signature;
+int<<16>> seq_number = [15 : 0]sig_copy;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
 int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
@@ -112,7 +112,7 @@ MetricSignatureManager_sign_ret = Array.get(outgoing_metric_signature_manager_0,
 new if statement: 
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 if (if_precomp==0) {
-int<<16>> seq_number = [15 : 0]set_signature_curr_signature;
+int<<16>> seq_number = [15 : 0]sig_copy;
 int<<1>> BookSignatureManager_sign_ret = 0;
 int<<16>> precompute = (int<<16>>)[15 : 5]seq_number;
 int<<32>> sig_bitstring = Array.get(outgoing_book_signature_manager_0,precompute);
@@ -236,11 +236,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~4238 tmp_val_id~4239)
+converting: (= if_precomp~4280 tmp_val_id~4281)
 
-converting: if_precomp~4238
+converting: if_precomp~4280
 
-converting: tmp_val_id~4239
+converting: tmp_val_id~4281
 
 old expression:  if_precomp==0
 
@@ -252,13 +252,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~4240))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~4282))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~4240)
+converting: (= set_signature_next_signature~0 tmp_val_id~4282)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~4240
+converting: tmp_val_id~4282
 
 old expression:  set_signature_next_signature!=0
 
