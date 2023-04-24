@@ -38,11 +38,11 @@ module BookSignatureManager : {
     * signature (int<<32>>): path ID of associated sequence number
     * block_idx (int<<1>>): block which to write to in book
     **/
-    // fun void set_signature_word (
-    //     t self,
-    //     int<<16>> word_addr,
-    //     int<<32>> signature
-    // ) [start <= self; end self];
+    fun void set_signature_word (
+        t self,
+        int<<16>> word_addr,
+        int<<32>> signature
+    ) [start <= self; end self];
 
    /**
     * # Description
@@ -117,15 +117,15 @@ module BookSignatureManager : {
         | _ -> { return sig_bitstring[31:31]; }
     }
 
-    // fun void set_signature_word (
-    //     t self,
-    //     int<<16>> word_addr,
-    //     int<<32>> signature
-    // ) {
-    //     Array.set(self#onebit_signatures, word_addr, signature);
-    //     // int<<32>> block = (int<<32>>) block_idx;
-    //     // match (block) with
-    //     // | 0 -> { Array.set(self#onebit_signatures, word_addr, signature); }
-    //     // | _ -> { Array.set(self#onebit_signatures, 1024 + word_addr, signature); }
-    // }
+    fun void set_signature_word (
+        t self,
+        int<<16>> word_addr,
+        int<<32>> signature
+    ) {
+        Array.set(self#onebit_signatures, word_addr, signature);
+        // int<<32>> block = (int<<32>>) block_idx;
+        // match (block) with
+        // | 0 -> { Array.set(self#onebit_signatures, word_addr, signature); }
+        // | _ -> { Array.set(self#onebit_signatures, 1024 + word_addr, signature); }
+    }
 }
