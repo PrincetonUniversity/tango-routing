@@ -27,15 +27,13 @@ class SignatureMetadata(Packet):
 
     name = "SignatureMetadata"
     fields_desc = [
-        [
-            ByteEnumField(
-                "sig_type",
-                0,
-                {0: SignatureType.SEQNUM_SIG.value, 1: SignatureType.TS_SIG.value},
-            ),
-            ShortField("sig_idx", 0),
-            ByteField("block_idx", 0),
-        ],
+        ByteEnumField(
+            "sig_type",
+            0,
+            {0: SignatureType.SEQNUM_SIG.value, 1: SignatureType.TS_SIG.value},
+        ),
+        ShortField("sig_idx", 0),
+        ByteField("block_idx", 0),
     ]
 
 
@@ -43,7 +41,7 @@ class Signature(Packet):
     """Single signature payload of packet."""
 
     name = "Signature"
-    fields_desc = [[IntField("Signature", 0)]]
+    fields_desc = [IntField("Signature", 0)]
 
 
 def main() -> None:
