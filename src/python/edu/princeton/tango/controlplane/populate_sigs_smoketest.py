@@ -18,8 +18,8 @@ from scapy.sendrecv import sendp
 class SignatureType(Enum):
     """Type of signature being written."""
 
-    SEQNUM_SIG = "SEQNUM_SIG"
-    TS_SIG = "TS_SIG"
+    SEQNUM_SIG = 0
+    TS_SIG = 1
 
 
 class SignatureMetadata(Packet):
