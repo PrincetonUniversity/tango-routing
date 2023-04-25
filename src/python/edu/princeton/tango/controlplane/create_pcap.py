@@ -11,7 +11,6 @@ from typing import List, Tuple
 
 from scapy.layers.inet6 import (
     UDP,
-    ByteEnumField,
     ByteField,
     Ether,
     IntField,
@@ -41,8 +40,8 @@ class PrecomputedSignatures:
 class SignatureType(Enum):
     """Type of signature being written."""
 
-    SEQNUM_SIG = "SEQNUM_SIG"
-    TS_SIG = "TS_SIG"
+    SEQNUM_SIG = 0
+    TS_SIG = 1
 
 
 class SignatureMetadata(Packet):
@@ -50,15 +49,9 @@ class SignatureMetadata(Packet):
 
     name = "SignatureMetadata"
     fields_desc = [
-        [
-            ByteEnumField(
-                "sig_type",
-                0,
-                {0: SignatureType.SEQNUM_SIG.value, 1: SignatureType.TS_SIG.value},
-            ),
-            ShortField("sig_idx", 0),
-            ByteField("block_idx", 0),
-        ],
+        ByteField("sig_type", 0),
+        ShortField("sig_idx", 0),
+        ByteField("block_idx", 0),
     ]
 
 
@@ -66,7 +59,7 @@ class Signature(Packet):
     """Single signature payload of packet."""
 
     name = "Signature"
-    fields_desc = [[IntField("Signature", 0)]]
+    fields_desc = [IntField("signature", 0)]
 
 
 def create_signature_packet(
@@ -77,15 +70,20 @@ def create_signature_packet(
 ) -> Packet:
     """Create a packet containing all signatures in payload."""
     logger = logging.getLogger(__name__)
-    null_sig_token = Signature(0)
+    null_sig_token = Signature(signature=0)
 
     if (PKT_PREFIX_BYTES + (len(signatures) * INT_BYTES) + NULL_BYTE) >= MTU_BYTES:
         logger.error("Too many signatures were attemped to be fit in a single packet!")
         sys.exit(-1)
 
-    pkt = Ether() / IPv6() / UDP() / SignatureMetadata(sigs_type.value, start_idx, block_idx)
+    pkt = (
+        Ether()
+        / IPv6()
+        / UDP()
+        / SignatureMetadata(sig_type=sigs_type.value, sig_idx=start_idx, block_idx=block_idx)
+    )
     for sig in signatures:
-        pkt = pkt / Signature(sig)
+        pkt = pkt / Signature(signature=sig)
     pkt = pkt / null_sig_token
 
     return pkt
