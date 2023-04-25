@@ -4,7 +4,6 @@ from enum import Enum
 
 from scapy.layers.inet6 import (
     UDP,
-    ByteEnumField,
     ByteField,
     Ether,
     IntField,
@@ -27,11 +26,7 @@ class SignatureMetadata(Packet):
 
     name = "SignatureMetadata"
     fields_desc = [
-        ByteEnumField(
-            "sig_type",
-            0,
-            {0: SignatureType.SEQNUM_SIG.value, 1: SignatureType.TS_SIG.value},
-        ),
+        ByteField("sig_type", 0),
         ShortField("sig_idx", 0),
         ByteField("block_idx", 0),
     ]
