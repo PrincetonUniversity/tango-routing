@@ -92,7 +92,9 @@ def create_signature_packet(
 
 
 def write_ts_sigs_to_pcap(
-    ts_blk_sz: int, raw_ts_sigs: List[int], max_sigs_per_pkt: int,
+    ts_blk_sz: int,
+    raw_ts_sigs: List[int],
+    max_sigs_per_pkt: int,
 ) -> None:
     """Marshall signature packets and write to pcap."""
     num_ts_books = len(raw_ts_sigs) // ts_blk_sz
@@ -126,7 +128,9 @@ def write_ts_sigs_to_pcap(
 
 
 def write_seq_sigs_to_pcap(
-    seq_blk_sz: int, raw_seq_num_sigs: List[int], max_sigs_per_pkt: int,
+    seq_blk_sz: int,
+    raw_seq_num_sigs: List[int],
+    max_sigs_per_pkt: int,
 ) -> None:
     """Marshall and write out sequence number signature packets to pcap."""
     num_seq_books = len(raw_seq_num_sigs) // seq_blk_sz
