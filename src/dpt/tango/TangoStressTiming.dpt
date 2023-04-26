@@ -19,7 +19,7 @@ const int<<9>> RECIRC_PORT = 196;
  * ================================================================================================================== */
 
 // Keep track of number of client packets coming through
-global SequenceNumberManager.t application_packet_counter = SequenceNumberManager.create();
+global Array.t<<32>> application_packet_counter = Array.create(1);
 
 // Provide read access to precomputed 1-bit signatures derived from sequence numbers
 global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
@@ -118,19 +118,6 @@ exit event set_next_signature (
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
 
-handle forward_flow (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
-
-    SequenceNumberManager.increment()
-    generate_port(
-        OUT_PORT,
-        dummy_traffic(
-            eth_header,
-            ip_header,
-            udp_header
-        )
-    );
-}
-
 memop set_start_time(int<<32>> stored_time, int<<32>> time_now) {
   if (stored_time == 0) {
     return time_now;
@@ -145,6 +132,19 @@ memop get_old(int<<32>> stored_count, int<<32>> ignore) {
 
 memop increase_by(int<<32>> stored_count, int<<32>> amount) {
     return stored_count + amount;
+}
+
+handle dummy_traffic (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
+
+    Array.setm(application_packet_counter, 0, increase_by, 1);
+    generate_port(
+        OUT_PORT,
+        dummy_traffic(
+            eth_header,
+            ip_header,
+            udp_header
+        )
+    );
 }
 
 handle set_signature (
