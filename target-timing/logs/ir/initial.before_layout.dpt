@@ -1,0 +1,184 @@
+global Array.t<<32>> application_packet_counter = Array.create(1);
+
+global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
+
+global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
+
+global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
+
+global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
+
+global Array.t<<32>> start_time = Array.create(1);
+
+global Array.t<<32>> num_pkt_finishes = Array.create(1);
+
+global Array.t<<32>> pkt_finish_times = Array.create(128);
+
+entry event dummy_traffic(int<<48>> dummy_traffic_eth_header_0,int<<48>> dummy_traffic_eth_header_1,int<<16>> dummy_traffic_eth_header_2,int<<8>> dummy_traffic_ip_header_0,int<<8>> dummy_traffic_ip_header_1,int<<16>> dummy_traffic_ip_header_2,int<<16>> dummy_traffic_ip_header_3,int<<16>> dummy_traffic_ip_header_4,int<<8>> dummy_traffic_ip_header_5,int<<8>> dummy_traffic_ip_header_6,int<<16>> dummy_traffic_ip_header_7,int<<32>> dummy_traffic_ip_header_8,int<<32>> dummy_traffic_ip_header_9,int<<16>> dummy_traffic_udp_header_0,int<<16>> dummy_traffic_udp_header_1,int<<16>> dummy_traffic_udp_header_2,int<<16>> dummy_traffic_udp_header_3);
+event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
+event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
+handle set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
+
+}
+handle dummy_traffic(int<<48>> dummy_traffic_eth_header_0,int<<48>> dummy_traffic_eth_header_1,int<<16>> dummy_traffic_eth_header_2,int<<8>> dummy_traffic_ip_header_0,int<<8>> dummy_traffic_ip_header_1,int<<16>> dummy_traffic_ip_header_2,int<<16>> dummy_traffic_ip_header_3,int<<16>> dummy_traffic_ip_header_4,int<<8>> dummy_traffic_ip_header_5,int<<8>> dummy_traffic_ip_header_6,int<<16>> dummy_traffic_ip_header_7,int<<32>> dummy_traffic_ip_header_8,int<<32>> dummy_traffic_ip_header_9,int<<16>> dummy_traffic_udp_header_0,int<<16>> dummy_traffic_udp_header_1,int<<16>> dummy_traffic_udp_header_2,int<<16>> dummy_traffic_udp_header_3) {
+
+}
+handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+
+}
+// shared locals:
+int<<48>> pre_gen_copy_dummy_traffic_eth_header_0;
+int<<48>> pre_gen_copy_dummy_traffic_eth_header_1;
+int<<16>> pre_gen_copy_dummy_traffic_eth_header_2;
+int<<8>> pre_gen_copy_dummy_traffic_ip_header_0;
+int<<8>> pre_gen_copy_dummy_traffic_ip_header_1;
+int<<16>> pre_gen_copy_dummy_traffic_ip_header_2;
+int<<16>> pre_gen_copy_dummy_traffic_ip_header_3;
+int<<16>> pre_gen_copy_dummy_traffic_ip_header_4;
+int<<8>> pre_gen_copy_dummy_traffic_ip_header_5;
+int<<8>> pre_gen_copy_dummy_traffic_ip_header_6;
+int<<16>> pre_gen_copy_dummy_traffic_ip_header_7;
+int<<32>> pre_gen_copy_dummy_traffic_ip_header_8;
+int<<32>> pre_gen_copy_dummy_traffic_ip_header_9;
+int<<16>> pre_gen_copy_dummy_traffic_udp_header_0;
+int<<16>> pre_gen_copy_dummy_traffic_udp_header_1;
+int<<16>> pre_gen_copy_dummy_traffic_udp_header_2;
+int<<16>> pre_gen_copy_dummy_traffic_udp_header_3;
+// MAIN HANDLER 
+handler main(...){
+// Stage 0
+match event_id with 
+| 3 -> {
+Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);
+}
+| 1 -> {
+Array.update_complex(application_packet_counter,0,increase_by,1,0,0);
+pre_gen_copy_dummy_traffic_eth_header_0 = dummy_traffic_eth_header_0;
+pre_gen_copy_dummy_traffic_eth_header_1 = dummy_traffic_eth_header_1;
+pre_gen_copy_dummy_traffic_eth_header_2 = dummy_traffic_eth_header_2;
+pre_gen_copy_dummy_traffic_ip_header_0 = dummy_traffic_ip_header_0;
+pre_gen_copy_dummy_traffic_ip_header_1 = dummy_traffic_ip_header_1;
+pre_gen_copy_dummy_traffic_ip_header_2 = dummy_traffic_ip_header_2;
+pre_gen_copy_dummy_traffic_ip_header_3 = dummy_traffic_ip_header_3;
+pre_gen_copy_dummy_traffic_ip_header_4 = dummy_traffic_ip_header_4;
+pre_gen_copy_dummy_traffic_ip_header_5 = dummy_traffic_ip_header_5;
+pre_gen_copy_dummy_traffic_ip_header_6 = dummy_traffic_ip_header_6;
+pre_gen_copy_dummy_traffic_ip_header_7 = dummy_traffic_ip_header_7;
+pre_gen_copy_dummy_traffic_ip_header_8 = dummy_traffic_ip_header_8;
+pre_gen_copy_dummy_traffic_ip_header_9 = dummy_traffic_ip_header_9;
+pre_gen_copy_dummy_traffic_udp_header_0 = dummy_traffic_udp_header_0;
+pre_gen_copy_dummy_traffic_udp_header_1 = dummy_traffic_udp_header_1;
+pre_gen_copy_dummy_traffic_udp_header_2 = dummy_traffic_udp_header_2;
+pre_gen_copy_dummy_traffic_udp_header_3 = dummy_traffic_udp_header_3;
+generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));
+}
+| 2 -> {
+int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
+int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
+match if_precomp with 
+| 0 -> {
+match block_idx_copy with 
+| 0 -> {
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3732,sig_copy,0,0);
+}
+| _ -> {
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3736,sig_copy,0,0);
+}
+}
+| _ -> {
+match set_signature_block_idx with 
+| 0 -> {
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3740,set_signature_curr_signature,0,0);
+}
+| _ -> {
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3744,set_signature_curr_signature,0,0);
+}
+}
+match set_signature_next_signature with 
+| 0 -> {
+int<<32>> time_now = Sys.time();
+Array.update_complex(start_time,0,set_start_time,time_now,0,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3750,0,1,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3754,time_now,0,0);
+}
+| _ -> {
+int<<16>> precompute = set_signature_ip_header_1-32;
+int<<16>> precompute3723 = 1+set_signature_sig_idx;
+generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3723,set_signature_block_idx,set_signature_next_signature));
+}
+Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);
+}}
+memop set_3754(int<<32>> mem_val_3753,int<<32>> new_val_3751,int<<32>> unused_3752)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3751), None
+cell2=None, None
+
+ret=None
+}}
+memop combined_memop_get_old_increase_by_3750(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3747)
+ {{
+b1=(mbool_3748,true);
+b2=(mbool_3749,true)
+cell1=(mbool_3748 -> stored_count+amount_set_3747), None
+cell2=(mbool_3749 -> stored_count), None
+
+ret=(true -> cell2)
+}}
+memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> unused_3746)
+ {{
+b1=None;
+b2=(mbool_3745,stored_time==0)
+cell1=None, None
+cell2=(mbool_3745 -> time_now), (!mbool_3745 -> stored_time)
+
+ret=(true -> cell2)
+}}
+memop set_3744(int<<32>> mem_val_3743,int<<32>> new_val_3741,int<<32>> unused_3742)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3741), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3740(int<<32>> mem_val_3739,int<<32>> new_val_3737,int<<32>> unused_3738)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3737), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3736(int<<32>> mem_val_3735,int<<32>> new_val_3733,int<<32>> unused_3734)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3733), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3732(int<<32>> mem_val_3731,int<<32>> new_val_3729,int<<32>> unused_3730)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3729), None
+cell2=None, None
+
+ret=None
+}}
+memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3728)
+ {{
+b1=None;
+b2=(mbool_3727,true)
+cell1=None, None
+cell2=(mbool_3727 -> stored_count+amount), None
+
+ret=(true -> cell2)
+}}

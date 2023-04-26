@@ -1,0 +1,200 @@
+include "Time.dpt"
+include "Types.dpt"
+include "static_maps/TrafficClassMap.dpt"
+include "static_maps/TunnelHeaderMap.dpt"
+include "store_managers/SequenceNumberManager.dpt"
+include "store_managers/cryptography/signatures/BookSignatureManager.dpt"
+include "store_managers/cryptography/signatures/MetricSignatureManager.dpt"
+
+/* ================================================================================================================== *
+ *                                                     EXTERNS                                                        *
+ * ================================================================================================================== */
+
+// Port declarations
+const int<<9>> OUT_PORT = 128;
+const int<<9>> RECIRC_PORT = 196;
+
+/* ================================================================================================================== *
+ *                                                     GLOBALS                                                        *
+ * ================================================================================================================== */
+
+// Keep track of number of client packets coming through
+global Array.t<<32>> application_packet_counter = Array.create(1);
+
+// Provide read access to precomputed 1-bit signatures derived from sequence numbers
+global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureManager.create();
+
+// Provide read access to precomputed timestamp + path ID signatures
+global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
+
+// Keep track of write start
+global Array.t<<32>> start_time = Array.create(1);
+
+// Keep track of number of packet finishes
+global Array.t<<32>> num_pkt_finishes = Array.create(1);
+
+// Record finish times for all control write packets
+global Array.t<<32>> pkt_finish_times = Array.create(128);
+
+/* ================================================================================================================== *
+ *                                                     EVENTS                                                         *
+ * ================================================================================================================== */
+
+/**
+ * # Description
+ * Process a dummy traffic packet
+ * 
+ * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): UDP header of incoming packet
+ *
+ * # Generates
+ * dummy_traffic: statically route out dummy traffic
+ **/
+entry event dummy_traffic (
+    EthernetHeader_t eth_header,
+    IPv4Header_t ip_header,
+    UDPHeader_t udp_header
+) [ application_packet_counter <= application_packet_counter ];
+
+/**
+ * # Description
+ * Set signataure for a given index and block.
+ * 
+ * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): TCP header of incoming packet
+ * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
+ * sig_idx (int<<16>>): index to place signature at
+ * block_idx (int<<8>>): block to write too
+ * curr_signature (int<<32>>): current signature to write
+ * next_signature (int<<32>>): next signature to be written after current is sliced
+ *
+ * # Generates
+ * set_next_signature: set the next signature contained in packet.
+ **/
+event set_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> curr_signature,
+    int<<32>> next_signature
+) [
+    outgoing_book_signature_manager < outgoing_metric_signature_manager;
+    outgoing_metric_signature_manager < start_time;
+    start_time < num_pkt_finishes;
+    num_pkt_finishes < pkt_finish_times
+];
+
+/**
+ * # Description
+ * Set signataure for a given index and block.
+ * 
+ * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv4Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): TCP header of incoming packet
+ * sig_type (int<<8>>): is this a book signature (==0) or timestamp signature (==1)
+ * sig_idx (int<<16>>): index to place signature at
+ * block_idx (int<<8>>): block to write too
+ * next_signature (int<<32>>): next signature to be written after current is sliced
+ **/
+exit event set_next_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> next_signature
+);
+
+/* ================================================================================================================== *
+ *                                                    HANDLERS                                                        *
+ * ================================================================================================================== */
+
+memop set_start_time(int<<32>> stored_time, int<<32>> time_now) {
+  if (stored_time == 0) {
+    return time_now;
+  } else {
+    return stored_time;
+  }
+}
+
+memop get_old(int<<32>> stored_count, int<<32>> ignore) {
+    return stored_count;
+}
+
+memop increase_by(int<<32>> stored_count, int<<32>> amount) {
+    return stored_count + amount;
+}
+
+handle dummy_traffic (EthernetHeader_t eth_header, IPv4Header_t ip_header, UDPHeader_t udp_header) {
+
+    Array.setm(application_packet_counter, 0, increase_by, 1);
+    generate_port(
+        OUT_PORT,
+        dummy_traffic(
+            eth_header,
+            ip_header,
+            udp_header
+        )
+    );
+}
+
+handle set_signature (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header,
+    int<<8>> sig_type,
+    int<<16>> sig_idx,
+    int<<8>> block_idx,
+    int<<32>> curr_signature,
+    int<<32>> next_signature
+) {
+    int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
+    int<<32>> sig_copy = hash<<32>>(1, curr_signature);
+    int<<8>> block_idx_copy = hash<<8>>(1, block_idx);
+    if (((int<<32>>) sig_type) == 0) {
+        BookSignatureManager.set_signature_word(
+            outgoing_book_signature_manager,
+            sig_idx_copy,
+            sig_copy,
+            block_idx_copy
+        );
+    } else {
+        MetricSignatureManager.set_signature(
+            outgoing_metric_signature_manager,
+            sig_idx,
+            curr_signature,
+            block_idx
+        );
+    }
+
+    if (next_signature != 0) {
+        generate_port(
+            RECIRC_PORT,
+            set_next_signature(
+                eth_header,
+                { ip_header with payload_len = ip_header#payload_len - 32 },
+                udp_header,
+                sig_type,
+                sig_idx + 1,
+                block_idx,
+                next_signature
+            )
+        );
+    } else {
+        int<<32>> time_now = Sys.time();
+        Array.setm(start_time, 0, set_start_time, time_now);
+
+        int<<32>> done_idx = Array.update(num_pkt_finishes, 0, get_old, 0, increase_by, 1);
+
+        Array.set(pkt_finish_times, done_idx, time_now);
+    }
+}
