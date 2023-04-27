@@ -202,7 +202,7 @@ def main() -> None:
         logger.info("Resetting registers...")
 
         start_time_reset = start_time_tbl.create_bulk_data_entry(
-            fieldname="start_time.f1", values=[(2**31)-1],
+            fieldname="start_time.f1", values=[0],
         )
 
         pkt_timings_reset = pkt_write_times_tbl.create_bulk_data_entry(

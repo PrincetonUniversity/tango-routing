@@ -65,7 +65,7 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
 memop set_start_time(int<<32>> stored_time,int<<32>> time_now)
- {if stored_time>time_now then time_now else stored_time}
+ {if stored_time==0 then time_now else stored_time}
 
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
@@ -111,7 +111,7 @@ Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signatur
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
 int<<32>> precompute = Sys.time();
@@ -158,7 +158,7 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
 memop set_start_time(int<<32>> stored_time,int<<32>> time_now)
- {if stored_time>time_now then time_now else stored_time}
+ {if stored_time==0 then time_now else stored_time}
 
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
@@ -204,7 +204,7 @@ Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signatur
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = 1+set_signature_sig_idx;
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
 int<<32>> precompute = Sys.time();
@@ -251,7 +251,7 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
 memop set_start_time(int<<32>> stored_time,int<<32>> time_now)
- {if stored_time>time_now then time_now else stored_time}
+ {if stored_time==0 then time_now else stored_time}
 
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
@@ -297,7 +297,7 @@ Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signatur
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = 1+set_signature_sig_idx;
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
 int<<32>> precompute = Sys.time();

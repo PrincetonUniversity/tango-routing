@@ -37,7 +37,7 @@ event set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_
 event set_next_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> next_signature);
 
 memop set_start_time(int<<32>> stored_time,int<<32>> time_now)
- {if stored_time>time_now then time_now else stored_time}
+ {if stored_time==0 then time_now else stored_time}
 
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
@@ -81,7 +81,7 @@ Array.set(outgoing_metric_signature_manager_1,sig_idx,curr_signature);
 false;
 }
 if (next_signature!=0) {
-generate_port (196, set_next_signature(eth_header_0,eth_header_1,eth_header_2,ip_header_0,ip_header_1-32,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3,sig_type,sig_idx+1,block_idx,next_signature));
+generate_port (68, set_next_signature(eth_header_0,eth_header_1,eth_header_2,ip_header_0,ip_header_1-32,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3,sig_type,sig_idx+1,block_idx,next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
 Array.set(pkt_finish_times,done_idx,Sys.time());
