@@ -1,24 +1,23 @@
 # Stress Test Experiment Overview
 
+### Cabernet804 (DPID 28, Port XX/0), use DPDK to send control packets 
+```bash 
+export RTE_SDK=/u/shared/pktgen-dpdk-pktgen-19.12.0/
+export RTE_TARGET=x86_64-native-linuxapp-gcc
+cd /u/shared/pktgen-dpdk-pktgen-19.12.0
+tools/run.py cabernet
+```
 
-### Cabernet802 (DPID 4, Port 16/0) for sending traffic
-
-Configure routing for interface enp134s0f1 (Notice the interface is different than the one used for the dyn-routing experiment!) and send traffic with iperf:
-
+### Cabernet801 (DPID 36, Port XX/0), use DPDK to send background IPv6/UDP traffic 
 ```bash
-# Set up local IP and MAC 
-sudo ifconfig enp134s0f0 <ip6 address> 
-sudo ifconfig enp134s0f0 hw ether <mac address> 
-# Create route to switch "gateway" with an ipv6 address and the destination MAC of the eBPF server
-sudo ip -6 neigh add fc::3 lladdr 50:6b:4b:c4:01:80 dev enp134s0f0
-# Add route to destination IPv6 address through switch gateway interface 
-sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f0
-# Iperf command to send packets (remove -V for non IPv6 traffic, also remember to adjust destination addresses as needed)
-iperf -t 50000000 -i 1 -V -u -c 2604:4540:80::1 -l1000 -b 100k
+export RTE_SDK=/u/shared/pktgen-dpdk
+export RTE_TARGET=x86_64-native-linuxapp-gcc
+tools/run.py cabernet
+```
 
 ```
 
-### Cabino1 as Tango switch
+### Cabino2 as Tango switch
 ```bash
 sudo su
 cd /data/bf-sde-9.7.1
@@ -27,7 +26,7 @@ cd /u/sy6/tango
 $SDE/p4_build.sh v6.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=tna
 $SDE/./run_switchd.sh -p v6
 
-# From bfshell> get to bf-sde.pm>, bring up ports for cab802 (16/0) and cab803(15/0), and view sending rates on the ports 
+# From bfshell> get to bf-sde.pm>, bring up ports for cab804 (XX/0) and cab801 XX/0), and view sending rates on the ports 
 ucli
 pm
 port-add 16/0 100G NONE
