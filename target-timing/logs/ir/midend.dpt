@@ -57,7 +57,7 @@ generate_port (12, dummy_traffic(eth_header_0,eth_header_1,eth_header_2,ip_heade
 }
 
 handle set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> curr_signature,int<<32>> next_signature) {
-Array.setm(start_time,0,set_start_time,Sys.time());
+Array.set(start_time,0,Sys.time());
 int<<16>> sig_idx_copy = hash<<16>>(1,sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,block_idx);

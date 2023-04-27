@@ -157,7 +157,8 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    Array.setm(start_time, 0, set_start_time, Sys.time());
+    // Array.setm(start_time, 0, set_start_time, Sys.time());
+    Array.set(start_time, 0, Sys.time());
 
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);
