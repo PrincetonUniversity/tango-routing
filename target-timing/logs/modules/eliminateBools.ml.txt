@@ -8,6 +8,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> start_time = Array.create(1);
+
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 
@@ -21,9 +24,6 @@ global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-
-global Array.t<<32>> start_time = Array.create(1);
 
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -59,6 +59,8 @@ generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_h
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> precompute = Sys.time();
+Array.setm(start_time,0,set_start_time,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -84,10 +86,9 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 }
 -----end before boolean elimination-------
@@ -100,6 +101,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> start_time = Array.create(1);
+
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 
@@ -113,9 +117,6 @@ global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-
-global Array.t<<32>> start_time = Array.create(1);
 
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -151,6 +152,8 @@ generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_h
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> precompute = Sys.time();
+Array.setm(start_time,0,set_start_time,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -176,10 +179,9 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 }
 -----end after phase 1: non-immediate elimination-------
@@ -192,6 +194,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> start_time = Array.create(1);
+
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 
@@ -205,9 +210,6 @@ global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-
-global Array.t<<32>> start_time = Array.create(1);
 
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -243,6 +245,8 @@ generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_h
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> precompute = Sys.time();
+Array.setm(start_time,0,set_start_time,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -269,10 +273,9 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 }
 -----end after phase 2: if expression cannonization-------
@@ -285,6 +288,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> start_time = Array.create(1);
+
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 
@@ -298,9 +304,6 @@ global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-
-global Array.t<<32>> start_time = Array.create(1);
 
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -336,6 +339,8 @@ generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_h
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> precompute = Sys.time();
+Array.setm(start_time,0,set_start_time,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -362,10 +367,9 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 }
 -----end after phase 3: immediate elimination-------

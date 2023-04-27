@@ -6,6 +6,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> start_time = Array.create(1);
+
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 
@@ -19,9 +22,6 @@ global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-
-global Array.t<<32>> start_time = Array.create(1);
 
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -57,6 +57,7 @@ generate_port (128, dummy_traffic(eth_header_0,eth_header_1,eth_header_2,ip_head
 }
 
 handle set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> curr_signature,int<<32>> next_signature) {
+Array.setm(start_time,0,set_start_time,Sys.time());
 int<<16>> sig_idx_copy = hash<<16>>(1,sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,block_idx);
@@ -82,9 +83,7 @@ false;
 if (next_signature!=0) {
 generate_port (196, set_next_signature(eth_header_0,eth_header_1,eth_header_2,ip_header_0,ip_header_1-32,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3,sig_type,sig_idx+1,block_idx,next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+Array.set(pkt_finish_times,done_idx,Sys.time());
 }
 }

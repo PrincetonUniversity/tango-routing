@@ -18,6 +18,9 @@ const int<<9>> RECIRC_PORT = 196;
  *                                                     GLOBALS                                                        *
  * ================================================================================================================== */
 
+// Keep track of write start
+global Array.t<<32>> start_time = Array.create(1);
+
 // Keep track of number of client packets coming through
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
@@ -26,9 +29,6 @@ global BookSignatureManager.t outgoing_book_signature_manager = BookSignatureMan
 
 // Provide read access to precomputed timestamp + path ID signatures
 global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignatureManager.create();
-
-// Keep track of write start
-global Array.t<<32>> start_time = Array.create(1);
 
 // Keep track of number of packet finishes
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
@@ -85,9 +85,9 @@ event set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) [
+    start_time < outgoing_book_signature_manager;
     outgoing_book_signature_manager < outgoing_metric_signature_manager;
-    outgoing_metric_signature_manager < start_time;
-    start_time < num_pkt_finishes;
+    outgoing_metric_signature_manager < num_pkt_finishes;
     num_pkt_finishes < pkt_finish_times
 ];
 
@@ -157,6 +157,8 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
+    Array.setm(start_time, 0, set_start_time, Sys.time());
+
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);
     int<<8>> block_idx_copy = hash<<8>>(1, block_idx);
@@ -190,11 +192,8 @@ handle set_signature (
             )
         );
     } else {
-        int<<32>> time_now = Sys.time();
-        Array.setm(start_time, 0, set_start_time, time_now);
-
         int<<32>> done_idx = Array.update(num_pkt_finishes, 0, get_old, 0, increase_by, 1);
 
-        Array.set(pkt_finish_times, done_idx, time_now);
+        Array.set(pkt_finish_times, done_idx, Sys.time());
     }
 }

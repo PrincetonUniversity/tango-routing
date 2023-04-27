@@ -42,10 +42,9 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 new if statement: 
 if (set_signature_next_signature!=0) {
@@ -53,20 +52,19 @@ int<<16>> precompute = set_signature_ip_header_1-32;
 int<<16>> precompute = set_signature_sig_idx+1;
 generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
-int<<32>> time_now = Sys.time();
-Array.setm(start_time,0,set_start_time,time_now);
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
-Array.set(pkt_finish_times,done_idx,time_now);
+int<<32>> precompute = Sys.time();
+Array.set(pkt_finish_times,done_idx,precompute);
 }
 converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~3724 tmp_val_id~3725)
+converting: (= if_precomp~3745 tmp_val_id~3746)
 
-converting: if_precomp~3724
+converting: if_precomp~3745
 
-converting: tmp_val_id~3725
+converting: tmp_val_id~3746
 
 old expression:  if_precomp==0
 
@@ -78,13 +76,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~3726))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~3747))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~3726)
+converting: (= set_signature_next_signature~0 tmp_val_id~3747)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~3726
+converting: tmp_val_id~3747
 
 old expression:  set_signature_next_signature!=0
 

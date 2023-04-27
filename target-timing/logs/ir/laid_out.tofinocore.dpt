@@ -1,3 +1,5 @@
+global Array.t<<32>> start_time = Array.create(1);
+
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
 global Array.t<<32>> outgoing_book_signature_manager_0 = Array.create(2048);
@@ -7,8 +9,6 @@ global Array.t<<32>> outgoing_book_signature_manager_1 = Array.create(2048);
 global Array.t<<32>> outgoing_metric_signature_manager_0 = Array.create(16);
 
 global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
-
-global Array.t<<32>> start_time = Array.create(1);
 
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
 
@@ -73,9 +73,10 @@ pre_gen_copy_dummy_traffic_udp_header_3 = dummy_traffic_udp_header_3;
 generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));
 }
 | 2,0 -> {
+int<<32>> precompute = Sys.time();
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
-int<<32>> time_now = Sys.time();
+int<<32>> precompute3744 = Sys.time();
 }
 | 3,_ -> {
 Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);
@@ -102,10 +103,11 @@ pre_gen_copy_dummy_traffic_udp_header_3 = dummy_traffic_udp_header_3;
 generate_port (128, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));
 }
 | 2,_ -> {
+int<<32>> precompute = Sys.time();
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
-int<<16>> precompute = set_signature_ip_header_1-32;
-int<<16>> precompute3723 = 1+set_signature_sig_idx;
+int<<16>> precompute3742 = set_signature_ip_header_1-32;
+int<<16>> precompute3743 = 1+set_signature_sig_idx;
 }
 | _,_ -> {
 
@@ -119,7 +121,7 @@ match (event_id,set_signature_next_signature) with
 }
 | 2,0 -> {
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3750,0,1,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3771,0,1,0);
 }
 | 3,_ -> {
 
@@ -147,81 +149,27 @@ int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 
 }
 // Stage 1
-match (set_signature_block_idx,if_precomp,event_id,set_signature_next_signature) with 
-| 0,0,3,0 -> {
+match (event_id,set_signature_next_signature) with 
+| 3,0 -> {
 
 }
-| 0,_,3,0 -> {
+| 1,0 -> {
 
 }
-| _,0,3,0 -> {
+| 2,0 -> {
+Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+}
+| 3,_ -> {
 
 }
-| _,_,3,0 -> {
+| 1,_ -> {
 
 }
-| 0,0,1,0 -> {
-
+| 2,_ -> {
+Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3742,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3743,set_signature_block_idx,set_signature_next_signature));
 }
-| 0,_,1,0 -> {
-
-}
-| _,0,1,0 -> {
-
-}
-| _,_,1,0 -> {
-
-}
-| 0,0,2,0 -> {
-
-}
-| 0,_,2,0 -> {
-
-}
-| _,0,2,0 -> {
-
-}
-| _,_,2,0 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3744,set_signature_curr_signature,0,0);
-}
-| 0,0,3,_ -> {
-
-}
-| 0,_,3,_ -> {
-
-}
-| _,0,3,_ -> {
-
-}
-| _,_,3,_ -> {
-
-}
-| 0,0,1,_ -> {
-
-}
-| 0,_,1,_ -> {
-
-}
-| _,0,1,_ -> {
-
-}
-| _,_,1,_ -> {
-
-}
-| 0,0,2,_ -> {
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3723,set_signature_block_idx,set_signature_next_signature));
-}
-| 0,_,2,_ -> {
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3723,set_signature_block_idx,set_signature_next_signature));
-}
-| _,0,2,_ -> {
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3723,set_signature_block_idx,set_signature_next_signature));
-}
-| _,_,2,_ -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3744,set_signature_curr_signature,0,0);
-generate_port (196, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3723,set_signature_block_idx,set_signature_next_signature));
-}
-| _,_,_,_ -> {
+| _,_ -> {
 
 }
 match (set_signature_block_idx,if_precomp,event_id) with 
@@ -241,7 +189,47 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3740,set_signature_curr_signature,0,0);
+
+}
+| _,0,3 -> {
+
+}
+| _,0,1 -> {
+
+}
+| _,0,2 -> {
+
+}
+| _,_,3 -> {
+
+}
+| _,_,1 -> {
+
+}
+| _,_,2 -> {
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3767,set_signature_curr_signature,0,0);
+}
+| _,_,_ -> {
+
+}
+match (set_signature_block_idx,if_precomp,event_id) with 
+| 0,0,3 -> {
+
+}
+| 0,0,1 -> {
+
+}
+| 0,0,2 -> {
+
+}
+| 0,_,3 -> {
+
+}
+| 0,_,1 -> {
+
+}
+| 0,_,2 -> {
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3763,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -263,11 +251,12 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3736,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3759,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
+// Stage 2
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
 
@@ -276,12 +265,11 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3732,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3755,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
-// Stage 2
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
 
@@ -290,20 +278,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(start_time,0,set_start_time,time_now,0,0);
-}
-| _,_ -> {
-
-}
-match (set_signature_next_signature,event_id) with 
-| 0,3 -> {
-
-}
-| 0,1 -> {
-
-}
-| 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3754,time_now,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3775,precompute3744,0,0);
 }
 | _,_ -> {
 
@@ -322,75 +297,75 @@ Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header
 | _ -> {
 
 }}
-memop set_3754(int<<32>> mem_val_3753,int<<32>> new_val_3751,int<<32>> unused_3752)
+memop set_3775(int<<32>> mem_val_3774,int<<32>> new_val_3772,int<<32>> unused_3773)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3751), None
+cell1=(true -> new_val_3772), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_get_old_increase_by_3750(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3747)
+memop combined_memop_get_old_increase_by_3771(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3768)
  {{
-b1=(mbool_3748,true);
-b2=(mbool_3749,true)
-cell1=(mbool_3748 -> stored_count+amount_set_3747), None
-cell2=(mbool_3749 -> stored_count), None
+b1=(mbool_3769,true);
+b2=(mbool_3770,true)
+cell1=(mbool_3769 -> stored_count+amount_set_3768), None
+cell2=(mbool_3770 -> stored_count), None
 
 ret=(true -> cell2)
 }}
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> unused_3746)
+memop set_3767(int<<32>> mem_val_3766,int<<32>> new_val_3764,int<<32>> unused_3765)
  {{
 b1=None;
-b2=(mbool_3745,stored_time==0)
+b2=None
+cell1=(true -> new_val_3764), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3763(int<<32>> mem_val_3762,int<<32>> new_val_3760,int<<32>> unused_3761)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3760), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3759(int<<32>> mem_val_3758,int<<32>> new_val_3756,int<<32>> unused_3757)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3756), None
+cell2=None, None
+
+ret=None
+}}
+memop set_3755(int<<32>> mem_val_3754,int<<32>> new_val_3752,int<<32>> unused_3753)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_3752), None
+cell2=None, None
+
+ret=None
+}}
+memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> unused_3751)
+ {{
+b1=None;
+b2=(mbool_3750,stored_time==0)
 cell1=None, None
-cell2=(mbool_3745 -> time_now), (!mbool_3745 -> stored_time)
+cell2=(mbool_3750 -> time_now), (!mbool_3750 -> stored_time)
 
 ret=(true -> cell2)
 }}
-memop set_3744(int<<32>> mem_val_3743,int<<32>> new_val_3741,int<<32>> unused_3742)
+memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3749)
  {{
 b1=None;
-b2=None
-cell1=(true -> new_val_3741), None
-cell2=None, None
-
-ret=None
-}}
-memop set_3740(int<<32>> mem_val_3739,int<<32>> new_val_3737,int<<32>> unused_3738)
- {{
-b1=None;
-b2=None
-cell1=(true -> new_val_3737), None
-cell2=None, None
-
-ret=None
-}}
-memop set_3736(int<<32>> mem_val_3735,int<<32>> new_val_3733,int<<32>> unused_3734)
- {{
-b1=None;
-b2=None
-cell1=(true -> new_val_3733), None
-cell2=None, None
-
-ret=None
-}}
-memop set_3732(int<<32>> mem_val_3731,int<<32>> new_val_3729,int<<32>> unused_3730)
- {{
-b1=None;
-b2=None
-cell1=(true -> new_val_3729), None
-cell2=None, None
-
-ret=None
-}}
-memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3728)
- {{
-b1=None;
-b2=(mbool_3727,true)
+b2=(mbool_3748,true)
 cell1=None, None
-cell2=(mbool_3727 -> stored_count+amount), None
+cell2=(mbool_3748 -> stored_count+amount), None
 
 ret=(true -> cell2)
 }}
