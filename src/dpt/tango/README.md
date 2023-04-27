@@ -6,7 +6,18 @@
 export RTE_SDK=/u/shared/pktgen-dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 cd /u/shared/pktgen-dpdk
-tools/run.py cabernet
+sudo -E tools/run.py cabernet
+
+set 1 type ipv6
+set 1 count 0
+set 1 burst 10000
+set 1 rate 1
+enable 1 random 
+set 1 proto tcp
+set 1 size 40 
+set 1 src mac 00:00:00:00:00:81
+set 1 dst mac 00:00:00:00:00:ff 
+start 1
 ```
 
 ### Cabernet804 (DPID 28, Port 13/0), use DPDK to send control packets 
@@ -37,4 +48,12 @@ port-enb 12/0
 port-enb 13/0
 rate-period 1
 rate-show
+```
+
+### Cabernet803 (DPID 12, Port 13/0), dump output packets from background traffic here
+```bash 
+export RTE_SDK=/u/shared/pktgen-dpdk-pktgen-19.12.0/
+export RTE_TARGET=x86_64-native-linuxapp-gcc
+cd /u/shared/pktgen-dpdk-pktgen-19.12.0
+tools/run.py cabernet
 ```
