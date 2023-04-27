@@ -118,11 +118,11 @@ exit event set_next_signature (
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
 
-memop set_start_time(int<<32>> stored_time, int<<32>> time_now) {
-    if (stored_time == 0) {
-        return time_now;
-    } else {
-        return stored_time;
+memop set_start_time(int<<32>> stored_time, int<<32>> time_now, int<<32>> cmp_val) {
+    bool should_set = (stored_time == cmp_val);
+
+    if (should_set) {
+        cell1 = time_now;
     }
 }
 
@@ -157,7 +157,7 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    Array.setm(start_time, 0, set_start_time, Sys.time());
+    Array.update_complex(start_time, 0, set_start_time, Sys.time(), 0, 0);
 
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);
