@@ -25,7 +25,12 @@ start 1
 export RTE_SDK=/u/shared/pktgen-dpdk-pktgen-19.12.0/
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 cd /u/shared/pktgen-dpdk-pktgen-19.12.0
-tools/run.py cabernet
+tools/run.py tango_pcap
+
+set 1 count 0
+set 1 burst 10000
+set 1 rate 1
+start 1
 ```
 
 ### Cabino2 as Tango switch
