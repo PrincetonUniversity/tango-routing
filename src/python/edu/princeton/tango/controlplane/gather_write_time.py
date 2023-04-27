@@ -162,12 +162,9 @@ def main() -> None:
             values=[0],
         )
 
-        scraped_start_time = list(
-            filter(
-                lambda x: x != 0,
-                start_time_tbl.get_bulk_entry(start_time_key)[0].data.to_dict()["start_time.f1"],
-            ),
-        )[0]
+        scraped_start_time = 0
+        for data, _ in start_time_tbl.get_bulk_entry(start_time_key):
+            scraped_start_time = list(filter(lambda x: x != 0, data.to_dict()["start_time.f1"]))[0]
 
         print("--- TRIAL START ---")  # noqa: T201
         print("--- START TIME ---")  # noqa: T201
