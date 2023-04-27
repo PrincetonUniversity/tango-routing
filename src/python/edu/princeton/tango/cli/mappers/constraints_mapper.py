@@ -69,7 +69,7 @@ class Constraint:
 
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
-        if self.exclusive_constraint >= 2**32:
+        if self.exclusive_constraint >= 2 ** 32:
             raise InvalidParameterError(
                 "".join(
                     (

@@ -306,7 +306,7 @@ def start_signature_computation(signature_file: Path) -> None:
     filepath = signature_file.absolute()
 
     test_time_len = timedelta(minutes=1)
-    packets_per_seq_book = 2**16
+    packets_per_seq_book = 2 ** 16
     num_books = 512
     num_seq_sigs = packets_per_seq_book * num_books
 
