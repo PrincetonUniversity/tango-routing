@@ -5,21 +5,21 @@ from pathlib import Path
 from typing import Self
 
 import yaml
-from edu.princeton.tango.mappers.constraints_mapper import (
+from edu.princeton.tango.cli.mappers.constraints_mapper import (
     ConfiguredConstraintMapper,
     Constraint,
     ConstraintMapper,
     ConstraintMapping,
     DefaultConstraintMapper,
 )
-from edu.princeton.tango.mappers.policy_mapper import (
+from edu.princeton.tango.cli.mappers.policy_mapper import (
     ConfiguredPolicyMapper,
     DefaultPolicyMapper,
     OptimizationStrategy,
     Policy,
     PolicyMapper,
 )
-from edu.princeton.tango.mappers.traffic_class_mapper import (
+from edu.princeton.tango.cli.mappers.traffic_class_mapper import (
     ConfiguredTrafficClassMapper,
     DefaultTrafficClassMapper,
     FuzzyClassMapping,
@@ -27,7 +27,7 @@ from edu.princeton.tango.mappers.traffic_class_mapper import (
     FuzzyIPv4Address,
     TrafficClassMapper,
 )
-from edu.princeton.tango.mappers.tunnel_header_mapper import (
+from edu.princeton.tango.cli.mappers.tunnel_header_mapper import (
     ConfiguredHeaderMapper,
     DefaultHeaderMapper,
     HeaderMapper,

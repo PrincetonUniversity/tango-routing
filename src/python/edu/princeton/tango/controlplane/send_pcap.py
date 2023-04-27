@@ -17,6 +17,6 @@ def main() -> None:
 
     sendp(pkts, iface="enp134s0f1")
 
+
 if __name__ == "__main__":
     main()
-

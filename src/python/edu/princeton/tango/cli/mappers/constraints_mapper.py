@@ -2,9 +2,9 @@
 from dataclasses import dataclass
 from typing import Final, LiteralString, Self
 
-from edu.princeton.tango.errors import InvalidParameterError
-from edu.princeton.tango.mappers.mapper import Mapper, OptimizationStrategy
-from edu.princeton.tango.match_stmt import MatchBody, MatchCase
+from edu.princeton.tango.cli.errors import InvalidParameterError
+from edu.princeton.tango.cli.mappers.mapper import Mapper, OptimizationStrategy
+from edu.princeton.tango.cli.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_CONSTRAINT_MAP: LiteralString = """include "../Types.dpt"
 

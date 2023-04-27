@@ -2,7 +2,7 @@
 
 from typing import Self
 
-from edu.princeton.tango.errors import InvalidParameterError
+from edu.princeton.tango.cli.errors import InvalidParameterError
 
 
 class MatchCase:

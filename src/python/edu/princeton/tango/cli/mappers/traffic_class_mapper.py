@@ -3,9 +3,9 @@ from dataclasses import dataclass
 from ipaddress import IPv4Address
 from typing import Final, LiteralString, Self
 
-from edu.princeton.tango.errors import InvalidParameterError
-from edu.princeton.tango.mappers.mapper import Mapper
-from edu.princeton.tango.match_stmt import MatchBody, MatchCase
+from edu.princeton.tango.cli.errors import InvalidParameterError
+from edu.princeton.tango.cli.mappers.mapper import Mapper
+from edu.princeton.tango.cli.match_stmt import MatchBody, MatchCase
 
 _DEFAULT_CLASS_MAP: LiteralString = """include "../Types.dpt"
 
