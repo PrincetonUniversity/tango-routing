@@ -50,10 +50,9 @@ rate-period 1
 rate-show
 ```
 
-### Cabernet803 (DPID 12, Port 13/0), dump output packets from background traffic here
-```bash 
-export RTE_SDK=/u/shared/pktgen-dpdk-pktgen-19.12.0/
-export RTE_TARGET=x86_64-native-linuxapp-gcc
-cd /u/shared/pktgen-dpdk-pktgen-19.12.0
-tools/run.py cabernet
+### Cabernet803 (DPID 12, Port 15/0), dump output packets from background traffic here
+```bash
+Use interface enp134s0f0np1 to send and receive traffic 
+sudo ifconfig enp134s0f0np1 up 
+ sudo tcpdump -evvvnX -i enp134s0f0np1
 ```
