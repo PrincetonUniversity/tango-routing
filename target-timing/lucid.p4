@@ -113,7 +113,7 @@ parser IngressParser(packet_in pkt,
     pkt.advance(64);
     transition select(ig_intr_md.ingress_port){
       (196) : port_196_default_set_signature;
-      (128) : port_128_default_set_signature;
+      (28) : port_28_default_set_signature;
       (4) : port_4_default_set_signature;
       (0) : parse_lucid_eth;
       (_) : default_setup;
@@ -152,7 +152,7 @@ parser IngressParser(packet_in pkt,
     hdr.bridge_ev.dummy_traffic=0;
     transition parse_set_signature;
   }
-  state port_128_default_set_signature {
+  state port_28_default_set_signature {
     hdr.wire_ev.setValid();
     hdr.bridge_ev.setValid();
     hdr.wire_ev.event_id=2;
@@ -359,7 +359,7 @@ hdr.dummy_traffic.dummy_traffic_udp_header_2=hdr.dummy_traffic.dummy_traffic_udp
    
 hdr.dummy_traffic.dummy_traffic_udp_header_3=hdr.dummy_traffic.dummy_traffic_udp_header_3;
     hdr.bridge_ev.port_event_id=1;
-    ig_tm_md.ucast_egress_port=9w128;
+    ig_tm_md.ucast_egress_port=9w12;
   }
   bit<32> precompute3744;
   action labeledstmt_48(){
