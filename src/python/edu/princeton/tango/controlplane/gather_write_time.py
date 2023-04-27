@@ -162,7 +162,7 @@ def main() -> None:
             values=[0],
         )
 
-        scraped_start_time = 0
+        scraped_start_time = -1
         for data, _ in start_time_tbl.get_bulk_entry(start_time_key):
             for start in data.to_dict()["start_time.f1"]:
                 if start:
@@ -174,12 +174,12 @@ def main() -> None:
 
         logger.info("Scraping timestamps...")
 
-        scraped_pkt_timings = pkt_write_times_tbl.create_bulk_key(
+        pkt_timing_keys = pkt_write_times_tbl.create_bulk_key(
             keyname="$REGISTER_INDEX",
             values=list(range(0, 127)),
         )
 
-        raw_scraped_pkt_times = pkt_write_times_tbl.get_bulk_entry(scraped_pkt_timings)
+        raw_scraped_pkt_times = pkt_write_times_tbl.get_bulk_entry(pkt_timing_keys)
 
         pkt_times = []
         for data, _ in raw_scraped_pkt_times:
@@ -197,6 +197,19 @@ def main() -> None:
         print("-- Runtime --")  # noqa: T201
         print(f"{times[0] - scraped_start_time} ms")  # noqa: T201
         print(f"--> {times[0]} (end) - {scraped_start_time} (start)")  # noqa: T201
+
+        logger.info("Resetting registers...")
+
+        start_time_reset = start_time_tbl.create_bulk_data_entry(
+            fieldname="start_time.f1", values=[-1],
+        )
+
+        pkt_timings_reset = pkt_write_times_tbl.create_bulk_data_entry(
+            fieldname="pkt_finish_times.f1", values=[0 for _ in range(0, 127)],
+        )
+
+        start_time_tbl.add_bulk_entry(start_time_key, start_time_reset)
+        pkt_write_times_tbl.add_bulk_entry(pkt_timing_keys, pkt_timings_reset)
 
         print("--- TRIAL END ---")  # noqa: T201
 

@@ -119,7 +119,7 @@ exit event set_next_signature (
  * ================================================================================================================== */
 
 memop set_start_time(int<<32>> stored_time, int<<32>> time_now) {
-  if (stored_time == 0) {
+  if (stored_time < 0) {
     return time_now;
   } else {
     return stored_time;

@@ -37,7 +37,7 @@ event set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_
 event set_next_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> next_signature);
 
 memop set_start_time(int<<32>> stored_time,int<<32>> time_now)
- {if stored_time==0 then time_now else stored_time}
+ {if stored_time<0 then time_now else stored_time}
 
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
