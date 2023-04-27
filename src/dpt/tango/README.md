@@ -58,6 +58,16 @@ rate-period 1
 rate-show
 ```
 
+```bash
+ucli
+pm
+port-add 16/0 100G NONE
+an-set 16/0 2
+port-enb 16/0
+rate-period 1
+rate-show
+```
+
 ### Cabernet803 (DPID 12, Port 15/0), dump output packets from background traffic here
 ```bash
 Use interface enp134s0f1np1 to send and receive traffic 
