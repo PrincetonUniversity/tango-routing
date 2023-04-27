@@ -74,7 +74,8 @@ class TableName(Enum):
     SEQ_NUM_SIGS_BLK0 = "pipe.outgoing_book_signature_manager_0"
     SEQ_NUM_SIGS_BLK1 = "pipe.outgoing_book_signature_manager_1"
     ROUTE_MANAGER = "pipe.route_manager_0"
-    PACKET_WRITE_TIMES = "pkt_finish_times"
+    PACKET_WRITE_TIMES = "pipe.pkt_finish_times"
+    START_TIME = "pipe.start_time"
 
 
 class Table:
@@ -151,58 +152,54 @@ def main() -> None:
 
     logger.info("Connecting to gRPC server...")
     with TofinoRuntimeClient() as client:
-        seq_table_block0 = Table(TableName.SEQ_NUM_SIGS_BLK0, client=client)
-        ts_table_blk0 = Table(TableName.TIMESTAMP_SIGS_BLK0, client=client)
-        seq_table_block1 = Table(TableName.SEQ_NUM_SIGS_BLK1, client=client)
-        ts_table_blk1 = Table(TableName.TIMESTAMP_SIGS_BLK1, client=client)
+        start_time_tbl = Table(TableName.START_TIME, client=client)
+        pkt_write_times_tbl = Table(TableName.PACKET_WRITE_TIMES, client=client)
 
-        logger.info("Attempting to fetch seq num block 0 signatures...")
+        logger.info("Scraping start time...")
 
-        seq_keys0 = seq_table_block0.create_bulk_key(
+        start_time_key = start_time_tbl.create_key(
             keyname="$REGISTER_INDEX",
-            values=list(range(0, 4)),
+            value=0,
         )
 
-        seq_entries0 = seq_table_block0.get_bulk_entry(seq_keys0)
+        scraped_start_time = list(
+            filter(
+                lambda x: x != 0,
+                start_time_tbl.get_entry(start_time_key)[0].data.to_dict()["start_time.f1"],
+            ),
+        )[0]
 
-        for data, key in seq_entries0:
-            logger.info("%s -> %s", str(key.to_dict()), str(data.to_dict()))
+        print("--- TRIAL START ---")  # noqa: T201
+        print("--- START TIME ---")  # noqa: T201
+        print(f"Start Time: {scraped_start_time}")  # noqa: T201
 
-        logger.info("Attempting to fetch seq num block 1 signatures...")
+        logger.info("Scraping timestamps...")
 
-        seq_keys1 = seq_table_block1.create_bulk_key(
+        scraped_pkt_timings = pkt_write_times_tbl.create_bulk_key(
             keyname="$REGISTER_INDEX",
-            values=list(range(4, 8)),
+            values=list(range(0, 127)),
         )
 
-        seq_entries1 = seq_table_block1.get_bulk_entry(seq_keys1)
+        raw_scraped_pkt_times = pkt_write_times_tbl.get_bulk_entry(scraped_pkt_timings)
 
-        for data, key in seq_entries1:
-            logger.info("%s -> %s", str(key.to_dict()), str(data.to_dict()))
+        pkt_times = []
+        for data, _ in raw_scraped_pkt_times:
+            tses = data.to_dict()["pkt_finish_times.f1"]
+            for ts in tses:
+                if ts:
+                    pkt_times.append(ts)
 
-        logger.info("Attempting to fetch timestamp block 0 signatures...")
+        times = sorted(pkt_times, reverse=True)
 
-        ts_keys0 = ts_table_blk0.create_bulk_key(
-            keyname="$REGISTER_INDEX",
-            values=list(range(0, 4)),
-        )
+        print("-- Finish Timestamps --")  # noqa: T201
+        for ts in times:
+            print(ts)  # noqa: T201
 
-        ts_entries0 = ts_table_blk0.get_bulk_entry(ts_keys0)
+        print("-- Runtime --")  # noqa: T201
+        print(f"{times[0] - scraped_start_time} ms")  # noqa: T201
+        print(f"--> {times[0]} (end) - {scraped_start_time} (start)")  # noqa: T201
 
-        for data, key in ts_entries0:
-            logger.info("%s -> %s", str(key.to_dict()), str(data.to_dict()))
-
-        logger.info("Attempting to fetch timestamp block 1 signatures...")
-
-        ts_keys1 = ts_table_blk1.create_bulk_key(
-            keyname="$REGISTER_INDEX",
-            values=list(range(4, 8)),
-        )
-
-        ts_entries1 = ts_table_blk1.get_bulk_entry(ts_keys1)
-
-        for data, key in ts_entries1:
-            logger.info("%s -> %s", str(key.to_dict()), str(data.to_dict()))
+        print("--- TRIAL END ---")  # noqa: T201
 
         logger.info("Exiting...")
 
