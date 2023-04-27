@@ -5,6 +5,7 @@
 ```bash
 export RTE_SDK=/u/shared/pktgen-dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc
+cd /u/shared/pktgen-dpdk-pktgen
 tools/run.py cabernet
 ```
 
