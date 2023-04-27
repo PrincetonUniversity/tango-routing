@@ -48,7 +48,7 @@ MISS{event_id~0==3;
 event_id~0==1;}
 HIT{event_id~0==2;}
 -****----
-successor node: 202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+successor node: 202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 original out edge condition: 
 
 new out edge condition: 
@@ -79,7 +79,7 @@ HIT{event_id~0==3;}
 -****----
 ------
 ------
-[propagate_edge_constraints] vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+[propagate_edge_constraints] vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 precondition_of_vertex:
 MISS{event_id~0==3;
 event_id~0==1;}
@@ -1399,11 +1399,11 @@ NORMALIZED VERTEX:159: match (event_id) with
 | 3 -> {}
 | 1 -> {generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));}
 | _ -> {}
-ORIGINAL VERTEX:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
-[NODE IN EDGES]vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+ORIGINAL VERTEX:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+[NODE IN EDGES]vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:181: int<<32>> precompute = Sys.time();
-[NODE IN EDGES]DST:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+[NODE IN EDGES]DST:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==3;
 event_id~0==1;}
 HIT{event_id~0==2;}
@@ -1413,7 +1413,7 @@ HIT{event_id~0==2;}
 NORMALIZED VERTEX:202: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(start_time,0,set_start_time,precompute,0,0);}
+| 2 -> {Array.update_complex(start_time,0,set_start_time,precompute,1,0);}
 | _ -> {}
 ORIGINAL VERTEX:181: int<<32>> precompute = Sys.time();
 [NODE IN EDGES]vertex:181: int<<32>> precompute = Sys.time();
@@ -1435,7 +1435,7 @@ NORMALIZED VERTEX:181: match (event_id) with
 ORIGINAL VERTEX:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]vertex:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+[NODE IN EDGES]SRC:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]DST:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]in edge:MISS{event_id~0==3;
 event_id~0==1;}
@@ -1448,11 +1448,11 @@ NORMALIZED VERTEX:213: match (event_id) with
 | 1 -> {}
 | 2 -> {int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);}
 | _ -> {}
-ORIGINAL VERTEX:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
-[NODE IN EDGES]vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+ORIGINAL VERTEX:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+[NODE IN EDGES]vertex:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]in edges:
 [NODE IN EDGES]SRC:181: int<<32>> precompute = Sys.time();
-[NODE IN EDGES]DST:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+[NODE IN EDGES]DST:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]in edge:MISS{event_id~0==3;
 event_id~0==1;}
 HIT{event_id~0==2;}
@@ -1462,7 +1462,7 @@ HIT{event_id~0==2;}
 NORMALIZED VERTEX:202: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(start_time,0,set_start_time,precompute,0,0);}
+| 2 -> {Array.update_complex(start_time,0,set_start_time,precompute,1,0);}
 | _ -> {}
 ORIGINAL VERTEX:223: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 [NODE IN EDGES]vertex:223: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
@@ -1483,7 +1483,7 @@ NORMALIZED VERTEX:223: match (event_id) with
 ORIGINAL VERTEX:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]vertex:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]in edges:
-[NODE IN EDGES]SRC:202: Array.update_complex(start_time,0,set_start_time,precompute,0,0);
+[NODE IN EDGES]SRC:202: Array.update_complex(start_time,0,set_start_time,precompute,1,0);
 [NODE IN EDGES]DST:213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 [NODE IN EDGES]in edge:MISS{event_id~0==3;
 event_id~0==1;}

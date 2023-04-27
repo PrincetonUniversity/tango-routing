@@ -463,7 +463,7 @@ block_idx_copy=hash_38190.get({hdr.set_signature.set_signature_block_idx});
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
       bit<32> cell2_local=0;
-      if((cell1_local==32w0)){
+      if((cell1_local==32w1)){
         cell1_remote=precompute;
       }
       //NOOP
