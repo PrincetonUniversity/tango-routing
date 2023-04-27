@@ -8,12 +8,12 @@ export RTE_TARGET=x86_64-native-linuxapp-gcc
 cd /u/shared/pktgen-dpdk
 sudo -E tools/run.py cabernet
 
-set 1 type ipv6
+set 1 type ipv4
 set 1 count 0
 set 1 burst 10000
 set 1 rate 1
 enable 1 random 
-set 1 proto tcp
+set 1 proto udp
 set 1 size 40 
 set 1 src mac 00:00:00:00:00:81
 set 1 dst mac 00:00:00:00:00:ff 
@@ -42,17 +42,20 @@ ucli
 pm
 port-add 12/0 100G NONE
 port-add 13/0 100G NONE
+port-add 15/0 100G NONE
 an-set 12/0 2
 an-set 13/0 2
+an-set 15/0 2
 port-enb 12/0
 port-enb 13/0
+port-enb 15/0
 rate-period 1
 rate-show
 ```
 
 ### Cabernet803 (DPID 12, Port 15/0), dump output packets from background traffic here
 ```bash
-Use interface enp134s0f0np1 to send and receive traffic 
-sudo ifconfig enp134s0f0np1 up 
- sudo tcpdump -evvvnX -i enp134s0f0np1
-```
+Use interface enp134s0f1np1 to send and receive traffic 
+sudo ifconfig enp134s0f1np1 up 
+sudo tcpdump -evvvnX -i enp134s0f1np1
+ ```
