@@ -157,15 +157,15 @@ def main() -> None:
 
         logger.info("Scraping start time...")
 
-        start_time_key = start_time_tbl.create_key(
+        start_time_key = start_time_tbl.create_bulk_key(
             keyname="$REGISTER_INDEX",
-            value=0,
+            values=[0],
         )
 
         scraped_start_time = list(
             filter(
                 lambda x: x != 0,
-                start_time_tbl.get_entry(start_time_key)[0].data.to_dict()["start_time.f1"],
+                start_time_tbl.get_bulk_entry(start_time_key)[0].data.to_dict()["start_time.f1"],
             ),
         )[0]
 
