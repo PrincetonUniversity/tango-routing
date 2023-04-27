@@ -1,3 +1,5 @@
+global Array.t<<32>> signature_count = Array.create(1);
+
 global Array.t<<32>> start_time = Array.create(1);
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -17,15 +19,6 @@ global Array.t<<32>> pkt_finish_times = Array.create(128);
 entry event dummy_traffic(int<<48>> dummy_traffic_eth_header_0,int<<48>> dummy_traffic_eth_header_1,int<<16>> dummy_traffic_eth_header_2,int<<8>> dummy_traffic_ip_header_0,int<<8>> dummy_traffic_ip_header_1,int<<16>> dummy_traffic_ip_header_2,int<<16>> dummy_traffic_ip_header_3,int<<16>> dummy_traffic_ip_header_4,int<<8>> dummy_traffic_ip_header_5,int<<8>> dummy_traffic_ip_header_6,int<<16>> dummy_traffic_ip_header_7,int<<32>> dummy_traffic_ip_header_8,int<<32>> dummy_traffic_ip_header_9,int<<16>> dummy_traffic_udp_header_0,int<<16>> dummy_traffic_udp_header_1,int<<16>> dummy_traffic_udp_header_2,int<<16>> dummy_traffic_udp_header_3);
 event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature);
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> cmp_val)
- {{
-b1=(should_set,stored_time==cmp_val);
-b2=None
-cell1=(should_set -> time_now), None
-cell2=None, None
-
-ret=None
-}}
 handle set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature) {
 
 }
@@ -78,318 +71,430 @@ labeledstmt_4();
 | _,_ -> {
 labeledstmt_5();
 }
-match (event_id,set_signature_next_signature) with 
-| 3,0 -> {
-labeledstmt_6();
-}
-| 1,0 -> {
-labeledstmt_6();
-}
-| 2,0 -> {
-labeledstmt_7();
-}
-| 3,_ -> {
-labeledstmt_6();
-}
-| 1,_ -> {
-labeledstmt_6();
-}
-| 2,_ -> {
-labeledstmt_8();
-}
-| _,_ -> {
-labeledstmt_6();
-}
 match event_id with 
 | 3 -> {
-labeledstmt_9();
+labeledstmt_6();
 }
 | 1 -> {
-labeledstmt_9();
+labeledstmt_6();
 }
 | 2 -> {
-labeledstmt_10();
+labeledstmt_7();
 }
 | _ -> {
-labeledstmt_9();
+labeledstmt_6();
 }
-// Stage 1
 match (event_id,set_signature_next_signature) with 
 | 3,0 -> {
-labeledstmt_11();
+labeledstmt_8();
 }
 | 1,0 -> {
-labeledstmt_11();
+labeledstmt_8();
 }
 | 2,0 -> {
-labeledstmt_12();
+labeledstmt_9();
 }
 | 3,_ -> {
-labeledstmt_11();
+labeledstmt_8();
 }
 | 1,_ -> {
-labeledstmt_11();
+labeledstmt_8();
 }
 | 2,_ -> {
-labeledstmt_13();
+labeledstmt_10();
 }
 | _,_ -> {
+labeledstmt_8();
+}
+// Stage 1
+match (num_sigs_written,event_id,set_signature_block_idx,if_precomp,set_signature_next_signature) with 
+| 0,3,0,0,0 -> {
+labeledstmt_11();
+}
+| _,3,0,0,0 -> {
+labeledstmt_11();
+}
+| 0,3,0,_,0 -> {
+labeledstmt_11();
+}
+| _,3,0,_,0 -> {
+labeledstmt_11();
+}
+| 0,3,_,0,0 -> {
+labeledstmt_11();
+}
+| _,3,_,0,0 -> {
+labeledstmt_11();
+}
+| 0,3,_,_,0 -> {
+labeledstmt_11();
+}
+| _,3,_,_,0 -> {
+labeledstmt_11();
+}
+| 0,1,0,0,0 -> {
+labeledstmt_11();
+}
+| _,1,0,0,0 -> {
+labeledstmt_11();
+}
+| 0,1,0,_,0 -> {
+labeledstmt_11();
+}
+| _,1,0,_,0 -> {
+labeledstmt_11();
+}
+| 0,1,_,0,0 -> {
+labeledstmt_11();
+}
+| _,1,_,0,0 -> {
+labeledstmt_11();
+}
+| 0,1,_,_,0 -> {
+labeledstmt_11();
+}
+| _,1,_,_,0 -> {
+labeledstmt_11();
+}
+| 0,2,0,0,0 -> {
+labeledstmt_12();
+}
+| _,2,0,0,0 -> {
+labeledstmt_11();
+}
+| 0,2,0,_,0 -> {
+labeledstmt_12();
+}
+| _,2,0,_,0 -> {
+labeledstmt_11();
+}
+| 0,2,_,0,0 -> {
+labeledstmt_12();
+}
+| _,2,_,0,0 -> {
+labeledstmt_11();
+}
+| 0,2,_,_,0 -> {
+labeledstmt_13();
+}
+| _,2,_,_,0 -> {
+labeledstmt_14();
+}
+| 0,3,0,0,_ -> {
+labeledstmt_11();
+}
+| _,3,0,0,_ -> {
+labeledstmt_11();
+}
+| 0,3,0,_,_ -> {
+labeledstmt_11();
+}
+| _,3,0,_,_ -> {
+labeledstmt_11();
+}
+| 0,3,_,0,_ -> {
+labeledstmt_11();
+}
+| _,3,_,0,_ -> {
+labeledstmt_11();
+}
+| 0,3,_,_,_ -> {
+labeledstmt_11();
+}
+| _,3,_,_,_ -> {
+labeledstmt_11();
+}
+| 0,1,0,0,_ -> {
+labeledstmt_11();
+}
+| _,1,0,0,_ -> {
+labeledstmt_11();
+}
+| 0,1,0,_,_ -> {
+labeledstmt_11();
+}
+| _,1,0,_,_ -> {
+labeledstmt_11();
+}
+| 0,1,_,0,_ -> {
+labeledstmt_11();
+}
+| _,1,_,0,_ -> {
+labeledstmt_11();
+}
+| 0,1,_,_,_ -> {
+labeledstmt_11();
+}
+| _,1,_,_,_ -> {
+labeledstmt_11();
+}
+| 0,2,0,0,_ -> {
+labeledstmt_15();
+}
+| _,2,0,0,_ -> {
+labeledstmt_16();
+}
+| 0,2,0,_,_ -> {
+labeledstmt_15();
+}
+| _,2,0,_,_ -> {
+labeledstmt_16();
+}
+| 0,2,_,0,_ -> {
+labeledstmt_15();
+}
+| _,2,_,0,_ -> {
+labeledstmt_16();
+}
+| 0,2,_,_,_ -> {
+labeledstmt_17();
+}
+| _,2,_,_,_ -> {
+labeledstmt_18();
+}
+| _,_,_,_,_ -> {
 labeledstmt_11();
 }
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
-labeledstmt_14();
-}
-| 0,0,1 -> {
-labeledstmt_14();
-}
-| 0,0,2 -> {
-labeledstmt_14();
-}
-| 0,_,3 -> {
-labeledstmt_14();
-}
-| 0,_,1 -> {
-labeledstmt_14();
-}
-| 0,_,2 -> {
-labeledstmt_14();
-}
-| _,0,3 -> {
-labeledstmt_14();
-}
-| _,0,1 -> {
-labeledstmt_14();
-}
-| _,0,2 -> {
-labeledstmt_14();
-}
-| _,_,3 -> {
-labeledstmt_14();
-}
-| _,_,1 -> {
-labeledstmt_14();
-}
-| _,_,2 -> {
-labeledstmt_15();
-}
-| _,_,_ -> {
-labeledstmt_14();
-}
-match (set_signature_block_idx,if_precomp,event_id) with 
-| 0,0,3 -> {
-labeledstmt_16();
-}
-| 0,0,1 -> {
-labeledstmt_16();
-}
-| 0,0,2 -> {
-labeledstmt_16();
-}
-| 0,_,3 -> {
-labeledstmt_16();
-}
-| 0,_,1 -> {
-labeledstmt_16();
-}
-| 0,_,2 -> {
-labeledstmt_17();
-}
-| _,_,_ -> {
-labeledstmt_16();
-}
-match (block_idx_copy,if_precomp,event_id) with 
-| 0,0,3 -> {
-labeledstmt_18();
-}
-| 0,0,1 -> {
-labeledstmt_18();
-}
-| 0,0,2 -> {
-labeledstmt_18();
-}
-| _,0,3 -> {
-labeledstmt_18();
-}
-| _,0,1 -> {
-labeledstmt_18();
-}
-| _,0,2 -> {
 labeledstmt_19();
 }
-| _,_,_ -> {
-labeledstmt_18();
+| 0,0,1 -> {
+labeledstmt_19();
 }
-// Stage 2
+| 0,0,2 -> {
+labeledstmt_19();
+}
+| 0,_,3 -> {
+labeledstmt_19();
+}
+| 0,_,1 -> {
+labeledstmt_19();
+}
+| 0,_,2 -> {
+labeledstmt_20();
+}
+| _,_,_ -> {
+labeledstmt_19();
+}
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
-labeledstmt_20();
+labeledstmt_21();
 }
 | 0,0,1 -> {
-labeledstmt_20();
+labeledstmt_21();
 }
 | 0,0,2 -> {
 labeledstmt_21();
 }
+| _,0,3 -> {
+labeledstmt_21();
+}
+| _,0,1 -> {
+labeledstmt_21();
+}
+| _,0,2 -> {
+labeledstmt_22();
+}
 | _,_,_ -> {
-labeledstmt_20();
+labeledstmt_21();
 }
-match (set_signature_next_signature,event_id) with 
-| 0,3 -> {
-labeledstmt_22();
-}
-| 0,1 -> {
-labeledstmt_22();
-}
-| 0,2 -> {
+match (block_idx_copy,if_precomp,event_id) with 
+| 0,0,3 -> {
 labeledstmt_23();
 }
+| 0,0,1 -> {
+labeledstmt_23();
+}
+| 0,0,2 -> {
+labeledstmt_24();
+}
+| _,_,_ -> {
+labeledstmt_23();
+}
+// Stage 2
+match (set_signature_next_signature,event_id) with 
+| 0,3 -> {
+labeledstmt_25();
+}
+| 0,1 -> {
+labeledstmt_25();
+}
+| 0,2 -> {
+labeledstmt_26();
+}
 | _,_ -> {
-labeledstmt_22();
+labeledstmt_25();
+}
+match (num_sigs_written,event_id) with 
+| 0,3 -> {
+labeledstmt_27();
+}
+| 0,1 -> {
+labeledstmt_27();
+}
+| 0,2 -> {
+labeledstmt_28();
+}
+| _,_ -> {
+labeledstmt_27();
 }
 // Stage 3
 match event_id with 
 | 3 -> {
-labeledstmt_24();
+labeledstmt_29();
 }
 | 1 -> {
-labeledstmt_24();
+labeledstmt_29();
 }
 | 2 -> {
-labeledstmt_25();
+labeledstmt_30();
 }
 | _ -> {
-labeledstmt_24();
+labeledstmt_29();
 }}
-memop set_3814(int<<32>> mem_val_3813,int<<32>> new_val_3811,int<<32>> unused_3812)
+memop set_3932(int<<32>> mem_val_3931,int<<32>> new_val_3929,int<<32>> unused_3930)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3811), None
+cell1=(true -> new_val_3929), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_get_old_increase_by_3810(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3807)
+memop combined_memop_get_old_increase_by_3928(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3925)
  {{
-b1=(mbool_3808,true);
-b2=(mbool_3809,true)
-cell1=(mbool_3808 -> stored_count+amount_set_3807), None
-cell2=(mbool_3809 -> stored_count), None
+b1=(mbool_3926,true);
+b2=(mbool_3927,true)
+cell1=(mbool_3926 -> stored_count+amount_set_3925), None
+cell2=(mbool_3927 -> stored_count), None
 
 ret=(true -> cell2)
 }}
-memop set_3806(int<<32>> mem_val_3805,int<<32>> new_val_3803,int<<32>> unused_3804)
+memop set_3924(int<<32>> mem_val_3923,int<<32>> new_val_3921,int<<32>> unused_3922)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3803), None
+cell1=(true -> new_val_3921), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3802(int<<32>> mem_val_3801,int<<32>> new_val_3799,int<<32>> unused_3800)
+memop set_3920(int<<32>> mem_val_3919,int<<32>> new_val_3917,int<<32>> unused_3918)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3799), None
+cell1=(true -> new_val_3917), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3798(int<<32>> mem_val_3797,int<<32>> new_val_3795,int<<32>> unused_3796)
+memop set_3916(int<<32>> mem_val_3915,int<<32>> new_val_3913,int<<32>> unused_3914)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3795), None
+cell1=(true -> new_val_3913), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3794(int<<32>> mem_val_3793,int<<32>> new_val_3791,int<<32>> unused_3792)
+memop set_3912(int<<32>> mem_val_3911,int<<32>> new_val_3909,int<<32>> unused_3910)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3791), None
+cell1=(true -> new_val_3909), None
 cell2=None, None
 
 ret=None
 }}
-memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3790)
+memop set_3908(int<<32>> mem_val_3907,int<<32>> new_val_3905,int<<32>> unused_3906)
  {{
 b1=None;
-b2=(mbool_3789,true)
+b2=None
+cell1=(true -> new_val_3905), None
+cell2=None, None
+
+ret=None
+}}
+memop combined_memop_get_old_increase_by_3904(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3901)
+ {{
+b1=(mbool_3902,true);
+b2=(mbool_3903,true)
+cell1=(mbool_3902 -> stored_count+amount_set_3901), None
+cell2=(mbool_3903 -> stored_count), None
+
+ret=(true -> cell2)
+}}
+memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3900)
+ {{
+b1=None;
+b2=(mbool_3899,true)
 cell1=None, None
-cell2=(mbool_3789 -> stored_count+amount), None
+cell2=(mbool_3899 -> stored_count+amount), None
 
 ret=(true -> cell2)
 }}
-labeled_statement labeledstmt_26{
+labeled_statement labeledstmt_31{
 Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);
 }
 labeled_statement labeledstmt_1{
-labeledstmt_26();
+labeledstmt_31();
 }
-labeled_statement labeledstmt_44{
+labeled_statement labeledstmt_49{
 pre_gen_copy_dummy_traffic_udp_header_3 = dummy_traffic_udp_header_3;
 }
-labeled_statement labeledstmt_43{
+labeled_statement labeledstmt_48{
 pre_gen_copy_dummy_traffic_udp_header_2 = dummy_traffic_udp_header_2;
 }
-labeled_statement labeledstmt_42{
+labeled_statement labeledstmt_47{
 pre_gen_copy_dummy_traffic_udp_header_1 = dummy_traffic_udp_header_1;
 }
-labeled_statement labeledstmt_41{
+labeled_statement labeledstmt_46{
 pre_gen_copy_dummy_traffic_udp_header_0 = dummy_traffic_udp_header_0;
 }
-labeled_statement labeledstmt_40{
+labeled_statement labeledstmt_45{
 pre_gen_copy_dummy_traffic_ip_header_9 = dummy_traffic_ip_header_9;
 }
-labeled_statement labeledstmt_39{
+labeled_statement labeledstmt_44{
 pre_gen_copy_dummy_traffic_ip_header_8 = dummy_traffic_ip_header_8;
 }
-labeled_statement labeledstmt_38{
+labeled_statement labeledstmt_43{
 pre_gen_copy_dummy_traffic_ip_header_7 = dummy_traffic_ip_header_7;
 }
-labeled_statement labeledstmt_37{
+labeled_statement labeledstmt_42{
 pre_gen_copy_dummy_traffic_ip_header_6 = dummy_traffic_ip_header_6;
 }
-labeled_statement labeledstmt_36{
+labeled_statement labeledstmt_41{
 pre_gen_copy_dummy_traffic_ip_header_5 = dummy_traffic_ip_header_5;
 }
-labeled_statement labeledstmt_35{
+labeled_statement labeledstmt_40{
 pre_gen_copy_dummy_traffic_ip_header_4 = dummy_traffic_ip_header_4;
 }
-labeled_statement labeledstmt_34{
+labeled_statement labeledstmt_39{
 pre_gen_copy_dummy_traffic_ip_header_3 = dummy_traffic_ip_header_3;
 }
-labeled_statement labeledstmt_33{
+labeled_statement labeledstmt_38{
 pre_gen_copy_dummy_traffic_ip_header_2 = dummy_traffic_ip_header_2;
 }
-labeled_statement labeledstmt_32{
+labeled_statement labeledstmt_37{
 pre_gen_copy_dummy_traffic_ip_header_1 = dummy_traffic_ip_header_1;
 }
-labeled_statement labeledstmt_31{
+labeled_statement labeledstmt_36{
 pre_gen_copy_dummy_traffic_ip_header_0 = dummy_traffic_ip_header_0;
 }
-labeled_statement labeledstmt_30{
+labeled_statement labeledstmt_35{
 pre_gen_copy_dummy_traffic_eth_header_2 = dummy_traffic_eth_header_2;
 }
-labeled_statement labeledstmt_29{
+labeled_statement labeledstmt_34{
 pre_gen_copy_dummy_traffic_eth_header_1 = dummy_traffic_eth_header_1;
 }
-labeled_statement labeledstmt_28{
+labeled_statement labeledstmt_33{
 pre_gen_copy_dummy_traffic_eth_header_0 = dummy_traffic_eth_header_0;
 }
-labeled_statement labeledstmt_27{
+labeled_statement labeledstmt_32{
 Array.update_complex(application_packet_counter,0,increase_by,1,0,0);
 }
 labeled_statement labeledstmt_2{
-labeledstmt_27();
-labeledstmt_28();
-labeledstmt_29();
-labeledstmt_30();
-labeledstmt_31();
 labeledstmt_32();
 labeledstmt_33();
 labeledstmt_34();
@@ -403,38 +508,38 @@ labeledstmt_41();
 labeledstmt_42();
 labeledstmt_43();
 labeledstmt_44();
-generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));
-}
-labeled_statement labeledstmt_48{
-int<<32>> precompute3785 = Sys.time();
-}
-labeled_statement labeledstmt_47{
-int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
-}
-labeled_statement labeledstmt_46{
-int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
-}
-labeled_statement labeledstmt_45{
-int<<32>> precompute = Sys.time();
-}
-labeled_statement labeledstmt_3{
 labeledstmt_45();
 labeledstmt_46();
 labeledstmt_47();
 labeledstmt_48();
+labeledstmt_49();
+generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));
+}
+labeled_statement labeledstmt_52{
+int<<32>> precompute3894 = Sys.time();
+}
+labeled_statement labeledstmt_51{
+int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
 }
 labeled_statement labeledstmt_50{
-int<<16>> precompute3784 = 1+set_signature_sig_idx;
+int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 }
-labeled_statement labeledstmt_49{
-int<<16>> precompute3783 = set_signature_ip_header_1-32;
+labeled_statement labeledstmt_3{
+labeledstmt_50();
+labeledstmt_51();
+labeledstmt_52();
+}
+labeled_statement labeledstmt_54{
+int<<16>> precompute3893 = 1+set_signature_sig_idx;
+}
+labeled_statement labeledstmt_53{
+int<<16>> precompute3892 = set_signature_ip_header_1-32;
 }
 labeled_statement labeledstmt_4{
-labeledstmt_45();
-labeledstmt_46();
-labeledstmt_47();
-labeledstmt_49();
 labeledstmt_50();
+labeledstmt_51();
+labeledstmt_53();
+labeledstmt_54();
 }
 labeled_statement labeledstmt_5{
 
@@ -442,92 +547,118 @@ labeled_statement labeledstmt_5{
 labeled_statement labeledstmt_6{
 
 }
-labeled_statement labeledstmt_52{
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3810,0,1,0);
-}
-labeled_statement labeledstmt_51{
+labeled_statement labeledstmt_56{
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 }
+labeled_statement labeledstmt_55{
+int<<32>> num_sigs_written = Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3904,0,1,0);
+}
 labeled_statement labeledstmt_7{
-labeledstmt_51();
-labeledstmt_52();
+labeledstmt_55();
+labeledstmt_56();
 }
 labeled_statement labeledstmt_8{
-labeledstmt_51();
-}
-labeled_statement labeledstmt_9{
 
 }
-labeled_statement labeledstmt_53{
+labeled_statement labeledstmt_58{
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3928,0,1,0);
+}
+labeled_statement labeledstmt_57{
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 }
+labeled_statement labeledstmt_9{
+labeledstmt_57();
+labeledstmt_58();
+}
 labeled_statement labeledstmt_10{
-labeledstmt_53();
+labeledstmt_57();
 }
 labeled_statement labeledstmt_11{
 
 }
-labeled_statement labeledstmt_54{
-Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+labeled_statement labeledstmt_59{
+int<<32>> precompute = Sys.time();
 }
 labeled_statement labeledstmt_12{
-labeledstmt_54();
-}
-labeled_statement labeledstmt_13{
-labeledstmt_54();
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3783,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3784,set_signature_block_idx,set_signature_next_signature));
-}
-labeled_statement labeledstmt_14{
-
-}
-labeled_statement labeledstmt_55{
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3806,set_signature_curr_signature,0,0);
-}
-labeled_statement labeledstmt_15{
-labeledstmt_55();
-}
-labeled_statement labeledstmt_16{
-
-}
-labeled_statement labeledstmt_56{
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3802,set_signature_curr_signature,0,0);
-}
-labeled_statement labeledstmt_17{
-labeledstmt_56();
-}
-labeled_statement labeledstmt_18{
-
-}
-labeled_statement labeledstmt_57{
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3798,sig_copy,0,0);
-}
-labeled_statement labeledstmt_19{
-labeledstmt_57();
-}
-labeled_statement labeledstmt_20{
-
-}
-labeled_statement labeledstmt_58{
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3794,sig_copy,0,0);
-}
-labeled_statement labeledstmt_21{
-labeledstmt_58();
-}
-labeled_statement labeledstmt_22{
-
-}
-labeled_statement labeledstmt_59{
-Array.update_complex(pkt_finish_times,done_idx,set_3814,precompute3785,0,0);
-}
-labeled_statement labeledstmt_23{
 labeledstmt_59();
 }
-labeled_statement labeledstmt_24{
+labeled_statement labeledstmt_60{
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3924,set_signature_curr_signature,0,0);
+}
+labeled_statement labeledstmt_13{
+labeledstmt_59();
+labeledstmt_60();
+}
+labeled_statement labeledstmt_14{
+labeledstmt_60();
+}
+labeled_statement labeledstmt_15{
+labeledstmt_59();
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3892,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3893,set_signature_block_idx,set_signature_next_signature));
+}
+labeled_statement labeledstmt_16{
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3892,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3893,set_signature_block_idx,set_signature_next_signature));
+}
+labeled_statement labeledstmt_17{
+labeledstmt_59();
+labeledstmt_60();
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3892,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3893,set_signature_block_idx,set_signature_next_signature));
+}
+labeled_statement labeledstmt_18{
+labeledstmt_60();
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3892,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3893,set_signature_block_idx,set_signature_next_signature));
+}
+labeled_statement labeledstmt_19{
 
 }
-labeled_statement labeledstmt_60{
-Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);
+labeled_statement labeledstmt_61{
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3920,set_signature_curr_signature,0,0);
+}
+labeled_statement labeledstmt_20{
+labeledstmt_61();
+}
+labeled_statement labeledstmt_21{
+
+}
+labeled_statement labeledstmt_62{
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3916,sig_copy,0,0);
+}
+labeled_statement labeledstmt_22{
+labeledstmt_62();
+}
+labeled_statement labeledstmt_23{
+
+}
+labeled_statement labeledstmt_63{
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3912,sig_copy,0,0);
+}
+labeled_statement labeledstmt_24{
+labeledstmt_63();
 }
 labeled_statement labeledstmt_25{
-labeledstmt_60();
+
+}
+labeled_statement labeledstmt_64{
+Array.update_complex(pkt_finish_times,done_idx,set_3932,precompute3894,0,0);
+}
+labeled_statement labeledstmt_26{
+labeledstmt_64();
+}
+labeled_statement labeledstmt_27{
+
+}
+labeled_statement labeledstmt_65{
+Array.update_complex(start_time,0,set_3908,precompute,0,0);
+}
+labeled_statement labeledstmt_28{
+labeledstmt_65();
+}
+labeled_statement labeledstmt_29{
+
+}
+labeled_statement labeledstmt_66{
+Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);
+}
+labeled_statement labeledstmt_30{
+labeledstmt_66();
 }

@@ -6,6 +6,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> signature_count = Array.create(1);
+
+
 global Array.t<<32>> start_time = Array.create(1);
 
 
@@ -36,16 +39,6 @@ event set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_
 
 event set_next_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> next_signature);
 
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> cmp_val)
- {{
-b1=(should_set,stored_time==cmp_val);
-b2=None
-cell1=(should_set -> time_now), None
-cell2=None, None
-
-ret=None
-}}
-
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
 }
@@ -64,7 +57,10 @@ generate_port (12, dummy_traffic(eth_header_0,eth_header_1,eth_header_2,ip_heade
 }
 
 handle set_signature(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3,int<<8>> sig_type,int<<16>> sig_idx,int<<8>> block_idx,int<<32>> curr_signature,int<<32>> next_signature) {
-Array.update_complex(start_time,0,set_start_time,Sys.time(),1,0);
+int<<32>> num_sigs_written = Array.update(signature_count,0,get_old,0,increase_by,1);
+if (num_sigs_written==0) {
+Array.set(start_time,0,Sys.time());
+} 
 int<<16>> sig_idx_copy = hash<<16>>(1,sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,block_idx);

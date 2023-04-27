@@ -18,6 +18,9 @@ const int<<9>> RECIRC_PORT = 68;
  *                                                     GLOBALS                                                        *
  * ================================================================================================================== */
 
+// Keep track of number of signatures written
+global Array.t<<32>> signature_count = Array.create(1);
+
 // Keep track of write start
 global Array.t<<32>> start_time = Array.create(1);
 
@@ -85,6 +88,7 @@ event set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) [
+    signature_count < start_time;
     start_time < outgoing_book_signature_manager;
     outgoing_book_signature_manager < outgoing_metric_signature_manager;
     outgoing_metric_signature_manager < num_pkt_finishes;
@@ -118,13 +122,13 @@ exit event set_next_signature (
  *                                                    HANDLERS                                                        *
  * ================================================================================================================== */
 
-memop set_start_time(int<<32>> stored_time, int<<32>> time_now, int<<32>> cmp_val) {
-    bool should_set = (stored_time == cmp_val);
+// memop set_start_time(int<<32>> stored_time, int<<32>> time_now) {
+//     bool should_set = (stored_time == cmp_val);
 
-    if (should_set) {
-        cell1 = time_now;
-    }
-}
+//     if (should_set) {
+//         cell1 = time_now;
+//     }
+// }
 
 memop get_old(int<<32>> stored_count, int<<32>> ignore) {
     return stored_count;
@@ -157,7 +161,10 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    Array.update_complex(start_time, 0, set_start_time, Sys.time(), 1, 0);
+    int<<32>> num_sigs_written = Array.update(signature_count, 0, get_old, 0, increase_by, 1);
+    if (num_sigs_written == 0) {
+        Array.set(start_time, 0, Sys.time());
+    }
 
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);

@@ -7,6 +7,8 @@
 set_signature_sig_idx+1
 [balance_assign_exp] balanced expression:
 1+set_signature_sig_idx
+[transform_precompute_exps.visit_exp] exp: Array.update(signature_count,0,get_old,0,increase_by,1)
+[transform_precompute_exps.visit_exp] atomic exp: Array.update(signature_count,0,get_old,0,increase_by,1)
 [transform_precompute_exps.visit_exp] exp: Sys.time()
 [transform_precompute_exps.visit_exp] atomic exp: Sys.time()
 [transform_precompute_exps.visit_exp] exp: hash<<16>>(1,set_signature_sig_idx)
@@ -33,6 +35,9 @@ memop SequenceNumberManager_next(int<<32>> curr,int<<32>> inc)
 memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
+
+global Array.t<<32>> signature_count = Array.create(1);
+
 
 global Array.t<<32>> start_time = Array.create(1);
 
@@ -64,16 +69,6 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> cmp_val)
- {{
-b1=(should_set,stored_time==cmp_val);
-b2=None
-cell1=(should_set -> time_now), None
-cell2=None, None
-
-ret=None
-}}
-
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
 }
@@ -92,8 +87,11 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> num_sigs_written = Array.update(signature_count,0,get_old,0,increase_by,1);
+if (num_sigs_written==0) {
 int<<32>> precompute = Sys.time();
-Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+Array.set(start_time,0,precompute);
+} 
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -134,6 +132,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> signature_count = Array.create(1);
+
+
 global Array.t<<32>> start_time = Array.create(1);
 
 
@@ -164,16 +165,6 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> cmp_val)
- {{
-b1=(should_set,stored_time==cmp_val);
-b2=None
-cell1=(should_set -> time_now), None
-cell2=None, None
-
-ret=None
-}}
-
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
 }
@@ -192,8 +183,11 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> num_sigs_written = Array.update(signature_count,0,get_old,0,increase_by,1);
+if (num_sigs_written==0) {
 int<<32>> precompute = Sys.time();
-Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+Array.set(start_time,0,precompute);
+} 
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -234,6 +228,9 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
  {return curr;
 }
 
+global Array.t<<32>> signature_count = Array.create(1);
+
+
 global Array.t<<32>> start_time = Array.create(1);
 
 
@@ -264,16 +261,6 @@ event set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature
 
 event set_next_signature(int<<48>> set_next_signature_eth_header_0,int<<48>> set_next_signature_eth_header_1,int<<16>> set_next_signature_eth_header_2,int<<32>> set_next_signature_ip_header_0,int<<16>> set_next_signature_ip_header_1,int<<8>> set_next_signature_ip_header_2,int<<8>> set_next_signature_ip_header_3,int<<64>> set_next_signature_ip_header_4,int<<64>> set_next_signature_ip_header_5,int<<64>> set_next_signature_ip_header_6,int<<64>> set_next_signature_ip_header_7,int<<16>> set_next_signature_udp_header_0,int<<16>> set_next_signature_udp_header_1,int<<16>> set_next_signature_udp_header_2,int<<16>> set_next_signature_udp_header_3,int<<8>> set_next_signature_sig_type,int<<16>> set_next_signature_sig_idx,int<<8>> set_next_signature_block_idx,int<<32>> set_next_signature_next_signature);
 
-memop set_start_time(int<<32>> stored_time,int<<32>> time_now,int<<32>> cmp_val)
- {{
-b1=(should_set,stored_time==cmp_val);
-b2=None
-cell1=(should_set -> time_now), None
-cell2=None, None
-
-ret=None
-}}
-
 memop get_old(int<<32>> stored_count,int<<32>> ignore)
  {return stored_count;
 }
@@ -292,8 +279,11 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 }
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
+int<<32>> num_sigs_written = Array.update(signature_count,0,get_old,0,increase_by,1);
+if (num_sigs_written==0) {
 int<<32>> precompute = Sys.time();
-Array.update_complex(start_time,0,set_start_time,precompute,1,0);
+Array.set(start_time,0,precompute);
+} 
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
