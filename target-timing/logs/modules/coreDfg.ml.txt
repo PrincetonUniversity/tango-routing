@@ -1,7 +1,24 @@
 ---coreDfg.ml log---
 ----read map----
 ------------
-id: combined_memop_get_old_increase_by_3780~0
+id: combined_memop_get_old_increase_by_3874~0
+----
+match event_id with 
+| 3 -> {
+
+}
+| 1 -> {
+
+}
+| 2 -> {
+Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);
+}
+| _ -> {
+
+}
+----
+------------
+id: combined_memop_get_old_increase_by_3898~0
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -11,7 +28,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);
 }
 | _,_ -> {
 
@@ -494,7 +511,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -518,7 +535,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3750 = 1+set_signature_sig_idx;
+int<<16>> precompute3864 = 1+set_signature_sig_idx;
 }
 | _,_ -> {
 
@@ -542,7 +559,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3749 = set_signature_ip_header_1-32;
+int<<16>> precompute3863 = set_signature_ip_header_1-32;
 }
 | _,_ -> {
 
@@ -581,7 +598,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
@@ -596,7 +613,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> precompute3751 = Sys.time();
+int<<32>> precompute3865 = Sys.time();
 }
 | _,_ -> {
 
@@ -611,7 +628,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);
 }
 | _,_ -> {
 
@@ -653,7 +670,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -677,7 +694,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -701,7 +718,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -716,7 +733,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -806,7 +823,7 @@ match event_id with
 
 }
 | 2 -> {
-Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);
 }
 | _ -> {
 
@@ -822,6 +839,21 @@ match event_id with
 }
 | 2 -> {
 int<<32>> precompute = Sys.time();
+}
+| _ -> {
+
+}
+----
+----
+match event_id with 
+| 3 -> {
+
+}
+| 1 -> {
+
+}
+| 2 -> {
+Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);
 }
 | _ -> {
 
@@ -1065,7 +1097,7 @@ Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signa
 }
 ----
 ------------
-id: set_3760~0
+id: set_3878~0
 ----
 match event_id with 
 | 3 -> {
@@ -1075,14 +1107,14 @@ match event_id with
 
 }
 | 2 -> {
-Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);
 }
 | _ -> {
 
 }
 ----
 ------------
-id: set_3764~0
+id: set_3882~0
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -1092,14 +1124,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: set_3768~0
+id: set_3886~0
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -1118,14 +1150,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: set_3772~0
+id: set_3890~0
 ----
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -1144,14 +1176,14 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: set_3776~0
+id: set_3894~0
 ----
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -1188,14 +1220,14 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: set_3784~0
+id: set_3902~0
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -1205,7 +1237,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
@@ -1231,7 +1263,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1273,7 +1305,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1297,7 +1329,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1356,7 +1388,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1380,7 +1412,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1421,7 +1453,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1447,7 +1479,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1473,7 +1505,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1499,7 +1531,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1525,7 +1557,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3749 = set_signature_ip_header_1-32;
+int<<16>> precompute3863 = set_signature_ip_header_1-32;
 }
 | _,_ -> {
 
@@ -1551,7 +1583,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1577,7 +1609,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1603,7 +1635,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1629,7 +1661,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1655,7 +1687,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1681,7 +1713,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1707,7 +1739,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1731,7 +1763,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -1755,7 +1787,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3750 = 1+set_signature_sig_idx;
+int<<16>> precompute3864 = 1+set_signature_sig_idx;
 }
 | _,_ -> {
 
@@ -1779,7 +1811,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3749 = set_signature_ip_header_1-32;
+int<<16>> precompute3863 = set_signature_ip_header_1-32;
 }
 | _,_ -> {
 
@@ -1818,7 +1850,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
@@ -1833,7 +1865,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> precompute3751 = Sys.time();
+int<<32>> precompute3865 = Sys.time();
 }
 | _,_ -> {
 
@@ -1848,7 +1880,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);
 }
 | _,_ -> {
 
@@ -1874,7 +1906,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-int<<16>> precompute3750 = 1+set_signature_sig_idx;
+int<<16>> precompute3864 = 1+set_signature_sig_idx;
 }
 | _,_ -> {
 
@@ -1916,7 +1948,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1940,7 +1972,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -1981,7 +2013,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -2022,7 +2054,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -2048,7 +2080,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -2074,7 +2106,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -2100,14 +2132,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: first_packet_seen~3130
+id: signature_count~3217
 ----
 match event_id with 
 | 3 -> {
@@ -2117,14 +2149,31 @@ match event_id with
 
 }
 | 2 -> {
-Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
+Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);
 }
 | _ -> {
 
 }
 ----
 ------------
-id: application_packet_counter~3131
+id: first_packet_seen~3218
+----
+match event_id with 
+| 3 -> {
+
+}
+| 1 -> {
+
+}
+| 2 -> {
+Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);
+}
+| _ -> {
+
+}
+----
+------------
+id: application_packet_counter~3219
 ----
 match event_id with 
 | 3 -> {
@@ -2138,7 +2187,7 @@ Array.update_complex(application_packet_counter,0,increase_by,1,0,0);
 }
 ----
 ------------
-id: outgoing_book_signature_manager_0~3132
+id: outgoing_book_signature_manager_0~3220
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2148,14 +2197,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: outgoing_book_signature_manager_1~3133
+id: outgoing_book_signature_manager_1~3221
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2174,14 +2223,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: outgoing_metric_signature_manager_0~3134
+id: outgoing_metric_signature_manager_0~3222
 ----
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2200,14 +2249,14 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: outgoing_metric_signature_manager_1~3135
+id: outgoing_metric_signature_manager_1~3223
 ----
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2244,14 +2293,14 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: num_pkt_finishes~3136
+id: num_pkt_finishes~3224
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2261,14 +2310,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: pkt_finish_times~3137
+id: pkt_finish_times~3225
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2278,14 +2327,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: increase_by~3202
+id: increase_by~3290
 ----
 match event_id with 
 | 3 -> {
@@ -2299,7 +2348,7 @@ Array.update_complex(application_packet_counter,0,increase_by,1,0,0);
 }
 ----
 ------------
-id: sig_idx_copy~3259
+id: sig_idx_copy~3347
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2318,7 +2367,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -2333,14 +2382,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: sig_copy~3260
+id: sig_copy~3348
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2359,7 +2408,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -2374,14 +2423,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: block_idx_copy~3261
+id: block_idx_copy~3349
 ----
 match (block_idx_copy,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2400,7 +2449,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -2415,14 +2464,14 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
 }
 ----
 ------------
-id: done_idx~3262
+id: done_idx~3350
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2432,14 +2481,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: precompute~3748
+id: precompute~3862
 ----
 match event_id with 
 | 3 -> {
@@ -2449,14 +2498,14 @@ match event_id with
 
 }
 | 2 -> {
-Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);
 }
 | _ -> {
 
 }
 ----
 ------------
-id: precompute3749~3749
+id: precompute3863~3863
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2475,14 +2524,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: precompute3750~3750
+id: precompute3864~3864
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2501,14 +2550,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | _,2 -> {
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: precompute3751~3751
+id: precompute3865~3865
 ----
 match (set_signature_next_signature,event_id) with 
 | 0,3 -> {
@@ -2518,14 +2567,14 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);
 }
 | _,_ -> {
 
 }
 ----
 ------------
-id: if_precomp~3752
+id: if_precomp~3866
 ----
 match (set_signature_block_idx,if_precomp,event_id) with 
 | 0,0,3 -> {
@@ -2562,7 +2611,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -2586,7 +2635,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -2610,7 +2659,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -2625,7 +2674,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -3065,7 +3114,31 @@ s:159: match (event_id) with
 ts:
 ---------
 [get_dependencies write-write]
-s:181: match (event_id) with
+s:200: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);}
+| _ -> {}
+ts:
+---------
+[get_dependencies write-read]
+s:200: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);}
+| _ -> {}
+ts:
+---------
+[get_dependencies read-write]
+s:200: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3874,0,1,0);}
+| _ -> {}
+ts:
+---------
+[get_dependencies write-write]
+s:204: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> precompute = Sys.time();}
@@ -3073,20 +3146,20 @@ s:181: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:181: match (event_id) with
+s:204: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> precompute = Sys.time();}
 | _ -> {}
 ts:
-DEPENDEE:202: match (event_id) with
+DEPENDEE:225: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);}
+| 2 -> {Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);}
 | _ -> {}
 ---------
 [get_dependencies read-write]
-s:181: match (event_id) with
+s:204: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> precompute = Sys.time();}
@@ -3094,31 +3167,31 @@ s:181: match (event_id) with
 ts:
 ---------
 [get_dependencies write-write]
-s:202: match (event_id) with
+s:225: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);}
+| 2 -> {Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);}
 | _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:202: match (event_id) with
+s:225: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);}
+| 2 -> {Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);}
 | _ -> {}
 ts:
 ---------
 [get_dependencies read-write]
-s:202: match (event_id) with
+s:225: match (event_id) with
 | 3 -> {}
 | 1 -> {}
-| 2 -> {Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);}
+| 2 -> {Array.update_complex(first_packet_seen,0,set_3878,precompute,0,0);}
 | _ -> {}
 ts:
 ---------
 [get_dependencies write-write]
-s:213: match (event_id) with
+s:236: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);}
@@ -3126,41 +3199,41 @@ s:213: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:213: match (event_id) with
+s:236: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);}
 | _ -> {}
 ts:
-DEPENDEE:269: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
-DEPENDEE:288: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:213: match (event_id) with
+s:236: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);}
 | _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:223: match (event_id) with
+s:246: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);}
@@ -3168,41 +3241,41 @@ s:223: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:223: match (event_id) with
+s:246: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);}
 | _ -> {}
 ts:
-DEPENDEE:269: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
-DEPENDEE:288: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:223: match (event_id) with
+s:246: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);}
 | _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:233: match (event_id) with
+s:256: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);}
@@ -3210,41 +3283,41 @@ s:233: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:233: match (event_id) with
+s:256: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);}
 | _ -> {}
 ts:
-DEPENDEE:269: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
-DEPENDEE:288: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:233: match (event_id) with
+s:256: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);}
 | _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:234: match (event_id) with
+s:257: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {}
@@ -3252,7 +3325,7 @@ s:234: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:234: match (event_id) with
+s:257: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {}
@@ -3260,7 +3333,7 @@ s:234: match (event_id) with
 ts:
 ---------
 [get_dependencies read-write]
-s:234: match (event_id) with
+s:257: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {}
@@ -3268,7 +3341,7 @@ s:234: match (event_id) with
 ts:
 ---------
 [get_dependencies write-write]
-s:246: match (event_id) with
+s:269: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;}
@@ -3276,34 +3349,34 @@ s:246: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:246: match (event_id) with
+s:269: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;}
 | _ -> {}
 ts:
-DEPENDEE:269: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
-DEPENDEE:288: match (block_idx_copy,if_precomp,event_id) with
+DEPENDEE:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
-DEPENDEE:310: match (set_signature_block_idx,if_precomp,event_id) with
+DEPENDEE:333: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | 0, _, 3 -> {}
 | 0, _, 1 -> {}
-| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);}
+| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
-DEPENDEE:329: match (set_signature_block_idx,if_precomp,event_id) with
+DEPENDEE:352: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
@@ -3315,146 +3388,129 @@ DEPENDEE:329: match (set_signature_block_idx,if_precomp,event_id) with
 | _, 0, 2 -> {}
 | _, _, 3 -> {}
 | _, _, 1 -> {}
-| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);}
+| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:246: match (event_id) with
+s:269: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;}
 | _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:269: match (block_idx_copy,if_precomp,event_id) with
+s:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:269: match (block_idx_copy,if_precomp,event_id) with
+s:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies read-write]
-s:269: match (block_idx_copy,if_precomp,event_id) with
+s:292: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
-| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);}
+| 0, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3882,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies write-write]
-s:288: match (block_idx_copy,if_precomp,event_id) with
+s:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:288: match (block_idx_copy,if_precomp,event_id) with
+s:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies read-write]
-s:288: match (block_idx_copy,if_precomp,event_id) with
+s:311: match (block_idx_copy,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | _, 0, 3 -> {}
 | _, 0, 1 -> {}
-| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);}
+| _, 0, 2 -> {Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3886,sig_copy,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies write-write]
-s:310: match (set_signature_block_idx,if_precomp,event_id) with
+s:333: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | 0, _, 3 -> {}
 | 0, _, 1 -> {}
-| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);}
+| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:310: match (set_signature_block_idx,if_precomp,event_id) with
+s:333: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | 0, _, 3 -> {}
 | 0, _, 1 -> {}
-| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);}
+| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
 [get_dependencies read-write]
-s:310: match (set_signature_block_idx,if_precomp,event_id) with
+s:333: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
 | 0, _, 3 -> {}
 | 0, _, 1 -> {}
-| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);}
+| 0, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3890,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:329: match (set_signature_block_idx,if_precomp,event_id) with
-| 0, 0, 3 -> {}
-| 0, 0, 1 -> {}
-| 0, 0, 2 -> {}
-| 0, _, 3 -> {}
-| 0, _, 1 -> {}
-| 0, _, 2 -> {}
-| _, 0, 3 -> {}
-| _, 0, 1 -> {}
-| _, 0, 2 -> {}
-| _, _, 3 -> {}
-| _, _, 1 -> {}
-| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);}
-| _, _, _ -> {}
-ts:
----------
-[get_dependencies write-read]
-s:329: match (set_signature_block_idx,if_precomp,event_id) with
+s:352: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
@@ -3466,12 +3522,12 @@ s:329: match (set_signature_block_idx,if_precomp,event_id) with
 | _, 0, 2 -> {}
 | _, _, 3 -> {}
 | _, _, 1 -> {}
-| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);}
+| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ts:
 ---------
-[get_dependencies read-write]
-s:329: match (set_signature_block_idx,if_precomp,event_id) with
+[get_dependencies write-read]
+s:352: match (set_signature_block_idx,if_precomp,event_id) with
 | 0, 0, 3 -> {}
 | 0, 0, 1 -> {}
 | 0, 0, 2 -> {}
@@ -3483,88 +3539,37 @@ s:329: match (set_signature_block_idx,if_precomp,event_id) with
 | _, 0, 2 -> {}
 | _, _, 3 -> {}
 | _, _, 1 -> {}
-| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);}
+| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);}
 | _, _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
-| 3 -> {}
-| 1 -> {}
-| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
-| _ -> {}
-DEPENDEE:502: match (event_id) with
-| 3 -> {}
-| 1 -> {}
-| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
-| _ -> {}
-DEPENDEE:502: match (event_id) with
-| 3 -> {}
-| 1 -> {}
-| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
-| _ -> {}
----------
-[get_dependencies write-write]
-s:359: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);}
-| _, _ -> {}
-ts:
----------
-[get_dependencies write-read]
-s:359: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);}
-| _, _ -> {}
-ts:
-DEPENDEE:382: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);}
-| _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:359: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);}
-| _, _ -> {}
+s:352: match (set_signature_block_idx,if_precomp,event_id) with
+| 0, 0, 3 -> {}
+| 0, 0, 1 -> {}
+| 0, 0, 2 -> {}
+| 0, _, 3 -> {}
+| 0, _, 1 -> {}
+| 0, _, 2 -> {}
+| _, 0, 3 -> {}
+| _, 0, 1 -> {}
+| _, 0, 2 -> {}
+| _, _, 3 -> {}
+| _, _, 1 -> {}
+| _, _, 2 -> {Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3894,set_signature_curr_signature,0,0);}
+| _, _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
----------
-[get_dependencies write-write]
-s:363: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> precompute3751 = Sys.time();}
-| _, _ -> {}
-ts:
----------
-[get_dependencies write-read]
-s:363: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> precompute3751 = Sys.time();}
-| _, _ -> {}
-ts:
-DEPENDEE:382: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);}
-| _, _ -> {}
----------
-[get_dependencies read-write]
-s:363: match (set_signature_next_signature,event_id) with
-| 0, 3 -> {}
-| 0, 1 -> {}
-| 0, 2 -> {int<<32>> precompute3751 = Sys.time();}
-| _, _ -> {}
-ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
+| _ -> {}
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
@@ -3574,7 +3579,7 @@ DEPENDEE:502: match (event_id) with
 s:382: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
-| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);}
+| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);}
 | _, _ -> {}
 ts:
 ---------
@@ -3582,25 +3587,93 @@ ts:
 s:382: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
-| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);}
+| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);}
 | _, _ -> {}
 ts:
+DEPENDEE:405: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);}
+| _, _ -> {}
 ---------
 [get_dependencies read-write]
 s:382: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
-| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);}
+| 0, 2 -> {int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3898,0,1,0);}
 | _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:385: match (set_signature_next_signature,event_id) with
+s:386: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {int<<32>> precompute3865 = Sys.time();}
+| _, _ -> {}
+ts:
+---------
+[get_dependencies write-read]
+s:386: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {int<<32>> precompute3865 = Sys.time();}
+| _, _ -> {}
+ts:
+DEPENDEE:405: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);}
+| _, _ -> {}
+---------
+[get_dependencies read-write]
+s:386: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {int<<32>> precompute3865 = Sys.time();}
+| _, _ -> {}
+ts:
+DEPENDEE:526: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
+| _ -> {}
+---------
+[get_dependencies write-write]
+s:405: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);}
+| _, _ -> {}
+ts:
+---------
+[get_dependencies write-read]
+s:405: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);}
+| _, _ -> {}
+ts:
+---------
+[get_dependencies read-write]
+s:405: match (set_signature_next_signature,event_id) with
+| 0, 3 -> {}
+| 0, 1 -> {}
+| 0, 2 -> {Array.update_complex(pkt_finish_times,done_idx,set_3902,precompute3865,0,0);}
+| _, _ -> {}
+ts:
+DEPENDEE:526: match (event_id) with
+| 3 -> {}
+| 1 -> {}
+| 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
+| _ -> {}
+---------
+[get_dependencies write-write]
+s:408: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
@@ -3611,7 +3684,7 @@ s:385: match (set_signature_next_signature,event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:385: match (set_signature_next_signature,event_id) with
+s:408: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
@@ -3622,7 +3695,7 @@ s:385: match (set_signature_next_signature,event_id) with
 ts:
 ---------
 [get_dependencies read-write]
-s:385: match (set_signature_next_signature,event_id) with
+s:408: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
@@ -3631,239 +3704,239 @@ s:385: match (set_signature_next_signature,event_id) with
 | _, 2 -> {}
 | _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:395: match (set_signature_next_signature,event_id) with
+s:418: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3749 = set_signature_ip_header_1-32;}
+| _, 2 -> {int<<16>> precompute3863 = set_signature_ip_header_1-32;}
 | _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:395: match (set_signature_next_signature,event_id) with
+s:418: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3749 = set_signature_ip_header_1-32;}
+| _, 2 -> {int<<16>> precompute3863 = set_signature_ip_header_1-32;}
 | _, _ -> {}
 ts:
-DEPENDEE:450: match (set_signature_next_signature,event_id) with
+DEPENDEE:473: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));}
+| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));}
 | _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:395: match (set_signature_next_signature,event_id) with
+s:418: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3749 = set_signature_ip_header_1-32;}
+| _, 2 -> {int<<16>> precompute3863 = set_signature_ip_header_1-32;}
 | _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:405: match (set_signature_next_signature,event_id) with
+s:428: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3750 = 1+set_signature_sig_idx;}
+| _, 2 -> {int<<16>> precompute3864 = 1+set_signature_sig_idx;}
 | _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:405: match (set_signature_next_signature,event_id) with
+s:428: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3750 = 1+set_signature_sig_idx;}
+| _, 2 -> {int<<16>> precompute3864 = 1+set_signature_sig_idx;}
 | _, _ -> {}
 ts:
-DEPENDEE:450: match (set_signature_next_signature,event_id) with
+DEPENDEE:473: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));}
+| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));}
 | _, _ -> {}
 ---------
 [get_dependencies read-write]
-s:405: match (set_signature_next_signature,event_id) with
+s:428: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {int<<16>> precompute3750 = 1+set_signature_sig_idx;}
+| _, 2 -> {int<<16>> precompute3864 = 1+set_signature_sig_idx;}
 | _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:450: match (set_signature_next_signature,event_id) with
+s:473: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));}
+| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));}
 | _, _ -> {}
 ts:
 ---------
 [get_dependencies write-read]
-s:450: match (set_signature_next_signature,event_id) with
+s:473: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));}
+| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));}
 | _, _ -> {}
 ts:
 ---------
 [get_dependencies read-write]
-s:450: match (set_signature_next_signature,event_id) with
+s:473: match (set_signature_next_signature,event_id) with
 | 0, 3 -> {}
 | 0, 1 -> {}
 | 0, 2 -> {}
 | _, 3 -> {}
 | _, 1 -> {}
-| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));}
+| _, 2 -> {generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3863,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3864,set_signature_block_idx,set_signature_next_signature));}
 | _, _ -> {}
 ts:
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
-DEPENDEE:502: match (event_id) with
+DEPENDEE:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
 | _ -> {}
 ---------
 [get_dependencies write-write]
-s:502: match (event_id) with
+s:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
@@ -3871,7 +3944,7 @@ s:502: match (event_id) with
 ts:
 ---------
 [get_dependencies write-read]
-s:502: match (event_id) with
+s:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}
@@ -3879,7 +3952,7 @@ s:502: match (event_id) with
 ts:
 ---------
 [get_dependencies read-write]
-s:502: match (event_id) with
+s:526: match (event_id) with
 | 3 -> {}
 | 1 -> {}
 | 2 -> {Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,set_signature_ip_header_1,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,set_signature_sig_idx,set_signature_block_idx,set_signature_curr_signature,set_signature_next_signature);}

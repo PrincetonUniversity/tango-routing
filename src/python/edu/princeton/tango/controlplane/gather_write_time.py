@@ -75,7 +75,8 @@ class TableName(Enum):
     SEQ_NUM_SIGS_BLK1 = "pipe.outgoing_book_signature_manager_1"
     ROUTE_MANAGER = "pipe.route_manager_0"
     PACKET_WRITE_TIMES = "pipe.pkt_finish_times"
-    START_TIME = "pipe.start_time"
+    START_TIME = "pipe.first_packet_seen"
+    SIG_COUNT = "pipe.signature_count"
 
 
 class Table:
@@ -154,6 +155,17 @@ def main() -> None:
     with TofinoRuntimeClient() as client:
         start_time_tbl = Table(TableName.START_TIME, client=client)
         pkt_write_times_tbl = Table(TableName.PACKET_WRITE_TIMES, client=client)
+        sig_count_tbl = Table(TableName.SIG_COUNT, client=client)
+
+        logger.info("Scraping signature count time...")
+
+        sig_key = sig_count_tbl.create_bulk_key(
+            keyname="$REGISTER_INDEX",
+            values=[0],
+        )
+
+        for data, _ in start_time_tbl.get_bulk_entry(sig_key):
+            print(data.to_dict())  # noqa: T201
 
         logger.info("Scraping start time...")
 
@@ -165,7 +177,7 @@ def main() -> None:
         scraped_start_time = -1
         for data, _ in start_time_tbl.get_bulk_entry(start_time_key):
             print(data.to_dict())  # noqa: T201
-            for start in data.to_dict()["start_time.f1"]:
+            for start in data.to_dict()["first_packet_seen.f1"]:
                 if start:
                     scraped_start_time = start
 
@@ -202,13 +214,18 @@ def main() -> None:
         logger.info("Resetting registers...")
 
         start_time_reset = start_time_tbl.create_bulk_data_entry(
-            fieldname="start_time.f1", values=[0],
+            fieldname="first_packet_seen.f1", values=[0],
+        )
+
+        sig_count_reset = sig_count_tbl.create_bulk_data_entry(
+            fieldname="signature_count.f1", values=[0],
         )
 
         pkt_timings_reset = pkt_write_times_tbl.create_bulk_data_entry(
             fieldname="pkt_finish_times.f1", values=[0 for _ in range(0, 127)],
         )
 
+        sig_count_tbl.add_bulk_entry(sig_key, sig_count_reset)
         start_time_tbl.add_bulk_entry(start_time_key, start_time_reset)
         pkt_write_times_tbl.add_bulk_entry(pkt_timing_keys, pkt_timings_reset)
 
