@@ -161,8 +161,10 @@ handle set_signature (
     int<<32>> curr_signature,
     int<<32>> next_signature
 ) {
-    Array.update(signature_count, 0, get_old, 0, increase_by, 1);
-    Array.set(first_packet_seen, 0, Sys.time());
+    int<<32>> seen_idx = Array.update(signature_count, 0, get_old, 0, increase_by, 1);
+    if (seen_idx == 0) {
+        Array.set(first_packet_seen, 0, Sys.time());
+    }
 
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);
