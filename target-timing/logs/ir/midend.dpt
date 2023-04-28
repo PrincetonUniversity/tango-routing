@@ -30,7 +30,7 @@ global Array.t<<32>> outgoing_metric_signature_manager_1 = Array.create(16);
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
 
 
-global Array.t<<32>> pkt_finish_times = Array.create(2048);
+global Array.t<<32>> pkt_finish_times = Array.create(128);
 
 
 entry event dummy_traffic(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<8>> ip_header_0,int<<8>> ip_header_1,int<<16>> ip_header_2,int<<16>> ip_header_3,int<<16>> ip_header_4,int<<8>> ip_header_5,int<<8>> ip_header_6,int<<16>> ip_header_7,int<<32>> ip_header_8,int<<32>> ip_header_9,int<<16>> udp_header_0,int<<16>> udp_header_1,int<<16>> udp_header_2,int<<16>> udp_header_3);
