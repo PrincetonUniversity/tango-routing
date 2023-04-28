@@ -80,7 +80,7 @@ def create_signature_packet(
         Ether()
         / IPv6()
         / UDP()
-        / SignatureMetadata(sig_type=sigs_type.value, sig_idx=start_idx, block_idx=block_idx)
+        / SignatureMetadata(sig_type=sigs_type.value, sig_idx=start_idx % 32768, block_idx=block_idx)
     )
     for sig in signatures:
         pkt = pkt / Signature(signature=sig)

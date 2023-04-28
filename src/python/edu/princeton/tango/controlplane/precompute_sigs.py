@@ -20,10 +20,7 @@ class PrecomputedSignatures:
 
 def hash_int(num: int) -> int:
     """Hash an int into a 32-bit integer."""
-    return int.from_bytes(
-        sha256(num.to_bytes((num.bit_length() + 7) // 8, "big")).digest()[-4:],
-        "big",
-    )
+    return num 
 
 
 def compute_timestamp_signatures(
@@ -42,18 +39,7 @@ def compute_sequence_num_signatures(num_seq_nums: int) -> List[int]:
     logger = logging.getLogger(__name__)
     logger.info("Calculating sequence number signatures...")
     return [
-        int(
-            "".join(
-                map(
-                    str,
-                    [
-                        hash_int(i) & 1
-                        for i in reversed(range(curr_round * 32, (curr_round * 32) + 32))
-                    ],
-                ),
-            ),
-            base=2,
-        )
+        hash_int(curr_round)
         for curr_round in range(0, num_seq_nums // 32)
     ]
 
@@ -69,19 +55,22 @@ def pickle_signatures(filename: Path, ts_sigs: List[int], seq_sigs: List[int]) -
 
 def main() -> None:
     """Genreate pickle file containing all precomputed signatures."""
-    if len(sys.argv) != 2:
-        print("\n-- ERROR --\n\nUsage: <program> <pickle-filepath>", flush=True)  # noqa: T201
+    if len(sys.argv) != 4:
+        print("\n-- ERROR --\n\nUsage: <program> <pickle-filepath> <ms-duration> <packets-per-book>", flush=True)  # noqa: T201
+        print(sys.argv, len(sys.argv))
         sys.exit(1)
 
     filepath = Path(sys.argv[1]).absolute()
 
-    test_time_len = timedelta(minutes=1)
-    packets_per_seq_book = 2 ** 16
-    num_books = 512
+    test_time_len = timedelta(milliseconds=int(sys.argv[2]))
+    packets_per_seq_book = int(sys.argv[3])
+    num_books = 1
     num_seq_sigs = packets_per_seq_book * num_books
 
     timestamp_sigs = compute_timestamp_signatures(test_time_len)
     seq_num_sigs = compute_sequence_num_signatures(num_seq_sigs)
+
+    print(f"num ts: {len(timestamp_sigs)}, num_seq: {len(seq_num_sigs)}")
 
     pickle_signatures(filepath, ts_sigs=timestamp_sigs, seq_sigs=seq_num_sigs)
     print(f"\n-- SUCCESS --\n\nPickled signatures @ file://{filepath}")  # noqa: T201
