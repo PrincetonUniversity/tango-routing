@@ -199,9 +199,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
     TangoHeader_t tango_metrics_hdr = {
         path_id = (int<<8>>) path_id;
         timestamp = (int<<16>>) timestamp;
-        signature = 0;
         sequence_num = seq_number;
-        book_signature = 0;
     };
 
     event forward_tango_pkt = incoming_tango_traffic (

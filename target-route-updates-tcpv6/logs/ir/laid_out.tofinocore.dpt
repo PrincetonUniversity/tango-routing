@@ -3,9 +3,9 @@ global Array.t<<8>> route_manager_0 = Array.create(32);
 global Array.t<<16>> sequence_counters_0 = Array.create(32);
 
 entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
-event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3);
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<16>> incoming_tango_traffic_tango_metrics_header_2,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3);
 event update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_tcp_header_0,int<<16>> update_route_tcp_header_1,int<<32>> update_route_tcp_header_2,int<<32>> update_route_tcp_header_3,int<<8>> update_route_tcp_header_4,int<<8>> update_route_tcp_header_5,int<<16>> update_route_tcp_header_6,int<<16>> update_route_tcp_header_7,int<<16>> update_route_tcp_header_8,int<<8>> update_route_update_0,int<<8>> update_route_update_1);
-handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3) {
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<16>> incoming_tango_traffic_tango_metrics_header_2,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3) {
 
 }
 handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
@@ -15,13 +15,13 @@ handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_e
 
 }
 // shared locals:
-int<<8>> route_manager_0_idx_4672;
+int<<8>> route_manager_0_idx_4624;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
 match event_id with 
 | 2 -> {
-Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_tcp_header_0,incoming_tango_traffic_tango_tcp_header_1,incoming_tango_traffic_tango_tcp_header_2,incoming_tango_traffic_tango_tcp_header_3,incoming_tango_traffic_tango_tcp_header_4,incoming_tango_traffic_tango_tcp_header_5,incoming_tango_traffic_tango_tcp_header_6,incoming_tango_traffic_tango_tcp_header_7,incoming_tango_traffic_tango_tcp_header_8,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);
+Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_tcp_header_0,incoming_tango_traffic_tango_tcp_header_1,incoming_tango_traffic_tango_tcp_header_2,incoming_tango_traffic_tango_tcp_header_3,incoming_tango_traffic_tango_tcp_header_4,incoming_tango_traffic_tango_tcp_header_5,incoming_tango_traffic_tango_tcp_header_6,incoming_tango_traffic_tango_tcp_header_7,incoming_tango_traffic_tango_tcp_header_8,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);
 }
 | 1 -> {
 int<<8>> traffic_class = 0;
@@ -36,8 +36,6 @@ int<<64>> tango_tunnel_hdr_6 = 0;
 int<<64>> tango_tunnel_hdr_7 = 0;
 int<<16>> SequenceNumberManager_increment_ret = 32;
 int<<32>> time_now = Sys.time();
-int<<32>> tango_metrics_hdr_2 = 0;
-int<<8>> tango_metrics_hdr_4 = 0;
 int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
 int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
 int<<16>> forward_tango_pkt_arg_2 = 34525;
@@ -50,21 +48,21 @@ int<<8>> forward_tango_pkt_arg_16 = 16;
 int<<16>> forward_tango_pkt_arg_17 = 0;
 int<<16>> forward_tango_pkt_arg_18 = 0;
 int<<16>> forward_tango_pkt_arg_19 = 0;
-int<<32>> forward_tango_pkt_arg_25 = forward_flow_ip_header_0;
-int<<16>> forward_tango_pkt_arg_26 = forward_flow_ip_header_1;
-int<<8>> forward_tango_pkt_arg_27 = forward_flow_ip_header_2;
-int<<8>> forward_tango_pkt_arg_28 = forward_flow_ip_header_3;
-int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_4;
-int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_5;
-int<<64>> forward_tango_pkt_arg_31 = forward_flow_ip_header_6;
-int<<64>> forward_tango_pkt_arg_32 = forward_flow_ip_header_7;
-int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_0;
-int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_1;
-int<<16>> forward_tango_pkt_arg_35 = forward_flow_udp_header_2;
-int<<16>> forward_tango_pkt_arg_36 = forward_flow_udp_header_3;
+int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_0;
+int<<16>> forward_tango_pkt_arg_24 = forward_flow_ip_header_1;
+int<<8>> forward_tango_pkt_arg_25 = forward_flow_ip_header_2;
+int<<8>> forward_tango_pkt_arg_26 = forward_flow_ip_header_3;
+int<<64>> forward_tango_pkt_arg_27 = forward_flow_ip_header_4;
+int<<64>> forward_tango_pkt_arg_28 = forward_flow_ip_header_5;
+int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_6;
+int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_7;
+int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_0;
+int<<16>> forward_tango_pkt_arg_32 = forward_flow_udp_header_1;
+int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_2;
+int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_3;
 }
 | 3 -> {
-route_manager_0_idx_4672 = update_route_update_0;
+route_manager_0_idx_4624 = update_route_update_0;
 }
 | _ -> {
 
@@ -128,110 +126,74 @@ match (forward_flow_ip_header_2,forward_flow_udp_header_1,forward_flow_ip_header
 | _,_,_,_,50000,_,_,1 -> {
 traffic_class = 0;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50001,_,_,1 -> {
 traffic_class = 1;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50002,_,_,1 -> {
 traffic_class = 2;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50003,_,_,1 -> {
 traffic_class = 3;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50004,_,_,1 -> {
 traffic_class = 4;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50005,_,_,1 -> {
 traffic_class = 5;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50006,_,_,1 -> {
 traffic_class = 6;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50007,_,_,1 -> {
 traffic_class = 7;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60000,_,_,1 -> {
 traffic_class = 8;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60001,_,_,1 -> {
 traffic_class = 9;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60002,_,_,1 -> {
 traffic_class = 10;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60003,_,_,1 -> {
 traffic_class = 11;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60004,_,_,1 -> {
 traffic_class = 12;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60005,_,_,1 -> {
 traffic_class = 13;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60006,_,_,1 -> {
 traffic_class = 14;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,60007,_,_,1 -> {
 traffic_class = 15;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,50008,_,_,1 -> {
 traffic_class = 30;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,_,_,_,1 -> {
 traffic_class = 31;
 int<<12>> timestamp = [31 : 20]time_now;
-int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
-int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
 }
 | _,_,_,_,_,_,_,_ -> {
 
@@ -242,7 +204,7 @@ match event_id with
 
 }
 | 1 -> {
-route_manager_0_idx_4672 = traffic_class;
+route_manager_0_idx_4624 = traffic_class;
 int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
 }
 | _ -> {
@@ -254,11 +216,11 @@ match event_id with
 
 }
 | 1 -> {
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4672,get_4663,0,0,0);
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4624,get_4615,0,0,0);
 int<<16>> forward_tango_pkt_arg_21 = tango_metrics_hdr_1;
 }
 | 3 -> {
-Array.update_complex(route_manager_0,route_manager_0_idx_4672,set_4671,update_route_update_1,0,0);
+Array.update_complex(route_manager_0,route_manager_0_idx_4624,set_4623,update_route_update_1,0,0);
 }
 | _ -> {
 
@@ -284,7 +246,7 @@ match (event_id,path_id) with
 }
 | 1,0 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537240576;
 tango_tunnel_hdr_5 = 3252;
@@ -299,7 +261,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,1 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537306112;
 tango_tunnel_hdr_5 = 3252;
@@ -314,7 +276,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,2 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537371648;
 tango_tunnel_hdr_5 = 3252;
@@ -329,7 +291,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,3 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537437184;
 tango_tunnel_hdr_5 = 3252;
@@ -344,7 +306,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,4 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537502720;
 tango_tunnel_hdr_5 = 3252;
@@ -359,7 +321,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,5 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537568256;
 tango_tunnel_hdr_5 = 3252;
@@ -374,7 +336,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,6 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_5 = 3252;
@@ -389,7 +351,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,7 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 1;
 tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_5 = 3252;
@@ -404,7 +366,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,8 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537240576;
 tango_tunnel_hdr_5 = 3252;
@@ -419,7 +381,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,9 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537306112;
 tango_tunnel_hdr_5 = 3252;
@@ -434,7 +396,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,10 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537371648;
 tango_tunnel_hdr_5 = 3252;
@@ -449,7 +411,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,11 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537437184;
 tango_tunnel_hdr_5 = 3252;
@@ -464,7 +426,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,12 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537502720;
 tango_tunnel_hdr_5 = 3252;
@@ -479,7 +441,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,13 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537568256;
 tango_tunnel_hdr_5 = 3252;
@@ -494,7 +456,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,14 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_5 = 3252;
@@ -509,7 +471,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,15 -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 tango_tunnel_hdr_7 = 2;
 tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_5 = 3252;
@@ -524,7 +486,7 @@ tango_tunnel_hdr_0 = 1610612736;
 }
 | 1,_ -> {
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);
 }
 | _,_ -> {
 
@@ -556,7 +518,7 @@ match event_id with
 
 }
 | 1 -> {
-int<<16>> tango_metrics_hdr_3 = seq_number;
+int<<16>> tango_metrics_hdr_2 = seq_number;
 }
 | _ -> {
 
@@ -567,7 +529,7 @@ match event_id with
 
 }
 | 1 -> {
-int<<16>> forward_tango_pkt_arg_23 = tango_metrics_hdr_3;
+int<<16>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
 }
 | _ -> {
 
@@ -578,35 +540,35 @@ match event_id with
 
 }
 | 1 -> {
-generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34,forward_tango_pkt_arg_35,forward_tango_pkt_arg_36));
+generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34));
 }
 | _ -> {
 
 }}
-memop set_4671(int<<8>> mem_val_4670,int<<8>> new_val_4668,int<<8>> unused_4669)
+memop set_4623(int<<8>> mem_val_4622,int<<8>> new_val_4620,int<<8>> unused_4621)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4668), None
+cell1=(true -> new_val_4620), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4664)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4616)
  {{
-b1=(mbool_4665,true);
-b2=(mbool_4666,true)
-cell1=(mbool_4665 -> curr+inc_set_4664), None
-cell2=(mbool_4666 -> curr), None
+b1=(mbool_4617,true);
+b2=(mbool_4618,true)
+cell1=(mbool_4617 -> curr+inc_set_4616), None
+cell2=(mbool_4618 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_4663(int<<8>> mem_val_4660,int<<8>> unused_4662,int<<8>> unused_4661)
+memop get_4615(int<<8>> mem_val_4612,int<<8>> unused_4614,int<<8>> unused_4613)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4660)
+ret=(true -> mem_val_4612)
 }}
