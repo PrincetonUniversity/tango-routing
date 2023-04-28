@@ -46,6 +46,17 @@ $SDE/./run_switchd.sh -p v6
 ucli
 pm
 port-add 12/0 100G NONE
+port-add 15/0 100G NONE
+an-set 12/0 2
+an-set 15/0 2
+port-enb 12/0
+port-enb 15/0
+rate-period 1
+rate-show
+
+
+
+port-add 12/0 100G NONE
 port-add 13/0 100G NONE
 port-add 15/0 100G NONE
 an-set 12/0 2
