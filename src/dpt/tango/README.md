@@ -14,7 +14,7 @@ set 1 burst 10000
 set 1 rate 1
 enable 1 random 
 set 1 proto udp
-set 1 size 40 
+set 1 size 1500 
 set 1 src mac 00:00:00:00:00:81
 set 1 dst mac 00:00:00:00:00:ff 
 start 1
