@@ -78,7 +78,7 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 int<<32>> precompute = Sys.time();
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
-int<<32>> precompute3860 = Sys.time();
+int<<32>> precompute3751 = Sys.time();
 }
 | 3,_ -> {
 Sys.invalidate.set_next_signature(set_next_signature_eth_header_0,set_next_signature_eth_header_1,set_next_signature_eth_header_2,set_next_signature_ip_header_0,set_next_signature_ip_header_1,set_next_signature_ip_header_2,set_next_signature_ip_header_3,set_next_signature_ip_header_4,set_next_signature_ip_header_5,set_next_signature_ip_header_6,set_next_signature_ip_header_7,set_next_signature_udp_header_0,set_next_signature_udp_header_1,set_next_signature_udp_header_2,set_next_signature_udp_header_3,set_next_signature_sig_type,set_next_signature_sig_idx,set_next_signature_block_idx,set_next_signature_next_signature);
@@ -108,8 +108,31 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 int<<32>> precompute = Sys.time();
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> if_precomp = (int<<32>>)set_signature_sig_type-0;
-int<<16>> precompute3858 = set_signature_ip_header_1-32;
-int<<16>> precompute3859 = 1+set_signature_sig_idx;
+int<<16>> precompute3749 = set_signature_ip_header_1-32;
+int<<16>> precompute3750 = 1+set_signature_sig_idx;
+}
+| _,_ -> {
+
+}
+match (event_id,set_signature_next_signature) with 
+| 3,0 -> {
+
+}
+| 1,0 -> {
+
+}
+| 2,0 -> {
+int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3780,0,1,0);
+}
+| 3,_ -> {
+
+}
+| 1,_ -> {
+
+}
+| 2,_ -> {
+int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 }
 | _,_ -> {
 
@@ -122,33 +145,9 @@ match event_id with
 
 }
 | 2 -> {
-int<<32>> num_sigs_written = Array.update_complex(signature_count,0,combined_memop_get_old_increase_by_3869,0,1,0);
-int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
+int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
 }
 | _ -> {
-
-}
-match (event_id,set_signature_next_signature) with 
-| 3,0 -> {
-
-}
-| 1,0 -> {
-
-}
-| 2,0 -> {
-int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
-int<<32>> done_idx = Array.update_complex(num_pkt_finishes,0,combined_memop_get_old_increase_by_3893,0,1,0);
-}
-| 3,_ -> {
-
-}
-| 1,_ -> {
-
-}
-| 2,_ -> {
-int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
-}
-| _,_ -> {
 
 }
 // Stage 1
@@ -160,7 +159,7 @@ match (event_id,set_signature_next_signature) with
 
 }
 | 2,0 -> {
-Array.update_complex(start_time,num_sigs_written,set_3873,precompute,0,0);
+Array.update_complex(start_time,0,set_3760,precompute,0,0);
 }
 | 3,_ -> {
 
@@ -169,8 +168,8 @@ Array.update_complex(start_time,num_sigs_written,set_3873,precompute,0,0);
 
 }
 | 2,_ -> {
-Array.update_complex(start_time,num_sigs_written,set_3873,precompute,0,0);
-generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3858,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3859,set_signature_block_idx,set_signature_next_signature));
+Array.update_complex(start_time,0,set_3760,precompute,0,0);
+generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {
 
@@ -210,7 +209,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | _,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3889,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_3776,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -232,7 +231,7 @@ match (set_signature_block_idx,if_precomp,event_id) with
 
 }
 | 0,_,2 -> {
-Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3885,set_signature_curr_signature,0,0);
+Array.update_complex(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_3772,set_signature_curr_signature,0,0);
 }
 | _,_,_ -> {
 
@@ -254,7 +253,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | _,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3881,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_1,sig_idx_copy,set_3768,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -268,7 +267,7 @@ match (block_idx_copy,if_precomp,event_id) with
 
 }
 | 0,0,2 -> {
-Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3877,sig_copy,0,0);
+Array.update_complex(outgoing_book_signature_manager_0,sig_idx_copy,set_3764,sig_copy,0,0);
 }
 | _,_,_ -> {
 
@@ -281,7 +280,7 @@ match (set_signature_next_signature,event_id) with
 
 }
 | 0,2 -> {
-Array.update_complex(pkt_finish_times,done_idx,set_3897,precompute3860,0,0);
+Array.update_complex(pkt_finish_times,done_idx,set_3784,precompute3751,0,0);
 }
 | _,_ -> {
 
@@ -300,84 +299,75 @@ Sys.invalidate.set_signature(set_signature_eth_header_0,set_signature_eth_header
 | _ -> {
 
 }}
-memop set_3897(int<<32>> mem_val_3896,int<<32>> new_val_3894,int<<32>> unused_3895)
+memop set_3784(int<<32>> mem_val_3783,int<<32>> new_val_3781,int<<32>> unused_3782)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3894), None
+cell1=(true -> new_val_3781), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_get_old_increase_by_3893(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3890)
+memop combined_memop_get_old_increase_by_3780(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3777)
  {{
-b1=(mbool_3891,true);
-b2=(mbool_3892,true)
-cell1=(mbool_3891 -> stored_count+amount_set_3890), None
-cell2=(mbool_3892 -> stored_count), None
+b1=(mbool_3778,true);
+b2=(mbool_3779,true)
+cell1=(mbool_3778 -> stored_count+amount_set_3777), None
+cell2=(mbool_3779 -> stored_count), None
 
 ret=(true -> cell2)
 }}
-memop set_3889(int<<32>> mem_val_3888,int<<32>> new_val_3886,int<<32>> unused_3887)
+memop set_3776(int<<32>> mem_val_3775,int<<32>> new_val_3773,int<<32>> unused_3774)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3886), None
+cell1=(true -> new_val_3773), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3885(int<<32>> mem_val_3884,int<<32>> new_val_3882,int<<32>> unused_3883)
+memop set_3772(int<<32>> mem_val_3771,int<<32>> new_val_3769,int<<32>> unused_3770)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3882), None
+cell1=(true -> new_val_3769), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3881(int<<32>> mem_val_3880,int<<32>> new_val_3878,int<<32>> unused_3879)
+memop set_3768(int<<32>> mem_val_3767,int<<32>> new_val_3765,int<<32>> unused_3766)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3878), None
+cell1=(true -> new_val_3765), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3877(int<<32>> mem_val_3876,int<<32>> new_val_3874,int<<32>> unused_3875)
+memop set_3764(int<<32>> mem_val_3763,int<<32>> new_val_3761,int<<32>> unused_3762)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3874), None
+cell1=(true -> new_val_3761), None
 cell2=None, None
 
 ret=None
 }}
-memop set_3873(int<<32>> mem_val_3872,int<<32>> new_val_3870,int<<32>> unused_3871)
+memop set_3760(int<<32>> mem_val_3759,int<<32>> new_val_3757,int<<32>> unused_3758)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_3870), None
+cell1=(true -> new_val_3757), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_get_old_increase_by_3869(int<<32>> stored_count,int<<32>> ignore,int<<32>> amount_set_3866)
- {{
-b1=(mbool_3867,true);
-b2=(mbool_3868,true)
-cell1=(mbool_3867 -> stored_count+amount_set_3866), None
-cell2=(mbool_3868 -> stored_count), None
-
-ret=(true -> cell2)
-}}
-memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3865)
+memop increase_by(int<<32>> stored_count,int<<32>> amount,int<<32>> unused_3756)
  {{
 b1=None;
-b2=(mbool_3864,true)
+b2=(mbool_3755,true)
 cell1=None, None
-cell2=(mbool_3864 -> stored_count+amount), None
+cell2=(mbool_3755 -> stored_count+amount), None
 
 ret=(true -> cell2)
 }}
