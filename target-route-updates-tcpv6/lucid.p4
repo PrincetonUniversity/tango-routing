@@ -749,7 +749,8 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_1=16w0;
 hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_2=32w0;
    
 hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_3=32w0;
-    hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_4=8w5;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_4=8w80;
    
 hdr.incoming_tango_traffic.incoming_tango_traffic_tango_tcp_header_5=8w16;
    
