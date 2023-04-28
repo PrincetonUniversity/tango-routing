@@ -1,15 +1,5 @@
 ---normalizeBools.ml log---
 original if statement: 
-if (num_sigs_written==0) {
-int<<32>> precompute = Sys.time();
-Array.set(start_time,0,precompute);
-} 
-new if statement: 
-if (num_sigs_written==0) {
-int<<32>> precompute = Sys.time();
-Array.set(start_time,0,precompute);
-} 
-original if statement: 
 if ((int<<32>>)set_signature_sig_type==0) {
 match block_idx_copy with 
 | 0 -> {
@@ -66,31 +56,15 @@ int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
 int<<32>> precompute = Sys.time();
 Array.set(pkt_finish_times,done_idx,precompute);
 }
-converting expression to dnf form: num_sigs_written==0
-
-converted expression into a disjunction of 1 exprs
-
-converting: (= num_sigs_written~3370 tmp_val_id~3896)
-
-converting: num_sigs_written~3370
-
-converting: tmp_val_id~3896
-
-old expression:  num_sigs_written==0
-
-new expression:  num_sigs_written==0
-
-new expression show: num_sigs_written==0
-
 converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~3895 tmp_val_id~3897)
+converting: (= if_precomp~3861 tmp_val_id~3862)
 
-converting: if_precomp~3895
+converting: if_precomp~3861
 
-converting: tmp_val_id~3897
+converting: tmp_val_id~3862
 
 old expression:  if_precomp==0
 
@@ -102,13 +76,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~3898))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~3863))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~3898)
+converting: (= set_signature_next_signature~0 tmp_val_id~3863)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~3898
+converting: tmp_val_id~3863
 
 old expression:  set_signature_next_signature!=0
 

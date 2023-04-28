@@ -22,7 +22,7 @@ const int<<9>> RECIRC_PORT = 68;
 global Array.t<<32>> signature_count = Array.create(1);
 
 // Keep track of write start
-global Array.t<<32>> start_time = Array.create(1);
+global Array.t<<32>> start_time = Array.create(65536);
 
 // Keep track of number of client packets coming through
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -162,9 +162,7 @@ handle set_signature (
     int<<32>> next_signature
 ) {
     int<<32>> num_sigs_written = Array.update(signature_count, 0, get_old, 0, increase_by, 1);
-    if (num_sigs_written == 0) {
-        Array.set(start_time, 0, Sys.time());
-    }
+    Array.set(start_time, num_sigs_written, Sys.time());
 
     int<<16>> sig_idx_copy = hash<<16>>(1, sig_idx);
     int<<32>> sig_copy = hash<<32>>(1, curr_signature);
