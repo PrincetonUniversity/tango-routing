@@ -103,7 +103,7 @@ outgoing_metric_signature_manager_0;
 Register<bit<32>,_>(32w16)
 outgoing_metric_signature_manager_1;
 Register<bit<32>,_>(32w1) num_pkt_finishes;
-Register<bit<32>,_>(32w128) pkt_finish_times;
+Register<bit<32>,_>(32w2048) pkt_finish_times;
 //Main program components (ingress/egress parser, control, deparser)
 parser IngressParser(packet_in pkt,
     out hdr_t hdr,

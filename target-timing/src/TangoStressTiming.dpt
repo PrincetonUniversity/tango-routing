@@ -37,7 +37,7 @@ global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignat
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
 
 // Record finish times for all control write packets
-global Array.t<<32>> pkt_finish_times = Array.create(128);
+global Array.t<<32>> pkt_finish_times = Array.create(2048);
 
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *
