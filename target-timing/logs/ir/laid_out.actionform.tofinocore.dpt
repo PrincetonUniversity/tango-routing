@@ -1,6 +1,6 @@
 global Array.t<<32>> signature_count = Array.create(1);
 
-global Array.t<<32>> start_time = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(65536);
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
@@ -470,7 +470,7 @@ labeled_statement labeledstmt_11{
 
 }
 labeled_statement labeledstmt_54{
-Array.update_complex(start_time,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
 }
 labeled_statement labeledstmt_12{
 labeledstmt_54();

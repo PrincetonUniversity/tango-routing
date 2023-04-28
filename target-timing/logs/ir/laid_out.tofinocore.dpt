@@ -1,6 +1,6 @@
 global Array.t<<32>> signature_count = Array.create(1);
 
-global Array.t<<32>> start_time = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(65536);
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
 
@@ -159,7 +159,7 @@ match (event_id,set_signature_next_signature) with
 
 }
 | 2,0 -> {
-Array.update_complex(start_time,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
 }
 | 3,_ -> {
 
@@ -168,7 +168,7 @@ Array.update_complex(start_time,0,set_3760,precompute,0,0);
 
 }
 | 2,_ -> {
-Array.update_complex(start_time,0,set_3760,precompute,0,0);
+Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);
 generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute3749,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute3750,set_signature_block_idx,set_signature_next_signature));
 }
 | _,_ -> {

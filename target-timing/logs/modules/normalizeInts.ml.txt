@@ -37,7 +37,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
 global Array.t<<32>> signature_count = Array.create(1);
 
 
-global Array.t<<32>> start_time = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(65536);
 
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -86,7 +86,7 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 int<<32>> precompute = Sys.time();
-Array.set(start_time,0,precompute);
+Array.set(first_packet_seen,0,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -130,7 +130,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
 global Array.t<<32>> signature_count = Array.create(1);
 
 
-global Array.t<<32>> start_time = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(65536);
 
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -179,7 +179,7 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 int<<32>> precompute = Sys.time();
-Array.set(start_time,0,precompute);
+Array.set(first_packet_seen,0,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);
@@ -223,7 +223,7 @@ memop SequenceNumberManager_get_curr(int<<32>> curr,int<<32>> inc)
 global Array.t<<32>> signature_count = Array.create(1);
 
 
-global Array.t<<32>> start_time = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(65536);
 
 
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -272,7 +272,7 @@ generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_he
 
 handle set_signature(int<<48>> set_signature_eth_header_0,int<<48>> set_signature_eth_header_1,int<<16>> set_signature_eth_header_2,int<<32>> set_signature_ip_header_0,int<<16>> set_signature_ip_header_1,int<<8>> set_signature_ip_header_2,int<<8>> set_signature_ip_header_3,int<<64>> set_signature_ip_header_4,int<<64>> set_signature_ip_header_5,int<<64>> set_signature_ip_header_6,int<<64>> set_signature_ip_header_7,int<<16>> set_signature_udp_header_0,int<<16>> set_signature_udp_header_1,int<<16>> set_signature_udp_header_2,int<<16>> set_signature_udp_header_3,int<<8>> set_signature_sig_type,int<<16>> set_signature_sig_idx,int<<8>> set_signature_block_idx,int<<32>> set_signature_curr_signature,int<<32>> set_signature_next_signature) {
 int<<32>> precompute = Sys.time();
-Array.set(start_time,0,precompute);
+Array.set(first_packet_seen,0,precompute);
 int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);
 int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);
 int<<8>> block_idx_copy = hash<<8>>(1,set_signature_block_idx);

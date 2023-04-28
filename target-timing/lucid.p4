@@ -91,7 +91,7 @@ struct meta_t {
   bit<8> egress_event_id;
 }
 Register<bit<32>,_>(32w1) signature_count;
-Register<bit<32>,_>(32w65536) start_time;
+Register<bit<32>,_>(32w65536) first_packet_seen;
 Register<bit<32>,_>(32w1)
 application_packet_counter;
 Register<bit<32>,_>(32w2048)
@@ -458,8 +458,8 @@ block_idx_copy=hash_37890.get({hdr.set_signature.set_signature_block_idx});
   action labeledstmt_11(){
     //NOOP
   }
-  RegisterAction<bit<32>,bit<32>,bit<32>>(start_time)
-  start_time_regaction_3790 = {
+  RegisterAction<bit<32>,bit<32>,bit<32>>(first_packet_seen)
+  first_packet_seen_regaction_3790 = {
     void apply(inout bit<32> cell1_remote,
         out bit<32> ret_remote){
       bit<32> cell1_local=cell1_remote;
@@ -471,7 +471,7 @@ block_idx_copy=hash_37890.get({hdr.set_signature.set_signature_block_idx});
     }
   };
   action labeledstmt_54(){
-    start_time_regaction_3790.execute(32w0);
+    first_packet_seen_regaction_3790.execute(32w0);
   }
   action labeledstmt_12(){
     labeledstmt_54();

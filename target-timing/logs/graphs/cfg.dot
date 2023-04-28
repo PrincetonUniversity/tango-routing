@@ -41,7 +41,7 @@ digraph G {
   "159: generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));" [
   shape=box, ];
   "181: int<<32>> precompute = Sys.time();" [shape=box, ];
-  "202: Array.update_complex(start_time,0,set_3760,precompute,0,0);" [
+  "202: Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);" [
   shape=box, ];
   "213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);" [
   shape=box, ];
@@ -122,9 +122,9 @@ digraph G {
   label="", ];
   "118: pre_gen_copy_dummy_traffic_udp_header_3 = dummy_traffic_udp_header_3;" -> "159: generate_port (12, dummy_traffic(dummy_traffic_eth_header_0,dummy_traffic_eth_header_1,dummy_traffic_eth_header_2,dummy_traffic_ip_header_0,dummy_traffic_ip_header_1,dummy_traffic_ip_header_2,dummy_traffic_ip_header_3,dummy_traffic_ip_header_4,dummy_traffic_ip_header_5,dummy_traffic_ip_header_6,dummy_traffic_ip_header_7,dummy_traffic_ip_header_8,dummy_traffic_ip_header_9,dummy_traffic_udp_header_0,dummy_traffic_udp_header_1,dummy_traffic_udp_header_2,dummy_traffic_udp_header_3));" [
   label="", ];
-  "181: int<<32>> precompute = Sys.time();" -> "202: Array.update_complex(start_time,0,set_3760,precompute,0,0);" [
+  "181: int<<32>> precompute = Sys.time();" -> "202: Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);" [
   label="", ];
-  "202: Array.update_complex(start_time,0,set_3760,precompute,0,0);" -> "213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);" [
+  "202: Array.update_complex(first_packet_seen,0,set_3760,precompute,0,0);" -> "213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);" [
   label="", ];
   "213: int<<16>> sig_idx_copy = hash<<16>>(1,set_signature_sig_idx);" -> "223: int<<32>> sig_copy = hash<<32>>(1,set_signature_curr_signature);" [
   label="", ];
