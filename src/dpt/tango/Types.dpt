@@ -109,7 +109,8 @@ type TCPHeader_t = {
    int<<16>> dest_port;
    int<<32>> sequence_num;
    int<<32>> ack_num;
-   int<<16>> len_flags;
+   int<<8>>  offset;
+   int<<8>>  flags;
    int<<16>> window_sz;
    int<<16>> checksum;
    int<<16>> urg_ptr;
