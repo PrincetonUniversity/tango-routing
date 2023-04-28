@@ -256,12 +256,8 @@ SequenceNumberManager_increment_ret = Array.update(sequence_counters_0,path_id,S
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
-int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
-int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
-int<<16>> tango_metrics_hdr_2 = seq_number;
-event forward_tango_pkt = incoming_tango_traffic(eth_header_0,eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,0,0,0,0,5,16,0,0,0,tango_metrics_hdr_0,tango_metrics_hdr_1,tango_metrics_hdr_2,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3);
 printf "Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }" path_id,traffic_class,timestamp,seq_number;
-generate_port (12, forward_tango_pkt);
+generate_port (12, incoming_tango_traffic(eth_header_0,eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,0,0,0,0,5,16,0,0,0,(int<<8>>)path_id,(int<<16>>)timestamp,seq_number,ip_header_0,ip_header_1,ip_header_2,ip_header_3,ip_header_4,ip_header_5,ip_header_6,ip_header_7,udp_header_0,udp_header_1,udp_header_2,udp_header_3));
 }
 
 handle update_route(int<<48>> eth_header_0,int<<48>> eth_header_1,int<<16>> eth_header_2,int<<32>> ip_header_0,int<<16>> ip_header_1,int<<8>> ip_header_2,int<<8>> ip_header_3,int<<64>> ip_header_4,int<<64>> ip_header_5,int<<64>> ip_header_6,int<<64>> ip_header_7,int<<16>> tcp_header_0,int<<16>> tcp_header_1,int<<32>> tcp_header_2,int<<32>> tcp_header_3,int<<8>> tcp_header_4,int<<8>> tcp_header_5,int<<16>> tcp_header_6,int<<16>> tcp_header_7,int<<16>> tcp_header_8,int<<8>> update_0,int<<8>> update_1) {

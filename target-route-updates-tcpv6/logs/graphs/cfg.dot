@@ -25,8 +25,8 @@ digraph G {
 " [
   shape=box, ];
   "193: int<<8>> RouteManager_get_path_id_ret = 32;" [shape=box, ];
-  "196: route_manager_0_idx_4624 = traffic_class;" [shape=box, ];
-  "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4624,get_4615,0,0,0);" [
+  "196: route_manager_0_idx_4594 = traffic_class;" [shape=box, ];
+  "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4594,get_4585,0,0,0);" [
   shape=box, ];
   "223: int<<8>> path_id = RouteManager_get_path_id_ret;" [shape=box, ];
   "230: int<<32>> tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
@@ -185,84 +185,27 @@ digraph G {
   "1131: match (path_id) ...
 " [shape=box, ];
   "1137: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
-  "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);" [
+  "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4589,0,1,0);" [
   shape=box, ];
   "1163: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
   shape=box, ];
   "1168: int<<32>> time_now = Sys.time();" [shape=box, ];
   "1174: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
   "1176: " [shape=box, ];
-  "1182: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" [shape=box, ];
-  "1188: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [shape=box, ];
-  "1193: int<<16>> tango_metrics_hdr_2 = seq_number;" [shape=box, ];
-  "1196: " [shape=box, ];
-  "1200: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  "1277: generate_port (12, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,0,0,0,0,5,16,0,0,0,(int<<8>>)path_id,(int<<16>>)timestamp,seq_number,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   shape=box, ];
-  "1204: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
+  "1318: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   shape=box, ];
-  "1210: int<<16>> forward_tango_pkt_arg_2 = 34525;" [shape=box, ];
-  "1214: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [shape=box, ];
-  "1218: int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;" [shape=box, ];
-  "1222: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [shape=box, ];
-  "1226: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [shape=box, ];
-  "1230: int<<64>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [shape=box, ];
-  "1234: int<<64>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [shape=box, ];
-  "1238: int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;" [shape=box, ];
-  "1242: int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;" [shape=box,
-                                                                    ];
-  "1248: int<<16>> forward_tango_pkt_arg_11 = 0;" [shape=box, ];
-  "1254: int<<16>> forward_tango_pkt_arg_12 = 0;" [shape=box, ];
-  "1260: int<<32>> forward_tango_pkt_arg_13 = 0;" [shape=box, ];
-  "1266: int<<32>> forward_tango_pkt_arg_14 = 0;" [shape=box, ];
-  "1272: int<<8>> forward_tango_pkt_arg_15 = 5;" [shape=box, ];
-  "1278: int<<8>> forward_tango_pkt_arg_16 = 16;" [shape=box, ];
-  "1284: int<<16>> forward_tango_pkt_arg_17 = 0;" [shape=box, ];
-  "1290: int<<16>> forward_tango_pkt_arg_18 = 0;" [shape=box, ];
-  "1296: int<<16>> forward_tango_pkt_arg_19 = 0;" [shape=box, ];
-  "1300: int<<8>> forward_tango_pkt_arg_20 = tango_metrics_hdr_0;" [shape=box,
-                                                                    ];
-  "1304: int<<16>> forward_tango_pkt_arg_21 = tango_metrics_hdr_1;" [
+  "1322: route_manager_0_idx_4594 = update_route_update_0;" [shape=box, ];
+  "1341: Array.update_complex(route_manager_0,route_manager_0_idx_4594,set_4593,update_route_update_1,0,0);" [
   shape=box, ];
-  "1308: int<<16>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;" [
+  "1389: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_tcp_header_0,update_route_tcp_header_1,update_route_tcp_header_2,update_route_tcp_header_3,update_route_tcp_header_4,update_route_tcp_header_5,update_route_tcp_header_6,update_route_tcp_header_7,update_route_tcp_header_8,update_route_update_0,update_route_update_1);" [
   shape=box, ];
-  "1312: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_0;" [
-  shape=box, ];
-  "1316: int<<16>> forward_tango_pkt_arg_24 = forward_flow_ip_header_1;" [
-  shape=box, ];
-  "1320: int<<8>> forward_tango_pkt_arg_25 = forward_flow_ip_header_2;" [
-  shape=box, ];
-  "1324: int<<8>> forward_tango_pkt_arg_26 = forward_flow_ip_header_3;" [
-  shape=box, ];
-  "1328: int<<64>> forward_tango_pkt_arg_27 = forward_flow_ip_header_4;" [
-  shape=box, ];
-  "1332: int<<64>> forward_tango_pkt_arg_28 = forward_flow_ip_header_5;" [
-  shape=box, ];
-  "1336: int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_6;" [
-  shape=box, ];
-  "1340: int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_7;" [
-  shape=box, ];
-  "1344: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_0;" [
-  shape=box, ];
-  "1348: int<<16>> forward_tango_pkt_arg_32 = forward_flow_udp_header_1;" [
-  shape=box, ];
-  "1352: int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_2;" [
-  shape=box, ];
-  "1356: int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_3;" [
-  shape=box, ];
-  "1468: generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34));" [
-  shape=box, ];
-  "1510: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
-  shape=box, ];
-  "1514: route_manager_0_idx_4624 = update_route_update_0;" [shape=box, ];
-  "1533: Array.update_complex(route_manager_0,route_manager_0_idx_4624,set_4623,update_route_update_1,0,0);" [
-  shape=box, ];
-  "1581: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_tcp_header_0,update_route_tcp_header_1,update_route_tcp_header_2,update_route_tcp_header_3,update_route_tcp_header_4,update_route_tcp_header_5,update_route_tcp_header_6,update_route_tcp_header_7,update_route_tcp_header_8,update_route_update_0,update_route_update_1);" [
-  shape=box, ];
-  "1583: match (event_id) ...
+  "1391: match (event_id) ...
 " [shape=box, ];
   
   
-  "1: " -> "1583: match (event_id) ...
+  "1: " -> "1391: match (event_id) ...
 " [label="", ];
   "82: int<<8>> traffic_class = 0;" -> "187: match (forward_flow_ip_header_5,forward_flow_ip_header_4,forward_flow_udp_header_0,forward_flow_ip_header_7,forward_flow_ip_header_6,forward_flow_udp_header_1,forward_flow_ip_header_2) ...
 " [
@@ -528,11 +471,11 @@ forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_hea
 forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_header_0~0==50008,forward_flow_ip_header_7~0==_,forward_flow_ip_header_6~0==_,forward_flow_udp_header_1~0==_,forward_flow_ip_header_2~0==_;}
 HIT{forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_header_0~0==_,forward_flow_ip_header_7~0==_,forward_flow_ip_header_6~0==_,forward_flow_udp_header_1~0==_,forward_flow_ip_header_2~0==_;}",
   ];
-  "193: int<<8>> RouteManager_get_path_id_ret = 32;" -> "196: route_manager_0_idx_4624 = traffic_class;" [
+  "193: int<<8>> RouteManager_get_path_id_ret = 32;" -> "196: route_manager_0_idx_4594 = traffic_class;" [
   label="", ];
-  "196: route_manager_0_idx_4624 = traffic_class;" -> "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4624,get_4615,0,0,0);" [
+  "196: route_manager_0_idx_4594 = traffic_class;" -> "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4594,get_4585,0,0,0);" [
   label="", ];
-  "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4624,get_4615,0,0,0);" -> "223: int<<8>> path_id = RouteManager_get_path_id_ret;" [
+  "217: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4594,get_4585,0,0,0);" -> "223: int<<8>> path_id = RouteManager_get_path_id_ret;" [
   label="", ];
   "223: int<<8>> path_id = RouteManager_get_path_id_ret;" -> "230: int<<32>> tango_tunnel_hdr_0 = 1610612736;" [
   label="", ];
@@ -828,294 +771,217 @@ HIT{forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp
   "1130: " -> "1137: int<<16>> SequenceNumberManager_increment_ret = 32;" [
   label="", ];
   "1131: match (path_id) ...
-" -> "282: " [label="HIT{path_id~3614==0;}", ];
+" -> "282: " [label="HIT{path_id~3592==0;}", ];
   "1131: match (path_id) ...
-" -> "335: " [label="MISS{path_id~3614==0;}
-HIT{path_id~3614==1;}",
+" -> "335: " [label="MISS{path_id~3592==0;}
+HIT{path_id~3592==1;}",
                                            ];
   "1131: match (path_id) ...
-" -> "388: " [label="MISS{path_id~3614==0;
-path_id~3614==1;}
-HIT{path_id~3614==2;}",
+" -> "388: " [label="MISS{path_id~3592==0;
+path_id~3592==1;}
+HIT{path_id~3592==2;}",
                                            ];
   "1131: match (path_id) ...
-" -> "441: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;}
-HIT{path_id~3614==3;}",
+" -> "441: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;}
+HIT{path_id~3592==3;}",
                                            ];
   "1131: match (path_id) ...
-" -> "494: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;}
-HIT{path_id~3614==4;}",
+" -> "494: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;}
+HIT{path_id~3592==4;}",
                                            ];
   "1131: match (path_id) ...
-" -> "547: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;}
-HIT{path_id~3614==5;}",
+" -> "547: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;}
+HIT{path_id~3592==5;}",
                                            ];
   "1131: match (path_id) ...
-" -> "600: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;}
-HIT{path_id~3614==6;}",
+" -> "600: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;}
+HIT{path_id~3592==6;}",
                                            ];
   "1131: match (path_id) ...
-" -> "653: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;}
-HIT{path_id~3614==7;}",
+" -> "653: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;}
+HIT{path_id~3592==7;}",
                                            ];
   "1131: match (path_id) ...
-" -> "706: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;}
-HIT{path_id~3614==8;}",
+" -> "706: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;}
+HIT{path_id~3592==8;}",
                                            ];
   "1131: match (path_id) ...
-" -> "759: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;}
-HIT{path_id~3614==9;}",
+" -> "759: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;}
+HIT{path_id~3592==9;}",
                                            ];
   "1131: match (path_id) ...
-" -> "812: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;}
-HIT{path_id~3614==10;}",
+" -> "812: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;}
+HIT{path_id~3592==10;}",
                                            ];
   "1131: match (path_id) ...
-" -> "865: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;}
-HIT{path_id~3614==11;}",
+" -> "865: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;}
+HIT{path_id~3592==11;}",
                                            ];
   "1131: match (path_id) ...
-" -> "918: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;
-path_id~3614==11;}
-HIT{path_id~3614==12;}",
+" -> "918: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;
+path_id~3592==11;}
+HIT{path_id~3592==12;}",
                                            ];
   "1131: match (path_id) ...
-" -> "971: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;
-path_id~3614==11;
-path_id~3614==12;}
-HIT{path_id~3614==13;}",
+" -> "971: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;
+path_id~3592==11;
+path_id~3592==12;}
+HIT{path_id~3592==13;}",
                                            ];
   "1131: match (path_id) ...
-" -> "1024: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;
-path_id~3614==11;
-path_id~3614==12;
-path_id~3614==13;}
-HIT{path_id~3614==14;}",
+" -> "1024: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;
+path_id~3592==11;
+path_id~3592==12;
+path_id~3592==13;}
+HIT{path_id~3592==14;}",
                                             ];
   "1131: match (path_id) ...
-" -> "1077: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;
-path_id~3614==11;
-path_id~3614==12;
-path_id~3614==13;
-path_id~3614==14;}
-HIT{path_id~3614==15;}",
+" -> "1077: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;
+path_id~3592==11;
+path_id~3592==12;
+path_id~3592==13;
+path_id~3592==14;}
+HIT{path_id~3592==15;}",
                                             ];
   "1131: match (path_id) ...
-" -> "1130: " [label="MISS{path_id~3614==0;
-path_id~3614==1;
-path_id~3614==2;
-path_id~3614==3;
-path_id~3614==4;
-path_id~3614==5;
-path_id~3614==6;
-path_id~3614==7;
-path_id~3614==8;
-path_id~3614==9;
-path_id~3614==10;
-path_id~3614==11;
-path_id~3614==12;
-path_id~3614==13;
-path_id~3614==14;
-path_id~3614==15;}
-HIT{path_id~3614==_;}",
+" -> "1130: " [label="MISS{path_id~3592==0;
+path_id~3592==1;
+path_id~3592==2;
+path_id~3592==3;
+path_id~3592==4;
+path_id~3592==5;
+path_id~3592==6;
+path_id~3592==7;
+path_id~3592==8;
+path_id~3592==9;
+path_id~3592==10;
+path_id~3592==11;
+path_id~3592==12;
+path_id~3592==13;
+path_id~3592==14;
+path_id~3592==15;}
+HIT{path_id~3592==_;}",
                                             ];
-  "1137: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);" [
+  "1137: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4589,0,1,0);" [
   label="", ];
-  "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4619,0,1,0);" -> "1163: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  "1158: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4589,0,1,0);" -> "1163: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
   label="", ];
   "1163: int<<16>> seq_number = SequenceNumberManager_increment_ret;" -> "1168: int<<32>> time_now = Sys.time();" [
   label="", ];
   "1168: int<<32>> time_now = Sys.time();" -> "1174: int<<12>> timestamp = [31 : 20]time_now;" [
   label="", ];
   "1174: int<<12>> timestamp = [31 : 20]time_now;" -> "1176: " [label="", ];
-  "1176: " -> "1182: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" [
+  "1176: " -> "1277: generate_port (12, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,0,0,0,0,5,16,0,0,0,(int<<8>>)path_id,(int<<16>>)timestamp,seq_number,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   label="", ];
-  "1182: int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;" -> "1188: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" [
+  "1277: generate_port (12, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,0,0,0,0,5,16,0,0,0,(int<<8>>)path_id,(int<<16>>)timestamp,seq_number,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "1318: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   label="", ];
-  "1188: int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;" -> "1193: int<<16>> tango_metrics_hdr_2 = seq_number;" [
+  "1322: route_manager_0_idx_4594 = update_route_update_0;" -> "1341: Array.update_complex(route_manager_0,route_manager_0_idx_4594,set_4593,update_route_update_1,0,0);" [
   label="", ];
-  "1193: int<<16>> tango_metrics_hdr_2 = seq_number;" -> "1196: " [label="", ];
-  "1196: " -> "1200: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" [
+  "1341: Array.update_complex(route_manager_0,route_manager_0_idx_4594,set_4593,update_route_update_1,0,0);" -> "1389: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_tcp_header_0,update_route_tcp_header_1,update_route_tcp_header_2,update_route_tcp_header_3,update_route_tcp_header_4,update_route_tcp_header_5,update_route_tcp_header_6,update_route_tcp_header_7,update_route_tcp_header_8,update_route_update_0,update_route_update_1);" [
   label="", ];
-  "1200: int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;" -> "1204: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" [
-  label="", ];
-  "1204: int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;" -> "1210: int<<16>> forward_tango_pkt_arg_2 = 34525;" [
-  label="", ];
-  "1210: int<<16>> forward_tango_pkt_arg_2 = 34525;" -> "1214: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" [
-  label="", ];
-  "1214: int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;" -> "1218: int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;" [
-  label="", ];
-  "1218: int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;" -> "1222: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" [
-  label="", ];
-  "1222: int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;" -> "1226: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" [
-  label="", ];
-  "1226: int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;" -> "1230: int<<64>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" [
-  label="", ];
-  "1230: int<<64>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;" -> "1234: int<<64>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" [
-  label="", ];
-  "1234: int<<64>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;" -> "1238: int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;" [
-  label="", ];
-  "1238: int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;" -> "1242: int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;" [
-  label="", ];
-  "1242: int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;" -> "1248: int<<16>> forward_tango_pkt_arg_11 = 0;" [
-  label="", ];
-  "1248: int<<16>> forward_tango_pkt_arg_11 = 0;" -> "1254: int<<16>> forward_tango_pkt_arg_12 = 0;" [
-  label="", ];
-  "1254: int<<16>> forward_tango_pkt_arg_12 = 0;" -> "1260: int<<32>> forward_tango_pkt_arg_13 = 0;" [
-  label="", ];
-  "1260: int<<32>> forward_tango_pkt_arg_13 = 0;" -> "1266: int<<32>> forward_tango_pkt_arg_14 = 0;" [
-  label="", ];
-  "1266: int<<32>> forward_tango_pkt_arg_14 = 0;" -> "1272: int<<8>> forward_tango_pkt_arg_15 = 5;" [
-  label="", ];
-  "1272: int<<8>> forward_tango_pkt_arg_15 = 5;" -> "1278: int<<8>> forward_tango_pkt_arg_16 = 16;" [
-  label="", ];
-  "1278: int<<8>> forward_tango_pkt_arg_16 = 16;" -> "1284: int<<16>> forward_tango_pkt_arg_17 = 0;" [
-  label="", ];
-  "1284: int<<16>> forward_tango_pkt_arg_17 = 0;" -> "1290: int<<16>> forward_tango_pkt_arg_18 = 0;" [
-  label="", ];
-  "1290: int<<16>> forward_tango_pkt_arg_18 = 0;" -> "1296: int<<16>> forward_tango_pkt_arg_19 = 0;" [
-  label="", ];
-  "1296: int<<16>> forward_tango_pkt_arg_19 = 0;" -> "1300: int<<8>> forward_tango_pkt_arg_20 = tango_metrics_hdr_0;" [
-  label="", ];
-  "1300: int<<8>> forward_tango_pkt_arg_20 = tango_metrics_hdr_0;" -> "1304: int<<16>> forward_tango_pkt_arg_21 = tango_metrics_hdr_1;" [
-  label="", ];
-  "1304: int<<16>> forward_tango_pkt_arg_21 = tango_metrics_hdr_1;" -> "1308: int<<16>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;" [
-  label="", ];
-  "1308: int<<16>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;" -> "1312: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_0;" [
-  label="", ];
-  "1312: int<<32>> forward_tango_pkt_arg_23 = forward_flow_ip_header_0;" -> "1316: int<<16>> forward_tango_pkt_arg_24 = forward_flow_ip_header_1;" [
-  label="", ];
-  "1316: int<<16>> forward_tango_pkt_arg_24 = forward_flow_ip_header_1;" -> "1320: int<<8>> forward_tango_pkt_arg_25 = forward_flow_ip_header_2;" [
-  label="", ];
-  "1320: int<<8>> forward_tango_pkt_arg_25 = forward_flow_ip_header_2;" -> "1324: int<<8>> forward_tango_pkt_arg_26 = forward_flow_ip_header_3;" [
-  label="", ];
-  "1324: int<<8>> forward_tango_pkt_arg_26 = forward_flow_ip_header_3;" -> "1328: int<<64>> forward_tango_pkt_arg_27 = forward_flow_ip_header_4;" [
-  label="", ];
-  "1328: int<<64>> forward_tango_pkt_arg_27 = forward_flow_ip_header_4;" -> "1332: int<<64>> forward_tango_pkt_arg_28 = forward_flow_ip_header_5;" [
-  label="", ];
-  "1332: int<<64>> forward_tango_pkt_arg_28 = forward_flow_ip_header_5;" -> "1336: int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_6;" [
-  label="", ];
-  "1336: int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_6;" -> "1340: int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_7;" [
-  label="", ];
-  "1340: int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_7;" -> "1344: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_0;" [
-  label="", ];
-  "1344: int<<16>> forward_tango_pkt_arg_31 = forward_flow_udp_header_0;" -> "1348: int<<16>> forward_tango_pkt_arg_32 = forward_flow_udp_header_1;" [
-  label="", ];
-  "1348: int<<16>> forward_tango_pkt_arg_32 = forward_flow_udp_header_1;" -> "1352: int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_2;" [
-  label="", ];
-  "1352: int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_2;" -> "1356: int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_3;" [
-  label="", ];
-  "1356: int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_3;" -> "1468: generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34));" [
-  label="", ];
-  "1468: generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34));" -> "1510: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
-  label="", ];
-  "1514: route_manager_0_idx_4624 = update_route_update_0;" -> "1533: Array.update_complex(route_manager_0,route_manager_0_idx_4624,set_4623,update_route_update_1,0,0);" [
-  label="", ];
-  "1533: Array.update_complex(route_manager_0,route_manager_0_idx_4624,set_4623,update_route_update_1,0,0);" -> "1581: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_tcp_header_0,update_route_tcp_header_1,update_route_tcp_header_2,update_route_tcp_header_3,update_route_tcp_header_4,update_route_tcp_header_5,update_route_tcp_header_6,update_route_tcp_header_7,update_route_tcp_header_8,update_route_update_0,update_route_update_1);" [
-  label="", ];
-  "1583: match (event_id) ...
+  "1391: match (event_id) ...
 " -> "76: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_tcp_header_0,incoming_tango_traffic_tango_tcp_header_1,incoming_tango_traffic_tango_tcp_header_2,incoming_tango_traffic_tango_tcp_header_3,incoming_tango_traffic_tango_tcp_header_4,incoming_tango_traffic_tango_tcp_header_5,incoming_tango_traffic_tango_tcp_header_6,incoming_tango_traffic_tango_tcp_header_7,incoming_tango_traffic_tango_tcp_header_8,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);" [
   label="HIT{event_id~0==2;}", ];
-  "1583: match (event_id) ...
+  "1391: match (event_id) ...
 " -> "82: int<<8>> traffic_class = 0;" [
   label="MISS{event_id~0==2;}
 HIT{event_id~0==1;}", ];
-  "1583: match (event_id) ...
-" -> "1514: route_manager_0_idx_4624 = update_route_update_0;" [
+  "1391: match (event_id) ...
+" -> "1322: route_manager_0_idx_4594 = update_route_update_0;" [
   label="MISS{event_id~0==2;
 event_id~0==1;}
 HIT{event_id~0==3;}", ];

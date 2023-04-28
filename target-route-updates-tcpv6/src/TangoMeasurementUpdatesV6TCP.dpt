@@ -196,20 +196,6 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
 
 
     /* 4. Encapsulate and forward packet. */
-    TangoHeader_t tango_metrics_hdr = {
-        path_id = (int<<8>>) path_id;
-        timestamp = (int<<16>>) timestamp;
-        sequence_num = seq_number;
-    };
-
-    event forward_tango_pkt = incoming_tango_traffic (
-        { eth_header with ethertype = 0x86DD },
-        tango_tunnel_hdr,
-        TANGO_TCP_HEADER,
-        tango_metrics_hdr,
-        ip_header,
-        udp_header
-    );
 
     printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
         path_id,
@@ -218,7 +204,17 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
         seq_number
     );
 
-    generate_port (OUT_PORT, forward_tango_pkt);
+    generate_port (
+        OUT_PORT,
+        incoming_tango_traffic (
+            { eth_header with ethertype = 0x86DD },
+            tango_tunnel_hdr,
+            TANGO_TCP_HEADER,
+            { path_id = (int<<8>>) path_id; timestamp = (int<<16>>) timestamp; sequence_num = seq_number; },
+            ip_header,
+            udp_header
+        )
+    );
 
 }
 
