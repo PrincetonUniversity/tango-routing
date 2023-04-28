@@ -22,7 +22,7 @@ const int<<9>> RECIRC_PORT = 68;
 global Array.t<<32>> signature_count = Array.create(1);
 
 // Keep track of write start
-global Array.t<<32>> first_packet_seen = Array.create(65536);
+global Array.t<<32>> first_packet_seen = Array.create(1);
 
 // Keep track of number of client packets coming through
 global Array.t<<32>> application_packet_counter = Array.create(1);
@@ -37,7 +37,7 @@ global MetricSignatureManager.t outgoing_metric_signature_manager = MetricSignat
 global Array.t<<32>> num_pkt_finishes = Array.create(1);
 
 // Record finish times for all control write packets
-global Array.t<<32>> pkt_finish_times = Array.create(128);
+global Array.t<<32>> pkt_finish_times = Array.create(65536);
 
 /* ================================================================================================================== *
  *                                                     EVENTS                                                         *

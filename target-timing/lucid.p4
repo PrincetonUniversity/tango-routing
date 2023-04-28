@@ -91,7 +91,7 @@ struct meta_t {
   bit<8> egress_event_id;
 }
 Register<bit<32>,_>(32w1) signature_count;
-Register<bit<32>,_>(32w65536) first_packet_seen;
+Register<bit<32>,_>(32w1) first_packet_seen;
 Register<bit<32>,_>(32w1)
 application_packet_counter;
 Register<bit<32>,_>(32w2048)
@@ -103,7 +103,7 @@ outgoing_metric_signature_manager_0;
 Register<bit<32>,_>(32w16)
 outgoing_metric_signature_manager_1;
 Register<bit<32>,_>(32w1) num_pkt_finishes;
-Register<bit<32>,_>(32w128) pkt_finish_times;
+Register<bit<32>,_>(32w65536) pkt_finish_times;
 //Main program components (ingress/egress parser, control, deparser)
 parser IngressParser(packet_in pkt,
     out hdr_t hdr,
