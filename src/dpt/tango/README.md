@@ -20,17 +20,9 @@ set 1 dst mac 00:00:00:00:00:ff
 start 1
 ```
 
-### Cabernet804 (DPID 28, Port 13/0), use DPDK to send control packets 
+### Cabernet802 (DPID 4, Port 16/0), send control pcap 
 ```bash 
-export RTE_SDK=/u/shared/pktgen-dpdk-pktgen-19.12.0/
-export RTE_TARGET=x86_64-native-linuxapp-gcc
-cd /u/shared/pktgen-dpdk-pktgen-19.12.0
-tools/run.py tango_pcap
 
-set 1 count 0
-set 1 burst 10000
-set 1 rate 1
-start 1
 ```
 
 ### Cabino2 as Tango switch
@@ -47,24 +39,13 @@ ucli
 pm
 port-add 12/0 100G NONE
 port-add 15/0 100G NONE
+port-add 16/0 100G NONE
 an-set 12/0 2
 an-set 15/0 2
+an-set 16/0 2
 port-enb 12/0
 port-enb 15/0
-rate-period 1
-rate-show
-
-
-
-port-add 12/0 100G NONE
-port-add 13/0 100G NONE
-port-add 15/0 100G NONE
-an-set 12/0 2
-an-set 13/0 2
-an-set 15/0 2
-port-enb 12/0
-port-enb 13/0
-port-enb 15/0
+port-enb 16/0
 rate-period 1
 rate-show
 ```
