@@ -1,0 +1,1077 @@
+global Array.t<<8>> route_manager_0 = Array.create(32);
+
+global Array.t<<16>> sequence_counters_0 = Array.create(32);
+
+entry event forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3);
+event incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3);
+event update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_tcp_header_0,int<<16>> update_route_tcp_header_1,int<<32>> update_route_tcp_header_2,int<<32>> update_route_tcp_header_3,int<<8>> update_route_tcp_header_4,int<<8>> update_route_tcp_header_5,int<<16>> update_route_tcp_header_6,int<<16>> update_route_tcp_header_7,int<<16>> update_route_tcp_header_8,int<<8>> update_route_update_0,int<<8>> update_route_update_1);
+handle incoming_tango_traffic(int<<48>> incoming_tango_traffic_tango_eth_header_0,int<<48>> incoming_tango_traffic_tango_eth_header_1,int<<16>> incoming_tango_traffic_tango_eth_header_2,int<<32>> incoming_tango_traffic_tango_ip_header_0,int<<16>> incoming_tango_traffic_tango_ip_header_1,int<<8>> incoming_tango_traffic_tango_ip_header_2,int<<8>> incoming_tango_traffic_tango_ip_header_3,int<<64>> incoming_tango_traffic_tango_ip_header_4,int<<64>> incoming_tango_traffic_tango_ip_header_5,int<<64>> incoming_tango_traffic_tango_ip_header_6,int<<64>> incoming_tango_traffic_tango_ip_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_0,int<<16>> incoming_tango_traffic_tango_tcp_header_1,int<<32>> incoming_tango_traffic_tango_tcp_header_2,int<<32>> incoming_tango_traffic_tango_tcp_header_3,int<<8>> incoming_tango_traffic_tango_tcp_header_4,int<<8>> incoming_tango_traffic_tango_tcp_header_5,int<<16>> incoming_tango_traffic_tango_tcp_header_6,int<<16>> incoming_tango_traffic_tango_tcp_header_7,int<<16>> incoming_tango_traffic_tango_tcp_header_8,int<<8>> incoming_tango_traffic_tango_metrics_header_0,int<<16>> incoming_tango_traffic_tango_metrics_header_1,int<<32>> incoming_tango_traffic_tango_metrics_header_2,int<<16>> incoming_tango_traffic_tango_metrics_header_3,int<<8>> incoming_tango_traffic_tango_metrics_header_4,int<<32>> incoming_tango_traffic_encaped_ip_header_0,int<<16>> incoming_tango_traffic_encaped_ip_header_1,int<<8>> incoming_tango_traffic_encaped_ip_header_2,int<<8>> incoming_tango_traffic_encaped_ip_header_3,int<<64>> incoming_tango_traffic_encaped_ip_header_4,int<<64>> incoming_tango_traffic_encaped_ip_header_5,int<<64>> incoming_tango_traffic_encaped_ip_header_6,int<<64>> incoming_tango_traffic_encaped_ip_header_7,int<<16>> incoming_tango_traffic_encaped_dup_header_0,int<<16>> incoming_tango_traffic_encaped_dup_header_1,int<<16>> incoming_tango_traffic_encaped_dup_header_2,int<<16>> incoming_tango_traffic_encaped_dup_header_3) {
+
+}
+handle forward_flow(int<<48>> forward_flow_eth_header_0,int<<48>> forward_flow_eth_header_1,int<<16>> forward_flow_eth_header_2,int<<32>> forward_flow_ip_header_0,int<<16>> forward_flow_ip_header_1,int<<8>> forward_flow_ip_header_2,int<<8>> forward_flow_ip_header_3,int<<64>> forward_flow_ip_header_4,int<<64>> forward_flow_ip_header_5,int<<64>> forward_flow_ip_header_6,int<<64>> forward_flow_ip_header_7,int<<16>> forward_flow_udp_header_0,int<<16>> forward_flow_udp_header_1,int<<16>> forward_flow_udp_header_2,int<<16>> forward_flow_udp_header_3) {
+
+}
+handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_eth_header_1,int<<16>> update_route_eth_header_2,int<<32>> update_route_ip_header_0,int<<16>> update_route_ip_header_1,int<<8>> update_route_ip_header_2,int<<8>> update_route_ip_header_3,int<<64>> update_route_ip_header_4,int<<64>> update_route_ip_header_5,int<<64>> update_route_ip_header_6,int<<64>> update_route_ip_header_7,int<<16>> update_route_tcp_header_0,int<<16>> update_route_tcp_header_1,int<<32>> update_route_tcp_header_2,int<<32>> update_route_tcp_header_3,int<<8>> update_route_tcp_header_4,int<<8>> update_route_tcp_header_5,int<<16>> update_route_tcp_header_6,int<<16>> update_route_tcp_header_7,int<<16>> update_route_tcp_header_8,int<<8>> update_route_update_0,int<<8>> update_route_update_1) {
+
+}
+// shared locals:
+int<<8>> route_manager_0_idx_4672;
+// MAIN HANDLER 
+handler main(...){
+// Stage 0
+match event_id with 
+| 2 -> {
+labeledstmt_1();
+}
+| 1 -> {
+labeledstmt_2();
+}
+| 3 -> {
+labeledstmt_3();
+}
+| _ -> {
+labeledstmt_4();
+}
+// Stage 1
+match (forward_flow_ip_header_2,forward_flow_udp_header_1,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_ip_header_4,forward_flow_ip_header_5,event_id) with 
+| _,_,_,_,50000,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50001,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50002,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50003,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50004,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50005,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50006,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50007,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60000,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60001,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60002,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60003,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60004,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60005,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60006,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,60007,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50008,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,_,_,_,2 -> {
+labeledstmt_5();
+}
+| _,_,_,_,50000,_,_,1 -> {
+labeledstmt_6();
+}
+| _,_,_,_,50001,_,_,1 -> {
+labeledstmt_7();
+}
+| _,_,_,_,50002,_,_,1 -> {
+labeledstmt_8();
+}
+| _,_,_,_,50003,_,_,1 -> {
+labeledstmt_9();
+}
+| _,_,_,_,50004,_,_,1 -> {
+labeledstmt_10();
+}
+| _,_,_,_,50005,_,_,1 -> {
+labeledstmt_11();
+}
+| _,_,_,_,50006,_,_,1 -> {
+labeledstmt_12();
+}
+| _,_,_,_,50007,_,_,1 -> {
+labeledstmt_13();
+}
+| _,_,_,_,60000,_,_,1 -> {
+labeledstmt_14();
+}
+| _,_,_,_,60001,_,_,1 -> {
+labeledstmt_15();
+}
+| _,_,_,_,60002,_,_,1 -> {
+labeledstmt_16();
+}
+| _,_,_,_,60003,_,_,1 -> {
+labeledstmt_17();
+}
+| _,_,_,_,60004,_,_,1 -> {
+labeledstmt_18();
+}
+| _,_,_,_,60005,_,_,1 -> {
+labeledstmt_19();
+}
+| _,_,_,_,60006,_,_,1 -> {
+labeledstmt_20();
+}
+| _,_,_,_,60007,_,_,1 -> {
+labeledstmt_21();
+}
+| _,_,_,_,50008,_,_,1 -> {
+labeledstmt_22();
+}
+| _,_,_,_,_,_,_,1 -> {
+labeledstmt_23();
+}
+| _,_,_,_,_,_,_,_ -> {
+labeledstmt_5();
+}
+// Stage 2
+match event_id with 
+| 2 -> {
+labeledstmt_24();
+}
+| 1 -> {
+labeledstmt_25();
+}
+| _ -> {
+labeledstmt_24();
+}
+// Stage 3
+match event_id with 
+| 2 -> {
+labeledstmt_26();
+}
+| 1 -> {
+labeledstmt_27();
+}
+| 3 -> {
+labeledstmt_28();
+}
+| _ -> {
+labeledstmt_26();
+}
+// Stage 4
+match event_id with 
+| 2 -> {
+labeledstmt_29();
+}
+| 1 -> {
+labeledstmt_30();
+}
+| 3 -> {
+labeledstmt_31();
+}
+| _ -> {
+labeledstmt_29();
+}
+// Stage 5
+match (event_id,path_id) with 
+| 2,0 -> {
+labeledstmt_32();
+}
+| 1,0 -> {
+labeledstmt_33();
+}
+| 2,1 -> {
+labeledstmt_32();
+}
+| 1,1 -> {
+labeledstmt_34();
+}
+| 2,2 -> {
+labeledstmt_32();
+}
+| 1,2 -> {
+labeledstmt_35();
+}
+| 2,3 -> {
+labeledstmt_32();
+}
+| 1,3 -> {
+labeledstmt_36();
+}
+| 2,4 -> {
+labeledstmt_32();
+}
+| 1,4 -> {
+labeledstmt_37();
+}
+| 2,5 -> {
+labeledstmt_32();
+}
+| 1,5 -> {
+labeledstmt_38();
+}
+| 2,6 -> {
+labeledstmt_32();
+}
+| 1,6 -> {
+labeledstmt_39();
+}
+| 2,7 -> {
+labeledstmt_32();
+}
+| 1,7 -> {
+labeledstmt_40();
+}
+| 2,8 -> {
+labeledstmt_32();
+}
+| 1,8 -> {
+labeledstmt_41();
+}
+| 2,9 -> {
+labeledstmt_32();
+}
+| 1,9 -> {
+labeledstmt_42();
+}
+| 2,10 -> {
+labeledstmt_32();
+}
+| 1,10 -> {
+labeledstmt_43();
+}
+| 2,11 -> {
+labeledstmt_32();
+}
+| 1,11 -> {
+labeledstmt_44();
+}
+| 2,12 -> {
+labeledstmt_32();
+}
+| 1,12 -> {
+labeledstmt_45();
+}
+| 2,13 -> {
+labeledstmt_32();
+}
+| 1,13 -> {
+labeledstmt_46();
+}
+| 2,14 -> {
+labeledstmt_32();
+}
+| 1,14 -> {
+labeledstmt_47();
+}
+| 2,15 -> {
+labeledstmt_32();
+}
+| 1,15 -> {
+labeledstmt_48();
+}
+| 2,_ -> {
+labeledstmt_32();
+}
+| 1,_ -> {
+labeledstmt_49();
+}
+| _,_ -> {
+labeledstmt_32();
+}
+// Stage 6
+match event_id with 
+| 2 -> {
+labeledstmt_50();
+}
+| 1 -> {
+labeledstmt_51();
+}
+| _ -> {
+labeledstmt_50();
+}
+// Stage 7
+match event_id with 
+| 2 -> {
+labeledstmt_52();
+}
+| 1 -> {
+labeledstmt_53();
+}
+| _ -> {
+labeledstmt_52();
+}
+// Stage 8
+match event_id with 
+| 2 -> {
+labeledstmt_54();
+}
+| 1 -> {
+labeledstmt_55();
+}
+| _ -> {
+labeledstmt_54();
+}
+// Stage 9
+match event_id with 
+| 2 -> {
+labeledstmt_56();
+}
+| 1 -> {
+labeledstmt_57();
+}
+| _ -> {
+labeledstmt_56();
+}}
+memop set_4671(int<<8>> mem_val_4670,int<<8>> new_val_4668,int<<8>> unused_4669)
+ {{
+b1=None;
+b2=None
+cell1=(true -> new_val_4668), None
+cell2=None, None
+
+ret=None
+}}
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4664)
+ {{
+b1=(mbool_4665,true);
+b2=(mbool_4666,true)
+cell1=(mbool_4665 -> curr+inc_set_4664), None
+cell2=(mbool_4666 -> curr), None
+
+ret=(true -> cell2)
+}}
+memop get_4663(int<<8>> mem_val_4660,int<<8>> unused_4662,int<<8>> unused_4661)
+ {{
+b1=None;
+b2=None
+cell1=None, None
+cell2=None, None
+
+ret=(true -> mem_val_4660)
+}}
+labeled_statement labeledstmt_58{
+Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_tcp_header_0,incoming_tango_traffic_tango_tcp_header_1,incoming_tango_traffic_tango_tcp_header_2,incoming_tango_traffic_tango_tcp_header_3,incoming_tango_traffic_tango_tcp_header_4,incoming_tango_traffic_tango_tcp_header_5,incoming_tango_traffic_tango_tcp_header_6,incoming_tango_traffic_tango_tcp_header_7,incoming_tango_traffic_tango_tcp_header_8,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);
+}
+labeled_statement labeledstmt_1{
+labeledstmt_58();
+}
+labeled_statement labeledstmt_96{
+int<<16>> forward_tango_pkt_arg_36 = forward_flow_udp_header_3;
+}
+labeled_statement labeledstmt_95{
+int<<16>> forward_tango_pkt_arg_35 = forward_flow_udp_header_2;
+}
+labeled_statement labeledstmt_94{
+int<<16>> forward_tango_pkt_arg_34 = forward_flow_udp_header_1;
+}
+labeled_statement labeledstmt_93{
+int<<16>> forward_tango_pkt_arg_33 = forward_flow_udp_header_0;
+}
+labeled_statement labeledstmt_92{
+int<<64>> forward_tango_pkt_arg_32 = forward_flow_ip_header_7;
+}
+labeled_statement labeledstmt_91{
+int<<64>> forward_tango_pkt_arg_31 = forward_flow_ip_header_6;
+}
+labeled_statement labeledstmt_90{
+int<<64>> forward_tango_pkt_arg_30 = forward_flow_ip_header_5;
+}
+labeled_statement labeledstmt_89{
+int<<64>> forward_tango_pkt_arg_29 = forward_flow_ip_header_4;
+}
+labeled_statement labeledstmt_88{
+int<<8>> forward_tango_pkt_arg_28 = forward_flow_ip_header_3;
+}
+labeled_statement labeledstmt_87{
+int<<8>> forward_tango_pkt_arg_27 = forward_flow_ip_header_2;
+}
+labeled_statement labeledstmt_86{
+int<<16>> forward_tango_pkt_arg_26 = forward_flow_ip_header_1;
+}
+labeled_statement labeledstmt_85{
+int<<32>> forward_tango_pkt_arg_25 = forward_flow_ip_header_0;
+}
+labeled_statement labeledstmt_84{
+int<<16>> forward_tango_pkt_arg_19 = 0;
+}
+labeled_statement labeledstmt_83{
+int<<16>> forward_tango_pkt_arg_18 = 0;
+}
+labeled_statement labeledstmt_82{
+int<<16>> forward_tango_pkt_arg_17 = 0;
+}
+labeled_statement labeledstmt_81{
+int<<8>> forward_tango_pkt_arg_16 = 16;
+}
+labeled_statement labeledstmt_80{
+int<<8>> forward_tango_pkt_arg_15 = 5;
+}
+labeled_statement labeledstmt_79{
+int<<32>> forward_tango_pkt_arg_14 = 0;
+}
+labeled_statement labeledstmt_78{
+int<<32>> forward_tango_pkt_arg_13 = 0;
+}
+labeled_statement labeledstmt_77{
+int<<16>> forward_tango_pkt_arg_12 = 0;
+}
+labeled_statement labeledstmt_76{
+int<<16>> forward_tango_pkt_arg_11 = 0;
+}
+labeled_statement labeledstmt_75{
+int<<16>> forward_tango_pkt_arg_2 = 34525;
+}
+labeled_statement labeledstmt_74{
+int<<48>> forward_tango_pkt_arg_1 = forward_flow_eth_header_1;
+}
+labeled_statement labeledstmt_73{
+int<<48>> forward_tango_pkt_arg_0 = forward_flow_eth_header_0;
+}
+labeled_statement labeledstmt_72{
+int<<8>> tango_metrics_hdr_4 = 0;
+}
+labeled_statement labeledstmt_71{
+int<<32>> tango_metrics_hdr_2 = 0;
+}
+labeled_statement labeledstmt_70{
+int<<32>> time_now = Sys.time();
+}
+labeled_statement labeledstmt_69{
+int<<16>> SequenceNumberManager_increment_ret = 32;
+}
+labeled_statement labeledstmt_68{
+int<<64>> tango_tunnel_hdr_7 = 0;
+}
+labeled_statement labeledstmt_67{
+int<<64>> tango_tunnel_hdr_6 = 0;
+}
+labeled_statement labeledstmt_66{
+int<<64>> tango_tunnel_hdr_5 = 3252;
+}
+labeled_statement labeledstmt_65{
+int<<64>> tango_tunnel_hdr_4 = 2747196614509592830;
+}
+labeled_statement labeledstmt_64{
+int<<8>> tango_tunnel_hdr_3 = 220;
+}
+labeled_statement labeledstmt_63{
+int<<8>> tango_tunnel_hdr_2 = 6;
+}
+labeled_statement labeledstmt_62{
+int<<16>> tango_tunnel_hdr_1 = 0;
+}
+labeled_statement labeledstmt_61{
+int<<32>> tango_tunnel_hdr_0 = 1610612736;
+}
+labeled_statement labeledstmt_60{
+int<<8>> RouteManager_get_path_id_ret = 32;
+}
+labeled_statement labeledstmt_59{
+int<<8>> traffic_class = 0;
+}
+labeled_statement labeledstmt_2{
+labeledstmt_59();
+labeledstmt_60();
+labeledstmt_61();
+labeledstmt_62();
+labeledstmt_63();
+labeledstmt_64();
+labeledstmt_65();
+labeledstmt_66();
+labeledstmt_67();
+labeledstmt_68();
+labeledstmt_69();
+labeledstmt_70();
+labeledstmt_71();
+labeledstmt_72();
+labeledstmt_73();
+labeledstmt_74();
+labeledstmt_75();
+labeledstmt_76();
+labeledstmt_77();
+labeledstmt_78();
+labeledstmt_79();
+labeledstmt_80();
+labeledstmt_81();
+labeledstmt_82();
+labeledstmt_83();
+labeledstmt_84();
+labeledstmt_85();
+labeledstmt_86();
+labeledstmt_87();
+labeledstmt_88();
+labeledstmt_89();
+labeledstmt_90();
+labeledstmt_91();
+labeledstmt_92();
+labeledstmt_93();
+labeledstmt_94();
+labeledstmt_95();
+labeledstmt_96();
+}
+labeled_statement labeledstmt_97{
+route_manager_0_idx_4672 = update_route_update_0;
+}
+labeled_statement labeledstmt_3{
+labeledstmt_97();
+}
+labeled_statement labeledstmt_4{
+
+}
+labeled_statement labeledstmt_5{
+
+}
+labeled_statement labeledstmt_101{
+int<<8>> forward_tango_pkt_arg_24 = tango_metrics_hdr_4;
+}
+labeled_statement labeledstmt_100{
+int<<32>> forward_tango_pkt_arg_22 = tango_metrics_hdr_2;
+}
+labeled_statement labeledstmt_99{
+int<<12>> timestamp = [31 : 20]time_now;
+}
+labeled_statement labeledstmt_98{
+traffic_class = 0;
+}
+labeled_statement labeledstmt_6{
+labeledstmt_98();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_102{
+traffic_class = 1;
+}
+labeled_statement labeledstmt_7{
+labeledstmt_102();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_103{
+traffic_class = 2;
+}
+labeled_statement labeledstmt_8{
+labeledstmt_103();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_104{
+traffic_class = 3;
+}
+labeled_statement labeledstmt_9{
+labeledstmt_104();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_105{
+traffic_class = 4;
+}
+labeled_statement labeledstmt_10{
+labeledstmt_105();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_106{
+traffic_class = 5;
+}
+labeled_statement labeledstmt_11{
+labeledstmt_106();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_107{
+traffic_class = 6;
+}
+labeled_statement labeledstmt_12{
+labeledstmt_107();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_108{
+traffic_class = 7;
+}
+labeled_statement labeledstmt_13{
+labeledstmt_108();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_109{
+traffic_class = 8;
+}
+labeled_statement labeledstmt_14{
+labeledstmt_109();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_110{
+traffic_class = 9;
+}
+labeled_statement labeledstmt_15{
+labeledstmt_110();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_111{
+traffic_class = 10;
+}
+labeled_statement labeledstmt_16{
+labeledstmt_111();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_112{
+traffic_class = 11;
+}
+labeled_statement labeledstmt_17{
+labeledstmt_112();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_113{
+traffic_class = 12;
+}
+labeled_statement labeledstmt_18{
+labeledstmt_113();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_114{
+traffic_class = 13;
+}
+labeled_statement labeledstmt_19{
+labeledstmt_114();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_115{
+traffic_class = 14;
+}
+labeled_statement labeledstmt_20{
+labeledstmt_115();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_116{
+traffic_class = 15;
+}
+labeled_statement labeledstmt_21{
+labeledstmt_116();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_117{
+traffic_class = 30;
+}
+labeled_statement labeledstmt_22{
+labeledstmt_117();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_118{
+traffic_class = 31;
+}
+labeled_statement labeledstmt_23{
+labeledstmt_118();
+labeledstmt_99();
+labeledstmt_100();
+labeledstmt_101();
+}
+labeled_statement labeledstmt_24{
+
+}
+labeled_statement labeledstmt_120{
+int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
+}
+labeled_statement labeledstmt_119{
+route_manager_0_idx_4672 = traffic_class;
+}
+labeled_statement labeledstmt_25{
+labeledstmt_119();
+labeledstmt_120();
+}
+labeled_statement labeledstmt_26{
+
+}
+labeled_statement labeledstmt_122{
+int<<16>> forward_tango_pkt_arg_21 = tango_metrics_hdr_1;
+}
+labeled_statement labeledstmt_121{
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4672,get_4663,0,0,0);
+}
+labeled_statement labeledstmt_27{
+labeledstmt_121();
+labeledstmt_122();
+}
+labeled_statement labeledstmt_123{
+Array.update_complex(route_manager_0,route_manager_0_idx_4672,set_4671,update_route_update_1,0,0);
+}
+labeled_statement labeledstmt_28{
+labeledstmt_123();
+}
+labeled_statement labeledstmt_29{
+
+}
+labeled_statement labeledstmt_124{
+int<<8>> path_id = RouteManager_get_path_id_ret;
+}
+labeled_statement labeledstmt_30{
+labeledstmt_124();
+}
+labeled_statement labeledstmt_125{
+Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_tcp_header_0,update_route_tcp_header_1,update_route_tcp_header_2,update_route_tcp_header_3,update_route_tcp_header_4,update_route_tcp_header_5,update_route_tcp_header_6,update_route_tcp_header_7,update_route_tcp_header_8,update_route_update_0,update_route_update_1);
+}
+labeled_statement labeledstmt_31{
+labeledstmt_125();
+}
+labeled_statement labeledstmt_32{
+
+}
+labeled_statement labeledstmt_135{
+tango_tunnel_hdr_0 = 1610612736;
+}
+labeled_statement labeledstmt_134{
+tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;
+}
+labeled_statement labeledstmt_133{
+tango_tunnel_hdr_2 = 6;
+}
+labeled_statement labeledstmt_132{
+tango_tunnel_hdr_3 = 220;
+}
+labeled_statement labeledstmt_131{
+tango_tunnel_hdr_4 = 2747196614509592830;
+}
+labeled_statement labeledstmt_130{
+tango_tunnel_hdr_5 = 3252;
+}
+labeled_statement labeledstmt_129{
+tango_tunnel_hdr_6 = 2739390614537240576;
+}
+labeled_statement labeledstmt_128{
+tango_tunnel_hdr_7 = 1;
+}
+labeled_statement labeledstmt_127{
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4667,0,1,0);
+}
+labeled_statement labeledstmt_126{
+int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
+}
+labeled_statement labeledstmt_33{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_129();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_136{
+tango_tunnel_hdr_6 = 2739390614537306112;
+}
+labeled_statement labeledstmt_34{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_136();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_137{
+tango_tunnel_hdr_6 = 2739390614537371648;
+}
+labeled_statement labeledstmt_35{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_137();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_138{
+tango_tunnel_hdr_6 = 2739390614537437184;
+}
+labeled_statement labeledstmt_36{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_138();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_139{
+tango_tunnel_hdr_6 = 2739390614537502720;
+}
+labeled_statement labeledstmt_37{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_139();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_140{
+tango_tunnel_hdr_6 = 2739390614537568256;
+}
+labeled_statement labeledstmt_38{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_140();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_141{
+tango_tunnel_hdr_6 = 2739390614537633792;
+}
+labeled_statement labeledstmt_39{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_141();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_40{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_128();
+labeledstmt_141();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_142{
+tango_tunnel_hdr_7 = 2;
+}
+labeled_statement labeledstmt_41{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_129();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_42{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_136();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_43{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_137();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_44{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_138();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_45{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_139();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_46{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_140();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_47{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_141();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_48{
+labeledstmt_126();
+labeledstmt_127();
+labeledstmt_142();
+labeledstmt_141();
+labeledstmt_130();
+labeledstmt_131();
+labeledstmt_132();
+labeledstmt_133();
+labeledstmt_134();
+labeledstmt_135();
+}
+labeled_statement labeledstmt_49{
+labeledstmt_126();
+labeledstmt_127();
+}
+labeled_statement labeledstmt_50{
+
+}
+labeled_statement labeledstmt_153{
+int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
+}
+labeled_statement labeledstmt_152{
+int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;
+}
+labeled_statement labeledstmt_151{
+Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
+}
+labeled_statement labeledstmt_150{
+int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
+}
+labeled_statement labeledstmt_149{
+int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
+}
+labeled_statement labeledstmt_148{
+int<<64>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
+}
+labeled_statement labeledstmt_147{
+int<<64>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
+}
+labeled_statement labeledstmt_146{
+int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;
+}
+labeled_statement labeledstmt_145{
+int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;
+}
+labeled_statement labeledstmt_144{
+int<<16>> seq_number = SequenceNumberManager_increment_ret;
+}
+labeled_statement labeledstmt_143{
+int<<8>> forward_tango_pkt_arg_20 = tango_metrics_hdr_0;
+}
+labeled_statement labeledstmt_51{
+labeledstmt_143();
+labeledstmt_144();
+labeledstmt_145();
+labeledstmt_146();
+labeledstmt_147();
+labeledstmt_148();
+labeledstmt_149();
+labeledstmt_150();
+labeledstmt_151();
+labeledstmt_152();
+labeledstmt_153();
+}
+labeled_statement labeledstmt_52{
+
+}
+labeled_statement labeledstmt_154{
+int<<16>> tango_metrics_hdr_3 = seq_number;
+}
+labeled_statement labeledstmt_53{
+labeledstmt_154();
+}
+labeled_statement labeledstmt_54{
+
+}
+labeled_statement labeledstmt_155{
+int<<16>> forward_tango_pkt_arg_23 = tango_metrics_hdr_3;
+}
+labeled_statement labeledstmt_55{
+labeledstmt_155();
+}
+labeled_statement labeledstmt_56{
+
+}
+labeled_statement labeledstmt_57{
+generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_pkt_arg_1,forward_tango_pkt_arg_2,forward_tango_pkt_arg_3,forward_tango_pkt_arg_4,forward_tango_pkt_arg_5,forward_tango_pkt_arg_6,forward_tango_pkt_arg_7,forward_tango_pkt_arg_8,forward_tango_pkt_arg_9,forward_tango_pkt_arg_10,forward_tango_pkt_arg_11,forward_tango_pkt_arg_12,forward_tango_pkt_arg_13,forward_tango_pkt_arg_14,forward_tango_pkt_arg_15,forward_tango_pkt_arg_16,forward_tango_pkt_arg_17,forward_tango_pkt_arg_18,forward_tango_pkt_arg_19,forward_tango_pkt_arg_20,forward_tango_pkt_arg_21,forward_tango_pkt_arg_22,forward_tango_pkt_arg_23,forward_tango_pkt_arg_24,forward_tango_pkt_arg_25,forward_tango_pkt_arg_26,forward_tango_pkt_arg_27,forward_tango_pkt_arg_28,forward_tango_pkt_arg_29,forward_tango_pkt_arg_30,forward_tango_pkt_arg_31,forward_tango_pkt_arg_32,forward_tango_pkt_arg_33,forward_tango_pkt_arg_34,forward_tango_pkt_arg_35,forward_tango_pkt_arg_36));
+}

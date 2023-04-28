@@ -1,0 +1,234 @@
+include "Time.dpt"
+include "Types.dpt"
+include "store_managers/RouteManager.dpt"
+include "store_managers/SequenceNumberManager.dpt"
+
+/* ================================================================================================================== *
+ *                                                     EXTERNS                                                        *
+ * ================================================================================================================== */
+
+// Port declarations
+const int<<9>> OUT_PORT = 12;
+
+// Tango UDP header to counter ECMP
+// const UDPHeader_t TANGO_UDP_HEADER = {
+//     source_port = 8080;
+//     destination_port = 8080;
+//     length = 0;
+//     checksum = 0;
+// };
+
+// Tango UDP header to counter ECMP and get past firewall
+const TCPHeader_t TANGO_TCP_HEADER = {
+    src_port = 0;
+    dest_port = 0;
+    sequence_num = 0;
+    ack_num = 0;
+    offset = 5;
+    flags = 0b00010000;
+    window_sz = 0;
+    checksum = 0;
+    urg_ptr = 0;
+};
+
+// Tango IPv6 header template
+const IPv6Header_t IPV6_HEADER_TEMPLATE = {
+    version_cls_flow = 0x60000000;
+    payload_len = 0;
+    next_header = 6; // TCP
+    hop_limit = 1500;
+    src_addr_hi = 2747196614509592830;
+    src_addr_lo = 3252;
+    dest_addr_hi = 0;
+    dest_addr_lo = 0;
+};
+
+/* ================================================================================================================== *
+ *                                                     GLOBALS                                                        *
+ * ================================================================================================================== */
+
+// Keep track of the traffic class to physical path ID mappings
+global RouteManager.t route_manager = RouteManager.create();
+
+// Counter keeping track of tango sequence numbers w.r.t. outgoing flow packets
+global SequenceNumberManager.t sequence_counters = SequenceNumberManager.create();
+
+/* ================================================================================================================== *
+ *                                                     EVENTS                                                         *
+ * ================================================================================================================== */
+
+/**
+ * # Description
+ * Application packet tunneled through system.
+ * 
+ * # Parameters
+ * eth_header (`EthernetHeader_t`): ethernet frame header
+ * ip_header (`IPv6Header_t`): IPv4 header of incoming packet
+ * udp_header (`UDPHeader_t`): UDP header of incoming packet
+ *
+ * # Generates
+ * forward_tango_traffic: flow packet wrapped with tango data sent to peer node
+ * complete_forward: not tango traffic
+ **/
+entry event forward_flow (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    UDPHeader_t udp_header
+) [ route_manager < sequence_counters ];
+
+/**
+ * # Description
+ * Incoming Tango data traffic from peer node.
+ * 
+ * # Parameters
+ * tango_eth_header (EthernetHeader_t): tunneled ethernet frame header
+ * tango_ip_header (IPv6Header_t): tango tunnel IPv6 header
+ * tango_tango_tcp_header (TCPHeader_t): tcp_header header to counter ECMP
+ * tango_metrics_header (TangoHeader_t): tango metric data and signatures
+ * encaped_udp_header (IPv6Header_t): flow IPv4 header tunneled thrpugh path
+ * encaped_udp_header (UDPHeader_t): tcp header of tunneled packet
+ *
+ * # Generates
+ * request_route_update: sometimes responds to peer with route mapping update
+ * complete_forward: forwards the packet on to its final destination
+ **/
+exit event incoming_tango_traffic (
+    EthernetHeader_t tango_eth_header,
+    IPv6Header_t tango_ip_header,
+    TCPHeader_t tango_tcp_header,
+    TangoHeader_t tango_metrics_header,
+    IPv6Header_t encaped_ip_header,
+    UDPHeader_t encaped_dup_header
+);
+
+/**
+ * # Description
+ * Incoming Tango data traffic from peer node.
+ * 
+ * # Parameters
+ * eth_header (EthernetHeader_t): ethernet frame header
+ * ip_header (IPv6Header_t): IPv6 header
+ * tango_tcp_header (TCPHeader_t): tcp_header header to counter ECMP
+ * update (RouteUpdate_t): requested route update by remote node
+ *
+ * # Generates
+ * request_route_update: sometimes responds to peer with route mapping update
+ * complete_forward: forwards the packet on to its final destination
+ **/
+event update_route (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    TCPHeader_t tcp_header,
+    RouteUpdate_t update
+) [ route_manager <= route_manager ];
+
+/* ================================================================================================================== *
+ *                                                    HANDLERS                                                        *
+ * ================================================================================================================== */
+
+handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHeader_t udp_header) {
+
+    /* 1. Map flow to a specific physical route. */
+    // -- Map flow to traffic class.
+    int<<8>> traffic_class = 0;
+    match (
+        ip_header#src_addr_lo,
+        ip_header#src_addr_hi,
+        udp_header#source_port,
+        ip_header#dest_addr_lo,
+        ip_header#dest_addr_hi,
+        udp_header#destination_port,
+        ip_header#next_header
+    ) with
+    | _, _, 50000, _, _, _, _ -> { traffic_class = 0; } // Keep Alive Routes 1 (static)
+    | _, _, 50001, _, _, _, _ -> { traffic_class = 1; }
+    | _, _, 50002, _, _, _, _ -> { traffic_class = 2; }
+    | _, _, 50003, _, _, _, _ -> { traffic_class = 3; }
+    | _, _, 50004, _, _, _, _ -> { traffic_class = 4; }
+    | _, _, 50005, _, _, _, _ -> { traffic_class = 5; }
+    | _, _, 50006, _, _, _, _ -> { traffic_class = 6; }
+    | _, _, 50007, _, _, _, _ -> { traffic_class = 7; }
+    | _, _, 60000, _, _, _, _ -> { traffic_class = 8; } // Keep Alive Routes 2 (static)
+    | _, _, 60001, _, _, _, _ -> { traffic_class = 9; }
+    | _, _, 60002, _, _, _, _ -> { traffic_class = 10; }
+    | _, _, 60003, _, _, _, _ -> { traffic_class = 11; }
+    | _, _, 60004, _, _, _, _ -> { traffic_class = 12; }
+    | _, _, 60005, _, _, _, _ -> { traffic_class = 13; }
+    | _, _, 60006, _, _, _, _ -> { traffic_class = 14; }
+    | _, _, 60007, _, _, _, _ -> { traffic_class = 15; }
+    | _, _, 50008, _, _, _, _ -> { traffic_class = 30; } // Active Route 1 (dyn)
+    | _, _, _, _, _, _, _    -> { traffic_class = 31; } // Active Route 2 (dyn)
+
+ 
+
+    // -- Find route cooresponding to traffic class.
+    int<<8>> path_id = RouteManager.get_path_id(route_manager, traffic_class);
+
+    // -- Get physical path header to tunnel with.
+    IPv6Header_t tango_tunnel_hdr = IPV6_HEADER_TEMPLATE;
+    match (path_id) with
+    | 0 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537240576; dest_addr_lo = 1; }; } // 2604:4540:88::1
+    | 1 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537306112; dest_addr_lo = 1; }; } // 2604:4540:89::1
+    | 2 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537371648; dest_addr_lo = 1; }; } // 2604:4540:8a::1
+    | 3 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537437184; dest_addr_lo = 1; }; } // 2604:4540:8b::1
+    | 4 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537502720; dest_addr_lo = 1; }; } // 2604:4540:8c::1
+    | 5 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537568256; dest_addr_lo = 1; }; } // 2604:4540:8d::1
+    | 6 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
+    | 7 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
+    | 8 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537240576; dest_addr_lo = 2; }; } // 2604:4540:88::2
+    | 9 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537306112; dest_addr_lo = 2; }; } // 2604:4540:89::2
+    | 10 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537371648; dest_addr_lo = 2; }; } // 2604:4540:8a::2
+    | 11 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537437184; dest_addr_lo = 2; }; } // 2604:4540:8b::2
+    | 12 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537502720; dest_addr_lo = 2; }; } // 2604:4540:8c::2
+    | 13 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537568256; dest_addr_lo = 2; }; } // 2604:4540:8d::2
+    | 14 -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 2; }; } // 2604:4540:8e::2
+    | 15 -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 2; }; } // 2604:4540:8e::2
+
+
+    /* 2. Increment sequence number. */
+    // -- Get updated sequence number
+    int<<16>> seq_number = SequenceNumberManager.increment(sequence_counters, path_id);
+
+
+    /* 3. Record path-specific timestamp. */
+    // -- Get current time in milliseconds
+    int<<12>> timestamp = get_time_now_ms();
+
+
+    /* 4. Encapsulate and forward packet. */
+    TangoHeader_t tango_metrics_hdr = {
+        path_id = (int<<8>>) path_id;
+        timestamp = (int<<16>>) timestamp;
+        signature = 0;
+        sequence_num = seq_number;
+        book_signature = 0;
+    };
+
+    event forward_tango_pkt = incoming_tango_traffic (
+        { eth_header with ethertype = 0x86DD },
+        tango_tunnel_hdr,
+        TANGO_TCP_HEADER,
+        tango_metrics_hdr,
+        ip_header,
+        udp_header
+    );
+
+    printf("Generating: { path: %d, class %d, timestamp: %d, seq_num: %d }",
+        path_id,
+        traffic_class,
+        timestamp,
+        seq_number
+    );
+
+    generate_port (OUT_PORT, forward_tango_pkt);
+
+}
+
+handle update_route (
+    EthernetHeader_t eth_header,
+    IPv6Header_t ip_header,
+    TCPHeader_t tcp_header,
+    RouteUpdate_t update
+) {
+    RouteManager.update_route(route_manager, update#traffic_class, update#new_path_id);
+}
