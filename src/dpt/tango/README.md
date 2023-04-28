@@ -53,11 +53,16 @@ rate-show
 ```bash
 ucli
 pm
+port-add 12/0 100G NONE
+port-add 15/0 100G NONE
 port-add 16/0 100G NONE
+an-set 12/0 2
+an-set 15/0 2
 an-set 16/0 2
+port-enb 12/0
+port-enb 15/0
 port-enb 16/0
 rate-period 1
-rate-show
 ```
 
 ### Cabernet803 (DPID 12, Port 15/0), dump output packets from background traffic here
