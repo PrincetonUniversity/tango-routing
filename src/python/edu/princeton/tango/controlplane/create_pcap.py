@@ -158,6 +158,7 @@ def write_seq_sigs_to_pcap(
             )
             raw_seq_num_sigs = raw_seq_num_sigs[(seq_blk_sz % max_sigs_per_pkt) :]
 
+        print(f"{len(seq_pkts)} written to pcap...")
         wrpcap(f"seqbook-{book}.pcap", seq_pkts)
 
 
