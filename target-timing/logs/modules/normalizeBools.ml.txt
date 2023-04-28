@@ -19,12 +19,13 @@ Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
 Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 } else {
+int<<16>> sig_addr = (int<<16>>)set_signature_sig_idx;
 match set_signature_block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_1,sig_addr,set_signature_curr_signature);
 }
 }
 new if statement: 
@@ -38,18 +39,19 @@ Array.set(outgoing_book_signature_manager_0,sig_idx_copy,sig_copy);
 Array.set(outgoing_book_signature_manager_1,sig_idx_copy,sig_copy);
 }
 } else {
+int<<16>> sig_addr = (int<<16>>)set_signature_sig_idx;
 match set_signature_block_idx with 
 | 0 -> {
-Array.set(outgoing_metric_signature_manager_0,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_0,sig_addr,set_signature_curr_signature);
 }
 | _ -> {
-Array.set(outgoing_metric_signature_manager_1,set_signature_sig_idx,set_signature_curr_signature);
+Array.set(outgoing_metric_signature_manager_1,sig_addr,set_signature_curr_signature);
 }
 }
 original if statement: 
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
-int<<16>> precompute = set_signature_sig_idx+1;
+int<<32>> precompute = set_signature_sig_idx+1;
 generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
@@ -59,7 +61,7 @@ Array.set(pkt_finish_times,done_idx,precompute);
 new if statement: 
 if (set_signature_next_signature!=0) {
 int<<16>> precompute = set_signature_ip_header_1-32;
-int<<16>> precompute = set_signature_sig_idx+1;
+int<<32>> precompute = set_signature_sig_idx+1;
 generate_port (68, set_next_signature(set_signature_eth_header_0,set_signature_eth_header_1,set_signature_eth_header_2,set_signature_ip_header_0,precompute,set_signature_ip_header_2,set_signature_ip_header_3,set_signature_ip_header_4,set_signature_ip_header_5,set_signature_ip_header_6,set_signature_ip_header_7,set_signature_udp_header_0,set_signature_udp_header_1,set_signature_udp_header_2,set_signature_udp_header_3,set_signature_sig_type,precompute,set_signature_block_idx,set_signature_next_signature));
 } else {
 int<<32>> done_idx = Array.update(num_pkt_finishes,0,get_old,0,increase_by,1);
@@ -70,11 +72,11 @@ converting expression to dnf form: seen_idx==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= seen_idx~3370 tmp_val_id~3896)
+converting: (= seen_idx~3381 tmp_val_id~3912)
 
-converting: seen_idx~3370
+converting: seen_idx~3381
 
-converting: tmp_val_id~3896
+converting: tmp_val_id~3912
 
 old expression:  seen_idx==0
 
@@ -86,11 +88,11 @@ converting expression to dnf form: if_precomp==0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (= if_precomp~3895 tmp_val_id~3897)
+converting: (= if_precomp~3911 tmp_val_id~3913)
 
-converting: if_precomp~3895
+converting: if_precomp~3911
 
-converting: tmp_val_id~3897
+converting: tmp_val_id~3913
 
 old expression:  if_precomp==0
 
@@ -102,13 +104,13 @@ converting expression to dnf form: set_signature_next_signature!=0
 
 converted expression into a disjunction of 1 exprs
 
-converting: (not (= set_signature_next_signature~0 tmp_val_id~3898))
+converting: (not (= set_signature_next_signature~0 tmp_val_id~3914))
 
-converting: (= set_signature_next_signature~0 tmp_val_id~3898)
+converting: (= set_signature_next_signature~0 tmp_val_id~3914)
 
 converting: set_signature_next_signature~0
 
-converting: tmp_val_id~3898
+converting: tmp_val_id~3914
 
 old expression:  set_signature_next_signature!=0
 

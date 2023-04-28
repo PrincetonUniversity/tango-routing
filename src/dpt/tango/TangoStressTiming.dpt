@@ -83,7 +83,7 @@ event set_signature (
     IPv6Header_t ip_header,
     UDPHeader_t udp_header,
     int<<8>> sig_type,
-    int<<16>> sig_idx,
+    int<<32>> sig_idx,
     int<<8>> block_idx,
     int<<32>> curr_signature,
     int<<32>> next_signature
@@ -113,7 +113,7 @@ exit event set_next_signature (
     IPv6Header_t ip_header,
     UDPHeader_t udp_header,
     int<<8>> sig_type,
-    int<<16>> sig_idx,
+    int<<32>> sig_idx,
     int<<8>> block_idx,
     int<<32>> next_signature
 );
@@ -156,7 +156,7 @@ handle set_signature (
     IPv6Header_t ip_header,
     UDPHeader_t udp_header,
     int<<8>> sig_type,
-    int<<16>> sig_idx,
+    int<<32>> sig_idx,
     int<<8>> block_idx,
     int<<32>> curr_signature,
     int<<32>> next_signature
@@ -179,7 +179,7 @@ handle set_signature (
     } else {
         MetricSignatureManager.set_signature(
             outgoing_metric_signature_manager,
-            sig_idx,
+            (int<<16>>) sig_idx,
             curr_signature,
             block_idx
         );
