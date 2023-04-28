@@ -111,9 +111,9 @@ show
 ```bash
 cd /data/bf-sde-9.12.0
 source set_sde.bash
-cd to where your program is 
-$SDE/p4_build.sh program.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=t2na
-$SDE/./run_switchd.sh -p program -arch tf2
+cd to where your program is e.g., /u/soph/tango
+$SDE/p4_build.sh tcpv6.p4 P4_VERSION=p4_16 P4_ARCHITECTURE=t2na
+$SDE/./run_switchd.sh -p tcpv6 -arch tf2
 ucli
 pm
 port-add 16/0 10G NONE
