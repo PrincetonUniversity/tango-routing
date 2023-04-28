@@ -18,7 +18,7 @@ def setup_plt() -> None:
 
 def calculate_mem(gigbit_sec_in: np.ndarray, control_loop: timedelta) -> np.ndarray:
     """Calculate the amount of memory used for given traffic."""
-    byte_sec_in = (np.copy(gigbit_sec_in) * (10 ** 9)) / 8
+    byte_sec_in = (np.copy(gigbit_sec_in) * (10**9)) / 8
     pkts_sec_in = byte_sec_in / PACKET_SIZE
     pkts_per_loop = np.floor(pkts_sec_in * control_loop.total_seconds())
     return np.floor(pkts_per_loop / 32) * SIGNATURE_SZ_BYTES

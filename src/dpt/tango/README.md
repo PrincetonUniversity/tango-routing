@@ -63,6 +63,7 @@ port-enb 12/0
 port-enb 15/0
 port-enb 16/0
 rate-period 1
+rate-show
 ```
 
 ### Cabernet803 (DPID 12, Port 15/0), dump output packets from background traffic here

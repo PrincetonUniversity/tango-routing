@@ -214,15 +214,18 @@ def main() -> None:
         logger.info("Resetting registers...")
 
         start_time_reset = start_time_tbl.create_bulk_data_entry(
-            fieldname="first_packet_seen.f1", values=[0],
+            fieldname="first_packet_seen.f1",
+            values=[0],
         )
 
         sig_count_reset = sig_count_tbl.create_bulk_data_entry(
-            fieldname="signature_count.f1", values=[0],
+            fieldname="signature_count.f1",
+            values=[0],
         )
 
         pkt_timings_reset = pkt_write_times_tbl.create_bulk_data_entry(
-            fieldname="pkt_finish_times.f1", values=[0 for _ in range(0, 127)],
+            fieldname="pkt_finish_times.f1",
+            values=[0 for _ in range(0, 127)],
         )
 
         sig_count_tbl.add_bulk_entry(sig_key, sig_count_reset)

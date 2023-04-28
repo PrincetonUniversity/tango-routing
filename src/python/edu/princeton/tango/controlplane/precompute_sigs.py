@@ -20,7 +20,7 @@ class PrecomputedSignatures:
 
 def hash_int(num: int) -> int:
     """Hash an int into a 32-bit integer."""
-    return num 
+    return num
 
 
 def compute_timestamp_signatures(
@@ -38,10 +38,7 @@ def compute_sequence_num_signatures(num_seq_nums: int) -> List[int]:
     """Generate signaures for all sequence numbers."""
     logger = logging.getLogger(__name__)
     logger.info("Calculating sequence number signatures...")
-    return [
-        hash_int(curr_round)
-        for curr_round in range(0, num_seq_nums // 32)
-    ]
+    return [hash_int(curr_round) for curr_round in range(0, num_seq_nums // 32)]
 
 
 def pickle_signatures(filename: Path, ts_sigs: List[int], seq_sigs: List[int]) -> None:
@@ -56,7 +53,10 @@ def pickle_signatures(filename: Path, ts_sigs: List[int], seq_sigs: List[int]) -
 def main() -> None:
     """Genreate pickle file containing all precomputed signatures."""
     if len(sys.argv) != 4:
-        print("\n-- ERROR --\n\nUsage: <program> <pickle-filepath> <ms-duration> <packets-per-book>", flush=True)  # noqa: T201
+        print(
+            "\n-- ERROR --\n\nUsage: <program> <pickle-filepath> <ms-duration> <packets-per-book>",
+            flush=True,
+        )  # noqa: T201
         print(sys.argv, len(sys.argv))
         sys.exit(1)
 

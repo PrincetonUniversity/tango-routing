@@ -83,32 +83,32 @@ class IPv6Header:
 
     def __post_init__(self: Self) -> None:
         """Sanitize inputs."""
-        if self.version >= 2 ** 4:
+        if self.version >= 2**4:
             raise InvalidParameterError(
                 f"`version` ({self.version}) is more than 4-bit!",
             )
 
-        if self.traffic_class >= 2 ** 8:
+        if self.traffic_class >= 2**8:
             raise InvalidParameterError(
                 f"`traffic_class` ({self.traffic_class}) is more than 8-bit!",
             )
 
-        if self.flow_label >= 2 ** 20:
+        if self.flow_label >= 2**20:
             raise InvalidParameterError(
                 f"`flow_label` ({self.flow_label}) is more than 20-bit!",
             )
 
-        if self.payload_len >= 2 ** 16:
+        if self.payload_len >= 2**16:
             raise InvalidParameterError(
                 f"`payload_len` ({self.payload_len}) is more than 16-bit!",
             )
 
-        if self.next_header >= 2 ** 8:
+        if self.next_header >= 2**8:
             raise InvalidParameterError(
                 f"`next_header` ({self.next_header}) is more than 8-bit!",
             )
 
-        if self.hop_limit >= 2 ** 8:
+        if self.hop_limit >= 2**8:
             raise InvalidParameterError(
                 f"`hop_limit` ({self.hop_limit}) is more than 8-bit!",
             )
