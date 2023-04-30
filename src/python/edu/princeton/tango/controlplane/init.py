@@ -180,7 +180,7 @@ def main() -> None:
             values=list(range(0, 32)),
         )
 
-        sequence_values = route_table.create_bulk_data_entry(
+        sequence_values = seq_num_table.create_bulk_data_entry(
             fieldname="sequence_counters_0.f1",
             values=[0 for _ in range(0, 32)],
         )
