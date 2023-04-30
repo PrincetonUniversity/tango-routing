@@ -124,7 +124,12 @@ port-enb 16/0
 port-enb 32/3
 show 
 ```
-
+Also in other terminal populate routes in control plane:
+```
+cd /data/bf-sde-9.12.0
+source set_sde.bash
+/data/bf-sde-9.12.0/install/bin/python3.10 /u/birgelee/tango-routing/src/python/edu/princeton/tango/controlplane/init.py
+```
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
 ```plaintext
