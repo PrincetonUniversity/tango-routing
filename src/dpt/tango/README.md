@@ -130,6 +130,8 @@ cd /data/bf-sde-9.12.0
 source set_sde.bash
 /data/bf-sde-9.12.0/install/bin/python3.10 /u/birgelee/tango-routing/src/python/edu/princeton/tango/controlplane/init.py
 ```
+
+Aslo note that in Lucid/P4 the Internet outbound port is 264 and the port where the server is sending traffic which needs to be encapsulated is 19.
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
 ```plaintext
