@@ -42,9 +42,9 @@ def main() -> None:
     plt.yticks(fontsize=14)
     plt.legend(title="Refresh Period")
     ax.set_yscale("log", base=2)
-    ax.set_aspect(1.0 / ax.get_data_ratio(), adjustable="box")
+    # ax.set_aspect(1.0 / ax.get_data_ratio(), adjustable="box")
     # plt.show()  # noqa: ERA001
-    plt.savefig("memory_footprint.pdf", bbox_inches="tight", format="pdf", dpi=600)
+    plt.savefig("memory_footprint_flat.pdf", bbox_inches="tight", format="pdf", dpi=600)
 
 
 if __name__ == "__main__":
