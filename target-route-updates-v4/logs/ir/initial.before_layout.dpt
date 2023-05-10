@@ -15,7 +15,7 @@ handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_e
 
 }
 // shared locals:
-int<<8>> route_manager_0_idx_4320;
+int<<8>> route_manager_0_idx_4331;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -81,8 +81,8 @@ traffic_class = 30;
 traffic_class = 31;
 }
 int<<8>> RouteManager_get_path_id_ret = 32;
-route_manager_0_idx_4320 = traffic_class;
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4320,get_4311,0,0,0);
+route_manager_0_idx_4331 = traffic_class;
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4331,get_4322,0,0,0);
 int<<8>> path_id = RouteManager_get_path_id_ret;
 int<<32>> tango_tunnel_hdr_0 = 1610612736;
 int<<16>> tango_tunnel_hdr_1 = 0;
@@ -95,169 +95,169 @@ int<<64>> tango_tunnel_hdr_7 = 0;
 match path_id with 
 | 0 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537240576;
 tango_tunnel_hdr_7 = 1;
 }
 | 1 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537306112;
 tango_tunnel_hdr_7 = 1;
 }
 | 2 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537371648;
 tango_tunnel_hdr_7 = 1;
 }
 | 3 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537437184;
 tango_tunnel_hdr_7 = 1;
 }
 | 4 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537502720;
 tango_tunnel_hdr_7 = 1;
 }
 | 5 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537568256;
 tango_tunnel_hdr_7 = 1;
 }
 | 6 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_7 = 1;
 }
 | 7 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537633792;
 tango_tunnel_hdr_7 = 1;
 }
 | 8 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537240576;
+tango_tunnel_hdr_7 = 2;
 }
 | 9 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537306112;
+tango_tunnel_hdr_7 = 2;
 }
 | 10 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537371648;
+tango_tunnel_hdr_7 = 2;
 }
 | 11 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537437184;
+tango_tunnel_hdr_7 = 2;
 }
 | 12 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537502720;
+tango_tunnel_hdr_7 = 2;
 }
 | 13 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537568256;
+tango_tunnel_hdr_7 = 2;
 }
 | 14 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537633792;
+tango_tunnel_hdr_7 = 2;
 }
 | 15 -> {
 tango_tunnel_hdr_0 = 1610612736;
-tango_tunnel_hdr_1 = forward_flow_ip_header_2+18;
+tango_tunnel_hdr_1 = 18+forward_flow_ip_header_2;
 tango_tunnel_hdr_2 = 17;
 tango_tunnel_hdr_3 = 220;
 tango_tunnel_hdr_4 = 2747196614509592830;
 tango_tunnel_hdr_5 = 3252;
-tango_tunnel_hdr_6 = 2739390614536716288;
-tango_tunnel_hdr_7 = 1;
+tango_tunnel_hdr_6 = 2739390614537633792;
+tango_tunnel_hdr_7 = 2;
 }
 | _ -> {
 
 }
 int<<16>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4315,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4326,0,1,0);
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
@@ -279,7 +279,7 @@ int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;
 int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;
 int<<16>> forward_tango_pkt_arg_11 = 8080;
 int<<16>> forward_tango_pkt_arg_12 = 8080;
-int<<16>> forward_tango_pkt_arg_13 = forward_flow_ip_header_2+18;
+int<<16>> forward_tango_pkt_arg_13 = 18+forward_flow_ip_header_2;
 int<<16>> forward_tango_pkt_arg_14 = 0;
 int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
 int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
@@ -304,34 +304,34 @@ generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }
 | 3 -> {
-route_manager_0_idx_4320 = update_route_update_0;
-Array.update_complex(route_manager_0,route_manager_0_idx_4320,set_4319,update_route_update_1,0,0);
+route_manager_0_idx_4331 = update_route_update_0;
+Array.update_complex(route_manager_0,route_manager_0_idx_4331,set_4330,update_route_update_1,0,0);
 Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_udp_header_0,update_route_udp_header_1,update_route_udp_header_2,update_route_udp_header_3,update_route_update_0,update_route_update_1);
 }}
-memop set_4319(int<<8>> mem_val_4318,int<<8>> new_val_4316,int<<8>> unused_4317)
+memop set_4330(int<<8>> mem_val_4329,int<<8>> new_val_4327,int<<8>> unused_4328)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4316), None
+cell1=(true -> new_val_4327), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4315(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4312)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4326(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4323)
  {{
-b1=(mbool_4313,true);
-b2=(mbool_4314,true)
-cell1=(mbool_4313 -> curr+inc_set_4312), None
-cell2=(mbool_4314 -> curr), None
+b1=(mbool_4324,true);
+b2=(mbool_4325,true)
+cell1=(mbool_4324 -> curr+inc_set_4323), None
+cell2=(mbool_4325 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_4311(int<<8>> mem_val_4308,int<<8>> unused_4310,int<<8>> unused_4309)
+memop get_4322(int<<8>> mem_val_4319,int<<8>> unused_4321,int<<8>> unused_4320)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4308)
+ret=(true -> mem_val_4319)
 }}

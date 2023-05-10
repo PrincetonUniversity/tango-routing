@@ -15,7 +15,7 @@ handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_e
 
 }
 // shared locals:
-int<<8>> route_manager_0_idx_4580;
+int<<8>> route_manager_0_idx_4585;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -335,32 +335,32 @@ labeledstmt_57();
 | _ -> {
 labeledstmt_56();
 }}
-memop set_4579(int<<8>> mem_val_4578,int<<8>> new_val_4576,int<<8>> unused_4577)
+memop set_4584(int<<8>> mem_val_4583,int<<8>> new_val_4581,int<<8>> unused_4582)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4576), None
+cell1=(true -> new_val_4581), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4575(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4572)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4580(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4577)
  {{
-b1=(mbool_4573,true);
-b2=(mbool_4574,true)
-cell1=(mbool_4573 -> curr+inc_set_4572), None
-cell2=(mbool_4574 -> curr), None
+b1=(mbool_4578,true);
+b2=(mbool_4579,true)
+cell1=(mbool_4578 -> curr+inc_set_4577), None
+cell2=(mbool_4579 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_4571(int<<8>> mem_val_4568,int<<8>> unused_4570,int<<8>> unused_4569)
+memop get_4576(int<<8>> mem_val_4573,int<<8>> unused_4575,int<<8>> unused_4574)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4568)
+ret=(true -> mem_val_4573)
 }}
 labeled_statement labeledstmt_58{
 Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_udp_header_0,incoming_tango_traffic_tango_udp_header_1,incoming_tango_traffic_tango_udp_header_2,incoming_tango_traffic_tango_udp_header_3,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_udp_header_0,incoming_tango_traffic_encaped_udp_header_1,incoming_tango_traffic_encaped_udp_header_2,incoming_tango_traffic_encaped_udp_header_3);
@@ -408,7 +408,7 @@ labeled_statement labeledstmt_79{
 int<<16>> forward_tango_pkt_arg_14 = 0;
 }
 labeled_statement labeledstmt_78{
-int<<16>> forward_tango_pkt_arg_13 = forward_flow_ip_header_1+58;
+int<<16>> forward_tango_pkt_arg_13 = 58+forward_flow_ip_header_1;
 }
 labeled_statement labeledstmt_77{
 int<<16>> forward_tango_pkt_arg_12 = 8080;
@@ -503,7 +503,7 @@ labeledstmt_90();
 labeledstmt_91();
 }
 labeled_statement labeledstmt_92{
-route_manager_0_idx_4580 = update_route_update_0;
+route_manager_0_idx_4585 = update_route_update_0;
 }
 labeled_statement labeledstmt_3{
 labeledstmt_92();
@@ -692,7 +692,7 @@ labeled_statement labeledstmt_115{
 int<<16>> tango_metrics_hdr_1 = (int<<16>>)timestamp;
 }
 labeled_statement labeledstmt_114{
-route_manager_0_idx_4580 = traffic_class;
+route_manager_0_idx_4585 = traffic_class;
 }
 labeled_statement labeledstmt_25{
 labeledstmt_114();
@@ -705,14 +705,14 @@ labeled_statement labeledstmt_117{
 int<<16>> forward_tango_pkt_arg_16 = tango_metrics_hdr_1;
 }
 labeled_statement labeledstmt_116{
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4580,get_4571,0,0,0);
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4585,get_4576,0,0,0);
 }
 labeled_statement labeledstmt_27{
 labeledstmt_116();
 labeledstmt_117();
 }
 labeled_statement labeledstmt_118{
-Array.update_complex(route_manager_0,route_manager_0_idx_4580,set_4579,update_route_update_1,0,0);
+Array.update_complex(route_manager_0,route_manager_0_idx_4585,set_4584,update_route_update_1,0,0);
 }
 labeled_statement labeledstmt_28{
 labeledstmt_118();
@@ -739,7 +739,7 @@ labeled_statement labeledstmt_130{
 tango_tunnel_hdr_0 = 1610612736;
 }
 labeled_statement labeledstmt_129{
-tango_tunnel_hdr_1 = forward_flow_ip_header_1+58;
+tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;
 }
 labeled_statement labeledstmt_128{
 tango_tunnel_hdr_2 = 17;
@@ -754,13 +754,13 @@ labeled_statement labeledstmt_125{
 tango_tunnel_hdr_5 = 3252;
 }
 labeled_statement labeledstmt_124{
-tango_tunnel_hdr_6 = 2739390614536716288;
+tango_tunnel_hdr_6 = 2739390614537240576;
 }
 labeled_statement labeledstmt_123{
 tango_tunnel_hdr_7 = 1;
 }
 labeled_statement labeledstmt_122{
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4575,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4580,0,1,0);
 }
 labeled_statement labeledstmt_121{
 int<<8>> tango_metrics_hdr_0 = (int<<8>>)path_id;
@@ -777,59 +777,74 @@ labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
 }
+labeled_statement labeledstmt_131{
+tango_tunnel_hdr_6 = 2739390614537306112;
+}
 labeled_statement labeledstmt_34{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_131();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
 labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
+}
+labeled_statement labeledstmt_132{
+tango_tunnel_hdr_6 = 2739390614537371648;
 }
 labeled_statement labeledstmt_35{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_132();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
 labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
+}
+labeled_statement labeledstmt_133{
+tango_tunnel_hdr_6 = 2739390614537437184;
 }
 labeled_statement labeledstmt_36{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_133();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
 labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
+}
+labeled_statement labeledstmt_134{
+tango_tunnel_hdr_6 = 2739390614537502720;
 }
 labeled_statement labeledstmt_37{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_134();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
 labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
+}
+labeled_statement labeledstmt_135{
+tango_tunnel_hdr_6 = 2739390614537568256;
 }
 labeled_statement labeledstmt_38{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_135();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -837,11 +852,14 @@ labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
 }
+labeled_statement labeledstmt_136{
+tango_tunnel_hdr_6 = 2739390614537633792;
+}
 labeled_statement labeledstmt_39{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_136();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -853,7 +871,7 @@ labeled_statement labeledstmt_40{
 labeledstmt_121();
 labeledstmt_122();
 labeledstmt_123();
-labeledstmt_124();
+labeledstmt_136();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -861,10 +879,13 @@ labeledstmt_128();
 labeledstmt_129();
 labeledstmt_130();
 }
+labeled_statement labeledstmt_137{
+tango_tunnel_hdr_7 = 2;
+}
 labeled_statement labeledstmt_41{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
+labeledstmt_137();
 labeledstmt_124();
 labeledstmt_125();
 labeledstmt_126();
@@ -876,8 +897,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_42{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_131();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -888,8 +909,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_43{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_132();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -900,8 +921,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_44{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_133();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -912,8 +933,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_45{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_134();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -924,8 +945,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_46{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_135();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -936,8 +957,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_47{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_136();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -948,8 +969,8 @@ labeledstmt_130();
 labeled_statement labeledstmt_48{
 labeledstmt_121();
 labeledstmt_122();
-labeledstmt_123();
-labeledstmt_124();
+labeledstmt_137();
+labeledstmt_136();
 labeledstmt_125();
 labeledstmt_126();
 labeledstmt_127();
@@ -964,69 +985,69 @@ labeledstmt_122();
 labeled_statement labeledstmt_50{
 
 }
-labeled_statement labeledstmt_141{
+labeled_statement labeledstmt_148{
 int<<32>> forward_tango_pkt_arg_3 = tango_tunnel_hdr_0;
 }
-labeled_statement labeledstmt_140{
+labeled_statement labeledstmt_147{
 int<<16>> forward_tango_pkt_arg_4 = tango_tunnel_hdr_1;
 }
-labeled_statement labeledstmt_139{
+labeled_statement labeledstmt_146{
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }
-labeled_statement labeledstmt_138{
+labeled_statement labeledstmt_145{
 int<<8>> forward_tango_pkt_arg_5 = tango_tunnel_hdr_2;
 }
-labeled_statement labeledstmt_137{
+labeled_statement labeledstmt_144{
 int<<8>> forward_tango_pkt_arg_6 = tango_tunnel_hdr_3;
 }
-labeled_statement labeledstmt_136{
+labeled_statement labeledstmt_143{
 int<<64>> forward_tango_pkt_arg_7 = tango_tunnel_hdr_4;
 }
-labeled_statement labeledstmt_135{
+labeled_statement labeledstmt_142{
 int<<64>> forward_tango_pkt_arg_8 = tango_tunnel_hdr_5;
 }
-labeled_statement labeledstmt_134{
+labeled_statement labeledstmt_141{
 int<<64>> forward_tango_pkt_arg_9 = tango_tunnel_hdr_6;
 }
-labeled_statement labeledstmt_133{
+labeled_statement labeledstmt_140{
 int<<64>> forward_tango_pkt_arg_10 = tango_tunnel_hdr_7;
 }
-labeled_statement labeledstmt_132{
+labeled_statement labeledstmt_139{
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 }
-labeled_statement labeledstmt_131{
+labeled_statement labeledstmt_138{
 int<<8>> forward_tango_pkt_arg_15 = tango_metrics_hdr_0;
 }
 labeled_statement labeledstmt_51{
-labeledstmt_131();
-labeledstmt_132();
-labeledstmt_133();
-labeledstmt_134();
-labeledstmt_135();
-labeledstmt_136();
-labeledstmt_137();
 labeledstmt_138();
 labeledstmt_139();
 labeledstmt_140();
 labeledstmt_141();
+labeledstmt_142();
+labeledstmt_143();
+labeledstmt_144();
+labeledstmt_145();
+labeledstmt_146();
+labeledstmt_147();
+labeledstmt_148();
 }
 labeled_statement labeledstmt_52{
 
 }
-labeled_statement labeledstmt_142{
+labeled_statement labeledstmt_149{
 int<<16>> tango_metrics_hdr_3 = seq_number;
 }
 labeled_statement labeledstmt_53{
-labeledstmt_142();
+labeledstmt_149();
 }
 labeled_statement labeledstmt_54{
 
 }
-labeled_statement labeledstmt_143{
+labeled_statement labeledstmt_150{
 int<<16>> forward_tango_pkt_arg_18 = tango_metrics_hdr_3;
 }
 labeled_statement labeledstmt_55{
-labeledstmt_143();
+labeledstmt_150();
 }
 labeled_statement labeledstmt_56{
 

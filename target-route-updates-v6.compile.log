@@ -1,57 +1,14 @@
 compiler: Compilation to P4 started...
 compiler: Starting P4-Tofino compilation. Using switch port configuration: 
-recirc dpid: 196
+recirc dpid: 68
 lucid internal ports: 
-lucid external ports: 12@100Gb/s
-port-event bindings: (4 : update_route)
-dpt: -------Checking well-formedness---------
-dpt: ---------typing1---------
-dpt: ---------Concretizing symbolics-------------
-dpt: ---------Aliasing Modules-------------
-dpt: ---------Making returns explicit-------------
-dpt: -----------renaming-----------
-dpt: -------Eliminating modules---------
-dpt: -------Inlining size declarations---------
-dpt: ---------typing2---------
-dpt: -------Eliminating type aliases 2---------
-dpt: -----------inlining functions-----------
-dpt: -----------inlining tables-----------
-dpt: -----------Assigning extern events default handlers-----------
-dpt: ---------Eliminating events with global arguments----------
-dpt: ---------------typing3-------------
-dpt: -------Eliminating vectors-------
-dpt: -----------re-renaming-----------
-dpt: -------Eliminating EStmts-------
-dpt: -------Eliminating records-------
-dpt: -------Eliminating tuples-------
-dpt: -------Inlining Constants-------
-dpt: -----------re-re-renaming-----------
-dpt: ---------------typing again-------------
-dpt: -------Eliminating interpreter-only operations--------
-dpt: -------Eliminating value cast ops--------
-dpt: -------Eliminating range relational ops--------
-dpt: -------Adding default branches--------
-dpt: -------Making variables in if / match conditions constants--------
-Tofino translation: making branch variables single assignment
-Tofino translation: partial ssa finished
-dpt: -------Breaking down compound expressions--------
-Tofino translation: Starting cannonization before IR...
-Tofino translation: boolean elimination complete. 
-Tofino translation: Normalizing relational ops...
-Tofino translation: Normalizing if expressions...
-Tofino translation: if-else cannonization complete.
-Tofino translation: immediate elimination complete.
-normalizeIntOps: assignments transformed to balanced exps
-normalizeIntOps: expressions atomized
+lucid external ports: 12@100Gb/s, 28@100Gb/s, 36@100Gb/s, 19@100Gb/s
+port-event bindings: (264 : update_route)
 -------- layout ----------
 number of nodes in dfg: 228
-[dfg_to_sgdfg] number of vertex_stmts in statement_groups before constructing dfg: 228
-[dfg_to_sgdfg] number of statement group nodes in dfg: 227
-[dfg_to_sgdfg] number of vertex_stmts in dfg: 228
 placing IR statement 1 / 228 into current pipeline:
 --- 0 IR statements in 0 physical tables across 0 stages ---
 
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 2 / 228 into current pipeline:
 --- 1 IR statements in 1 physical tables across 1 stages ---
 stage 0 -- 1 tables: [(branches: 1, IR statements: 1, statement groups: 1)]
@@ -169,7 +126,6 @@ stage 0 -- 1 tables: [(branches: 3, IR statements: 38, statement groups: 38)]
 placing IR statement 40 / 228 into current pipeline:
 --- 39 IR statements in 1 physical tables across 1 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 41 / 228 into current pipeline:
 --- 40 IR statements in 2 physical tables across 2 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -254,7 +210,6 @@ placing IR statement 61 / 228 into current pipeline:
 --- 60 IR statements in 2 physical tables across 2 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
 stage 1 -- 1 tables: [(branches: 37, IR statements: 21, statement groups: 21)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 62 / 228 into current pipeline:
 --- 61 IR statements in 3 physical tables across 3 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -265,7 +220,6 @@ placing IR statement 63 / 228 into current pipeline:
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
 stage 1 -- 1 tables: [(branches: 37, IR statements: 21, statement groups: 21)]
 stage 2 -- 1 tables: [(branches: 3, IR statements: 2, statement groups: 2)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 65 / 228 into current pipeline:
 --- 64 IR statements in 4 physical tables across 4 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -278,7 +232,6 @@ stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
 stage 1 -- 1 tables: [(branches: 37, IR statements: 21, statement groups: 21)]
 stage 2 -- 1 tables: [(branches: 3, IR statements: 2, statement groups: 2)]
 stage 3 -- 1 tables: [(branches: 4, IR statements: 3, statement groups: 2)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 67 / 228 into current pipeline:
 --- 66 IR statements in 5 physical tables across 5 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -293,7 +246,6 @@ stage 1 -- 1 tables: [(branches: 37, IR statements: 21, statement groups: 21)]
 stage 2 -- 1 tables: [(branches: 3, IR statements: 2, statement groups: 2)]
 stage 3 -- 1 tables: [(branches: 4, IR statements: 3, statement groups: 2)]
 stage 4 -- 1 tables: [(branches: 4, IR statements: 2, statement groups: 2)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 69 / 228 into current pipeline:
 --- 68 IR statements in 6 physical tables across 6 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -1470,7 +1422,6 @@ stage 2 -- 1 tables: [(branches: 3, IR statements: 2, statement groups: 2)]
 stage 3 -- 1 tables: [(branches: 4, IR statements: 3, statement groups: 2)]
 stage 4 -- 1 tables: [(branches: 4, IR statements: 2, statement groups: 2)]
 stage 5 -- 1 tables: [(branches: 35, IR statements: 147, statement groups: 147)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 216 / 228 into current pipeline:
 --- 215 IR statements in 7 physical tables across 7 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -1570,7 +1521,6 @@ stage 3 -- 1 tables: [(branches: 4, IR statements: 3, statement groups: 2)]
 stage 4 -- 1 tables: [(branches: 4, IR statements: 2, statement groups: 2)]
 stage 5 -- 1 tables: [(branches: 35, IR statements: 147, statement groups: 147)]
 stage 6 -- 1 tables: [(branches: 3, IR statements: 11, statement groups: 11)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 227 / 228 into current pipeline:
 --- 226 IR statements in 8 physical tables across 8 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -1581,7 +1531,6 @@ stage 4 -- 1 tables: [(branches: 4, IR statements: 2, statement groups: 2)]
 stage 5 -- 1 tables: [(branches: 35, IR statements: 147, statement groups: 147)]
 stage 6 -- 1 tables: [(branches: 3, IR statements: 11, statement groups: 11)]
 stage 7 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
-[try_place_in_stage] attempting to create new table in stage.
 placing IR statement 228 / 228 into current pipeline:
 --- 227 IR statements in 9 physical tables across 9 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -1593,7 +1542,6 @@ stage 5 -- 1 tables: [(branches: 35, IR statements: 147, statement groups: 147)]
 stage 6 -- 1 tables: [(branches: 3, IR statements: 11, statement groups: 11)]
 stage 7 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
 stage 8 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
-[try_place_in_stage] attempting to create new table in stage.
 [coreLayoutNew] final pipeline
 --- 228 IR statements in 10 physical tables across 10 stages ---
 stage 0 -- 1 tables: [(branches: 4, IR statements: 39, statement groups: 39)]
@@ -1607,6 +1555,3 @@ stage 7 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
 stage 8 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
 stage 9 -- 1 tables: [(branches: 3, IR statements: 1, statement groups: 1)]
 compiler: Compilation to P4 finished. Writing to build directory:target-route-updates-v6
-Packager: Packaging lucid tofino app in: target-route-updates-v6
-Packager: copying runtime libraries from: /Users/benjaminherber/Documents/Year5/Tango/tango-routing.nosync/tofinoLibs
-Packager: Lucid app generation complete in: target-route-updates-v6

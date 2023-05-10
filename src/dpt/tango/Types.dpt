@@ -134,6 +134,23 @@ type UDPHeader_t = {
 }
 
 /**
+ * # Desctiption 
+ * ICMP Header describing host source and destination ports.
+ *
+ * # Properties
+ * type (int<<8>>): ICMP message type 
+ * code (int<<8>>): ICMP message subtype 
+ * checksum (int<<16>>): checksum of the header 
+ * hdr_remainder (int<<32>>): remainder of header 
+ **/
+type ICMPHeader_t = {
+   int<<8>> icmp_type;
+   int<<8>> code;
+   int<<16>> checksum;
+   int<<32>> hdr_remainder;
+}
+
+/**
  * # Description
  * The ipv6 header describing a packet source and destination.
  *
@@ -147,7 +164,9 @@ type UDPHeader_t = {
 type TangoHeader_t = {
    int<<8>>   path_id;
    int<<16>>  timestamp;
+   int<<32>> signature; 
    int<<16>>  sequence_num;
+   int<<8>> book_signature; 
 }
 
 /**
