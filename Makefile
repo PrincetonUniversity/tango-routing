@@ -26,12 +26,6 @@ test: $(SOURCES)
 	@tox -e py11
 
 compile: $(SOURCES)
-	@echo "compiling $(MAIN_FILE)V4.dpt [build log: $(BUILD_DIR)-v4.compile.log]..."
-	@$(COMPILER) $(MAIN_FILE)V4.dpt -o $(BUILD_DIR)-v4 --ports $(PORTS_CONFIG) > "$(BUILD_DIR)-v4.compile.log"
-	@cat $(BUILD_DIR)-v4.compile.log | grep error > /dev/null && echo "-- ERROR compiling v4!" || echo "-- SUCCESS compiling v4!"
-	@echo "compiling $(MAIN_FILE)V6.dpt [build log: $(BUILD_DIR)-v6.compile.log]..."
-	@$(COMPILER) $(MAIN_FILE)V6.dpt -o $(BUILD_DIR)-v6 --ports $(PORTS_CONFIG) > "$(BUILD_DIR)-v6.compile.log"
-	@cat $(BUILD_DIR)-v6.compile.log | grep error > /dev/null && echo "-- ERROR compiling v6!" || echo "-- SUCCESS compiling v6!"
 	@echo "compiling $(MAIN_FILE)V6ICMP.dpt [build log: $(BUILD_DIR)-v6ICMP.compile.log]..."
 	@$(COMPILER) $(MAIN_FILE)V6ICMP.dpt -o $(BUILD_DIR)-v6ICMP --ports $(PORTS_CONFIG) > "$(BUILD_DIR)-v6ICMP.compile.log"
 	@cat $(BUILD_DIR)-v6ICMP.compile.log | grep error > /dev/null && echo "-- ERROR compiling v6 ICMP!" || echo "-- SUCCESS compiling v6 ICMP!"
