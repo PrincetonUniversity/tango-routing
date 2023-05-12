@@ -155,22 +155,22 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
     // -- Get physical path header to tunnel with.
     IPv6Header_t tango_tunnel_hdr = IPV6_HEADER_TEMPLATE;
     match (path_id) with
- /*   | 0 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537240576; dest_addr_lo = 1; }; } // 2604:4540:88::1
-    | 1 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537306112; dest_addr_lo = 1; }; } // 2604:4540:89::1
-    | 2 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537371648; dest_addr_lo = 1; }; } // 2604:4540:8a::1
-    | 3 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537437184; dest_addr_lo = 1; }; } // 2604:4540:8b::1
-    | 4 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537502720; dest_addr_lo = 1; }; } // 2604:4540:8c::1
-    | 5 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537568256; dest_addr_lo = 1; }; } // 2604:4540:8d::1
-    | 6 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
-    | 7 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
-    | 8 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537240576; dest_addr_lo = 2; }; } // 2604:4540:88::2
-    | 9 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537306112; dest_addr_lo = 2; }; } // 2604:4540:89::2
-    | 10 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537371648; dest_addr_lo = 2; }; } // 2604:4540:8a::2
-    | 11 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537437184; dest_addr_lo = 2; }; } // 2604:4540:8b::2
-    | 12 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537502720; dest_addr_lo = 2; }; } // 2604:4540:8c::2
-    | 13 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537568256; dest_addr_lo = 2; }; } // 2604:4540:8d::2
-    | 14 -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 58 + ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 2; }; } // 2604:4540:8e::2
-*/    | _ -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = ip_header#payload_len; dest_addr_hi = 2739390614537633792; dest_addr_lo = 77; }; } // 2604:4540:8e::2
+    | 0 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537240576; dest_addr_lo = 1; }; } // 2604:4540:88::1
+    | 1 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537306112; dest_addr_lo = 1; }; } // 2604:4540:89::1
+    | 2 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537371648; dest_addr_lo = 1; }; } // 2604:4540:8a::1
+    | 3 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537437184; dest_addr_lo = 1; }; } // 2604:4540:8b::1
+    | 4 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537502720; dest_addr_lo = 1; }; } // 2604:4540:8c::1
+    | 5 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537568256; dest_addr_lo = 1; }; } // 2604:4540:8d::1
+    | 6 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
+    | 7 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 1; }; } // 2604:4540:8e::1
+    | 8 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537240576; dest_addr_lo = 2; }; } // 2604:4540:88::2
+    | 9 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537306112; dest_addr_lo = 2; }; } // 2604:4540:89::2
+    | 10 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537371648; dest_addr_lo = 2; }; } // 2604:4540:8a::2
+    | 11 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537437184; dest_addr_lo = 2; }; } // 2604:4540:8b::2
+    | 12 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537502720; dest_addr_lo = 2; }; } // 2604:4540:8c::2
+    | 13 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537568256; dest_addr_lo = 2; }; } // 2604:4540:8d::2
+    | 14 -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 2; }; } // 2604:4540:8e::2
+    | _ -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 77; }; } // 2604:4540:8e::2
 
 
     /* 2. Increment sequence number. */
