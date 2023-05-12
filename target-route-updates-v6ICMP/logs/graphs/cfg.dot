@@ -25,8 +25,8 @@ digraph G {
 " [
   shape=box, ];
   "189: int<<8>> RouteManager_get_path_id_ret = 32;" [shape=box, ];
-  "192: route_manager_0_idx_3333 = traffic_class;" [shape=box, ];
-  "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_3333,get_3324,0,0,0);" [
+  "192: route_manager_0_idx_4537 = traffic_class;" [shape=box, ];
+  "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4537,get_4528,0,0,0);" [
   shape=box, ];
   "219: int<<8>> path_id = RouteManager_get_path_id_ret;" [shape=box, ];
   "226: int<<32>> tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
@@ -37,38 +37,174 @@ digraph G {
   "260: int<<64>> tango_tunnel_hdr_5 = 3252;" [shape=box, ];
   "267: int<<64>> tango_tunnel_hdr_6 = 0;" [shape=box, ];
   "274: int<<64>> tango_tunnel_hdr_7 = 0;" [shape=box, ];
-  "282: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
-  "285: tango_tunnel_hdr_1 = forward_flow_ip_header_1;" [shape=box, ];
-  "291: tango_tunnel_hdr_2 = 58;" [shape=box, ];
-  "297: tango_tunnel_hdr_3 = 220;" [shape=box, ];
-  "303: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
-  "309: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
-  "315: tango_tunnel_hdr_6 = 2739390614537633792;" [shape=box, ];
-  "321: tango_tunnel_hdr_7 = 77;" [shape=box, ];
-  "323: match (path_id) ...
+  "278: " [shape=box, ];
+  "283: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "292: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "298: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "304: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "310: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "316: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "322: tango_tunnel_hdr_6 = 2739390614537240576;" [shape=box, ];
+  "328: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "331: " [shape=box, ];
+  "336: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "345: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "351: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "357: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "363: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "369: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "375: tango_tunnel_hdr_6 = 2739390614537306112;" [shape=box, ];
+  "381: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "384: " [shape=box, ];
+  "389: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "398: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "404: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "410: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "416: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "422: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "428: tango_tunnel_hdr_6 = 2739390614537371648;" [shape=box, ];
+  "434: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "437: " [shape=box, ];
+  "442: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "451: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "457: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "463: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "469: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "475: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "481: tango_tunnel_hdr_6 = 2739390614537437184;" [shape=box, ];
+  "487: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "490: " [shape=box, ];
+  "495: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "504: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "510: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "516: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "522: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "528: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "534: tango_tunnel_hdr_6 = 2739390614537502720;" [shape=box, ];
+  "540: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "543: " [shape=box, ];
+  "548: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "557: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "563: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "569: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "575: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "581: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "587: tango_tunnel_hdr_6 = 2739390614537568256;" [shape=box, ];
+  "593: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "596: " [shape=box, ];
+  "601: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "610: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "616: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "622: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "628: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "634: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "640: tango_tunnel_hdr_6 = 2739390614537633792;" [shape=box, ];
+  "646: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "649: " [shape=box, ];
+  "654: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "663: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "669: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "675: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "681: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "687: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "693: tango_tunnel_hdr_6 = 2739390614537633792;" [shape=box, ];
+  "699: tango_tunnel_hdr_7 = 1;" [shape=box, ];
+  "702: " [shape=box, ];
+  "707: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "716: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "722: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "728: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "734: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "740: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "746: tango_tunnel_hdr_6 = 2739390614537240576;" [shape=box, ];
+  "752: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "755: " [shape=box, ];
+  "760: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "769: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "775: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "781: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "787: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "793: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "799: tango_tunnel_hdr_6 = 2739390614537306112;" [shape=box, ];
+  "805: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "808: " [shape=box, ];
+  "813: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "822: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "828: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "834: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "840: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "846: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "852: tango_tunnel_hdr_6 = 2739390614537371648;" [shape=box, ];
+  "858: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "861: " [shape=box, ];
+  "866: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "875: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "881: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "887: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "893: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "899: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "905: tango_tunnel_hdr_6 = 2739390614537437184;" [shape=box, ];
+  "911: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "914: " [shape=box, ];
+  "919: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "928: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "934: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "940: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "946: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "952: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "958: tango_tunnel_hdr_6 = 2739390614537502720;" [shape=box, ];
+  "964: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "967: " [shape=box, ];
+  "972: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "981: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "987: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "993: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "999: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "1005: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "1011: tango_tunnel_hdr_6 = 2739390614537568256;" [shape=box, ];
+  "1017: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "1020: " [shape=box, ];
+  "1025: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "1034: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "1040: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "1046: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "1052: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "1058: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "1064: tango_tunnel_hdr_6 = 2739390614537633792;" [shape=box, ];
+  "1070: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "1073: " [shape=box, ];
+  "1078: tango_tunnel_hdr_0 = 1610612736;" [shape=box, ];
+  "1087: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [shape=box, ];
+  "1093: tango_tunnel_hdr_2 = 58;" [shape=box, ];
+  "1099: tango_tunnel_hdr_3 = 220;" [shape=box, ];
+  "1105: tango_tunnel_hdr_4 = 2747196614509592830;" [shape=box, ];
+  "1111: tango_tunnel_hdr_5 = 3252;" [shape=box, ];
+  "1117: tango_tunnel_hdr_6 = 2739390614537633792;" [shape=box, ];
+  "1123: tango_tunnel_hdr_7 = 2;" [shape=box, ];
+  "1126: match (path_id) ...
 " [shape=box, ];
-  "329: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
-  "350: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3328,0,1,0);" [
+  "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [shape=box, ];
+  "1153: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4532,0,1,0);" [
   shape=box, ];
-  "355: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  "1158: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
   shape=box, ];
-  "360: int<<32>> time_now = Sys.time();" [shape=box, ];
-  "366: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
-  "368: " [shape=box, ];
-  "461: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "1163: int<<32>> time_now = Sys.time();" [shape=box, ];
+  "1169: int<<12>> timestamp = [31 : 20]time_now;" [shape=box, ];
+  "1171: " [shape=box, ];
+  "1264: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
   shape=box, ];
-  "502: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  "1305: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
   shape=box, ];
-  "506: route_manager_0_idx_3333 = update_route_update_0;" [shape=box, ];
-  "525: Array.update_complex(route_manager_0,route_manager_0_idx_3333,set_3332,update_route_update_1,0,0);" [
+  "1309: route_manager_0_idx_4537 = update_route_update_0;" [shape=box, ];
+  "1328: Array.update_complex(route_manager_0,route_manager_0_idx_4537,set_4536,update_route_update_1,0,0);" [
   shape=box, ];
-  "565: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_icmp_header_0,update_route_icmp_header_1,update_route_icmp_header_2,update_route_icmp_header_3,update_route_icmp_header_4,update_route_update_0,update_route_update_1);" [
+  "1368: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_icmp_header_0,update_route_icmp_header_1,update_route_icmp_header_2,update_route_icmp_header_3,update_route_icmp_header_4,update_route_update_0,update_route_update_1);" [
   shape=box, ];
-  "567: match (event_id) ...
+  "1370: match (event_id) ...
 " [shape=box, ];
   
   
-  "1: " -> "567: match (event_id) ...
+  "1: " -> "1370: match (event_id) ...
 " [label="", ];
   "78: int<<8>> traffic_class = 0;" -> "183: match (forward_flow_ip_header_5,forward_flow_ip_header_4,forward_flow_udp_header_0,forward_flow_ip_header_7,forward_flow_ip_header_6,forward_flow_udp_header_1,forward_flow_ip_header_2) ...
 " [
@@ -334,11 +470,11 @@ forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_hea
 forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_header_0~0==50008,forward_flow_ip_header_7~0==_,forward_flow_ip_header_6~0==_,forward_flow_udp_header_1~0==_,forward_flow_ip_header_2~0==_;}
 HIT{forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp_header_0~0==_,forward_flow_ip_header_7~0==_,forward_flow_ip_header_6~0==_,forward_flow_udp_header_1~0==_,forward_flow_ip_header_2~0==_;}",
   ];
-  "189: int<<8>> RouteManager_get_path_id_ret = 32;" -> "192: route_manager_0_idx_3333 = traffic_class;" [
+  "189: int<<8>> RouteManager_get_path_id_ret = 32;" -> "192: route_manager_0_idx_4537 = traffic_class;" [
   label="", ];
-  "192: route_manager_0_idx_3333 = traffic_class;" -> "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_3333,get_3324,0,0,0);" [
+  "192: route_manager_0_idx_4537 = traffic_class;" -> "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4537,get_4528,0,0,0);" [
   label="", ];
-  "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_3333,get_3324,0,0,0);" -> "219: int<<8>> path_id = RouteManager_get_path_id_ret;" [
+  "213: RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4537,get_4528,0,0,0);" -> "219: int<<8>> path_id = RouteManager_get_path_id_ret;" [
   label="", ];
   "219: int<<8>> path_id = RouteManager_get_path_id_ret;" -> "226: int<<32>> tango_tunnel_hdr_0 = 1610612736;" [
   label="", ];
@@ -356,54 +492,474 @@ HIT{forward_flow_ip_header_5~0==_,forward_flow_ip_header_4~0==_,forward_flow_udp
   label="", ];
   "267: int<<64>> tango_tunnel_hdr_6 = 0;" -> "274: int<<64>> tango_tunnel_hdr_7 = 0;" [
   label="", ];
-  "274: int<<64>> tango_tunnel_hdr_7 = 0;" -> "323: match (path_id) ...
+  "274: int<<64>> tango_tunnel_hdr_7 = 0;" -> "1126: match (path_id) ...
 " [
   label="", ];
-  "282: tango_tunnel_hdr_0 = 1610612736;" -> "285: tango_tunnel_hdr_1 = forward_flow_ip_header_1;" [
+  "278: " -> "283: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "283: tango_tunnel_hdr_0 = 1610612736;" -> "292: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
   label="", ];
-  "285: tango_tunnel_hdr_1 = forward_flow_ip_header_1;" -> "291: tango_tunnel_hdr_2 = 58;" [
+  "292: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "298: tango_tunnel_hdr_2 = 58;" [
   label="", ];
-  "291: tango_tunnel_hdr_2 = 58;" -> "297: tango_tunnel_hdr_3 = 220;" [
+  "298: tango_tunnel_hdr_2 = 58;" -> "304: tango_tunnel_hdr_3 = 220;" [
   label="", ];
-  "297: tango_tunnel_hdr_3 = 220;" -> "303: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  "304: tango_tunnel_hdr_3 = 220;" -> "310: tango_tunnel_hdr_4 = 2747196614509592830;" [
   label="", ];
-  "303: tango_tunnel_hdr_4 = 2747196614509592830;" -> "309: tango_tunnel_hdr_5 = 3252;" [
+  "310: tango_tunnel_hdr_4 = 2747196614509592830;" -> "316: tango_tunnel_hdr_5 = 3252;" [
   label="", ];
-  "309: tango_tunnel_hdr_5 = 3252;" -> "315: tango_tunnel_hdr_6 = 2739390614537633792;" [
+  "316: tango_tunnel_hdr_5 = 3252;" -> "322: tango_tunnel_hdr_6 = 2739390614537240576;" [
   label="", ];
-  "315: tango_tunnel_hdr_6 = 2739390614537633792;" -> "321: tango_tunnel_hdr_7 = 77;" [
+  "322: tango_tunnel_hdr_6 = 2739390614537240576;" -> "328: tango_tunnel_hdr_7 = 1;" [
   label="", ];
-  "321: tango_tunnel_hdr_7 = 77;" -> "329: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  "328: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
   label="", ];
-  "323: match (path_id) ...
-" -> "282: tango_tunnel_hdr_0 = 1610612736;" [
-  label="HIT{path_id~2659==_;}", ];
-  "329: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "350: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3328,0,1,0);" [
+  "331: " -> "336: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "336: tango_tunnel_hdr_0 = 1610612736;" -> "345: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
   label="", ];
-  "350: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_3328,0,1,0);" -> "355: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  "345: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "351: tango_tunnel_hdr_2 = 58;" [
   label="", ];
-  "355: int<<16>> seq_number = SequenceNumberManager_increment_ret;" -> "360: int<<32>> time_now = Sys.time();" [
+  "351: tango_tunnel_hdr_2 = 58;" -> "357: tango_tunnel_hdr_3 = 220;" [
   label="", ];
-  "360: int<<32>> time_now = Sys.time();" -> "366: int<<12>> timestamp = [31 : 20]time_now;" [
+  "357: tango_tunnel_hdr_3 = 220;" -> "363: tango_tunnel_hdr_4 = 2747196614509592830;" [
   label="", ];
-  "366: int<<12>> timestamp = [31 : 20]time_now;" -> "368: " [label="", ];
-  "368: " -> "461: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  "363: tango_tunnel_hdr_4 = 2747196614509592830;" -> "369: tango_tunnel_hdr_5 = 3252;" [
   label="", ];
-  "461: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "502: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  "369: tango_tunnel_hdr_5 = 3252;" -> "375: tango_tunnel_hdr_6 = 2739390614537306112;" [
   label="", ];
-  "506: route_manager_0_idx_3333 = update_route_update_0;" -> "525: Array.update_complex(route_manager_0,route_manager_0_idx_3333,set_3332,update_route_update_1,0,0);" [
+  "375: tango_tunnel_hdr_6 = 2739390614537306112;" -> "381: tango_tunnel_hdr_7 = 1;" [
   label="", ];
-  "525: Array.update_complex(route_manager_0,route_manager_0_idx_3333,set_3332,update_route_update_1,0,0);" -> "565: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_icmp_header_0,update_route_icmp_header_1,update_route_icmp_header_2,update_route_icmp_header_3,update_route_icmp_header_4,update_route_update_0,update_route_update_1);" [
+  "381: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
   label="", ];
-  "567: match (event_id) ...
+  "384: " -> "389: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "389: tango_tunnel_hdr_0 = 1610612736;" -> "398: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "398: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "404: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "404: tango_tunnel_hdr_2 = 58;" -> "410: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "410: tango_tunnel_hdr_3 = 220;" -> "416: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "416: tango_tunnel_hdr_4 = 2747196614509592830;" -> "422: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "422: tango_tunnel_hdr_5 = 3252;" -> "428: tango_tunnel_hdr_6 = 2739390614537371648;" [
+  label="", ];
+  "428: tango_tunnel_hdr_6 = 2739390614537371648;" -> "434: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "434: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "437: " -> "442: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "442: tango_tunnel_hdr_0 = 1610612736;" -> "451: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "451: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "457: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "457: tango_tunnel_hdr_2 = 58;" -> "463: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "463: tango_tunnel_hdr_3 = 220;" -> "469: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "469: tango_tunnel_hdr_4 = 2747196614509592830;" -> "475: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "475: tango_tunnel_hdr_5 = 3252;" -> "481: tango_tunnel_hdr_6 = 2739390614537437184;" [
+  label="", ];
+  "481: tango_tunnel_hdr_6 = 2739390614537437184;" -> "487: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "487: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "490: " -> "495: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "495: tango_tunnel_hdr_0 = 1610612736;" -> "504: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "504: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "510: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "510: tango_tunnel_hdr_2 = 58;" -> "516: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "516: tango_tunnel_hdr_3 = 220;" -> "522: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "522: tango_tunnel_hdr_4 = 2747196614509592830;" -> "528: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "528: tango_tunnel_hdr_5 = 3252;" -> "534: tango_tunnel_hdr_6 = 2739390614537502720;" [
+  label="", ];
+  "534: tango_tunnel_hdr_6 = 2739390614537502720;" -> "540: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "540: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "543: " -> "548: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "548: tango_tunnel_hdr_0 = 1610612736;" -> "557: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "557: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "563: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "563: tango_tunnel_hdr_2 = 58;" -> "569: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "569: tango_tunnel_hdr_3 = 220;" -> "575: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "575: tango_tunnel_hdr_4 = 2747196614509592830;" -> "581: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "581: tango_tunnel_hdr_5 = 3252;" -> "587: tango_tunnel_hdr_6 = 2739390614537568256;" [
+  label="", ];
+  "587: tango_tunnel_hdr_6 = 2739390614537568256;" -> "593: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "593: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "596: " -> "601: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "601: tango_tunnel_hdr_0 = 1610612736;" -> "610: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "610: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "616: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "616: tango_tunnel_hdr_2 = 58;" -> "622: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "622: tango_tunnel_hdr_3 = 220;" -> "628: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "628: tango_tunnel_hdr_4 = 2747196614509592830;" -> "634: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "634: tango_tunnel_hdr_5 = 3252;" -> "640: tango_tunnel_hdr_6 = 2739390614537633792;" [
+  label="", ];
+  "640: tango_tunnel_hdr_6 = 2739390614537633792;" -> "646: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "646: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "649: " -> "654: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "654: tango_tunnel_hdr_0 = 1610612736;" -> "663: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "663: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "669: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "669: tango_tunnel_hdr_2 = 58;" -> "675: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "675: tango_tunnel_hdr_3 = 220;" -> "681: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "681: tango_tunnel_hdr_4 = 2747196614509592830;" -> "687: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "687: tango_tunnel_hdr_5 = 3252;" -> "693: tango_tunnel_hdr_6 = 2739390614537633792;" [
+  label="", ];
+  "693: tango_tunnel_hdr_6 = 2739390614537633792;" -> "699: tango_tunnel_hdr_7 = 1;" [
+  label="", ];
+  "699: tango_tunnel_hdr_7 = 1;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "702: " -> "707: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "707: tango_tunnel_hdr_0 = 1610612736;" -> "716: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "716: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "722: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "722: tango_tunnel_hdr_2 = 58;" -> "728: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "728: tango_tunnel_hdr_3 = 220;" -> "734: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "734: tango_tunnel_hdr_4 = 2747196614509592830;" -> "740: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "740: tango_tunnel_hdr_5 = 3252;" -> "746: tango_tunnel_hdr_6 = 2739390614537240576;" [
+  label="", ];
+  "746: tango_tunnel_hdr_6 = 2739390614537240576;" -> "752: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "752: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "755: " -> "760: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "760: tango_tunnel_hdr_0 = 1610612736;" -> "769: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "769: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "775: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "775: tango_tunnel_hdr_2 = 58;" -> "781: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "781: tango_tunnel_hdr_3 = 220;" -> "787: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "787: tango_tunnel_hdr_4 = 2747196614509592830;" -> "793: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "793: tango_tunnel_hdr_5 = 3252;" -> "799: tango_tunnel_hdr_6 = 2739390614537306112;" [
+  label="", ];
+  "799: tango_tunnel_hdr_6 = 2739390614537306112;" -> "805: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "805: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "808: " -> "813: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "813: tango_tunnel_hdr_0 = 1610612736;" -> "822: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "822: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "828: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "828: tango_tunnel_hdr_2 = 58;" -> "834: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "834: tango_tunnel_hdr_3 = 220;" -> "840: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "840: tango_tunnel_hdr_4 = 2747196614509592830;" -> "846: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "846: tango_tunnel_hdr_5 = 3252;" -> "852: tango_tunnel_hdr_6 = 2739390614537371648;" [
+  label="", ];
+  "852: tango_tunnel_hdr_6 = 2739390614537371648;" -> "858: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "858: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "861: " -> "866: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "866: tango_tunnel_hdr_0 = 1610612736;" -> "875: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "875: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "881: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "881: tango_tunnel_hdr_2 = 58;" -> "887: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "887: tango_tunnel_hdr_3 = 220;" -> "893: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "893: tango_tunnel_hdr_4 = 2747196614509592830;" -> "899: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "899: tango_tunnel_hdr_5 = 3252;" -> "905: tango_tunnel_hdr_6 = 2739390614537437184;" [
+  label="", ];
+  "905: tango_tunnel_hdr_6 = 2739390614537437184;" -> "911: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "911: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "914: " -> "919: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "919: tango_tunnel_hdr_0 = 1610612736;" -> "928: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "928: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "934: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "934: tango_tunnel_hdr_2 = 58;" -> "940: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "940: tango_tunnel_hdr_3 = 220;" -> "946: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "946: tango_tunnel_hdr_4 = 2747196614509592830;" -> "952: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "952: tango_tunnel_hdr_5 = 3252;" -> "958: tango_tunnel_hdr_6 = 2739390614537502720;" [
+  label="", ];
+  "958: tango_tunnel_hdr_6 = 2739390614537502720;" -> "964: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "964: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "967: " -> "972: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "972: tango_tunnel_hdr_0 = 1610612736;" -> "981: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "981: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "987: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "987: tango_tunnel_hdr_2 = 58;" -> "993: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "993: tango_tunnel_hdr_3 = 220;" -> "999: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "999: tango_tunnel_hdr_4 = 2747196614509592830;" -> "1005: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "1005: tango_tunnel_hdr_5 = 3252;" -> "1011: tango_tunnel_hdr_6 = 2739390614537568256;" [
+  label="", ];
+  "1011: tango_tunnel_hdr_6 = 2739390614537568256;" -> "1017: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "1017: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "1020: " -> "1025: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "1025: tango_tunnel_hdr_0 = 1610612736;" -> "1034: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "1034: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "1040: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "1040: tango_tunnel_hdr_2 = 58;" -> "1046: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "1046: tango_tunnel_hdr_3 = 220;" -> "1052: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "1052: tango_tunnel_hdr_4 = 2747196614509592830;" -> "1058: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "1058: tango_tunnel_hdr_5 = 3252;" -> "1064: tango_tunnel_hdr_6 = 2739390614537633792;" [
+  label="", ];
+  "1064: tango_tunnel_hdr_6 = 2739390614537633792;" -> "1070: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "1070: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "1073: " -> "1078: tango_tunnel_hdr_0 = 1610612736;" [label="", ];
+  "1078: tango_tunnel_hdr_0 = 1610612736;" -> "1087: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" [
+  label="", ];
+  "1087: tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;" -> "1093: tango_tunnel_hdr_2 = 58;" [
+  label="", ];
+  "1093: tango_tunnel_hdr_2 = 58;" -> "1099: tango_tunnel_hdr_3 = 220;" [
+  label="", ];
+  "1099: tango_tunnel_hdr_3 = 220;" -> "1105: tango_tunnel_hdr_4 = 2747196614509592830;" [
+  label="", ];
+  "1105: tango_tunnel_hdr_4 = 2747196614509592830;" -> "1111: tango_tunnel_hdr_5 = 3252;" [
+  label="", ];
+  "1111: tango_tunnel_hdr_5 = 3252;" -> "1117: tango_tunnel_hdr_6 = 2739390614537633792;" [
+  label="", ];
+  "1117: tango_tunnel_hdr_6 = 2739390614537633792;" -> "1123: tango_tunnel_hdr_7 = 2;" [
+  label="", ];
+  "1123: tango_tunnel_hdr_7 = 2;" -> "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" [
+  label="", ];
+  "1126: match (path_id) ...
+" -> "278: " [label="HIT{path_id~3558==0;}", ];
+  "1126: match (path_id) ...
+" -> "331: " [label="MISS{path_id~3558==0;}
+HIT{path_id~3558==1;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "384: " [label="MISS{path_id~3558==0;
+path_id~3558==1;}
+HIT{path_id~3558==2;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "437: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;}
+HIT{path_id~3558==3;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "490: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;}
+HIT{path_id~3558==4;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "543: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;}
+HIT{path_id~3558==5;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "596: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;}
+HIT{path_id~3558==6;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "649: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;}
+HIT{path_id~3558==7;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "702: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;}
+HIT{path_id~3558==8;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "755: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;}
+HIT{path_id~3558==9;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "808: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;}
+HIT{path_id~3558==10;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "861: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;
+path_id~3558==10;}
+HIT{path_id~3558==11;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "914: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;
+path_id~3558==10;
+path_id~3558==11;}
+HIT{path_id~3558==12;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "967: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;
+path_id~3558==10;
+path_id~3558==11;
+path_id~3558==12;}
+HIT{path_id~3558==13;}",
+                                           ];
+  "1126: match (path_id) ...
+" -> "1020: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;
+path_id~3558==10;
+path_id~3558==11;
+path_id~3558==12;
+path_id~3558==13;}
+HIT{path_id~3558==14;}",
+                                            ];
+  "1126: match (path_id) ...
+" -> "1073: " [label="MISS{path_id~3558==0;
+path_id~3558==1;
+path_id~3558==2;
+path_id~3558==3;
+path_id~3558==4;
+path_id~3558==5;
+path_id~3558==6;
+path_id~3558==7;
+path_id~3558==8;
+path_id~3558==9;
+path_id~3558==10;
+path_id~3558==11;
+path_id~3558==12;
+path_id~3558==13;
+path_id~3558==14;}
+HIT{path_id~3558==_;}",
+                                            ];
+  "1132: int<<16>> SequenceNumberManager_increment_ret = 32;" -> "1153: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4532,0,1,0);" [
+  label="", ];
+  "1153: SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4532,0,1,0);" -> "1158: int<<16>> seq_number = SequenceNumberManager_increment_ret;" [
+  label="", ];
+  "1158: int<<16>> seq_number = SequenceNumberManager_increment_ret;" -> "1163: int<<32>> time_now = Sys.time();" [
+  label="", ];
+  "1163: int<<32>> time_now = Sys.time();" -> "1169: int<<12>> timestamp = [31 : 20]time_now;" [
+  label="", ];
+  "1169: int<<12>> timestamp = [31 : 20]time_now;" -> "1171: " [label="", ];
+  "1171: " -> "1264: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" [
+  label="", ];
+  "1264: generate_port (264, incoming_tango_traffic(forward_flow_eth_header_0,forward_flow_eth_header_1,34525,tango_tunnel_hdr_0,tango_tunnel_hdr_1,tango_tunnel_hdr_2,tango_tunnel_hdr_3,tango_tunnel_hdr_4,tango_tunnel_hdr_5,tango_tunnel_hdr_6,tango_tunnel_hdr_7,128,0,43981,0,204,(int<<8>>)path_id,(int<<16>>)timestamp,0,seq_number,0,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3));" -> "1305: Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);" [
+  label="", ];
+  "1309: route_manager_0_idx_4537 = update_route_update_0;" -> "1328: Array.update_complex(route_manager_0,route_manager_0_idx_4537,set_4536,update_route_update_1,0,0);" [
+  label="", ];
+  "1328: Array.update_complex(route_manager_0,route_manager_0_idx_4537,set_4536,update_route_update_1,0,0);" -> "1368: Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_icmp_header_0,update_route_icmp_header_1,update_route_icmp_header_2,update_route_icmp_header_3,update_route_icmp_header_4,update_route_update_0,update_route_update_1);" [
+  label="", ];
+  "1370: match (event_id) ...
 " -> "72: Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_icmp_header_0,incoming_tango_traffic_tango_icmp_header_1,incoming_tango_traffic_tango_icmp_header_2,incoming_tango_traffic_tango_icmp_header_3,incoming_tango_traffic_tango_icmp_header_4,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);" [
   label="HIT{event_id~0==2;}", ];
-  "567: match (event_id) ...
+  "1370: match (event_id) ...
 " -> "78: int<<8>> traffic_class = 0;" [
   label="MISS{event_id~0==2;}
 HIT{event_id~0==1;}", ];
-  "567: match (event_id) ...
-" -> "506: route_manager_0_idx_3333 = update_route_update_0;" [
+  "1370: match (event_id) ...
+" -> "1309: route_manager_0_idx_4537 = update_route_update_0;" [
   label="MISS{event_id~0==2;
 event_id~0==1;}
 HIT{event_id~0==3;}", ];

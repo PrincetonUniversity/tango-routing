@@ -1,10 +1,5 @@
 #!/bin/bash
-# bash script to build and run the components of a p4 program on a tofino model and switch.
-# must be run from the build directory produced by the lucid-tofino compiler.
-
-# the current user
-USER=$(whoami)
-PROJ_DIR="$(realpath .)"
+# simple shell to build and run the components of a p4 program + c manager.
 
 # simulation configuration
 PORT_DPIDS="128 129 130 131 132 136 140 144 148 152 156 160 164 168 172 176 180 184 188 192"
@@ -127,7 +122,7 @@ function build() {
     P4_SRC=$(realpath "$1")
     # CTL_SRC=$(to_switchd_fn "$1")
     BUILD_DIR=$(to_build_dir "$1")
-    sudo rm -rf "$BUILD_DIR"; mkdir -p "$BUILD_DIR"; mkdir -p "$BUILD_DIR/pcap_output"
+    rm -rf "$BUILD_DIR"; mkdir -p "$BUILD_DIR"
     build_p4 "$P4_SRC" "$BUILD_DIR" "-v" $3 # && build_mgr "$CTL_SRC" "$BUILD_DIR"
 }
 
@@ -309,15 +304,10 @@ function startsim() {
     start_python "$MGR_PY"    
 }
 
-# stop the simulator and switchd. The control program should exit 
-# on its own. After stopping the simulator, set the log directory's user 
-# to the current user.
 function stopsim() {
     echo "**** stopping simulator and switchd ****"
     { sudo pkill --signal 2 -P $SWITCHD_PID && wait $SWITCHD_PID; } 2>/dev/null
     { sudo pkill --signal 2 -P $SIM_PID && wait $SIM_PID; } 2>/dev/null
-    # change the log directory's owner to the current user
-    sudo chown -R $(whoami) "$PROJ_DIR"
 }
 # use this to clean up an aborted run
 function killsim() {
