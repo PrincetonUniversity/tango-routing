@@ -98,7 +98,8 @@ def main() -> None:
     plt.yticks(fontsize=14)
     ax.legend(loc="upper left", ncols=2)
     ax.set_ylim(0, 90)
-    # ax.set_aspect(1.0 / ax.get_data_ratio(), adjustable="box")
+
+    fig.set_size_inches(3*3, (3/3)*3)
     # plt.show()  # noqa: ERA001
     plt.savefig("runtime_err_flat.pdf", bbox_inches="tight", format="pdf", dpi=600)
 
