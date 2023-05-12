@@ -15,7 +15,7 @@ handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_e
 
 }
 // shared locals:
-int<<8>> route_manager_0_idx_4331;
+int<<8>> route_manager_0_idx_4332;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -81,8 +81,8 @@ traffic_class = 30;
 traffic_class = 31;
 }
 int<<8>> RouteManager_get_path_id_ret = 32;
-route_manager_0_idx_4331 = traffic_class;
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4331,get_4322,0,0,0);
+route_manager_0_idx_4332 = traffic_class;
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4332,get_4323,0,0,0);
 int<<8>> path_id = RouteManager_get_path_id_ret;
 int<<32>> tango_tunnel_hdr_0 = 1610612736;
 int<<16>> tango_tunnel_hdr_1 = 0;
@@ -257,7 +257,7 @@ tango_tunnel_hdr_7 = 2;
 
 }
 int<<16>> SequenceNumberManager_increment_ret = 32;
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4326,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4327,0,1,0);
 int<<16>> seq_number = SequenceNumberManager_increment_ret;
 int<<32>> time_now = Sys.time();
 int<<12>> timestamp = [31 : 20]time_now;
@@ -304,34 +304,34 @@ generate_port (12, incoming_tango_traffic(forward_tango_pkt_arg_0,forward_tango_
 Sys.invalidate.forward_flow(forward_flow_eth_header_0,forward_flow_eth_header_1,forward_flow_eth_header_2,forward_flow_ip_header_0,forward_flow_ip_header_1,forward_flow_ip_header_2,forward_flow_ip_header_3,forward_flow_ip_header_4,forward_flow_ip_header_5,forward_flow_ip_header_6,forward_flow_ip_header_7,forward_flow_ip_header_8,forward_flow_ip_header_9,forward_flow_udp_header_0,forward_flow_udp_header_1,forward_flow_udp_header_2,forward_flow_udp_header_3);
 }
 | 3 -> {
-route_manager_0_idx_4331 = update_route_update_0;
-Array.update_complex(route_manager_0,route_manager_0_idx_4331,set_4330,update_route_update_1,0,0);
+route_manager_0_idx_4332 = update_route_update_0;
+Array.update_complex(route_manager_0,route_manager_0_idx_4332,set_4331,update_route_update_1,0,0);
 Sys.invalidate.update_route(update_route_eth_header_0,update_route_eth_header_1,update_route_eth_header_2,update_route_ip_header_0,update_route_ip_header_1,update_route_ip_header_2,update_route_ip_header_3,update_route_ip_header_4,update_route_ip_header_5,update_route_ip_header_6,update_route_ip_header_7,update_route_udp_header_0,update_route_udp_header_1,update_route_udp_header_2,update_route_udp_header_3,update_route_update_0,update_route_update_1);
 }}
-memop set_4330(int<<8>> mem_val_4329,int<<8>> new_val_4327,int<<8>> unused_4328)
+memop set_4331(int<<8>> mem_val_4330,int<<8>> new_val_4328,int<<8>> unused_4329)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4327), None
+cell1=(true -> new_val_4328), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4326(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4323)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4327(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4324)
  {{
-b1=(mbool_4324,true);
-b2=(mbool_4325,true)
-cell1=(mbool_4324 -> curr+inc_set_4323), None
-cell2=(mbool_4325 -> curr), None
+b1=(mbool_4325,true);
+b2=(mbool_4326,true)
+cell1=(mbool_4325 -> curr+inc_set_4324), None
+cell2=(mbool_4326 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_4322(int<<8>> mem_val_4319,int<<8>> unused_4321,int<<8>> unused_4320)
+memop get_4323(int<<8>> mem_val_4320,int<<8>> unused_4322,int<<8>> unused_4321)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4319)
+ret=(true -> mem_val_4320)
 }}

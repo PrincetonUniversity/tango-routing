@@ -145,9 +145,10 @@ type UDPHeader_t = {
  **/
 type ICMPHeader_t = {
    int<<8>> icmp_type;
-   int<<8>> code;
-   int<<16>> checksum;
-   int<<32>> hdr_remainder;
+   int<<8>> icmp_code;
+   int<<16>> icmp_checksum;
+   int<<16>> icmp_id;
+   int<<16>> icmp_seq_num;
 }
 
 /**

@@ -12,7 +12,7 @@ header wire_ev_t {
 }
 header bridge_ev_t {
   bit<8> port_event_id;
-  bit<5> flag_pad_4606;
+  bit<5> flag_pad_4558;
   bit<1> update_route;
   bit<1> incoming_tango_traffic;
   bit<1> forward_flow;
@@ -29,10 +29,11 @@ header update_route_t {
   bit<64> update_route_ip_header_5;
   bit<64> update_route_ip_header_6;
   bit<64> update_route_ip_header_7;
-  bit<16> update_route_udp_header_0;
-  bit<16> update_route_udp_header_1;
-  bit<16> update_route_udp_header_2;
-  bit<16> update_route_udp_header_3;
+  bit<8> update_route_icmp_header_0;
+  bit<8> update_route_icmp_header_1;
+  bit<16> update_route_icmp_header_2;
+  bit<16> update_route_icmp_header_3;
+  bit<16> update_route_icmp_header_4;
   bit<8> update_route_update_0;
   bit<8> update_route_update_1;
 }
@@ -48,10 +49,11 @@ header incoming_tango_traffic_t {
   bit<64> incoming_tango_traffic_tango_ip_header_5;
   bit<64> incoming_tango_traffic_tango_ip_header_6;
   bit<64> incoming_tango_traffic_tango_ip_header_7;
-  bit<16> incoming_tango_traffic_tango_udp_header_0;
-  bit<16> incoming_tango_traffic_tango_udp_header_1;
-  bit<16> incoming_tango_traffic_tango_udp_header_2;
-  bit<16> incoming_tango_traffic_tango_udp_header_3;
+  bit<8> incoming_tango_traffic_tango_icmp_header_0;
+  bit<8> incoming_tango_traffic_tango_icmp_header_1;
+  bit<16> incoming_tango_traffic_tango_icmp_header_2;
+  bit<16> incoming_tango_traffic_tango_icmp_header_3;
+  bit<16> incoming_tango_traffic_tango_icmp_header_4;
   bit<8> incoming_tango_traffic_tango_metrics_header_0;
   bit<16> incoming_tango_traffic_tango_metrics_header_1;
   bit<32> incoming_tango_traffic_tango_metrics_header_2;
@@ -65,10 +67,10 @@ header incoming_tango_traffic_t {
   bit<64> incoming_tango_traffic_encaped_ip_header_5;
   bit<64> incoming_tango_traffic_encaped_ip_header_6;
   bit<64> incoming_tango_traffic_encaped_ip_header_7;
-  bit<16> incoming_tango_traffic_encaped_udp_header_0;
-  bit<16> incoming_tango_traffic_encaped_udp_header_1;
-  bit<16> incoming_tango_traffic_encaped_udp_header_2;
-  bit<16> incoming_tango_traffic_encaped_udp_header_3;
+  bit<16> incoming_tango_traffic_encaped_dup_header_0;
+  bit<16> incoming_tango_traffic_encaped_dup_header_1;
+  bit<16> incoming_tango_traffic_encaped_dup_header_2;
+  bit<16> incoming_tango_traffic_encaped_dup_header_3;
 }
 header forward_flow_t {
   bit<48> forward_flow_eth_header_0;
@@ -172,147 +174,64 @@ control IngressControl(inout hdr_t hdr,
     in ingress_intrinsic_metadata_from_parser_t ig_prsr_md,
     inout ingress_intrinsic_metadata_for_deparser_t ig_dprsr_md,
     inout ingress_intrinsic_metadata_for_tm_t ig_tm_md){
-  bit<8> route_manager_0_idx_4592;
-  action labeledstmt_58(){
+  bit<8> route_manager_0_idx_4545;
+  action labeledstmt_56(){
     hdr.incoming_tango_traffic.setInvalid();
   }
   action labeledstmt_1(){
-    labeledstmt_58();
-  }
-  bit<16> forward_tango_pkt_arg_31;
-  action labeledstmt_91(){
-    forward_tango_pkt_arg_31=hdr.forward_flow.forward_flow_udp_header_3;
-  }
-  bit<16> forward_tango_pkt_arg_30;
-  action labeledstmt_90(){
-    forward_tango_pkt_arg_30=hdr.forward_flow.forward_flow_udp_header_2;
-  }
-  bit<16> forward_tango_pkt_arg_29;
-  action labeledstmt_89(){
-    forward_tango_pkt_arg_29=hdr.forward_flow.forward_flow_udp_header_1;
-  }
-  bit<16> forward_tango_pkt_arg_28;
-  action labeledstmt_88(){
-    forward_tango_pkt_arg_28=hdr.forward_flow.forward_flow_udp_header_0;
-  }
-  bit<64> forward_tango_pkt_arg_27;
-  action labeledstmt_87(){
-    forward_tango_pkt_arg_27=hdr.forward_flow.forward_flow_ip_header_7;
-  }
-  bit<64> forward_tango_pkt_arg_26;
-  action labeledstmt_86(){
-    forward_tango_pkt_arg_26=hdr.forward_flow.forward_flow_ip_header_6;
-  }
-  bit<64> forward_tango_pkt_arg_25;
-  action labeledstmt_85(){
-    forward_tango_pkt_arg_25=hdr.forward_flow.forward_flow_ip_header_5;
-  }
-  bit<64> forward_tango_pkt_arg_24;
-  action labeledstmt_84(){
-    forward_tango_pkt_arg_24=hdr.forward_flow.forward_flow_ip_header_4;
-  }
-  bit<8> forward_tango_pkt_arg_23;
-  action labeledstmt_83(){
-    forward_tango_pkt_arg_23=hdr.forward_flow.forward_flow_ip_header_3;
-  }
-  bit<8> forward_tango_pkt_arg_22;
-  action labeledstmt_82(){
-    forward_tango_pkt_arg_22=hdr.forward_flow.forward_flow_ip_header_2;
-  }
-  bit<16> forward_tango_pkt_arg_21;
-  action labeledstmt_81(){
-    forward_tango_pkt_arg_21=hdr.forward_flow.forward_flow_ip_header_1;
-  }
-  bit<32> forward_tango_pkt_arg_20;
-  action labeledstmt_80(){
-    forward_tango_pkt_arg_20=hdr.forward_flow.forward_flow_ip_header_0;
-  }
-  bit<16> forward_tango_pkt_arg_14;
-  action labeledstmt_79(){
-    forward_tango_pkt_arg_14=16w0;
-  }
-  bit<16> forward_tango_pkt_arg_13;
-  action labeledstmt_78(){
-   
-forward_tango_pkt_arg_13=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
-  }
-  bit<16> forward_tango_pkt_arg_12;
-  action labeledstmt_77(){
-    forward_tango_pkt_arg_12=16w8080;
-  }
-  bit<16> forward_tango_pkt_arg_11;
-  action labeledstmt_76(){
-    forward_tango_pkt_arg_11=16w8080;
-  }
-  bit<16> forward_tango_pkt_arg_2;
-  action labeledstmt_75(){
-    forward_tango_pkt_arg_2=16w34525;
-  }
-  bit<48> forward_tango_pkt_arg_1;
-  action labeledstmt_74(){
-    forward_tango_pkt_arg_1=hdr.forward_flow.forward_flow_eth_header_1;
-  }
-  bit<48> forward_tango_pkt_arg_0;
-  action labeledstmt_73(){
-    forward_tango_pkt_arg_0=hdr.forward_flow.forward_flow_eth_header_0;
-  }
-  bit<8> tango_metrics_hdr_4;
-  action labeledstmt_72(){
-    tango_metrics_hdr_4=8w0;
-  }
-  bit<32> tango_metrics_hdr_2;
-  action labeledstmt_71(){
-    tango_metrics_hdr_2=32w0;
+    labeledstmt_56();
   }
   bit<32> time_now;
-  action labeledstmt_70(){
+  action labeledstmt_68(){
     time_now=(ig_intr_md.ingress_mac_tstamp[47:16]);
   }
   bit<16> SequenceNumberManager_increment_ret;
-  action labeledstmt_69(){
+  action labeledstmt_67(){
     SequenceNumberManager_increment_ret=16w32;
   }
   bit<64> tango_tunnel_hdr_7;
-  action labeledstmt_68(){
+  action labeledstmt_66(){
     tango_tunnel_hdr_7=64w0;
   }
   bit<64> tango_tunnel_hdr_6;
-  action labeledstmt_67(){
+  action labeledstmt_65(){
     tango_tunnel_hdr_6=64w0;
   }
   bit<64> tango_tunnel_hdr_5;
-  action labeledstmt_66(){
+  action labeledstmt_64(){
     tango_tunnel_hdr_5=64w3252;
   }
   bit<64> tango_tunnel_hdr_4;
-  action labeledstmt_65(){
+  action labeledstmt_63(){
     tango_tunnel_hdr_4=64w2747196614509592830;
   }
   bit<8> tango_tunnel_hdr_3;
-  action labeledstmt_64(){
+  action labeledstmt_62(){
     tango_tunnel_hdr_3=8w220;
   }
   bit<8> tango_tunnel_hdr_2;
-  action labeledstmt_63(){
-    tango_tunnel_hdr_2=8w17;
+  action labeledstmt_61(){
+    tango_tunnel_hdr_2=8w58;
   }
   bit<16> tango_tunnel_hdr_1;
-  action labeledstmt_62(){
+  action labeledstmt_60(){
     tango_tunnel_hdr_1=16w0;
   }
   bit<32> tango_tunnel_hdr_0;
-  action labeledstmt_61(){
+  action labeledstmt_59(){
     tango_tunnel_hdr_0=32w1610612736;
   }
   bit<8> RouteManager_get_path_id_ret;
-  action labeledstmt_60(){
+  action labeledstmt_58(){
     RouteManager_get_path_id_ret=8w32;
   }
   bit<8> traffic_class;
-  action labeledstmt_59(){
+  action labeledstmt_57(){
     traffic_class=8w0;
   }
   action labeledstmt_2(){
+    labeledstmt_57();
+    labeledstmt_58();
     labeledstmt_59();
     labeledstmt_60();
     labeledstmt_61();
@@ -323,35 +242,12 @@ forward_tango_pkt_arg_13=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
     labeledstmt_66();
     labeledstmt_67();
     labeledstmt_68();
-    labeledstmt_69();
-    labeledstmt_70();
-    labeledstmt_71();
-    labeledstmt_72();
-    labeledstmt_73();
-    labeledstmt_74();
-    labeledstmt_75();
-    labeledstmt_76();
-    labeledstmt_77();
-    labeledstmt_78();
-    labeledstmt_79();
-    labeledstmt_80();
-    labeledstmt_81();
-    labeledstmt_82();
-    labeledstmt_83();
-    labeledstmt_84();
-    labeledstmt_85();
-    labeledstmt_86();
-    labeledstmt_87();
-    labeledstmt_88();
-    labeledstmt_89();
-    labeledstmt_90();
-    labeledstmt_91();
   }
-  action labeledstmt_92(){
-    route_manager_0_idx_4592=hdr.update_route.update_route_update_0;
+  action labeledstmt_69(){
+    route_manager_0_idx_4545=hdr.update_route.update_route_update_0;
   }
   action labeledstmt_3(){
-    labeledstmt_92();
+    labeledstmt_69();
   }
   action labeledstmt_4(){
     //NOOP
@@ -359,203 +255,150 @@ forward_tango_pkt_arg_13=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
   action labeledstmt_5(){
     //NOOP
   }
-  bit<8> forward_tango_pkt_arg_19;
-  action labeledstmt_96(){
-    forward_tango_pkt_arg_19=tango_metrics_hdr_4;
-  }
-  bit<32> forward_tango_pkt_arg_17;
-  action labeledstmt_95(){
-    forward_tango_pkt_arg_17=tango_metrics_hdr_2;
-  }
   bit<12> timestamp;
-  action labeledstmt_94(){
+  action labeledstmt_71(){
     timestamp=(time_now[31:20]);
   }
-  action labeledstmt_93(){
+  action labeledstmt_70(){
     traffic_class=8w0;
   }
   action labeledstmt_6(){
-    labeledstmt_93();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_70();
+    labeledstmt_71();
   }
-  action labeledstmt_97(){
+  action labeledstmt_72(){
     traffic_class=8w1;
   }
   action labeledstmt_7(){
-    labeledstmt_97();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_72();
+    labeledstmt_71();
   }
-  action labeledstmt_98(){
+  action labeledstmt_73(){
     traffic_class=8w2;
   }
   action labeledstmt_8(){
-    labeledstmt_98();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_73();
+    labeledstmt_71();
   }
-  action labeledstmt_99(){
+  action labeledstmt_74(){
     traffic_class=8w3;
   }
   action labeledstmt_9(){
-    labeledstmt_99();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_74();
+    labeledstmt_71();
   }
-  action labeledstmt_100(){
+  action labeledstmt_75(){
     traffic_class=8w4;
   }
   action labeledstmt_10(){
-    labeledstmt_100();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_75();
+    labeledstmt_71();
   }
-  action labeledstmt_101(){
+  action labeledstmt_76(){
     traffic_class=8w5;
   }
   action labeledstmt_11(){
-    labeledstmt_101();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_76();
+    labeledstmt_71();
   }
-  action labeledstmt_102(){
+  action labeledstmt_77(){
     traffic_class=8w6;
   }
   action labeledstmt_12(){
-    labeledstmt_102();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_77();
+    labeledstmt_71();
   }
-  action labeledstmt_103(){
+  action labeledstmt_78(){
     traffic_class=8w7;
   }
   action labeledstmt_13(){
-    labeledstmt_103();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_78();
+    labeledstmt_71();
   }
-  action labeledstmt_104(){
+  action labeledstmt_79(){
     traffic_class=8w8;
   }
   action labeledstmt_14(){
-    labeledstmt_104();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_79();
+    labeledstmt_71();
   }
-  action labeledstmt_105(){
+  action labeledstmt_80(){
     traffic_class=8w9;
   }
   action labeledstmt_15(){
-    labeledstmt_105();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_80();
+    labeledstmt_71();
   }
-  action labeledstmt_106(){
+  action labeledstmt_81(){
     traffic_class=8w10;
   }
   action labeledstmt_16(){
-    labeledstmt_106();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_81();
+    labeledstmt_71();
   }
-  action labeledstmt_107(){
+  action labeledstmt_82(){
     traffic_class=8w11;
   }
   action labeledstmt_17(){
-    labeledstmt_107();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_82();
+    labeledstmt_71();
   }
-  action labeledstmt_108(){
+  action labeledstmt_83(){
     traffic_class=8w12;
   }
   action labeledstmt_18(){
-    labeledstmt_108();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_83();
+    labeledstmt_71();
   }
-  action labeledstmt_109(){
+  action labeledstmt_84(){
     traffic_class=8w13;
   }
   action labeledstmt_19(){
-    labeledstmt_109();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_84();
+    labeledstmt_71();
   }
-  action labeledstmt_110(){
+  action labeledstmt_85(){
     traffic_class=8w14;
   }
   action labeledstmt_20(){
-    labeledstmt_110();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_85();
+    labeledstmt_71();
   }
-  action labeledstmt_111(){
+  action labeledstmt_86(){
     traffic_class=8w15;
   }
   action labeledstmt_21(){
-    labeledstmt_111();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_86();
+    labeledstmt_71();
   }
-  action labeledstmt_112(){
+  action labeledstmt_87(){
     traffic_class=8w30;
   }
   action labeledstmt_22(){
-    labeledstmt_112();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_87();
+    labeledstmt_71();
   }
-  action labeledstmt_113(){
+  action labeledstmt_88(){
     traffic_class=8w31;
   }
   action labeledstmt_23(){
-    labeledstmt_113();
-    labeledstmt_94();
-    labeledstmt_95();
-    labeledstmt_96();
+    labeledstmt_88();
+    labeledstmt_71();
   }
   action labeledstmt_24(){
     //NOOP
   }
-  bit<16> tango_metrics_hdr_1;
-  action labeledstmt_115(){
-    tango_metrics_hdr_1=((bit<16>)timestamp);
-  }
-  action labeledstmt_114(){
-    route_manager_0_idx_4592=traffic_class;
+  action labeledstmt_89(){
+    route_manager_0_idx_4545=traffic_class;
   }
   action labeledstmt_25(){
-    labeledstmt_114();
-    labeledstmt_115();
+    labeledstmt_89();
   }
   action labeledstmt_26(){
     //NOOP
   }
-  bit<16> forward_tango_pkt_arg_16;
-  action labeledstmt_117(){
-    forward_tango_pkt_arg_16=tango_metrics_hdr_1;
-  }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_4593 = {
+  route_manager_0_regaction_4546 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -565,16 +408,15 @@ forward_tango_pkt_arg_13=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
       }
     }
   };
-  action labeledstmt_116(){
+  action labeledstmt_90(){
    
-RouteManager_get_path_id_ret=route_manager_0_regaction_4593.execute(route_manager_0_idx_4592);
+RouteManager_get_path_id_ret=route_manager_0_regaction_4546.execute(route_manager_0_idx_4545);
   }
   action labeledstmt_27(){
-    labeledstmt_116();
-    labeledstmt_117();
+    labeledstmt_90();
   }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_4594 = {
+  route_manager_0_regaction_4547 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -585,57 +427,57 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4593.execute(route_manage
       //NOOP
     }
   };
-  action labeledstmt_118(){
-    route_manager_0_regaction_4594.execute(route_manager_0_idx_4592);
+  action labeledstmt_91(){
+    route_manager_0_regaction_4547.execute(route_manager_0_idx_4545);
   }
   action labeledstmt_28(){
-    labeledstmt_118();
+    labeledstmt_91();
   }
   action labeledstmt_29(){
     //NOOP
   }
   bit<8> path_id;
-  action labeledstmt_119(){
+  action labeledstmt_92(){
     path_id=RouteManager_get_path_id_ret;
   }
   action labeledstmt_30(){
-    labeledstmt_119();
+    labeledstmt_92();
   }
-  action labeledstmt_120(){
+  action labeledstmt_93(){
     hdr.update_route.setInvalid();
   }
   action labeledstmt_31(){
-    labeledstmt_120();
+    labeledstmt_93();
   }
   action labeledstmt_32(){
     //NOOP
   }
-  action labeledstmt_130(){
+  action labeledstmt_102(){
     tango_tunnel_hdr_0=32w1610612736;
   }
-  action labeledstmt_129(){
+  action labeledstmt_101(){
     tango_tunnel_hdr_1=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
   }
-  action labeledstmt_128(){
-    tango_tunnel_hdr_2=8w17;
+  action labeledstmt_100(){
+    tango_tunnel_hdr_2=8w58;
   }
-  action labeledstmt_127(){
+  action labeledstmt_99(){
     tango_tunnel_hdr_3=8w220;
   }
-  action labeledstmt_126(){
+  action labeledstmt_98(){
     tango_tunnel_hdr_4=64w2747196614509592830;
   }
-  action labeledstmt_125(){
+  action labeledstmt_97(){
     tango_tunnel_hdr_5=64w3252;
   }
-  action labeledstmt_124(){
+  action labeledstmt_96(){
     tango_tunnel_hdr_6=64w2739390614537240576;
   }
-  action labeledstmt_123(){
+  action labeledstmt_95(){
     tango_tunnel_hdr_7=64w1;
   }
   RegisterAction<bit<16>,bit<8>,bit<16>>(sequence_counters_0)
-  sequence_counters_0_regaction_4595 = {
+  sequence_counters_0_regaction_4548 = {
     void apply(inout bit<16> cell1_remote,
         out bit<16> ret_remote){
       bit<16> cell1_local=cell1_remote;
@@ -651,384 +493,305 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4593.execute(route_manage
       }
     }
   };
-  action labeledstmt_122(){
+  action labeledstmt_94(){
    
-SequenceNumberManager_increment_ret=sequence_counters_0_regaction_4595.execute(path_id);
-  }
-  bit<8> tango_metrics_hdr_0;
-  action labeledstmt_121(){
-    tango_metrics_hdr_0=((bit<8>)path_id);
+SequenceNumberManager_increment_ret=sequence_counters_0_regaction_4548.execute(path_id);
   }
   action labeledstmt_33(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_124();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_96();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_131(){
+  action labeledstmt_103(){
     tango_tunnel_hdr_6=64w2739390614537306112;
   }
   action labeledstmt_34(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_131();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_103();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_132(){
+  action labeledstmt_104(){
     tango_tunnel_hdr_6=64w2739390614537371648;
   }
   action labeledstmt_35(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_132();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_104();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_133(){
+  action labeledstmt_105(){
     tango_tunnel_hdr_6=64w2739390614537437184;
   }
   action labeledstmt_36(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_133();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_105();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_134(){
+  action labeledstmt_106(){
     tango_tunnel_hdr_6=64w2739390614537502720;
   }
   action labeledstmt_37(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_134();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_106();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_135(){
+  action labeledstmt_107(){
     tango_tunnel_hdr_6=64w2739390614537568256;
   }
   action labeledstmt_38(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_135();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_107();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_136(){
+  action labeledstmt_108(){
     tango_tunnel_hdr_6=64w2739390614537633792;
   }
   action labeledstmt_39(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_136();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_108();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_40(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_123();
-    labeledstmt_136();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_95();
+    labeledstmt_108();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
-  action labeledstmt_137(){
+  action labeledstmt_109(){
     tango_tunnel_hdr_7=64w2;
   }
   action labeledstmt_41(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_124();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_96();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_42(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_131();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_103();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_43(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_132();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_104();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_44(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_133();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_105();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_45(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_134();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_106();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_46(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_135();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_107();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_47(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_136();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_108();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_48(){
-    labeledstmt_121();
-    labeledstmt_122();
-    labeledstmt_137();
-    labeledstmt_136();
-    labeledstmt_125();
-    labeledstmt_126();
-    labeledstmt_127();
-    labeledstmt_128();
-    labeledstmt_129();
-    labeledstmt_130();
+    labeledstmt_94();
+    labeledstmt_109();
+    labeledstmt_108();
+    labeledstmt_97();
+    labeledstmt_98();
+    labeledstmt_99();
+    labeledstmt_100();
+    labeledstmt_101();
+    labeledstmt_102();
   }
   action labeledstmt_49(){
-    labeledstmt_121();
-    labeledstmt_122();
+    labeledstmt_94();
   }
   action labeledstmt_50(){
     //NOOP
   }
-  bit<32> forward_tango_pkt_arg_3;
-  action labeledstmt_148(){
-    forward_tango_pkt_arg_3=tango_tunnel_hdr_0;
-  }
-  bit<16> forward_tango_pkt_arg_4;
-  action labeledstmt_147(){
-    forward_tango_pkt_arg_4=tango_tunnel_hdr_1;
-  }
-  action labeledstmt_146(){
-    hdr.forward_flow.setInvalid();
-  }
-  bit<8> forward_tango_pkt_arg_5;
-  action labeledstmt_145(){
-    forward_tango_pkt_arg_5=tango_tunnel_hdr_2;
-  }
-  bit<8> forward_tango_pkt_arg_6;
-  action labeledstmt_144(){
-    forward_tango_pkt_arg_6=tango_tunnel_hdr_3;
-  }
-  bit<64> forward_tango_pkt_arg_7;
-  action labeledstmt_143(){
-    forward_tango_pkt_arg_7=tango_tunnel_hdr_4;
-  }
-  bit<64> forward_tango_pkt_arg_8;
-  action labeledstmt_142(){
-    forward_tango_pkt_arg_8=tango_tunnel_hdr_5;
-  }
-  bit<64> forward_tango_pkt_arg_9;
-  action labeledstmt_141(){
-    forward_tango_pkt_arg_9=tango_tunnel_hdr_6;
-  }
-  bit<64> forward_tango_pkt_arg_10;
-  action labeledstmt_140(){
-    forward_tango_pkt_arg_10=tango_tunnel_hdr_7;
-  }
   bit<16> seq_number;
-  action labeledstmt_139(){
+  action labeledstmt_110(){
     seq_number=SequenceNumberManager_increment_ret;
   }
-  bit<8> forward_tango_pkt_arg_15;
-  action labeledstmt_138(){
-    forward_tango_pkt_arg_15=tango_metrics_hdr_0;
-  }
   action labeledstmt_51(){
-    labeledstmt_138();
-    labeledstmt_139();
-    labeledstmt_140();
-    labeledstmt_141();
-    labeledstmt_142();
-    labeledstmt_143();
-    labeledstmt_144();
-    labeledstmt_145();
-    labeledstmt_146();
-    labeledstmt_147();
-    labeledstmt_148();
+    labeledstmt_110();
   }
   action labeledstmt_52(){
     //NOOP
   }
-  bit<16> tango_metrics_hdr_3;
-  action labeledstmt_149(){
-    tango_metrics_hdr_3=seq_number;
-  }
   action labeledstmt_53(){
-    labeledstmt_149();
+    hdr.bridge_ev.incoming_tango_traffic=1;
+    hdr.incoming_tango_traffic.setValid();
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0=hdr.forward_flow.forward_flow_eth_header_0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1=hdr.forward_flow.forward_flow_eth_header_1;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2=16w34525;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0=tango_tunnel_hdr_0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1=tango_tunnel_hdr_1;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2=tango_tunnel_hdr_2;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3=tango_tunnel_hdr_3;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4=tango_tunnel_hdr_4;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5=tango_tunnel_hdr_5;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6=tango_tunnel_hdr_6;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_7=tango_tunnel_hdr_7;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_0=8w128;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_1=8w0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_2=16w43981;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_3=16w0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_4=16w15;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0=((bit<8>)path_id);
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1=((bit<16>)timestamp);
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2=32w0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3=seq_number;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4=8w0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0=hdr.forward_flow.forward_flow_ip_header_0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1=hdr.forward_flow.forward_flow_ip_header_1;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2=hdr.forward_flow.forward_flow_ip_header_2;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3=hdr.forward_flow.forward_flow_ip_header_3;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4=hdr.forward_flow.forward_flow_ip_header_4;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5=hdr.forward_flow.forward_flow_ip_header_5;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6=hdr.forward_flow.forward_flow_ip_header_6;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7=hdr.forward_flow.forward_flow_ip_header_7;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_0=hdr.forward_flow.forward_flow_udp_header_0;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_1=hdr.forward_flow.forward_flow_udp_header_1;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_2=hdr.forward_flow.forward_flow_udp_header_2;
+   
+hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forward_flow.forward_flow_udp_header_3;
+    hdr.bridge_ev.port_event_id=2;
+    ig_tm_md.ucast_egress_port=9w264;
   }
   action labeledstmt_54(){
     //NOOP
   }
-  bit<16> forward_tango_pkt_arg_18;
-  action labeledstmt_150(){
-    forward_tango_pkt_arg_18=tango_metrics_hdr_3;
+  action labeledstmt_111(){
+    hdr.forward_flow.setInvalid();
   }
   action labeledstmt_55(){
-    labeledstmt_150();
+    labeledstmt_111();
   }
-  action labeledstmt_56(){
-    //NOOP
-  }
-  action labeledstmt_57(){
-    hdr.bridge_ev.incoming_tango_traffic=1;
-    hdr.incoming_tango_traffic.setValid();
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_0=forward_tango_pkt_arg_0;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_1=forward_tango_pkt_arg_1;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_eth_header_2=forward_tango_pkt_arg_2;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_0=forward_tango_pkt_arg_3;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_1=forward_tango_pkt_arg_4;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_2=forward_tango_pkt_arg_5;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_3=forward_tango_pkt_arg_6;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_4=forward_tango_pkt_arg_7;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_5=forward_tango_pkt_arg_8;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_6=forward_tango_pkt_arg_9;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_7=forward_tango_pkt_arg_10;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0=forward_tango_pkt_arg_11;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1=forward_tango_pkt_arg_12;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2=forward_tango_pkt_arg_13;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3=forward_tango_pkt_arg_14;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0=forward_tango_pkt_arg_15;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_1=forward_tango_pkt_arg_16;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_2=forward_tango_pkt_arg_17;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_3=forward_tango_pkt_arg_18;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_4=forward_tango_pkt_arg_19;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_0=forward_tango_pkt_arg_20;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_1=forward_tango_pkt_arg_21;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_2=forward_tango_pkt_arg_22;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_3=forward_tango_pkt_arg_23;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_4=forward_tango_pkt_arg_24;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_5=forward_tango_pkt_arg_25;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_6=forward_tango_pkt_arg_26;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7=forward_tango_pkt_arg_27;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0=forward_tango_pkt_arg_28;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1=forward_tango_pkt_arg_29;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2=forward_tango_pkt_arg_30;
-   
-hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_tango_pkt_arg_31;
-    hdr.bridge_ev.port_event_id=2;
-    ig_tm_md.ucast_egress_port=9w12;
-  }
-  table table_4605 {
+  table table_4557 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1045,7 +808,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_4();
     } 
   } 
-  table table_4604 {
+  table table_4556 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_2 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
@@ -1078,46 +841,46 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       labeledstmt_23;
     }
     const entries = {
-      (_,_,_,_,5000,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5001,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5002,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5003,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5004,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5005,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5006,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5007,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6000,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6001,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6002,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6003,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6004,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6005,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6006,_,_,2) : labeledstmt_5();
-      (_,_,_,_,6007,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5008,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50000,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50001,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50002,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50003,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50004,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50005,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50006,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50007,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60000,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60001,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60002,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60003,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60004,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60005,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60006,_,_,2) : labeledstmt_5();
+      (_,_,_,_,60007,_,_,2) : labeledstmt_5();
+      (_,_,_,_,50008,_,_,2) : labeledstmt_5();
       (_,_,_,_,_,_,_,2) : labeledstmt_5();
-      (_,_,_,_,5000,_,_,1) : labeledstmt_6();
-      (_,_,_,_,5001,_,_,1) : labeledstmt_7();
-      (_,_,_,_,5002,_,_,1) : labeledstmt_8();
-      (_,_,_,_,5003,_,_,1) : labeledstmt_9();
-      (_,_,_,_,5004,_,_,1) : labeledstmt_10();
-      (_,_,_,_,5005,_,_,1) : labeledstmt_11();
-      (_,_,_,_,5006,_,_,1) : labeledstmt_12();
-      (_,_,_,_,5007,_,_,1) : labeledstmt_13();
-      (_,_,_,_,6000,_,_,1) : labeledstmt_14();
-      (_,_,_,_,6001,_,_,1) : labeledstmt_15();
-      (_,_,_,_,6002,_,_,1) : labeledstmt_16();
-      (_,_,_,_,6003,_,_,1) : labeledstmt_17();
-      (_,_,_,_,6004,_,_,1) : labeledstmt_18();
-      (_,_,_,_,6005,_,_,1) : labeledstmt_19();
-      (_,_,_,_,6006,_,_,1) : labeledstmt_20();
-      (_,_,_,_,6007,_,_,1) : labeledstmt_21();
-      (_,_,_,_,5008,_,_,1) : labeledstmt_22();
+      (_,_,_,_,50000,_,_,1) : labeledstmt_6();
+      (_,_,_,_,50001,_,_,1) : labeledstmt_7();
+      (_,_,_,_,50002,_,_,1) : labeledstmt_8();
+      (_,_,_,_,50003,_,_,1) : labeledstmt_9();
+      (_,_,_,_,50004,_,_,1) : labeledstmt_10();
+      (_,_,_,_,50005,_,_,1) : labeledstmt_11();
+      (_,_,_,_,50006,_,_,1) : labeledstmt_12();
+      (_,_,_,_,50007,_,_,1) : labeledstmt_13();
+      (_,_,_,_,60000,_,_,1) : labeledstmt_14();
+      (_,_,_,_,60001,_,_,1) : labeledstmt_15();
+      (_,_,_,_,60002,_,_,1) : labeledstmt_16();
+      (_,_,_,_,60003,_,_,1) : labeledstmt_17();
+      (_,_,_,_,60004,_,_,1) : labeledstmt_18();
+      (_,_,_,_,60005,_,_,1) : labeledstmt_19();
+      (_,_,_,_,60006,_,_,1) : labeledstmt_20();
+      (_,_,_,_,60007,_,_,1) : labeledstmt_21();
+      (_,_,_,_,50008,_,_,1) : labeledstmt_22();
       (_,_,_,_,_,_,_,1) : labeledstmt_23();
       (_,_,_,_,_,_,_,_) : labeledstmt_5();
     } 
   } 
-  table table_4603 {
+  table table_4555 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1131,7 +894,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_24();
     } 
   } 
-  table table_4602 {
+  table table_4554 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1147,7 +910,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_26();
     } 
   } 
-  table table_4601 {
+  table table_4553 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1163,7 +926,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_29();
     } 
   } 
-  table table_4600 {
+  table table_4552 {
     key = {
       hdr.wire_ev.event_id : ternary;
       path_id : ternary;
@@ -1226,7 +989,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_,_) : labeledstmt_32();
     } 
   } 
-  table table_4599 {
+  table table_4551 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1240,7 +1003,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_50();
     } 
   } 
-  table table_4598 {
+  table table_4550 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1254,7 +1017,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_52();
     } 
   } 
-  table table_4597 {
+  table table_4549 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1268,31 +1031,16 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3=forward_t
       (_) : labeledstmt_54();
     } 
   } 
-  table table_4596 {
-    key = {
-      hdr.wire_ev.event_id : ternary;
-    }
-    actions = {
-      labeledstmt_56;
-      labeledstmt_57;
-    }
-    const entries = {
-      (2) : labeledstmt_56();
-      (1) : labeledstmt_57();
-      (_) : labeledstmt_56();
-    } 
-  } 
   apply {
-    table_4605.apply();
-    table_4604.apply();
-    table_4603.apply();
-    table_4602.apply();
-    table_4601.apply();
-    table_4600.apply();
-    table_4599.apply();
-    table_4598.apply();
-    table_4597.apply();
-    table_4596.apply();
+    table_4557.apply();
+    table_4556.apply();
+    table_4555.apply();
+    table_4554.apply();
+    table_4553.apply();
+    table_4552.apply();
+    table_4551.apply();
+    table_4550.apply();
+    table_4549.apply();
   }
 } 
 control IngressDeparser(packet_out pkt,
@@ -1344,10 +1092,11 @@ control EgressControl(inout hdr_t hdr,
   @pa_no_overlay("egress","hdr.update_route.update_route_ip_header_5")
   @pa_no_overlay("egress","hdr.update_route.update_route_ip_header_6")
   @pa_no_overlay("egress","hdr.update_route.update_route_ip_header_7")
-  @pa_no_overlay("egress","hdr.update_route.update_route_udp_header_0")
-  @pa_no_overlay("egress","hdr.update_route.update_route_udp_header_1")
-  @pa_no_overlay("egress","hdr.update_route.update_route_udp_header_2")
-  @pa_no_overlay("egress","hdr.update_route.update_route_udp_header_3")
+  @pa_no_overlay("egress","hdr.update_route.update_route_icmp_header_0")
+  @pa_no_overlay("egress","hdr.update_route.update_route_icmp_header_1")
+  @pa_no_overlay("egress","hdr.update_route.update_route_icmp_header_2")
+  @pa_no_overlay("egress","hdr.update_route.update_route_icmp_header_3")
+  @pa_no_overlay("egress","hdr.update_route.update_route_icmp_header_4")
   @pa_no_overlay("egress","hdr.update_route.update_route_update_0")
   @pa_no_overlay("egress","hdr.update_route.update_route_update_1")
  
@@ -1373,13 +1122,15 @@ control EgressControl(inout hdr_t hdr,
  
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_ip_header_7")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_0")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_0")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_1")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_1")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_2")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_2")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_udp_header_3")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_3")
+ 
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_icmp_header_4")
  
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_tango_metrics_header_0")
  
@@ -1407,13 +1158,13 @@ control EgressControl(inout hdr_t hdr,
  
 @pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_ip_header_7")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_0")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_0")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_1")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_1")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_2")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_2")
  
-@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_udp_header_3")
+@pa_no_overlay("egress","hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3")
   @pa_no_overlay("egress","hdr.forward_flow.forward_flow_eth_header_0")
   @pa_no_overlay("egress","hdr.forward_flow.forward_flow_eth_header_1")
   @pa_no_overlay("egress","hdr.forward_flow.forward_flow_eth_header_2")
