@@ -180,7 +180,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
 
     /* 3. Record path-specific timestamp. */
     // -- Get current time in milliseconds
-    int<<12>> timestamp = get_time_now_ms();
+    int<<32>> timestamp = get_time_now_ns();
 
 
     /* 4. Encapsulate and forward packet. */
@@ -191,14 +191,14 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
         timestamp,
         seq_number
     );
-
+    
     generate_port (
         OUT_PORT,
         incoming_tango_traffic (
             { eth_header with ethertype = 0x86DD },
             tango_tunnel_hdr,
             TANGO_ICMP_HEADER,
-            { path_id = (int<<8>>) path_id; timestamp = (int<<16>>) timestamp; signature = 0; sequence_num = seq_number; book_signature = 0},
+            { path_id = (int<<8>>) path_id; timestamp = timestamp; signature = 0; sequence_num = seq_number; book_signature = 0},
             ip_header,
             udp_header
         )

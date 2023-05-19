@@ -11,10 +11,6 @@ all: lint test compile
 .PHONY: clean clobber test
 
 lint: $(SOURCES)
-	@echo "linting $(MAIN_FILE)V4.dpt..."
-	@$(INTERPRETER) $(MAIN_FILE)V4.dpt
-	@echo "linting $(MAIN_FILE)V6.dpt..."
-	@$(INTERPRETER) $(MAIN_FILE)V6.dpt
 	@echo "linting $(MAIN_FILE)V6ICMP.dpt..."
 	@$(INTERPRETER) $(MAIN_FILE)V6ICMP.dpt
 
