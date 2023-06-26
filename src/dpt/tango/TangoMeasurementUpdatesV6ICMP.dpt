@@ -8,7 +8,7 @@ include "store_managers/SequenceNumberManager.dpt"
  * ================================================================================================================== */
 
 // Port declarations
-const int<<9>> OUT_PORT = 264;
+const int<<9>> OUT_PORT = 156;
 
 // Tango ICMPv6 header to counter ECMP and get past firewall
 const ICMPHeader_t TANGO_ICMP_HEADER = {
@@ -170,7 +170,7 @@ handle forward_flow (EthernetHeader_t eth_header, IPv6Header_t ip_header, UDPHea
     | 12 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537502720; dest_addr_lo = 2; }; } // 2604:4540:8c::2
     | 13 -> { tango_tunnel_hdr = { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537568256; dest_addr_lo = 2; }; } // 2604:4540:8d::2
     | 14 -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 2; }; } // 2604:4540:8e::2
-    | _ -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = 77; }; } // 2604:4540:8e::2
+    | _ -> { tango_tunnel_hdr =  { IPV6_HEADER_TEMPLATE with payload_len = 1000; dest_addr_hi = 2739390614537633792; dest_addr_lo = (int<<64>>) path_id; }; } // 2604:4540:8e::2
 
 
     /* 2. Increment sequence number. */
