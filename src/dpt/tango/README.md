@@ -131,6 +131,16 @@ source set_sde.bash
 /data/bf-sde-9.12.0/install/bin/python3.10 /u/birgelee/tango-routing/src/python/edu/princeton/tango/controlplane/init.py
 ```
 
+To check the populated switch registers in the route_manager table, go to the switch bfshell> command line: 
+```
+bfshell> bfrt
+bfrt> <program_name>
+bfrt.program_name> pipe
+bfrt.program_name.pipe> route_manager_0
+bfrt.program_name.pipe.route_manager_0> dump 
+
+```
+
 Aslo note that in Lucid/P4 the Internet outbound port is 264 and the port where the server is sending traffic which needs to be encapsulated is 19.
 ### Cab-fruity-03 (DPID X, Port XX/0) for sending traffic
 
@@ -158,6 +168,14 @@ pub key.
 
 
 ### External Vultr eBPF Tango node
+
+## Accessing the Stolkholm Vultr Server 
+```
+stockholm server: root@65.20.115.127
+Make sure to kill ebpf processes to use tcpdump 
+/root/performance-aware-routing-2/ebpf/server-module/remove_all.sh
+
+```
 
 ## Route Configuration
 
@@ -217,7 +235,7 @@ rm -rf .venv
 
 There is a custom Route Update packet that the eBPF node can send back to the
 switch in order to remap a particular traffic class to a sepcific path
-identifier, thereby rerouting the entire class. The packet is of the following
+identifier, thereby rerouting the entire class. The packet must be an ICMPv6 Echo Reply (type=129) of the following
 form:
 
 ```lucid
@@ -229,7 +247,7 @@ type RouteUpdate_t = {
 event update_route (
     EthernetHeader_t eth_header,
     IPv6Header_t ip_header,
-    UDPHeader_t udp_header,
+    ICMPHeader_t icmp_header,
     RouteUpdate_t update
 )
 ```
@@ -256,12 +274,12 @@ def main() -> None:
     pkts = [
         Ether()
         / IPv6()
-        / UDP()
+        / ICMPv6EchoReply()
         / RouteUpdate(traffic_class=i, new_path_id=(7 - (i % 8)))
         for i in range(0, 32)
     ]
 
-    sendp(pkts, iface="enp134s0f1")
+    sendp(pkts, iface="enp1s0")
 
 
 if __name__ == "__main__":
@@ -290,7 +308,7 @@ rate-period 1
 rate-show
 ```
 
-The following must be run to set-up the ehternet interfaces on `Cabernet802`'s
+The following must be run to set-up the ethernet interfaces on `Cabernet802`'s
 NIC:
 
 ```bash
