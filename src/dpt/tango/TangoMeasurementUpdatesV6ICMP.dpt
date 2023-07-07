@@ -212,5 +212,7 @@ handle update_route (
     ICMPHeader_t icmp_header,
     RouteUpdate_t update
 ) {
-    RouteManager.update_route(route_manager, update#traffic_class, update#new_path_id);
+    if(icmp_header#icmp_type == 129 ){ // ICMPv6 Echo Reply 
+        RouteManager.update_route(route_manager, update#traffic_class, update#new_path_id);
+    }
 }
