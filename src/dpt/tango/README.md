@@ -190,29 +190,31 @@ following:
 
 ### Static "Keep Alive" Routes
 
-| UDP Source Port | Traffic Class | eBPF Node | IPv6 Destination |
-|-----------------|---------------|-----------|------------------|
-| 50000           | 0             | Stockholm | 2604:4540:88::1  |
-| 50001           | 1             | Stockholm | 2604:4540:89::1  |
-| 50002           | 2             | Stockholm | 2604:4540:8a::1  |
-| 50003           | 3             | Stockholm | 2604:4540:8b::1  |
-| 50004           | 4             | Stockholm | 2604:4540:8c::1  |
-| 50005           | 5             | Stockholm | 2604:4540:8d::1  |
-| 50006           | 6             | Stockholm | 2604:4540:8e::1  |
-| 60000           | 8             | Stockholm | 2604:4540:88::2  |
-| 60001           | 9             | Stockholm | 2604:4540:89::2  |
-| 60002           | 10            | Stockholm | 2604:4540:8a::2  |
-| 60003           | 11            | Stockholm | 2604:4540:8b::2  |
-| 60004           | 12            | Stockholm | 2604:4540:8c::2  |
-| 60005           | 13            | Stockholm | 2604:4540:8d::2  |
-| 60006           | 14            | Stockholm | 2604:4540:8e::2  |
+| UDP Source Port | Traffic Class | Path ID   | eBPF Node | IPv6 Destination |
+|-----------------|---------------|-----------|-----------|------------------|
+| 50000           | 0             | 0         | Stockholm | 2604:4540:88::1  |
+| 50001           | 1             | 1         | Stockholm | 2604:4540:89::1  |
+| 50002           | 2             | 2         | Stockholm | 2604:4540:8a::1  |
+| 50003           | 3             | 3         | Stockholm | 2604:4540:8b::1  |
+| 50004           | 4             | 4         | Stockholm | 2604:4540:8c::1  |
+| 50005           | 5             | 5         | Stockholm | 2604:4540:8d::1  |
+| 50006           | 6             | 6         | Stockholm | 2604:4540:8e::1  |
+| 50007           | 7             | 7         | Stockholm | 2604:4540:8f::1  |
+| 60000           | 8             | 8         | Stockholm | 2604:4540:88::2  |
+| 60001           | 9             | 9         | Stockholm | 2604:4540:89::2  |
+| 60002           | 10            | 10        | Stockholm | 2604:4540:8a::2  |
+| 60003           | 11            | 11        | Stockholm | 2604:4540:8b::2  |
+| 60004           | 12            | 12        | Stockholm | 2604:4540:8c::2  |
+| 60005           | 13            | 13        | Stockholm | 2604:4540:8d::2  |
+| 60006           | 14            | 14        | Stockholm | 2604:4540:8e::2  |
+| 60007           | 15            | 15        | Stockholm | 2604:4540:8f::2  |
 
 ### Dynamic "Active" Routes
 
-| UDP Source Port | Traffic Class | eBPF Node |
-|-----------------|---------------|-----------|
-| 50008           | 30            | Stockholm |
-| 60008           | 31            | Stockholm |
+| UDP Source Port | Traffic Class | Path ID   | eBPF Node |
+|-----------------|---------------|-----------|-----------|
+| 50008           | 30            | 0         | Stockholm |
+| 60008           | 31            | 8         | Stockholm |
 
 ### IPv6 Address Conversion
 
