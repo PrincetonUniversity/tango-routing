@@ -243,8 +243,8 @@ rm -rf .venv
 ## Triggering Reroutes
 
 There is a custom Route Update packet that the eBPF node can send back to the
-switch in order to remap a particular traffic class to a sepcific path
-identifier, thereby rerouting the entire class. The packet must be an ICMPv6 Echo Reply (type=129) of the following
+switch in order to remap a particular traffic class to a specific path
+identifier, thereby rerouting the entire class. The packet can be sent to IPv6 dst address “2620:c4:0:fe:e42:a1ff:fedd:5990” and must be an ICMPv6 Echo Reply (type=129) of the following
 form:
 
 ```lucid
