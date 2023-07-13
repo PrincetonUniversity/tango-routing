@@ -70,7 +70,7 @@ sudo tcpdump -evvvnX -i enp134s0f0np0
 ![full_test](images/dyn_routing_testbed.png)
 
 
-### Cabino4 as Simple Forwarding Switch (Remember to Build for Tofino 1!)
+### Cabino4 as Simple Forwarding Switch (Remember to Build for Tofino 1 and update ports if needed!)
 
 ```plaintext
 Access cabino4 through ssh with public key. Note that the DNS resolution might not be working, so use the IP address (172.17.0.95) directly. 
@@ -107,7 +107,7 @@ port-enb 32/1
 show 
 ```
 
-### Cab2no1 as Tango Switch (Remember to Build for Tofino 2!)  
+### Cab2no1 as Tango Switch (Remember to Build for Tofino 2 and update ports if needed!)  
 Note, you need to edit the P4 file when compiling to Tofino 2, as the Tofino1 and Tofino2 model have different header lengths (64 bits and 192 bits) for ingress port intrinsic metadata, which can mess up the parsing. Apply the following quick fix for now, until the Lucid compiler is updated. 
 ```
 //In the P4 file, change
