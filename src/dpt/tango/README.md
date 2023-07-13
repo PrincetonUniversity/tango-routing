@@ -108,6 +108,13 @@ show
 ```
 
 ### Cab2no1 as Tango Switch (Remember to Build for Tofino 2!)  
+Note, you need to edit the P4 file when compiling to Tofino 2, as the Tofino1 and Tofino2 model have different header lengths (64 bits and 192 bits) for ingress port intrinsic metadata, which can mess up the parsing. Apply the following quick fix for now, until the Lucid compiler is updated. 
+```
+//In the P4 file, change
+pkt.advance(64); --> pkt.advance(PORT_METADATA_SIZE);
+//PORT_METADATA_SIZE is a builtin defined in the tna.p4 / t2na.p4 headers
+```
+To run the program: 
 ```bash
 cd /data/bf-sde-9.12.0
 source set_sde.bash
