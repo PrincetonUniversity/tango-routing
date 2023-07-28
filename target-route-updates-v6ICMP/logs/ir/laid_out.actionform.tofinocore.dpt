@@ -15,7 +15,7 @@ handle update_route(int<<48>> update_route_eth_header_0,int<<48>> update_route_e
 
 }
 // shared locals:
-int<<8>> route_manager_0_idx_4241;
+int<<8>> route_manager_0_idx_4500;
 // MAIN HANDLER 
 handler main(...){
 // Stage 0
@@ -318,32 +318,32 @@ labeledstmt_54();
 | _ -> {
 labeledstmt_53();
 }}
-memop set_4240(int<<8>> mem_val_4239,int<<8>> new_val_4237,int<<8>> unused_4238)
+memop set_4499(int<<8>> mem_val_4498,int<<8>> new_val_4496,int<<8>> unused_4497)
  {{
 b1=None;
 b2=None
-cell1=(true -> new_val_4237), None
+cell1=(true -> new_val_4496), None
 cell2=None, None
 
 ret=None
 }}
-memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4236(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4233)
+memop combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4495(int<<32>> curr,int<<32>> inc,int<<32>> inc_set_4492)
  {{
-b1=(mbool_4234,true);
-b2=(mbool_4235,true)
-cell1=(mbool_4234 -> curr+inc_set_4233), None
-cell2=(mbool_4235 -> curr), None
+b1=(mbool_4493,true);
+b2=(mbool_4494,true)
+cell1=(mbool_4493 -> curr+inc_set_4492), None
+cell2=(mbool_4494 -> curr), None
 
 ret=(true -> cell2)
 }}
-memop get_4232(int<<8>> mem_val_4229,int<<8>> unused_4231,int<<8>> unused_4230)
+memop get_4491(int<<8>> mem_val_4488,int<<8>> unused_4490,int<<8>> unused_4489)
  {{
 b1=None;
 b2=None
 cell1=None, None
 cell2=None, None
 
-ret=(true -> mem_val_4229)
+ret=(true -> mem_val_4488)
 }}
 labeled_statement labeledstmt_55{
 Sys.invalidate.incoming_tango_traffic(incoming_tango_traffic_tango_eth_header_0,incoming_tango_traffic_tango_eth_header_1,incoming_tango_traffic_tango_eth_header_2,incoming_tango_traffic_tango_ip_header_0,incoming_tango_traffic_tango_ip_header_1,incoming_tango_traffic_tango_ip_header_2,incoming_tango_traffic_tango_ip_header_3,incoming_tango_traffic_tango_ip_header_4,incoming_tango_traffic_tango_ip_header_5,incoming_tango_traffic_tango_ip_header_6,incoming_tango_traffic_tango_ip_header_7,incoming_tango_traffic_tango_icmp_header_0,incoming_tango_traffic_tango_icmp_header_1,incoming_tango_traffic_tango_icmp_header_2,incoming_tango_traffic_tango_icmp_header_3,incoming_tango_traffic_tango_icmp_header_4,incoming_tango_traffic_tango_metrics_header_0,incoming_tango_traffic_tango_metrics_header_1,incoming_tango_traffic_tango_metrics_header_2,incoming_tango_traffic_tango_metrics_header_3,incoming_tango_traffic_tango_metrics_header_4,incoming_tango_traffic_encaped_ip_header_0,incoming_tango_traffic_encaped_ip_header_1,incoming_tango_traffic_encaped_ip_header_2,incoming_tango_traffic_encaped_ip_header_3,incoming_tango_traffic_encaped_ip_header_4,incoming_tango_traffic_encaped_ip_header_5,incoming_tango_traffic_encaped_ip_header_6,incoming_tango_traffic_encaped_ip_header_7,incoming_tango_traffic_encaped_dup_header_0,incoming_tango_traffic_encaped_dup_header_1,incoming_tango_traffic_encaped_dup_header_2,incoming_tango_traffic_encaped_dup_header_3);
@@ -402,7 +402,7 @@ labeledstmt_66();
 labeledstmt_67();
 }
 labeled_statement labeledstmt_68{
-route_manager_0_idx_4241 = update_route_update_0;
+route_manager_0_idx_4500 = update_route_update_0;
 }
 labeled_statement labeledstmt_3{
 labeledstmt_68();
@@ -525,7 +525,7 @@ labeled_statement labeledstmt_24{
 
 }
 labeled_statement labeledstmt_87{
-route_manager_0_idx_4241 = traffic_class;
+route_manager_0_idx_4500 = traffic_class;
 }
 labeled_statement labeledstmt_25{
 labeledstmt_87();
@@ -534,13 +534,13 @@ labeled_statement labeledstmt_26{
 
 }
 labeled_statement labeledstmt_88{
-RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4241,get_4232,0,0,0);
+RouteManager_get_path_id_ret = Array.update_complex(route_manager_0,route_manager_0_idx_4500,get_4491,0,0,0);
 }
 labeled_statement labeledstmt_27{
 labeledstmt_88();
 }
 labeled_statement labeledstmt_89{
-Array.update_complex(route_manager_0,route_manager_0_idx_4241,set_4240,update_route_update_1,0,0);
+Array.update_complex(route_manager_0,route_manager_0_idx_4500,set_4499,update_route_update_1,0,0);
 }
 labeled_statement labeledstmt_28{
 labeledstmt_89();
@@ -567,7 +567,7 @@ labeled_statement labeledstmt_100{
 tango_tunnel_hdr_0 = 1610612736;
 }
 labeled_statement labeledstmt_99{
-tango_tunnel_hdr_1 = 1000;
+tango_tunnel_hdr_1 = 58+forward_flow_ip_header_1;
 }
 labeled_statement labeledstmt_98{
 tango_tunnel_hdr_2 = 58;
@@ -588,7 +588,7 @@ labeled_statement labeledstmt_93{
 tango_tunnel_hdr_7 = 1;
 }
 labeled_statement labeledstmt_92{
-SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4236,0,1,0);
+SequenceNumberManager_increment_ret = Array.update_complex(sequence_counters_0,path_id,combined_memop_SequenceNumberManager_get_curr_SequenceNumberManager_next_4495,0,1,0);
 }
 labeled_statement labeledstmt_33{
 labeledstmt_92();
@@ -777,7 +777,7 @@ labeledstmt_99();
 labeledstmt_100();
 }
 labeled_statement labeledstmt_108{
-tango_tunnel_hdr_7 = 77;
+tango_tunnel_hdr_7 = (int<<64>>)path_id;
 }
 labeled_statement labeledstmt_48{
 labeledstmt_92();

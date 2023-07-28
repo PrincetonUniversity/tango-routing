@@ -12,7 +12,7 @@ header wire_ev_t {
 }
 header bridge_ev_t {
   bit<8> port_event_id;
-  bit<5> flag_pad_4254;
+  bit<5> flag_pad_4513;
   bit<1> update_route;
   bit<1> incoming_tango_traffic;
   bit<1> forward_flow;
@@ -174,7 +174,7 @@ control IngressControl(inout hdr_t hdr,
     in ingress_intrinsic_metadata_from_parser_t ig_prsr_md,
     inout ingress_intrinsic_metadata_for_deparser_t ig_dprsr_md,
     inout ingress_intrinsic_metadata_for_tm_t ig_tm_md){
-  bit<8> route_manager_0_idx_4241;
+  bit<8> route_manager_0_idx_4500;
   action labeledstmt_55(){
     hdr.incoming_tango_traffic.setInvalid();
   }
@@ -244,7 +244,7 @@ control IngressControl(inout hdr_t hdr,
     labeledstmt_67();
   }
   action labeledstmt_68(){
-    route_manager_0_idx_4241=hdr.update_route.update_route_update_0;
+    route_manager_0_idx_4500=hdr.update_route.update_route_update_0;
   }
   action labeledstmt_3(){
     labeledstmt_68();
@@ -367,7 +367,7 @@ control IngressControl(inout hdr_t hdr,
     //NOOP
   }
   action labeledstmt_87(){
-    route_manager_0_idx_4241=traffic_class;
+    route_manager_0_idx_4500=traffic_class;
   }
   action labeledstmt_25(){
     labeledstmt_87();
@@ -376,7 +376,7 @@ control IngressControl(inout hdr_t hdr,
     //NOOP
   }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_4242 = {
+  route_manager_0_regaction_4501 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -388,13 +388,13 @@ control IngressControl(inout hdr_t hdr,
   };
   action labeledstmt_88(){
    
-RouteManager_get_path_id_ret=route_manager_0_regaction_4242.execute(route_manager_0_idx_4241);
+RouteManager_get_path_id_ret=route_manager_0_regaction_4501.execute(route_manager_0_idx_4500);
   }
   action labeledstmt_27(){
     labeledstmt_88();
   }
   RegisterAction<bit<8>,bit<8>,bit<8>>(route_manager_0)
-  route_manager_0_regaction_4243 = {
+  route_manager_0_regaction_4502 = {
     void apply(inout bit<8> cell1_remote,
         out bit<8> ret_remote){
       bit<8> cell1_local=cell1_remote;
@@ -406,7 +406,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4242.execute(route_manage
     }
   };
   action labeledstmt_89(){
-    route_manager_0_regaction_4243.execute(route_manager_0_idx_4241);
+    route_manager_0_regaction_4502.execute(route_manager_0_idx_4500);
   }
   action labeledstmt_28(){
     labeledstmt_89();
@@ -434,7 +434,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4242.execute(route_manage
     tango_tunnel_hdr_0=32w1610612736;
   }
   action labeledstmt_99(){
-    tango_tunnel_hdr_1=16w1000;
+    tango_tunnel_hdr_1=(16w58+hdr.forward_flow.forward_flow_ip_header_1);
   }
   action labeledstmt_98(){
     tango_tunnel_hdr_2=8w58;
@@ -455,7 +455,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4242.execute(route_manage
     tango_tunnel_hdr_7=64w1;
   }
   RegisterAction<bit<16>,bit<8>,bit<16>>(sequence_counters_0)
-  sequence_counters_0_regaction_4244 = {
+  sequence_counters_0_regaction_4503 = {
     void apply(inout bit<16> cell1_remote,
         out bit<16> ret_remote){
       bit<16> cell1_local=cell1_remote;
@@ -473,7 +473,7 @@ RouteManager_get_path_id_ret=route_manager_0_regaction_4242.execute(route_manage
   };
   action labeledstmt_92(){
    
-SequenceNumberManager_increment_ret=sequence_counters_0_regaction_4244.execute(path_id);
+SequenceNumberManager_increment_ret=sequence_counters_0_regaction_4503.execute(path_id);
   }
   action labeledstmt_33(){
     labeledstmt_92();
@@ -662,7 +662,7 @@ SequenceNumberManager_increment_ret=sequence_counters_0_regaction_4244.execute(p
     labeledstmt_100();
   }
   action labeledstmt_108(){
-    tango_tunnel_hdr_7=64w77;
+    tango_tunnel_hdr_7=((bit<64>)path_id);
   }
   action labeledstmt_48(){
     labeledstmt_92();
@@ -769,7 +769,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
   action labeledstmt_54(){
     labeledstmt_110();
   }
-  table table_4253 {
+  table table_4512 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -786,7 +786,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_4();
     } 
   } 
-  table table_4252 {
+  table table_4511 {
     key = {
       hdr.forward_flow.forward_flow_ip_header_2 : ternary;
       hdr.forward_flow.forward_flow_udp_header_1 : ternary;
@@ -858,7 +858,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_,_,_,_,_,_,_,_) : labeledstmt_5();
     } 
   } 
-  table table_4251 {
+  table table_4510 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -872,7 +872,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_24();
     } 
   } 
-  table table_4250 {
+  table table_4509 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -888,7 +888,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_26();
     } 
   } 
-  table table_4249 {
+  table table_4508 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -904,7 +904,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_29();
     } 
   } 
-  table table_4248 {
+  table table_4507 {
     key = {
       hdr.wire_ev.event_id : ternary;
       path_id : ternary;
@@ -964,7 +964,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_,_) : labeledstmt_32();
     } 
   } 
-  table table_4247 {
+  table table_4506 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -978,7 +978,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_49();
     } 
   } 
-  table table_4246 {
+  table table_4505 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -992,7 +992,7 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
       (_) : labeledstmt_51();
     } 
   } 
-  table table_4245 {
+  table table_4504 {
     key = {
       hdr.wire_ev.event_id : ternary;
     }
@@ -1007,15 +1007,15 @@ hdr.incoming_tango_traffic.incoming_tango_traffic_encaped_dup_header_3=hdr.forwa
     } 
   } 
   apply {
-    table_4253.apply();
-    table_4252.apply();
-    table_4251.apply();
-    table_4250.apply();
-    table_4249.apply();
-    table_4248.apply();
-    table_4247.apply();
-    table_4246.apply();
-    table_4245.apply();
+    table_4512.apply();
+    table_4511.apply();
+    table_4510.apply();
+    table_4509.apply();
+    table_4508.apply();
+    table_4507.apply();
+    table_4506.apply();
+    table_4505.apply();
+    table_4504.apply();
   }
 } 
 control IngressDeparser(packet_out pkt,
