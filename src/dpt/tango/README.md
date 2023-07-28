@@ -124,7 +124,7 @@ $SDE/./run_switchd.sh -p tcpv6 --arch tf2
 ucli
 pm
 port-add 16/0 10G NONE
-port-add 32/3 10G NONE
+port-add 15/3 10G NONE
 an-set 16/0 2
 an-set 15/3 2
 port-enb 16/0
