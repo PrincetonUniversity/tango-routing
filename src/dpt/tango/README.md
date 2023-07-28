@@ -261,8 +261,14 @@ event update_route (
 )
 ```
 
+Example of a simple Scapy packet that was tested and works, where the Raw payload has two bytes [Traffic_Class, New_Path_ID]: 
+```
+ sendp((Ether(dst="6e:81:25:df:a9:86", src="56:00:04:60:02:cd")/IPv6(dst="2620:c4:0:fe:e42:a1ff:fedd:5990")/ICMPv6EchoReply()/Raw('\x01\x0c'))*178,iface="enp1s0")
+
+```
+
 A Scapy program to form these packets with custom layers would look something
-akin to the following:
+akin to the following (note, this scapy program has not been fully tested yet):
 
 ```python
 """Send reroutes to switch."""
