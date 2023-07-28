@@ -144,7 +144,11 @@ bfshell> bfrt
 bfrt> <program_name>
 bfrt.program_name> pipe
 bfrt.program_name.pipe> route_manager_0
-bfrt.program_name.pipe.route_manager_0> dump 
+bfrt.program_name.pipe.route_manager_0> dump
+
+// After any updates, sync the register before reading it again
+bfrt.program_name.pipe.route_manager_0> operation_register_sync 
+bfrt.program_name.pipe.route_manager_0> dump
 
 ```
 
