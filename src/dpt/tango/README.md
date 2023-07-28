@@ -97,13 +97,13 @@ ucli
 pm
 port-add 4/0 10G NONE
 port-add 16/0 10G NONE
-port-add 32/1 10G NONE
+port-add 15/1 10G NONE
 an-set 4/0 2
 an-set 16/0 2
-an-set 32/1 2
+an-set 15/1 2
 port-enb 4/0
 port-enb 16/0
-port-enb 32/1
+port-enb 15/1
 show 
 ```
 
@@ -126,9 +126,9 @@ pm
 port-add 16/0 10G NONE
 port-add 32/3 10G NONE
 an-set 16/0 2
-an-set 32/3 2
+an-set 15/3 2
 port-enb 16/0
-port-enb 32/3
+port-enb 15/3
 show 
 ```
 Also in other terminal populate routes in control plane:
