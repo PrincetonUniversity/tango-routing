@@ -336,3 +336,10 @@ sudo ifconfig enp134s0f1 hw ether 50:6b:4b:c4:01:91
 sudo ip -6 neigh add fc::3 lladdr 00:90:fb:5e:d6:94 dev enp134s0f1
 sudo ip -6 route add fc::2/128 via fc::3 dev enp134s0f1
 ```
+
+The following are the setup commands for the L2 and L3 tables on cab-fruity. These may have to be run if the link state of ens3f1 is cycled.
+```
+ip addr add fc::1/64 dev ens3f1
+ip -6 neigh add fc::3 lladdr 00:16:9c:8e:cc:40 dev ens3f1
+ip -6 route add fc::2/128 via fc::3 dev ens3f1
+```
