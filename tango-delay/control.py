@@ -1,4 +1,4 @@
-"""Control plane implementation for stress test."""
+"""Control plane for populating switch delay table."""
 
 import logging
 import os
@@ -69,11 +69,7 @@ class TofinoRuntimeClient:
 
 class TableName(Enum):
     """All tables in p4 program of note."""
-
-    TIMESTAMP_SIGS = "pipe.outgoing_metric_signature_manager_0"
-    SEQ_NUM_SIGS = "pipe.outgoing_book_signature_manager_0"
-    ROUTE_MANAGER = "pipe.route_manager_0"
-    SEQ_COUNTERS = "pipe.sequence_counters_0"
+    DELAY_MANAGER = "pipe.delay_manager_0"
 
 
 class Table:
@@ -104,7 +100,7 @@ class Table:
         key: Any,  # noqa: ANN401
         data: Any,  # noqa: ANN401
     ) -> None:
-        """Add key-date entries to table."""
+        """Add key-data entries to table."""
         self._table.entry_add(
             target=gc.Target(),
             key_list=[key],
@@ -116,7 +112,7 @@ class Table:
         keys: List[Any],
         data_entries: List[Any],
     ) -> None:
-        """Add key-date entries to table."""
+        """Add key-data entries to table."""
         self._table.entry_add(
             target=gc.Target(),
             key_list=keys,
@@ -127,7 +123,7 @@ class Table:
         self: "Table",
         key: Any,  # noqa: ANN401
     ) -> Any:  # noqa: ANN401
-        """Add key-date entries to table."""
+        """Get key-data entries from table."""
         return self._table.entry_get(
             target=gc.Target(),
             key_list=key,
@@ -145,49 +141,33 @@ class Table:
 
 
 def main() -> None:
-    """Populate the switch with route updates and test they were successful."""
+    """Populate the switch with delay mapping table and test they were successful."""
     logger = logging.getLogger(__name__)
 
     logger.info("Connecting to gRPC server...")
     with TofinoRuntimeClient() as client:
-        logger.info("Parsing pickled signatures into gRPC calls...")
-        route_table = Table(TableName.ROUTE_MANAGER, client=client)
-        seq_num_table = Table(TableName.SEQ_COUNTERS, client=client)
-
+        logger.info("Writing delay map into gRPC calls...")
+        delay_table = Table(TableName.DELAY_MANAGER, client=client)
         logger.info("Initializing route table...")
 
-        route_keys = route_table.create_bulk_key(
+        # TODO: Update these keys 
+        delay_keys = delay_table.create_bulk_key(
             keyname="$REGISTER_INDEX",
             values=list(range(0, 32)),
         )
 
-        routes = list(range(0, 32))
-        routes[30] = 0
-        routes[31] = 8
-        route_values = route_table.create_bulk_data_entry(
-            fieldname="route_manager_0.f1",
-            values=routes,
+        # TODO: Get data entries associated with delay keys 
+        delays = list(range(0,32))
+        delay_values = delay_table.create_bulk_data_entry(
+            fieldname="delay_manager_0.f1",
+            values=delays,
         )
 
-        route_table.add_bulk_entry(route_keys, route_values)
+        delay_table.add_bulk_entry(delay_keys, delay_values)
 
-        logger.info("Route table initialized!!!")
+        logger.info("Delay table initialized!!!")
 
         logger.info("Initializing sequence counters...")
-
-        sequence_keys = seq_num_table.create_bulk_key(
-            keyname="$REGISTER_INDEX",
-            values=list(range(0, 32)),
-        )
-
-        sequence_values = seq_num_table.create_bulk_data_entry(
-            fieldname="sequence_counters_0.f1",
-            values=[0 for _ in range(0, 32)],
-        )
-
-        seq_num_table.add_bulk_entry(sequence_keys, sequence_values)
-
-        logger.info("Sequence numbers initialized!!!")
 
         logger.info("Exiting...")
 
