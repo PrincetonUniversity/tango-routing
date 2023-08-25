@@ -3,8 +3,14 @@
 #include <core.p4>
 #include <tna.p4>
 
-#define INTERNET_PORT 2 //156
-#define SERVER_PORT 4 // 9
+//TOFINO MODEL 
+//#define INTERNET_PORT 2
+//#define SERVER_PORT 4 
+//#define TANGO_SWITCH_PORT 0
+
+//TOFINO HARDWARE
+#define INTERNET_PORT 156
+#define SERVER_PORT 9
 #define TANGO_SWITCH_PORT 0
 
 typedef bit<48> mac_addr_t;
@@ -374,8 +380,7 @@ control SwitchIngress(
                         }
                     }
 		}
-        // TODO LATER: change ingress_port back to TANGO_SWITCH_PORT
-        else if(ig_intr_md.ingress_port==SERVER_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6){
+        else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6){
 			   //&& hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
                 if(hdr.ipv6.dst_addr_hi[23:16]==0x0088){ //path 0, no delay  
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
