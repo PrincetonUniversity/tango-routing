@@ -390,50 +390,58 @@ control SwitchIngress(
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                         }*/
                         // Add different recirc amount for different dst 
-                        if(hdr.ipv6.dst_addr_hi[23:16]==0x0089) // path 1
+                        if(hdr.ipv6.dst_addr_hi[23:16]==0x0089){ // path 1
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 10; 
-                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008a) // path 2
+                        }
+                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008a){ // path 2
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 100; 
-                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008b) // path 3
+                        }
+                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008b){// path 3
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 500; 
-                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008c) // path 4
+                        }
+                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008c){ // path 4
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 1000; 
-                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008d) // path 5
+                        }
+                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008d){ // path 5
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 2000; 
-                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008e) // path 6
+                        }
+                        else if(hdr.ipv6.dst_addr_hi[23:16]==0x008e){ // path 6
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 5000; 
-                        else if (hdr.ipv6.dst_addr_hi[23:16]==0x008f) // path 7
+                        }
+                        else if (hdr.ipv6.dst_addr_hi[23:16]==0x008f){ // path 7
                             hdr.delay_meta.setValid(); 
                             hdr.delay_meta.curr_round = 0; 
 			                hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 			                ig_intr_tm_md.ucast_egress_port = 68; 
                             hdr.delay_meta.needed_rounds = 10000; 
-                        else 
+                        }
+                        else{ 
                             ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
+                        }
                     }
                 }
 		
