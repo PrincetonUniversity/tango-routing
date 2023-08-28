@@ -373,6 +373,7 @@ control SwitchIngress(
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
                             route_to(INTERNET_PORT); 
+			    hdr.ethernet.ether_type=ETHERTYPE_IPV6;
                             hdr.delay_meta.setInvalid(); 
                         }
                         else{
