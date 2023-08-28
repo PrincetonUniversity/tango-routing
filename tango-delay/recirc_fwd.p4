@@ -365,14 +365,15 @@ control SwitchIngress(
                 }
                 // naive_routing();
 
+        bool is_delay = hdr.delay_meta.isValid(); 
                 
 		if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
-                    if(hdr.delay_meta.isValid()){
+                    if(is_delay){
                         // Check if curr_round == needed_rounds for delay
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
-                            hdr.delay_meta.setInvalid(); 
                             route_to(INTERNET_PORT); 
+                            hdr.delay_meta.setInvalid(); 
                         }
                         else{
                             // Increment curr_round and recirculate 
