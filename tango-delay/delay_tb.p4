@@ -13,7 +13,7 @@
 #define SERVER_PORT 9
 #define TANGO_SWITCH_PORT 0
 
-#define DELAY_TB_SIZE 4294967296
+#define DELAY_TB_SIZE 65536
 
 typedef bit<48> mac_addr_t;
 typedef bit<32> ipv4_addr_t;
@@ -124,6 +124,7 @@ struct header_t {
 }
 
 struct ig_metadata_t {
+    bit<32> first_ts; 
     bit<32> ts_bucket;  
     bit<16> tcp_total_len;
     bit<1> redo_cksum;
@@ -384,25 +385,27 @@ control SwitchIngress(
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
-			ig_intr_tm_md.ucast_egress_port = 68; 
+	    ig_intr_tm_md.ucast_egress_port = 68; 
             hdr.delay_meta.needed_rounds = num_recircs; 
         }
-
-        table tb_delay {
+	
+	table tb_delay_map {
             key = {
                 ig_md.ts_bucket: ternary; 
             }
-            size = DELAY_TB_SIZE; // 2^32  
             actions = {
                 start_delay_bucket; 
-            }
-            const_entries = {
-                (0): start_delay_bucket(10); // For given time bucket, perform X recirculations  
+            	drop;
+	    }
+	    default_action = drop(); 
+	    const entries = {
+	        (0): start_delay_bucket(10); // For given time bucket, perform X recirculations  
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
                 (_): start_delay_bucket(23); 
             } 
             // could also fill table from control plane
+            size = DELAY_TB_SIZE; // 2^16  
         } // end table 
 
 
@@ -431,14 +434,13 @@ control SwitchIngress(
                         }
                     }
 		}
-        // NOTE: apply delays on packets from TANGO_SWITCH_PORT 
-        else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
-
+        	// NOTE: apply delays on packets from TANGO_SWITCH_PORT 
+        	else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
                 // Extract timestamp, take middle bits as table index
-                ig_md.ts_bucket = 1  
+                ig_md.ts_bucket = 1;   
                 // Go to delay table
-                tb_delay.apply();  
-        }
+		tb_delay_map.apply();  
+		}
 		
 		else {
                 // TODO: bring reroute logic back, removed for ping test! 
@@ -454,7 +456,7 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
-        }
+        } // end apply 
 }
 
 // ---------------------------------------------------------------------------
