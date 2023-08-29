@@ -368,7 +368,7 @@ control SwitchIngress(
         RegisterAction<bit<32> ,_, bit<32>>(reg_tsbase) regact_tsbase_write = 
         {
             void apply(inout bit<32> value, out bit<32> ret){
-                value = ig_md.first_ts; 
+                value = ig_intr_md.ingress_mac_tstamp; // take first-seen current ts as start time  
                 ret = 0; 
             }
 
@@ -436,8 +436,12 @@ control SwitchIngress(
 		}
         	// NOTE: apply delays on packets from TANGO_SWITCH_PORT 
         	else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
-                // Extract timestamp, take middle bits as table index
-                ig_md.ts_bucket = 1;   
+                ig_md.first_ts = regact_tsbase_read.execute(0); 
+                if(ig_md.first_ts==0){ // First time through, initialize first_ts to current time 
+                    regact_tsbase_write.execute(0); 
+                }
+                // Extract timestamp, take upper bits as delay bucket and table index
+                ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[47:16] - ig_md.first_ts[47:16];   
                 // Go to delay table
 		tb_delay_map.apply();  
 		}
