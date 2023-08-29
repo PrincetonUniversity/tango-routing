@@ -124,8 +124,8 @@ struct header_t {
 }
 
 struct ig_metadata_t {
-    bit<32> first_ts; 
-    bit<32> ts_bucket;  
+    bit<32> first_ts_ms; 
+    bit<16> ts_bucket;  
     bit<16> tcp_total_len;
     bit<1> redo_cksum;
 
@@ -368,7 +368,7 @@ control SwitchIngress(
         RegisterAction<bit<32> ,_, bit<32>>(reg_tsbase) regact_tsbase_write = 
         {
             void apply(inout bit<32> value, out bit<32> ret){
-                value = ig_intr_md.ingress_mac_tstamp; // take first-seen current ts as start time  
+                value = ig_intr_md.ingress_mac_tstamp[47:16]; // take first-seen current ts as start time in ms 
                 ret = 0; 
             }
 
@@ -389,7 +389,7 @@ control SwitchIngress(
             hdr.delay_meta.needed_rounds = num_recircs; 
         }
 	
-	table tb_delay_map {
+	/*table tb_delay_map {
             key = {
                 ig_md.ts_bucket: ternary; 
             }
@@ -408,7 +408,7 @@ control SwitchIngress(
             size = DELAY_TB_SIZE; // 2^16  
         } // end table 
 
-
+*/
         apply {
                 ig_md.redo_cksum = 0;
                 if (hdr.ethernet.dst_addr[47:8] == 0) {
@@ -417,10 +417,10 @@ control SwitchIngress(
                 }
                 // naive_routing();
 
-        bool is_delay = hdr.delay_meta.isValid(); 
-                
+        	bool is_recirc = hdr.delay_meta.isValid(); 
+                bool should_delay = false;  
 		if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
-                    if(is_delay){
+                    if(is_recirc){
                         // Check if curr_round == needed_rounds for delay
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
@@ -435,15 +435,21 @@ control SwitchIngress(
                     }
 		}
         	// NOTE: apply delays on packets from TANGO_SWITCH_PORT 
-        	else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
-                ig_md.first_ts = regact_tsbase_read.execute(0); 
-                if(ig_md.first_ts==0){ // First time through, initialize first_ts to current time 
-                    regact_tsbase_write.execute(0); 
-                }
-                // Extract timestamp, take upper bits as delay bucket and table index
-                ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[47:16] - ig_md.first_ts[47:16];   
-                // Go to delay table
-		tb_delay_map.apply();  
+        	// First check to determine if delay condition is met 
+		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
+                //ig_md.first_ts_ms = regact_tsbase_read.execute(0);  
+                //ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
+		if(regact_tsbase_read.execute(0)==0){ // First time through, initialize first_ts to current time, ms 
+			should_delay = true; 
+			// can't initialize here, just set a flag 
+			//regact_tsbase_write.execute(0); 
+                } // don't add delay on first packet as we gather ts 
+		/*else{
+                	// Extract timestamp, take upper bits as delay bucket and table index
+                	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
+                	// Go to delay table
+			//tb_delay_map.apply();
+		} */ 
 		}
 		
 		else {
@@ -460,6 +466,13 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
+
+		// If we need to start a delay cycle for a packet 
+		if(should_delay){
+			// move logic here	
+                        ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
+		}		
+
         } // end apply 
 }
 
