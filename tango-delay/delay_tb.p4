@@ -421,9 +421,20 @@ control SwitchIngress(
         apply {
                 ig_md.redo_cksum = 0;
 
-           	    bool is_recirc = hdr.delay_meta.isValid(); 
-
-        if(hdr.ethernet.ether_type==ETHERTYPE_WRITE_TSTAMP){
+	if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
+                    if(hdr.delay_meta.isValid()){
+                        if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
+                            // Remove header and release packet to Internet 
+                            route_to(INTERNET_PORT); 
+			                hdr.ethernet.ether_type=ETHERTYPE_IPV6;
+                            hdr.delay_meta.setInvalid(); 
+                        }
+                        else{
+                            incr_and_recirc(hdr.delay_meta.curr_round); 
+                        }
+                    }
+		}
+        else if(hdr.ethernet.ether_type==ETHERTYPE_WRITE_TSTAMP){
 		        tsbase_write(); 
                 // Remove tstamp ethertype and release packet to Internet 
                 route_to(INTERNET_PORT); 
@@ -440,19 +451,6 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
                 	    // Go to delay table
 			            tb_delay_map.apply();
-                    }
-		}
-		else if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
-                    if(is_recirc){
-                        if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
-                            // Remove header and release packet to Internet 
-                            route_to(INTERNET_PORT); 
-			                hdr.ethernet.ether_type=ETHERTYPE_IPV6;
-                            hdr.delay_meta.setInvalid(); 
-                        }
-                        else{
-                            incr_and_recirc(hdr.delay_meta.curr_round); 
-                        }
                     }
 		}
 		else {
