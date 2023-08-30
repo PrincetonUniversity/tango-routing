@@ -125,7 +125,7 @@ struct header_t {
 }
 
 struct ig_metadata_t {
-    bit<32> first_ts_ms; 
+    bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
     bit<1> redo_cksum;
@@ -365,19 +365,19 @@ control SwitchIngress(
 
         // <entry_type, key_type> (num_entries) 
         // TODO: how many bits are ts? 
-        Register<bit<32>,_>(1) reg_tsbase;
-        RegisterAction<bit<32> ,_, bit<32>>(reg_tsbase) regact_tsbase_write = 
+        Register<bit<16>,_>(1) reg_tsbase;
+        RegisterAction<bit<16> ,_, bit<16>>(reg_tsbase) regact_tsbase_write = 
         {
-            void apply(inout bit<32> value, out bit<32> ret){
-                value = ig_intr_md.ingress_mac_tstamp[47:16]; // take first-seen current ts as start time in ms 
+            void apply(inout bit<16> value, out bit<16> ret){
+                value = ig_intr_md.ingress_mac_tstamp[45:30]; // take first-seen current ts, on roughly 1s granularity 
                 ret = 0; 
             }
 
         };  
 
-        RegisterAction<bit<32>, _, bit<32>>(reg_tsbase) regact_tsbase_read = 
+        RegisterAction<bit<16>, _, bit<16>>(reg_tsbase) regact_tsbase_read = 
         {
-            void apply(inout bit<32> value, out bit<32> ret){
+            void apply(inout bit<16> value, out bit<16> ret){
                 ret = value; 
             }
         }; 
@@ -398,7 +398,7 @@ control SwitchIngress(
             hdr.delay_meta.needed_rounds = num_recircs; 
         }
 	
-	table tb_delay_map {
+	    table tb_delay_map {
             key = {
                 ig_md.ts_bucket: ternary; 
             }
@@ -421,7 +421,7 @@ control SwitchIngress(
         apply {
                 ig_md.redo_cksum = 0;
 
-	if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
+	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
@@ -447,8 +447,8 @@ control SwitchIngress(
                         hdr.ethernet.ether_type=ETHERTYPE_WRITE_TSTAMP;
 	                    ig_intr_tm_md.ucast_egress_port = 68; 
                     } 
-                    else{ // Extract timestamp, take upper bits as delay bucket and table index
-                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
+                    else{ // Extract timestamp, slice upper-middle bits as delay bucket and table index
+                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_map.apply();
                     }
