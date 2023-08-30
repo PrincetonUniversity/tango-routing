@@ -125,8 +125,9 @@ struct header_t {
 }
 
 struct ig_metadata_t {
-    bit<32> rnd_shifted; 
-    bit<32> max_recircs; 
+    bit<32> rnd_index; 
+    bit<32> rnd_offset_index; 
+    bit<32> range_offset; 
     bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
@@ -395,22 +396,21 @@ control SwitchIngress(
 
 	Random<bit<32>>() rng; 
         
-	action start_delay_bucket(bit<32> min_recircs, bit<32> max_recircs){
+    //TODO Change offset size 
+	action start_delay_bucket(bit<32> offset){
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 	        ig_intr_tm_md.ucast_egress_port = 68;
 
-	    bit<32> rnd = (bit<32>) rng.get(); 	
-	    //ig_md.rnd_shifted = rnd + min_recircs; 	
-	    ig_md.rnd_shifted = 0; 	
-            ig_md.max_recircs = max_recircs; 
-
-            // set to be true so needed_rounds saturated to max_recircs is added to delay metadata header later 
+	        bit<32> rnd = (bit<32>) rng.get(); 	
+	        ig_md.rnd_index = rnd; 	
+            ig_md.range_offset = offset; 
+            // set to be true so delay range table is applied later 
             ig_md.must_set_recircs=1; 
         }
 	
-	    table tb_delay_map {
+	    table tb_delay_buckets {
             key = {
                 ig_md.ts_bucket: ternary; 
             }
@@ -420,20 +420,42 @@ control SwitchIngress(
 	    }
 	    default_action = drop(); 
 	    const entries = {
-	            (0): start_delay_bucket(10,40); // For given time bucket, perform X recirculations  
-                (1): start_delay_bucket(40,100);
-                (2): start_delay_bucket(3000,5000);
-                (_): start_delay_bucket(23,80); 
+	            (0): start_delay_bucket(10); // For given time bucket, find random index with bucket offset to delay_range table  
+                (1): start_delay_bucket(40);
+                (2): start_delay_bucket(3000);
+                (_): start_delay_bucket(23); 
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
         } // end table 
 
 
+	    action start_delay_range(bit<32> recircs){
+            hdr.delay_meta.needed_rounds = recircs; 
+        }
+
+	    table tb_delay_ranges {
+            key = {
+                ig_md.rnd_offset_index: ternary; 
+            }
+            actions = {
+                start_delay_range; 
+            	drop;
+	    }
+	    default_action = drop(); 
+	    const entries = {
+	            (0): start_delay_range(10); // For given time bucket, find random index with bucket offset to delay_range table  
+                (1): start_delay_range(40);
+                (2): start_delay_range(3000);
+                (_): start_delay_range(23); 
+            } 
+            // could also fill table from control plane
+            size = DELAY_TB_SIZE; // 2^16  
+        } // end table 
         apply {
                 ig_md.redo_cksum = 0;
-                ig_md.must_set_recircs = 0; 
 
+                ig_md.must_set_recircs = 0; 
 	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
@@ -463,7 +485,7 @@ control SwitchIngress(
                     else{ // Extract timestamp, slice upper-middle bits as delay bucket and table index
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
-			            tb_delay_map.apply();
+			            tb_delay_buckets.apply();
                     }
 		}
 		else {
@@ -481,13 +503,10 @@ control SwitchIngress(
                 }
 		}
 
-        if(ig_md.must_set_recircs==1){ // This will only be true after delay table is applied 
-            if(ig_md.rnd_shifted > ig_md.max_recircs){
-                hdr.delay_meta.needed_rounds = ig_md.max_recircs; 
-            }
-            else{
-                hdr.delay_meta.needed_rounds = ig_md.rnd_shifted; 
-            }
+        if(ig_md.must_set_recircs){
+            // apply delay_range table 
+            ig_md.rnd_offset_index = ig_md.rnd_index + ig_md.range_offset;
+            tb_delay_ranges.apply(); 
         }
 
         } // end apply 
