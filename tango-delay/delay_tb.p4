@@ -22,7 +22,8 @@ typedef bit<16> ether_type_t;
 const ether_type_t ETHERTYPE_IPV4 = 16w0x0800;
 const ether_type_t ETHERTYPE_IPV6 = 16w0x86DD;
 const ether_type_t ETHERTYPE_VLAN = 16w0x0810;
-const ether_type_t ETHERTYPE_DELAY_INTM = 16w0xff00;
+const ether_type_t ETHERTYPE_DELAY_INTM = 16w0xFF00;
+const ether_type_t ETHERTYPE_WRITE_TSTAMP = 16w0xFFFF;
 
 typedef bit<8> ip_protocol_t;
 const ip_protocol_t IP_PROTOCOLS_ICMP = 1;
@@ -393,7 +394,7 @@ control SwitchIngress(
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
-	    ig_intr_tm_md.ucast_egress_port = 68; 
+	        ig_intr_tm_md.ucast_egress_port = 68; 
             hdr.delay_meta.needed_rounds = num_recircs; 
         }
 	
@@ -419,19 +420,27 @@ control SwitchIngress(
 
         apply {
                 ig_md.redo_cksum = 0;
-                if (hdr.ethernet.dst_addr[47:8] == 0) {
-                        hdr.ethernet.src_addr = SRC_MAC;
-                        hdr.ethernet.dst_addr = DST_MAC;
-                }
 
            	    bool is_recirc = hdr.delay_meta.isValid(); 
 
-		if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16] && regact_tsbase_read.execute(0)!=0){
+        if(hdr.ethernet.ether_type==ETHERTYPE_WRITE_TSTAMP){
+		        tsbase_write(); 
+                // Remove tstamp ethertype and release packet to Internet 
+                route_to(INTERNET_PORT); 
+			    hdr.ethernet.ether_type=ETHERTYPE_IPV6;
+                exit; 
+        }
+		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
 			        tsbase_read(); 
-                	// Extract timestamp, take upper bits as delay bucket and table index
-                	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
-                	// Go to delay table
-			tb_delay_map.apply();
+                	if(ig_md.first_ts_ms == 0){ // First time through, recirculate with WRITE_TSTAMP ethertype 
+                        hdr.ethernet.ether_type=ETHERTYPE_WRITE_TSTAMP;
+	                    ig_intr_tm_md.ucast_egress_port = 68; 
+                    } 
+                    else{ // Extract timestamp, take upper bits as delay bucket and table index
+                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
+                	    // Go to delay table
+			            tb_delay_map.apply();
+                    }
 		}
 		else if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(is_recirc){
@@ -445,11 +454,7 @@ control SwitchIngress(
                             incr_and_recirc(hdr.delay_meta.curr_round); 
                         }
                     }
-		        }
-		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
-                // Assume this is the first time through 
-		        tsbase_write(); 
-	    }
+		}
 		else {
                 // TODO: bring reroute logic back, removed for ping test! 
                 // Send IPv6/ICMP6EchoReply pkts to update routes on tango switch
