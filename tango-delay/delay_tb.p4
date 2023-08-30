@@ -503,7 +503,7 @@ control SwitchIngress(
                 }
 		}
 
-        if(ig_md.must_set_recircs){
+        if(ig_md.must_set_recircs==1){
             // apply delay_range table 
             ig_md.rnd_offset_index = ig_md.rnd_index + ig_md.range_offset;
             tb_delay_ranges.apply(); 
