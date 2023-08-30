@@ -1,0 +1,218 @@
+:08-30 14:32:16.210759:    PORT UP asic 0 port 0
+:08-30 14:32:16.210886:    PORT UP asic 0 port 1
+:08-30 14:32:16.210914:    PORT UP asic 0 port 2
+:08-30 14:32:16.210944:    PORT UP asic 0 port 3
+:08-30 14:32:16.210961:    PORT UP asic 0 port 4
+:08-30 14:32:16.210989:    PORT UP asic 0 port 5
+:08-30 14:32:16.211014:    PORT UP asic 0 port 6
+:08-30 14:32:16.211036:    PORT UP asic 0 port 7
+:08-30 14:32:16.211064:    PORT UP asic 0 port 8
+:08-30 14:32:16.211086:    PORT UP asic 0 port 9
+:08-30 14:32:16.211116:    PORT UP asic 0 port 10
+:08-30 14:32:16.211137:    PORT UP asic 0 port 11
+:08-30 14:32:16.211167:    PORT UP asic 0 port 12
+:08-30 14:32:16.211188:    PORT UP asic 0 port 13
+:08-30 14:32:16.211204:    PORT UP asic 0 port 14
+:08-30 14:32:16.211234:    PORT UP asic 0 port 15
+:08-30 14:32:16.211256:    PORT UP asic 0 port 16
+:08-30 14:32:16.211287:    PORT UP asic 0 port 64
+:08-30 14:32:16.210543:    Setting logging fn
+:08-30 14:32:16.211381:    Registering handler for tx
+:08-30 14:32:16.232343:     Updating model log flags: clearing 0xffffffff ffffffff, setting 0x00000000 0000000f
+:08-30 14:32:16.241147:    :-:-:<0,0,0>:Updating p4 log flags: clearing 0xffffffff ffffffff, setting 0x00000000 0000007f
+:08-30 14:32:16.246462:    :-:-:<0,0,0>:Updating tofino log flags: clearing 0xffffffff ffffffff, setting 0x00000000 0000007f
+:08-30 14:32:16.250615:    :-:-:<0,0,0>:Updating packet log flags: clearing 0xffffffff ffffffff, setting 0x00000000 0000007f
+:08-30 14:32:16.451440:    :-:-:<0,0,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.451955:    :-:-:<0,0,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.453052:    :-:-:<0,1,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.453208:    :-:-:<0,1,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.454220:    :-:-:<0,2,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.454588:    :-:-:<0,2,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.455913:    :-:-:<0,3,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:32:16.456082:    :-:-:<0,3,->:LearningFilter::clear : Excessive clearing of filter 1 !!! Nothing to clear
+:08-30 14:36:55.216026:    :-:-:<0,-,0>:Begin packet processing
+:08-30 14:36:55.216168:    :0x1:-:<0,0,0>:========== Ingress Pkt from port 0 (64 bytes)  ==========
+:08-30 14:36:55.216186:    :0x1:-:<0,0,0>:Packet :
+:08-30 14:36:55.216195:        :0x1:-:<0,0,0>:aa bb cc dd ee ff 00 11 22 33 44 55 86 dd 60 00 
+:08-30 14:36:55.216211:        :0x1:-:<0,0,0>:00 00 00 00 3b 40 00 00 00 00 00 00 00 00 00 00 
+:08-30 14:36:55.216226:        :0x1:-:<0,0,0>:00 00 00 00 00 00 26 04 45 40 00 8d 00 00 00 00 
+:08-30 14:36:55.216240:        :0x1:-:<0,0,0>:00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 
+:08-30 14:36:55.216256:    :0x1:-:<0,0,->:========== Packet to input parser: from port 0 (80 bytes)  ==========
+:08-30 14:36:55.216267:    :0x1:-:<0,0,->:Packet :
+:08-30 14:36:55.216281:        :0x1:-:<0,0,->:00 00 00 51 33 91 20 60 00 00 00 00 00 00 00 00 
+:08-30 14:36:55.216295:        :0x1:-:<0,0,->:aa bb cc dd ee ff 00 11 22 33 44 55 86 dd 60 00 
+:08-30 14:36:55.216303:        :0x1:-:<0,0,->:00 00 00 00 3b 40 00 00 00 00 00 00 00 00 00 00 
+:08-30 14:36:55.216317:        :0x1:-:<0,0,->:00 00 00 00 00 00 26 04 45 40 00 8d 00 00 00 00 
+:08-30 14:36:55.216442:    :0x1:-:<0,0,0>:Ingress Parser state '$entry_point'
+:08-30 14:36:55.216514:        :0x1:-:<0,0,0>:Ingress Parser state '$entry_point': extracted       0x00, updating PHV word  64 to value       0x00 I [ig_intr_md.ingress_port[8:8]]
+:08-30 14:36:55.216541:        :0x1:-:<0,0,0>:Ingress Parser state '$entry_point': extracted       0x00, updating PHV word  65 to value       0x00 I [ig_intr_md.ingress_port[7:0]]
+:08-30 14:36:55.216572:        :0x1:-:<0,0,0>:Ingress Parser state '$entry_point': extracted     0x0051, updating PHV word 129 to value     0x0051 I [ig_intr_md.ingress_mac_tstamp[47:32]]
+:08-30 14:36:55.216607:        :0x1:-:<0,0,0>:Ingress Parser state '$entry_point': extracted     0x2060, updating PHV word 320 to value     0x2060 I [ig_intr_md.ingress_mac_tstamp[15:0]]
+:08-30 14:36:55.216637:        :0x1:-:<0,0,0>:Ingress Parser state '$entry_point': extracted 0x00513391, updating PHV word   2 to value 0x00513391 I [ig_intr_md.ingress_mac_tstamp[31:16]]
+:08-30 14:36:55.216657:    :0x1:-:<0,0,0>:Ingress Parser state 'start'
+:08-30 14:36:55.216688:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted       0x01, updating PHV word  70 to value       0x01 I [POV]
+:08-30 14:36:55.216716:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted       0xaa, updating PHV word  68 to value       0xaa I [hdr.ethernet.dst_addr[47:40]]
+:08-30 14:36:55.216738:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted       0xff, updating PHV word  67 to value       0xff I [hdr.ethernet.dst_addr[7:0]]
+:08-30 14:36:55.216759:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted     0x0011, updating PHV word 131 to value     0x0011 I [hdr.ethernet.src_addr[47:32]]
+:08-30 14:36:55.216789:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted     0x86dd, updating PHV word 130 to value     0x86dd I [hdr.ethernet.ether_type[15:0]]
+:08-30 14:36:55.216813:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted 0xbbccddee, updating PHV word   6 to value 0xbbccddee I [hdr.ethernet.dst_addr[39:8]]
+:08-30 14:36:55.216839:        :0x1:-:<0,0,0>:Ingress Parser state 'start': extracted 0x22334455, updating PHV word   5 to value 0x22334455 I [hdr.ethernet.src_addr[31:0]]
+:08-30 14:36:55.216859:    :0x1:-:<0,0,0>:Ingress Parser state 'start_0'
+:08-30 14:36:55.216897:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted       0x00, updating PHV word 298 to value       0x00 I [hdr.ipv6.src_addr_hi[31:24]]
+:08-30 14:36:55.216919:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted       0x00, updating PHV word 297 to value       0x00 I [hdr.ipv6.src_addr_hi[23:16]]
+:08-30 14:36:55.216940:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted       0x00, updating PHV word 296 to value       0x00 I [hdr.ipv6.src_addr_hi[15:8]]
+:08-30 14:36:55.216963:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted       0x00, updating PHV word 291 to value       0x00 I [hdr.ipv6.src_addr_hi[7:0]]
+:08-30 14:36:55.216987:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted     0x0000, updating PHV word 337 to value     0x0000 I [hdr.ipv6.src_addr_low[63:48]]
+:08-30 14:36:55.217829:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted     0x0000, updating PHV word 336 to value     0x0000 I [hdr.ipv6.src_addr_low[47:32]]
+:08-30 14:36:55.217853:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted     0x0000, updating PHV word 335 to value     0x0000 I [hdr.ipv6.src_addr_low[31:16]]
+:08-30 14:36:55.217881:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted     0x0000, updating PHV word 334 to value     0x0000 I [hdr.ipv6.src_addr_low[15:0]]
+:08-30 14:36:55.217906:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted 0x60000000, updating PHV word 259 to value 0x60000000 I [hdr.ipv6.flow_label[19:0], hdr.ipv6.priority_class[7:0], hdr.ipv6.version[3:0]]
+:08-30 14:36:55.218334:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted 0x00003b40, updating PHV word 258 to value 0x00003b40 I [hdr.ipv4.identification[15:0], hdr.ipv4.total_len[15:0], hdr.ipv6.hop_limit[7:0], hdr.ipv6.next_hdr[7:0], hdr.ipv6.payload_len[15:0]]
+:08-30 14:36:55.218360:        :0x1:-:<0,0,0>:Ingress Parser state 'start_0': extracted 0x00000000, updating PHV word 268 to value 0x00000000 I [hdr.ipv6.src_addr_hi[63:32]]
+:08-30 14:36:55.218373:    :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0'
+:08-30 14:36:55.218401:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted       0x20, updating PHV word  70 to value       0x21 I [POV]
+:08-30 14:36:55.218430:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted       0x26, updating PHV word 288 to value       0x26 I [hdr.ipv6.dst_addr_hi[63:56]]
+:08-30 14:36:55.218454:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted       0x8d, updating PHV word  69 to value       0x8d I [hdr.ipv6.dst_addr_hi[23:16]]
+:08-30 14:36:55.218493:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted     0x0445, updating PHV word 333 to value     0x0445 I [hdr.ipv4.hdr_checksum[15:0], hdr.ipv6.dst_addr_hi[55:40]]
+:08-30 14:36:55.218518:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted     0x4000, updating PHV word 332 to value     0x4000 I [hdr.ipv4.diffserv[7:0], hdr.ipv4.ihl[3:0], hdr.ipv4.version[3:0], hdr.ipv6.dst_addr_hi[39:24]]
+:08-30 14:36:55.218547:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted     0x0000, updating PHV word 340 to value     0x0000 I [hdr.ipv6.dst_addr_hi[15:0]]
+:08-30 14:36:55.218570:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted 0x00000000, updating PHV word 267 to value 0x00000000 I [hdr.ipv6.dst_addr_low[63:32]]
+:08-30 14:36:55.219120:        :0x1:-:<0,0,0>:Ingress Parser state 'parse_ipv6.$split_0': extracted 0x00000001, updating PHV word 266 to value 0x00000001 I [hdr.ipv6.dst_addr_low[31:0]]
+:08-30 14:36:55.219539:        :0x1:-:<0,0,->:Ingress Headers:
+:08-30 14:36:55.219631:        :0x1:-:<0,0,->:Header hdr.ethernet.$valid is valid
+:08-30 14:36:55.219653:        :0x1:-:<0,0,->:Header hdr.ipv6.$valid is valid
+:08-30 14:36:55.219673:    :0x1:-:<0,0,->:------------ Stage 0 ------------
+:08-30 14:36:55.220158:    :0x1:-:<0,0,0>:Ingress : Gateway table condition ((hdr.ethernet.dst_addr[47:8] == 0)) not matched.
+:08-30 14:36:55.220206:    :0x1:-:<0,0,0>:Ingress : Gateway attached to tbl_delay_tb423
+:08-30 14:36:55.220220:    :0x1:-:<0,0,0>:Ingress : Associated table tbl_delay_tb423 is executed
+:08-30 14:36:55.220226:    :0x1:-:<0,0,0>:Ingress : Gateway did provide payload.
+:08-30 14:36:55.220242:        :0x1:-:<0,0,0>:Next Table = tbl_act
+:08-30 14:36:55.220262:    :0x1:-:<0,0,->:------------ Stage 1 ------------
+:08-30 14:36:55.220602:    :0x1:-:<0,0,1>:Ingress : Table tbl_act is miss
+:08-30 14:36:55.220622:        :0x1:-:<0,0,1>:Key:
+:08-30 14:36:55.220703:        :0x1:-:<0,0,1>:Executed StatefulALU 3 with instruction 0
+:08-30 14:36:55.220720:        :0x1:-:<0,0,1>:Execute Default Action: act
+:08-30 14:36:55.220744:        :0x1:-:<0,0,1>:Action Results:
+:08-30 14:36:55.220751:        :0x1:-:<0,0,1>:	----- ExecuteStatefulAluPrimitive -----
+:08-30 14:36:55.220764:        :0x1:-:<0,0,1>:	----- BlackBox: regact_tsbase_read_0 -----
+:08-30 14:36:55.220770:        :0x1:-:<0,0,1>:	----- register: SwitchIngress.reg_tsbase -----
+:08-30 14:36:55.220793:        :0x1:-:<0,0,1>:	--- SALU Condition ---
+:08-30 14:36:55.220812:        :0x1:-:<0,0,1>:	  Not supplied by program.
+:08-30 14:36:55.220818:        :0x1:-:<0,0,1>:	    SALU ConditionLo: FALSE
+:08-30 14:36:55.220823:        :0x1:-:<0,0,1>:	    SALU ConditionHi: FALSE
+:08-30 14:36:55.220837:        :0x1:-:<0,0,1>:	--- SALU Update ---
+:08-30 14:36:55.220843:        :0x1:-:<0,0,1>:	  None
+:08-30 14:36:55.220852:        :0x1:-:<0,0,1>:	--- SALU Output ---
+:08-30 14:36:55.220870:        :0x1:-:<0,0,1>:	    Output predicate not supplied by program
+:08-30 14:36:55.220876:        :0x1:-:<0,0,1>:	    Output PredicateResult: TRUE
+:08-30 14:36:55.220888:        :0x1:-:<0,0,1>:	    Output Destination Field: regact_tsbase_read = 0x0
+:08-30 14:36:55.220894:        :0x1:-:<0,0,1>:	---  SALU Register ---
+:08-30 14:36:55.220906:        :0x1:-:<0,0,1>:	   Register Index: 0
+:08-30 14:36:55.220911:        :0x1:-:<0,0,1>:	     Before stateful alu execution: 0x00000000
+:08-30 14:36:55.220922:        :0x1:-:<0,0,1>:	     After stateful alu execution: 0x00000000
+:08-30 14:36:55.220930:        :0x1:-:<0,0,1>:Next Table = cond-10
+:08-30 14:36:55.220946:    :0x1:-:<0,0,->:------------ Stage 2 ------------
+:08-30 14:36:55.221281:    :0x1:-:<0,0,2>:Ingress : Gateway table condition ((ig_intr_md.ingress_port == 0 && hdr.ethernet.ether_type == 34525 && hdr.ipv6.dst_addr_hi[23:16] == 141 && regact_tsbase_read != 0)) matched.
+:08-30 14:36:55.221313:    :0x1:-:<0,0,2>:Ingress : Gateway attached to cond-10
+:08-30 14:36:55.221319:    :0x1:-:<0,0,2>:Ingress : Associated table cond-10 is executed
+:08-30 14:36:55.221334:    :0x1:-:<0,0,2>:Ingress : Gateway did provide payload.
+:08-30 14:36:55.221340:        :0x1:-:<0,0,2>:Next Table = cond-11
+:08-30 14:36:55.221353:    :0x1:-:<0,0,2>:Ingress : Table tbl_tsbase_read is not active(inhibited/skipped)
+:08-30 14:36:55.221368:    :0x1:-:<0,0,2>:Ingress : Gateway table condition ((hdr.ethernet.ether_type == 65280)) not matched.
+:08-30 14:36:55.221374:    :0x1:-:<0,0,2>:Ingress : Gateway attached to cond-11
+:08-30 14:36:55.221379:    :0x1:-:<0,0,2>:Ingress : Associated table cond-11 is executed
+:08-30 14:36:55.221384:    :0x1:-:<0,0,2>:Ingress : Gateway did provide payload.
+:08-30 14:36:55.221398:        :0x1:-:<0,0,2>:Next Table = tbl_tsbase_write
+:08-30 14:36:55.221418:    :0x1:-:<0,0,2>:Ingress : Gateway table condition ((ig_intr_md.ingress_port == 0 && hdr.ethernet.ether_type == 34525 && hdr.ipv6.dst_addr_hi[23:16] == 141)) matched.
+:08-30 14:36:55.221849:    :0x1:-:<0,0,2>:Ingress : Gateway attached to tbl_tsbase_write
+:08-30 14:36:55.221867:    :0x1:-:<0,0,2>:Ingress : Table tbl_tsbase_write is inhibited by a gateway condition
+:08-30 14:36:55.221874:        :0x1:-:<0,0,2>:Executed StatefulALU 3 with instruction 1
+:08-30 14:36:55.221889:        :0x1:-:<0,0,2>:Execute Default Action: SwitchIngress.tsbase_write
+:08-30 14:36:55.221907:        :0x1:-:<0,0,2>:Action Results:
+:08-30 14:36:55.221921:        :0x1:-:<0,0,2>:	----- ExecuteStatefulAluPrimitive -----
+:08-30 14:36:55.221927:        :0x1:-:<0,0,2>:	----- BlackBox: regact_tsbase_write_0 -----
+:08-30 14:36:55.221940:        :0x1:-:<0,0,2>:	----- register: SwitchIngress.reg_tsbase -----
+:08-30 14:36:55.221946:        :0x1:-:<0,0,2>:Next Table = ingresshdr.ipv4.hdr_checksum_encode_update_condition_2_ingress
+:08-30 14:36:55.221953:    :0x1:-:<0,0,2>:Ingress : Table tbl_delay_tb460 is not active(inhibited/skipped)
+:08-30 14:36:55.221967:    :0x1:-:<0,0,2>:Ingress : Table tbl_delay_tb462 is not active(inhibited/skipped)
+:08-30 14:36:55.221980:    :0x1:-:<0,0,2>:Ingress : Table tbl_delay_tb464 is not active(inhibited/skipped)
+:08-30 14:36:55.221987:    :0x1:-:<0,0,2>:Ingress : Table tbl_delay_tb441 is not active(inhibited/skipped)
+:08-30 14:36:55.221999:    :0x1:-:<0,0,2>:Ingress : Table tbl_incr_and_recirc is not active(inhibited/skipped)
+:08-30 14:36:55.222005:    :0x1:-:<0,0,2>:Ingress : Table tbl_route_to is not active(inhibited/skipped)
+:08-30 14:36:55.222015:    :0x1:-:<0,0,->:------------ Stage 3 ------------
+:08-30 14:36:55.222212:    :0x1:-:<0,0,3>:Ingress : Table tbl_delay_tb432 is not active(inhibited/skipped)
+:08-30 14:36:55.222230:    :0x1:-:<0,0,->:------------ Stage 4 ------------
+:08-30 14:36:55.222565:    <0,0,4> WARN MAU_PRED<4> get_next_table(ingress,-1) Power-saved LT 0 using table counter - table lookup will appear to always miss
+:08-30 14:36:55.222910:    :0x1:-:<0,0,->:------------ Stage 5 ------------
+:08-30 14:36:55.223495:    :0x1:-:<0,0,5>:Ingress : Table SwitchIngress.tb_delay_map is not active(inhibited/skipped)
+:08-30 14:36:55.223518:    :0x1:-:<0,0,->:------------ Stage 6 ------------
+:08-30 14:36:55.223624:    <0,0,6> WARN MAU_PRED<6> get_next_table(ingress,-1) Power-saved LT 0 using table counter - table lookup will appear to always miss
+:08-30 14:36:55.223736:    :0x1:-:<0,0,->:------------ Stage 7 ------------
+:08-30 14:36:55.224078:    :0x1:-:<0,0,7>:Ingress : Table SwitchIngress.tb_delay_map is not active(inhibited/skipped)
+:08-30 14:36:55.224101:    :0x1:-:<0,0,->:------------ Stage 8 ------------
+:08-30 14:36:55.224456:    :0x1:-:<0,0,8>:Ingress : Table SwitchIngress.tb_delay_map is not active(inhibited/skipped)
+:08-30 14:36:55.224483:    :0x1:-:<0,0,->:------------ Stage 9 ------------
+:08-30 14:36:55.224718:    :0x1:-:<0,0,9>:Ingress : Table SwitchIngress.tb_delay_map is not active(inhibited/skipped)
+:08-30 14:36:55.224748:    :0x1:-:<0,0,->:------------ Stage 10 ------------
+:08-30 14:36:55.224991:    :0x1:-:<0,0,10>:Ingress : Table ingresshdr.ipv4.hdr_checksum_encode_update_condition_2_ingress is miss
+:08-30 14:36:55.225014:        :0x1:-:<0,0,10>:Key:
+:08-30 14:36:55.225115:        :0x1:-:<0,0,10>:	--validity_check--hdr.ipv4.$valid = 0x0
+:08-30 14:36:55.225130:        :0x1:-:<0,0,10>:	ig_md.redo_cksum[0:0] = 0x0
+:08-30 14:36:55.225144:        :0x1:-:<0,0,10>:Execute Default Action: __nop_
+:08-30 14:36:55.225160:        :0x1:-:<0,0,10>:Action Results:
+:08-30 14:36:55.225166:        :0x1:-:<0,0,10>:Next Table = ingresshdr.tcp.checksum_encode_update_condition_3_ingress
+:08-30 14:36:55.225184:    :0x1:-:<0,0,->:------------ Stage 11 ------------
+:08-30 14:36:55.225440:    :0x1:-:<0,0,11>:Ingress : Table ingresshdr.tcp.checksum_encode_update_condition_3_ingress is miss
+:08-30 14:36:55.225456:        :0x1:-:<0,0,11>:Key:
+:08-30 14:36:55.225548:        :0x1:-:<0,0,11>:	--validity_check--hdr.tcp.$valid = 0x0
+:08-30 14:36:55.225567:        :0x1:-:<0,0,11>:	ig_md.redo_cksum[0:0] = 0x0
+:08-30 14:36:55.225575:        :0x1:-:<0,0,11>:Execute Default Action: __nop_
+:08-30 14:36:55.225694:        :0x1:-:<0,0,11>:Action Results:
+:08-30 14:36:55.225710:        :0x1:-:<0,0,11>:	----- ModifyFieldPrimitive -----
+:08-30 14:36:55.225716:        :0x1:-:<0,0,11>:	Operation:
+:08-30 14:36:55.225734:        :0x1:-:<0,0,11>:	set
+:08-30 14:36:55.225751:        :0x1:-:<0,0,11>:	Destination:
+:08-30 14:36:55.225763:        :0x1:-:<0,0,11>:	ig_intr_md_for_dprsr.mirror_type[2:0] = 0x0
+:08-30 14:36:55.225769:        :0x1:-:<0,0,11>:	mask=0x7
+:08-30 14:36:55.225774:        :0x1:-:<0,0,11>:	Source 1:
+:08-30 14:36:55.225779:        :0x1:-:<0,0,11>:	Val=0x3
+:08-30 14:36:55.226400:        :0x1:-:<0,0,11>:Next Table = --END_OF_PIPELINE--
+:08-30 14:36:55.226619:    :0x1:-:<0,0,->:------------ Stage 0 EOP processing ------------
+:08-30 14:36:55.226882:    :0x1:-:<0,0,->:------------ Stage 1 EOP processing ------------
+:08-30 14:36:55.227121:    :0x1:-:<0,0,->:------------ Stage 2 EOP processing ------------
+:08-30 14:36:55.227423:    :0x1:-:<0,0,->:------------ Stage 3 EOP processing ------------
+:08-30 14:36:55.227632:    :0x1:-:<0,0,->:------------ Stage 4 EOP processing ------------
+:08-30 14:36:55.227875:    :0x1:-:<0,0,->:------------ Stage 5 EOP processing ------------
+:08-30 14:36:55.228103:    :0x1:-:<0,0,->:------------ Stage 6 EOP processing ------------
+:08-30 14:36:55.228262:    :0x1:-:<0,0,->:------------ Stage 7 EOP processing ------------
+:08-30 14:36:55.228588:    :0x1:-:<0,0,->:------------ Stage 8 EOP processing ------------
+:08-30 14:36:55.228655:    :0x1:-:<0,0,->:------------ Stage 9 EOP processing ------------
+:08-30 14:36:55.228882:    :0x1:-:<0,0,->:------------ Stage 10 EOP processing ------------
+:08-30 14:36:55.229263:    :0x1:-:<0,0,->:------------ Stage 11 EOP processing ------------
+:08-30 14:36:55.229482:        :0x1:-:<0,0,->:Ingress Deparser Headers:
+:08-30 14:36:55.229503:        :0x1:-:<0,0,->:Header hdr.ethernet.$valid is valid
+:08-30 14:36:55.229509:        :0x1:-:<0,0,->:Header hdr.ipv6.$valid is valid
+:08-30 14:36:55.230216:    :-:-:<0,0,->:---- Mirroring session 81 : ingress  ----
+:08-30 14:36:55.230236:        :-:-:<0,0,->:Mirroring session 81 is not enabled
+:08-30 14:36:55.230479:    :-:-:<0,-,0>:Waiting for packets to process
+:08-30 17:18:50.685673:    PORT DOWN asic 0 port 0
+:08-30 17:18:50.685740:    PORT DOWN asic 0 port 1
+:08-30 17:18:50.685753:    PORT DOWN asic 0 port 2
+:08-30 17:18:50.685758:    PORT DOWN asic 0 port 3
+:08-30 17:18:50.685770:    PORT DOWN asic 0 port 4
+:08-30 17:18:50.685781:    PORT DOWN asic 0 port 5
+:08-30 17:18:50.685787:    PORT DOWN asic 0 port 6
+:08-30 17:18:50.685791:    PORT DOWN asic 0 port 7
+:08-30 17:18:50.685803:    PORT DOWN asic 0 port 8
+:08-30 17:18:50.685808:    PORT DOWN asic 0 port 9
+:08-30 17:18:50.685813:    PORT DOWN asic 0 port 10
+:08-30 17:18:50.685831:    PORT DOWN asic 0 port 11
+:08-30 17:18:50.685836:    PORT DOWN asic 0 port 12
+:08-30 17:18:50.685861:    PORT DOWN asic 0 port 13
+:08-30 17:18:50.685872:    PORT DOWN asic 0 port 14
+:08-30 17:18:50.685877:    PORT DOWN asic 0 port 15
+:08-30 17:18:50.685923:    PORT DOWN asic 0 port 16
+:08-30 17:18:50.685929:    PORT DOWN asic 0 port 64
+:08-30 17:18:51.368955:    :-:-:<0,-,0>:Begin packet processing
+:08-30 17:18:51.369004:    :-:-:<0,-,0>:Chip=0 Thread=0 Pipe=0: PktsIn=1 PktsOut=0
+:08-30 17:18:51.369021:    :-:-:<0,-,0>:Chip=0 Thread=0 Pipe=*: PktsIn=1 PktsOut=0 PktsTOT=1  Waits=1000

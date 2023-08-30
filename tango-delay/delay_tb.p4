@@ -400,8 +400,10 @@ control SwitchIngress(
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 	        ig_intr_tm_md.ucast_egress_port = 68;
-	
-	        ig_md.rnd_shifted = rng.get() + min_recircs; 	
+
+	    bit<32> rnd = (bit<32>) rng.get(); 	
+	    //ig_md.rnd_shifted = rnd + min_recircs; 	
+	    ig_md.rnd_shifted = 0; 	
             ig_md.max_recircs = max_recircs; 
 
             // set to be true so needed_rounds saturated to max_recircs is added to delay metadata header later 
@@ -421,7 +423,7 @@ control SwitchIngress(
 	            (0): start_delay_bucket(10,40); // For given time bucket, perform X recirculations  
                 (1): start_delay_bucket(40,100);
                 (2): start_delay_bucket(3000,5000);
-                (_): start_delay_bucket(23,80; 
+                (_): start_delay_bucket(23,80); 
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
@@ -481,7 +483,7 @@ control SwitchIngress(
 
         if(ig_md.must_set_recircs==1){ // This will only be true after delay table is applied 
             if(ig_md.rnd_shifted > ig_md.max_recircs){
-                hdr.delay_meta.needed_rounds = max_recircs; 
+                hdr.delay_meta.needed_rounds = ig_md.max_recircs; 
             }
             else{
                 hdr.delay_meta.needed_rounds = ig_md.rnd_shifted; 
