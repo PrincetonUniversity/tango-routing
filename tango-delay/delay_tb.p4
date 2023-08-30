@@ -125,10 +125,13 @@ struct header_t {
 }
 
 struct ig_metadata_t {
+    bit<32> rnd_shifted; 
+    bit<32> max_recircs; 
     bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
     bit<1> redo_cksum;
+    bit<1> must_set_recircs; 
 
 }
 struct eg_metadata_t {
@@ -392,15 +395,17 @@ control SwitchIngress(
 
 	Random<bit<32>>() rng; 
         
-	action start_delay_bucket(bit<32> min_recircs, bit<32> max_recircs, bit<6> max_bitwidth){
+	action start_delay_bucket(bit<32> min_recircs, bit<32> max_recircs){
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 	        ig_intr_tm_md.ucast_egress_port = 68;
 	
-	    bit<32> rnd_shifted = rng.get() + min_recircs; 	
+	        ig_md.rnd_shifted = rng.get() + min_recircs; 	
+            ig_md.max_recircs = max_recircs; 
 
-            hdr.delay_meta.needed_rounds = min_recircs; 
+            // set to be true so needed_rounds saturated to max_recircs is added to delay metadata header later 
+            ig_md.must_set_recircs=1; 
         }
 	
 	    table tb_delay_map {
@@ -413,10 +418,10 @@ control SwitchIngress(
 	    }
 	    default_action = drop(); 
 	    const entries = {
-	        (0): start_delay_bucket(10,40,6); // For given time bucket, perform X recirculations  
-                (1): start_delay_bucket(40,100,7);
-                (2): start_delay_bucket(3000,5000,13);
-                (_): start_delay_bucket(23,80,7); 
+	            (0): start_delay_bucket(10,40); // For given time bucket, perform X recirculations  
+                (1): start_delay_bucket(40,100);
+                (2): start_delay_bucket(3000,5000);
+                (_): start_delay_bucket(23,80; 
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
@@ -425,6 +430,7 @@ control SwitchIngress(
 
         apply {
                 ig_md.redo_cksum = 0;
+                ig_md.must_set_recircs = 0; 
 
 	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
@@ -472,6 +478,16 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
+
+        if(ig_md.must_set_recircs==1){ // This will only be true after delay table is applied 
+            if(ig_md.rnd_shifted > ig_md.max_recircs){
+                hdr.delay_meta.needed_rounds = max_recircs; 
+            }
+            else{
+                hdr.delay_meta.needed_rounds = ig_md.rnd_shifted; 
+            }
+        }
+
         } // end apply 
 }
 
