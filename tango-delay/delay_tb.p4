@@ -397,7 +397,7 @@ control SwitchIngress(
             hdr.delay_meta.needed_rounds = num_recircs; 
         }
 	
-	/*table tb_delay_map {
+	table tb_delay_map {
             key = {
                 ig_md.ts_bucket: ternary; 
             }
@@ -416,7 +416,7 @@ control SwitchIngress(
             size = DELAY_TB_SIZE; // 2^16  
         } // end table 
 
-*/
+
         apply {
                 ig_md.redo_cksum = 0;
                 if (hdr.ethernet.dst_addr[47:8] == 0) {
@@ -431,7 +431,7 @@ control SwitchIngress(
                 	// Extract timestamp, take upper bits as delay bucket and table index
                 	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
                 	// Go to delay table
-			        //tb_delay_map.apply();
+			tb_delay_map.apply();
 		}
 		else if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(is_recirc){
