@@ -446,7 +446,7 @@ control SwitchIngress(
 		    else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
                 if(ig_md.first_ts_ms==0){ // First time through, set flag to later initialize first_ts to current time, ms 
 			        should_delay = true; 
-		        else{ // Not first time, initial ts already written 
+		        }else{ // Not first time, initial ts already written 
                 	// Extract timestamp, take upper bits as delay bucket and table index
                 	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
                 	// Go to delay table
