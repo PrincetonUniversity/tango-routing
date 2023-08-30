@@ -390,12 +390,17 @@ control SwitchIngress(
             ig_md.first_ts_ms = regact_tsbase_read.execute(0);
         }
 
-        action start_delay_bucket(bit<32> num_recircs){
+        action start_delay_bucket(bit<32> min_recircs, bit<32> max_recircs, bit<6> max_bitwidth){
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
-	        ig_intr_tm_md.ucast_egress_port = 68; 
-            hdr.delay_meta.needed_rounds = num_recircs; 
+	        ig_intr_tm_md.ucast_egress_port = 68;
+
+            Random< bit<max_bitwidth> >() rng; 
+            bit<max_bitwidth> rnd_shifted = rng.get() + min_recircs;
+
+            //TODO: add max_recirc saturation 
+            hdr.delay_meta.needed_rounds = rnd_shifted; 
         }
 	
 	    table tb_delay_map {
@@ -408,10 +413,10 @@ control SwitchIngress(
 	    }
 	    default_action = drop(); 
 	    const entries = {
-	        (0): start_delay_bucket(10); // For given time bucket, perform X recirculations  
-                (1): start_delay_bucket(40);
-                (2): start_delay_bucket(3000);
-                (_): start_delay_bucket(23); 
+	        (0): start_delay_bucket(10,40, 6); // For given time bucket, perform X recirculations  
+                (1): start_delay_bucket(40,100,7);
+                (2): start_delay_bucket(3000,5000,13);
+                (_): start_delay_bucket(23,80, 7); 
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
