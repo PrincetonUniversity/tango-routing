@@ -425,14 +425,13 @@ control SwitchIngress(
                 }
 
            	    bool is_recirc = hdr.delay_meta.isValid(); 
-                bool should_delay = false;  
 
 		if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16] && regact_tsbase_read.execute(0)!=0){
-			tsbase_read(); 
+			        tsbase_read(); 
                 	// Extract timestamp, take upper bits as delay bucket and table index
                 	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
                 	// Go to delay table
-			//tb_delay_map.apply();
+			        //tb_delay_map.apply();
 		}
 		else if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(is_recirc){
@@ -447,29 +446,10 @@ control SwitchIngress(
                         }
                     }
 		        }
-		     // NOTE: apply delays on packets from TANGO_SWITCH_PORT 
-        	    // First check to determine if delay condition is met 
-		    else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
+		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
                 // Assume this is the first time through 
-		//regact_tsbase_write.execute(0); 
-		tsbase_write(); 
-		/*if(ig_md.first_ts_ms==0){ // First time through, set flag to later initialize first_ts to current time, ms 
-			        should_delay = true; 
-		        }else{ // Not first time, initial ts already written 
-                	// Extract timestamp, take upper bits as delay bucket and table index
-                	ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[31:16] - ig_md.first_ts_ms[15:0];   
-                	// Go to delay table
-			        //tb_delay_map.apply();
-		        } */ 
-	    	}
-
-
-
-
-
-
-
-
+		        tsbase_write(); 
+	    }
 		else {
                 // TODO: bring reroute logic back, removed for ping test! 
                 // Send IPv6/ICMP6EchoReply pkts to update routes on tango switch
@@ -484,12 +464,6 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
-
-		// If we need to start a delay cycle for a path, write initial ts for first packet seen from that path  
-/*		if(should_delay){
-			    regact_tsbase_write.execute(0); 
-		}		
-*/
         } // end apply 
 }
 
