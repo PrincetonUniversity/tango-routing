@@ -423,7 +423,7 @@ control SwitchIngress(
 	    }
 	    default_action = no_delay(); 
 	    const entries = {
-                #include "table_entries.p4"
+                #include "table_entries.txt"
 	            /*(0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
