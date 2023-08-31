@@ -2,6 +2,7 @@
 # Plus Recirc Delay 
 #include <core.p4>
 #include <tna.p4>
+#include table_entries.p4 
 
 //TOFINO MODEL 
 #define INTERNET_PORT 2
