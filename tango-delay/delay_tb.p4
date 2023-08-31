@@ -406,8 +406,6 @@ control SwitchIngress(
 	        bit<16> rnd = rng.get(); 	
 		ig_md.rnd_val_16b = rnd; 
             ig_md.min_recircs = min_val; 
-            // set to be true so delay range table is applied later 
-	    ig_md.must_set_recircs=1; 
         }
 	
 	    table tb_delay_buckets {
@@ -431,8 +429,6 @@ control SwitchIngress(
 
         apply {
                 ig_md.redo_cksum = 0;
-
-                ig_md.must_set_recircs = 0; 
 	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
@@ -463,6 +459,8 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
+				ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_16b;
+				hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
                     }
 		}
 		else {
@@ -479,14 +477,6 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
-
-        if(ig_md.must_set_recircs==1){
-		ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_16b;
-		hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
-		//ig_md.rnd_val = (bit<32>) rnd; // directly casting => doesnt work, says fields arent allocated  
-	    //@in_hash { ig_md.rnd_val = (bit<32>)rnd; } // casting to 32-bit within a hash => gives compiler bug 	
-            //@in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	// concatenating two 16-bit fields => gives compiler bug 
-        }
 
         } // end apply 
 }
