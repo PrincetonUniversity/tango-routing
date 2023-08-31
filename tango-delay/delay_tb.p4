@@ -463,7 +463,6 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
-                        hdr.delay_meta.needed_rounds = ig_md.rnd_val + ig_md.min_recircs; 
                     }
 		}
 		else {
@@ -481,12 +480,10 @@ control SwitchIngress(
                 }
 		}
 
-/*        if(ig_md.must_set_recircs==1){
-            // apply delay_range table 
-            ig_md.rnd_offset_index = ig_md.rnd_index + ig_md.range_offset;
-            tb_delay_ranges.apply(); 
+        if(ig_md.must_set_recircs==1){
+            hdr.delay_meta.needed_rounds = ig_md.rnd_val + ig_md.min_recircs; 
         }
-*/
+
         } // end apply 
 }
 
