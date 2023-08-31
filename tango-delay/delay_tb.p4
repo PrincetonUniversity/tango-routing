@@ -35,8 +35,9 @@ const mac_addr_t ZERO_MAC = 0x0;
 const mac_addr_t DST_MAC = 0x00169c8ecc40;
 const mac_addr_t SRC_MAC = 0x0c42a1dd5990;
 
-const ipv6_addr_t DELAY_ADDRESS_HI = 0x26044540008D0000; 
-const ipv6_addr_t DELAY_ADDRESS_LOW = 0x0000000000000001; // Path 5 - 2604:4540:8d::1
+const ipv6_addr_t DELAY_ADDRESS_HI_A = 0x26044540008D0000; // Path 5 - 2604:4540:8d::1 
+const ipv6_addr_t DELAY_ADDRESS_HI_B = 0x26044540008E0000; // Path 6 - 2604:4540:8e::1 
+const ipv6_addr_t DELAY_ADDRESS_HI_C = 0x26044540008F0000; // Path 7 - 2604:4540:8f::1 
 
 header ethernet_h {
     mac_addr_t dst_addr;
@@ -449,19 +450,27 @@ control SwitchIngress(
 			    hdr.ethernet.ether_type=ETHERTYPE_IPV6;
                 exit; 
         }
-		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6 && hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
+		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6){
+                // Check for any of the delay paths 
+                if(hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_A[23:16] || hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_B[23:16] || hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_C[23:16]){
 			        tsbase_read(); 
+                    // Store timestamp on first packet seen from any path 
                 	if(ig_md.first_ts_ms == 0){ // First time through, recirculate with WRITE_TSTAMP ethertype 
                         hdr.ethernet.ether_type=ETHERTYPE_WRITE_TSTAMP;
 	                    ig_intr_tm_md.ucast_egress_port = 68; 
                     } 
+                    // All future packets from any path get put in same buckets 
                     else{ // Extract timestamp, slice upper-middle bits as delay bucket and table index
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
-				ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
-				hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
+				        ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
+				        hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
                     }
+                }
+                else{
+                    ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
+                }
 		}
 		else {
                 // TODO: bring reroute logic back, removed for ping test! 
