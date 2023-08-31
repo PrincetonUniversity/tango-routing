@@ -125,9 +125,8 @@ struct header_t {
 }
 
 struct ig_metadata_t {
-    bit<32> rnd_index; 
-    bit<32> rnd_offset_index; 
-    bit<32> range_offset; 
+    bit<32> min_recircs; 
+    bit<32> rnd_val; 
     bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
@@ -394,18 +393,18 @@ control SwitchIngress(
             ig_md.first_ts_ms = regact_tsbase_read.execute(0);
         }
 
-	Random<bit<32>>() rng; 
+	Random<bit<16>>() rng; 
         
-    //TODO Change offset size 
-	action start_delay_bucket(bit<32> offset){
+	action start_delay_bucket(bit<32> min_val){
             hdr.delay_meta.setValid(); 
             hdr.delay_meta.curr_round = 0;
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 	        ig_intr_tm_md.ucast_egress_port = 68;
 
-	        bit<32> rnd = (bit<32>) rng.get(); 	
-	        ig_md.rnd_index = rnd; 	
-            ig_md.range_offset = offset; 
+            //Assume delay range is always 16 bits  
+	        bit<16> rnd = (bit<16>) rng.get(); 	
+	        ig_md.rnd_val = (bit<32>) rnd; 	
+            ig_md.min_recircs = min_val; 
             // set to be true so delay range table is applied later 
             ig_md.must_set_recircs=1; 
         }
@@ -420,7 +419,7 @@ control SwitchIngress(
 	    }
 	    default_action = drop(); 
 	    const entries = {
-	            (0): start_delay_bucket(10); // For given time bucket, find random index with bucket offset to delay_range table  
+	            (0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
                 (_): start_delay_bucket(23); 
@@ -429,29 +428,6 @@ control SwitchIngress(
             size = DELAY_TB_SIZE; // 2^16  
         } // end table 
 
-
-	    action start_delay_range(bit<32> recircs){
-            hdr.delay_meta.needed_rounds = recircs; 
-        }
-
-	    table tb_delay_ranges {
-            key = {
-                ig_md.rnd_offset_index: ternary; 
-            }
-            actions = {
-                start_delay_range; 
-            	drop;
-	    }
-	    default_action = drop(); 
-	    const entries = {
-	            (0): start_delay_range(10); // For given time bucket, find random index with bucket offset to delay_range table  
-                (1): start_delay_range(40);
-                (2): start_delay_range(3000);
-                (_): start_delay_range(23); 
-            } 
-            // could also fill table from control plane
-            size = DELAY_TB_SIZE; // 2^16  
-        } // end table 
         apply {
                 ig_md.redo_cksum = 0;
 
@@ -486,6 +462,7 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
+                        hdr.delay_meta.needed_rounds = ig_md.rnd_val + ig_md.min_recircs; 
                     }
 		}
 		else {
@@ -503,12 +480,12 @@ control SwitchIngress(
                 }
 		}
 
-        if(ig_md.must_set_recircs==1){
+/*        if(ig_md.must_set_recircs==1){
             // apply delay_range table 
             ig_md.rnd_offset_index = ig_md.rnd_index + ig_md.range_offset;
             tb_delay_ranges.apply(); 
         }
-
+*/
         } // end apply 
 }
 
