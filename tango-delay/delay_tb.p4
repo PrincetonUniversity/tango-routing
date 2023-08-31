@@ -4,14 +4,14 @@
 #include <tna.p4>
 
 //TOFINO MODEL 
-//#define INTERNET_PORT 2
-//#define SERVER_PORT 4 
-//#define TANGO_SWITCH_PORT 0
+#define INTERNET_PORT 2
+#define SERVER_PORT 4 
+#define TANGO_SWITCH_PORT 0
 
 //TOFINO HARDWARE
-#define INTERNET_PORT 156
-#define SERVER_PORT 9
-#define TANGO_SWITCH_PORT 0
+//#define INTERNET_PORT 156
+//#define SERVER_PORT 9
+//#define TANGO_SWITCH_PORT 0
 
 #define DELAY_TB_SIZE 65536
 
@@ -127,7 +127,7 @@ struct header_t {
 struct ig_metadata_t {
     bit<32> min_recircs; 
     bit<32> rnd_val_32b; 
-    bit<16> rnd_val_16b; 
+    bit<10> rnd_val_10b; 
     bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
@@ -394,7 +394,7 @@ control SwitchIngress(
             ig_md.first_ts_ms = regact_tsbase_read.execute(0);
         }
 
-	Random<bit<16>>() rng; 
+	Random<bit<10>>() rng; 
         
 	action start_delay_bucket(bit<32> min_val){
             hdr.delay_meta.setValid(); 
@@ -402,9 +402,9 @@ control SwitchIngress(
             hdr.ethernet.ether_type=ETHERTYPE_DELAY_INTM;
 	        ig_intr_tm_md.ucast_egress_port = 68;
 
-            //Assume delay range is always 16 bits  
-	        bit<16> rnd = rng.get(); 	
-		ig_md.rnd_val_16b = rnd; 
+            //Assume delay range is always N=10 bits, 2^10 is range of 1024 recircs, should be on order of 1-4 ms  
+	        bit<10> rnd = rng.get(); 	
+		ig_md.rnd_val_10b = rnd; 
             ig_md.min_recircs = min_val; 
         }
 	
@@ -459,7 +459,7 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
-				ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_16b;
+				ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
 				hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
                     }
 		}
