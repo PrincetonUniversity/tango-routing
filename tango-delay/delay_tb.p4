@@ -395,6 +395,9 @@ control SwitchIngress(
             ig_md.first_ts_ms = regact_tsbase_read.execute(0);
         }
 
+    action no_delay(){
+            route_to(INTERNET_PORT); 
+    }
 	Random<bit<10>>() rng; 
         
 	action start_delay_bucket(bit<32> min_val){
@@ -405,8 +408,9 @@ control SwitchIngress(
 
             //Assume delay range is always N=10 bits, 2^10 is range of 1024 recircs, should be on order of 1-4 ms  
 	        bit<10> rnd = rng.get(); 	
-		ig_md.rnd_val_10b = rnd; 
+		    ig_md.rnd_val_10b = rnd; 
             ig_md.min_recircs = min_val; 
+            ig_md.must_set_recircs = 1; 
         }
 	
 	    table tb_delay_buckets {
@@ -414,14 +418,16 @@ control SwitchIngress(
                 ig_md.ts_bucket: ternary; 
             }
             actions = {
-                start_delay_bucket; 
-            	drop;
+                start_delay_bucket;
+                no_delay; 
 	    }
-	    default_action = drop(); 
+	    default_action = no_delay(); 
 	    const entries = {
 	            (0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
+                (3): start_delay_bucket(3000);
+                (4): no_delay(); 
                 (_): start_delay_bucket(23); 
             } 
             // could also fill table from control plane
@@ -430,7 +436,8 @@ control SwitchIngress(
 
         apply {
                 ig_md.redo_cksum = 0;
-	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
+                ig_md.must_set_recircs = 0; 
+        if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
@@ -464,8 +471,6 @@ control SwitchIngress(
                 	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
-				        ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
-				        hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
                     }
                 }
                 else{
@@ -486,6 +491,11 @@ control SwitchIngress(
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
                 }
 		}
+
+        if(ig_md.must_set_recircs==1){
+			    ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
+		        hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
+        }
 
         } // end apply 
 }
