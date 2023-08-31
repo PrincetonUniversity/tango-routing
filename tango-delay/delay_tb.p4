@@ -403,7 +403,8 @@ control SwitchIngress(
 
             //Assume delay range is always 16 bits  
 	        bit<16> rnd = (bit<16>) rng.get(); 	
-	        ig_md.rnd_val = (bit<32>) rnd; 	
+	        //ig_md.rnd_val = (bit<32>) rnd; 
+            @in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	
             ig_md.min_recircs = min_val; 
             // set to be true so delay range table is applied later 
             ig_md.must_set_recircs=1; 
