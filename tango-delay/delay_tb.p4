@@ -403,11 +403,12 @@ control SwitchIngress(
 
             //Assume delay range is always 16 bits  
 	        bit<16> rnd = (bit<16>) rng.get(); 	
-	        //ig_md.rnd_val = (bit<32>) rnd; 
-            @in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	
+	        ig_md.rnd_val = (bit<32>) rnd; // directly casting => doesnt work, says fields arent allocated  
+	    //@in_hash { ig_md.rnd_val = (bit<32>)rnd; } // casting to 32-bit within a hash => gives compiler bug 	
+            //@in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	// concatenating two 16-bit fields => gives compiler bug 
             ig_md.min_recircs = min_val; 
             // set to be true so delay range table is applied later 
-            ig_md.must_set_recircs=1; 
+	    ig_md.must_set_recircs=1; 
         }
 	
 	    table tb_delay_buckets {
