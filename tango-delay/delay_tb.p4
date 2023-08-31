@@ -126,7 +126,8 @@ struct header_t {
 
 struct ig_metadata_t {
     bit<32> min_recircs; 
-    bit<32> rnd_val; 
+    bit<32> rnd_val_32b; 
+    bit<16> rnd_val_16b; 
     bit<16> first_ts_ms; 
     bit<16> ts_bucket;  
     bit<16> tcp_total_len;
@@ -402,10 +403,8 @@ control SwitchIngress(
 	        ig_intr_tm_md.ucast_egress_port = 68;
 
             //Assume delay range is always 16 bits  
-	        bit<16> rnd = (bit<16>) rng.get(); 	
-	        ig_md.rnd_val = (bit<32>) rnd; // directly casting => doesnt work, says fields arent allocated  
-	    //@in_hash { ig_md.rnd_val = (bit<32>)rnd; } // casting to 32-bit within a hash => gives compiler bug 	
-            //@in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	// concatenating two 16-bit fields => gives compiler bug 
+	        bit<16> rnd = rng.get(); 	
+		ig_md.rnd_val_16b = rnd; 
             ig_md.min_recircs = min_val; 
             // set to be true so delay range table is applied later 
 	    ig_md.must_set_recircs=1; 
@@ -482,7 +481,11 @@ control SwitchIngress(
 		}
 
         if(ig_md.must_set_recircs==1){
-            hdr.delay_meta.needed_rounds = ig_md.rnd_val + ig_md.min_recircs; 
+		ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_16b;
+		hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
+		//ig_md.rnd_val = (bit<32>) rnd; // directly casting => doesnt work, says fields arent allocated  
+	    //@in_hash { ig_md.rnd_val = (bit<32>)rnd; } // casting to 32-bit within a hash => gives compiler bug 	
+            //@in_hash { ig_md.rnd_val = 16w0 ++ rnd; }	// concatenating two 16-bit fields => gives compiler bug 
         }
 
         } // end apply 
