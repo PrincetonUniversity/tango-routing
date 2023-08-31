@@ -2,7 +2,6 @@
 # Plus Recirc Delay 
 #include <core.p4>
 #include <tna.p4>
-#include table_entries.p4 
 
 //TOFINO MODEL 
 #define INTERNET_PORT 2
@@ -424,12 +423,14 @@ control SwitchIngress(
 	    }
 	    default_action = no_delay(); 
 	    const entries = {
-	            (0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
+                #include "table_entries.p4"
+	            /*(0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
                 (3): start_delay_bucket(3000);
                 (4): no_delay(); 
                 (_): start_delay_bucket(23); 
+            */
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
