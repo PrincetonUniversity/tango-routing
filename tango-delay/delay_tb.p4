@@ -4,14 +4,14 @@
 #include <tna.p4>
 
 //TOFINO MODEL 
-#define INTERNET_PORT 2
-#define SERVER_PORT 4 
-#define TANGO_SWITCH_PORT 0
+//#define INTERNET_PORT 2
+//#define SERVER_PORT 4 
+//#define TANGO_SWITCH_PORT 0
 
 //TOFINO HARDWARE
-//#define INTERNET_PORT 156
-//#define SERVER_PORT 9
-//#define TANGO_SWITCH_PORT 0
+#define INTERNET_PORT 156
+#define SERVER_PORT 9
+#define TANGO_SWITCH_PORT 0
 
 #define DELAY_TB_SIZE 65536
 
@@ -35,9 +35,9 @@ const mac_addr_t ZERO_MAC = 0x0;
 const mac_addr_t DST_MAC = 0x00169c8ecc40;
 const mac_addr_t SRC_MAC = 0x0c42a1dd5990;
 
-const ipv6_addr_t DELAY_ADDRESS_HI_A = 0x26044540008D0000; // Path 5 - 2604:4540:8d::1 
-const ipv6_addr_t DELAY_ADDRESS_HI_B = 0x26044540008E0000; // Path 6 - 2604:4540:8e::1 
-const ipv6_addr_t DELAY_ADDRESS_HI_C = 0x26044540008F0000; // Path 7 - 2604:4540:8f::1 
+const ipv6_addr_t DELAY_ADDRESS_HI_A = 0x26044540008C0000; // Path 4 - 2604:4540:8c::1 
+const ipv6_addr_t DELAY_ADDRESS_HI_B = 0x26044540008D0000; // Path 5 - 2604:4540:8d::1 
+const ipv6_addr_t DELAY_ADDRESS_HI_C = 0x26044540008E0000; // Path 6 - 2604:4540:8e::1 
 
 header ethernet_h {
     mac_addr_t dst_addr;
@@ -395,9 +395,10 @@ control SwitchIngress(
             ig_md.first_ts_ms = regact_tsbase_read.execute(0);
         }
 
-    action no_delay(){
-            route_to(INTERNET_PORT); 
-    }
+	action no_delay(){
+	    route_to(INTERNET_PORT);
+	}
+
 	Random<bit<10>>() rng; 
         
 	action start_delay_bucket(bit<32> min_val){
@@ -408,9 +409,9 @@ control SwitchIngress(
 
             //Assume delay range is always N=10 bits, 2^10 is range of 1024 recircs, should be on order of 1-4 ms  
 	        bit<10> rnd = rng.get(); 	
-		    ig_md.rnd_val_10b = rnd; 
-            ig_md.min_recircs = min_val; 
-            ig_md.must_set_recircs = 1; 
+		ig_md.rnd_val_10b = rnd; 
+            ig_md.min_recircs = min_val;
+	    ig_md.must_set_recircs = 1;  
         }
 	
 	    table tb_delay_buckets {
@@ -418,19 +419,19 @@ control SwitchIngress(
                 ig_md.ts_bucket: ternary; 
             }
             actions = {
-                start_delay_bucket;
-                no_delay; 
+                start_delay_bucket; 
+            	no_delay; 
 	    }
 	    default_action = no_delay(); 
 	    const entries = {
-                #include "table_entries.txt"
+		#include "table_entries.txt" 
 	            /*(0): start_delay_bucket(10); // For given time bucket, give min recircs as offset input to random recircs in a set range   
                 (1): start_delay_bucket(40);
                 (2): start_delay_bucket(3000);
-                (3): start_delay_bucket(3000);
-                (4): no_delay(); 
-                (_): start_delay_bucket(23); 
-            */
+		(3): start_delay_bucket(3000); 
+		(4): no_delay(); 
+                (_): start_delay_bucket(200000); 
+		*/
             } 
             // could also fill table from control plane
             size = DELAY_TB_SIZE; // 2^16  
@@ -438,8 +439,8 @@ control SwitchIngress(
 
         apply {
                 ig_md.redo_cksum = 0;
-                ig_md.must_set_recircs = 0; 
-        if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
+		ig_md.must_set_recircs = 0; 
+	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
                             // Remove header and release packet to Internet 
@@ -494,10 +495,10 @@ control SwitchIngress(
                 }
 		}
 
-        if(ig_md.must_set_recircs==1){
-			    ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b;
-		        hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 	
-        }
+		if(ig_md.must_set_recircs==1){
+			ig_md.rnd_val_32b = (bit<32>) ig_md.rnd_val_10b; 
+			hdr.delay_meta.needed_rounds = ig_md.rnd_val_32b + ig_md.min_recircs; 
+		} 
 
         } // end apply 
 }
