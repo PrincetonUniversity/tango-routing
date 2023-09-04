@@ -481,12 +481,11 @@ control SwitchIngress(
                 }
 		}
 		else {
-                // TODO: bring reroute logic back, removed for ping test! 
                 // Send IPv6/ICMP6EchoReply pkts to update routes on tango switch
-                /*if(ig_intr_md.ingress_port==INTERNET_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6
+                if(ig_intr_md.ingress_port==INTERNET_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6
                         && hdr.ipv6.next_hdr==IP_PROTOCOLS_ICMP_IPV6 && hdr.icmp.icmp_type==129){
                         ig_intr_tm_md.ucast_egress_port = TANGO_SWITCH_PORT;
-                } else*/ if (ig_intr_md.ingress_port==INTERNET_PORT) {  // All other pkts from internet go to server
+                } else if (ig_intr_md.ingress_port==INTERNET_PORT) {  // All other pkts from internet go to server
                         ig_intr_tm_md.ucast_egress_port = SERVER_PORT;
                 } else if (ig_intr_md.ingress_port==TANGO_SWITCH_PORT) {
                         ig_intr_tm_md.ucast_egress_port = INTERNET_PORT;
