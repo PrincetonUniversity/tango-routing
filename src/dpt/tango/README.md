@@ -191,7 +191,7 @@ Make sure to kill ebpf processes to use tcpdump
 ## Collectin logs on Vultr 
 ```
 tmux a -t run
-./attach_all_and_run.sh | rotatelogs -p '/root/performance-aware-routing-2/compress-log.sh' -c logs/stats-tofino.log 500M.
+./attach_all_and_run.sh | rotatelogs -p '/root/performance-aware-routing-2/compress-log.sh' -c logs/stats-tofino.log 500M
 //Change the path after -c to write logs. 
 ```
 
