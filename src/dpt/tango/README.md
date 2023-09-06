@@ -188,6 +188,13 @@ Make sure to kill ebpf processes to use tcpdump
 
 ```
 
+## Collectin logs on Vultr 
+```
+tmux a -t run
+./attach_all_and_run.sh | rotatelogs -p '/root/performance-aware-routing-2/compress-log.sh' -c logs/stats-tofino.log 500M.
+//Change the path after -c to write logs. 
+```
+
 ## Route Configuration
 
 Currently, we have a set-up for 16 static (keep-alive) routes and two dynamic
