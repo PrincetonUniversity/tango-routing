@@ -374,7 +374,7 @@ control SwitchIngress(
         RegisterAction<bit<16> ,_, bit<16>>(reg_tsbase) regact_tsbase_write = 
         {
             void apply(inout bit<16> value, out bit<16> ret){
-                value = ig_intr_md.ingress_mac_tstamp[45:30]; // take first-seen current ts, on roughly 1s granularity 
+                value = ig_intr_md.ingress_mac_tstamp[39:24]; // take first-seen current ts, on roughly 17ms granularity 
                 ret = 0; 
             }
 
@@ -471,7 +471,7 @@ control SwitchIngress(
                     } 
                     // All future packets from any path get put in same buckets 
                     else{ // Extract timestamp, slice upper-middle bits as delay bucket and table index
-                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
+                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[39:24] - ig_md.first_ts_ms;   
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
                     }
