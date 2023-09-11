@@ -35,9 +35,7 @@ const mac_addr_t ZERO_MAC = 0x0;
 const mac_addr_t DST_MAC = 0x00169c8ecc40;
 const mac_addr_t SRC_MAC = 0x0c42a1dd5990;
 
-const ipv6_addr_t DELAY_ADDRESS_HI_A = 0x26044540008C0000; // Path 4 - 2604:4540:8c::1 
-const ipv6_addr_t DELAY_ADDRESS_HI_B = 0x26044540008D0000; // Path 5 - 2604:4540:8d::1 
-const ipv6_addr_t DELAY_ADDRESS_HI_C = 0x26044540008E0000; // Path 6 - 2604:4540:8e::1 
+const ipv6_addr_t DELAY_ADDRESS_HI = 0x26044540008D0000; // Path 5 - 2604:4540:8d::1 
 
 header ethernet_h {
     mac_addr_t dst_addr;
@@ -462,7 +460,7 @@ control SwitchIngress(
         }
 		else if(ig_intr_md.ingress_port==TANGO_SWITCH_PORT && hdr.ethernet.ether_type==ETHERTYPE_IPV6){
                 // Check for any of the delay paths 
-                if(hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_A[23:16] || hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_B[23:16] || hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI_C[23:16]){
+                if(hdr.ipv6.dst_addr_hi[23:16]==DELAY_ADDRESS_HI[23:16]){
 			        tsbase_read(); 
                     // Store timestamp on first packet seen from any path 
                 	if(ig_md.first_ts_ms == 0){ // First time through, recirculate with WRITE_TSTAMP ethertype 
