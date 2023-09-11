@@ -13,7 +13,7 @@
 #define SERVER_PORT 9
 #define TANGO_SWITCH_PORT 0
 
-#define DELAY_TB_SIZE 65536
+#define DELAY_TB_SIZE 262144
 
 typedef bit<48> mac_addr_t;
 typedef bit<32> ipv4_addr_t;
@@ -129,8 +129,9 @@ struct ig_metadata_t {
     bit<32> min_recircs; 
     bit<32> rnd_val_32b; 
     bit<10> rnd_val_10b; 
-    bit<16> first_ts_ms; 
-    bit<16> ts_bucket;  
+    bit<32> first_ts_ms; 
+    bit<32> tmp_ts_ms; 
+    bit<18> ts_bucket;  
     bit<16> tcp_total_len;
     bit<1> redo_cksum;
     bit<1> must_set_recircs; 
@@ -370,19 +371,19 @@ control SwitchIngress(
 
         // <entry_type, key_type> (num_entries) 
         // TODO: how many bits are ts? 
-        Register<bit<16>,_>(1) reg_tsbase;
-        RegisterAction<bit<16> ,_, bit<16>>(reg_tsbase) regact_tsbase_write = 
+        Register<bit<32>,_>(1) reg_tsbase;
+        RegisterAction<bit<32> ,_, bit<32>>(reg_tsbase) regact_tsbase_write = 
         {
-            void apply(inout bit<16> value, out bit<16> ret){
-                value = ig_intr_md.ingress_mac_tstamp[45:30]; // take first-seen current ts, on roughly 1s granularity 
+            void apply(inout bit<32> value, out bit<32> ret){
+                value = ig_intr_md.ingress_mac_tstamp[47:16]; // take first-seen current ts, on roughly 17ms granularity 
                 ret = 0; 
             }
 
         };  
 
-        RegisterAction<bit<16>, _, bit<16>>(reg_tsbase) regact_tsbase_read = 
+        RegisterAction<bit<32>, _, bit<32>>(reg_tsbase) regact_tsbase_read = 
         {
-            void apply(inout bit<16> value, out bit<16> ret){
+            void apply(inout bit<32> value, out bit<32> ret){
                 ret = value; 
             }
         }; 
@@ -433,13 +434,14 @@ control SwitchIngress(
                 (_): start_delay_bucket(200000); 
 		*/
             } 
-            // could also fill table from control plane
-            size = DELAY_TB_SIZE; // 2^16  
+            size = DELAY_TB_SIZE; // 2^18  
         } // end table 
 
         apply {
                 ig_md.redo_cksum = 0;
 		ig_md.must_set_recircs = 0; 
+
+                ig_md.tmp_ts_ms = ig_intr_md.ingress_mac_tstamp[47:16] - ig_md.first_ts_ms; //32-bit subtraction    
 	    if(hdr.ethernet.ether_type==ETHERTYPE_DELAY_INTM){
                     if(hdr.delay_meta.isValid()){
                         if(hdr.delay_meta.curr_round == hdr.delay_meta.needed_rounds){
@@ -471,7 +473,8 @@ control SwitchIngress(
                     } 
                     // All future packets from any path get put in same buckets 
                     else{ // Extract timestamp, slice upper-middle bits as delay bucket and table index
-                	    ig_md.ts_bucket = ig_intr_md.ingress_mac_tstamp[45:30] - ig_md.first_ts_ms;   
+                	    //ig_md.tmp_ts_ms = ig_intr_md.ingress_mac_tstamp[47:16] - ig_md.first_ts_ms; //32-bit subtraction    
+                	    ig_md.ts_bucket = ig_md.tmp_ts_ms[25:8]; //Slice to 18 bits, get [41:24] of original 48-bit timestamp, previously sliced to [47:16]  
                 	    // Go to delay table
 			            tb_delay_buckets.apply();
                     }
