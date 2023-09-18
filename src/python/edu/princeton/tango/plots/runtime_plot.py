@@ -92,11 +92,11 @@ def main() -> None:
         multiplier += 1
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
-    ax.set_ylabel("Write Time (ns)", fontsize=14)
-    ax.set_xlabel("Signatures Written", fontsize=14)
-    ax.set_xticks(x + width, independent, fontsize=14)
+    ax.set_ylabel("Write Time (ns)", fontsize=20)
+    ax.set_xlabel("Signatures Written", fontsize=20)
+    ax.set_xticks(x + width, independent, fontsize=20)
     plt.yticks(fontsize=14)
-    ax.legend(loc="upper left", ncols=2)
+    ax.legend(bbox_to_anchor=(0, 1.4), loc="upper left", ncols=2, fontsize=20)
     ax.set_ylim(0, 90)
 
     fig.set_size_inches(3*3, (3/3)*3)
