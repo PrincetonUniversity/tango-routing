@@ -283,10 +283,10 @@ akin to the following (note, this scapy program has not been fully tested yet):
 
 ```python
 """Send reroutes to switch."""
+#! /usr/bin/env python3
 
-from scapy.layers.inet6 import UDP, ByteField, Ether, IPv6, Packet
-from scapy.sendrecv import sendp
-
+from scapy.layers.inet6 import UDP, ICMPv6EchoReply, ByteField, Ether, IPv6, Packet
+from scapy.sendrecv import send, sendp
 
 class RouteUpdate(Packet):
     """Update route layer to trigger reroute on Tango node."""
@@ -298,15 +298,17 @@ class RouteUpdate(Packet):
 def main() -> None:
     """Send reroute packets to switch."""
     pkts = [
-        Ether()
-        / IPv6()
-        / ICMPv6EchoReply()
-        / RouteUpdate(traffic_class=i, new_path_id=(7 - (i % 8)))
-        for i in range(0, 32)
+        #Ether(dst="6e:81:25:df:a9:86", src="56:00:04:60:02:cd")
+        IPv6(dst="2620:c4:0:fe:e42:a1ff:fedd:5990")
+        /ICMPv6EchoReply()
+        / RouteUpdate(traffic_class=2, new_path_id=7)
+        #/ RouteUpdate(traffic_class=i, new_path_id=(7 - (i % 8)))
+        #for i in range(0, 32)
     ]
 
-    sendp(pkts, iface="enp1s0")
-
+    while True:
+        send(pkts, iface="enp1s0")
+        #sendp(pkts, iface="enp1s0")
 
 if __name__ == "__main__":
     main()
