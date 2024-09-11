@@ -1,12 +1,11 @@
 /**
  * # Description
- * Get the current time in milliseconds.
+ * Get the current time in nanoseconds.
  * 
  * # Returns
- * time_now (int<<12>>): current time in milliseconds
+ * time_now (int<<32>>): current time in nanoseconds
  **/
-fun int<<12>> get_time_now_ms () {
-    int time_now = Sys.time();
-    return time_now[31:20]; // TODO: Double check slicing
+fun int<<32>> get_time_now_ns () {
+    return Sys.time();
 }
 

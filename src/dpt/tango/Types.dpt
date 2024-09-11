@@ -59,17 +59,17 @@ type IPv4Header_t = {
  **/
 type IPv6Header_t = {
    // int<<4>>   version;
-   // int<<8>>   traffic_class; // TODO: Should we reconsider naming
+   // int<<8>>   traffic_class;
    // int<<20>>  flow_label;
    int<<32>>  version_cls_flow;
    int<<16>>  payload_len;
    int<<8>>   next_header;
    int<<8>>   hop_limit;
-   int<<128>> src_addr;
-   int<<128>> dest_addr;
+   int<<64>> src_addr_hi;
+   int<<64>> src_addr_lo;
+   int<<64>> dest_addr_hi;
+   int<<64>> dest_addr_lo;
 }
-
-size ipv6_hdr_sz = 320;
 
 /**
  * # Description
@@ -109,10 +109,46 @@ type TCPHeader_t = {
    int<<16>> dest_port;
    int<<32>> sequence_num;
    int<<32>> ack_num;
-   int<<16>> len_flags;
+   int<<8>>  offset;
+   int<<8>>  flags;
    int<<16>> window_sz;
    int<<16>> checksum;
    int<<16>> urg_ptr;
+}
+
+/**
+ * # Desctiption 
+ * UDP Header describing host source and destination ports.
+ *
+ * # Properties
+ * src_port (int<<16>>): host source port
+ * dest_port (int<<16>>): host destination port
+ * length (int<<16>>): length of payload
+ * checksum (int<<16>>): checksum of the header
+ **/
+type UDPHeader_t = {
+   int<<16>> source_port;
+   int<<16>> destination_port;
+   int<<16>> length;
+   int<<16>> checksum;
+}
+
+/**
+ * # Desctiption 
+ * ICMP Header describing host source and destination ports.
+ *
+ * # Properties
+ * type (int<<8>>): ICMP message type 
+ * code (int<<8>>): ICMP message subtype 
+ * checksum (int<<16>>): checksum of the header 
+ * hdr_remainder (int<<32>>): remainder of header 
+ **/
+type ICMPHeader_t = {
+   int<<8>> icmp_type;
+   int<<8>> icmp_code;
+   int<<16>> icmp_checksum;
+   int<<16>> icmp_id;
+   int<<16>> icmp_seq_num;
 }
 
 /**
@@ -128,10 +164,10 @@ type TCPHeader_t = {
  **/
 type TangoHeader_t = {
    int<<8>>   path_id;
-   int<<16>>  timestamp;
-   int<<32>>  signature;
-   int<<24>>  sequence_num;
-   int<<8>>   book_signature;
+   int<<32>>  timestamp;
+   int<<16>> signature; 
+   int<<16>>  sequence_num;
+   int<<8>> book_signature; 
 }
 
 /**
@@ -143,9 +179,8 @@ type TangoHeader_t = {
  * new_path_id (int<<3>>): physical path ID to update mapping to
  **/
 type RouteUpdate_t = {
-   bool     is_valid;
-   int<<4>> traffic_class;
-   int<<3>> new_path_id;
+   int<<8>> traffic_class;
+   int<<8>> new_path_id;
 }
 
 /**

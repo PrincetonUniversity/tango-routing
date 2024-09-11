@@ -124,8 +124,7 @@ class IPv6Header:
         return " ".join(
             (
                 "{",
-                f"version_cls_flow = {version_cls_flow};"
-                f"payload_len = {self.payload_len};",
+                f"version_cls_flow = {version_cls_flow};" f"payload_len = {self.payload_len};",
                 f"next_header = {self.next_header};",
                 f"hop_limit = {self.hop_limit};",
                 f"src_addr = {int(self.src_addr)};",

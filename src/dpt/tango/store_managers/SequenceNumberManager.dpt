@@ -4,7 +4,7 @@
  * 
  * # Methods
  * create() -> SequenceNumberManager.t
- * increment(SequenceNumberManager.t, int<<3>>) -> int<<24>>
+ * increment(SequenceNumberManager.t, int<<8>>) -> int<<16>>
  **/
 module SequenceNumberManager : {
     global type t;
@@ -17,44 +17,44 @@ module SequenceNumberManager : {
     * 
     * # Parameters
     * self (t): self
-    * path_id (int<<3>>): the path on which the packet is tunneled
+    * path_id (int<<8>>): the path on which the packet is tunneled
     * 
     * # Returns
-    * sequence_number (int<<24>>): the current, non-incremented sequence number
+    * sequence_number (int<<16>>): the current, non-incremented sequence number
     **/
-    fun int<<24>> increment (
+    fun int<<16>> increment (
         t self,
-        int<<3>> path_id
+        int<<8>> path_id
     ) [start <= self; end self];
 }
 {
     type t = {
-        Array.t<<24>> seq_nums;
+        Array.t<<16>> seq_nums;
     }
 
     constr t create () = {
-        seq_nums = Array.create(8);
+        seq_nums = Array.create(32);
     };
 
     /**
      * # Description
      * Set next sequence number for this path.
      **/
-    memop next(int<<'sz>> curr, int<<'sz>> ignore) {
-        return curr + 1;
+    memop next(int<<'sz>> curr, int<<'sz>> inc) {
+        return curr + inc;
     }
 
     /**
      * # Description
      * Get current sequence number for this path.
      **/
-    memop get_curr(int<<'sz>> curr, int<<'sz>> ignore) {
+    memop get_curr(int<<'sz>> curr, int<<'sz>> inc) {
         return curr;
     }
 
-    fun int<<24>> increment (
+    fun int<<16>> increment (
         t self,
-        int<<3>> path_id
+        int<<8>> path_id
     ) {
         return Array.update(
             self#seq_nums,
@@ -62,7 +62,7 @@ module SequenceNumberManager : {
             get_curr,
             0,
             next,
-            0
+            (int<<16>>) 1
         );
     }
 }
